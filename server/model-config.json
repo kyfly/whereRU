@@ -1,0 +1,79 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RUser": {
+    "dataSource": "db",
+    "public": true
+  },
+  "team": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ContestOrg": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Contest": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Project": {
+    "dataSource": "db",
+    "public": true
+  },
+  "menber": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ProjectResult": {
+    "dataSource": "db",
+    "public": true
+  },
+  "material": {
+    "dataSource": "db",
+    "public": true
+  },
+  "message": {
+    "dataSource": "db",
+    "public": true
+  },
+  "active": {
+    "dataSource": "db",
+    "public": true
+  },
+  "school": {
+    "dataSource": "db",
+    "public": true
+  }
+}

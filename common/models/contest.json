@@ -1,0 +1,45 @@
+{
+  "name": "Contest",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "ruleUrl": {
+      "type": "string"
+    },
+    "processUrl": {
+      "type": "string"
+    },
+    "explainUrl": {
+      "type": "string"
+    },
+    "start_time": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "projects": {
+      "type": "hasMany",
+      "model": "Project",
+      "foreignKey": ""
+    },
+    "materials": {
+      "type": "hasMany",
+      "model": "material",
+      "foreignKey": ""
+    },
+    "messages": {
+      "type": "hasMany",
+      "model": "message",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

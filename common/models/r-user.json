@@ -1,0 +1,32 @@
+{
+  "name": "RUser",
+  "plural": "user",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "phone": {
+      "type": "number",
+      "required": true
+    },
+    "school": {
+      "type": "string",
+      "required": true
+    },
+    "sex": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "teams": {
+      "type": "hasMany",
+      "model": "team",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

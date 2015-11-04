@@ -1,0 +1,37 @@
+{
+  "name": "team",
+  "plural": "team",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "school": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "projects": {
+      "type": "hasMany",
+      "model": "Project",
+      "foreignKey": ""
+    },
+    "menbers": {
+      "type": "hasMany",
+      "model": "menber",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

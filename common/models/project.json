@@ -1,0 +1,36 @@
+{
+  "name": "Project",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "explainUrl": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "projectResults": {
+      "type": "hasMany",
+      "model": "ProjectResult",
+      "foreignKey": ""
+    },
+    "materials": {
+      "type": "hasMany",
+      "model": "material",
+      "foreignKey": ""
+    },
+    "menbers": {
+      "type": "hasMany",
+      "model": "menber",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,26 @@
+{
+  "name": "material",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "createAt": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "dataUrl": {
+      "type": "string"
+    },
+    "loader": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

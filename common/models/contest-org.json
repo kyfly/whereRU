@@ -1,0 +1,26 @@
+{
+  "name": "ContestOrg",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "school": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "contests": {
+      "type": "hasMany",
+      "model": "Contest",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
