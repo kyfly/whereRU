@@ -1,0 +1,24 @@
+{
+  "name": "UserMessage",
+  "plural": "user-message",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "messageId": {
+      "type": "string",
+      "required": true
+    },
+    "readed": {
+      "type": "bool",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+  },
+  "acls": [],
+  "methods": {}
+}

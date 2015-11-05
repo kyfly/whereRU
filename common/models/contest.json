@@ -18,7 +18,7 @@
     "explainUrl": {
       "type": "string"
     },
-    "start_time": {
+    "startTime": {
       "type": "date"
     }
   },
@@ -26,7 +26,7 @@
   "relations": {
     "projects": {
       "type": "hasMany",
-      "model": "Project",
+      "model": "ProjectResult",
       "foreignKey": ""
     },
     "materials": {
@@ -37,6 +37,11 @@
     "messages": {
       "type": "hasMany",
       "model": "message",
+      "foreignKey": ""
+    },
+    "contestOrg": {
+      "type": "belongsTo",
+      "model": "ContestOrg",
       "foreignKey": ""
     }
   },

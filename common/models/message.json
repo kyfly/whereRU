@@ -1,5 +1,5 @@
 {
-  "name": "message",
+  "name": "Message",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -15,8 +15,11 @@
     "type": {
       "type": "string"
     },
+    "actId": {
+      "type": "objectid"
+    },
     "loader": {
-      "type": "string"
+      "type": "object"
     }
   },
   "validations": [],

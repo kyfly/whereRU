@@ -1,5 +1,5 @@
 {
-  "name": "active",
+  "name": "Active",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -12,6 +12,7 @@
     "type": {
       "type": "string"
     },
+    "secret": "number",
     "actItem": {
       "type": [
         "object"

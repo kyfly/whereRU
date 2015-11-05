@@ -21,6 +21,11 @@
   },
   "validations": [],
   "relations": {
+    "messages": {
+      "type": "embedsMany",
+      "model": "UserMessage",
+      "foreignKey": ""
+    },
     "teams": {
       "type": "hasMany",
       "model": "team",

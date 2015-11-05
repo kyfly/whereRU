@@ -1,5 +1,5 @@
 {
-  "name": "material",
+  "name": "Material",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {

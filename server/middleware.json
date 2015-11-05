@@ -15,7 +15,11 @@
   "session": {},
   "auth": {},
   "parse": {},
-  "routes": {},
+  "routes": {
+    "loopback#status": {
+      "paths": "/"
+    }
+  },
   "files": {},
   "final": {
     "loopback#urlNotFound": {}

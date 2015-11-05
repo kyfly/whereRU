@@ -36,7 +36,7 @@
     "dataSource": "db",
     "public": true
   },
-  "team": {
+  "Team": {
     "dataSource": "db",
     "public": true
   },
@@ -52,7 +52,7 @@
     "dataSource": "db",
     "public": true
   },
-  "menber": {
+  "Menber": {
     "dataSource": "db",
     "public": true
   },
@@ -60,19 +60,23 @@
     "dataSource": "db",
     "public": true
   },
-  "material": {
+  "Material": {
     "dataSource": "db",
     "public": true
   },
-  "message": {
+  "Message": {
     "dataSource": "db",
     "public": true
   },
-  "active": {
+  "Active": {
     "dataSource": "db",
     "public": true
   },
-  "school": {
+  "School": {
+    "dataSource": "db",
+    "public": true
+  },
+  "UserMessage": {
     "dataSource": "db",
     "public": true
   }
