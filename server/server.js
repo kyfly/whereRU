@@ -1,6 +1,6 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
-
+var path = require('path');
 var app = module.exports = loopback();
 
 app.start = function() {
@@ -20,4 +20,7 @@ boot(app, __dirname, function(err) {
   if (require.main === module)
     app.start();
 });
-app.use(loopback.static('../client'));
+// app.get('/[a,b]', function(req, res) {
+// 	console.log(__dirname);
+//     res.sendFile(path.join(__dirname, '../client/index.html'));
+// });

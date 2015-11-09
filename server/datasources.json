@@ -1,9 +1,9 @@
 {
   "db": {
-    "name": "db",
     "host": "127.0.0.1",
     "port": 27017,
     "database": "whereRU",
+    "name": "db",
     "connector": "mongodb"
   }
 }

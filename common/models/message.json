@@ -9,7 +9,7 @@
     "content": {
       "type": "string"
     },
-    "createAt": {
+    "created": {
       "type": "string"
     },
     "type": {
@@ -19,7 +19,14 @@
       "type": "objectid"
     },
     "loader": {
-      "type": "object"
+      "type": "string"
+    },
+    "reads": {
+      "type": [
+        {
+          "type": "object"
+        }
+      ]
     }
   },
   "validations": [],

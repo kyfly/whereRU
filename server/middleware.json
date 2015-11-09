@@ -16,11 +16,13 @@
   "auth": {},
   "parse": {},
   "routes": {
-    "loopback#status": {
-      "paths": "/"
-    }
+    
   },
-  "files": {},
+  "files": {
+    "loopback#static": {
+      "params": "$!../client"
+    }
+    },
   "final": {
     "loopback#urlNotFound": {}
   },

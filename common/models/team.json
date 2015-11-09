@@ -17,6 +17,12 @@
     },
     "school": {
       "type": "string"
+    },
+    "explainUrl": {
+      "type": "string"
+    },
+    "created": {
+      "type": "Date"
     }
   },
   "validations": [],
@@ -30,6 +36,11 @@
       "type": "hasMany",
       "model": "menber",
       "foreignKey": ""
+    },
+    "histories": {
+      "type": "embedsMany",
+      "model": "TeamHistory",
+      "foreignKey": "teamId"
     }
   },
   "acls": [],

@@ -20,6 +20,12 @@
     },
     "startTime": {
       "type": "date"
+    },
+    "authorize": {
+      "type": "string"
+    },
+    "authCode": {
+      "type": "string"
     }
   },
   "validations": [],

@@ -1,25 +1,21 @@
 {
-  "name": "Menber",
+  "name": "TeamHistory",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "UserId": {
-      "type": "string"
-    },
-    "role": {
-      "type": "string"
-    },
     "name": {
       "type": "string"
     },
-    "phone": {
-      "type": "number"
+    "updateAt": {
+      "type": "date"
     },
-    "academy": {
-      "type": "string"
+    "members": {
+      "type": [
+        "object"
+      ]
     }
   },
   "validations": [],

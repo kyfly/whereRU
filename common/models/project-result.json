@@ -17,6 +17,12 @@
     },
     "level": {
       "type": "string"
+    },
+    "contestId": {
+      "type": "objectId"
+    },
+    "updateAt": {
+      "type": "Date"
     }
   },
   "validations": [],

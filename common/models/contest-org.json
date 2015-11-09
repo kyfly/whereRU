@@ -11,6 +11,21 @@
     },
     "school": {
       "type": "string"
+    },
+    "loader": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "number"
+    },
+    "password": {
+      "type": "string"
+    },
+    "authorizeId": {
+      "type": "string"
+    },
+    "authCode": {
+      "type": "string"
     }
   },
   "validations": [],
@@ -18,7 +33,7 @@
     "contests": {
       "type": "hasMany",
       "model": "Contest",
-      "foreignKey": ""
+      "foreignKey": "contestOrgId"
     }
   },
   "acls": [

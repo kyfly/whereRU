@@ -12,7 +12,9 @@
     "type": {
       "type": "string"
     },
-    "secret": "number",
+    "secret": {
+      "type": "number"
+    },
     "actItem": {
       "type": [
         "object"

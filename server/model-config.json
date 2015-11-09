@@ -52,7 +52,7 @@
     "dataSource": "db",
     "public": true
   },
-  "Menber": {
+  "Member": {
     "dataSource": "db",
     "public": true
   },
@@ -77,6 +77,10 @@
     "public": true
   },
   "UserMessage": {
+    "dataSource": "db",
+    "public": true
+  },
+  "TeamHistory": {
     "dataSource": "db",
     "public": true
   }
