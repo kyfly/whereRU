@@ -3,3 +3,4 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.bootstrap'])
   .config(['$locationProvider', function ($locationProvider) {
     //$locationProvider.html5Mode(true);
   }]);
+
