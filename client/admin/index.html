@@ -1,11 +1,11 @@
 <html ng-app="app" ng-controller="AdminCtrl">
-
 <head>
+  <base href="/contest">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
   <link href="/lib/materialize/css/materialize.min.css" rel="stylesheet">
-  <link href="css/admin.css" rel="stylesheet">
+  <link href="/admin/css/admin.css" rel="stylesheet">
 </head>
 <body>
 <!--侧边导航-->
@@ -14,7 +14,7 @@
     <img id="front-page-logo" src="/lib/img/logo.jpg">
   </a>
   <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars" ng-class="{active: sidebar.active}" class="bold">
-    <a class="waves-effect" href ng-click="redirect($index)">{{sidebar.display_name}}</a>
+    <a class="waves-effect" href="{{sidebar.url}}" ng-click="redirect($index)">{{sidebar.display_name}}</a>
   </li>
 </ul>
 <!--头部nav-->
@@ -50,9 +50,9 @@
 <script src="/lib/materialize/js/materialize.min.js"></script>
 <script src="/lib/angular-components/angular-resource.min.js"></script>
 <script src="/lib/angular-components/angular-route.min.js"></script>
-<script src="js/admin-controller.js"></script>
-<script src="js/admin-route.js"></script>
-<script src="js/admin-configure.js"></script>
+<script src="/admin/js/admin-controller.js"></script>
+<script src="/admin/js/admin-route.js"></script>
+<script src="/admin/js/admin-configure.js"></script>
 <script>
   $(".button-collapse").sideNav();
 </script>

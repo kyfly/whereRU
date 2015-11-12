@@ -1,19 +1,20 @@
 function RouteConfigure($routeProvider) {
   $routeProvider
-    .when('/home', {
+    .when('/contest/home', {
       templateUrl: '/admin/partials/home.html',
       controller: ['$scope', '$resource', HomeCtrl]
     })
-    .when('/event', {
+    .when('/contest/event', {
       templateUrl: '/admin/partials/event.html',
       controller: ['$scope', '$resource', EventCtrl]
-    }).when('/setting', {
+    })
+    .when('/contest/setting', {
       templateUrl: '/admin/partials/setting.html',
       controller: ['$scope', '$resource', SettingCtrl]
     })
-    .when('/help', {
+    .when('/contest/help', {
       templateUrl: '/admin/partials/help.html',
       controller: HelpCtrl
     })
-    .otherwise({redirectTo: '/home'});
+    .otherwise({redirectTo: '/contest/home'});
 }
