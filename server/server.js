@@ -21,7 +21,7 @@ boot(app, __dirname, function(err) {
     app.start();
 });
 
-app.get('/contest*', function(req, res) {
+app.get('/eventManage*', function(req, res) {
   console.log(__dirname+ 'q');
   res.sendFile(path.join(__dirname, '../client/admin/index.html'));
 });
