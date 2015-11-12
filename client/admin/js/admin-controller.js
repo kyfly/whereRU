@@ -1,42 +1,40 @@
 function AdminCtrl($scope, $timeout, $window) {
   //监听ngView完成事件，延迟200ms用于页面渲染
   $scope.$on('$viewContentLoaded', function () {
-    if (document.body.clientWidth >= 768) {
-      $timeout(function () {
-        document.getElementById('main').style.minHeight = document.body.clientHeight - document.getElementById('footer').offsetHeight - document.getElementById('nav').offsetHeight + 'px';
-      }, 200);
-    }
+    $timeout(function () {
+      document.getElementById('main').style.minHeight = document.body.clientHeight - document.getElementById('footer').offsetHeight - document.getElementById('nav').offsetHeight + 'px';
+      if ($window.location.hash === '#/home') {
+        $scope.redirect(0);
+      } else if ($window.location.hash === '#/event') {
+        $scope.redirect(1);
+      } else if ($window.location.hash === '#/setting') {
+        $scope.redirect(2);
+      } else if ($window.location.hash === '#/help') {
+        $scope.redirect(3);
+      }
+    }, 200);
   });
-  //检测函数，利用路由判断，辅助检测左边的按钮何时应该高亮
-  var sidebarItemChosen = function (type) {
-    var rx = new RegExp('#\/' + type);
-    return rx.test($window.location.hash);
-  };
   //侧边栏显示内容
   $scope.sidebars = [
     {
       'id': 'sidebarHome',
       'display_name': '首页',
-      'url': '#/home',
-      'active': sidebarItemChosen('home')
+      'url': '#/home'
     },
     {
       'id': 'sidebarEvent',
       'display_name': '竞赛',
-      'url': '#/event',
-      'active': sidebarItemChosen('vote')
+      'url': '#/event'
     },
     {
       'id': 'sidebarSetting',
       'display_name': '设置',
-      'url': '#/setting',
-      'active': sidebarItemChosen('setting')
+      'url': '#/setting'
     },
     {
       'id': 'sidebarHelp',
       'display_name': '帮助',
-      'url': '#/help',
-      'active': sidebarItemChosen('help')
+      'url': '#/help'
     }
   ];
   //跳转函数，包括操作侧边栏按钮和跳转至相应页面

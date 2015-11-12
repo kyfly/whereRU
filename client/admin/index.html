@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="/lib/materialize/css/materialize.min.css" rel="stylesheet">
-  <link href="/lib/css/admin.css" rel="stylesheet">
+  <link href="css/admin.css" rel="stylesheet">
 </head>
 <body>
 <!--侧边导航-->
@@ -13,7 +13,7 @@
   <a class="logo brand-logo" href="/index.html">
     <img id="front-page-logo" src="/lib/img/logo.jpg">
   </a>
-  <li ng-repeat="sidebar in sidebars" ng-class="{active: sidebar.active}" class="bold">
+  <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars" ng-class="{active: sidebar.active}" class="bold">
     <a class="waves-effect" href ng-click="redirect($index)">{{sidebar.display_name}}</a>
   </li>
 </ul>
@@ -30,8 +30,8 @@
   </div>
 </nav>
 <!--右侧主要内容-->
-<main id="main">
-  <div class="container">
+<main >
+  <div class="container" id="main">
     <div class="col s12" ng-view></div>
   </div>
 </main>
