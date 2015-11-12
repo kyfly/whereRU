@@ -3,8 +3,15 @@
 <head>
   <title>where R U</title>
   <base href="/">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/lib/img/etuan_logo.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="/lib/img/etuan_logo.ico" type="image/x-icon">
+
+  <link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
+
+  <link href="/lib/materialize/css/materialize.css" rel="stylesheet">
+	<script src="/lib/jquery/jquery.min.js"></script>
+	<script src="/lib/materialize/js/materialize.min.js"></script>
   <!--angular-->
   <script src="/lib/angular/angular.min.js"></script>
   <!--ui-router-->
@@ -22,17 +29,72 @@
   <!--controller-->
   <script src="/controllers/home-controller.js"></script>
 
+  <script src="/directives/jquery-directives.js"></script>
+	<style type="text/css">
+		footer{
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+		}
+		footer .row{
+			margin: 0
+		}
+		footer .row .col{
+			padding: 0;
+			background: #ee6e73;
+		}
+		footer .tabs1 .newtab a{
+			color: #fff;
 
+		}
+		footer .tabs1 .newtab{
+			-webkit-box-flex: 1;
+	    -webkit-flex-grow: 1;
+	    -ms-flex-positive: 1;
+	    flex-grow: 1;
+	    display: block;
+	    float: left;
+	    text-align: center;
+	    line-height: 48px;
+	    height: 48px;
+	    padding: 0;
+	    margin: 0;
+	    text-transform: uppercase;
+	    text-overflow: ellipsis;
+	    overflow: hidden;
+	    letter-spacing: .8px;
+	    width: 15%;
+	    min-width: 80px;
+		}
+		footer .tabs1 {
+			display: -webkit-box;
+	    display: -moz-box;
+	    display: -ms-flexbox;
+	    display: -webkit-flex;
+	    display: flex;
+	    position: relative;
+	    height: 48px;
+	    background-color: #fff;
+	    margin: 0 auto;
+	    width: 100%;
+	    white-space: nowrap;
+		}
+	</style>
+	
 </head>
 <body>
-<header>
-
-</header>
 <div>
   <div ui-view></div>
 </div>
 <footer>
-
+	<div class="row">
+      <ul class="tabs1">
+        <li class="newtab col s3 m3 l3"><a href="/">首页</a></li>
+        <li class="newtab col s3 m3 l3"><a href="/myTeam">我的团队</a></li>
+        <li class="newtab col s3 m3 l3"><a href="/search">搜索</a></li>
+        <li class="newtab col s3 m3 l3"><a href="/home">个人中心</a></li>
+      </ul>
+  </div>
 </footer>
 </body>
 </html>
