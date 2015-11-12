@@ -9,7 +9,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
   })
   .state('home', {
   	url: '/home',
-  	templateUrl: "/templates/user-homepage.html",
+  	templateUrl: "/templates/user-home.html",
   	resolve: {
 
   	},
