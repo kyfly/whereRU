@@ -1,7 +1,7 @@
 function RouteConfigure($routeProvider) {
   $routeProvider
-    .when('/eventManage/homepage', {
-      templateUrl: '/admin/partials/homepage.html',
+    .when('/eventManage/home', {
+      templateUrl: '/admin/partials/home.html',
       controller: ['$scope', '$resource', HomeCtrl]
     })
     .when('/eventManage/event', {
@@ -16,5 +16,5 @@ function RouteConfigure($routeProvider) {
       templateUrl: '/admin/partials/help.html',
       controller: HelpCtrl
     })
-    .otherwise({redirectTo: '/eventManage/homepage'});
+    .otherwise({redirectTo: '/eventManage/home'});
 }

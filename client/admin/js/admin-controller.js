@@ -5,7 +5,7 @@ function AdminCtrl($scope, $timeout, $window) {
   //监听ngView完成事件，延迟200ms用于页面渲染
   $scope.$on('$viewContentLoaded', function () {
     $timeout(function () {
-      if ($window.location.pathname === '/eventManage/homepage') {
+      if ($window.location.pathname === '/eventManage/home') {
         $scope.redirect(0);
       } else if ($window.location.pathname === '/eventManage/event') {
         $scope.redirect(1);
@@ -21,7 +21,7 @@ function AdminCtrl($scope, $timeout, $window) {
     {
       'id': 'sidebarHome',
       'display_name': '首页',
-      'url': '/eventManage/homepage'
+      'url': '/eventManage/home'
     },
     {
       'id': 'sidebarEvent',
