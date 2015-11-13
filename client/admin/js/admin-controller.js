@@ -50,7 +50,16 @@ function AdminCtrl($scope, $timeout, $window) {
   };
 }
 
-function HomeCtrl() {
+function HomeCtrl($scope) {
+  $scope.selects = [
+    {
+      name:'123',
+      yes:'23'
+    },{
+      name:'12232',
+      yes:'222'
+    }
+];
 }
 
 function EventCtrl() {
