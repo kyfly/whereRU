@@ -39,13 +39,16 @@ function CreateTeamController ($scope, Ueditor) {
     }
 	];
 	$scope.team = {
-		pics: []
+		name: "团团一家",
+		school: "杭州电子科技大学",
+		pics: ['/lib/img/etuan-group.jpg?a=1','/lib/img/etuan-group.jpg?a=12','/lib/img/etuan-group.jpg?a=13']
 	};
 	$scope.logoLoad = function () {
 		var e = document.getElementById('logo').files;
 		uploadFile(e, function (res) {
 			$scope.team.logoUrl = res[0].url;
 			$scope.logo = 'success';
+			$scope.$apply();
 		});	
 	}
 	$scope.picLoad = function () {

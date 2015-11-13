@@ -59,10 +59,19 @@ function HomeCtrl($scope) {
       name:'12232',
       yes:'222'
     }
-];
+  ];
 }
 
-function EventCtrl() {
+function EventCtrl($scope) {
+  $scope.events = [
+    {
+      name:'123',
+      yes:'23'
+    },{
+      name:'12232',
+      yes:'222'
+    }
+  ];
 }
 
 function SettingCtrl() {
