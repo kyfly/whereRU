@@ -3,7 +3,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     url: "/",
     templateUrl: "/templates/index.html",
     resolve: {
-
+      teams: function (Team) {
+        return Team.find();
+      }
     },
     controller: 'HomeController'
   })
@@ -27,7 +29,23 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
   	url: '/myTeam',
   	templateUrl: '/templates/my-team.html',
   	controller: 'MyTeamController'
-  });
+  })
+  .state('createTeam', {
+    url: '/myTeam/createTeam',
+    templateUrl: '/templates/create-team.html',
+    resolve: {
+
+    },
+    controller: 'CreateTeamController'
+  }) 
+  .state('findTeam', {
+    url: '/myTeam/findTeam',
+    templateUrl: '/templates/find-team.html',
+    resolve: {
+
+    },
+    controller: 'FindTeamController'
+  })
   $urlRouterProvider.when('', '/');
   $urlRouterProvider.otherwise(function ($injector, $location) {
     $location.path('/');

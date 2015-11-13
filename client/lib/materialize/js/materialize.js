@@ -401,6 +401,7 @@ else {
         $panel_headers.on('click.collapse', function (e) {
           var element = $(e.target);
 
+
           if (isChildrenOfPanelHeader(element)) {
             element = getPanelHeader(element);
           }
@@ -3278,7 +3279,8 @@ $(document).ready(function(){
           $active.show();
         }
         else {
-          $slides.first().addClass('active').velocity({opacity: 1}, {duration: options.transition, queue: false, easing: 'easeOutQuad'});
+          $slides.first().addClass('active').velocity({opacity: 1},
+           {duration: options.transition, queue: false, easing: 'easeOutQuad'});
 
           $active_index = 0;
           $active = $slides.eq($active_index);
@@ -3291,7 +3293,9 @@ $(document).ready(function(){
 
         // Adjust height to current slide
         $active.find('img').each(function() {
-          $active.find('.caption').velocity({opacity: 1, translateX: 0, translateY: 0}, {duration: options.transition, queue: false, easing: 'easeOutQuad'});
+          $active.find('.caption').velocity(
+          	{opacity: 1, translateX: 0, translateY: 0}, 
+          	{duration: options.transition, queue: false, easing: 'easeOutQuad'});
         });
 
         // auto scroll

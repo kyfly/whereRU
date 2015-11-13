@@ -1,14 +1,18 @@
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">three</a></li>
-</ul>
+
 <nav>
   <div class="nav-wrapper">
     <a href="#!" class="brand-logo left">Logo</a>
     <ul class="right">
-      <li><a dropdown-button class="dropdown-button" href="#!" data-activates="dropdown1" style="font-size:3rem;line-height: 100%;">...</a></li>
+      <li>
+        <a class='' href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="true">
+            <i class="material-icons">add</i>
+        </a>
+        <ul id="demoDropdown" class="dropdown-content">
+          <li><a href="/myTeam/createTeam">创建团队</a></li>
+          <li class="divider"></li>
+          <li><a href="/myTeam/findTeam">寻找团队</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
 </nav>

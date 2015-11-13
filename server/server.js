@@ -21,11 +21,3 @@ boot(app, __dirname, function(err) {
     app.start();
 });
 
-app.get('/contest*', function(req, res) {
-  console.log(__dirname+ 'q');
-  res.sendFile(path.join(__dirname, '../client/admin/index.html'));
-});
-app.get('/search|myTeam|home', function(req, res) {
-  console.log(__dirname);
-  res.sendFile(path.join(__dirname, '../client/index.html'));
-});

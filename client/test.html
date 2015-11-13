@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="WRU">
+<head>
+  <title>where R U</title>
+  <base href="/">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/lib/img/etuan_logo.ico" type="image/x-icon">
+	<!-- materialize icon css -->
+  <link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
+	<!-- materialize css -->
+  <link href="/lib/materialize/css/materialize.css" rel="stylesheet">
+  <!-- jquery -->
+	<script src="/lib/jquery/jquery.min.js"></script>
+	<!-- materialize js -->
+	<script src="/lib/materialize/js/materialize.min.js"></script>
+
+  <script src="/lib/angular/angular.min.js"></script>
+
+  <script src="/lib/materialize/js/angular-materialize.js"></script>
+</head>
+<body ng-controller='testController'>
+<select class="" ng-model="test" material-select watch>
+    <option ng-repeat="value in select">{{value}}</option>
+</select>
+<script type="text/javascript">
+	var app = angular.module('WRU', ['ui.materialize']);
+	app.controller('testController', ['$scope', function ($scope){
+			$scope.select = ['a','c','v'];
+		}])
+</script>
+</body>
+</html>

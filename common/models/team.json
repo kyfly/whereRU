@@ -15,13 +15,22 @@
       "type": "string",
       "required": true
     },
+    "dynamic": {
+      "type": "string"
+    },
     "school": {
       "type": "string"
     },
     "explainUrl": {
       "type": "string"
     },
+    "logoUrl": {
+      "type": "string"
+    },
     "created": {
+      "type": "Date"
+    },
+    "updated": {
       "type": "Date"
     }
   },
@@ -30,6 +39,11 @@
     "projects": {
       "type": "hasMany",
       "model": "Project",
+      "foreignKey": ""
+    },
+    "messages": {
+      "type": "hasMany",
+      "model": "Message",
       "foreignKey": ""
     },
     "menbers": {
