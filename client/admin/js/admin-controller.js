@@ -51,18 +51,20 @@ function AdminCtrl($scope, $timeout, $window) {
 }
 
 function HomeCtrl($scope) {
-  $scope.selects = [
-    {
-      name:'123',
-      yes:'23'
-    },{
-      name:'12232',
-      yes:'222'
-    }
-];
 }
 
-function EventCtrl() {
+function EventCtrl($scope) {
+  $scope.collapsibleElements = [{
+    title: '杭州电子科技大学2015年大学生挑战杯',
+    content: 'Lorem ipsum dolor sit amet.'
+  },{
+    title: '杭州电子科技大学2015年大学生“创青春”',
+    content: 'Lorem ipsum dolor sit amet.'
+  },{
+    title: '杭州电子科技大学2015年大学生新苗',
+    content: 'Lorem ipsum dolor sit amet.'
+  }
+  ];
 }
 
 function SettingCtrl() {
