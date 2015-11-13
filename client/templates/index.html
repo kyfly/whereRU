@@ -1,7 +1,7 @@
 <header>
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">wher R U</a>
+      <a href="#" class="brand-logo center">where R U</a>
       <span class="nav-wrapper right" style="padding: 0 15px">
         <i class="material-icons">loop</i>
       </span>
@@ -9,54 +9,21 @@
   </nav>
 </header>
 <div>
-   <ul class="collection">
-    <li class="collection-item avatar">
-      <i class="material-icons circle">folder</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+   
+  <ul class="collapsible popout" data-collapsible="accordion" watch>
+    <li ng-repeat="team in teams">
+      <div class="collapsible-header" ng-click="getExplain()">
+        <img ng-src="{{team.logoUrl||'/lib/img/logo.jpg'}}" style="width:3rem">
+        <p style="margin:0;display:inline-block;padding:0 15px">
+          <span ng-bind="team.name"></span>
+          <br>
+          <span ng-bind="team.dynamic"></span>
+        </p>
+      </div>
+      <div class="collapsible-body">
+        <p ng-bind-html="team.explain">
+        </p>
     </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle green">insert_chart</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle red">play_arrow</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle">folder</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle green">insert_chart</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle red">play_arrow</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
+  </div>
   </ul>
 </div>

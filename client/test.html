@@ -1,0 +1,45 @@
+<html ng-app="app" ng-controller="AdminCtrl">
+<head>
+  <base href="/eventManage">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
+  <link href="/lib/materialize/css/materialize.min.css" rel="stylesheet">
+  
+</head>
+<body>
+
+
+   <div class="row">
+  <div class="section col s4">
+    <select class="" ng-model="select" material-select watch>
+      <option ng-repeat="value in selects">{{value.yes}}</option>
+    </select>
+  </div>
+  <div>{{select}}</div>
+</div>
+
+<!--底部引入js加快加载速度-->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/angular/angular.min.js"></script>
+<script src="/lib/materialize/js/materialize.min.js"></script>
+<script src="/lib/materialize/js/angular-materialize.js"></script>
+
+<script>
+  $(".button-collapse").sideNav();
+  var app = angular.module('app', ['ui.materialize']);
+  app.controller('AdminCtrl', ['$scope', AdminCtrl]);
+  function AdminCtrl($scope) {
+  $scope.selects = [
+    {
+      name:'123',
+      yes:'23'
+    },{
+      name:'12232',
+      yes:'222'
+    }
+];
+}
+</script>
+</body>
+</html>

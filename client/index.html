@@ -6,35 +6,17 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/lib/img/etuan_logo.ico" type="image/x-icon">
-
+	<!-- materialize icon css -->
   <link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
-
+	<!-- materialize css -->
   <link href="/lib/materialize/css/materialize.css" rel="stylesheet">
-	<script src="/lib/jquery/jquery.min.js"></script>
-	<script src="/lib/materialize/js/materialize.min.js"></script>
-  <!--angular-->
-  <script src="/lib/angular/angular.min.js"></script>
-  <!--ui-router-->
-  <script src="/lib/angular-components/angular-ui-router.min.js"></script>
-  <!--resource-->
-  <script src="/lib/angular-components/angular-resource.min.js"></script>
-  <!--ui-bootstrap-->
-  <script src="/lib/angular-ui-bootstrap/etuan-ui-bootstrap.js"></script>
-  <!--service-->
-  <script src="/services/lb-services.js"></script>
-  <!--app-->
-  <script src="/app.js"></script>
-  <!--route-->
-  <script src="/router/route.js"></script>
-  <!--controller-->
-  <script src="/controllers/home-controller.js"></script>
-
-  <script src="/directives/jquery-directives.js"></script>
+  
 	<style type="text/css">
 		footer{
 			position: fixed;
 			bottom: 0;
 			width: 100%;
+			z-index: 9999
 		}
 		footer .row{
 			margin: 0
@@ -87,14 +69,44 @@
   <div ui-view></div>
 </div>
 <footer>
-	<div class="row">
-      <ul class="tabs1">
-        <li class="newtab col s3 m3 l3"><a href="/">首页</a></li>
-        <li class="newtab col s3 m3 l3"><a href="/myTeam">我的团队</a></li>
-        <li class="newtab col s3 m3 l3"><a href="/search">搜索</a></li>
-        <li class="newtab col s3 m3 l3"><a href="/home">个人中心</a></li>
-      </ul>
+  <div class="fixed-action-btn horizontal" style="bottom: 20px; right: 20px;">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons" style="font-size:3rem">toc</i>
+    </a>
+    <ul>
+      <li><a href="/" class="btn-floating blue">首页</a></li>
+      <li class="btn-floating green"><a href="/myTeam">我的团队</a></li>
+      <li class="btn-floating yellow darken-1"><a href="/search">搜索</a></li>
+      <li class="btn-floating red"><a href="/home">个人中心</a></li>
+    </ul>
   </div>
 </footer>
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<!-- materialize js -->
+<script src="/lib/materialize/js/materialize.min.js"></script>
+<!-- ueditor -->
+<script type="text/javascript" src="/lib/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/lib/ueditor/ueditor.all.js"></script>
+<!--angular-->
+<script src="/lib/angular/angular.min.js"></script>
+<!--ui-router-->
+<script src="/lib/angular-components/angular-ui-router.min.js"></script>
+<!--resource-->
+<script src="/lib/angular-components/angular-resource.min.js"></script>
+<!-- angular ueditor -->
+<script src="/lib/angular-ueditor/angular-ueditor.min.js"></script>
+<!-- angular materialize -->
+<script src="/lib/materialize/js/angular-materialize.js"></script>
+<!--model service-->
+<script src="/services/lb-services.js"></script>
+<!--angular module-->
+<script src="/app.js"></script>
+ <!--ueditor service-->
+<script src="/services/uediter-services.js"></script>
+<!--angular route-->
+<script src="/router/route.js"></script>
+<!--angular controller-->
+<script src="/controllers/home-controller.js"></script>
 </body>
 </html>
