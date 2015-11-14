@@ -1,11 +1,6 @@
-app.controller('HomeController', ['$scope', 'teams', '$http', '$sce', '$templateCache', HomeController])
-.controller('UserHomeController', ['$scope', UserHomeController])
-.controller('TeamController', ['$scope', TeamController])
-.controller('MyTeamController', ['$scope', MyTeamController])
-.controller('CreateTeamController', ['$scope', 'Ueditor', 'Team', CreateTeamController])
-.controller('FindTeamController', ['$scope', FindTeamController])
-function HomeController($scope, teams, $http, $sce, $templateCache) {
-	$scope.teams = teams;
+app.controller('HomeController', ['$scope', 'messages', '$http', '$sce', '$templateCache', HomeController]);
+function HomeController($scope, messages, $http, $sce, $templateCache) {
+	$scope.messages = messages;
 	$scope.getExplain = function () {
 		that = this;
 		if (!this.team.explain) {
@@ -16,16 +11,55 @@ function HomeController($scope, teams, $http, $sce, $templateCache) {
 		}
 	}
 }
+app.controller('SignUpController', ['$scope','$location', 'RUser', 'Auth', SignUpController]);
+function SignUpController ($scope, $location, RUser, Auth) {
+	$scope.schools = [
+    {
+    	id: 1,
+      name:'XX大学',
+      logo:'/lib/img/logo/png'
+    },{
+    	id: 2,
+      name:'XX大学',
+      logo:'/lib/img/logo/png'
+    }
+	];
+	$scope.signUp = function () {
+		RUser.create({}, $scope.user, function (res) {
+			if (res.err) return;
+			Auth.setUser(res.token);
+			$location.path('/');
+		}, function (){});
+	}
+}
+app.controller('SignInController', ['$scope', '$location', 'RUser', 'Auth', SignInController]);
+function SignInController ($scope, $location, RUser, Auth){
+	$scope.login = function () {
+		RUser.login($scope.user, function (res) {
+			if (res.err) return;
+			Auth.setUser(res.token);
+			$location.path('/');
+		}, function () {});
+	}
+}
+app.controller('UserHomeController', ['$scope', UserHomeController]);
 function UserHomeController ($scope) {
 	// body...
 }
-function TeamController ($scope) {
+app.controller('SearchController', ['$scope', SearchController]);
+function SearchController ($scope) {
 	
 }
-function MyTeamController ($scope) {
-	// body...
+app.controller('MyTeamController', ['$scope', 'teams', MyTeamController]);
+function MyTeamController ($scope, teams) {
+	$scope.teams = teams;
 }
-function CreateTeamController ($scope, Ueditor, Team) {
+app.controller('ViewTeamController', ['$scope', ViewTeamController]);
+function ViewTeamController ($scope) {
+
+}
+app.controller('CreateTeamController', ['$scope', 'Team', CreateTeamController]);
+function CreateTeamController ($scope, Team) {
 	//$scope.teamConfig = Ueditor.config;
 	$scope.schools = [
     {
@@ -67,6 +101,7 @@ function CreateTeamController ($scope, Ueditor, Team) {
 	}
 	//$('select').material_select();
 }
+app.controller('FindTeamController', ['$scope', FindTeamController]);
 function FindTeamController ($scope) {
 	console.log($scope);
 }

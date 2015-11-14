@@ -49,9 +49,9 @@
       "model": "Message",
       "foreignKey": ""
     },
-    "menbers": {
+    "members": {
       "type": "hasMany",
-      "model": "menber",
+      "model": "Member",
       "foreignKey": ""
     },
     "histories": {

@@ -30,7 +30,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "teams": {
+      "type": "belongsTo",
+      "model": "Team",
+      "foreignKey": ""
+    },
+    "contests": {
+      "type": "belongsTo",
+      "model": "Contest",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

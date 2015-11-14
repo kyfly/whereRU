@@ -29,6 +29,10 @@
     }
   },
   "final:after": {
-    "errorhandler": {}
+    "errorhandler": {
+      "params": {
+        "includeStack": false
+      }
+    }
   }
 }
