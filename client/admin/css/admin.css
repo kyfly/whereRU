@@ -27,6 +27,7 @@ body {
 
 .bold {
   padding: 0 !important;
+  margin-right: 15px !important;
 }
 
 .bold > a {
@@ -35,6 +36,14 @@ body {
 
 .side-nav > li {
   text-align: center;
+}
+
+.side-nav li:hover, .side-nav li.active {
+  background-color: #0288D1;
+}
+
+.side-nav > li:hover > a, .side-nav > li.active > a {
+  color: #ffffff;
 }
 
 .login-out > i {
@@ -46,6 +55,12 @@ body {
 main {
   padding: 15px 0 15px 0;
   background-color: #FCFCFC;
+}
+
+@media only screen and (min-width: 993px) {
+  .container {
+    width: 80% !important;
+  }
 }
 
 .page-footer {
@@ -74,3 +89,19 @@ main {
   }
 }
 
+.addEvent {
+  margin-top: 17px;
+}
+
+.collapsible-body > .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.card-action > .activator > .material-icons {
+  margin-top: -5px;
+}
+
+.card-content > p {
+  padding: 5px;
+}

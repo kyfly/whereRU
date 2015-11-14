@@ -63,13 +63,15 @@ function HomeCtrl($scope) {
 }
 
 function EventCtrl($scope) {
-  $scope.events = [
-    {
-      name:'123',
-      yes:'23'
+  $scope.collapsibleElements = [{
+      title: '杭州电子科技大学2015年大学生挑战杯',
+      content: 'Lorem ipsum dolor sit amet.'
     },{
-      name:'12232',
-      yes:'222'
+      title: '杭州电子科技大学2015年大学生“创青春”',
+      content: 'Lorem ipsum dolor sit amet.'
+    },{
+      title: '杭州电子科技大学2015年大学生新苗',
+      content: 'Lorem ipsum dolor sit amet.'
     }
   ];
 }
