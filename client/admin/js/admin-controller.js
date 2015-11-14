@@ -67,7 +67,31 @@ function HomeCtrl($scope) {
   ];
 }
 
-function EventCtrl($scope) {
+function EventCtrl($scope, $resource) {
+  var GetTeam = $resource('/api/team');
+  var GetProject = $resource('/api/Projects');
+  var GetContest = $resource('/api/ContestOrgs/5646e2ec5d0401cc238e5521/contests');
+  GetTeam.query({},
+    function (res) {
+      console.log(res)
+    },
+    function () {
+    }
+  );
+  GetProject.query({},
+    function (res) {
+      console.log(res)
+    },
+    function () {
+    }
+  );
+  GetContest.query({},
+    function (res) {
+      console.log(res)
+    },
+    function () {
+    }
+  );
   $scope.collapsibleElements = [{
       title: '杭州电子科技大学2015年大学生挑战杯',
       content: 'Lorem ipsum dolor sit amet.'
@@ -79,6 +103,7 @@ function EventCtrl($scope) {
       content: 'Lorem ipsum dolor sit amet.'
     }
   ];
+
 }
 
 function SettingCtrl() {
