@@ -1,4 +1,9 @@
-function AdminCtrl($scope, $timeout, $window) {
+function AdminCtrl($scope, $timeout, $window, $rootScope) {
+  if (localStorage.CMSCAPTCHA) {
+    $rootScope.access = true;
+  } else {
+    $scope.navShow = {'padding-left':0};
+  }
   document.getElementById('main').style.minHeight = document.body.clientHeight
     - document.getElementById('footer').offsetHeight
     - document.getElementById('nav').offsetHeight - 30 + 'px';
@@ -80,4 +85,18 @@ function SettingCtrl() {
 }
 
 function HelpCtrl() {
+}
+function LoginCtrl($scope, Org , $location) {
+  $scope.org = {};
+  $scope.login = function () {
+    $scope.org.email = $scope.org.phone + '@etuan.org';
+    Org.login($scope.org, function (res) {
+      if (res.err) {
+        ;
+      } else {
+        localStorage.CMSCAPTCHA = JSON.stringify(res.token);
+        $location.path('/eventManage/home');
+      }
+    }, function () {});
+  };
 }

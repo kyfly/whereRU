@@ -31,6 +31,9 @@ function upload(c) {
 	    case 'uploadimage':
         uploadfile(req, res);
         break;
+      case 'uploadtext':
+        uploadText(req, res);
+        break;
 	    case 'listimage':
         listfile(req, res, '.jpg,.jpeg,.png,.gif,.ico,.bmp');
         break;
@@ -53,7 +56,22 @@ function upload(c) {
     }
 	}
 }
-
+var uploadText = function (req, res) {
+  var fileName = getFileName('.html');
+  fs.writeFile(path.join(__dirname, '../client/lib/html/', fileName), 
+    req.body.content, function (err) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send({
+          'url': path.join('/client/lib/html/', fileName),
+          //'title': req.body.pictitle,
+          'original': fileName,
+          'state': "SUCCESS"
+        });
+      }
+  });
+}
 var uploadfile = function (req, res) {
 	var result = [];
 	var fileConut = req.query.files || 1;

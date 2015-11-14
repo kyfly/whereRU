@@ -18,6 +18,9 @@
     "dynamic": {
       "type": "string"
     },
+    "pics": [{
+      "type": "string"
+    }],
     "school": {
       "type": "string"
     },

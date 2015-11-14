@@ -9,7 +9,7 @@
 </head>
 <body>
 <!--侧边导航-->
-<ul class="side-nav fixed z-depth-2" id="sideBar">
+<ul class="side-nav fixed z-depth-2" id="sideBar"  ng-show="access">
   <a class="logo brand-logo" href="/index.html">
     <img id="front-page-logo" src="/lib/img/logo.jpg">
   </a>
@@ -18,9 +18,9 @@
   </li>
 </ul>
 <!--头部nav-->
-<nav id="nav">
+<nav id="nav" ng-style="navShow">
   <div class="nav-wrapper light-blue darken-2">
-    <a href="#" data-activates="sideBar" class="button-collapse"><i class="material-icons">menu</i></a>
+    <a href="#" data-activates="sideBar" class="button-collapse"  ng-show="access"><i class="material-icons">menu</i></a>
     <a href="#" class="brand-logo center"><img class="topBar-logo" src="/lib/img/full-logo-white.png"></a>
     <ul class="right">
       <li>
@@ -51,6 +51,7 @@
 <script src="/lib/angular-components/angular-resource.min.js"></script>
 <script src="/lib/angular-components/angular-route.min.js"></script>
 <script src="/lib/materialize/js/angular-materialize.js"></script>
+<script src="/services/lb-services.js"></script>
 <script src="/admin/js/admin-route.js"></script>
 <script src="/admin/js/admin-controller.js"></script>
 <script src="/admin/js/admin-configure.js"></script>

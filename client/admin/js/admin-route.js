@@ -16,5 +16,9 @@ function RouteConfigure($routeProvider) {
       templateUrl: '/admin/partials/help.html',
       controller: HelpCtrl
     })
+    .when('/eventManage/login', {
+      templateUrl: '/admin/partials/login.html',
+      controller: ['$scope', 'ContestOrg', '$location', LoginCtrl]
+    })
     .otherwise({redirectTo: '/eventManage/home'});
 }

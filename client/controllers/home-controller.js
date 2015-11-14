@@ -2,7 +2,7 @@ app.controller('HomeController', ['$scope', 'teams', '$http', '$sce', '$template
 .controller('UserHomeController', ['$scope', UserHomeController])
 .controller('TeamController', ['$scope', TeamController])
 .controller('MyTeamController', ['$scope', MyTeamController])
-.controller('CreateTeamController', ['$scope', 'Ueditor', CreateTeamController])
+.controller('CreateTeamController', ['$scope', 'Ueditor', 'Team', CreateTeamController])
 .controller('FindTeamController', ['$scope', FindTeamController])
 function HomeController($scope, teams, $http, $sce, $templateCache) {
 	$scope.teams = teams;
@@ -25,7 +25,7 @@ function TeamController ($scope) {
 function MyTeamController ($scope) {
 	// body...
 }
-function CreateTeamController ($scope, Ueditor) {
+function CreateTeamController ($scope, Ueditor, Team) {
 	//$scope.teamConfig = Ueditor.config;
 	$scope.schools = [
     {
@@ -38,10 +38,9 @@ function CreateTeamController ($scope, Ueditor) {
       logo:'/lib/img/logo/png'
     }
 	];
+	$scope.teamTypes = ['竞赛', '学习', '体育', '创业', '旅游', '桌游', '聊天'];
 	$scope.team = {
-		name: "团团一家",
-		school: "杭州电子科技大学",
-		pics: ['/lib/img/etuan-group.jpg?a=1','/lib/img/etuan-group.jpg?a=12','/lib/img/etuan-group.jpg?a=13']
+		pics: []
 	};
 	$scope.logoLoad = function () {
 		var e = document.getElementById('logo').files;
@@ -58,10 +57,13 @@ function CreateTeamController ($scope, Ueditor) {
 				$scope.team.pics.push(res[r].url);
 			}
 			$scope.pic = 'success';
+			$scope.$apply();
 		});	
 	}
 	$scope.submit = function () {
-		console.log($scope.team);
+		Team.create({}, $scope.team, function (res) {
+				console.log(res);
+			}, function () {});
 	}
 	//$('select').material_select();
 }
@@ -83,4 +85,21 @@ function uploadFile (files, callback) {
 	}
 	xhr.open("POST", "/ue/uploads?action=uploadimage&dynamicPath=team&files=" + files.length, true);
 	xhr.send(formData);
+}
+
+function uploadHtml (content, callback) {
+	var Xhr = new XMLHttpRequest();
+	//var formData = new FormData();
+  Xhr.onreadystatechange = function () {
+    if (Xhr.readyState === 4) {
+      if (Xhr.status === 200) {
+        callback(JSON.parse(Xhr.responseText));
+      }
+    }
+  };;
+ // formData.append("content=", content);
+  Xhr.open('POST', '/ue/uploads?action=uploadtext&dynamicPath=html&files=1', true);
+  Xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  Xhr.send('content=' + content);
+  
 }
