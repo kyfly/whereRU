@@ -1,5 +1,6 @@
 <h4 class="left">竞赛管理</h4>
 <a href="#addEvent" modal class="addEvent waves-effect waves-light btn right"><i class="material-icons right">add</i>新建竞赛</a>
+<div class="clearfix"></div>
 <!-- 新建竞赛的Modal -->
 <div id="addEvent" class="modal">
   <div class="modal-content">
@@ -43,54 +44,60 @@
     <a href="#" class="modal-action waves-effect waves-light btn orange darken-4"><i class="material-icons right">done</i>创建竞赛</a>
   </div>
 </div>
-<div class="row">
-  <div class="col s12">
-    <ul class="tabs" tabs>
-      <li class="tab col s3 waves-effect"><a class="active" href="#eventList">参赛队伍</a></li>
-      <li class="tab col s3 waves-effect"><a href="#noticeList">通知记录</a></li>
-      <li class="tab col s3 waves-effect"><a href="#docList">资料库</a></li>
-      <li class="tab col s3 waves-effect"><a href="#eventSetting">竞赛设置</a></li>
-    </ul>
-  </div>
-  <div id="eventList" class="col s12">
-    <div>
-      <ul class="collapsible" data-collapsible="accordion" watch>
-        <li ng-repeat="single in collapsibleElements">
-          <div class="collapsible-header"><i class="mdi-social-whatshot"></i>{{single.title}}</div>
-          <div class="collapsible-body">
 
-            <!--参赛队伍-->
-            <div class="row">
-              <div class="col s12 m4">
-                <div class="card">
-                  <div class="card-content">
-                    <span class="card-title">基于saas的活动云平台</span>
-                    <hr>
-                    <p>负责人：<span>李畅</span></p>
-                    <p>指导老师：<span>张建海</span></p>
-                    <p>所属领域：<span>信息技术与电子商务类</span></p>
-                    <p>团队人数：<span>8</span>人</p>
-                  </div>
-                  <div class="card-action">
-                  <a class="activator" href="#">更多信息<i class="material-icons right">more_vert</i></a>
-                  </div>
-                  <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">更多信息<i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
+<div>
+  <ul class="collapsible popout" data-collapsible="accordion" watch>
+    <li ng-repeat="single in collapsibleElements">
+      <div class="collapsible-header"><i class="mdi-social-whatshot"></i>{{single.title}}</div>
+      <div class="collapsible-body">
+        <div class="">
+          <div class="col s12">
+            <ul class="tabs" tabs>
+              <li class="tab col s3 waves-effect"><a class="active" href="#">参赛队伍</a></li>
+              <li class="tab col s3 waves-effect"><a href="#">通知记录</a></li>
+              <li class="tab col s3 waves-effect"><a href="#">资料库</a></li>
+              <li class="tab col s3 waves-effect"><a href="#">竞赛设置</a></li>
+            </ul>
           </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div id="noticeList" class="col s12">通知记录</div>
-  <div id="docList" class="col s12">资料库</div>
-  <div id="eventSetting" class="col s12">竞赛设置</div>
+          <!--<div id="eventList" class="col s12">-->
+
+          <!--</div>-->
+          <!--<div id="noticeList" class="col s12">通知记录</div>-->
+          <!--<div id="docList" class="col s12">资料库</div>-->
+          <!--<div id="eventSetting" class="col s12">竞赛设置</div>-->
+        </div>
+        <div id="eventMain">
+          参赛队伍
+        </div>
+
+
+      </div>
+    </li>
+  </ul>
 </div>
 
 
+
+<!--&lt;!&ndash;参赛队伍&ndash;&gt;-->
+<!--<div class="row">-->
+  <!--<div class="col s12 m4">-->
+    <!--<div class="card">-->
+      <!--<div class="card-content">-->
+        <!--<span class="card-title">基于saas的活动云平台</span>-->
+        <!--<hr>-->
+        <!--<p>负责人：<span>李畅</span></p>-->
+        <!--<p>指导老师：<span>张建海</span></p>-->
+        <!--<p>所属领域：<span>信息技术与电子商务类</span></p>-->
+        <!--<p>团队人数：<span>8</span>人</p>-->
+      <!--</div>-->
+      <!--<div class="card-action">-->
+        <!--<a class="activator" href="#">更多信息<i class="material-icons right">more_vert</i></a>-->
+      <!--</div>-->
+      <!--<div class="card-reveal">-->
+        <!--<span class="card-title grey-text text-darken-4">更多信息<i class="material-icons right">close</i></span>-->
+        <!--<p>Here is some more information about this product that is only revealed once clicked on.</p>-->
+      <!--</div>-->
+
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
