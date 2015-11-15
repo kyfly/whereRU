@@ -6,6 +6,7 @@
   <div class="modal-content">
     <h4>新建竞赛</h4>
     <br>
+
     <div input-field>
       <div>
         <input id="eventName" type="text" class="validate">
@@ -41,13 +42,14 @@
     </div>
   </div>
   <div class="modal-footer">
-    <a href="#" class="modal-action waves-effect waves-light btn orange darken-4"><i class="material-icons right">done</i>创建竞赛</a>
+    <a href="#" class="modal-action waves-effect waves-light btn orange darken-4"><i
+      class="material-icons right">done</i>创建竞赛</a>
   </div>
 </div>
 <div>
   <ul class="collapsible popout" data-collapsible="accordion" watch>
-    <li ng-repeat="single in collapsibleElements">
-      <div class="collapsible-header"><i class="mdi-social-whatshot"></i>{{single.title}}</div>
+    <li ng-repeat="single in contestLists">
+      <div class="collapsible-header"><i class="mdi-social-whatshot"></i>{{single.name}}</div>
       <div class="collapsible-body">
         <div class="">
           <div class="col s12">
@@ -57,8 +59,36 @@
               <li class="tab col s3 waves-effect"><a href="#">资料库</a></li>
               <li class="tab col s3 waves-effect"><a href="#">竞赛设置</a></li>
             </ul>
+            <div id="contentView">
+              <!--参赛队伍-->
+              <div class="row">
+                <div class="col s12 m3" ng-repeat="project in projects" ng-show="project._projectResults[0].contestId === single.id">
+                  <div class="card">
+                    <div class="card-content">
+                      <span class="card-title">基于saas的活动云平台</span>
+                      <hr>
+                      <p>负责人：<span>李畅</span></p>
+                      <p>指导老师：<span>张建海</span></p>
+                      <p>所属领域：<span>信息技术与电子商务类</span></p>
+                      <p>团队人数：<span>8</span>人</p>
+                    </div>
+                    <div class="card-action">
+                      <a class="activator" href="#">更多信息<i class="material-icons right">more_vert</i></a>
+                    </div>
+                    <div class="card-reveal">
+                      <span class="card-title grey-text text-darken-4">更多信息<i class="material-icons right">close</i></span>
+                      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
     </li>
   </ul>
 </div>
+
+

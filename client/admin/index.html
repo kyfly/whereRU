@@ -10,7 +10,7 @@
 </head>
 <body>
 <!--侧边导航-->
-<ul class="side-nav fixed z-depth-2" id="sideBar"  ng-show="access">
+<ul class="side-nav fixed z-depth-2" id="sideBar" ng-show="access">
   <a class="logo brand-logo" href="/index.html">
     <img id="front-page-logo" src="/lib/img/logo.jpg">
   </a>
@@ -24,8 +24,8 @@
     <a href="#" data-activates="sideBar" class="button-collapse"  ng-show="access"><i class="material-icons">menu</i></a>
     <a href="#" class="brand-logo center"><img class="topBar-logo" src="/lib/img/full-logo-white.png"></a>
     <ul class="right">
-      <li>
-        <a class="login-out waves-effect" href="#"><i class="material-icons">power_settings_new</i></a>
+      <li ng-show="access">
+        <a tooltipped data-position="bottom" data-delay="0" data-tooltip="退出登陆" class="login-out waves-effect" href ng-click="logout()"><i class="material-icons">power_settings_new</i></a>
       </li>
     </ul>
   </div>
@@ -37,7 +37,7 @@
   </div>
 </main>
 <!--底部信息-->
-<footer class="page-footer light-blue darken-2" id="footer">
+<footer class="page-footer light-blue darken-2" id="footer" ng-style="footerShow">
   <div class="footer-copyright">
     <div class="container">
       © 2014-2015 Etuan Studio, All rights reserved.

@@ -1,12 +1,19 @@
 function AdminCtrl($scope, $timeout, $window, $rootScope) {
+  if (localStorage.CMSCAPTCHA && window.location.pathname === '/eventManage/login') {
+    window.location.pathname = '/eventManage/home';
+  }
+
   if (localStorage.CMSCAPTCHA) {
     $rootScope.access = true;
   } else {
-    $scope.navShow = {'padding-left':0};
+    $scope.navShow = {'padding-left': 0};
+    $scope.footerShow = {'margin-left': 0};
   }
+
   document.getElementById('main').style.minHeight = document.body.clientHeight
     - document.getElementById('footer').offsetHeight
     - document.getElementById('nav').offsetHeight - 30 + 'px';
+
   //监听ngView完成事件，延迟200ms用于页面渲染
   $scope.$on('$viewContentLoaded', function () {
     $timeout(function () {
@@ -21,6 +28,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
       }
     }, 50);
   });
+
   //侧边栏显示内容
   $scope.sidebars = [
     {
@@ -44,6 +52,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
       'url': '/eventManage/help'
     }
   ];
+
   //跳转函数，包括操作侧边栏按钮和跳转至相应页面
   $scope.redirect = function (index) {
     for (var i = 0; i < $scope.sidebars.length; i++) {
@@ -53,56 +62,47 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
 
     $('.button-collapse').sideNav('hide');
   };
+
+  $scope.logout = function () {
+    localStorage.removeItem('CMSCAPTCHA');
+    window.location.pathname = '/eventManage/login/';
+  }
 }
 
 function HomeCtrl($scope) {
-  $scope.selects = [
-    {
-      name:'123',
-      yes:'23'
-    },{
-      name:'12232',
-      yes:'222'
-    }
-  ];
 }
 
 function EventCtrl($scope, $resource) {
+  var localInfo = JSON.parse(localStorage.CMSCAPTCHA);
   var GetTeam = $resource('/api/team');
   var GetProject = $resource('/api/Projects');
-  var GetContest = $resource('/api/ContestOrgs/5646e2ec5d0401cc238e5521/contests');
+  var GetContest = $resource('/api/ContestOrgs/' + localInfo.userId + '/contests?access_token=' + localInfo.id);
   GetTeam.query({},
     function (res) {
-      console.log(res)
+      console.log('团队');
+      console.log(res);
     },
     function () {
     }
   );
   GetProject.query({},
     function (res) {
-      console.log(res)
+      console.log('项目');
+      console.log(res);
+      $scope.projects = res;
     },
     function () {
     }
   );
   GetContest.query({},
     function (res) {
-      console.log(res)
+      console.log('竞赛');
+      console.log(res);
+      $scope.contestLists = res;
     },
     function () {
     }
   );
-  $scope.collapsibleElements = [{
-      title: '杭州电子科技大学2015年大学生挑战杯',
-      content: 'Lorem ipsum dolor sit amet.'
-    },{
-      title: '杭州电子科技大学2015年大学生“创青春”',
-      content: 'Lorem ipsum dolor sit amet.'
-    },{
-      title: '杭州电子科技大学2015年大学生新苗',
-      content: 'Lorem ipsum dolor sit amet.'
-    }
-  ];
 
 }
 
@@ -111,17 +111,18 @@ function SettingCtrl() {
 
 function HelpCtrl() {
 }
-function LoginCtrl($scope, Org , $location) {
+function LoginCtrl($scope, Org) {
   $scope.org = {};
   $scope.login = function () {
     $scope.org.email = $scope.org.phone + '@etuan.org';
     Org.login($scope.org, function (res) {
       if (res.err) {
-        ;
+        alert('登录失败');
       } else {
         localStorage.CMSCAPTCHA = JSON.stringify(res.token);
-        $location.path('/eventManage/home');
+        window.location.pathname = '/eventManage/home';
       }
-    }, function () {});
+    }, function () {
+    });
   };
 }
