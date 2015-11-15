@@ -9,7 +9,21 @@ function HomeController($scope, messages, $http, $sce, $templateCache) {
 				that.team.explain = $sce.trustAsHtml(html);
 			})
 		}
-	}
+	};
+  $scope.collapsibleElements = [{
+    icon: 'mdi-image-filter-drama',
+    title: 'First',
+    content: 'Lorem ipsum dolor sit amet.'
+  },{
+    icon: 'mdi-maps-place',
+    title: 'Second',
+    content: 'Lorem ipsum dolor sit amet.'
+  },{
+    icon: 'mdi-social-whatshot',
+    title: 'Third',
+    content: 'Lorem ipsum dolor sit amet.'
+  }
+  ];
 }
 app.controller('SignUpController', ['$scope','$location', 'RUser', 'Auth', SignUpController]);
 function SignUpController ($scope, $location, RUser, Auth) {
@@ -48,11 +62,25 @@ function UserHomeController ($scope) {
 }
 app.controller('SearchController', ['$scope', SearchController]);
 function SearchController ($scope) {
-	
+
 }
 app.controller('MyTeamController', ['$scope', 'teams', MyTeamController]);
 function MyTeamController ($scope, teams) {
 	$scope.teams = teams;
+  $scope.collapsibleElements = [{
+    icon: 'mdi-image-filter-drama',
+    title: '公告一',
+    content: '加班.'
+  },{
+    icon: 'mdi-maps-place',
+    title: '公告二',
+    content: '加班.'
+  },{
+    icon: 'mdi-social-whatshot',
+    title: '公告三',
+    content: '加班.'
+  }
+  ];
 }
 app.controller('ViewTeamController', ['$scope', ViewTeamController]);
 function ViewTeamController ($scope) {
@@ -82,7 +110,7 @@ function CreateTeamController ($scope, Team) {
 			$scope.team.logoUrl = res[0].url;
 			$scope.logo = 'success';
 			$scope.$apply();
-		});	
+		});
 	}
 	$scope.picLoad = function () {
 		var e = document.getElementById('pic').files;
@@ -92,7 +120,7 @@ function CreateTeamController ($scope, Team) {
 			}
 			$scope.pic = 'success';
 			$scope.$apply();
-		});	
+		});
 	}
 	$scope.submit = function () {
 		Team.create({}, $scope.team, function (res) {
@@ -136,5 +164,5 @@ function uploadHtml (content, callback) {
   Xhr.open('POST', '/ue/uploads?action=uploadtext&dynamicPath=html&files=1', true);
   Xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   Xhr.send('content=' + content);
-  
+
 }

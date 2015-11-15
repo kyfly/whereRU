@@ -8,12 +8,81 @@
     </div>
   </nav>
 </header>
+
+
+<!--顶部滑动框-->
+<div class="slider" slider>
+  <ul class="slides">
+    <li>
+      <img src="img/1.jpg">
+      <div class="caption center-align">
+        <h3>This is our big Tagline!</h3>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      </div>
+    </li>
+    <li>
+      <img src="img/1.jpg">
+      <div class="caption left-align">
+        <h3>Left Aligned Caption</h3>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      </div>
+    </li>
+    <li>
+      <img src="img/1.jpg">
+      <div class="caption right-align">
+        <h3>Right Aligned Caption</h3>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!--竞赛滑动条-->
+<div class="competition">
+  <div class="allContent">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+    <img src="/lib/img/test1.png">
+
+
+  </div>
+</div>
+
+
+<!--队伍信息-->
+<div class="teamInfo">
+  <ul class="collapsible popout" data-collapsible="accordion" watch>
+    <li ng-repeat="single in collapsibleElements">
+      <div class="collapsible-header"><i class="{{single.icon}}"></i>{{single.title}}</div>
+      <div class="collapsible-body"><p>{{single.content}}</p></div>
+    </li>
+  </ul>
+</div>
+
+
+
+
+
+
 <div>
-   
   <ul class="collapsible popout" data-collapsible="accordion" watch>
     <li ng-repeat="team in teams">
       <div class="collapsible-header" ng-click="getExplain()">
         <img ng-src="{{team.logoUrl||'/lib/img/logo.jpg'}}" style="width:3rem">
+
         <p style="margin:0;display:inline-block;padding:0 15px">
           <span ng-bind="team.name"></span>
           <br>
@@ -23,7 +92,10 @@
       <div class="collapsible-body">
         <p ng-bind-html="team.explain">
         </p>
+      </div>
     </li>
-  </div>
   </ul>
 </div>
+
+<!--底部bar等高div-->
+<div class="bottomBar"></div>
