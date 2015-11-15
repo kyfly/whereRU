@@ -63,7 +63,7 @@ footer .tabs1 {
 
 .bottomBar{
   bottom: 0;
-  height:35px ;
+  height:48px ;
   width: 100%;
 }
 
@@ -80,6 +80,22 @@ footer .tabs1 {
 .competition .allContent{
   white-space: nowrap;
 }
+
+.myTeamImg{
+  vertical-align:middle;
+}
+
+
+.myTeamName{
+  font-size: large;
+}
+
+
+/*.myTeamTag{*/
+  /*position: relative;*/
+  /*right: 0;*/
+  /*bottom: 0;*/
+/*}*/
 
 
 
