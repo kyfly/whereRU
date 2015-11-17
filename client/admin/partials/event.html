@@ -9,40 +9,40 @@
 
     <div input-field>
       <div>
-        <input id="eventName" type="text" class="validate">
+        <input ng-change="changeName()" id="eventName" type="text" class="validate" ng-model="eventName">
         <label for="eventName">竞赛名称</label>
       </div>
       <div class="file-field input-field">
         <div class="btn">
           <span>竞赛介绍文档</span>
-          <input type="file">
+          <input type="file" id="explainDoc">
         </div>
         <div class="file-path-wrapper">
-          <input class="file-path validate" type="text" placeholder="点我上传介绍文档（.doc）">
+          <input ng-model="explainDoc" ng-change="explainDocLoad()" class="file-path validate" type="text" placeholder="点我上传介绍文档（.doc）">
         </div>
       </div>
       <div class="file-field input-field">
         <div class="btn">
           <span>竞赛流程文件</span>
-          <input type="file">
+          <input type="file" id="processDoc">
         </div>
         <div class="file-path-wrapper">
-          <input class="file-path validate" type="text" placeholder="点我上传竞赛流程文件（.doc）">
+          <input ng-model="processDoc" ng-change="processDocLoad()" class="file-path validate" type="text" placeholder="点我上传竞赛流程文件（.doc）">
         </div>
       </div>
       <div class="file-field input-field">
         <div class="btn">
           <span>竞赛规则文件</span>
-          <input type="file">
+          <input type="file" id="ruleDoc">
         </div>
         <div class="file-path-wrapper">
-          <input class="file-path validate" type="text" placeholder="点我上传竞赛规则文件（.doc）">
+          <input ng-model="ruleDoc" ng-change="ruleDocLoad()" class="file-path validate" type="text" placeholder="点我上传竞赛规则文件（.doc）">
         </div>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <a href="#" class="modal-action waves-effect waves-light btn orange darken-4"><i
+    <a href="#" class="modal-action waves-effect waves-light btn orange darken-4" ng-click="submit()"><i
       class="material-icons right">done</i>创建竞赛</a>
   </div>
 </div>

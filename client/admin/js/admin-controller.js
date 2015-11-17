@@ -76,7 +76,7 @@ function EventCtrl($scope, $resource) {
   var localInfo = JSON.parse(localStorage.CMSCAPTCHA);
   var GetTeam = $resource('/api/team');
   var GetProject = $resource('/api/Projects');
-  var GetContest = $resource('/api/ContestOrgs/' + localInfo.userId + '/contests?access_token=' + localInfo.id);
+  var Contest = $resource('/api/ContestOrgs/' + localInfo.userId + '/contests?access_token=' + localInfo.id);
   GetTeam.query({},
     function (res) {
       console.log('团队');
@@ -94,7 +94,7 @@ function EventCtrl($scope, $resource) {
     function () {
     }
   );
-  GetContest.query({},
+  Contest.query({},
     function (res) {
       console.log('竞赛');
       console.log(res);
@@ -103,6 +103,64 @@ function EventCtrl($scope, $resource) {
     function () {
     }
   );
+
+  $scope.contest = {};
+
+  $scope.explainDocLoad = function () {
+    var e = document.getElementById('explainDoc').files;
+    uploadFile(e, function (res) {
+      $scope.contest.explainUrl = res[0].url;
+      $scope.$apply();
+    });
+  };
+
+  $scope.processDocLoad = function () {
+    var e = document.getElementById('processDoc').files;
+    uploadFile(e, function (res) {
+      console.log(res);
+      $scope.contest.processUrl = res[0].url;
+      $scope.$apply();
+    });
+  };
+
+  $scope.ruleDocLoad = function () {
+    var e = document.getElementById('ruleDoc').files;
+    uploadFile(e, function (res) {
+      $scope.contest.ruleUrl = res[0].url;
+      $scope.$apply();
+    });
+  };
+
+  function uploadFile(files, callback) {
+    var formData = new FormData();
+    for (var i = 0; i < files.length; i++) {
+      file = files[i];
+      formData.append(file.name, file);
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        callback(JSON.parse(xhr.responseText));
+      }
+    };
+    xhr.open("POST", "/ue/uploads?action=uploadfile&dynamicPath=contest&files=" + files.length, true);
+    xhr.send(formData);
+  }
+
+  $scope.submit = function () {
+    $scope.contest.name = document.getElementById('eventName').value;
+    console.log($scope.contest);
+    Contest.save({},$scope.contest,function(res){
+      alert("创建成功！");
+      history.go(0);
+    },function(res){
+
+    });
+    //Team.create({}, $scope.contest, function (res) {
+    //  console.log(res);
+    //}, function () {
+    //});
+  };
 
 }
 
