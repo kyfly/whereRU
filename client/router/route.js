@@ -53,14 +53,31 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         });
       } 
     },
-  	templateUrl: '/templates/my-team.html',
+  	templateUrl: '/templates/team/my-team.html',
   	controller: 'MyTeamController'
+  })
+  .state('createTeam', {
+    url: '/myTeam/createTeam',
+    templateUrl: '/templates/team/create-team.html',
+    resolve: {
+      schools: function (School) {
+        return School.find({filter: {fields: {name: true}}})
+      }
+    },
+    controller: 'CreateTeamController'
+  }) 
+  .state('findTeam', {
+    url: '/myTeam/findTeam',
+    templateUrl: '/templates/team/find-team.html',
+    resolve: {
+
+    },
+    controller: 'FindTeamController'
   })
   .state('viewTeam', {
     url: '/myTeam/:id',
     resolve: {
       team: function ($stateParams, Team) {
-        console.log($stateParams.id);
         return Team.findById({
           id: $stateParams.id,
           filter: {
@@ -69,25 +86,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         })
       }
     },
-    templateUrl: '/templates/view-team.html',
+    templateUrl: '/templates/team/view-team.html',
     controller: 'ViewTeamController'
   })
-  .state('createTeam', {
-    url: '/myTeam/createTeam',
-    templateUrl: '/templates/create-team.html',
-    resolve: {
-
-    },
-    controller: 'CreateTeamController'
-  }) 
-  .state('findTeam', {
-    url: '/myTeam/findTeam',
-    templateUrl: '/templates/find-team.html',
-    resolve: {
-
-    },
-    controller: 'FindTeamController'
-  })
+  
   $urlRouterProvider.when('', '/');
   $urlRouterProvider.otherwise(function ($injector, $location) {
     $location.path('/');
