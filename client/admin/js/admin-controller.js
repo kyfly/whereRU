@@ -148,18 +148,16 @@ function EventCtrl($scope, $resource) {
   }
 
   $scope.submit = function () {
-    $scope.contest.name = document.getElementById('eventName').value;
-    console.log($scope.contest);
-    Contest.save({},$scope.contest,function(res){
-      alert("创建成功！");
-      history.go(0);
-    },function(res){
+    if (!($scope.contest.name && $scope.contest.ruleUrl && $scope.contest.processUrl && $scope.contest.explainUrl)) {
+      alert("请填写完整哦");
+    } else {
+      Contest.save({}, $scope.contest, function (res) {
+        alert("创建成功！");
+        history.go(0);
+      }, function (res) {
 
-    });
-    //Team.create({}, $scope.contest, function (res) {
-    //  console.log(res);
-    //}, function () {
-    //});
+      });
+    }
   };
 
 }

@@ -7,9 +7,9 @@
     <h4>新建竞赛</h4>
     <br>
 
-    <div input-field>
-      <div>
-        <input ng-change="changeName()" id="eventName" type="text" class="validate" ng-model="eventName">
+    <div>
+      <div input-field>
+        <input id="eventName" type="text" class="validate" ng-model="contest.name">
         <label for="eventName">竞赛名称</label>
       </div>
       <div class="file-field input-field">
@@ -44,6 +44,8 @@
   <div class="modal-footer">
     <a href="#" class="modal-action waves-effect waves-light btn orange darken-4" ng-click="submit()"><i
       class="material-icons right">done</i>创建竞赛</a>
+    <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+
   </div>
 </div>
 <div>
