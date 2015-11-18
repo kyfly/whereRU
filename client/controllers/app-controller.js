@@ -84,24 +84,23 @@ function MyTeamController($scope, teams) {
   }
   ];
 }
-app.controller('ViewTeamController', ['$scope', ViewTeamController]);
-function ViewTeamController($scope) {
-
+/**
+ * 查看团队信息
+ * team promise 团队信息
+ */
+app.controller('ViewTeamController', ['$scope', 'team', ViewTeamController]);
+function ViewTeamController($scope, team) {
+	$scope.team = team;
+	$scope.edit = true;
 }
-app.controller('CreateTeamController', ['$scope', 'Team', CreateTeamController]);
-function CreateTeamController($scope, Team) {
-  //$scope.teamConfig = Ueditor.config;
-  $scope.schools = [
-    {
-      id: 1,
-      name: 'XX大学',
-      logo: '/lib/img/logo/png'
-    }, {
-      id: 2,
-      name: 'XX大学',
-      logo: '/lib/img/logo/png'
-    }
-  ];
+/**
+ * 创建团队
+ * Team model 数据库Team模型
+ * schools promise 所有学校名称查询结果
+ */
+app.controller('CreateTeamController', ['$scope', 'Team', 'schools', CreateTeamController]);
+function CreateTeamController($scope, Team, schools) {
+  $scope.schools = schools;
   $scope.teamTypes = ['竞赛', '学习', '体育', '创业', '旅游', '桌游', '聊天'];
   $scope.team = {
     pics: []
@@ -127,11 +126,12 @@ function CreateTeamController($scope, Team) {
   $scope.submit = function () {
     Team.create({}, $scope.team, function (res) {
       console.log(res);
+      Materialize.toast('恭喜你！！！团队创建成功', 4000);
     }, function () {
     });
   };
-  //$('select').material_select();
 }
+
 app.controller('FindTeamController', ['$scope', FindTeamController]);
 function FindTeamController($scope) {
   console.log($scope);
