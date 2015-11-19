@@ -35,7 +35,10 @@
     },
     "updated": {
       "type": "Date"
-    }
+    },
+    "userIds": [{
+      "type": "string"
+    }]
   },
   "validations": [],
   "relations": {

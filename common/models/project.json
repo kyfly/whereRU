@@ -29,6 +29,11 @@
       "type": "hasMany",
       "model": "Menber",
       "foreignKey": ""
+    },
+    "teams": {
+      "type": "belongsTo",
+      "model": "Team",
+      "foreignKey": ""
     }
   },
   "acls": [],

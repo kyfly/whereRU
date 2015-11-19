@@ -8,7 +8,7 @@ app.config(['$locationProvider', function ($locationProvider) {
 }]);
 app.run(['$rootScope', '$location', function ($rootScope, $location) {
 	$rootScope.$on('$routeChangeStart', function (evt, next, current) {
-		if (!$rootScope.access)
+		if (!$rootScope.access && next.$$route.originalPath !== '/eventManage/reg')
 			$location.path('/eventManage/login');
 	});
 }]);
