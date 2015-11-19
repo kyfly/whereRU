@@ -34,7 +34,7 @@
     "teams": {
       "type": "belongsTo",
       "model": "Team",
-      "foreignKey": ""
+      "foreignKey": "teamId"
     },
     "contests": {
       "type": "belongsTo",

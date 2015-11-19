@@ -205,13 +205,28 @@ function SettingCtrl() {
 
 function HelpCtrl() {
 }
-function LoginCtrl($scope, Org) {
+function LoginCtrl($scope, Org, $location) {
   $scope.org = {};
   $scope.login = function () {
     $scope.org.email = $scope.org.phone + '@etuan.org';
     Org.login($scope.org, function (res) {
       if (res.err) {
         alert('登录失败');
+      } else {
+        localStorage.CMSCAPTCHA = JSON.stringify(res.token);
+        window.location.pathname = '/eventManage/home';
+      }
+    }, function () {
+    });
+  };
+}
+function SignUpCtrl($scope, Org, $location) {
+  $scope.org = {};
+  $scope.signUp = function () {
+    $scope.org.email = $scope.org.phone + '@etuan.org';
+    Org.create($scope.org, function (res) {
+      if (res.err) {
+        alert('注册失败');
       } else {
         localStorage.CMSCAPTCHA = JSON.stringify(res.token);
         window.location.pathname = '/eventManage/home';

@@ -4,6 +4,7 @@
     "port": 27017,
     "database": "whereRU",
     "name": "db",
-    "connector": "mongodb"
+    "connector": "mongodb",
+    "allowExtendedOperators": true
   }
 }
