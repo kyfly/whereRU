@@ -102,9 +102,9 @@
                   </div>
                   <div class="addFile left">
                     <a class="waves-effect waves-light btn light-blue darken-2"
-                       ng-click="uploadAttachment = !uploadAttachment">上传附件</a>
+                       ng-click="uploadAttachment = !uploadAttachment;addGetInfo = false">上传附件</a>
                     <a class="waves-effect waves-light btn light-blue darken-2"
-                       ng-click="addGetInfo = !addGetInfo">资料收集</a>
+                       ng-click="addGetInfo = !addGetInfo;uploadAttachment = false">资料收集</a>
                     <a class="waves-effect waves-light btn light-blue darken-2">资料库选择</a>
 
                     <div ng-show="uploadAttachment" class="file-field input-field">
