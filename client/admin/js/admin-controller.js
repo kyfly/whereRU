@@ -104,6 +104,7 @@ function EventCtrl($scope, $resource) {
     }
   );
 
+  //新建竞赛
   $scope.contest = {};
 
   $scope.explainDocLoad = function () {
@@ -131,6 +132,7 @@ function EventCtrl($scope, $resource) {
     });
   };
 
+  //上传文件
   function uploadFile(files, callback) {
     var formData = new FormData();
     for (var i = 0; i < files.length; i++) {
@@ -159,6 +161,42 @@ function EventCtrl($scope, $resource) {
       });
     }
   };
+
+  //参赛队伍，通知管理，资料库，竞赛设置的切换
+  $scope.contentType = 'contestTeam';
+
+  $scope.toContestTeam = function () {
+    $scope.contentType = 'contestTeam';
+  };
+
+  $scope.toContestNotice = function () {
+    $scope.contentType = 'contestNotice';
+  };
+
+  $scope.toContestLibrary = function () {
+    $scope.contentType = 'contestLibrary';
+  };
+
+  $scope.toContestSetting = function () {
+    $scope.contentType = 'contestSetting';
+  };
+
+  //通知管理
+  $scope.newNotice = {};
+  $scope.uploadAttachment = false;
+  $scope.addGetInfo = false;
+
+  //Input-date的配置
+  var currentTime = new Date();
+  $scope.minDate = (new Date(currentTime.getTime())).toISOString();
+  $scope.month = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+  $scope.monthShort = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+  $scope.weekdaysFull = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+  $scope.weekdaysLetter = ['日', '一', '二', '三', '四', '五', '六'];
+  $scope.today = '今天';
+  $scope.clear = '清除';
+  $scope.close = '确定';
+  $scope.deadline = {};
 
 }
 
