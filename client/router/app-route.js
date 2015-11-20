@@ -3,11 +3,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
   .state('/', {
     url: "/",
     templateUrl: "/templates/index.html",
-    resolve: {
-      messages: function (Message) {
-        return Message.find();
-      }
-    },
     controller: 'HomeController'
   })
   .state('signUp', {
@@ -23,37 +18,16 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
   .state('home', {
   	url: '/home',
   	templateUrl: "/templates/user.html",
-  	resolve: {
-
-  	},
   	controller: 'UserHomeController'
   })
   .state('search', {
   	url: '/search',
   	templateUrl: '/templates/search.html',
-  	resolve: {
-
-  	},
   	controller: 'SearchController'
   })
   .state('myTeam', {
   	url: '/myTeam',
-    resolve: {
-      teams: function (Team) {
-        return Team.find({
-          filter: 
-          {
-            fields: {
-              id: true, 
-              name: true, 
-              dynamic: true,
-              logoUrl:true
-            }
-          }
-        });
-      } 
-    },
-  	templateUrl: '/templates/team/my-team.html',
+  	templateUrl: '/templates/team/team.html',
   	controller: 'MyTeamController'
   })
   $urlRouterProvider.when('', '/');

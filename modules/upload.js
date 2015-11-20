@@ -4,6 +4,7 @@ var path = require('path');
 var Busboy = require('busboy');
 var ALY = require('aliyun-sdk');
 var fse = require('fs-extra');
+var mammoth = require("mammoth");
 var guid = 1000;
 var config = {
     configFile: path.join(__dirname, '../client/lib/ueditor/config.json'),
@@ -11,7 +12,7 @@ var config = {
     AccessKey: '',
     SecrectKey: '',
     dynamicPath: 'upload',
-    staticPath: path.join(__dirname, '../client/lib/images')
+    staticPath: path.join(__dirname, '../client/lib/')
 };
 
 var setConfig = function(c) {
@@ -121,6 +122,17 @@ var save = function (file, filename, req, callback) {
   var saveTo = path.join(os.tmpDir(), realName);
   file.pipe(fs.createWriteStream(saveTo));
   file.on('end', function() {
+    if (/.+\.doc[x]/.test(filename)) {
+      docx2html(saveTo, function (data) {
+        saveToFile(data.value, function (err, path) {
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, path);
+          }
+        });
+      })
+    }
     if (config.mode == 'ali') {
        
     } else {
@@ -137,8 +149,31 @@ var save = function (file, filename, req, callback) {
     }
   });
 }
-
-
+function saveToFile (data, cb) {
+  var fileName = getFileName('.html');
+  fs.writeFile(path.join(__dirname, '../client/lib/html/', fileName), 
+    data , function (err) {
+      cb(err, path.join('/client/lib/html/', fileName));
+  });
+}
+function docx2html (path, cb) {
+  var options = {
+    // convertImage: mammoth.images.inline(function(element) {
+    //     return element.read("base64").then(function(imageBuffer) {
+    //         return {
+    //             src: "data:" + element.contentType + ";base64," + imageBuffer
+    //         };
+    //     });
+    // }),
+    styleMap: [
+        "u => em"
+    ],
+  };
+  mammoth.convertToHtml({path: path}, options)
+    .then(function(result){
+      cb(result);
+    })
+}
 // var listfile = function (req, res, fileType) {
 //   var dPath = util.getRealDynamicPath(req);
 //   var urlRoot = dPath;

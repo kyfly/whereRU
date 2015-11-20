@@ -1,6 +1,6 @@
-app.controller('HomeController', ['$scope', 'messages', '$http', '$sce', '$templateCache', HomeController]);
-function HomeController($scope, messages, $http, $sce, $templateCache) {
-  $scope.messages = messages;
+app.controller('HomeController', ['$scope', '$http', '$sce', '$templateCache', HomeController]);
+function HomeController($scope, $http, $sce, $templateCache) {
+ 
   $scope.getExplain = function () {
     that = this;
     if (!this.team.explain) {
@@ -66,9 +66,9 @@ app.controller('SearchController', ['$scope', SearchController]);
 function SearchController($scope) {
 
 }
-app.controller('MyTeamController', ['$scope', 'teams', MyTeamController]);
-function MyTeamController($scope, teams) {
-  $scope.teams = teams;
+app.controller('MyTeamController', ['$scope', 'Team', MyTeamController]);
+function MyTeamController($scope, Team) {
+  $scope.teams = Team.find({filter: {fields:['name', 'id', 'logoUrl', 'dynamic']}});
   $scope.collapsibleElements = [{
     icon: 'mdi-image-filter-drama',
     title: '公告一',

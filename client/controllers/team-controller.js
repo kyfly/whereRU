@@ -1,20 +1,23 @@
 /**
- * 查看团队信息
- * team promise 团队信息
+ * 团队总页
  */
-app.controller('ViewTeamController', ['$scope', 'team', ViewTeamController]);
-function ViewTeamController($scope, team) {
-	$scope.team = team;
-	$scope.edit = true;
+app.controller('ViewTeamController', ['$scope', 'Team', '$stateParams', ViewTeamController]);
+function ViewTeamController($scope, Team, $stateParams) {
+	Team.findById({
+    id: $stateParams.id, 
+    filter: {fields: ['id', 'name', 'logoUrl']}
+  }, function (res) {
+    $scope.team = res;
+  });
 }
 /**
  * 创建团队
  * Team model 数据库Team模型
  * schools promise 所有学校名称查询结果
  */
-app.controller('CreateTeamController', ['$scope', 'Team', 'schools', CreateTeamController]);
-function CreateTeamController($scope, Team, schools) {
-  $scope.schools = schools;
+app.controller('CreateTeamController', ['$scope', 'Team', 'School', CreateTeamController]);
+function CreateTeamController($scope, Team, School) {
+  $scope.schools = School.find();
   $scope.teamTypes = ['竞赛', '学习', '体育', '创业', '旅游', '桌游', '聊天'];
   $scope.team = {
     pics: []
@@ -45,27 +48,62 @@ function CreateTeamController($scope, Team, schools) {
     });
   };
 }
-
+/**
+ * 查找团队
+ */
 app.controller('FindTeamController', ['$scope', FindTeamController]);
 function FindTeamController($scope) {
   console.log($scope);
 }
-function uploadFile(files, callback) {
-  var formData = new FormData();
-  for (var i = 0; i < files.length; i++) {
-    file = files[i];
-    formData.append(file.name, file);
-  }
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      callback(JSON.parse(xhr.responseText));
-    }
-  };
-  xhr.open("POST", "/ue/uploads?action=uploadimage&dynamicPath=team&files=" + files.length, true);
-  xhr.send(formData);
-}
 
+/**
+ * 消息管理
+ * @param  {[type]} ){               }] [description]
+ * @return {[type]}     [description]
+ */
+app.controller('TeamMessageController', ['$scope', '$stateParams', function($scope, $stateParams){
+  $scope.teamId = $stateParams.id;
+}]);
+/**
+ * 成员管理
+ * @param  {[type]} ){               }] [description]
+ * @return {[type]}     [description]
+ */
+app.controller('TeamMemberController', ['$scope', '$stateParams', function($scope, $stateParams){
+  $scope.teamId = $stateParams.id;
+}]);
+/**
+ * 介绍信息管理
+ * @param  {[type]} ){               }] [description]
+ * @return {[type]}     [description]
+ */
+app.controller('TeamInfoController', ['$scope', '$stateParams', function($scope, $stateParams){
+  $scope.teamId = $stateParams.id;
+}]);
+/**
+ * 项目管理
+ * @param  {[type]} ){               }] [description]
+ * @return {[type]}     [description]
+ */
+app.controller('TeamProjectController', ['$scope', '$stateParams', function($scope, $stateParams){
+  $scope.teamId = $stateParams.id;
+}]);
+/**
+ * 成员列表
+ * @param  {[type]} $scope          [description]
+ * @param  {[type]} $stateParams){               $scope.teamId [description]
+ * @return {[type]}                 [description]
+ */
+app.controller('TeamMembersController', ['$scope', '$stateParams', function($scope, $stateParams){
+  $scope.teamId = $stateParams.id;
+}]);
+
+/**
+ * [uploadHtml description]
+ * @param  {[type]}   content  [description]
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
 function uploadHtml(content, callback) {
   var Xhr = new XMLHttpRequest();
   //var formData = new FormData();
@@ -80,4 +118,25 @@ function uploadHtml(content, callback) {
   Xhr.open('POST', '/ue/uploads?action=uploadtext&dynamicPath=html&files=1', true);
   Xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   Xhr.send('content=' + content);
+}
+/**
+ * [uploadFile description]
+ * @param  {[type]}   files    [description]
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
+function uploadFile(files, callback) {
+  var formData = new FormData();
+  for (var i = 0; i < files.length; i++) {
+    file = files[i];
+    formData.append(file.name, file);
+  }
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      callback(JSON.parse(xhr.responseText));
+    }
+  };
+  xhr.open("POST", "/ue/uploads?action=uploadimage&dynamicPath=team&files=" + files.length, true);
+  xhr.send(formData);
 }

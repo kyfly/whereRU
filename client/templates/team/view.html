@@ -1,0 +1,50 @@
+<header>
+  <nav style="position: fixed;
+    top: 0;
+    z-index: 999;">
+    <div class="nav-wrapper">
+      <a class="brand-logo center">团队信息</a>
+      <ul id="nav-mobile">
+        <li class="left">
+          <a href="/myTeam" style="padding-left:1rem">&lt</a>
+        </li>
+        <li class="right col">
+          <a href='#quitTeam' modal>退出</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- Modal Structure -->
+<div id="quitTeam" class="modal">
+    <div class="modal-content center">
+        <h4>确定退出吗</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat left">确定</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat right">取消</a>
+    </div>
+</div>
+
+<div class="collection" style="position: relative;
+    top: 50px;">
+  <a class="collection-item">
+    <h3 style="margin:0">
+      <img ng-src="{{team.logoUrl}}" style="width:3rem">
+      <span ng-bind="team.name"><span class="badge">14</span></span>
+    </h3>
+  </a>
+  <a ng-href="/myTeam/{{team.id}}/manage/info" class="collection-item">
+    <h4 style="margin:0">管理团队<span class="badge">14</span></h4>
+  </a>
+  <a ng-href="/myTeam/{{team.id}}/members" class="collection-item">
+    <h4 style="margin:0">团队成员<span class="badge">14</span></h4>
+  </a>
+  <a ng-href="/myTeam/{{team.id}}/addProject" class="collection-item">
+    <h4 style="margin:0">添加项目<span class="badge">14</span></h4>
+  </a>
+  <a ng-href="/myTeam/{{team.id}}/chat" class="collection-item">
+    <h4 style="margin:0">团队聊天室<span class="badge">14</span></h4>
+  </a>
+</div>
