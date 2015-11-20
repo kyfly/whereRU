@@ -97,14 +97,19 @@
                 <div class="col s12 m12" ng-show="contentType === 'contestNotice'">
                   <div input-field>
                     <i class="material-icons prefix">mode_edit</i>
-                    <textarea ng-model="newNotice.content" class="materialize-textarea"></textarea>
-                    <label>发布新通知</label>
+                    <input id="newNoticeTitle" ng-model="newNotice.title" type="text" class="validate">
+                    <label for="newNoticeTitle">新通知标题</label>
+                  </div>
+                  <div input-field class="newNoticeContent">
+                    <textarea id="newNoticeContent" ng-model="newNotice.content"
+                              class="materialize-textarea"></textarea>
+                    <label for="newNoticeContent">新通知内容</label>
                   </div>
                   <div class="addFile left">
                     <a class="waves-effect waves-light btn light-blue darken-2"
-                       ng-click="uploadAttachment = !uploadAttachment">上传附件</a>
+                       ng-click="uploadAttachment = !uploadAttachment;addGetInfo = false">上传附件</a>
                     <a class="waves-effect waves-light btn light-blue darken-2"
-                       ng-click="addGetInfo = !addGetInfo">资料收集</a>
+                       ng-click="addGetInfo = !addGetInfo;uploadAttachment = false">资料收集</a>
                     <a class="waves-effect waves-light btn light-blue darken-2">资料库选择</a>
 
                     <div ng-show="uploadAttachment" class="file-field input-field">
@@ -118,7 +123,6 @@
                       </div>
                     </div>
                   </div>
-                  <a class="waves-effect waves-light right btn orange darken-4">发送通知</a>
 
                   <div class="clearfix"></div>
                   <div ng-show="addGetInfo" class="card addGetInfo">
@@ -141,8 +145,42 @@
                              clear="clear"
                              close="close"
                              select-years="15">
+
+                      <div class="row">
+                        <div class="col s12" input-field>
+                          <input id="geiInfoFile" type="text" class="validate">
+                          <label for="geiInfoFile">请输入您所需要收集的文件名称</label>
+                        </div>
+                        <div class="col s12" input-field>
+                          <textarea ng-model="dummyInputs.textAreaInput" class="materialize-textarea"></textarea>
+                          <label>请输入该文件的描述以便参赛队伍上传正确的文件</label>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <div class="clearfix"></div>
+                  <a class="waves-effect waves-light right btn orange darken-4">发送通知</a>
+
+                  <div class="clearfix"></div>
+                  <br>
+
+                  <!--发送过的通知-->
+                  <ul class="collection">
+                    <li class="collection-item avatar">
+                      <a href="" class="collection-item">
+                        <span class="title">2015/11/20</span>
+
+                        <p>通知标题</p>
+                      </a>
+                    </li>
+                    <li class="collection-item avatar">
+                      <a href="" class="collection-item">
+                        <span class="title">2015/11/19</span>
+
+                        <p>通知标题</p>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
 
                 <div class="col s12 m3" ng-show="contentType === 'contestLibrary'">
