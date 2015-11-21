@@ -69,20 +69,20 @@ function SearchController($scope) {
 app.controller('MyTeamController', ['$scope', 'teams', MyTeamController]);
 function MyTeamController($scope, teams) {
   $scope.teams = teams;
-  $scope.collapsibleElements = [{
-    icon: 'mdi-image-filter-drama',
-    title: '公告一',
-    content: '加班.'
-  }, {
-    icon: 'mdi-maps-place',
-    title: '公告二',
-    content: '加班.'
-  }, {
-    icon: 'mdi-social-whatshot',
-    title: '公告三',
-    content: '加班.'
-  }
-  ];
+  //$scope.collapsibleElements = [{
+  //  icon: 'mdi-image-filter-drama',
+  //  title: '公告一',
+  //  content: '加班.'
+  //}, {
+  //  icon: 'mdi-maps-place',
+  //  title: '公告二',
+  //  content: '加班.'
+  //}, {
+  //  icon: 'mdi-social-whatshot',
+  //  title: '公告三',
+  //  content: '加班.'
+  //}
+  //];
 }
 /**
  * 查看团队信息

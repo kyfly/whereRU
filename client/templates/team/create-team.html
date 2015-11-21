@@ -18,6 +18,10 @@
 	          <input id="first_name" ng-model="team.name" type="text" class="validate">
 	          <label for="first_name">团队名称</label>
 	        </div>
+          <div class="input-field col s12">
+            <textarea id="textarea1" class="materialize-textarea" ng-model="team.dynamic"></textarea>
+            <label for="textarea1">团队简介</label>
+          </div>
           <div class="input-field col s12 m12">
             <select class="" ng-model="team.type" material-select watch>
               <option value="" disabled selected>选择团队类型</option>
@@ -32,10 +36,7 @@
 						</select>
 						<label>选择你的学校</label>
 					</div>
-          <div class="input-field col s12">
-            <textarea id="textarea1" class="materialize-textarea" ng-model="team.dynamic"></textarea>
-            <label for="textarea1">团队动态</label>
-          </div>
+
 		      <div class="file-field input-field col s12 m12">
 			      <div class="btn">
 			        <span>团队LOGO</span>

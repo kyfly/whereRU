@@ -1,3 +1,12 @@
+html{
+  min-height: 100%;
+  height: 100%;
+}
+body{
+  min-height: 100%;
+  height: 100%;
+}
+
 footer{
   position: fixed;
   bottom: 0;
@@ -57,8 +66,9 @@ footer .tabs1 {
 
 
 .slider{
-  height: 400px !important;
+  height: 200px !important;
 }
+
 
 
 .bottomBar{
@@ -74,12 +84,12 @@ footer .tabs1 {
 
 .competition{
   min-height: .01%;
-  overflow-x:  auto;
+  overflow-x:  auto!important;
+  white-space: nowrap!important;
+
 }
 
-.competition .allContent{
-  white-space: nowrap;
-}
+
 
 .myTeamImg{
   vertical-align:middle;
@@ -90,14 +100,69 @@ footer .tabs1 {
   font-size: large;
 }
 
-
+.card-content{
+  padding: 20px 0 20px 0!important;
+}
 /*.myTeamTag{*/
   /*position: relative;*/
   /*right: 0;*/
   /*bottom: 0;*/
 /*}*/
 
+.thumbnail > img,
+.thumbnail a > img,{
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
 
+.img-thumbnail {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  padding: 4px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
 
+.thumbnail {
+  display: block;
+  padding: 4px!important;
+  margin-bottom: 10px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  text-align: center;
+  white-space: nowrap!important;
+  overflow-x:  auto!important;
+}
+.thumbnail > img,
+.thumbnail a > img {
+  margin-right: auto;
+  margin-left: auto;
+}
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active {
+  border-color: #337ab7;
+}
+.thumbnail .caption {
+  padding: 9px;
+  color: #333;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mys2{
+  float: left;
+  white-space: nowrap!important;
+  overflow-x:  auto!important;
+}
 
 

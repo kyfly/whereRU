@@ -11,24 +11,27 @@
 
 
 <!--顶部滑动框-->
-<div class="slider" slider>
+<div class="slider" slider  >
   <ul class="slides">
     <li>
-      <img src="img/1.jpg">
+      <img src="../lib/img/test1.png">
+
       <div class="caption center-align">
         <h3>This is our big Tagline!</h3>
         <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
       </div>
     </li>
     <li>
-      <img src="img/1.jpg">
+      <img src="../lib/img/test1.png">
+
       <div class="caption left-align">
         <h3>Left Aligned Caption</h3>
         <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
       </div>
     </li>
     <li>
-      <img src="img/1.jpg">
+      <img src="../lib/img/test1.png">
+
       <div class="caption right-align">
         <h3>Right Aligned Caption</h3>
         <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
@@ -37,25 +40,62 @@
   </ul>
 </div>
 
+<!--字图的介绍-->
+<div style="border: 1px solid">
+  字图的介绍.
+</div>
+
 <!--竞赛滑动条-->
 <div class="competition">
-  <div class="allContent">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
-    <img src="/lib/img/test1.png">
+
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+<img src="/lib/img/test1.png">
+
+</div>
+
+<div class="row competition" style="margin: 0">
+  <div class="competition">
+  <span class="thumbnail mys2">
+  <img src="../lib/img/test1.png" alt="无法显示"/>
+  <div class="text-center">aa</div>
+</span>
+  <span class="thumbnail mys2">
+  <img src="../lib/img/test1.png" alt="无法显示"/>
+  <div class="text-center">aa</div>
+</span>
+  <span class="thumbnail mys2">
+  <img src="../lib/img/test1.png" alt="无法显示"/>
+  <div class="text-center">aa</div>
+</span>
+  <span class="thumbnail mys2">
+  <img src="../lib/img/test1.png" alt="无法显示"/>
+  <div class="text-center">aa</div>
+</span>
+  <span class="thumbnail mys2">
+  <img src="../lib/img/test1.png" alt="无法显示"/>
+  <div class="text-center">aa</div>
+</span>
+  <span class="thumbnail mys2">
+  <img src="../lib/img/test1.png" alt="无法显示"/>
+  <div class="text-center">aa</div>
+</span>
+    <span class="thumbnail mys2">
+  <img src="../lib/img/test1.png" alt="无法显示"/>
+  <div class="text-center">aa</div>
 
 
   </div>
@@ -63,14 +103,37 @@
 
 
 <!--队伍信息-->
-<div class="teamInfo">
-  <ul class="collapsible popout" data-collapsible="accordion" watch>
-    <li ng-repeat="single in collapsibleElements">
-      <div class="collapsible-header"><i class="{{single.icon}}"></i>{{single.title}}</div>
-      <div class="collapsible-body"><p>{{single.content}}</p></div>
-    </li>
-  </ul>
-</div>
+<ul class="collection">
+  <li class="collection-item avatar">
+    <img src="../lib/img/test1.png" alt="" class="circle">
+    <span class="title">团队名称</span>
+    <p>公告标题 <br>
+      通知正文
+    </p>
+    <div class="secondary-content" ng-init="showParallax1 = false">
+      <i class="material-icons" ng-click="showParallax1 = !showParallax1">reorder</i>
+    </div>
+    <div class="parallax-container" ng-if="showParallax1" style="margin: 20px 0; height: auto">
+      <div>hello</div>
+    </div>
+  </li>
+  <li class="collection-item avatar">
+    <img src="../lib/img/test1.png" alt="" class="circle">
+    <span class="title">团队名称</span>
+    <p>公告标题 <br>
+      通知正文
+    </p>
+    <div class="secondary-content" ng-init="showParallax2 = false">
+      <i class="material-icons" ng-click="showParallax2 = !showParallax2">reorder</i>
+    </div>
+    <div class="parallax-container" ng-if="showParallax2" style="margin: 20px 0; height: auto">
+      <div>hello</div>
+    </div>
+  </li>
+</ul>
+
+
+
 
 <div>
   <ul class="collapsible popout" data-collapsible="accordion" watch>

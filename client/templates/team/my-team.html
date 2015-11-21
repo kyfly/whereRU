@@ -16,21 +16,26 @@
   </div>
 </nav>
 
+
 <div>
   <ul class="collection">
     <li class="collection-item avatar"
         ng-repeat="team in teams">
       <a ng-href="{{'/myTeam/' + team.id}}">
         <img ng-src="{{team.logoUrl}}" class="circle">
+        <span class="new badge deep-orange lighten-2">1</span>
         <span class="title" ng-bind="team.name"></span>
 
         <p ng-bind="team.dynamic">
         </p>
       </a>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+      <a href="#!" class="secondary-content"></a>
     </li>
   </ul>
 </div>
+
+
+
 <footer>
   <div class="row">
     <div class="col s12">

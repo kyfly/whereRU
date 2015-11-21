@@ -41,17 +41,17 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     resolve: {
       teams: function (Team) {
         return Team.find({
-          filter: 
+          filter:
           {
             fields: {
-              id: true, 
-              name: true, 
+              id: true,
+              name: true,
               dynamic: true,
               logoUrl:true
             }
           }
         });
-      } 
+      }
     },
   	templateUrl: '/templates/team/my-team.html',
   	controller: 'MyTeamController'
@@ -65,7 +65,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       }
     },
     controller: 'CreateTeamController'
-  }) 
+  })
   .state('findTeam', {
     url: '/myTeam/findTeam',
     templateUrl: '/templates/team/find-team.html',
@@ -89,7 +89,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     templateUrl: '/templates/team/view-team.html',
     controller: 'ViewTeamController'
   })
-  
+
   $urlRouterProvider.when('', '/');
   $urlRouterProvider.otherwise(function ($injector, $location) {
     $location.path('/');
