@@ -13,22 +13,12 @@
 <!--顶部滑动框-->
 <div slider height='200' transition='400'>
   <ul class="slides">
-    <li>
-      <div class="caption center-align">
-        <h3>This is our big Tagline!</h3>
-        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-      </div>
-    </li>
-    <li>
+    <li ng-repeat="event in events">
       <div class="caption left-align">
-        <h3>Left Aligned Caption</h3>
-        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-      </div>
-    </li>
-    <li>
-      <div class="caption right-align">
-        <h3>Right Aligned Caption</h3>
-        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        <a ng-href="/events/{{event.id}}/explain">
+          <h3>最新竞赛</h3>
+          <h5 class="light grey-text text-lighten-3" ng-bind="event.name"></h5>
+        </a>
       </div>
     </li>
   </ul>
