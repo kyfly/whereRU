@@ -12,7 +12,7 @@ var config = {
     AccessKey: '',
     SecrectKey: '',
     dynamicPath: 'upload',
-    staticPath: path.join(__dirname, '../client/lib/')
+    staticPath: path.join(__dirname, '../client/lib/temporary')
 };
 
 var setConfig = function(c) {
@@ -59,7 +59,7 @@ function upload(c) {
 }
 var uploadText = function (req, res) {
   var fileName = getFileName('.html');
-  fs.writeFile(path.join(__dirname, '../client/lib/html/', fileName), 
+  fs.writeFile(path.join(__dirname, '../client/lib/temporary/html/', fileName), 
     req.body.content, function (err) {
       if (err) {
         res.send(err);
@@ -143,7 +143,7 @@ var save = function (file, filename, req, callback) {
         if (err) {
             callback(err);
         } else {
-            callback(null, '/lib/images/' + dPath + '/' + realName);
+            callback(null, '/lib/temporary/' + dPath + '/' + realName);
         }
       });
     }
@@ -151,9 +151,9 @@ var save = function (file, filename, req, callback) {
 }
 function saveToFile (data, cb) {
   var fileName = getFileName('.html');
-  fs.writeFile(path.join(__dirname, '../client/lib/html/', fileName), 
+  fs.writeFile(path.join(__dirname, '../client/lib/temporary/html/', fileName), 
     data , function (err) {
-      cb(err, path.join('/client/lib/html/', fileName));
+      cb(err, path.join('/client/lib/temporary/html/', fileName));
   });
 }
 function docx2html (path, cb) {
