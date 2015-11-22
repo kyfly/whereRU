@@ -142,11 +142,23 @@ main {
   padding: 5px !important;
 }
 
-.collection-item > span {
+.noticeSingle {
+  cursor: default !important;
+}
+
+.collection-item > span{
   margin: 15px !important;
 }
 
 .collection-item > p {
   color: #000000 !important;
   padding: 15px !important;
+}
+
+.collection-item > h6 {
+  padding-left: 15px !important;
+}
+
+.addLibraryBtn {
+  margin-top: -50px;
 }
