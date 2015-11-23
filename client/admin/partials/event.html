@@ -18,7 +18,8 @@
           <input type="file" id="explainDoc">
         </div>
         <div class="file-path-wrapper">
-          <input ng-model="explainDoc" ng-change="explainDocLoad()" class="file-path validate" type="text" placeholder="点我上传介绍文档（.doc）">
+          <input ng-model="explainDoc" ng-change="explainDocLoad()" class="file-path validate" type="text"
+                 placeholder="点我上传介绍文档（.doc）">
         </div>
       </div>
       <div class="file-field input-field">
@@ -27,7 +28,8 @@
           <input type="file" id="processDoc">
         </div>
         <div class="file-path-wrapper">
-          <input ng-model="processDoc" ng-change="processDocLoad()" class="file-path validate" type="text" placeholder="点我上传竞赛流程文件（.doc）">
+          <input ng-model="processDoc" ng-change="processDocLoad()" class="file-path validate" type="text"
+                 placeholder="点我上传竞赛流程文件（.doc）">
         </div>
       </div>
       <div class="file-field input-field">
@@ -36,7 +38,8 @@
           <input type="file" id="ruleDoc">
         </div>
         <div class="file-path-wrapper">
-          <input ng-model="ruleDoc" ng-change="ruleDocLoad()" class="file-path validate" type="text" placeholder="点我上传竞赛规则文件（.doc）">
+          <input ng-model="ruleDoc" ng-change="ruleDocLoad()" class="file-path validate" type="text"
+                 placeholder="点我上传竞赛规则文件（.doc）">
         </div>
       </div>
     </div>
@@ -56,33 +59,136 @@
         <div class="">
           <div class="col s12">
             <ul class="tabs" tabs>
-              <li class="tab col s3 waves-effect"><a class="active" href="#">参赛队伍</a></li>
-              <li class="tab col s3 waves-effect"><a href="#">通知记录</a></li>
-              <li class="tab col s3 waves-effect"><a href="#">资料库</a></li>
-              <li class="tab col s3 waves-effect"><a href="#">竞赛设置</a></li>
+              <li ng-click="toContestTeam()" class="tab col s3 waves-effect"><a href="#">参赛队伍</a></li>
+              <li ng-click="toContestNotice()" class="tab col s3 waves-effect"><a href="#">通知管理</a></li>
+              <li ng-click="toContestLibrary()" class="tab col s3 waves-effect"><a href="#">资料库</a></li>
+              <li ng-click="toContestSetting()" class="tab col s3 waves-effect"><a href="#">竞赛设置</a></li>
             </ul>
             <div id="contentView">
               <!--参赛队伍-->
               <div class="row">
-                <div class="col s12 m3" ng-repeat="project in projects" ng-show="project._projectResults[0].contestId === single.id">
+                <div class="col s12 m3" ng-repeat="project in projects"
+                     ng-show="(project._projectResults[0].contestId === single.id) && (contentType === 'contestTeam')">
                   <div class="card">
                     <div class="card-content">
                       <span class="card-title">基于saas的活动云平台</span>
                       <hr>
                       <p>负责人：<span>李畅</span></p>
+
                       <p>指导老师：<span>张建海</span></p>
+
                       <p>所属领域：<span>信息技术与电子商务类</span></p>
+
                       <p>团队人数：<span>8</span>人</p>
                     </div>
                     <div class="card-action">
                       <a class="activator" href="#">更多信息<i class="material-icons right">more_vert</i></a>
                     </div>
                     <div class="card-reveal">
-                      <span class="card-title grey-text text-darken-4">更多信息<i class="material-icons right">close</i></span>
+                      <span class="card-title grey-text text-darken-4">更多信息<i
+                        class="material-icons right">close</i></span>
+
                       <p>Here is some more information about this product that is only revealed once clicked on.</p>
                     </div>
 
                   </div>
+                </div>
+
+                <div class="col s12 m12" ng-show="contentType === 'contestNotice'">
+                  <div input-field>
+                    <i class="material-icons prefix">mode_edit</i>
+                    <input id="newNoticeTitle" ng-model="newNotice.title" type="text" class="validate">
+                    <label for="newNoticeTitle">新通知标题</label>
+                  </div>
+                  <div input-field class="newNoticeContent">
+                    <textarea id="newNoticeContent" ng-model="newNotice.content"
+                              class="materialize-textarea"></textarea>
+                    <label for="newNoticeContent">新通知内容</label>
+                  </div>
+                  <div class="addFile left">
+                    <a class="waves-effect waves-light btn light-blue darken-2"
+                       ng-click="uploadAttachment = !uploadAttachment;addGetInfo = false">上传附件</a>
+                    <a class="waves-effect waves-light btn light-blue darken-2"
+                       ng-click="addGetInfo = !addGetInfo;uploadAttachment = false">资料收集</a>
+                    <a class="waves-effect waves-light btn light-blue darken-2">资料库选择</a>
+
+                    <div ng-show="uploadAttachment" class="file-field input-field">
+                      <div class="btn">
+                        <span>点击上传附件</span>
+                        <input type="file">
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input ng-model="explainDoc" ng-change="explainDocLoad()" class="file-path validate" type="text"
+                               placeholder="点我上传介绍文档（.doc）">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="clearfix"></div>
+                  <div ng-show="addGetInfo" class="card addGetInfo">
+                    <div class="card-content">
+                      <label for="inputCreated">截止日期</label>
+                      <input input-date
+                             type="text"
+                             name="created"
+                             id="inputCreated"
+                             ng-model="deadline.time"
+                             container="body"
+                             format="yyyy/mm/dd"
+                             months-full="{{ month }}"
+                             months-short="{{ monthShort }}"
+                             weekdays-full="{{ weekdaysFull }}"
+                             weekdays-short="{{ weekdaysShort }}"
+                             weekdays-letter="{{ weekdaysLetter }}"
+                             min="{{ minDate }}"
+                             today="today"
+                             clear="clear"
+                             close="close"
+                             select-years="15">
+
+                      <div class="row">
+                        <div class="col s12" input-field>
+                          <input id="geiInfoFile" type="text" class="validate">
+                          <label for="geiInfoFile">请输入您所需要收集的文件名称</label>
+                        </div>
+                        <div class="col s12" input-field>
+                          <textarea ng-model="dummyInputs.textAreaInput" class="materialize-textarea"></textarea>
+                          <label>请输入该文件的描述以便参赛队伍上传正确的文件</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <a class="waves-effect waves-light right btn orange darken-4">发送通知</a>
+
+                  <div class="clearfix"></div>
+                  <br>
+
+                  <!--发送过的通知-->
+                  <ul class="collection">
+                    <li class="collection-item avatar">
+                      <a href="" class="collection-item">
+                        <span class="title">2015/11/20</span>
+
+                        <p>通知标题</p>
+                      </a>
+                    </li>
+                    <li class="collection-item avatar">
+                      <a href="" class="collection-item">
+                        <span class="title">2015/11/19</span>
+
+                        <p>通知标题</p>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="col s12 m3" ng-show="contentType === 'contestLibrary'">
+                  资料库
+                </div>
+
+                <div class="col s12 m3" ng-show="contentType === 'contestSetting'">
+                  竞赛设置
                 </div>
               </div>
             </div>

@@ -23,7 +23,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "teams": {
+      "type": "belongsTo",
+      "model": "Team",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

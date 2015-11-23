@@ -1,0 +1,66 @@
+<header>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">团队管理</a>
+      <ul id="nav-mobile">
+        <li class="left">
+          <a href="/myTeam/:id" style="padding-left:1rem">&lt</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+<div class="row" id="parallax" ng-init="showParallax = false" style="text-align: center;margin: 20px 0">
+  <a class="btn waves-effect waves-light" ng-click="showParallax = !showParallax" style="">添加新公告</a>
+</div>
+<div class="parallax-container" ng-if="showParallax" style="margin: 20px 0;padding: 20px;">
+
+  <div input-field>
+    <input type="text" ng-model="dummyInputs.inputFieldInput" length="20">
+    <label>公告标题</label>
+  </div>
+  <div class="input-field col s12 m12">
+    <select class="" ng-model="announcement.type" material-select watch>
+      <option value="" disabled selected>公告内容类型</option>
+      <option ng-repeat="type in announcementType">{{type}}</option>
+    </select>
+    <label>公告内容类型</label>
+  </div>
+
+</div>
+
+
+
+
+
+<div class="row">
+  <div class="col s12 m5">
+    <div class="card-panel teal waves-light">
+          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+          公告1
+          </span>
+    </div>
+    <div class="card-panel teal">
+          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+          公告1
+          </span>
+    </div>
+  </div>
+</div>
+
+
+
+<footer>
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs1">
+        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/messages">通知</a></li>
+        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/projects">项目</a></li>
+        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/members">成员</a></li>
+        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/info">信息</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

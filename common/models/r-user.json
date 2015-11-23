@@ -28,7 +28,7 @@
     },
     "teams": {
       "type": "hasMany",
-      "model": "team",
+      "model": "Team",
       "foreignKey": ""
     }
   },

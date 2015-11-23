@@ -88,7 +88,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     },
     templateUrl: '/templates/team/view-team.html',
     controller: 'ViewTeamController'
-  })
+  });
 
   $urlRouterProvider.when('', '/');
   $urlRouterProvider.otherwise(function ($injector, $location) {

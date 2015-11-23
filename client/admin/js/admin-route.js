@@ -1,7 +1,7 @@
 function RouteConfigure($routeProvider) {
   $routeProvider
     .when('/eventManage/home', {
-      templateUrl: '/admin/partials/home.html',
+      templateUrl: '/admin/partials/index.html',
       controller: ['$scope', '$resource', HomeCtrl]
     })
     .when('/eventManage/event', {
@@ -17,8 +17,12 @@ function RouteConfigure($routeProvider) {
       controller: HelpCtrl
     })
     .when('/eventManage/login', {
-      templateUrl: '/admin/partials/login.html',
+      templateUrl: '/admin/partials/sign-in.html',
       controller: ['$scope', 'ContestOrg', '$location', LoginCtrl]
+    })
+    .when('/eventManage/reg', {
+      templateUrl: '/admin/partials/sign-up.html',
+      controller: ['$scope', 'ContestOrg', '$location', SignUpCtrl]
     })
     .otherwise({redirectTo: '/eventManage/home'});
 }

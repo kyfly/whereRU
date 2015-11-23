@@ -1,0 +1,66 @@
+<header>
+  <nav style="position: fixed;
+    top: 0;
+    z-index: 999;">
+    <div class="nav-wrapper">
+      <a class="brand-logo center">团队信息</a>
+      <ul id="nav-mobile">
+        <li class="left">
+          <a href="/myTeam" style="padding-left:1rem">&lt</a>
+        </li>
+        <li class="right col">
+          <a href='#quitTeam' modal>退出</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- Modal Structure -->
+<div id="quitTeam" class="modal">
+    <div class="modal-content center">
+        <h4>确定退出吗</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat left">确定</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat right">取消</a>
+    </div>
+</div>
+
+
+
+<ul class="collection" style="position: relative;
+    top: 50px;">
+  <li class="collection-item avatar">
+      <img ng-src="{{team.logoUrl}}" class="circle">
+      <div class="title" ng-bind="team.name"></div>
+      <span ng-bind="team.dynamic"></span>
+
+  </li>
+  <li class="collection-item">
+    <a ng-href="/myTeam/{{team.id}}/manage/info">
+      管理团队
+    </a>
+  </li>
+  <li class="collection-item">
+    <a ng-href="/myTeam/{{team.id}}/members">
+      团队成员
+    </a>
+  </li>
+  <li class="collection-item">
+    <a ng-href="/myTeam/{{team.id}}/chat">
+      团队聊天室
+    </a>
+  </li>
+  <li class="collection-item">
+    <div>
+      已有项目
+    </div>
+  </li>
+  <li class="collection-item">
+    <a ng-href="/myTeam/{{team.id}}/addProject">
+      添加项目
+    </a>
+  </li>
+
+</ul>
