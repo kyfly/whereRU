@@ -1,15 +1,7 @@
-app.controller('HomeController', ['$scope', '$http', '$sce', '$templateCache', HomeController]);
-function HomeController($scope, $http, $sce, $templateCache) {
 
-  $scope.getExplain = function () {
-    that = this;
-    if (!this.team.explain) {
-      that.team.explain = $sce.trustAsHtml("dend");
-      $http.get(this.team.explainUrl).success(function (html) {
-        that.team.explain = $sce.trustAsHtml(html);
-      })
-    }
-  };
+app.controller('HomeController', ['$scope', '$http', 'Contest', '$templateCache', HomeController]);
+function HomeController($scope, $http, Contest, $templateCache) {
+  $scope.events = Contest.find({filter: {limit: 4}});
   $scope.collapsibleElements = [{
     icon: 'mdi-image-filter-drama',
     title: 'First',

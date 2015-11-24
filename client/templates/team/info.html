@@ -12,12 +12,71 @@
 </header>
 
 <div>
-  <ul class="collection">
-    <li class="collection-item ">
-     团队名称
-      <span ></span>
+  <ul class="collection" style="margin: 20px 0 10px 0 ;">
+
+    <li class="collection-item">
+        <span>团队名称</span>
+        <span class="title" ng-bind="team.name" style="margin-left: 20px"></span>
     </li>
+
+    <li class="collection-item">
+      <span>团队简介:</span>
+      <h5 class="card-panel white" ng-bind="team.dynamic"></h5>
+    </li>
+
+    <li class="collection-item file-field input-field col s12 m12" style="border: 0;padding: 10px 20px 0 20px">
+      <div class="btn">
+        <span>新上传团队LOGO</span>
+        <input type="file" id="logo" accept="image">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" ng-model="logo" ng-change="logoLoad()" type="text" placeholder="请上传团队Logo">
+      </div>
+    </li>
+    <li class="collection-item" style="padding:0 20px 10px 20px">
+      <div>
+        <span>历史logo:</span><br>
+        <img ng-src="{{team.logoUrl}}" class="circle" style="height: 50px;width: auto">
+      </div>
+    </li>
+
+    <li class="collection-item file-field input-field col s12 m12" style="border: 0;padding: 10px 20px 0 20px">
+      <div class="btn">
+        <span>新上传宣传图片</span>
+        <input type="file" id="pic" multiple="multiple"  accept="image">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" ng-model="pic" ng-change="picLoad()" type="text" placeholder="请上传宣传图片">
+      </div>
+    </li>
+    <li class="collection-item" style="padding:0 20px 10px 20px">
+      <div>
+        历史宣传图片:<br>
+        <img ng-src="{{team.logoUrl}}" class="circle" style="height: 50px;width: auto">
+      </div>
+    </li>
+
+    <li class="collection-item file-field input-field col s12 m12" style="border: 0;padding: 10px 20px 0 20px">
+      <div class="btn">
+        <span>新上传宣传视频</span>
+        <input type="file" id="video" multiple="multiple"  accept="video">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" ng-model="video" ng-change="picLoad()" type="text" placeholder="请上传宣传视频">
+      </div>
+    </li>
+    <li class="collection-item" style="padding:0 20px 10px 20px">
+      <div>
+        历史宣传视频:<br>
+        <img ng-src="{{team.logoUrl}}" class="circle" style="height: 50px;width: auto">
+      </div>
+    </li>
+
   </ul>
+</div>
+
+<div class="btn" style="width: 80%;text-align: center;margin: auto;display: block">
+  确定
 </div>
 
 
@@ -28,11 +87,13 @@
   <div class="row">
     <div class="col s12">
       <ul class="tabs1">
-        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/messages">通知</a></li>
-        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/projects">项目</a></li>
-        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/members">成员</a></li>
-        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/info">信息</a></li>
+        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/messages">通知</a></li>
+        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/projects">项目</a></li>
+        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/members">成员</a></li>
+        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/info">信息</a></li>
       </ul>
     </div>
   </div>
 </footer>
+
+<div class="bottomBar" style="height: 55px"></div>

@@ -61,9 +61,14 @@ function FindTeamController($scope) {
  * @param  {[type]} ){               }] [description]
  * @return {[type]}     [description]
  */
-app.controller('TeamMessageController', ['$scope', '$stateParams', function($scope, $stateParams){
+app.controller('TeamMessageController', ['$scope', '$stateParams', TeamMessageController]);
+function TeamMessageController($scope, $stateParams) {
   $scope.teamId = $stateParams.id;
-}]);
+  $scope.announcementType = ['文本', '表单'];
+  $scope.announcement = {
+    pics: []
+  };
+}
 /**
  * 成员管理
  * @param  {[type]} ){               }] [description]
@@ -77,13 +82,35 @@ app.controller('TeamMemberController', ['$scope', '$stateParams', function($scop
  * @param  {[type]} ){               }] [description]
  * @return {[type]}     [description]
  */
-app.controller('TeamInfoController', ['$scope', '$stateParams', function($scope, $stateParams){
-  $scope.teamId = $stateParams.id;
-  $scope.announcementType = ['文本', '表单'];
-  $scope.announcement= {
-    pics: []
-  };
-}]);
+app.controller('TeamInfoController', ['$scope','Team','$stateParams',TeamInfoController]);
+  function TeamInfoController($scope, Team, $stateParams) {
+    $scope.teamId = $stateParams.id;
+    Team.findById({
+      id: $stateParams.id,
+      filter: {fields: ['id', 'name', 'dynamic', 'logoUrl']}
+    }, function (res) {
+      $scope.team = res;
+    });
+    $scope.logoLoad = function () {
+      var e = document.getElementById('logo').files;
+      uploadFile(e, function (res) {
+        $scope.team.logoUrl = res[0].url;
+        $scope.logo = 'success';
+        $scope.$apply();
+      });
+    };
+    $scope.picLoad = function () {
+      var e = document.getElementById('pic').files;
+      uploadFile(e, function (res) {
+        for (r in res) {
+          $scope.team.pics.push(res[r].url);
+        }
+        $scope.pic = 'success';
+        $scope.$apply();
+      });
+    };
+  }
+
 /**
  * 项目管理
  * @param  {[type]} ){               }] [description]

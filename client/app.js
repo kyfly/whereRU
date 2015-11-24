@@ -33,7 +33,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 				return req;
 			}
 		}
-	}
+	};
 	$httpProvider.interceptors.push(interceptor);
 }]);
 

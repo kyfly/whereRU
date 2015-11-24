@@ -27,6 +27,14 @@
       <option ng-repeat="type in announcementType">{{type}}</option>
     </select>
     <label>公告内容类型</label>
+    <input-field>
+      <input type="text" ng-model="dummyInputs.inputFieldInput">
+      <label>Input label</label>
+    </input-field>
+    <input-field>
+      <textarea ng-model="dummyInputs.textAreaInput" class="materialize-textarea"></textarea>
+      <label>Textarea</label>
+    </input-field>
   </div>
 
 </div>
@@ -37,7 +45,7 @@
 
 <div class="row">
   <div class="col s12 m5">
-    <div class="card-panel teal waves-light">
+    <div class="card-panel teal">
           <span class="white-text">I am a very simple card. I am good at containing small bits of information.
           公告1
           </span>
@@ -50,17 +58,58 @@
   </div>
 </div>
 
+<section id="cd-timeline" class="cd-container">
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-num green lighten-2 white-text">
+      1
+    </div>
+    <div class="cd-timeline-content">
+      <p>网页时间轴一般用于展示以时间为主线的事件，如企业网站常见的公司发展历程等。本文将给大家介绍一款基于HTML5和CSS3的漂亮的垂直时间轴，它可以响应页面布局，适用于HTML5开发的PC和移动手机WEB应用。</p>
+      <span class="cd-date">2015-01-06</span>
+    </div>
+  </div>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-num  deep-orange lighten-1 white-text" style="text-align: center;line-height: 40px;">
+      2
+    </div>
+    <div class="cd-timeline-content">
+      <p>我们在一些应用中需要动态展示数据，比如当前在线人数，当前交易总额，当前汇率等等，前端页面需要实时刷新获取最新数据。本文将结合实例给大家介绍使用jQuery和PHP来实现动态数字展示效果。</p>
+      <span class="cd-date">2014-12-25</span>
+    </div>
+  </div>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-num green lighten-2 white-text">
+      3
+    </div>
+    <div class="cd-timeline-content">
+      <p>我们跟踪用户信息时需要用到Session和Cookie，比如用户登录验证、记录用户浏览历史，存储购物车数据，限制用户会话有效时间等。今天我们来了解下PHP是如何操作Session和Cookie的。</p>
+      <span class="cd-date">2014-12-20</span>
+    </div>
+  </div>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-num  deep-orange lighten-1 white-text">
+      4
+    </div>
+    <div class="cd-timeline-content">
+      <p>我们在网上购物提交订单时，在网页上一般会有一个选择数量的控件，要求买家选择购买商品的件数，开发者会把该控件做成可以通过点击实现加减等微调操作，当然也可以直接输入数字件数。本文将介绍常见的几种使用spinner数字微调器来实现数字加减的功能的方法。</p>
+      <span class="cd-date">2014-12-14</span>
+    </div>
+  </div>
+</section>
+
 
 
 <footer>
   <div class="row">
     <div class="col s12">
       <ul class="tabs1">
-        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/messages">通知</a></li>
-        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/projects">项目</a></li>
-        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/members">成员</a></li>
-        <li class="newtab col s3"><a ng-href="/myTeam/{{teamId}}/manage/info">信息</a></li>
+        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/messages">通知</a></li>
+        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/projects">项目</a></li>
+        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/members">成员</a></li>
+        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/info">信息</a></li>
       </ul>
     </div>
   </div>
 </footer>
+
+<div class="bottomBar"></div>

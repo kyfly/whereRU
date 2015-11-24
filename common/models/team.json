@@ -61,6 +61,11 @@
       "type": "embedsMany",
       "model": "TeamHistory",
       "foreignKey": "teamId"
+    },
+    "actives": {
+      "type": "hasMany",
+      "model": "Active",
+      "foreignKey": ""
     }
   },
   "acls": [],

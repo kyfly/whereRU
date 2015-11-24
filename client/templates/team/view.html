@@ -29,8 +29,7 @@
 
 
 
-<ul class="collection" style="position: relative;
-    top: 50px;">
+<ul class="collection" style="position: relative;top: 50px;">
   <li class="collection-item avatar">
       <img ng-src="{{team.logoUrl}}" class="circle">
       <div class="title" ng-bind="team.name"></div>
@@ -38,7 +37,7 @@
 
   </li>
   <li class="collection-item">
-    <a ng-href="/myTeam/{{team.id}}/manage/info">
+    <a ng-href="/myTeam/{{team.id}}/manage/messages">
       管理团队
     </a>
   </li>
@@ -49,16 +48,36 @@
   </li>
   <li class="collection-item">
     <a ng-href="/myTeam/{{team.id}}/chat">
-      团队聊天室
+      团队聊天
     </a>
   </li>
   <li class="collection-item">
     <div>
       已有项目
     </div>
+    <div>
+      <div class="card-panel white">
+        <h5 ng-bind="team.dynamic"></h5>
+        <span class="cd-date" style="float: right">2014-12-15</span>
+      </div>
+      <div class="card-panel white">
+        <h5 ng-bind="team.dynamic"></h5>
+        <span class="cd-date" style="float: right">2014-12-14</span>
+      </div>
+      <div class="card-panel white">
+        <h5 ng-bind="team.dynamic"></h5>
+        <span class="cd-date" style="float: right">2014-12-13</span>
+      </div>
+      <div class="card-panel white">
+        <h5 ng-bind="team.dynamic"></h5>
+        <span class="cd-date" style="float: right">2014-12-12</span>
+      </div>
+    </div>
   </li>
+
+
   <li class="collection-item">
-    <a ng-href="/myTeam/{{team.id}}/addProject">
+    <a ng-href="/myTeam/{{team.id}}/manage/projects">
       添加项目
     </a>
   </li>

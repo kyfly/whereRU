@@ -35,6 +35,11 @@
       "model": "ProjectResult",
       "foreignKey": ""
     },
+    "actives": {
+      "type": "hasMany",
+      "model": "Active",
+      "foreignKey": ""
+    },
     "materials": {
       "type": "hasMany",
       "model": "Material",
