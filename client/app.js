@@ -1,4 +1,7 @@
-var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'ng.ueditor'])
+var realtime;
+var leancloudAppId = 'vClHC4mUTBMJmicYVCJ8zluw';
+var leancloudAppKey = '4MY3lhMBVc5Q1wUqG42w6BLB';
+var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize'])
   //配置路由方式
 .config(['$locationProvider', function ($locationProvider) {
   $locationProvider.html5Mode({
@@ -36,7 +39,28 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	}
 	$httpProvider.interceptors.push(interceptor);
 }]);
-
+function createRealtimeObj(cb) {
+	if (!realtime) {
+	  var userId = JSON.parse(localStorage['IY9O2PG']).userId;
+	  realtime = AV.realtime({
+	    appId: leancloudAppId,
+	    clientId: userId
+	  });
+	  realtime.open(function() {});
+	  realtime.on('open', function () {
+	    cb (realtime);
+	  });
+	} else {
+		cb (realtime);
+	}
+}
+function getRooms (cb) {
+	createRealtimeObj(function (rt) {
+    rt.query(function (rooms) {
+      cb (rooms);
+    });
+  });
+}
 //$(document).ready(function(){
 //  // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
 //  $('.modal-trigger').leanModal();

@@ -57,9 +57,9 @@ app.controller('SearchController', ['$scope', SearchController]);
 function SearchController($scope) {
 
 }
-app.controller('MyTeamController', ['$scope', 'Team', MyTeamController]);
-function MyTeamController($scope, Team) {
-  $scope.teams = Team.find({filter: {fields:['name', 'id', 'logoUrl', 'dynamic']}});
+app.controller('MyTeamController', ['$scope', 'Team', 'Auth', MyTeamController]);
+function MyTeamController($scope, Team, Auth) {
+  $scope.teams = Team.find({filter: {where:{userIds: Auth.getId()}, fields:['name', 'id', 'logoUrl', 'dynamic']}});
   $scope.collapsibleElements = [{
     icon: 'mdi-image-filter-drama',
     title: '公告一',
@@ -75,3 +75,55 @@ function MyTeamController($scope, Team) {
   }
   ];
 }
+app.controller('ChatController', ['$scope', 'Auth', '$stateParams', function($scope, Auth, $stateParams){
+  var roomId = $stateParams.id;
+  var type = $stateParams.type;
+  var chat = function (rt, Room) {
+    Room.log(function (history) {
+      console.log(history);
+    });
+    rt.on('join', function () {
+
+    })
+    .on('message', function (data) {
+      console.log(data);
+    });
+    Room.send({
+      test:'nihao'
+    }, {
+      receipt: true,
+      transient: false,
+      type: 'text'
+    }, function (data) {
+      console.log(data);
+    })
+  }
+  createRealtimeObj(function (rt) {
+    switch(type) {
+      //聊天室ID，可直接通过ID获取对象
+      case 'roomId':
+        rt.room(roomId, function (Room) {
+          if (Room) {
+            chat(rt, Room);
+          } else {
+            //非法访问
+          }
+        });
+      break;
+      //用户ID，私聊模式，先确定有已存在的聊天室号，如果没有则需要创建新的聊天室
+      case 'userId':
+
+      break;
+    }
+  });
+  
+  
+}]);
+app.controller('ChatsController', ['$scope', 'Auth', function($scope, Auth){
+  //用户所有聊天室
+  getRooms(function (rooms) {
+    $scope.rooms = rooms;
+    console.log(rooms);
+    $scope.$apply();
+  });
+}])
