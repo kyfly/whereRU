@@ -133,8 +133,22 @@ footer .tabs1 {
   min-height: 50px;
   background: #0ff;
 }
-
-
-
-
+.IM {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+.IM .msg {
+  position: fixed;
+  top: 50px;
+  bottom: 50px;
+  overflow: scroll;
+  width: 100%;
+}
+.IM .content-box {
+  display: flex;
+}
+.IM .IM-text-align {
+  text-align: right;
+}
 

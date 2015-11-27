@@ -64,7 +64,7 @@ function CreateTeamController($scope, Team, School, $location, Auth) {
         name: name,
         attr: {
           type: 'team',
-          names: ['userInfo.name']
+          names: Auth.getUserName()
         }
       }, function (result) {
         cb (result);
@@ -127,9 +127,28 @@ app.controller('TeamMembersController', ['$scope', '$stateParams', function($sco
  * @param  {[type]} $stateParams){               $scope.teamId [description]
  * @return {[type]}                 [description]
  */
-app.controller('TeamExplainController', ['$scope', '$stateParams', function($scope, $stateParams){
+app.controller('TeamExplainController', ['$scope', '$stateParams', 'Team', function($scope, $stateParams, Team){
   $scope.teamId = $stateParams.id;
+  Team.findById({
+    id: $stateParams.id, 
+    filter: {
+      include: ['members']
+    }
+  }, function (res) {
+    $scope.team = res;
+  });
 }]);
+/**
+ * [description]
+ * @param  {[type]} $scope          [description]
+ * @param  {[type]} $stateParams    [description]
+ * @param  {[type]} Team            [description]
+ * @param  {[type]} Auth){                       var           roomId [description]
+ * @param  {[type]} options.userId: Auth.getId()  [description]
+ * @param  {[type]} function        (res)         {                                               createRealtimeObj(function (rt) {      console.log(Auth.getId());      rt.room(roomId, function (Room) {        console.log(Room);        Room.add(Auth.getId())        Room.update({                  })      });    });  } [description]
+ * @param  {[type]} function        (res)         {                   });}]       [description]
+ * @return {[type]}                 [description]
+ */
 app.controller('JoinTeamController', ['$scope', '$stateParams', 'Team', 'Auth', function($scope, $stateParams, Team, Auth){
   var roomId = $stateParams.roomId;
   $scope.teamId = $stateParams.id;
@@ -143,9 +162,14 @@ app.controller('JoinTeamController', ['$scope', '$stateParams', 'Team', 'Auth', 
       console.log(Auth.getId());
       rt.room(roomId, function (Room) {
         console.log(Room);
-        Room.add(Auth.getId())
+        Room.add(Auth.getId());
+        Room.attr.names.push(Auth.getUserName());
+        names = Room.attr.names;
         Room.update({
-          attr.names = attr.names.push('name');
+          attr: {
+            //这里添加加入团队的用户姓名
+            names: names
+          }
         })
       });
 

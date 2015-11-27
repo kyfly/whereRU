@@ -9,6 +9,8 @@ module.exports = function(RUser) {
 	});
 	RUser.afterRemote('create', function (ctx, instance, next) {
 		RUser.login(ctx.req.body, function (err, token) {
+			token.name = instance.username;
+			token.phone = instance.phone;
 			ctx.res.send({err, token});
 		})
 	});
