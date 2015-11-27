@@ -33,6 +33,9 @@
     "created": {
       "type": "Date"
     },
+    "chatId": {
+      "type": "string"
+    },
     "updated": {
       "type": "Date"
     },

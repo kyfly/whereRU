@@ -12,7 +12,7 @@ module.exports = function(server) {
 	server.get('/search|myTeam|home|signUp|login|teams|events', function(req, res) {
     res.sendFile(path.join(__dirname, '../../client/index.html'));
 	});
-  server.get('/events*', function(req, res) {
+  server.get('/events*|chats*', function(req, res) {
     res.sendFile(path.join(__dirname, '../../client/index.html'));
   });
 };

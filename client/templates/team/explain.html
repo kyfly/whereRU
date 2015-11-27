@@ -1,0 +1,18 @@
+<header>
+  <nav style="position: fixed;
+    top: 0;
+    z-index: 999;">
+    <div class="nav-wrapper">
+      <a class="brand-logo center" ng-bind="team.name"></a>
+      <ul id="nav-mobile">
+        <li class="left">
+          <a href="/myTeam/findTeam" style="padding-left:1rem">&lt</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<div style="position: relative;
+    top: 50px;">
+  <a ng-href="/teams/{{team.id}}/join/{{team.chatId}}" class="waves-effect waves-light btn">申请加入</a>
+</div>

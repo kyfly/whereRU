@@ -149,7 +149,6 @@ footer .tabs1 {
   min-height: 50px;
   background: #0ff;
 }
-
 .thumbnail > img,
 .thumbnail a > img,{
   display: block;
@@ -293,5 +292,21 @@ a.thumbnail.active {
   border: 7px solid transparent;
   border-right: 7px solid white;
 }
-
-
+.IM {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+.IM .msg {
+  position: fixed;
+  top: 50px;
+  bottom: 50px;
+  overflow: scroll;
+  width: 100%;
+}
+.IM .content-box {
+  display: flex;
+}
+.IM .IM-text-align {
+  text-align: right;
+}

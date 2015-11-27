@@ -1,0 +1,10 @@
+<ul class="collection">
+	<li class="collection-item avatar" ng-repeat="room in rooms">
+    <a ng-href="/chats/{{room.objectId}}/roomId"> 
+      <h4>
+      <i class="material-icons">loop</i>
+      <span class="title" ng-bind="room.name"></span>
+    </h4>
+    </a>
+  </li>
+</ul>

@@ -92,5 +92,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     templateUrl: "/templates/team/more.html",
     controller: 'TeamMoreController'
   })
+  /**
+   * 加入团队
+   */
+  .state('join', {
+    url: '/teams/:id/join/:roomId',
+    templateUrl: 'templates/team/join.html',
+    controller: 'JoinTeamController'
+  })
 }]);
 

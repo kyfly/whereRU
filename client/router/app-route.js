@@ -30,6 +30,16 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
   	templateUrl: '/templates/team/team.html',
   	controller: 'MyTeamController'
   })
+  .state('chat', {
+    url: '/chats/:id/:type',
+    templateUrl: '/templates/chat/index.html',
+    controller: 'ChatController'
+  })
+  .state('chats', {
+    url: '/chats',
+    templateUrl: '/templates/chat/list.html',
+    controller: 'ChatsController'
+  })
   $urlRouterProvider.when('', '/');
   $urlRouterProvider.otherwise(function ($injector, $location) {
     $location.path('/');

@@ -1,1 +1,27 @@
-find-team.html
+<header>
+<div>
+  <ul class="collection">
+    <li class="collection-item avatar"
+        ng-repeat="team in teams">
+      <a ng-href="/teams/{{team.id}}">
+        <img ng-src="{{team.logoUrl}}" class="circle">
+        <span class="title" ng-bind="team.name"></span>
+        <p ng-bind="team.dynamic">
+        </p>
+      </a>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+  </ul>
+</div>
+<footer>
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs1">
+        <li class="newtab col s3"><a href="/">首页</a></li>
+        <li class="newtab col s3"><a href="/myTeam">我的团队</a></li>
+        <li class="newtab col s3"><a href="/search">搜索</a></li>
+        <li class="newtab col s3"><a href="/home">个人中心</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

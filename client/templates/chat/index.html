@@ -1,0 +1,33 @@
+<header>
+  <nav style="position: fixed;
+    top: 0;
+    z-index: 999;">
+    <div class="nav-wrapper">
+      <a class="brand-logo center" ng-bind="room.name"></a>
+      <ul id="nav-mobile">
+        <li class="left">
+          <a href="/myTeam/findTeam" style="padding-left:1rem">&lt</a>
+        </li>
+      </ul>
+      <div>
+  </nav>
+</header>
+<div class="IM">
+  <ul class="msg">
+    <li ng-repeat="message in history" >
+      <p ng-if="message.from === userId" class="IM-text-align">
+        <a ng-href="/users/{{message.from}}">{{message.msg.formUserName}}</a>
+        <p ng-bind="message.msg.text"></p>
+      </p>
+      <p ng-if="message.from !== userId">
+        <a ng-href="/users/{{message.from}}">{{message.msg.formUserName}}</a>
+        <p ng-bind="message.msg.text"></p>
+      </p>
+    </li>
+  </ul>
+  <div class="input-field col s3 content-box">
+    <i class="material-icons prefix" style="">account_circle</i>
+     <textarea class="materialize-textarea" style="padding:0;max-height:5rem;overflow:scroll;width:70%" ng-model="content"></textarea>
+    <button class="btn waves-effect waves-light right" style="width:90px;padding:0 10px" ng-click="sendMsg()">发送</button>
+  </div>
+</div>
