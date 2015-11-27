@@ -101,4 +101,3 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     controller: 'JoinTeamController'
   })
 }]);
-

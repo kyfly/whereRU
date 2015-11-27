@@ -5,7 +5,7 @@ app.controller('ViewTeamController', ['$scope', 'Team', '$stateParams', ViewTeam
 function ViewTeamController($scope, Team, $stateParams) {
 	Team.findById({
     id: $stateParams.id,
-    filter: {fields: ['id', 'name', 'logoUrl','dynamic']}
+    filter: {fields: ['id', 'name', 'logoUrl','dynamic', 'chatId']}
   }, function (res) {
     $scope.team = res;
   });

@@ -3,7 +3,16 @@
  * @param  {[type]} ){	}] [description]
  * @return {[type]}         [description]
  */
-app.controller('EventExplainController', ['$scope', function(){
+app.controller('EventExplainController', ['$scope', '$stateParams', function($scope, $stateParams){
+	$scope.eventId = $stateParams.id;
+}]);
+/**
+ * [description]
+ * @param  {[type]} ){	}] [description]
+ * @return {[type]}         [description]
+ */
+app.controller('EventMessageController', ['$scope', '$stateParams',function($scope, $stateParams){
+	$scope.eventId = $stateParams.id;
 	
 }]);
 /**
@@ -11,14 +20,7 @@ app.controller('EventExplainController', ['$scope', function(){
  * @param  {[type]} ){	}] [description]
  * @return {[type]}         [description]
  */
-app.controller('EventMessageController', ['$scope', function(){
-	
-}]);
-/**
- * [description]
- * @param  {[type]} ){	}] [description]
- * @return {[type]}         [description]
- */
-app.controller('EventTeamsController', ['$scope', function(){
+app.controller('EventTeamsController', ['$scope', '$stateParams',function($scope, $stateParams){
+	$scope.eventId = $stateParams.id;
 	
 }]);

@@ -6,7 +6,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
    * @return {[type]}            
    */
   .state('eventExplain', {
-    url: '/events/:id/explain',
+    url: '/events/:id/explains',
     templateUrl: '/templates/event/explain.html',
     controller: 'EventExplainController'
   })
@@ -16,7 +16,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
    * @return {[type]}            
    */
   .state('eventMessage', {
-    url: '/events/:id/message',
+    url: '/events/:id/messages',
     templateUrl: '/templates/event/message.html',
     controller: 'EventMessageController'
   })

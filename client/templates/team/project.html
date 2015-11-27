@@ -4,24 +4,38 @@
       <a href="#" class="brand-logo center">团队管理</a>
       <ul id="nav-mobile">
         <li class="left">
-          <a href="/myTeam/:id" style="padding-left:1rem">&lt</a>
+          <a href="/myTeam/{{teamId}}" style="padding-left:1rem">&lt</a>
         </li>
       </ul>
     </div>
   </nav>
+  <div class="top-bar"></div>
 </header>
 
 
-
 <footer>
-  <div class="row">
-    <div class="col s12">
-      <ul class="tabs1">
-        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/messages">通知</a></li>
-        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/projects">项目</a></li>
-        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/members">成员</a></li>
-        <li class="newtab col s3 waves-effect waves-light btn-large"><a ng-href="/myTeam/{{teamId}}/manage/info">信息</a></li>
-      </ul>
-    </div>
+  <div class="fragment col s12">
+    <ul class="tabs">
+      <li class="tab col s3 waves-effect waves-light">
+        <a ng-href="/myTeam/{{teamId}}/manage/messages">
+          通知
+        </a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a ng-href="/myTeam/{{teamId}}/manage/projects">
+          <b class="tab-active">项目</b>
+        </a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a ng-href="/myTeam/{{teamId}}/manage/members">
+          成员
+        </a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a ng-href="/myTeam/{{teamId}}/manage/info">
+          信息
+        </a>
+      </li>
+    </ul>
   </div>
 </footer>

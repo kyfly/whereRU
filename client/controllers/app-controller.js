@@ -2,20 +2,6 @@
 app.controller('HomeController', ['$scope', '$http', 'Contest', '$templateCache', HomeController]);
 function HomeController($scope, $http, Contest, $templateCache) {
   $scope.events = Contest.find({filter: {limit: 4}});
-  $scope.collapsibleElements = [{
-    icon: 'mdi-image-filter-drama',
-    title: 'First',
-    content: 'Lorem ipsum dolor sit amet.'
-  }, {
-    icon: 'mdi-maps-place',
-    title: 'Second',
-    content: 'Lorem ipsum dolor sit amet.'
-  }, {
-    icon: 'mdi-social-whatshot',
-    title: 'Third',
-    content: 'Lorem ipsum dolor sit amet.'
-  }
-  ];
 }
 app.controller('SignUpController', ['$scope', '$location', 'RUser', 'Auth', 'School', SignUpController]);
 function SignUpController($scope, $location, RUser, Auth, School) {
@@ -59,7 +45,7 @@ function SearchController($scope) {
 }
 app.controller('MyTeamController', ['$scope', 'Team', MyTeamController]);
 function MyTeamController($scope, Team) {
-  $scope.teams = Team.find({filter: {fields:['name', 'id', 'logoUrl', 'dynamic']}});
+  $scope.teams = Team.find({filter: {fields:['name', 'id', 'logoUrl', 'dynamic', 'chatId']}});
 }
 app.controller('ChatController', ['$scope', 'Auth', '$stateParams', function($scope, Auth, $stateParams){
   var roomId = $stateParams.id;
@@ -68,6 +54,7 @@ app.controller('ChatController', ['$scope', 'Auth', '$stateParams', function($sc
   var History = [];
   var Room;
   var rt;
+  $scope.userId = userId;
   var historyFormat = function (message) {
     if (Array.isArray(message)) {
       History = message;
@@ -82,15 +69,7 @@ app.controller('ChatController', ['$scope', 'Auth', '$stateParams', function($sc
       $scope.history = History;
     });
   };
-  $scope.align = function () {
-    console.log('1');
-    if (this.message.from === userId) {
-      return true;
-    }
-    return false;
-  };
   $scope.sendMsg = function () {
-    console.log('1');
     Room.send({
       text: $scope.content,
       formUserName: Auth.getUserName()
@@ -99,7 +78,7 @@ app.controller('ChatController', ['$scope', 'Auth', '$stateParams', function($sc
       transient: false,
     }, function (data) {
       historyFormat({
-        form: Auth.getId(),
+        from: Auth.getId(),
         msg: {
           text: $scope.content,
           formUserName: Auth.getUserName()
@@ -125,6 +104,7 @@ app.controller('ChatController', ['$scope', 'Auth', '$stateParams', function($sc
 
     })
     .on('message', function (data) {
+      console.log(data);
       historyFormat(data);
     });
   });

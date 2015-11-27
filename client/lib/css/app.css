@@ -5,107 +5,79 @@ html{
 body{
   min-height: 100%;
   height: 100%;
+  background: #e1e2e2;
 }
-
-footer{
+html::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+/*顶部导航*/
+header nav {
+  position: fixed;
+  top: 0;
+  height: 56px; 
+  background: #1672ce;
+  z-index: 999;
+}
+/*内容*/
+.top-bar {
+  height: 56px;
+  width: 100%;
+}
+/*.doc-body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}*/
+/*底部导航*/
+.fragment{
   position: fixed;
   bottom: 0;
   width: 100%;
-  z-index: 9999
+  z-index: 9999;
+  background: #1672ce;
 }
-footer .row{
-  margin: 0
+.fragment .tabs .tab {
+  background: #1672ce;
 }
-footer .row .col{
-  padding: 0;
-  background: #ee6e73;
+.fragment .tabs .tab a {
+  color: #4ecdf2;
 }
-footer .tabs1 .newtab a{
+.fragment .tabs .tab-active {
   color: #fff;
-
 }
-footer .tabs1 .newtab{
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  display: block;
-  float: left;
-  text-align: center;
-  line-height: 48px;
-  height: 48px;
-  padding: 0;
-  margin: 0;
-  text-transform: uppercase;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  letter-spacing: .8px;
-  width: 15%;
-  min-width: 80px;
+/*滚动标签*/
+.slider .indicators .indicator-item {
+  background: #fff;
 }
-footer .tabs1 {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  position: relative;
-  height: 48px;
-  background-color: #fff;
-  margin: 0 auto;
-  width: 100%;
-  white-space: nowrap;
-}
-
 .slider .indicators{
   position: relative !important;
   top: -30px  !important;
   z-index: 999;
+  margin-bottom: 5px; 
 }
-
-
-
 .slider{
   height: 200px !important;
 }
-
-
-
-.bottomBar{
-  bottom: 0;
-  height:48px ;
-  width: 100%;
-}
-
-
-.collapsible.popout > li {
-  margin: 0 !important;
-}
-
+/*滑动标签*/
 .competition{
-  min-height: .01%;
-  overflow-x:  auto!important;
-  white-space: nowrap!important;
-
+  margin: 5px 0;
+  display: inline-flex;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden; 
 }
-
-
-
-.myTeamImg{
-  vertical-align:middle;
+.competition::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
-
-
-.myTeamName{
-  font-size: large;
+.competition::-webkit-scrollbar-thumb{
+ 
 }
-
-
-.card-content{
-  padding: 20px 0 20px 0!important;
+.competition .sli {
+  background: #fff;
+  margin: 0 4px;
 }
-
-
+/*垂直时间轴*/
 .etuan_timeline {
   margin: 30px 0 0 0;
   padding: 0;
@@ -121,10 +93,8 @@ footer .tabs1 {
   width: 5px;
   background: #afdcf8;
 }
-
-.etuan_timeline>li{
+.etuan_timeline>li {
   position: relative;
-
 }
 .etuan_timeline>li .tip {
   width: 20px;
@@ -149,62 +119,37 @@ footer .tabs1 {
   min-height: 50px;
   background: #0ff;
 }
-.thumbnail > img,
-.thumbnail a > img,{
-  display: block;
-  max-width: 100%;
-  height: auto;
+
+.collapsible.popout > li {
+  margin: 0 !important;
+}
+/*列表*/
+.collection {
+  padding: 0;
+  margin:0;
 }
 
-.img-thumbnail {
-  display: inline-block;
-  max-width: 100%;
-  height: auto;
-  padding: 4px;
-  line-height: 1.42857143;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  -webkit-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
-  transition: all .2s ease-in-out;
+
+
+.myTeamImg{
+  vertical-align:middle;
 }
 
-.thumbnail {
-  display: block;
-  padding: 4px!important;
-  margin-bottom: 10px;
-  line-height: 1.42857143;
-  background-color: #fff;
-  text-align: center;
-  white-space: nowrap!important;
-  overflow-x:  auto!important;
+
+.myTeamName{
+  font-size: large;
 }
-.thumbnail > img,
-.thumbnail a > img {
-  margin-right: auto;
-  margin-left: auto;
+
+
+.card-content{
+  padding: 20px 0 20px 0!important;
 }
-a.thumbnail:hover,
-a.thumbnail:focus,
-a.thumbnail.active {
-  border-color: #337ab7;
-}
-.thumbnail .caption {
-  padding: 9px;
-  color: #333;
-}
+
+
 
 .text-center {
   text-align: center;
 }
-
-.mys2{
-  float: left;
-  white-space: nowrap!important;
-  overflow-x:  auto!important;
-}
-
 
 
 #cd-timeline {
@@ -273,7 +218,6 @@ a.thumbnail.active {
   margin: 1em 0;
   line-height: 1.6;
 }
-
 .no-touch .cd-timeline-content .cd-read-more:hover {
   background-color: #bac4cb;
 }
@@ -292,6 +236,15 @@ a.thumbnail.active {
   border: 7px solid transparent;
   border-right: 7px solid white;
 }
+/*小型块高度*/
+.small-block-lists {
+  max-height: 10rem;
+  overflow: hidden;
+} 
+.small-block-lists .desc{
+  overflow:hidden;
+}
+/*聊天界面*/
 .IM {
   position: fixed;
   bottom: 0px;
@@ -301,12 +254,44 @@ a.thumbnail.active {
   position: fixed;
   top: 50px;
   bottom: 50px;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   width: 100%;
+}
+.IM .msg::-webkit-scrollbar {
+    /*width: 5px;*/
+    /*height: 0;*/
+}
+.IM .msg::-webkit-scrollbar-thumb{
+ 
 }
 .IM .content-box {
   display: flex;
+  background: #fff;
+  position: relative;
 }
-.IM .IM-text-align {
+.IM .content-box i{
+  position: absolute;
+  bottom: 12px;
+}
+.IM .content-box textarea{
+  padding:0;
+  min-height:3rem;
+  max-height: 8rem;
+  overflow: hidden;
+  width: 60%;
+}
+.IM .content-box button{
+  position: absolute;
+  bottom: 13px; 
+  right: 5px;
+  width:20%;
+  padding:0 10px
+}
+.IM .IM-text-align-right {
   text-align: right;
+  right: 0;
+}
+.IM .msg-box {
+  background: #fff;
 }

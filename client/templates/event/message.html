@@ -4,18 +4,30 @@
       <a href="#" class="brand-logo center">竞赛信息</a>
     </div>
   </nav>
+  <div class="top-bar"></div>
 </header>
 
 
 
+
 <footer>
-  <div class="row">
-    <div class="col s12">
-      <ul class="tabs1">
-        <li class="newtab col s4"><a ng-href="/event/{{event.id}}/messages">竞赛通知</a></li>
-        <li class="newtab col s4"><a ng-href="/event/{{event.id}}/teams">竞赛团队</a></li>
-        <li class="newtab col s4"><a ng-href="/event/{{event.id}}/explains">竞赛介绍</a></li>
-      </ul>
-    </div>
+  <div class="fragment col s12">
+    <ul class="tabs">
+      <li class="tab col s4">
+        <a ng-href="/events/{{eventId}}/messages">
+          <b class="tab-active">竞赛通知</b>
+        </a>
+      </li>
+      <li class="tab col s4">
+        <a ng-href="/events/{{eventId}}/teams">
+          竞赛团队
+        </a>
+      </li>
+      <li class="tab col s4">
+        <a ng-href="/events/{{eventId}}/explains">
+          竞赛介绍
+        </a>
+      </li>
+    </ul>
   </div>
 </footer>
