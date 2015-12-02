@@ -205,10 +205,12 @@ function SettingCtrl() {
 
 function HelpCtrl() {
 }
-function LoginCtrl($scope, Org, $location) {
+function LoginCtrl($scope, Org) {
   $scope.org = {};
+  $scope.register = function () {
+    window.location.pathname = '/eventManage/reg';
+  };
   $scope.login = function () {
-    $scope.org.email = $scope.org.phone + '@etuan.org';
     Org.login($scope.org, function (res) {
       if (res.err) {
         alert('登录失败');
@@ -220,18 +222,21 @@ function LoginCtrl($scope, Org, $location) {
     });
   };
 }
-function SignUpCtrl($scope, Org, $location) {
+function SignUpCtrl($scope, Org) {
   $scope.org = {};
+  $scope.goBack = function () {
+    window.location.pathname = '/eventManage/login';
+  };
   $scope.signUp = function () {
-    $scope.org.email = $scope.org.phone + '@etuan.org';
     Org.create($scope.org, function (res) {
-      if (res.err) {
+      if (res.err || res.name == 'ValidationError') {
         alert('注册失败');
       } else {
         localStorage.CMSCAPTCHA = JSON.stringify(res.token);
         window.location.pathname = '/eventManage/home';
       }
     }, function () {
+      alert("注册失败，请检查您填写的内容");
     });
   };
 }

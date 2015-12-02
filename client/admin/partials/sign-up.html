@@ -1,8 +1,20 @@
+<h4 class="left">竞赛管理后台注册</h4>
+<div class="clearfix"></div>
 <div class="row">
   <div class="input-field">
     <i class="material-icons prefix">account_circle</i>
-    <input id="phone" type="text" ng-model="org.phone">
-    <label for="phone">手机号</label>
+    <input id="name" type="text" ng-model="org.name">
+    <label for="name">名称</label>
+  </div>
+  <div class="input-field">
+    <i class="material-icons prefix">room</i>
+    <input id="school" type="text" ng-model="org.school">
+    <label for="school">学校</label>
+  </div>
+  <div class="input-field">
+    <i class="material-icons prefix">email</i>
+    <input id="email" type="text" ng-model="org.email">
+    <label for="email">邮箱</label>
   </div>
   <div class="input-field">
     <i class="material-icons prefix">vpn_key</i>
@@ -11,3 +23,4 @@
   </div>
 </div>
 <a class="waves-effect waves-light btn loginBtn" ng-click="signUp()">注册</a>
+<a class="waves-effect waves-light btn loginBtn orange darken-1" ng-click="goBack()">返回登陆</a>
