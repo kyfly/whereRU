@@ -170,3 +170,12 @@ main {
 .margin-left {
   margin-left: 15px !important;
 }
+
+.orgName {
+  margin-top: 0 !important;
+  margin-bottom: 30px !important;
+}
+
+.brand-logo {
+  margin-bottom: 50px !important;
+}

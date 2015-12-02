@@ -1,3 +1,4 @@
+var localInfo = JSON.parse(localStorage.CMSCAPTCHA);
 function AdminCtrl($scope, $timeout, $window, $rootScope) {
   if (localStorage.CMSCAPTCHA && window.location.pathname === '/eventManage/login') {
     window.location.pathname = '/eventManage/home';
@@ -9,6 +10,8 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
     $scope.navShow = {'padding-left': 0};
     $scope.footerShow = {'margin-left': 0};
   }
+
+  $scope.orgName = localInfo.name;
 
   document.getElementById('main').style.minHeight = document.body.clientHeight
     - document.getElementById('footer').offsetHeight
@@ -73,7 +76,6 @@ function HomeCtrl($scope) {
 }
 
 function EventCtrl($scope, $resource, ContestOrg, Contest) {
-  var localInfo = JSON.parse(localStorage.CMSCAPTCHA);
   var GetTeam = $resource('/api/team');
   var GetProject = $resource('/api/Projects');
   GetTeam.query({},
@@ -179,7 +181,7 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
       Contest.materials({
         id: res[index].id,
         access_token: localInfo.id
-      },function(res){
+      }, function (res) {
         $scope.materialList = res;
       });
     };
@@ -284,19 +286,35 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
 
 }
 
-function SettingCtrl() {
+function SettingCtrl($scope, ContestOrg) {
+  ContestOrg.findById({
+    id: localInfo.userId,
+    access_token: localInfo.id
+  }, function (res) {
+    $scope.orgChange = res;
+  });
+
+  $scope.updateOrgInfo = function () {
+    ContestOrg.prototype$updateAttributes({
+      id: localInfo.userId,
+      access_token: localInfo.id
+    }, $scope.orgChange, function (res) {
+      alert('更新成功！');
+      history.go(0);
+    });
+  };
 }
 
 function HelpCtrl() {
 }
 
-function LoginCtrl($scope, Org) {
+function LoginCtrl($scope, ContestOrg) {
   $scope.org = {};
   $scope.register = function () {
     window.location.pathname = '/eventManage/reg';
   };
   $scope.login = function () {
-    Org.login($scope.org, function (res) {
+    ContestOrg.login($scope.org, function (res) {
       console.log(res);
       if (res.err) {
         alert('登录失败');
@@ -309,13 +327,13 @@ function LoginCtrl($scope, Org) {
   };
 }
 
-function SignUpCtrl($scope, Org) {
+function SignUpCtrl($scope, ContestOrg) {
   $scope.org = {};
   $scope.goBack = function () {
     window.location.pathname = '/eventManage/login';
   };
   $scope.signUp = function () {
-    Org.create($scope.org, function (res) {
+    ContestOrg.create($scope.org, function (res) {
       if (res.err || res.name == 'ValidationError') {
         alert('注册失败');
       } else {
