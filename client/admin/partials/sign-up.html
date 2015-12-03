@@ -22,7 +22,9 @@
     <label for="password">密码</label>
   </div>
   <div class="input-field">
-    <select class="" ng-model="org.school" material-select watch>
+    <i class="material-icons prefix">place</i>
+    <select class="selectMargin" ng-model="org.school"
+            material-select watch>
       <option value="" disabled selected>选择你的学校</option>
       <option ng-repeat="school in schools">{{school.name}}</option>
     </select>

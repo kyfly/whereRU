@@ -1,7 +1,10 @@
-if (localStorage.CMSCAPTCHA)
-  var localInfo = JSON.parse(localStorage.CMSCAPTCHA);
-else 
-  var localInfo = {id:null, userId: null, name: null};
+var localInfo;
+if (localStorage.CMSCAPTCHA) {
+  localInfo = JSON.parse(localStorage.CMSCAPTCHA);
+} else {
+  localInfo = {id: null, userId: null, name: null};
+}
+
 function AdminCtrl($scope, $timeout, $window, $rootScope) {
   if (localStorage.CMSCAPTCHA && window.location.pathname === '/eventManage/login') {
     window.location.pathname = '/eventManage/home';
@@ -261,7 +264,7 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
     $scope.contentType = 'contestNotice';
   };
 
-  $scope.toContestLibrary = function (index) {
+  $scope.toContestLibrary = function () {
     $scope.contentType = 'contestLibrary';
   };
 
@@ -310,11 +313,10 @@ function SettingCtrl($scope, ContestOrg) {
 function HelpCtrl() {
 }
 
-function LoginCtrl($scope, ContestOrg, $location) {
+function LoginCtrl($scope, ContestOrg, $location, $rootScope) {
   $scope.org = {};
   $scope.login = function () {
     ContestOrg.login($scope.org, function (res) {
-      console.log(res);
       if (res.err) {
         alert('登录失败');
       } else {
@@ -328,7 +330,7 @@ function LoginCtrl($scope, ContestOrg, $location) {
   };
 }
 
-function SignUpCtrl($scope, ContestOrg, $location, School) {
+function SignUpCtrl($scope, ContestOrg, $location, $rootScope, School) {
   $scope.org = {};
   $scope.schools = School.find({
     filter: {
@@ -337,7 +339,7 @@ function SignUpCtrl($scope, ContestOrg, $location, School) {
   });
   $scope.signUp = function () {
     ContestOrg.create($scope.org, function (res) {
-      if (res.err || res.name == 'ValidationError') {
+      if (res.err || res.name === 'ValidationError') {
         alert('注册失败');
       } else {
         localInfo = res.token;

@@ -18,11 +18,11 @@ function RouteConfigure($routeProvider) {
     })
     .when('/eventManage/login', {
       templateUrl: '/admin/partials/sign-in.html',
-      controller: ['$scope', 'ContestOrg', '$location', LoginCtrl]
+      controller: ['$scope', 'ContestOrg', '$location', '$rootScope', LoginCtrl]
     })
     .when('/eventManage/reg', {
       templateUrl: '/admin/partials/sign-up.html',
-      controller: ['$scope', 'ContestOrg', '$location', 'School', SignUpCtrl]
+      controller: ['$scope', 'ContestOrg', '$location', '$rootScope', 'School', SignUpCtrl]
     })
     .otherwise({redirectTo: '/eventManage/home'});
 }
