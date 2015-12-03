@@ -9,4 +9,5 @@ module.exports = function(ContestOrg) {
 			ctx.res.send({err, token});
 		});
 	});
+	
 };

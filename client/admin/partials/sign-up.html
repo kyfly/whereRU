@@ -9,5 +9,11 @@
     <input id="password" type="password" ng-model="org.password">
     <label for="password">密码</label>
   </div>
+  <div class="input-field">
+    <select class="" ng-model="org.school" material-select watch>
+      <option value="" disabled selected>选择你的学校</option>
+      <option ng-repeat="school in schools">{{school.name}}</option>
+    </select>
+  </div>
 </div>
 <a class="waves-effect waves-light btn loginBtn" ng-click="signUp()">注册</a>

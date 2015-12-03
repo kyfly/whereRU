@@ -9,6 +9,11 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize'])
    	//requireBase: false
   });
 }])
+.run(['$rootScope', function ($rootScope) {
+	$rootScope.goback = function () {
+		window.history.back();
+	}
+}])
 .config(['$httpProvider', function($httpProvider) {
 	var interceptor = function ($q, $rootScope, Auth) {
 		return {
@@ -61,8 +66,3 @@ function getRooms (cb) {
     });
   });
 }
-//$(document).ready(function(){
-//  // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-//  $('.modal-trigger').leanModal();
-//});
-

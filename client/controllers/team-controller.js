@@ -41,6 +41,8 @@ function CreateTeamController($scope, Team, School, $location, Auth) {
     });
   };
   $scope.submit = function () {
+    if (!Auth.getId)
+      return;
     //为团队建一个聊天室
     createTeamRoom($scope.team.name, function (result) {
       //聊天室ID
@@ -57,14 +59,13 @@ function CreateTeamController($scope, Team, School, $location, Auth) {
     });
   };
   function createTeamRoom(name, cb) {
-    var userInfo = JSON.parse(localStorage['IY9O2PG']);
     createRealtimeObj(function (rt) {
       rt.room({
-        members: [userInfo.userId],
+        members: [Auth.getId()],
         name: name,
         attr: {
           type: 'team',
-          names: Auth.getUserName()
+          names: [Auth.getUserName()]
         }
       }, function (result) {
         cb (result);
@@ -75,9 +76,17 @@ function CreateTeamController($scope, Team, School, $location, Auth) {
 /**
  * 查找团队
  */
-app.controller('FindTeamController', ['$scope', 'Team', FindTeamController]);
-function FindTeamController($scope, Team) {
-  $scope.teams = Team.find({filter: {fields: ['id', 'name', 'logoUrl']}});
+app.controller('FindTeamController', ['$scope', 'Team', 'Auth', FindTeamController]);
+function FindTeamController($scope, Team, Auth) {
+  $scope.teams = Team.find({
+    filter: 
+    {
+      fields: ['id', 'name', 'logoUrl'],
+      where: {
+        'userIds': {neq: Auth.getId()}
+      }
+    }
+  });
 }
 
 /**

@@ -2991,6 +2991,33 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use Team.actives.findById() instead.
+        "prototype$__findById__actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/team/:id/actives/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Team.actives.destroyById() instead.
+        "prototype$__destroyById__actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/team/:id/actives/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Team.actives.updateById() instead.
+        "prototype$__updateById__actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/team/:id/actives/:fk",
+          method: "PUT"
+        },
+
         // INTERNAL. Use Team.histories.findById() instead.
         "prototype$__findById__histories": {
           params: {
@@ -3090,6 +3117,31 @@ module.factory(
         // INTERNAL. Use Team.messages.count() instead.
         "prototype$__count__messages": {
           url: urlBase + "/team/:id/messages/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Team.actives() instead.
+        "prototype$__get__actives": {
+          isArray: true,
+          url: urlBase + "/team/:id/actives",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Team.actives.create() instead.
+        "prototype$__create__actives": {
+          url: urlBase + "/team/:id/actives",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Team.actives.destroyAll() instead.
+        "prototype$__delete__actives": {
+          url: urlBase + "/team/:id/actives",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Team.actives.count() instead.
+        "prototype$__count__actives": {
+          url: urlBase + "/team/:id/actives/count",
           method: "GET"
         },
 
@@ -3599,12 +3651,6 @@ module.factory(
         // INTERNAL. Use Project.teams() instead.
         "::get::Project::teams": {
           url: urlBase + "/Projects/:id/teams",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Member.teams() instead.
-        "::get::Member::teams": {
-          url: urlBase + "/Members/:id/teams",
           method: "GET"
         },
 
@@ -4650,6 +4696,307 @@ module.factory(
         R.messages.updateById = function() {
           var TargetResource = $injector.get("Message");
           var action = TargetResource["::updateById::Team::messages"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Team.actives
+     * @header lbServices.Team.actives
+     * @object
+     * @description
+     *
+     * The object `Team.actives` groups methods
+     * manipulating `Active` instances related to `Team`.
+     *
+     * Call {@link lbServices.Team#actives Team.actives()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Team#actives
+         * @methodOf lbServices.Team
+         *
+         * @description
+         *
+         * Queries actives of Team.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.actives = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::get::Team::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Team.actives#count
+         * @methodOf lbServices.Team.actives
+         *
+         * @description
+         *
+         * Counts actives of Team.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.actives.count = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::count::Team::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Team.actives#create
+         * @methodOf lbServices.Team.actives
+         *
+         * @description
+         *
+         * Creates a new instance in actives of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.actives.create = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::create::Team::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Team.actives#createMany
+         * @methodOf lbServices.Team.actives
+         *
+         * @description
+         *
+         * Creates a new instance in actives of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.actives.createMany = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::createMany::Team::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Team.actives#destroyAll
+         * @methodOf lbServices.Team.actives
+         *
+         * @description
+         *
+         * Deletes all actives of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.actives.destroyAll = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::delete::Team::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Team.actives#destroyById
+         * @methodOf lbServices.Team.actives
+         *
+         * @description
+         *
+         * Delete a related item by id for actives.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for actives
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.actives.destroyById = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::destroyById::Team::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Team.actives#findById
+         * @methodOf lbServices.Team.actives
+         *
+         * @description
+         *
+         * Find a related item by id for actives.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for actives
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.actives.findById = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::findById::Team::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Team.actives#updateById
+         * @methodOf lbServices.Team.actives
+         *
+         * @description
+         *
+         * Update a related item by id for actives.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for actives
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.actives.updateById = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::updateById::Team::actives"];
           return action.apply(R, arguments);
         };
     /**
@@ -6510,6 +6857,33 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use Contest.actives.findById() instead.
+        "prototype$__findById__actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Contests/:id/actives/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Contest.actives.destroyById() instead.
+        "prototype$__destroyById__actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Contests/:id/actives/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Contest.actives.updateById() instead.
+        "prototype$__updateById__actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Contests/:id/actives/:fk",
+          method: "PUT"
+        },
+
         // INTERNAL. Use Contest.projects() instead.
         "prototype$__get__projects": {
           isArray: true,
@@ -6582,6 +6956,31 @@ module.factory(
         // INTERNAL. Use Contest.messages.count() instead.
         "prototype$__count__messages": {
           url: urlBase + "/Contests/:id/messages/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Contest.actives() instead.
+        "prototype$__get__actives": {
+          isArray: true,
+          url: urlBase + "/Contests/:id/actives",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Contest.actives.create() instead.
+        "prototype$__create__actives": {
+          url: urlBase + "/Contests/:id/actives",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Contest.actives.destroyAll() instead.
+        "prototype$__delete__actives": {
+          url: urlBase + "/Contests/:id/actives",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Contest.actives.count() instead.
+        "prototype$__count__actives": {
+          url: urlBase + "/Contests/:id/actives/count",
           method: "GET"
         },
 
@@ -7002,6 +7401,40 @@ module.factory(
         "createChangeStream": {
           url: urlBase + "/Contests/change-stream",
           method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Contest#getMySchoolEvents
+         * @methodOf lbServices.Contest
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `school` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `events` – `{*=}` - 
+         */
+        "getMySchoolEvents": {
+          url: urlBase + "/Contests/getMySchoolEvents",
+          method: "GET"
         },
 
         // INTERNAL. Use ContestOrg.contests.findById() instead.
@@ -8141,6 +8574,307 @@ module.factory(
         R.messages.updateById = function() {
           var TargetResource = $injector.get("Message");
           var action = TargetResource["::updateById::Contest::messages"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Contest.actives
+     * @header lbServices.Contest.actives
+     * @object
+     * @description
+     *
+     * The object `Contest.actives` groups methods
+     * manipulating `Active` instances related to `Contest`.
+     *
+     * Call {@link lbServices.Contest#actives Contest.actives()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Contest#actives
+         * @methodOf lbServices.Contest
+         *
+         * @description
+         *
+         * Queries actives of Contest.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.actives = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::get::Contest::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Contest.actives#count
+         * @methodOf lbServices.Contest.actives
+         *
+         * @description
+         *
+         * Counts actives of Contest.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.actives.count = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::count::Contest::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Contest.actives#create
+         * @methodOf lbServices.Contest.actives
+         *
+         * @description
+         *
+         * Creates a new instance in actives of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.actives.create = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::create::Contest::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Contest.actives#createMany
+         * @methodOf lbServices.Contest.actives
+         *
+         * @description
+         *
+         * Creates a new instance in actives of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.actives.createMany = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::createMany::Contest::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Contest.actives#destroyAll
+         * @methodOf lbServices.Contest.actives
+         *
+         * @description
+         *
+         * Deletes all actives of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.actives.destroyAll = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::delete::Contest::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Contest.actives#destroyById
+         * @methodOf lbServices.Contest.actives
+         *
+         * @description
+         *
+         * Delete a related item by id for actives.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for actives
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.actives.destroyById = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::destroyById::Contest::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Contest.actives#findById
+         * @methodOf lbServices.Contest.actives
+         *
+         * @description
+         *
+         * Find a related item by id for actives.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for actives
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.actives.findById = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::findById::Contest::actives"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Contest.actives#updateById
+         * @methodOf lbServices.Contest.actives
+         *
+         * @description
+         *
+         * Update a related item by id for actives.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for actives
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.actives.updateById = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::updateById::Contest::actives"];
           return action.apply(R, arguments);
         };
 
@@ -9562,12 +10296,6 @@ module.factory(
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use Member.teams() instead.
-        "prototype$__get__teams": {
-          url: urlBase + "/Members/:id/teams",
-          method: "GET"
-        },
-
         /**
          * @ngdoc method
          * @name lbServices.Member#create
@@ -10181,42 +10909,6 @@ module.factory(
     */
     R.modelName = "Member";
 
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Member#teams
-         * @methodOf lbServices.Member
-         *
-         * @description
-         *
-         * Fetches belongsTo relation teams.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `refresh` – `{boolean=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Team` object.)
-         * </em>
-         */
-        R.teams = function() {
-          var TargetResource = $injector.get("Team");
-          var action = TargetResource["::get::Member::teams"];
-          return action.apply(R, arguments);
-        };
 
     return R;
   }]);
@@ -12850,6 +13542,124 @@ module.factory(
         "createChangeStream": {
           url: urlBase + "/Actives/change-stream",
           method: "POST"
+        },
+
+        // INTERNAL. Use Team.actives.findById() instead.
+        "::findById::Team::actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/team/:id/actives/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Team.actives.destroyById() instead.
+        "::destroyById::Team::actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/team/:id/actives/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Team.actives.updateById() instead.
+        "::updateById::Team::actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/team/:id/actives/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Team.actives() instead.
+        "::get::Team::actives": {
+          isArray: true,
+          url: urlBase + "/team/:id/actives",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Team.actives.create() instead.
+        "::create::Team::actives": {
+          url: urlBase + "/team/:id/actives",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Team.actives.createMany() instead.
+        "::createMany::Team::actives": {
+          isArray: true,
+          url: urlBase + "/team/:id/actives",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Team.actives.destroyAll() instead.
+        "::delete::Team::actives": {
+          url: urlBase + "/team/:id/actives",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Team.actives.count() instead.
+        "::count::Team::actives": {
+          url: urlBase + "/team/:id/actives/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Contest.actives.findById() instead.
+        "::findById::Contest::actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Contests/:id/actives/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Contest.actives.destroyById() instead.
+        "::destroyById::Contest::actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Contests/:id/actives/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Contest.actives.updateById() instead.
+        "::updateById::Contest::actives": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Contests/:id/actives/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Contest.actives() instead.
+        "::get::Contest::actives": {
+          isArray: true,
+          url: urlBase + "/Contests/:id/actives",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Contest.actives.create() instead.
+        "::create::Contest::actives": {
+          url: urlBase + "/Contests/:id/actives",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Contest.actives.createMany() instead.
+        "::createMany::Contest::actives": {
+          isArray: true,
+          url: urlBase + "/Contests/:id/actives",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Contest.actives.destroyAll() instead.
+        "::delete::Contest::actives": {
+          url: urlBase + "/Contests/:id/actives",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Contest.actives.count() instead.
+        "::count::Contest::actives": {
+          url: urlBase + "/Contests/:id/actives/count",
+          method: "GET"
         },
       }
     );

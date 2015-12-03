@@ -35,6 +35,9 @@ app.factory('$cookieStore', function(){
 		getToken: function () {
 			return _user.id;
 		},
+		getSchool: function () {
+			return _user.school;
+		},
 		logout: function () {
 			$cookieStore.remove('IY9O2PG');
 			_user = null;

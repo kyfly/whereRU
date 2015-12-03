@@ -1,7 +1,27 @@
-
-app.controller('HomeController', ['$scope', '$http', 'Contest', '$templateCache', HomeController]);
-function HomeController($scope, $http, Contest, $templateCache) {
-  $scope.events = Contest.find({filter: {limit: 4}});
+app.controller('HomeController', ['$scope', '$http', 'Auth', 'ContestOrg', 'Message', 'Contest', '$templateCache', HomeController]);
+function HomeController($scope, $http, Auth, ContestOrg, Message, Contest, $templateCache) {
+  $scope.messages = Contest.find({
+      include:[{
+        relation: 'contestOrg',
+        scope: {
+          where: {'phone': 17764592171}
+        }
+      },{
+        relation: 'messages',
+        scope: {
+          order: 'id DESC',
+          limit: 3
+        }
+      }]
+    });
+  Contest.getMySchoolEvents({
+   school: Auth.getSchool(),
+   filter: {
+    fields: ['id', 'name']
+   }
+  }, function (res) {
+    $scope.events = res.events;
+  });
 }
 app.controller('SignUpController', ['$scope', '$location', 'RUser', 'Auth', 'School', SignUpController]);
 function SignUpController($scope, $location, RUser, Auth, School) {
@@ -28,6 +48,7 @@ function SignInController($scope, $location, RUser, Auth) {
       if (res.err) return;
       res.name = res.user.username;
       res.phone = res.user.phone;
+      res.school = res.user.school;
       res.user = undefined;
       Auth.setUser(res);
       $location.path('/');
@@ -43,9 +64,24 @@ app.controller('SearchController', ['$scope', SearchController]);
 function SearchController($scope) {
 
 }
-app.controller('MyTeamController', ['$scope', 'Team', MyTeamController]);
-function MyTeamController($scope, Team) {
-  $scope.teams = Team.find({filter: {fields:['name', 'id', 'logoUrl', 'dynamic', 'chatId']}});
+app.controller('MyTeamController', ['$scope', 'Team', 'Auth', '$rootScope', MyTeamController]);
+function MyTeamController($scope, Team, Auth, $rootScope) {
+  $scope.chatCount = [];
+  $scope.teams = Team.find({
+    filter: 
+    {
+      fields:['name', 'id', 'logoUrl', 'dynamic', 'chatId'],
+      where: {userIds: Auth.getId()}
+    }
+  });
+  //监听消息
+  createRealtimeObj(function (rt) {
+    rt.on('message', function (message) {
+      $scope.$apply(function () {
+        $scope.chatCount[message.cid] = $scope.chatCount[message.cid] + 1;
+      });
+    });
+  });
 }
 app.controller('ChatController', ['$scope', 'Auth', '$stateParams', function($scope, Auth, $stateParams){
   var roomId = $stateParams.id;
@@ -105,11 +141,10 @@ app.controller('ChatController', ['$scope', 'Auth', '$stateParams', function($sc
     })
     .on('message', function (data) {
       console.log(data);
+      $scope.$emit(roomId, data);
       historyFormat(data);
     });
   });
-  
-  
 }]);
 app.controller('ChatsController', ['$scope', 'Auth', function($scope, Auth){
   //用户所有聊天室

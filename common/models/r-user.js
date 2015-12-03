@@ -11,7 +11,8 @@ module.exports = function(RUser) {
 		RUser.login(ctx.req.body, function (err, token) {
 			token.name = instance.username;
 			token.phone = instance.phone;
-			ctx.res.send({err, token});
+			token.school = instance.school;
+			ctx.res.send({err: err, token: token});
 		})
 	});
 	RUser.beforeRemote('login', function (ctx, instance, next) {

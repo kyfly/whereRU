@@ -222,6 +222,11 @@ function LoginCtrl($scope, Org, $location) {
 }
 function SignUpCtrl($scope, Org, $location) {
   $scope.org = {};
+  $scope.schools = School.find({
+    filter: {
+      fields: ['name']
+    }
+  });
   $scope.signUp = function () {
     $scope.org.email = $scope.org.phone + '@etuan.org';
     Org.create($scope.org, function (res) {

@@ -23,7 +23,7 @@
         ng-repeat="team in teams">
       <img ng-src="{{team.logoUrl}}" class="circle">
       <a ng-href="/chats/{{team.chatId}}/roomId">
-        <span class="new badge deep-orange lighten-2">1</span>
+        <span class="new badge deep-orange lighten-2" ng-init="chatCount[team.chatId] = 0" ng-bind="chatCount[team.chatId]"></span>
       </a>
       <a ng-href="/myTeam/{{team.id}}">
         <span class="title" ng-bind="team.name"></span>

@@ -53,45 +53,14 @@
   </div>
 
   <ul class="competition">
-    <li class="sli">
-      <img src="../lib/img/test1.png" alt="无法显示"/>
-      <br>
-      <div class="text-center">aa</div>
-    </li>
-    <li class="sli">
-      <img src="../lib/img/test1.png" alt="无法显示"/>
-      <br>
-      <div class="text-center">aa</div>
-    </li>
-    <li class="sli">
-      <img src="../lib/img/test1.png" alt="无法显示"/>
-      <br>
-      <div class="text-center">aa</div>
-    </li>
-    <li class="sli">
-      <img src="../lib/img/test1.png" alt="无法显示"/>
-      <br>
-      <div class="text-center">aa</div>
-    </li>
-    <li class="sli">
-      <img src="../lib/img/test1.png" alt="无法显示"/>
-      <br>
-      <div class="text-center">aa</div>
-    </li>
-    <li class="sli">
-      <img src="../lib/img/test1.png" alt="无法显示"/>
-      <br>
-      <div class="text-center">aa</div>
-    </li>
-    <li class="sli">
-      <img src="../lib/img/test1.png" alt="无法显示"/>
-      <br>
-      <div class="text-center">aa</div>
-    </li>
-    <li class="sli">
-      <img src="../lib/img/test1.png" alt="无法显示"/>
-      <br>
-      <div class="text-center">aa</div>
+    <li class="sli" ng-repeat="event in events">
+      <a ng-href="events/{{event.id}}/explains">
+        <img src="../lib/img/test1.png" alt="无法显示"/>
+        <br>
+        <div class="text-center">
+          <h6  ng-bind="event.name"></h6>
+        </div>
+      </a>
     </li>
   </ul>
   <!--队伍信息-->
