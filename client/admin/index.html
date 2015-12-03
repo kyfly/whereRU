@@ -2,8 +2,12 @@
 <head>
   <title>团团一家竞赛管理</title>
   <base href="/eventManage">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="icon" href="/lib/img/etuan_logo.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/lib/img/etuan_logo.ico" type="image/x-icon">
   <link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
   <link href="/lib/materialize/css/materialize.min.css" rel="stylesheet">
   <link href="/admin/css/admin.css" rel="stylesheet">
@@ -14,6 +18,7 @@
   <a class="logo brand-logo" href="/index.html">
     <img id="front-page-logo" src="/lib/img/logo.jpg">
   </a>
+  <h5 class="text-center orgName" ng-bind="orgName"></h5>
   <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars" ng-class="{active: sidebar.active}" class="bold">
     <a class="waves-effect" href="{{sidebar.url}}" ng-click="redirect($index)">{{sidebar.display_name}}</a>
   </li>

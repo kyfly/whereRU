@@ -6,11 +6,11 @@ function RouteConfigure($routeProvider) {
     })
     .when('/eventManage/event', {
       templateUrl: '/admin/partials/event.html',
-      controller: ['$scope', '$resource', EventCtrl]
+      controller: ['$scope', '$resource', 'ContestOrg', 'Contest', EventCtrl]
     })
     .when('/eventManage/setting', {
       templateUrl: '/admin/partials/setting.html',
-      controller: ['$scope', '$resource', SettingCtrl]
+      controller: ['$scope', 'ContestOrg', SettingCtrl]
     })
     .when('/eventManage/help', {
       templateUrl: '/admin/partials/help.html',
