@@ -22,7 +22,7 @@ function RouteConfigure($routeProvider) {
     })
     .when('/eventManage/reg', {
       templateUrl: '/admin/partials/sign-up.html',
-      controller: ['$scope', 'ContestOrg', '$location', SignUpCtrl]
+      controller: ['$scope', 'ContestOrg', '$location', 'School', SignUpCtrl]
     })
     .otherwise({redirectTo: '/eventManage/home'});
 }

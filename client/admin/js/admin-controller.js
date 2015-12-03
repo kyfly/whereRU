@@ -1,9 +1,11 @@
-var localInfo = JSON.parse(localStorage.CMSCAPTCHA);
+if (localStorage.CMSCAPTCHA)
+  var localInfo = JSON.parse(localStorage.CMSCAPTCHA);
+else 
+  var localInfo = {id:null, userId: null, name: null};
 function AdminCtrl($scope, $timeout, $window, $rootScope) {
   if (localStorage.CMSCAPTCHA && window.location.pathname === '/eventManage/login') {
     window.location.pathname = '/eventManage/home';
   }
-
   if (localStorage.CMSCAPTCHA) {
     $rootScope.access = true;
   } else {
@@ -308,45 +310,40 @@ function SettingCtrl($scope, ContestOrg) {
 function HelpCtrl() {
 }
 
-function LoginCtrl($scope, ContestOrg) {
+function LoginCtrl($scope, ContestOrg, $location) {
   $scope.org = {};
-  $scope.register = function () {
-    window.location.pathname = '/eventManage/reg';
-  };
   $scope.login = function () {
     ContestOrg.login($scope.org, function (res) {
       console.log(res);
       if (res.err) {
         alert('登录失败');
       } else {
+        $rootScope.access = true;
+        localInfo = res.token;
         localStorage.CMSCAPTCHA = JSON.stringify(res.token);
-        window.location.pathname = '/eventManage/home';
+        $location.path('/eventManage/home');
       }
     }, function () {
     });
   };
 }
 
-function SignUpCtrl($scope, ContestOrg) {
+function SignUpCtrl($scope, ContestOrg, $location, School) {
   $scope.org = {};
-<<<<<<< HEAD
   $scope.schools = School.find({
     filter: {
       fields: ['name']
     }
   });
-=======
-  $scope.goBack = function () {
-    window.location.pathname = '/eventManage/login';
-  };
->>>>>>> b4d6053c63602c0488ddbcc84a406cb49c8f0542
   $scope.signUp = function () {
     ContestOrg.create($scope.org, function (res) {
       if (res.err || res.name == 'ValidationError') {
         alert('注册失败');
       } else {
+        localInfo = res.token;
+        $rootScope.access = true;
         localStorage.CMSCAPTCHA = JSON.stringify(res.token);
-        window.location.pathname = '/eventManage/home';
+        $location.path('/eventManage/home');
       }
     }, function () {
       alert("注册失败，请检查您填写的内容");
