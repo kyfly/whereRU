@@ -10,7 +10,7 @@ function RouteConfigure($routeProvider) {
     })
     .when('/eventManage/setting', {
       templateUrl: '/admin/partials/setting.html',
-      controller: ['$scope', 'ContestOrg', SettingCtrl]
+      controller: ['$scope', 'ContestOrg', '$rootScope', SettingCtrl]
     })
     .when('/eventManage/help', {
       templateUrl: '/admin/partials/help.html',

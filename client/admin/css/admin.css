@@ -192,3 +192,8 @@ main {
 .selectBlack {
   color: #272727;
 }
+
+.noticeText {
+  font-size: 30px;
+  font-weight: 300;
+}

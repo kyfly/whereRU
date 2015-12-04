@@ -52,22 +52,25 @@
   </div>
 </div>
 <div>
+  <div ng-show="noEvent" class="text-center">
+    <p class="noticeText">还没有竞赛哦，点击右上角的按钮创建吧 <i class="material-icons">call_made</i></p>
+  </div>
   <ul class="collapsible popout" data-collapsible="accordion" watch>
     <li ng-repeat="single in contestLists" ng-click="loadContest($index)">
       <div class="collapsible-header"><i class="mdi-social-whatshot"></i>{{single.name}}</div>
       <div class="collapsible-body">
         <div class="col s12">
           <ul class="tabs" tabs>
-            <li ng-click="toContestTeam()" class="tab col s3 waves-effect"><a href="#">参赛队伍</a></li>
-            <li ng-click="toContestNotice()" class="tab col s3 waves-effect"><a href="#">通知管理</a></li>
-            <li ng-click="toContestLibrary($index)" class="tab col s3 waves-effect"><a href="#">资料库</a></li>
-            <li ng-click="toContestSetting()" class="tab col s3 waves-effect"><a href="#">竞赛设置</a></li>
+            <li ng-click="contentTypeChange(0)" class="tab col s3 waves-effect"><a href="#">参赛队伍</a></li>
+            <li ng-click="contentTypeChange(1)" class="tab col s3 waves-effect"><a href="#">通知管理</a></li>
+            <li ng-click="contentTypeChange(2)" class="tab col s3 waves-effect"><a href="#">资料库</a></li>
+            <li ng-click="contentTypeChange(3)" class="tab col s3 waves-effect"><a href="#">竞赛设置</a></li>
           </ul>
           <div id="contentView">
             <!--参赛队伍-->
             <div class="row">
               <div class="col s12 m3" ng-repeat="project in projects"
-                   ng-show="(project._projectResults[0].contestId === single.id) && (contentType === 'contestTeam')">
+                   ng-show="(project._projectResults[0].contestId === single.id) && (contentType === 0)">
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title">基于saas的活动云平台</span>
@@ -93,7 +96,7 @@
                 </div>
               </div>
 
-              <div class="col s12 m12" ng-show="contentType === 'contestNotice'">
+              <div class="col s12 m12" ng-show="contentType === 1">
                 <div class="container">
                   <div input-field>
                     <i class="material-icons prefix">mode_edit</i>
@@ -191,7 +194,7 @@
                 </div>
               </div>
 
-              <div class="col s12 m12" ng-show="contentType === 'contestLibrary'">
+              <div class="col s12 m12" ng-show="contentType === 2">
                 <div class="container">
                   <div class="file-field input-field">
                     <div class="btn">
@@ -224,7 +227,7 @@
                 </div>
               </div>
 
-              <div class="col s12 m12" ng-show="contentType === 'contestSetting'">
+              <div class="col s12 m12" ng-show="contentType === 3">
                 <div class="container">
                   <h4 class="left">竞赛设置</h4>
                   <a class="addEvent waves-effect waves-light btn red darken-1 right"
@@ -294,5 +297,6 @@
     </li>
   </ul>
 </div>
+
 
 
