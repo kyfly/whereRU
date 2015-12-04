@@ -1,5 +1,5 @@
 <h4 class="left">竞赛管理</h4>
-<a href="#addEvent" modal class="addEvent waves-effect waves-light btn right"><i class="material-icons right">add</i>新建竞赛</a>
+<a href="#addEvent" modal class="addEvent waves-effect waves-light btn right"><i class="mdi-content-add right"></i>新建竞赛</a>
 <div class="clearfix"></div>
 <!-- 新建竞赛的Modal -->
 <div id="addEvent" class="modal">
@@ -46,14 +46,14 @@
   </div>
   <div class="modal-footer">
     <a href="#" class="modal-action waves-effect waves-light btn orange darken-4" ng-click="addContest()"><i
-      class="material-icons right">done</i>创建竞赛</a>
+      class="mdi-action-done right"></i>创建竞赛</a>
     <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
 
   </div>
 </div>
 <div>
   <div ng-show="noEvent" class="text-center">
-    <p class="noticeText">还没有竞赛哦，点击右上角的按钮创建吧 <i class="material-icons">call_made</i></p>
+    <p class="noticeText">还没有竞赛哦，点击右上角的按钮创建吧 <i class="mdi-communication-call-made"></i></p>
   </div>
   <ul class="collapsible popout" data-collapsible="accordion" watch>
     <li ng-repeat="single in contestLists" ng-click="loadContest($index)">
@@ -84,11 +84,11 @@
                     <p>团队人数：<span>8</span>人</p>
                   </div>
                   <div class="card-action">
-                    <a class="activator" href="#">更多信息<i class="material-icons right">more_vert</i></a>
+                    <a class="activator" href="#">更多信息<i class="mdi-navigation-more-vert right"></i></a>
                   </div>
                   <div class="card-reveal">
-                      <span class="card-title grey-text text-darken-4">更多信息<i
-                        class="material-icons right">close</i></span>
+                    <span class="card-title grey-text text-darken-4">更多信息<i
+                      class="mdi-Navigation-close right"></i></span>
 
                     <p>Here is some more information about this product that is only revealed once clicked on.</p>
                   </div>
@@ -99,7 +99,7 @@
               <div class="col s12 m12" ng-show="contentType === 1">
                 <div class="container">
                   <div input-field>
-                    <i class="material-icons prefix">mode_edit</i>
+                    <i class="mdi-editor-mode-edit prefix"></i>
                     <input id="newNoticeTitle" ng-model="newNotice.title" type="text" class="validate">
                     <label for="newNoticeTitle">新通知标题</label>
                   </div>
@@ -151,12 +151,12 @@
 
                       <div class="row">
                         <div class="col s12" input-field>
-                          <i class="material-icons prefix">label_outline</i>
+                          <i class="mdi-action-label-outline prefix"></i>
                           <input id="geiInfoFile" type="text" class="validate">
                           <label for="geiInfoFile">需要收集的文件名称</label>
                         </div>
                         <div class="col s12" input-field>
-                          <i class="material-icons prefix">label_outline</i>
+                          <i class="mdi-action-label-outline prefix"></i>
                           <textarea ng-model="dummyInputs.textAreaInput" class="materialize-textarea"></textarea>
                           <label>该文件的描述</label>
                         </div>
@@ -207,8 +207,7 @@
                     </div>
                   </div>
                   <a href="" class="waves-effect waves-light btn right orange darken-4"
-                     ng-click="creatMaterial($index)"><i
-                    class="material-icons right">add</i>上传资料</a>
+                     ng-click="creatMaterial($index)"><i class="mdi-content-add right"></i>上传资料</a>
 
                   <div class="clearfix"></div>
                   <ul class="collection">
@@ -231,13 +230,13 @@
                 <div class="container">
                   <h4 class="left">竞赛设置</h4>
                   <a class="addEvent waves-effect waves-light btn red darken-1 right"
-                     ng-href="{{'#deleteConfirm' + $index}}" modal>删除竞赛</a>
+                     ng-href="{{'#deleteConfirm' + $index}}" modal><i class="mdi-action-delete right"></i>删除竞赛</a>
                   <!-- 确认删除 -->
                   <div id="{{'deleteConfirm' + $index}}" class="modal">
                     <div class="modal-content">
                       <h4>确认删除？</h4>
 
-                      <p class="text-center"><i class="material-icons">warning</i> 删除后不可恢复！</p>
+                      <p class="text-center"><i class="mdi-alert-warning"></i> 删除后不可恢复！</p>
                     </div>
                     <div class="modal-footer">
                       <a ng-click="deleteContest($index)" href=""
@@ -287,7 +286,7 @@
                   </div>
                   <small>只需上传需要更新的文件，不上传即用原来的文件</small>
                   <a href="#" class="waves-effect waves-light btn orange darken-4 right"
-                     ng-click="updateEvent($index)">更新竞赛</a>
+                     ng-click="updateEvent($index)"><i class="mdi-action-done right"></i>更新竞赛</a>
                 </div>
               </div>
             </div>
