@@ -173,9 +173,8 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
       Contest.materials.create({
           id: res[index].id,
           access_token: localInfo.id
-        }, $scope.material, function (res) {
+        }, $scope.material, function ) {
           alert('上传成功！');
-          history.go(0);
         }, function () {
           alert('上传失败！');
         }
