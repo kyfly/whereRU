@@ -104,7 +104,7 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
     id: localInfo.userId,
     access_token: localInfo.id
   }, function (res) {
-    if(res.length === 0){
+    if (res.length === 0) {
       $scope.noEvent = true;
     }
     console.log(res, '竞赛');
@@ -288,7 +288,12 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
 
 }
 
-function SettingCtrl($scope, ContestOrg, $rootScope) {
+function SettingCtrl($scope, ContestOrg, $rootScope, School) {
+  $scope.schools = School.find({
+    filter: {
+      fields: ['name']
+    }
+  });
   ContestOrg.findById({
     id: localInfo.userId,
     access_token: localInfo.id

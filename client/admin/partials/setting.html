@@ -6,8 +6,11 @@
   </div>
   <div class="input-field">
     <i class="mdi-action-room prefix"></i>
-    <input id="school" type="text" ng-model="orgChange.school">
-    <label for="school">学校（选填）</label>
+    <select class="selectMargin" ng-model="orgChange.school"
+            material-select watch>
+      <option value="" disabled selected>选择你的学校</option>
+      <option ng-repeat="school in schools">{{school.name}}</option>
+    </select>
   </div>
   <div class="input-field">
     <i class="mdi-communication-phone prefix"></i>
