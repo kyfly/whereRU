@@ -240,24 +240,3 @@ function uploadHtml(content, callback) {
   Xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   Xhr.send('content=' + content);
 }
-/**
- * [uploadFile description]
- * @param  {[type]}   files    [description]
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
- */
-function uploadFile(files, callback) {
-  var formData = new FormData();
-  for (var i = 0; i < files.length; i++) {
-    file = files[i];
-    formData.append(file.name, file);
-  }
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      callback(JSON.parse(xhr.responseText));
-    }
-  };
-  xhr.open("POST", "/ue/uploads?action=uploadimage&dynamicPath=team&files=" + files.length, true);
-  xhr.send(formData);
-}

@@ -16,7 +16,7 @@
       "type": "string"
     },
     "actId": {
-      "type": "objectid"
+      "type": "string"
     },
     "loader": {
       "type": "string"
@@ -31,14 +31,9 @@
   },
   "validations": [],
   "relations": {
-    "teams": {
-      "type": "belongsTo",
-      "model": "Team",
-      "foreignKey": "teamId"
-    },
-    "contests": {
-      "type": "belongsTo",
-      "model": "Contest",
+    "active": {
+      "type": "hasOne",
+      "model": "Active",
       "foreignKey": ""
     }
   },

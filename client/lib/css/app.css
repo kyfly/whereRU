@@ -33,7 +33,7 @@ nav .brand-logo {
 }*/
 /*底部导航*/
 footer{
-  height: 48px;
+  height: 50px;
 }
 .fragment{
   position: fixed;
@@ -86,11 +86,12 @@ footer{
 }
 /*垂直时间轴*/
 .etuan_timeline {
-  margin: 30px 0 0 0;
+  margin: 10px 5px;
   padding: 0;
   list-style: none;
-  position: relative;
+  position: absolute;
   left:20px;
+  padding-bottom: 50px;
 }
 .etuan_timeline:before {
   content: '';
@@ -122,9 +123,9 @@ footer{
   display: inline;
 }
 .etuan_timeline>li .content {
-  margin: 0 0 0 30px;
+  margin: 0 20px;
+  padding: 0 5px;
   min-height: 50px;
-  background: #0ff;
 }
 
 .collapsible.popout > li {

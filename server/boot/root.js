@@ -11,18 +11,10 @@ module.exports = function(server) {
 
   server.get('/docx2html', function (req, res) {
     var options = {
-      // convertImage: mammoth.images.inline(function(element) {
-      //     return element.read("base64").then(function(imageBuffer) {
-      //         return {
-      //             src: "data:" + element.contentType + ";base64," + imageBuffer
-      //         };
-      //     });
-      // }),
       styleMap: [
           "u => em"
       ],
     };
-    console.log('../client' + req.query.path);
     mammoth.convertToHtml({path: '../client' + req.query.path}, 
       options)
       .then(function(result){

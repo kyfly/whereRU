@@ -15,10 +15,7 @@ function HomeController($scope, $http, Auth, ContestOrg, Message, Contest, $temp
       }]
     });
   Contest.getMySchoolEvents({
-   school: Auth.getSchool(),
-   filter: {
-    fields: ['id', 'name']
-   }
+   school: Auth.getSchool()
   }, function (res) {
     $scope.events = res.events;
   });
