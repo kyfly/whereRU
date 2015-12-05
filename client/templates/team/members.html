@@ -1,1 +1,37 @@
-members.html
+<!--members.html-->
+<header>
+  <nav style="position: fixed;
+    top: 0;
+    z-index: 999;">
+    <div class="nav-wrapper">
+      <a class="brand-logo center" >{{members.teamId}}团队成员</a>
+      <ul id="nav-mobile">
+        <li class="left">
+          <a href="/myTeam" style="padding-left:1rem">&lt</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<div>
+  <ul class="collection">
+    <li class="collection-item avatar"
+        ng-repeat="member in members">
+        <p ng-bind="member.name">
+      <p ng-bind="member.id">
+      <p ng-bind="member.phone">
+
+        </p>
+      </a>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+  </ul>
+</div>
+
+
+
+<!--<div style="color: #0000ed; height: 300px;">aaaaaa</div>-->
+
+
+

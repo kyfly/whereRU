@@ -4,7 +4,7 @@
 app.controller('ViewTeamController', ['$scope', 'Team', '$stateParams', ViewTeamController]);
 function ViewTeamController($scope, Team, $stateParams) {
 	Team.findById({
-    id: $stateParams.id, 
+    id: $stateParams.id,
     filter: {fields: ['id', 'name', 'logoUrl']}
   }, function (res) {
     $scope.team = res;
@@ -94,8 +94,16 @@ app.controller('TeamProjectController', ['$scope', '$stateParams', function($sco
  * @param  {[type]} $stateParams){               $scope.teamId [description]
  * @return {[type]}                 [description]
  */
-app.controller('TeamMembersController', ['$scope', '$stateParams', function($scope, $stateParams){
+app.controller('TeamMembersController', ['$scope', '$stateParams', 'Team', function($scope, $stateParams, Team){
   $scope.teamId = $stateParams.id;
+  Team.members({
+    id: $stateParams.id
+  },function(res){
+    console.log(res);
+    $scope.members = res;
+  },function(err){
+
+  });
 }]);
 
 /**
