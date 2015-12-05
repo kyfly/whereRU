@@ -1,7 +1,10 @@
-if (localStorage.CMSCAPTCHA)
-  var localInfo = JSON.parse(localStorage.CMSCAPTCHA);
-else 
-  var localInfo = {id:null, userId: null, name: null};
+var localInfo;
+if (localStorage.CMSCAPTCHA) {
+  localInfo = JSON.parse(localStorage.CMSCAPTCHA);
+} else {
+  localInfo = {id: null, userId: null, name: null};
+}
+
 function AdminCtrl($scope, $timeout, $window, $rootScope) {
   if (localStorage.CMSCAPTCHA && window.location.pathname === '/eventManage/login') {
     window.location.pathname = '/eventManage/home';
@@ -13,8 +16,6 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
     $scope.footerShow = {'margin-left': 0};
   }
 
-  $scope.orgName = localInfo.name;
-
   document.getElementById('main').style.minHeight = document.body.clientHeight
     - document.getElementById('footer').offsetHeight
     - document.getElementById('nav').offsetHeight - 30 + 'px';
@@ -22,6 +23,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
   //监听ngView完成事件，延迟200ms用于页面渲染
   $scope.$on('$viewContentLoaded', function () {
     $timeout(function () {
+      $rootScope.orgName = localInfo.name;
       if ($window.location.pathname === '/eventManage/home') {
         $scope.redirect(0);
       } else if ($window.location.pathname === '/eventManage/event') {
@@ -78,6 +80,7 @@ function HomeCtrl($scope) {
 }
 
 function EventCtrl($scope, $resource, ContestOrg, Contest) {
+  $scope.noEvent = false;
   var GetTeam = $resource('/api/team');
   var GetProject = $resource('/api/Projects');
   GetTeam.query({},
@@ -101,6 +104,9 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
     id: localInfo.userId,
     access_token: localInfo.id
   }, function (res) {
+    if (res.length === 0) {
+      $scope.noEvent = true;
+    }
     console.log(res, '竞赛');
     $scope.contestLists = res;
 
@@ -147,9 +153,9 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
         fk: res[index].id,
         access_token: localInfo.id
       }, $scope.changeEvent[index], function () {
-        alert('更新成功！');
+        Materialize.toast('更新成功！', 2000)
       }, function () {
-        alert('更新失败！');
+        Materialize.toast('更新失败！', 2000)
       })
     };
 
@@ -167,22 +173,28 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
     $scope.creatMaterial = function (index) {
       $scope.material.loader = localInfo.name;
       $scope.material.createAt = new Date();
-      Contest.materials.create({
-          id: res[index].id,
-          access_token: localInfo.id
-        }, $scope.material, function (res) {
-          alert('上传成功！');
-          history.go(0);
-        }, function () {
-          alert('上传失败！');
-        }
-      )
+      if ($scope.material.dataUrl) {
+        Contest.materials.create({
+            id: res[index].id,
+            access_token: localInfo.id
+          }, $scope.material, function () {
+            Materialize.toast('上传成功！', 2000)
+          }, function () {
+            Materialize.toast('上传失败！', 2000)
+          }
+        )
+      } else {
+        Materialize.toast('请先选择文件！', 2000)
+      }
     };
 
     $scope.loadContest = function (index) {
       Contest.materials({
         id: res[index].id,
-        access_token: localInfo.id
+        access_token: localInfo.id,
+        filter: {
+          order: 'createAt DESC'
+        }
       }, function (res) {
         $scope.materialList = res;
       });
@@ -237,7 +249,7 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
 
   $scope.addContest = function () {
     if (!($scope.contest.name && $scope.contest.ruleUrl && $scope.contest.processUrl && $scope.contest.explainUrl)) {
-      alert("请填写完整哦");
+      Materialize.toast('请填写完整哦！', 2000);
     } else {
       ContestOrg.contests.create({
         id: localInfo.userId,
@@ -245,28 +257,16 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
       }, $scope.contest, function () {
         history.go(0);
       }, function () {
-        alert("创建失败！");
+        Materialize.toast('创建失败！', 2000);
       });
     }
   };
 
   //参赛队伍，通知管理，资料库，竞赛设置的切换
-  $scope.contentType = 'contestTeam';
+  $scope.contentType = 0;
 
-  $scope.toContestTeam = function () {
-    $scope.contentType = 'contestTeam';
-  };
-
-  $scope.toContestNotice = function () {
-    $scope.contentType = 'contestNotice';
-  };
-
-  $scope.toContestLibrary = function (index) {
-    $scope.contentType = 'contestLibrary';
-  };
-
-  $scope.toContestSetting = function () {
-    $scope.contentType = 'contestSetting';
+  $scope.contentTypeChange = function (contentType) {
+    $scope.contentType = contentType;
   };
 
   //通知管理
@@ -288,7 +288,12 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
 
 }
 
-function SettingCtrl($scope, ContestOrg) {
+function SettingCtrl($scope, ContestOrg, $rootScope, School) {
+  $scope.schools = School.find({
+    filter: {
+      fields: ['name']
+    }
+  });
   ContestOrg.findById({
     id: localInfo.userId,
     access_token: localInfo.id
@@ -300,9 +305,14 @@ function SettingCtrl($scope, ContestOrg) {
     ContestOrg.prototype$updateAttributes({
       id: localInfo.userId,
       access_token: localInfo.id
-    }, $scope.orgChange, function (res) {
-      alert('更新成功！');
-      history.go(0);
+    }, $scope.orgChange, function () {
+      var recordInfo = JSON.parse(localStorage.CMSCAPTCHA);
+      recordInfo.name = $scope.orgChange.name;
+      localStorage.CMSCAPTCHA = JSON.stringify(recordInfo);
+      $rootScope.orgName = $scope.orgChange.name;
+      Materialize.toast('更新成功！', 2000);
+    }, function () {
+      Materialize.toast('更新失败！', 2000);
     });
   };
 }
@@ -310,17 +320,17 @@ function SettingCtrl($scope, ContestOrg) {
 function HelpCtrl() {
 }
 
-function LoginCtrl($scope, ContestOrg, $location) {
+function LoginCtrl($scope, ContestOrg, $location, $rootScope) {
   $scope.org = {};
   $scope.login = function () {
     ContestOrg.login($scope.org, function (res) {
-      console.log(res);
       if (res.err) {
-        alert('登录失败');
+        Materialize.toast('登陆失败！', 2000);
       } else {
         $rootScope.access = true;
         localInfo = res.token;
         localStorage.CMSCAPTCHA = JSON.stringify(res.token);
+        Materialize.toast('登陆成功！', 2000);
         $location.path('/eventManage/home');
       }
     }, function () {
@@ -328,7 +338,7 @@ function LoginCtrl($scope, ContestOrg, $location) {
   };
 }
 
-function SignUpCtrl($scope, ContestOrg, $location, School) {
+function SignUpCtrl($scope, ContestOrg, $location, $rootScope, School) {
   $scope.org = {};
   $scope.schools = School.find({
     filter: {
@@ -337,16 +347,17 @@ function SignUpCtrl($scope, ContestOrg, $location, School) {
   });
   $scope.signUp = function () {
     ContestOrg.create($scope.org, function (res) {
-      if (res.err || res.name == 'ValidationError') {
-        alert('注册失败');
+      if (res.err || res.name === 'ValidationError') {
+        Materialize.toast('注册失败！', 2000);
       } else {
         localInfo = res.token;
         $rootScope.access = true;
         localStorage.CMSCAPTCHA = JSON.stringify(res.token);
+        Materialize.toast('注册成功,已自动登陆', 2000);
         $location.path('/eventManage/home');
       }
     }, function () {
-      alert("注册失败，请检查您填写的内容");
+      Materialize.toast('注册失败，请检查您填写的内容', 2000);
     });
   };
 }

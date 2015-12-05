@@ -180,3 +180,20 @@ main {
 .brand-logo {
   margin-bottom: 50px !important;
 }
+
+.selectMargin {
+  margin-left: 45px;
+}
+
+.selectGray {
+  color: #9E9E9E;
+}
+
+.selectBlack {
+  color: #272727;
+}
+
+.noticeText {
+  font-size: 30px;
+  font-weight: 300;
+}
