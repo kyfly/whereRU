@@ -6,7 +6,7 @@
     "validateUpsert": true
   },
   "properties": {
-    "UserId": {
+    "userId": {
       "type": "string"
     },
     "role": {
@@ -24,11 +24,7 @@
   },
   "validations": [],
   "relations": {
-    "teams": {
-      "type": "belongsTo",
-      "model": "Team",
-      "foreignKey": ""
-    }
+   
   },
   "acls": [],
   "methods": {}

@@ -1,1 +1,27 @@
-setting
+<div class="row">
+  <div class="input-field">
+    <i class="mdi-action-account-circle prefix"></i>
+    <input id="name" type="text" ng-model="orgChange.name">
+    <label for="name">主办方名称</label>
+  </div>
+  <div class="input-field">
+    <i class="mdi-action-room prefix"></i>
+    <select class="selectMargin" ng-model="orgChange.school"
+            material-select watch>
+      <option value="" disabled selected>选择你的学校</option>
+      <option ng-repeat="school in schools">{{school.name}}</option>
+    </select>
+  </div>
+  <div class="input-field">
+    <i class="mdi-communication-phone prefix"></i>
+    <input id="phone" type="text" ng-model="orgChange.phone">
+    <label for="phone">手机长号</label>
+  </div>
+  <div class="input-field">
+    <i class="mdi-communication-email prefix"></i>
+    <input id="email" type="text" ng-model="orgChange.email">
+    <label for="email">邮箱</label>
+  </div>
+</div>
+<a href="#" class="waves-effect waves-light btn orange darken-4 right"
+   ng-click="updateOrgInfo()">更新资料</a>

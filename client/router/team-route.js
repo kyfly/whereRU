@@ -3,16 +3,17 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
   /**
    * 创建团队
    * @param  {[type]}
-   * @return {[type]}            
+   * @return {[type]}
    */
   .state('createTeam', {
     url: '/myTeam/createTeam',
     templateUrl: '/templates/team/create.html',
     controller: 'CreateTeamController'
-  }) 
+  })
   /**
-   * 
+   *
    * @type {String}
+   * 发现团队
    */
   .state('findTeam', {
     url: '/myTeam/findTeam',
@@ -44,7 +45,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     controller: 'TeamMessageController'
   })
   /**
-   * 通知管理页面
+   * 成员管理页面
    */
   .state('teamManage.members', {
     url: '/members',
@@ -52,7 +53,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     controller: 'TeamMemberController'
   })
   /**
-   * 通知管理页面
+   * 信息管理页面
    */
   .state('teamManage.info', {
     url: '/info',
@@ -68,7 +69,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     controller: 'TeamProjectController'
   })
   /**
-   * 项目管理页面
+   * 所有成员信息管理页面
    */
   .state('teamMembers', {
     url: '/myTeam/:id/members',
@@ -91,5 +92,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     templateUrl: "/templates/team/more.html",
     controller: 'TeamMoreController'
   })
+  /**
+   * 加入团队
+   */
+  .state('join', {
+    url: '/teams/:id/join/:roomId',
+    templateUrl: 'templates/team/join.html',
+    controller: 'JoinTeamController'
+  })
 }]);
-

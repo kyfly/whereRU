@@ -1,13 +1,16 @@
+<h4 class="left">竞赛管理后台登陆</h4>
+<div class="clearfix"></div>
 <div class="row">
   <div class="input-field">
-    <i class="material-icons prefix">account_circle</i>
-    <input id="phone" type="text" ng-model="org.phone">
-    <label for="phone">手机号</label>
+    <i class="mdi-action-account-circle prefix"></i>
+    <input id="email" type="text" ng-model="org.email">
+    <label for="email">邮箱</label>
   </div>
   <div class="input-field">
-    <i class="material-icons prefix">vpn_key</i>
+    <i class="mdi-communication-vpn-key prefix"></i>
     <input id="password" type="password" ng-model="org.password">
     <label for="password">密码</label>
   </div>
 </div>
-<a class="waves-effect waves-light btn loginBtn" ng-click="login()">登陆</a>
+<a class="waves-effect waves-light btn loginBtn orange darken-1" ng-click="login()">登陆</a>
+<a class="waves-effect waves-light loginBtn" href="/eventManage/reg">立即注册</a>

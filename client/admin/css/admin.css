@@ -162,3 +162,38 @@ main {
 .addLibraryBtn {
   margin-top: -50px;
 }
+
+.whiteColor {
+  color: #ffffff !important;
+}
+
+.margin-left {
+  margin-left: 15px !important;
+}
+
+.orgName {
+  margin-top: 0 !important;
+  margin-bottom: 30px !important;
+  font-size: medium;
+}
+
+.brand-logo {
+  margin-bottom: 50px !important;
+}
+
+.selectMargin {
+  margin-left: 45px;
+}
+
+.selectGray {
+  color: #9E9E9E;
+}
+
+.selectBlack {
+  color: #272727;
+}
+
+.noticeText {
+  font-size: 30px;
+  font-weight: 300;
+}

@@ -122,17 +122,7 @@ var save = function (file, filename, req, callback) {
   var saveTo = path.join(os.tmpDir(), realName);
   file.pipe(fs.createWriteStream(saveTo));
   file.on('end', function() {
-    if (/.+\.doc[x]/.test(filename)) {
-      docx2html(saveTo, function (data) {
-        saveToFile(data.value, function (err, path) {
-          if (err) {
-            callback(err);
-          } else {
-            callback(null, path);
-          }
-        });
-      })
-    }
+    
     if (config.mode == 'ali') {
        
     } else {
@@ -224,4 +214,5 @@ function docx2html (path, cb) {
 //     res.json(r);
 //   });
 // }
-module.exports = upload;
+exports.upload = upload;
+exports.docx2html = docx2html;

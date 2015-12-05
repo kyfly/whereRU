@@ -1,31 +1,40 @@
 <ul class="collection">
 	<li class="collection-item avatar">
     <img src="/lib/img/logo.jpg" alt="" class="circle">
-    <span class="title">团团一家</span>
+    <span class="title" ng-bind="user.name"></span>
     <p>手机号<br>
-       15095922525
+      {{user.phone}}
     </p>
     <a href="#!" class="secondary-content">
-      <i class="material-icons">loop</i>
+      <i class="material-icons">settings</i>
     </a>
   </li>
   <li class="collection-item">我的团队</li>
   <li class="collection-item">修改密码</li>
+  <li class="collection-item"><a href="/chats">我的圈子</a></li>
   <li class="collection-item">推荐给好友</li>
   <li class="collection-item">意见反馈/联系我们</li>
   <li class="collection-item">关于我们</li>
   <li class="collection-item"><a href="/signUp">注册</a></li>
   <li class="collection-item"><a href="/login">登录</a></li>
 </ul>
+
 <footer>
-  <div class="row">
-    <div class="col s12">
-      <ul class="tabs1">
-        <li class="newtab col s3"><a href="/">首页</a></li>
-        <li class="newtab col s3"><a href="/myTeam">我的团队</a></li>
-        <li class="newtab col s3"><a href="/search">搜索</a></li>
-        <li class="newtab col s3"><a href="/home">个人中心</a></li>
-      </ul>
-    </div>
+  <div class="fragment col s12">
+    <ul class="tabs">
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/">首页</a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/myTeam">我的团队</a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/search">搜索</a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/home"><b class="tab-active">个人中心</b></a>
+      </li>
+    </ul>
   </div>
 </footer>
+

@@ -1,7 +1,6 @@
 <header>
   <nav>
     <div class="nav-wrapper">
-      <a href="#!" class="brand-logo left">Logo</a>
       <ul class="right">
         <li>
           <a class='' href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="true">
@@ -16,31 +15,41 @@
       </ul>
     </div>
   </nav>
+  <div class="top-bar"></div>
 </header>
-<div>
+<div class="doc-body">
   <ul class="collection">
-    <li class="collection-item avatar"
+    <li class="collection-item avatar small-block-lists"
         ng-repeat="team in teams">
-      <a ng-href="/myTeam/{{team.id}}">
-        <img ng-src="{{team.logoUrl}}" class="circle">
-        <span class="title" ng-bind="team.name"></span>
-
-        <p ng-bind="team.dynamic">
-        </p>
+      <img ng-src="{{team.logoUrl}}" class="circle">
+      <a ng-href="/chats/{{team.chatId}}/roomId">
+        <span class="new badge deep-orange lighten-2" ng-init="chatCount[team.chatId] = 0" ng-bind="chatCount[team.chatId]"></span>
       </a>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+      <a ng-href="/myTeam/{{team.id}}">
+        <span class="title" ng-bind="team.name"></span>
+      </a>
+      <p ng-bind="team.dynamic" class="desc">
+      </p>
     </li>
   </ul>
 </div>
+
+
 <footer>
-  <div class="row">
-    <div class="col s12">
-      <ul class="tabs1">
-        <li class="newtab col s3"><a href="/">首页</a></li>
-        <li class="newtab col s3"><a href="/myTeam">我的团队</a></li>
-        <li class="newtab col s3"><a href="/search">搜索</a></li>
-        <li class="newtab col s3"><a href="/home">个人中心</a></li>
-      </ul>
-    </div>
+  <div class="fragment col s12">
+    <ul class="tabs">
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/">首页</a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/myTeam"><b class="tab-active">我的团队</b></a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/search">搜索</a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/home">个人中心</a>
+      </li>
+    </ul>
   </div>
 </footer>

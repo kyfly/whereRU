@@ -6,11 +6,11 @@ function RouteConfigure($routeProvider) {
     })
     .when('/eventManage/event', {
       templateUrl: '/admin/partials/event.html',
-      controller: ['$scope', '$resource', EventCtrl]
+      controller: ['$scope', '$resource', 'ContestOrg', 'Contest', EventCtrl]
     })
     .when('/eventManage/setting', {
       templateUrl: '/admin/partials/setting.html',
-      controller: ['$scope', '$resource', SettingCtrl]
+      controller: ['$scope', 'ContestOrg', '$rootScope', 'School', SettingCtrl]
     })
     .when('/eventManage/help', {
       templateUrl: '/admin/partials/help.html',
@@ -18,11 +18,11 @@ function RouteConfigure($routeProvider) {
     })
     .when('/eventManage/login', {
       templateUrl: '/admin/partials/sign-in.html',
-      controller: ['$scope', 'ContestOrg', '$location', LoginCtrl]
+      controller: ['$scope', 'ContestOrg', '$location', '$rootScope', LoginCtrl]
     })
     .when('/eventManage/reg', {
       templateUrl: '/admin/partials/sign-up.html',
-      controller: ['$scope', 'ContestOrg', '$location', SignUpCtrl]
+      controller: ['$scope', 'ContestOrg', '$location', '$rootScope', 'School', SignUpCtrl]
     })
     .otherwise({redirectTo: '/eventManage/home'});
 }
