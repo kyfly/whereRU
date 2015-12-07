@@ -1,4 +1,5 @@
 <!--members.html-->
+
 <header>
   <nav style="position: fixed;
     top: 0;
@@ -7,27 +8,55 @@
       <a class="brand-logo center"  ng-bind="teamTop"></a>
       <ul id="nav-mobile">
         <li class="left">
-          <a ng-href="/myTeam/{{team.id}}" style="padding-left:1rem">&lt</a>
+          <i ng-href="/myTeam/{{team.id}}" style="float-left:1rem" class="material-icons">chevron_left</i>
         </li>
       </ul>
     </div>
   </nav>
 </header>
-
+<br><br><br>
 <div>
-  <ul class="collection">
-    <li class="collection-item avatar"
+  <ul class="collection ">
+    <li class="collection-item"
         ng-repeat="member in members">
-        <p ng-bind="member.name"></p>
-      <p ng-bind="member.id"></p>
-      <p ng-bind="member.phone"></p>
-      <!--<p ng-bind="member.teamId"></p>-->
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+      <i  style="float: right" onclick="on(this)">详情</i>
+      <span>姓&nbsp&nbsp&nbsp&nbsp&nbsp名:&nbsp&nbsp</span><span ng-bind="member.name"></span><br>
+      <span>电&nbsp&nbsp&nbsp&nbsp&nbsp话:&nbsp&nbsp</span><span ng-bind="member.phone"></span><br>
+      <!--<span  style="display: none">-->
+        <span>专&nbsp&nbsp&nbsp&nbsp&nbsp业:&nbsp&nbsp</span><span ng-bind="member.academy"></span><br>
+        <span>职&nbsp&nbsp&nbsp&nbsp&nbsp务:&nbsp&nbsp</span><span ng-bind="member.role"></span><br>
+        <span>用户名:&nbsp&nbsp</span><span ng-bind="member.userld"></span>
+      <!--</span>-->
+
+      <!--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
     </li>
   </ul>
 </div>
 
+<footer>
+  <div class="fragment col s12">
+    <ul class="tabs">
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/">首页</a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/myTeam"><b class="tab-active">我的团队</b></a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/search">搜索</a>
+      </li>
+      <li class="tab col s3 waves-effect waves-light">
+        <a href="/home">个人中心</a>
+      </li>
+    </ul>
+  </div>
+</footer>
 
-
+<script type="text/javascript">
+  function on(x)
+  {
+    x.style.display="block";
+  }
+</script>
 <!--<div style="color: #0000ed; height: 300px;">aaaaaa</div>-->
 
