@@ -64,48 +64,113 @@
     </li>
   </ul>
   <!--队伍信息-->
-  <ul class="collection">
-    <li class="collection-item avatar">
-      <img src="../lib/img/test1.png" alt="" class="circle">
-      <span class="title">团队名称</span>
-      <p>公告标题 <br>
-        通知正文
+<div class="">
+  <ul class="collapsible popout" data-collapsible="accordion" watch>
+    <li ng-repeat="team in teams">
+        <div class="collapsible-header row" style="line-height:normal;margin-bottom: 0"> 
+          <img ng-src="{{team.logoUrl}}" alt="" class="circle col s2" 
+          style="width: 50px; margin-top:15px">
+          <div class="col s10">
+            <a href="/teams/{{team.id}}">
+              <h6 class=" ">
+                <span ng-bind="team.name"></span>
+                <i class="material-icons right " style="line-height:normal;">forward</i>
+              </h6>
+            </a>
+            <p ng-bind="team.message.content">
+            </p>
+          </div>
+            
+        </div>
+        <div class="collapsible-body">
+          <div ng-show="team.message.active" class="card-content">
+          <ul>
+            <form ng-init="form[message.active.id] = {}">
+              <li ng-repeat="item in team.message.active.actItem">
+                <div ng-show="item.type !== 'file'" class="input-field col s12">
+                  <input 
+                      type="text" class="validate" 
+                      id="form[message.active.id][$index]" 
+                      ng-model="form[message.active.id][$index]" required>
+                  <label for="form[message.active.id][$index]" ng-bind="item.name"></label>
+                </div>
+                <div ng-show="item.type === 'file'" class="file-field input-field">
+                  <div class="btn">
+                    <span>{{item.name}}</span>
+                    <input
+                        type="file"
+                        id="{{message.active.id + '_' + $index}}" required>
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input
+                        ng-model="c"
+                        ng-change="upLoad()"
+                        class="file-path validate" type="text">
+                  </div>
+                </div>
+              </li>
+              <button 
+              type="submit" 
+              ng-disabled="form[message.active.id]['disabled']"
+              ng-click="submit()" 
+              class="waves-effect waves-light btn">OK</button>
+            </form>
+          </ul>
+        </div>
+        </div>
+    </li>
+  </ul>
+</div>
+  <!-- <ul class="collection">
+    <li class="collection-item avatar" ng-repeat="team in teams">
+      <img ng-src="{{team.logoUrl}}" alt="" class="circle">
+      <a href="/teams/{{team.id}}" style="display:block">
+        <span class="title" ng-bind="team.name"></span>
+      </a>
+      <p ng-bind="team.message.content">
       </p>
       <div class="secondary-content" ng-init="showParallax1 = false">
         <i class="material-icons" ng-click="showParallax1 = !showParallax1">reorder</i>
       </div>
       <div class="parallax-container" ng-if="showParallax1" style="margin: 20px 0; height: auto">
-        <div>hello</div>
+        <div ng-show="team.message.active" class="card-content">
+          <ul>
+            <form ng-init="form[message.active.id] = {}">
+              <li ng-repeat="item in team.message.active.actItem">
+                <div ng-show="item.type !== 'file'" class="input-field col s12">
+                  <input 
+                      type="text" class="validate" 
+                      id="form[message.active.id][$index]" 
+                      ng-model="form[message.active.id][$index]" required>
+                  <label for="form[message.active.id][$index]" ng-bind="item.name"></label>
+                </div>
+                <div ng-show="item.type === 'file'" class="file-field input-field">
+                  <div class="btn">
+                    <span>{{item.name}}</span>
+                    <input
+                        type="file"
+                        id="{{message.active.id + '_' + $index}}" required>
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input
+                        ng-model="c"
+                        ng-change="upLoad()"
+                        class="file-path validate" type="text">
+                  </div>
+                </div>
+              </li>
+              <button 
+              type="submit" 
+              ng-disabled="form[message.active.id]['disabled']"
+              ng-click="submit()" 
+              class="waves-effect waves-light btn">OK</button>
+            </form>
+          </ul>
+        </div>
       </div>
     </li>
-    <li class="collection-item avatar">
-      <img src="../lib/img/test1.png" alt="" class="circle">
-      <span class="title">团队名称</span>
-      <p>公告标题 <br>
-        通知正文
-      </p>
-      <div class="secondary-content" ng-init="showParallax2 = false">
-        <i class="material-icons" ng-click="showParallax2 = !showParallax2">reorder</i>
-      </div>
-      <div class="parallax-container" ng-if="showParallax2" style="margin: 20px 0; height: auto">
-        <div>hello</div>
-      </div>
-    </li>
-    <li class="collection-item avatar">
-      <img src="../lib/img/test1.png" alt="" class="circle">
-      <span class="title">团队名称</span>
-      <p>公告标题 <br>
-        通知正文
-      </p>
-      <div class="secondary-content" ng-init="showParallax2 = false">
-        <i class="material-icons" ng-click="showParallax2 = !showParallax2">reorder</i>
-      </div>
-      <div class="parallax-container" ng-if="showParallax2" style="margin: 20px 0; height: auto">
-        <div>hello</div>
-      </div>
-    </li>
-  </ul>
-  <div>
+  </ul> -->
+ <!--  <div>
     <ul class="collapsible popout" data-collapsible="accordion" watch>
       <li ng-repeat="team in teams">
         <div class="collapsible-header" ng-click="getExplain()">
@@ -123,7 +188,7 @@
         </div>
       </li>
     </ul>
-  </div>
+  </div> -->
 <footer>
   <div class="fragment">
     <div class="col s12">

@@ -3589,6 +3589,40 @@ module.factory(
           method: "POST"
         },
 
+        /**
+         * @ngdoc method
+         * @name lbServices.Team#getMySchoolTeamsMessages
+         * @methodOf lbServices.Team
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `school` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `message` – `{*=}` - 
+         */
+        "getMySchoolTeamsMessages": {
+          url: urlBase + "/team/getMySchoolTeamsMessages",
+          method: "GET"
+        },
+
         // INTERNAL. Use RUser.teams.findById() instead.
         "::findById::RUser::teams": {
           params: {
@@ -3651,12 +3685,6 @@ module.factory(
         // INTERNAL. Use Project.teams() instead.
         "::get::Project::teams": {
           url: urlBase + "/Projects/:id/teams",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Message.teams() instead.
-        "::get::Message::teams": {
-          url: urlBase + "/Messages/:id/teams",
           method: "GET"
         },
       }
@@ -7527,12 +7555,6 @@ module.factory(
         // INTERNAL. Use ContestOrg.contests.count() instead.
         "::count::ContestOrg::contests": {
           url: urlBase + "/ContestOrgs/:id/contests/count",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Message.contests() instead.
-        "::get::Message::contests": {
-          url: urlBase + "/Messages/:id/contests",
           method: "GET"
         },
       }
@@ -12374,16 +12396,28 @@ module.factory(
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use Message.teams() instead.
-        "prototype$__get__teams": {
-          url: urlBase + "/Messages/:id/teams",
+        // INTERNAL. Use Message.active() instead.
+        "prototype$__get__active": {
+          url: urlBase + "/Messages/:id/active",
           method: "GET"
         },
 
-        // INTERNAL. Use Message.contests() instead.
-        "prototype$__get__contests": {
-          url: urlBase + "/Messages/:id/contests",
-          method: "GET"
+        // INTERNAL. Use Message.active.create() instead.
+        "prototype$__create__active": {
+          url: urlBase + "/Messages/:id/active",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Message.active.update() instead.
+        "prototype$__update__active": {
+          url: urlBase + "/Messages/:id/active",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Message.active.destroy() instead.
+        "prototype$__destroy__active": {
+          url: urlBase + "/Messages/:id/active",
+          method: "DELETE"
         },
 
         /**
@@ -13058,15 +13092,29 @@ module.factory(
     */
     R.modelName = "Message";
 
+    /**
+     * @ngdoc object
+     * @name lbServices.Message.active
+     * @header lbServices.Message.active
+     * @object
+     * @description
+     *
+     * The object `Message.active` groups methods
+     * manipulating `Active` instances related to `Message`.
+     *
+     * Call {@link lbServices.Message#active Message.active()}
+     * to query all related instances.
+     */
+
 
         /**
          * @ngdoc method
-         * @name lbServices.Message#teams
+         * @name lbServices.Message#active
          * @methodOf lbServices.Message
          *
          * @description
          *
-         * Fetches belongsTo relation teams.
+         * Fetches hasOne relation active.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -13086,29 +13134,31 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Team` object.)
+         * This usually means the response is a `Active` object.)
          * </em>
          */
-        R.teams = function() {
-          var TargetResource = $injector.get("Team");
-          var action = TargetResource["::get::Message::teams"];
+        R.active = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::get::Message::active"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Message#contests
-         * @methodOf lbServices.Message
+         * @name lbServices.Message.active#create
+         * @methodOf lbServices.Message.active
          *
          * @description
          *
-         * Fetches belongsTo relation contests.
+         * Creates a new instance in active of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
          *  - `id` – `{*}` - PersistedModel id
          *
-         *  - `refresh` – `{boolean=}` - 
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -13122,12 +13172,119 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Contest` object.)
+         * This usually means the response is a `Active` object.)
          * </em>
          */
-        R.contests = function() {
-          var TargetResource = $injector.get("Contest");
-          var action = TargetResource["::get::Message::contests"];
+        R.active.create = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::create::Message::active"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Message.active#createMany
+         * @methodOf lbServices.Message.active
+         *
+         * @description
+         *
+         * Creates a new instance in active of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.active.createMany = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::createMany::Message::active"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Message.active#destroy
+         * @methodOf lbServices.Message.active
+         *
+         * @description
+         *
+         * Deletes active of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.active.destroy = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::destroy::Message::active"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Message.active#update
+         * @methodOf lbServices.Message.active
+         *
+         * @description
+         *
+         * Update active of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Active` object.)
+         * </em>
+         */
+        R.active.update = function() {
+          var TargetResource = $injector.get("Active");
+          var action = TargetResource["::update::Message::active"];
           return action.apply(R, arguments);
         };
 
@@ -13694,6 +13851,37 @@ module.factory(
         "::count::Contest::actives": {
           url: urlBase + "/Contests/:id/actives/count",
           method: "GET"
+        },
+
+        // INTERNAL. Use Message.active() instead.
+        "::get::Message::active": {
+          url: urlBase + "/Messages/:id/active",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Message.active.create() instead.
+        "::create::Message::active": {
+          url: urlBase + "/Messages/:id/active",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Message.active.createMany() instead.
+        "::createMany::Message::active": {
+          isArray: true,
+          url: urlBase + "/Messages/:id/active",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Message.active.update() instead.
+        "::update::Message::active": {
+          url: urlBase + "/Messages/:id/active",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Message.active.destroy() instead.
+        "::destroy::Message::active": {
+          url: urlBase + "/Messages/:id/active",
+          method: "DELETE"
         },
       }
     );

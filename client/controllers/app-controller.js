@@ -1,5 +1,5 @@
-app.controller('HomeController', ['$scope', '$http', 'Auth', 'ContestOrg', 'Message', 'Contest', '$templateCache', HomeController]);
-function HomeController($scope, $http, Auth, ContestOrg, Message, Contest, $templateCache) {
+app.controller('HomeController', ['$scope', '$http', 'Auth', 'Team', 'Contest', '$templateCache', HomeController]);
+function HomeController($scope, $http, Auth, Team, Contest, $templateCache) {
   $scope.messages = Contest.find({
       include:[{
         relation: 'contestOrg',
@@ -19,6 +19,12 @@ function HomeController($scope, $http, Auth, ContestOrg, Message, Contest, $temp
   }, function (res) {
     $scope.events = res.events;
   });
+  Team.getMySchoolTeamsMessages({
+    school: Auth.getSchool()
+  }, function (res) {
+    $scope.teams = res.message;
+    console.log(res);
+  })
 }
 app.controller('SignUpController', ['$scope', '$location', 'RUser', 'Auth', 'School', SignUpController]);
 function SignUpController($scope, $location, RUser, Auth, School) {

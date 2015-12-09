@@ -180,7 +180,14 @@ app.controller('TeamExplainController', ['$scope', '$stateParams', 'Team', funct
   Team.findById({
     id: $stateParams.id,
     filter: {
-      include: ['members']
+      include: [{
+        relation: 'members'
+      }, {
+        relation: 'messages',
+        scope: {
+          include: ['active']
+        }
+      }]
     }
   }, function (res) {
     $scope.team = res;
