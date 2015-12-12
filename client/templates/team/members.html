@@ -8,7 +8,7 @@
       <a class="brand-logo center"  ng-bind="teamTop"></a>
       <ul id="nav-mobile">
         <li class="left">
-          <i ng-href="/myTeam/{{team.id}}" style="float-left:1rem" class="material-icons">chevron_left</i>
+          <a ng-href="/myTeam/{{team.id}}" style="float-left:1rem;padding: 0px;" class="material-icons">chevron_left</a>
         </li>
       </ul>
     </div>
@@ -19,15 +19,14 @@
   <ul class="collection ">
     <li class="collection-item"
         ng-repeat="member in members">
-      <i  style="float: right" onclick="on(this)">详情</i>
+      <a  style="float: right" onclick="on(this)">详情</a>
       <span>姓&nbsp&nbsp&nbsp&nbsp&nbsp名:&nbsp&nbsp</span><span ng-bind="member.name"></span><br>
       <span>电&nbsp&nbsp&nbsp&nbsp&nbsp话:&nbsp&nbsp</span><span ng-bind="member.phone"></span><br>
-      <!--<span  style="display: none">-->
+      <span  style="display: none">
         <span>专&nbsp&nbsp&nbsp&nbsp&nbsp业:&nbsp&nbsp</span><span ng-bind="member.academy"></span><br>
         <span>职&nbsp&nbsp&nbsp&nbsp&nbsp务:&nbsp&nbsp</span><span ng-bind="member.role"></span><br>
         <span>用户名:&nbsp&nbsp</span><span ng-bind="member.userld"></span>
-      <!--</span>-->
-
+      </span>
       <!--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
     </li>
   </ul>
@@ -55,7 +54,18 @@
 <script type="text/javascript">
   function on(x)
   {
-    x.style.display="block";
+//    console.log(x);
+//    console.log(x.parentNode);
+//    console.log(x.parentNode.childNodes[11]);
+    var t= x.parentNode.childNodes[11];
+    if(t.style.display=="none")
+    {
+      t.style.display="block";
+    }
+    else
+    {
+      t.style.display = "none";
+    }
   }
 </script>
 <!--<div style="color: #0000ed; height: 300px;">aaaaaa</div>-->

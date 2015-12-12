@@ -166,16 +166,16 @@ app.controller('TeamMembersController', ['$scope', '$stateParams', 'Team', funct
     filter: {fields: ['id', 'name', 'logoUrl','dynamic', 'chatId']}
   }, function (res) {
     var a = res.name + "的成员列表";
-    console.log(a);
+    //console.log(a);
     $scope.teamTop = a;
     $scope.team = res;
   });
   Team.members({
     id: $stateParams.id
   },function(res){
-    console.log(res);
+    //console.log(res);
     $scope.Team = res[0].teamId;
-    console.log(res[0].teamId);
+    //console.log(res[0].teamId);
     $scope.members = res;
   },function(err){
 
