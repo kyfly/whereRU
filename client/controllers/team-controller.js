@@ -160,10 +160,22 @@ app.controller('TeamProjectController', ['$scope', '$stateParams', function($sco
  */
 app.controller('TeamMembersController', ['$scope', '$stateParams', 'Team', function($scope, $stateParams, Team){
   $scope.teamId = $stateParams.id;
+
+  Team.findById({
+    id: $stateParams.id,
+    filter: {fields: ['id', 'name', 'logoUrl','dynamic', 'chatId']}
+  }, function (res) {
+    var a = res.name + "的成员列表";
+    //console.log(a);
+    $scope.teamTop = a;
+    $scope.team = res;
+  });
   Team.members({
     id: $stateParams.id
   },function(res){
-    console.log(res);
+    //console.log(res);
+    $scope.Team = res[0].teamId;
+    //console.log(res[0].teamId);
     $scope.members = res;
   },function(err){
 
