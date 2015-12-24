@@ -1,0 +1,84 @@
+{
+  "name": "whereRUUser",
+  "base": "User",
+  "idInjection": true,
+  "plural": "WUsers",
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "phone": {
+      "type": "number"
+    },
+    "school": {
+      "type": "string"
+    },
+    "academy": {
+      "type": "string"
+    },
+    "sex": {
+      "type": "string"
+    },
+    "headImgUrl": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "teams": {
+      "model": "Team",
+      "type": "hasMany",
+      "foreignKey": "userId"
+    },
+    "formResult": {
+      "model": "FormResult",
+      "type": "hasMany",
+      "foreignKey": "userId"
+    },
+    "voteResult": {
+      "model": "VoteResult",
+      "type": "hasMany",
+      "foreignKey": "userId"
+    },
+    "seckillResult": {
+      "model": "SeckillResult",
+      "type": "hasMany",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__create__teams"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__updateById__teams"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__get__teams"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$authenticated",
+    "permission": "ALLOW",
+    "property": "__create__formResult"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$authenticated",
+    "permission": "ALLOW",
+    "property": "__create__voteResult"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$authenticated",
+    "permission": "ALLOW",
+    "property": "__create__seckillResult"
+  }],
+  "methods": {}
+}

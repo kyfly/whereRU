@@ -1,0 +1,36 @@
+{
+  "name": "Seckill",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "started": {
+      "type": "date"
+    },
+    "total": {
+      "type": "number"
+    },
+    "limit": {
+      "type": "number",
+      "default": 1
+    },
+    "updated": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "seckillResults": {
+      "model": "SeckillResult",
+      "type": "hasMany"
+    },
+    "seckillItems": {
+      "model": "SeckillItem",
+      "type": "embedsMany"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

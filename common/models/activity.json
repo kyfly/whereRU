@@ -1,0 +1,100 @@
+{
+  "name": "Activity",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "authorName": {
+      "type": "string"
+    },
+    "authorId": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "comment": "区分校园社团和兴趣社团的活动"
+    },
+    "explainUrl": {
+      "type": "string"
+    },
+    "verifyRule": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "deleted": {
+      "type": "date"
+    },
+    "school": {
+      "type": "string"
+    },
+    "updated": {
+      "type": "date"
+    },
+    "started": {
+      "type": "date"
+    },
+    "ended": {
+      "type": "date"
+    },
+    "keyword": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "forms": {
+      "model": "Form",
+      "type": "hasMany"
+    },
+    "votes": {
+      "model": "Vote",
+      "type": "hasMany"
+    },
+    "seckills": {
+      "model": "Seckill",
+      "type": "hasMany"
+    },
+    "readers": {
+      "model": "Reader",
+      "type": "hasMany"
+    },
+    "team": {
+      "model": "Team",
+      "type": "belongsTo"
+    }
+  },
+  "acls": [
+  {
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "DENY"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "ALLOW",
+    "property": "__create__readers"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "ALLOW",
+    "property": "__count__readers"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "ALLOW",
+    "property": "getMySchoolActiveties"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "ALLOW",
+    "property": "findById"
+  }],
+  "methods": {}
+}

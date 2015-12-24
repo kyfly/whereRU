@@ -6,26 +6,33 @@
     "validateUpsert": true
   },
   "properties": {
-    "userId": {
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "username": {
+      "type": "string"
+    },
+    "school": {
+      "type": "string"
+    },
+    "academy": {
       "type": "string"
     },
     "role": {
       "type": "string"
     },
-    "name": {
+    "userId": {
       "type": "string"
     },
-    "phone": {
-      "type": "number"
-    },
-    "academy": {
-      "type": "string"
+    "created": {
+      "type": "date"
     }
   },
   "validations": [],
-  "relations": {
-   
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

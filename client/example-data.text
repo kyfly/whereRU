@@ -1,0 +1,218 @@
+注册用户
+{
+	"phone": 17764592171,
+	"school": "杭州电子科技大学",
+	"sex": "男",
+	"username": "测试",
+	"password": "test"
+}
+登录用户
+{
+	"phone": 17764592171,
+	"password": "test"
+}
+创建团队
+{
+	"name": "团团一家",
+	"logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+	"type": "创业",
+	"pics": [
+		"http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+		"http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+	],
+	"videos": [
+		"http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+	],
+	"desc": "团队描述",
+	"school": "杭州电子科技大学",
+	"chatId": "id",
+	"created": "2015/12/4"
+}
+{
+	"name": "团团一家工作室",
+	"logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+	"type": "创业",
+	"pics": [
+		"http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+		"http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+	],
+	"videos": [
+		"http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+	],
+	"desc": "团队描述",
+	"school": "杭电",
+	"chatId": "id",
+	"created": "2015/12/05"
+}
+创建活动
+{
+  "title": "团团一家招新",
+  "authorName": "测试",
+  "authorId": "5672b3f5337626dd96fb52a0",
+  "explainUrl": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html",
+  "verifyRule": "姓名",
+  "created": "2015/12/04",
+  "started": "2015/12/04",
+  "ended": "2015/12/04",
+	"active": {
+  	"_formItems": [
+      {
+        "name": "姓名",
+        "type": "text",
+        "id": 0
+      },
+      {
+        "name": "性别",
+        "type": "radio",
+        "options": [
+          "男","女"
+        ],
+        "id": 1
+      },
+      {
+        "name": "照片",
+        "type": "file",
+        "id": 2
+      }
+    ]
+  },
+  "actType": "form"
+}
+{
+  "title": "团团一家优秀成员",
+  "authorName": "测试",
+  "authorId": "5672b3f5337626dd96fb52a0",
+  "explainUrl": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html",
+  "verifyRule": "姓名",
+  "created": "2015/12/04",
+  "started": "2015/12/04",
+  "ended": "2015/12/04",
+	"active": {
+		"max": 2,
+		"cycle": "24",
+		"_voteItems": [
+			{
+				"name": "小明",
+				"id": 0
+			},
+			{
+				"name": "大名",
+				"id": 1
+			},
+			{
+				"name": "帅帅",
+				"id": 3
+			}
+		]
+	},
+  "actType": "vote"
+}
+{
+  "title": "团团一家纪念章抢票",
+  "authorName": "测试",
+  "authorId": "5672b3f5337626dd96fb52a0",
+  "explainUrl": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html",
+  "verifyRule": "姓名",
+  "created": "2015/12/04",
+  "started": "2015/12/04",
+  "ended": "2015/12/04",
+	"active": {
+	  "started": "2015/12/5",
+		"total": 6,
+		"_seckillItems": [
+			{
+				"name": "纪念U盘",
+				"count": 2,
+				"id": 0
+			},
+			{
+				"name": "纪念手镯",
+				"count": 2,
+				"id": 1
+			},
+			{
+				"name": "纪念手链",
+				"count": 2,
+				"id": 2
+			}
+		]
+	},
+  "actType": "seckill"
+}
+创建竞赛
+{
+  "name": "团团一家最佳程序员竞赛",
+  "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+  "explainUrl": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html",
+  "startTime": "2015/12/04"
+}
+团队资料
+{
+  "name": "团队任务计划",
+  "dataUrl": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html",
+  "created": "2015/12/04",
+  "loader": "测试"
+}
+加入团队
+{
+  "email": "17764592171@etuan.org",
+  "phone": "17764592171",
+  "username": "测试",
+  "school": "杭州电子科技大学",
+  "academy": "计算机学院",
+  "role": "管理",//0表示未通过验证
+  "userId": "5672b3f5337626dd96fb52a0",
+  "created": "2015/12/04"
+}
+竞赛资料
+{
+  "name": "挑战杯申请表",
+  "dataUrl": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html",
+  "created": "2015/12/04",
+  "loader": "测试"
+}
+竞赛通知
+{
+  "content": "挑战杯申请表上传",
+  "created": "2015/12/04",
+  "active": {
+  	"_formItems": [
+      {
+        "name": "申请表",
+        "type": "file",
+        "id": 0
+      }
+    ]
+  }
+}
+团队参与竞赛
+HTTP PUT http://localhost:3000/api/Races/RACEID/raceTeams/rel/TEAMID?access_token=ACCESSTOKEN
+填写表单
+{
+  "result": [{
+			"name": "测试"
+		},{
+			"name": "男"
+		},{
+			"name": "我的文件",
+			"url": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html"
+		}
+	],
+  "verifyId": "测试",
+  "created": "2015/12/04",
+  "formId": "5672b729337626dd96fb52a3"
+}
+参与投票
+{
+  "result": [
+    0,1,1
+  ],
+  "verifyId": "测试",
+  "created": "2015/12/04",
+  "voteId": "5672b96a88b7c0a97d0259b4"
+}
+用户浏览活动/通知
+{
+  "userId": "5672b3f5337626dd96fb52a0",
+  "name": "测试"
+}

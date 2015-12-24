@@ -1,0 +1,41 @@
+{
+  "name": "Vote",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "limit": {
+      "type": "number",
+      "default": 1
+    },
+    "max": {
+      "type": "number"
+    },
+    "cycle": {
+      "type": "number",
+      "default": 99999,
+      "commit": "用户可投票周期，单位小时"
+    },
+    "updated": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "voteResults": {
+      "model": "VoteResult",
+      "type": "hasMany"
+    },
+    "voteItems": {
+      "model": "VoteItem",
+      "type": "embedsMany",
+      "options": {
+        "validate": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

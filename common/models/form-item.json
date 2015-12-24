@@ -1,28 +1,20 @@
 {
-  "name": "Active",
+  "name": "FormItem",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "title": {
+    "name": {
       "type": "string"
     },
     "type": {
       "type": "string"
     },
-    "secret": {
-      "type": "number"
-    },
-    "actItem": {
+    "options": {
       "type": [
-        "object"
-      ]
-    },
-    "result": {
-      "type": [
-        "object"
+        "string"
       ]
     }
   },

@@ -1,0 +1,27 @@
+{
+  "name": "Form",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "updated": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "formResults": {
+      "model": "FormResult",
+      "type": "hasMany"
+    },
+    "formItems": {
+      "model": "FormItem",
+      "type": "embedsMany"
+    }
+  },
+  "acls": [
+  ],
+  "methods": {}
+}

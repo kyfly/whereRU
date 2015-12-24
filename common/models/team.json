@@ -1,6 +1,5 @@
 {
   "name": "Team",
-  "plural": "team",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -8,69 +7,137 @@
   },
   "properties": {
     "name": {
-      "type": "string",
-      "required": true
-    },
-    "type": {
-      "type": "string",
-      "required": true
-    },
-    "dynamic": {
-      "type": "string"
-    },
-    "pics": [{
-      "type": "string"
-    }],
-    "school": {
-      "type": "string"
-    },
-    "explainUrl": {
       "type": "string"
     },
     "logoUrl": {
       "type": "string"
     },
+    "type": {
+      "type": "string"
+    },
+    "pics": {
+      "type": [
+        "string"
+      ]
+    },
+    "videos": {
+      "type": [
+        "string"
+      ]
+    },
+    "desc": {
+      "type": "string"
+    },
+    "school": {
+      "type": "string"
+    },
     "created": {
-      "type": "Date"
+      "type": "date"
+    },
+    "updated": {
+      "type": "date"
+    },
+    "deleted": {
+      "type": "date"
     },
     "chatId": {
       "type": "string"
-    },
-    "updated": {
-      "type": "Date"
-    },
-    "userIds": [{
-      "type": "string"
-    }]
+    }
   },
   "validations": [],
   "relations": {
-    "projects": {
-      "type": "hasMany",
-      "model": "Project",
-      "foreignKey": ""
-    },
-    "messages": {
-      "type": "hasMany",
-      "model": "Message",
-      "foreignKey": ""
-    },
     "members": {
-      "type": "hasMany",
       "model": "Member",
-      "foreignKey": ""
+      "type": "hasMany"
     },
-    "histories": {
-      "type": "embedsMany",
-      "model": "TeamHistory",
-      "foreignKey": "teamId"
+    "activities": {
+      "model": "Activity",
+      "type": "hasMany"
     },
-    "actives": {
-      "type": "hasMany",
-      "model": "Active",
-      "foreignKey": ""
+    "races": {
+      "model": "Race",
+      "type": "hasMany"
+    },
+    "materials": {
+      "model": "Material",
+      "type": "hasMany"
     }
   },
-  "acls": [],
+  "acls": [
+  {
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "DENY"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "ALLOW",
+    "property": "find"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "create"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__create__activities"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__updateById__activities"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__get__activities"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__create__races"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__updateById__races"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__get__races"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__create__materials"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__updateById__materials"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__get__materials"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$authenticated",
+    "permission": "ALLOW",
+    "property": "__create__members"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__updateById__members"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__get__members"
+  }],
   "methods": {}
 }

@@ -1,26 +1,29 @@
 {
-  "name": "Material",
+  "name": "Reader",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
+    "userId": {
+      "type": "string"
+    },
     "name": {
-      "type": "string"
-    },
-    "dataUrl": {
-      "type": "string"
-    },
-    "created": {
-      "type": "date"
-    },
-    "loader": {
       "type": "string"
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "notices": {
+      "model": "Notice",
+      "type": "belongsTo"
+    },
+    "activeties": {
+      "model": "Activety",
+      "type": "belongsTo"
+    }
+  },
   "acls": [],
   "methods": {}
 }

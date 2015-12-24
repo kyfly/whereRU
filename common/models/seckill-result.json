@@ -1,0 +1,35 @@
+{
+  "name": "SeckillResult",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "created": {
+      "type": "date"
+    },
+    "get": {
+      "type": "boolean"
+    },
+    "verifyId": {
+      "type": "string"
+    },
+    "item": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "seckill": {
+      "model": "Seckill",
+      "type": "belongsTo"
+    },
+    "user": {
+      "model": "whereRUUser",
+      "type": "belongsTo"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

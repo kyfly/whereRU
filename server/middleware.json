@@ -15,14 +15,12 @@
   "session": {},
   "auth": {},
   "parse": {},
-  "routes": {
-    
-  },
+  "routes": {},
   "files": {
     "loopback#static": {
       "params": "$!../client"
     }
-    },
+  },
   "final": {
     "loopback#urlNotFound": {
       "params": "$!../client/index.html"

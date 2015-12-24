@@ -1,19 +1,19 @@
 {
-  "name": "UserMessage",
-  "plural": "user-message",
+  "name": "VoteItem",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "messageId": {
-      "type": "string",
-      "required": true
+    "name": {
+      "type": "string"
     },
-    "readed": {
-      "type": "bool",
-      "required": true
+    "imgUrl": {
+      "type": "string"
+    },
+    "count": {
+      "type": "string"
     }
   },
   "validations": [],

@@ -1,0 +1,35 @@
+{
+  "name": "FormResult",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "result": {
+      "type": [
+        "object"
+      ]
+    },
+    "verifyId": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "form": {
+      "model": "Form",
+      "type": "belongsTo"
+    },
+    "user": {
+      "model": "whereRUUser",
+      "type": "belongsTo"
+    }
+  },
+  "acls": [
+  ],
+  "methods": {}
+}

@@ -1,5 +1,5 @@
 {
-  "name": "TeamHistory",
+  "name": "SeckillItem",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,13 +9,8 @@
     "name": {
       "type": "string"
     },
-    "updateAt": {
-      "type": "date"
-    },
-    "members": {
-      "type": [
-        "object"
-      ]
+    "count": {
+      "type": "number"
     }
   },
   "validations": [],

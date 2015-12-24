@@ -32,7 +32,11 @@
     "dataSource": "db",
     "public": false
   },
-  "RUser": {
+  "School": {
+    "dataSource": "db",
+    "public": true
+  },
+  "whereRUUser": {
     "dataSource": "db",
     "public": true
   },
@@ -40,47 +44,63 @@
     "dataSource": "db",
     "public": true
   },
-  "ContestOrg": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Contest": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Project": {
-    "dataSource": "db",
-    "public": true
-  },
   "Member": {
     "dataSource": "db",
-    "public": true
+    "public": false
   },
-  "ProjectResult": {
+  "Race": {
     "dataSource": "db",
     "public": true
   },
   "Material": {
     "dataSource": "db",
-    "public": true
+    "public": false
   },
-  "Message": {
+  "Notice": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Reader": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Activity": {
     "dataSource": "db",
     "public": true
   },
-  "Active": {
+  "Form": {
     "dataSource": "db",
     "public": true
   },
-  "School": {
+  "FormItem": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Vote": {
     "dataSource": "db",
     "public": true
   },
-  "UserMessage": {
+  "VoteItem": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Seckill": {
     "dataSource": "db",
     "public": true
   },
-  "TeamHistory": {
+  "SeckillItem": {
+    "dataSource": "db",
+    "public": false
+  },
+  "FormResult": {
+    "dataSource": "db",
+    "public": false
+  },
+  "VoteResult": {
+    "dataSource": "db",
+    "public": false
+  },
+  "SeckillResult": {
     "dataSource": "db",
     "public": true
   }

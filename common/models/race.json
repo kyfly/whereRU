@@ -1,0 +1,52 @@
+{
+  "name": "Race",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "logoUrl": {
+      "type": "string"
+    },
+    "explainUrl": {
+      "type": "string"
+    },
+    "startTime": {
+      "type": "date"
+    },
+    "authorize": {
+      "type": "string"
+    },
+    "authCode": {
+      "type": "string"
+    },
+    "school": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "raceTeams": {
+      "model": "Team",
+      "type": "hasAndBelongsToMany"
+    },
+    "materials": {
+      "model": "Material",
+      "type": "hasMany"
+    },
+    "notices": {
+      "model": "Notice",
+      "type": "hasMany"
+    },
+    "team": {
+      "model": "Team",
+      "type": "belongsTo"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
