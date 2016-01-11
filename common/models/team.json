@@ -15,15 +15,11 @@
     "type": {
       "type": "string"
     },
-    "pics": {
-      "type": [
-        "string"
-      ]
+    "hidden": {
+      "type": "boolean"
     },
-    "videos": {
-      "type": [
-        "string"
-      ]
+    "videoUrl": {
+      "type": "string"
     },
     "desc": {
       "type": "string"
@@ -47,97 +43,108 @@
   "validations": [],
   "relations": {
     "members": {
-      "model": "Member",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "Member"
     },
     "activities": {
-      "model": "Activity",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "Activity"
     },
     "races": {
-      "model": "Race",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "Race"
     },
-    "materials": {
-      "model": "Material",
-      "type": "hasMany"
+    "departments": {
+      "type": "embedsMany",
+      "model": "TeamDepartment"
+    },
+    "histories": {
+      "type": "hasMany",
+      "model": "TeamHistory"
+    },
+    "albums": {
+      "type": "hasMany",
+      "model": "TeamAlbum"
     }
   },
   "acls": [
-  {
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "DENY"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "ALLOW",
-    "property": "find"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "create"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__create__activities"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__updateById__activities"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__get__activities"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__create__races"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__updateById__races"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__get__races"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__create__materials"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__updateById__materials"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__get__materials"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$authenticated",
-    "permission": "ALLOW",
-    "property": "__create__members"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__updateById__members"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__get__members"
-  }],
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "search"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getMySchoolTeams"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__get__albums"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__get__activities"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "__create__members"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__get__members"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__findById__members"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__destroyById__members"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__updateById__members"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "getActivitiesData"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__updateById__departments"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__destroyById__departments"
+    }
+  ],
   "methods": {}
 }

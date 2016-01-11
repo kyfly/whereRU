@@ -1,0 +1,31 @@
+{
+  "name": "TeamAlbum",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "created": {
+      "type": "date"
+    },
+    "deleted": {
+      "type": "date"
+    },
+    "title": {
+      "type": "string"
+    },
+    "pics": {
+      "type": [
+        "string"
+      ]
+    },
+    "hidden": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

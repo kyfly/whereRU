@@ -21,12 +21,12 @@
   "validations": [],
   "relations": {
     "vote": {
-      "model": "Vote",
-      "type": "belongsTo"
+      "type": "belongsTo",
+      "model": "Vote"
     },
     "user": {
-      "model": "whereRUUser",
-      "type": "belongsTo"
+      "type": "belongsTo",
+      "model": "whereRUUser"
     }
   },
   "acls": [],

@@ -19,6 +19,9 @@
       "type": "string",
       "comment": "区分校园社团和兴趣社团的活动"
     },
+    "imgUrl": {
+      "type": "string"
+    },
     "explainUrl": {
       "type": "string"
     },
@@ -45,56 +48,79 @@
     },
     "keyword": {
       "type": "string"
+    },
+    "hidden": {
+      "type": "boolean"
+    },
+    "issue": {
+      "type": "boolean"
     }
   },
   "validations": [],
   "relations": {
     "forms": {
-      "model": "Form",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "Form"
     },
     "votes": {
-      "model": "Vote",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "Vote"
     },
     "seckills": {
-      "model": "Seckill",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "Seckill"
     },
     "readers": {
-      "model": "Reader",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "Reader"
     },
     "team": {
-      "model": "Team",
-      "type": "belongsTo"
+      "type": "belongsTo",
+      "model": "Team"
     }
   },
   "acls": [
-  {
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "DENY"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "ALLOW",
-    "property": "__create__readers"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "ALLOW",
-    "property": "__count__readers"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "ALLOW",
-    "property": "getMySchoolActiveties"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "ALLOW",
-    "property": "findById"
-  }],
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__create__readers"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__count__readers"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getMySchoolActiveties"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "search"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getHotActiveties"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findById"
+    }
+  ],
   "methods": {}
 }

@@ -1,0 +1,32 @@
+{
+  "name": "UserData",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "integration": {
+      "type": "number",
+      "comment": "积分"
+    },
+    "balance": {
+      "type": "number",
+      "comment": "余额"
+    },
+    "credit": {
+      "type": "number",
+      "comment": "信用值"
+    },
+    "label": {
+      "type": [
+        "string"
+      ],
+      "comment": "标签"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

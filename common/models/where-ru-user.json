@@ -1,8 +1,8 @@
 {
   "name": "whereRUUser",
+  "plural": "WUsers",
   "base": "User",
   "idInjection": true,
-  "plural": "WUsers",
   "options": {
     "validateUpsert": true
   },
@@ -24,61 +24,132 @@
     },
     "name": {
       "type": "string"
+    },
+    "studentId": {
+      "type": "number"
+    },
+    "sign": {
+      "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "teams": {
-      "model": "Team",
+    "data": {
+      "type": "hasOne",
+      "model": "UserData",
+      "foreignKey": "userId"
+    },
+    "histories": {
       "type": "hasMany",
+      "model": "UserHistory",
+      "foreignKey": "userId"
+    },
+    "teams": {
+      "type": "hasMany",
+      "model": "Team",
       "foreignKey": "userId"
     },
     "formResult": {
-      "model": "FormResult",
       "type": "hasMany",
+      "model": "FormResult",
       "foreignKey": "userId"
     },
     "voteResult": {
-      "model": "VoteResult",
       "type": "hasMany",
+      "model": "VoteResult",
       "foreignKey": "userId"
     },
     "seckillResult": {
-      "model": "SeckillResult",
       "type": "hasMany",
+      "model": "SeckillResult",
       "foreignKey": "userId"
     }
   },
-  "acls": [{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__create__teams"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__updateById__teams"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$owner",
-    "permission": "ALLOW",
-    "property": "__get__teams"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$authenticated",
-    "permission": "ALLOW",
-    "property": "__create__formResult"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$authenticated",
-    "permission": "ALLOW",
-    "property": "__create__voteResult"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$authenticated",
-    "permission": "ALLOW",
-    "property": "__create__seckillResult"
-  }],
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "search"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__formResult"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__voteResult"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__seckillResult"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__updateById__teams"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "getMyTeams"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "getActivitiesHistories"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "getRaceHistories"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__updateAttributes"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__teams"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__teams"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__findById__formResult"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__findById__VoteResult"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__findById__seckillResult"
+    }
+  ],
   "methods": {}
 }

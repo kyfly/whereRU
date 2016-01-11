@@ -22,20 +22,20 @@
   "validations": [],
   "relations": {
     "form": {
-      "model": "Form",
-      "type": "hasOne"
+      "type": "hasOne",
+      "model": "Form"
     },
     "vote": {
-      "model": "Vote",
-      "type": "hasOne"
+      "type": "hasOne",
+      "model": "Vote"
     },
     "seckill": {
-      "model": "Seckill",
-      "type": "hasOne"
+      "type": "hasOne",
+      "model": "Seckill"
     },
     "readers": {
-      "model": "Reader",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "Reader"
     }
   },
   "acls": [],

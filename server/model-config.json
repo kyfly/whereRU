@@ -40,6 +40,14 @@
     "dataSource": "db",
     "public": true
   },
+  "UserData": {
+    "dataSource": "db",
+    "public": false
+  },
+  "UserHistory": {
+    "dataSource": "db",
+    "public": false
+  },
   "Team": {
     "dataSource": "db",
     "public": true
@@ -103,5 +111,17 @@
   "SeckillResult": {
     "dataSource": "db",
     "public": true
+  },
+  "TeamDepartment": {
+    "dataSource": "db",
+    "public": true
+  },
+  "TeamAlbum": {
+    "dataSource": "db",
+    "public": false
+  },
+  "TeamHistory": {
+    "dataSource": "db",
+    "public": false
   }
 }

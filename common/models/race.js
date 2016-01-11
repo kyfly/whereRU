@@ -12,4 +12,31 @@ module.exports = function(Race) {
 				ctx.res.send(notice);
 		})
 	});
+	Race.beforeRemote('prototype.__link__raceTeams', function(){});
+	Race.remoteMethod('search', {
+		accepts: {
+			arg: 'keyword', type: 'string',
+		},
+		returns: {
+			arg: 'races', type: "array"
+		},
+		http: {
+			path: '/search', verb: 'get'
+		}
+	});
+	Race.search = function (){}
+	Race.remoteMethod('getMySchoolRaces', {
+		accepts: [{
+			arg: 'school', type: 'string',
+		},{
+			arg: 'limit', type: 'number',
+		},{
+			arg: 'offset', type: 'number',
+		}],
+		returns: {
+			arg: 'races', type: 'array'
+		},
+		http: {path: '/mySchoolRaces', verb: 'get'}
+	});
+	Race.getMySchoolRaces = function (){}
 };

@@ -6,13 +6,10 @@
     "validateUpsert": true
   },
   "properties": {
-    "email": {
-      "type": "string"
-    },
     "phone": {
       "type": "string"
     },
-    "username": {
+    "name": {
       "type": "string"
     },
     "school": {
@@ -21,10 +18,16 @@
     "academy": {
       "type": "string"
     },
-    "role": {
-      "type": "string"
+    "verified": {
+      "type": "boolean"
     },
     "userId": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    },
+    "remark": {
       "type": "string"
     },
     "created": {

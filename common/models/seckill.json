@@ -23,14 +23,32 @@
   "validations": [],
   "relations": {
     "seckillResults": {
-      "model": "SeckillResult",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "SeckillResult"
     },
     "seckillItems": {
-      "model": "SeckillItem",
-      "type": "embedsMany"
+      "type": "embedsMany",
+      "model": "SeckillItem"
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "margin"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__get__seckillResults"
+    }
+  ],
   "methods": {}
 }

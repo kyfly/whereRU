@@ -9,7 +9,13 @@
     "name": {
       "type": "string"
     },
-    "logoUrl": {
+    "imgUrl": {
+      "type": "string"
+    },
+    "authorName": {
+      "type": "string"
+    },
+    "authorId": {
       "type": "string"
     },
     "explainUrl": {
@@ -18,12 +24,6 @@
     "startTime": {
       "type": "date"
     },
-    "authorize": {
-      "type": "string"
-    },
-    "authCode": {
-      "type": "string"
-    },
     "school": {
       "type": "string"
     }
@@ -31,22 +31,46 @@
   "validations": [],
   "relations": {
     "raceTeams": {
-      "model": "Team",
-      "type": "hasAndBelongsToMany"
+      "type": "hasAndBelongsToMany",
+      "model": "Team"
     },
     "materials": {
-      "model": "Material",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "Material"
     },
     "notices": {
-      "model": "Notice",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "Notice"
     },
     "team": {
-      "model": "Team",
-      "type": "belongsTo"
+      "type": "belongsTo",
+      "model": "Team"
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "search"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getMySchoolRaces"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "__link__raceTeams"
+    }
+  ],
   "methods": {}
 }

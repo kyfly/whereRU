@@ -15,19 +15,19 @@
     "verifyId": {
       "type": "string"
     },
-    "item": {
-      "type": "string"
+    "itemId": {
+      "type": "number"
     }
   },
   "validations": [],
   "relations": {
     "seckill": {
-      "model": "Seckill",
-      "type": "belongsTo"
+      "type": "belongsTo",
+      "model": "Seckill"
     },
     "user": {
-      "model": "whereRUUser",
-      "type": "belongsTo"
+      "type": "belongsTo",
+      "model": "whereRUUser"
     }
   },
   "acls": [],

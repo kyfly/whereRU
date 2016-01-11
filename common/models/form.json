@@ -13,15 +13,26 @@
   "validations": [],
   "relations": {
     "formResults": {
-      "model": "FormResult",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "FormResult"
     },
     "formItems": {
-      "model": "FormItem",
-      "type": "embedsMany"
+      "type": "embedsMany",
+      "model": "FormItem"
     }
   },
   "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__get__formResults"
+    }
   ],
   "methods": {}
 }

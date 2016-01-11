@@ -1,28 +1,20 @@
 {
-  "name": "Reader",
+  "name": "TeamDepartment",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "userId": {
-      "type": "string"
-    },
     "name": {
       "type": "string"
     },
-    "from": {
+    "desc": {
       "type": "string"
     }
   },
   "validations": [],
-  "relations": {
-    "activeties": {
-      "type": "belongsTo",
-      "model": "Activety"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

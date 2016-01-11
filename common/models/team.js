@@ -1,4 +1,15 @@
 module.exports = function(Team) {
+	Team.remoteMethod('search', {
+		accepts: {
+			arg: 'keyword', type: 'string',
+		},
+		returns: {
+			arg: 'teams', type: "array"
+		},
+		http: {
+			path: '/search', verb: 'get'
+		}
+	});
 	Team.beforeRemote('prototype.__create__activities', function (ctx, ins, next) {
 		var active = ctx.req.body.active;
 		var type = ctx.req.body.actType;
@@ -27,4 +38,27 @@ module.exports = function(Team) {
 		ctx.req.body.school = ctx.instance.school;
 		next();
 	});
+	Team.remoteMethod('getMySchoolTeams', {
+		accepts: [{
+			arg: 'school', type: 'string',
+		},{
+			arg: 'limit', type: 'number',
+		},{
+			arg: 'offset', type: 'number',
+		}],
+		returns: {
+			arg: 'races', type: 'array'
+		},
+		http: {path: '/mySchoolTeams', verb: 'get'}
+	});
+	Team.getMySchoolTeams = function (){}
+	Team.remoteMethod('getActivitiesData', {
+		returns: {
+			arg: 'activities', type: 'array'
+		},
+		http: {path: '/:id/activitiesData', verb: 'get'}
+	});
+	Team.getActivitiesData = function (){}
+	
+	Team.beforeRemote('prototype.__create__members',function () {});
 };

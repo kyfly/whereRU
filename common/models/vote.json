@@ -15,7 +15,7 @@
     },
     "cycle": {
       "type": "number",
-      "default": 99999,
+      "default": 0,
       "commit": "用户可投票周期，单位小时"
     },
     "updated": {
@@ -25,12 +25,12 @@
   "validations": [],
   "relations": {
     "voteResults": {
-      "model": "VoteResult",
-      "type": "hasMany"
+      "type": "hasMany",
+      "model": "VoteResult"
     },
     "voteItems": {
-      "model": "VoteItem",
       "type": "embedsMany",
+      "model": "VoteItem",
       "options": {
         "validate": true
       }

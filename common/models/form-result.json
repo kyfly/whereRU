@@ -21,15 +21,14 @@
   "validations": [],
   "relations": {
     "form": {
-      "model": "Form",
-      "type": "belongsTo"
+      "type": "belongsTo",
+      "model": "Form"
     },
     "user": {
-      "model": "whereRUUser",
-      "type": "belongsTo"
+      "type": "belongsTo",
+      "model": "whereRUUser"
     }
   },
-  "acls": [
-  ],
+  "acls": [],
   "methods": {}
 }

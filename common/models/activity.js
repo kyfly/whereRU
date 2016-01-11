@@ -16,9 +16,9 @@ module.exports = function(Activity) {
 			arg: 'offset', type: 'number',
 		}],
 		returns: {
-			arg: 'activties', type: 'object'
+			arg: 'activties', type: 'array'
 		},
-		http: {path: '/getMySchoolActiveties', verb: 'get'}
+		http: {path: '/mySchoolActiveties', verb: 'get'}
 	});
 	Activity.getMySchoolActiveties = function (school, limit, offset, cb) {
 		if (!(school && limit && (offset === 0 ? true: false))) 
@@ -31,4 +31,31 @@ module.exports = function(Activity) {
 			cb(null, activties);
 		});
 	}
+	Activity.remoteMethod('search', {
+		accepts: {
+			arg: 'keyword', type: 'string',
+		},
+		returns: {
+			arg: 'activties', type: "array"
+		},
+		http: {
+			path: '/search', verb: 'get'
+		}
+	});
+	Activity.search = function () {}
+	Activity.remoteMethod('getHotActiveties', {
+		accepts: [{
+			arg: 'school', type: 'string',
+		},{
+			arg: 'limit', type: 'number',
+		}],
+		returns: {
+			arg: 'activties', type: 'array'
+		},
+		http: {path: '/hotActiveties', verb: 'get'}
+	});
+	//
+	Activity.getHotActiveties = function () {}
+	//
+	Activity.afterRemote('__create__readers', function () {});
 };
