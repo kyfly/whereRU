@@ -10,6 +10,13 @@ module.exports = function(Team) {
 			path: '/search', verb: 'get'
 		}
 	});
+// 	Team.afterRemote('prototype.__link__joinRaces', function (ctx, ins, next) {
+// 		 ins.c = 'aaa';
+// 		 ins.save(function (err, r) {
+// console.log(err, r);
+// 		 });
+// 		 next();
+// 	});
 	Team.beforeRemote('prototype.__create__activities', function (ctx, ins, next) {
 		var active = ctx.req.body.active;
 		var type = ctx.req.body.actType;

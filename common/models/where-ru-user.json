@@ -49,17 +49,17 @@
       "model": "Team",
       "foreignKey": "userId"
     },
-    "formResult": {
+    "formResults": {
       "type": "hasMany",
       "model": "FormResult",
       "foreignKey": "userId"
     },
-    "voteResult": {
+    "voteResults": {
       "type": "hasMany",
       "model": "VoteResult",
       "foreignKey": "userId"
     },
-    "seckillResult": {
+    "seckillResults": {
       "type": "hasMany",
       "model": "SeckillResult",
       "foreignKey": "userId"
@@ -76,19 +76,19 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__create__formResult"
+      "property": "__create__formResults"
     },
     {
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__create__voteResult"
+      "property": "__create__voteResults"
     },
     {
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__create__seckillResult"
+      "property": "__create__seckillResults"
     },
     {
       "principalType": "ROLE",
@@ -98,7 +98,7 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "$owner",
+      "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "getMyTeams"
     },
@@ -136,19 +136,25 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__findById__formResult"
+      "property": "__findById__formResults"
     },
     {
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__findById__VoteResult"
+      "property": "__findById__VoteResults"
     },
     {
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__findById__seckillResult"
+      "property": "__findById__seckillResults"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "confirmSchool"
     }
   ],
   "methods": {}

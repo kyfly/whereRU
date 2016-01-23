@@ -22,13 +22,7 @@ module.exports = function(server) {
     })
   });
 
-  server.get('/eventManage*', function(req, res) {
-	  res.sendFile(path.join(__dirname, '../../client/admin/index.html'));
-	});
-	server.get('/search|myTeam|home|signUp|login|teams|events', function(req, res) {
-    res.sendFile(path.join(__dirname, '../../client/index.html'));
-	});
-  server.get('/events*|chats*', function(req, res) {
+  server.get(/^\/w\/*/, function(req, res) {
     res.sendFile(path.join(__dirname, '../../client/index.html'));
   });
 };

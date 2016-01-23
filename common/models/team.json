@@ -65,13 +65,17 @@
     "albums": {
       "type": "hasMany",
       "model": "TeamAlbum"
+    },
+    "partakedRaces": {
+      "type": "hasAndBelongsToMany",
+      "model": "Race"
     }
   },
   "acls": [
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
+      "permission": "ALLOW"
     },
     {
       "principalType": "ROLE",
