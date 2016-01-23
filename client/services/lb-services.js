@@ -1,3 +1,27 @@
+/**
+ * LOOPBACK restful接口，使用resource封装
+ * @param  {[type]} window    [description]
+ * @param  {[type]} angular   [description]
+ * @param  {[type]} undefined [description]
+ * @return {[type]}           [description]
+ * 使用方法：应用中引入模块'lbServices',控制器中引入相应的服务名称
+ * model.method([queryObject, postObject], successFn, errorFn)
+ * model       服务名称
+ * method      resource参数  
+ * queryObject 参数对象       根据restful接口匹配，不匹配的参数作为query参数,无参数可省略
+ * postObject  发送数据对象   PUT，POST需要发送的数据，GET方法无该参数
+ * successFn   成功回调
+ * errorFn     失败回调
+ * 示例：
+ * User.login({
+ *   phone: 12345678901,
+ *   password: 123
+ * }, function (token) {
+ *   alert('success');
+ * }, function (err) {
+ *   alert('error');
+ * })
+ */
 (function(window, angular, undefined) {
   'use strict';
 

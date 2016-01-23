@@ -67,5 +67,5 @@ module.exports = function(Team) {
 	});
 	Team.getActivitiesData = function (){}
 	
-	Team.beforeRemote('prototype.__create__members',function () {});
+	//Team.beforeRemote('prototype.__create__members',function () {});
 };
