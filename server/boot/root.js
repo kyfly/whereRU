@@ -9,18 +9,18 @@ module.exports = function(server) {
   // server.use(router);
   server.use('/ue/uploads', upload({}));
 
-  server.get('/docx2html', function (req, res) {
-    var options = {
-      styleMap: [
-          "u => em"
-      ],
-    };
-    mammoth.convertToHtml({path: '../client' + req.query.path}, 
-      options)
-      .then(function(result){
-        res.send(result.value);
-    })
-  });
+  // server.get('/docx2html', function (req, res) {
+  //   var options = {
+  //     styleMap: [
+  //         "u => em"
+  //     ],
+  //   };
+  //   mammoth.convertToHtml({path: '../client' + req.query.path}, 
+  //     options)
+  //     .then(function(result){
+  //       res.send(result.value);
+  //   })
+  // });
 
   server.get(/^\/w\/*/, function(req, res) {
     res.sendFile(path.join(__dirname, '../../client/index.html'));
