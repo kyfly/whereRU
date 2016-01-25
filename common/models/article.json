@@ -1,0 +1,48 @@
+{
+  "name": "Article",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "contentUrl": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "viewUser": {
+      "type": "hasMany",
+      "model": "Reader",
+      "comments": "浏览量"
+    },
+    "likeUser": {
+      "type": "hasMany",
+      "model": "LikeUser",
+      "comments": "点赞量"
+    },
+    "comments": {
+      "type": "hasMany",
+      "model": "Comment",
+      "comments": "评论"
+    },
+    "coterie": {
+      "type": "belongsTo",
+      "model": "Coterie"
+    },
+    "team": {
+      "type": "belongsTo",
+      "model": "Team"
+    },
+    "owner": {
+      "type": "belongsTo",
+      "model": "whereRUUser"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

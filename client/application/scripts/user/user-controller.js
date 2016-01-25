@@ -1,7 +1,13 @@
 app.controller('LoginController', ['User', '$scope', function(User, $scope){
 	$scope.login = function () {
-		User.login($scope.user, function (data) {
-
+		User.login({
+			phone: "15456",
+			password: "54",
+			a: {
+				a:c
+			}
+		}, function (data) {
+ 
 		});
 	}
 }])

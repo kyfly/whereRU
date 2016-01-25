@@ -69,6 +69,10 @@
     "partakedRaces": {
       "type": "hasAndBelongsToMany",
       "model": "Race"
+    },
+    "articles": {
+      "type": "hasMany",
+      "model": "Artical"
     }
   },
   "acls": [

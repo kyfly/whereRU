@@ -1,24 +1,24 @@
 {
-  "name": "Reader",
+  "name": "Reply",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "from": {
+    "content": {
       "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "activeties": {
+    "comments": {
       "type": "belongsTo",
-      "model": "Activety"
+      "model": "Comment"
     },
-    "articals": {
+    "owner": {
       "type": "belongsTo",
-      "model": "Article"
+      "model": "whereRUUser"
     }
   },
   "acls": [],

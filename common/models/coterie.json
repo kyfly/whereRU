@@ -1,0 +1,33 @@
+{
+  "name": "Coterie",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "logoUrl": {
+      "type": "string"
+    },
+    "lastView": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "fans": {
+      "type": "hasAndBelongsToMany",
+      "model": "whereRUUser",
+      "foreignKey": "userId"
+    },
+    "articles": {
+      "type": "hasMany",
+      "model": "Artical"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

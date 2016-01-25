@@ -123,5 +123,25 @@
   "TeamHistory": {
     "dataSource": "db",
     "public": false
+  },
+  "Coterie": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Article": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Commont": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Reply": {
+    "dataSource": "db",
+    "public": true
+  },
+  "LikeUser": {
+    "dataSource": "db",
+    "public": false
   }
 }

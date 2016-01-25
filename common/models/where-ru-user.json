@@ -63,6 +63,36 @@
       "type": "hasMany",
       "model": "SeckillResult",
       "foreignKey": "userId"
+    },
+    "readers": {
+      "type": "hasMany",
+      "model": "Reader",
+      "foreignKey": "userId"
+    },
+    "coteries": {
+      "type": "hasAndBelongsToMany",
+      "model": "Coterie",
+      "foreignKey": "userId"
+    },
+    "articles": {
+      "type": "hasMany",
+      "model": "Artical",
+      "foreignKey": "userId"
+    },
+    "likeUsers": {
+      "type": "hasMany",
+      "model": "LikeUser",
+      "foreignKey": "userId"
+    },
+    "comments": {
+      "type": "hasMany",
+      "model": "Comment",
+      "foreignKey": "userId"
+    },
+    "replys": {
+      "type": "hasMany",
+      "model": "Reply",
+      "foreignKey": "userId"
     }
   },
   "acls": [
