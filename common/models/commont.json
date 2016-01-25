@@ -1,24 +1,28 @@
 {
-  "name": "Reader",
+  "name": "Commont",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "from": {
+    "content": {
       "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "activeties": {
+    "articles": {
       "type": "belongsTo",
-      "model": "Activety"
+      "model": "Artical"
     },
-    "articals": {
+    "replys": {
+      "type": "hasMany",
+      "model": "Reply"
+    },
+    "owner": {
       "type": "belongsTo",
-      "model": "Article"
+      "model": "whereRUUser"
     }
   },
   "acls": [],
