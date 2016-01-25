@@ -26,12 +26,24 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
       $rootScope.orgName = localInfo.name;
       if ($window.location.pathname === '/eventManage/home') {
         $scope.redirect(0);
-      } else if ($window.location.pathname === '/eventManage/event') {
+      } else if ($window.location.pathname === '/eventManage/member') {
         $scope.redirect(1);
-      } else if ($window.location.pathname === '/eventManage/setting') {
+      } else if ($window.location.pathname === '/eventManage/event') {
         $scope.redirect(2);
-      } else if ($window.location.pathname === '/eventManage/help') {
+      } else if ($window.location.pathname === '/eventManage/activity') {
         $scope.redirect(3);
+      } else if ($window.location.pathname === '/eventManage/form') {
+        $scope.redirect(4);
+      } else if ($window.location.pathname === '/eventManage/vote') {
+        $scope.redirect(5);
+      } else if ($window.location.pathname === '/eventManage/seckill') {
+        $scope.redirect(6);
+      } else if ($window.location.pathname === '/eventManage/album') {
+        $scope.redirect(7);
+      } else if ($window.location.pathname === '/eventManage/setting') {
+        $scope.redirect(8);
+      } else if ($window.location.pathname === '/eventManage/help') {
+        $scope.redirect(9);
       }
     }, 50);
   });
@@ -44,9 +56,39 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
       'url': '/eventManage/home'
     },
     {
+      'id': 'sidebarMember',
+      'display_name': '成员管理',
+      'url': '/eventManage/member'
+    },
+    {
       'id': 'sidebarEvent',
-      'display_name': '竞赛',
+      'display_name': '竞赛管理',
       'url': '/eventManage/event'
+    },
+    {
+      'id': 'sidebarActivity',
+      'display_name': '活动管理',
+      'url': '/eventManage/activity'
+    },
+    {
+      'id': 'sidebarForm',
+      'display_name': '表单管理',
+      'url': '/eventManage/form'
+    },
+    {
+      'id': 'sidebarVote',
+      'display_name': '投票管理',
+      'url': '/eventManage/vote'
+    },
+    {
+      'id': 'sidebarSeckill',
+      'display_name': '抢票管理',
+      'url': '/eventManage/seckill'
+    },
+    {
+      'id': 'sidebarAlbum',
+      'display_name': '相册管理',
+      'url': '/eventManage/album'
     },
     {
       'id': 'sidebarSetting',
@@ -77,6 +119,17 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
 }
 
 function HomeCtrl($scope) {
+}
+
+function MemberCtrl($scope, Team) {
+  Team.members({},
+    function(){
+
+    },
+    function(){
+
+    }
+  );
 }
 
 function EventCtrl($scope, $resource, ContestOrg, Contest) {
@@ -286,6 +339,21 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
   $scope.close = '确定';
   $scope.deadline = {};
 
+}
+
+function ActivityCtrl($scope) {
+}
+
+function FormCtrl($scope) {
+}
+
+function VoteCtrl($scope) {
+}
+
+function SeckillCtrl($scope) {
+}
+
+function AlbumCtrl($scope) {
 }
 
 function SettingCtrl($scope, ContestOrg, $rootScope, School) {

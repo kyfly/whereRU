@@ -15,10 +15,11 @@
 <body>
 <!--侧边导航-->
 <ul class="side-nav fixed z-depth-2" id="sideBar" ng-show="access">
+  <h5 class="text-center orgName" ng-bind="orgName"></h5>
   <a class="logo brand-logo" href="/index.html">
     <img id="front-page-logo" src="/lib/img/logo.jpg">
   </a>
-  <h5 class="text-center orgName" ng-bind="orgName"></h5>
+  <hr id="sidebarHr">
   <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars" ng-class="{active: sidebar.active}" class="bold">
     <a class="waves-effect" href="{{sidebar.url}}" ng-click="redirect($index)">{{sidebar.display_name}}</a>
   </li>

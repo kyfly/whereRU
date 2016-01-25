@@ -12,12 +12,24 @@ body {
   margin-bottom: 80px;
 }
 
+hr {
+  border-top: 1px solid #DDDDDD;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
 .logo:hover {
   background-color: #ffffff;
 }
 
 #front-page-logo {
   height: 80px;
+}
+
+#sidebarHr {
+  width: 70%;
+  margin-top: -10px;
 }
 
 .topBar-logo {
@@ -36,6 +48,12 @@ body {
 
 .side-nav > li {
   text-align: center;
+  height: 55px;
+}
+
+.side-nav > li > a {
+  height: 55px;
+  line-height: 55px;
 }
 
 .side-nav li:hover, .side-nav li.active {
@@ -172,8 +190,7 @@ main {
 }
 
 .orgName {
-  margin-top: 0 !important;
-  margin-bottom: 30px !important;
+  margin-top: 30px !important;
   font-size: medium;
 }
 
@@ -196,4 +213,16 @@ main {
 .noticeText {
   font-size: 30px;
   font-weight: 300;
+}
+
+.addMember {
+  margin-top: 7px;
+}
+
+.memberInfo {
+  margin-left: 15px;
+}
+
+.telSpan {
+  margin-top: 10px !important;
 }
