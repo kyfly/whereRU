@@ -1,16 +1,19 @@
 {
-  "name": "TeamHistory",
+  "name": "VoteItem",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "created": {
+    "name": {
       "type": "string"
     },
-    "updateDate": {
-      "type": "object"
+    "imgUrl": {
+      "type": "string"
+    },
+    "count": {
+      "type": "string"
     }
   },
   "validations": [],

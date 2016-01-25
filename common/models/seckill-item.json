@@ -1,16 +1,16 @@
 {
-  "name": "TeamHistory",
+  "name": "SeckillItem",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "created": {
+    "name": {
       "type": "string"
     },
-    "updateDate": {
-      "type": "object"
+    "count": {
+      "type": "number"
     }
   },
   "validations": [],

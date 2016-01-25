@@ -1,0 +1,38 @@
+{
+  "name": "Form",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "updated": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "formResults": {
+      "type": "hasMany",
+      "model": "FormResult"
+    },
+    "formItems": {
+      "type": "embedsMany",
+      "model": "FormItem"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__get__formResults"
+    }
+  ],
+  "methods": {}
+}

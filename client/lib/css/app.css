@@ -85,15 +85,17 @@ footer{
   white-space:nowrap;
 }
 /*垂直时间轴*/
-.etuan_timeline {
+.timeline {
+  position: relative;
+}
+.timeline .timeline-body {
   margin: 10px 5px;
   padding: 0;
   list-style: none;
-  position: absolute;
+  position: relative;
   left:20px;
-  padding-bottom: 50px;
 }
-.etuan_timeline:before {
+.timeline .timeline-body:before {
   content: '';
   position: absolute;
   top: 0;
@@ -101,10 +103,10 @@ footer{
   width: 5px;
   background: #afdcf8;
 }
-.etuan_timeline>li {
+.timeline .timeline-body>li {
   position: relative;
 }
-.etuan_timeline>li .tip {
+.timeline .timeline-body>li .tip {
   width: 20px;
   height: 20px;
   background: #afdcf8;
@@ -117,12 +119,12 @@ footer{
   top: 3px;
   position: absolute;
 }
-.etuan_timeline>li .time{
+.timeline .timeline-body>li .time{
   margin: 0 0 0 30px;
   line-height: 30px;
   display: inline;
 }
-.etuan_timeline>li .content {
+.timeline .timeline-body>li .content {
   margin: 0 20px;
   padding: 0 5px;
   min-height: 50px;

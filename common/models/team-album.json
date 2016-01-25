@@ -1,5 +1,5 @@
 {
-  "name": "TeamHistory",
+  "name": "TeamAlbum",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -7,10 +7,21 @@
   },
   "properties": {
     "created": {
+      "type": "date"
+    },
+    "deleted": {
+      "type": "date"
+    },
+    "title": {
       "type": "string"
     },
-    "updateDate": {
-      "type": "object"
+    "pics": {
+      "type": [
+        "string"
+      ]
+    },
+    "hidden": {
+      "type": "boolean"
     }
   },
   "validations": [],

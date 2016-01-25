@@ -1,82 +1,71 @@
 {
-  "name": "Team",
-  "base": "PersistedModel",
+  "name": "whereRUUser",
+  "plural": "WUsers",
+  "base": "User",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "name": {
-      "type": "string"
-    },
-    "logoUrl": {
-      "type": "string"
-    },
-    "type": {
-      "type": "string"
-    },
-    "hidden": {
-      "type": "boolean"
-    },
-    "videoUrl": {
-      "type": "string"
-    },
-    "desc": {
-      "type": "string"
+    "phone": {
+      "type": "number"
     },
     "school": {
       "type": "string"
     },
-    "created": {
-      "type": "date"
+    "academy": {
+      "type": "string"
     },
-    "updated": {
-      "type": "date"
+    "sex": {
+      "type": "string"
     },
-    "deleted": {
-      "type": "date"
+    "headImgUrl": {
+      "type": "string"
     },
-    "chatId": {
+    "name": {
+      "type": "string"
+    },
+    "studentId": {
+      "type": "number"
+    },
+    "sign": {
       "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "members": {
-      "type": "hasMany",
-      "model": "Member"
-    },
-    "activities": {
-      "type": "hasMany",
-      "model": "Activity"
-    },
-    "races": {
-      "type": "hasMany",
-      "model": "Race"
-    },
-    "departments": {
-      "type": "embedsMany",
-      "model": "TeamDepartment"
+    "data": {
+      "type": "hasOne",
+      "model": "UserData",
+      "foreignKey": "userId"
     },
     "histories": {
       "type": "hasMany",
-      "model": "TeamHistory"
+      "model": "UserHistory",
+      "foreignKey": "userId"
     },
-    "albums": {
+    "teams": {
       "type": "hasMany",
-      "model": "TeamAlbum"
+      "model": "Team",
+      "foreignKey": "userId"
     },
-    "partakedRaces": {
-      "type": "hasAndBelongsToMany",
-      "model": "Race"
+    "formResults": {
+      "type": "hasMany",
+      "model": "FormResult",
+      "foreignKey": "userId"
+    },
+    "voteResults": {
+      "type": "hasMany",
+      "model": "VoteResult",
+      "foreignKey": "userId"
+    },
+    "seckillResults": {
+      "type": "hasMany",
+      "model": "SeckillResult",
+      "foreignKey": "userId"
     }
   },
   "acls": [
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY"
-    },
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
@@ -85,75 +74,87 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "teamMember",
+      "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "findById"
+      "property": "__create__formResults"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__voteResults"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__seckillResults"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__updateById__teams"
     },
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
-      "property": "getMySchoolTeams"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "__get__albums"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "__get__activities"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW",
-      "property": "__create__members"
+      "property": "getMyTeams"
     },
     {
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__get__members"
+      "property": "getActivitiesHistories"
     },
     {
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__findById__members"
+      "property": "getRaceHistories"
     },
     {
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__destroyById__members"
+      "property": "__updateAttributes"
     },
     {
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__updateById__members"
+      "property": "__create__teams"
     },
     {
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "getActivitiesData"
+      "property": "__create__teams"
     },
     {
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__updateById__departments"
+      "property": "__findById__formResults"
     },
     {
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__destroyById__departments"
+      "property": "__findById__VoteResults"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__findById__seckillResults"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "confirmSchool"
     }
   ],
   "methods": {}

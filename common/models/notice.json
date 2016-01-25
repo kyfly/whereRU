@@ -1,0 +1,43 @@
+{
+  "name": "Notice",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "content": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "updated": {
+      "type": "date"
+    },
+    "deleted": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "form": {
+      "type": "hasOne",
+      "model": "Form"
+    },
+    "vote": {
+      "type": "hasOne",
+      "model": "Vote"
+    },
+    "seckill": {
+      "type": "hasOne",
+      "model": "Seckill"
+    },
+    "readers": {
+      "type": "hasMany",
+      "model": "Reader"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,54 @@
+{
+  "name": "Seckill",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "started": {
+      "type": "date"
+    },
+    "total": {
+      "type": "number"
+    },
+    "limit": {
+      "type": "number",
+      "default": 1
+    },
+    "updated": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "seckillResults": {
+      "type": "hasMany",
+      "model": "SeckillResult"
+    },
+    "seckillItems": {
+      "type": "embedsMany",
+      "model": "SeckillItem"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "margin"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__get__seckillResults"
+    }
+  ],
+  "methods": {}
+}

@@ -1,16 +1,16 @@
 {
-  "name": "TeamHistory",
+  "name": "TeamDepartment",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "created": {
+    "name": {
       "type": "string"
     },
-    "updateDate": {
-      "type": "object"
+    "desc": {
+      "type": "string"
     }
   },
   "validations": [],

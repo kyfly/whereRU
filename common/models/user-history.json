@@ -1,5 +1,5 @@
 {
-  "name": "TeamHistory",
+  "name": "UserHistory",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -7,9 +7,9 @@
   },
   "properties": {
     "created": {
-      "type": "string"
+      "type": "date"
     },
-    "updateDate": {
+    "updateData": {
       "type": "object"
     }
   },

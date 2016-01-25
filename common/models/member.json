@@ -6,25 +6,40 @@
     "validateUpsert": true
   },
   "properties": {
-    "userId": {
-      "type": "string"
-    },
-    "role": {
+    "phone": {
       "type": "string"
     },
     "name": {
       "type": "string"
     },
-    "phone": {
-      "type": "number"
+    "school": {
+      "type": "string"
     },
     "academy": {
       "type": "string"
+    },
+    "verified": {
+      "type": "boolean"
+    },
+    "userId": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    },
+    "remark": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
     }
   },
   "validations": [],
   "relations": {
-   
+    "team": {
+      "type": "belongsTo",
+      "model": "Team"
+    }
   },
   "acls": [],
   "methods": {}

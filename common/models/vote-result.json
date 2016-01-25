@@ -1,0 +1,34 @@
+{
+  "name": "VoteResult",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "result": {
+      "type": [
+        "number"
+      ]
+    },
+    "verifyId": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "vote": {
+      "type": "belongsTo",
+      "model": "Vote"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "whereRUUser"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

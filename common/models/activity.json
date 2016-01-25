@@ -1,0 +1,126 @@
+{
+  "name": "Activity",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "authorName": {
+      "type": "string"
+    },
+    "authorId": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "comment": "区分校园社团和兴趣社团的活动"
+    },
+    "imgUrl": {
+      "type": "string"
+    },
+    "explainUrl": {
+      "type": "string"
+    },
+    "verifyRule": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "deleted": {
+      "type": "date"
+    },
+    "school": {
+      "type": "string"
+    },
+    "updated": {
+      "type": "date"
+    },
+    "started": {
+      "type": "date"
+    },
+    "ended": {
+      "type": "date"
+    },
+    "keyword": {
+      "type": "string"
+    },
+    "hidden": {
+      "type": "boolean"
+    },
+    "issue": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "forms": {
+      "type": "hasMany",
+      "model": "Form"
+    },
+    "votes": {
+      "type": "hasMany",
+      "model": "Vote"
+    },
+    "seckills": {
+      "type": "hasMany",
+      "model": "Seckill"
+    },
+    "readers": {
+      "type": "hasMany",
+      "model": "Reader"
+    },
+    "team": {
+      "type": "belongsTo",
+      "model": "Team"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__create__readers"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__count__readers"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getMySchoolActiveties"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "search"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getHotActiveties"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findById"
+    }
+  ],
+  "methods": {}
+}
