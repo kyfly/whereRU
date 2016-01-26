@@ -2,6 +2,7 @@ var q = require('q');
 
 function modelPromise (model, method, option) {
 	var defer = q.defer();
+	
 	switch (method) {
 		case 'find': 
 			model.find(option.query, callback);

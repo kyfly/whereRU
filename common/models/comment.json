@@ -1,5 +1,5 @@
 {
-  "name": "Commont",
+  "name": "Comment",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -14,7 +14,7 @@
   "relations": {
     "articles": {
       "type": "belongsTo",
-      "model": "Artical"
+      "model": "Article"
     },
     "replys": {
       "type": "hasMany",

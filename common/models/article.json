@@ -38,7 +38,7 @@
       "type": "belongsTo",
       "model": "Team"
     },
-    "owner": {
+    "user": {
       "type": "belongsTo",
       "model": "whereRUUser"
     }
