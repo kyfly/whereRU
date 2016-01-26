@@ -20,7 +20,7 @@
       "type": "hasMany",
       "model": "Reply"
     },
-    "owner": {
+    "user": {
       "type": "belongsTo",
       "model": "whereRUUser"
     }

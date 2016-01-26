@@ -1,4 +1,5 @@
 var q = require('q');
+var promise = require(__dirname + '/../../modules/model-promise.js');
 function articleFn(article, userId, a) {
 	var defer = q.defer();
 	article.likeUser.count(
@@ -49,6 +50,56 @@ module.exports = function(Coterie) {
 			} else {
 				ctx.res.send(articles);
 			}
+		});
+	});
+
+	Coterie.afterRemote('prototype.__findById__articles', function (ctx, ins, next) {
+		var article = ins.toJSON();
+		promise(ins.user, 'insFind', {query: {fields: ['id', 'name', 'sign', 'headImgUrl']}})
+		.then(function (user) {
+			article.user = user.toJSON();
+			return promise(ins.comments, 'insFind', {
+				query: {include: ['user', {'replys': 'user'}]}
+			})
+		})
+		.then(function (comments) {
+			var commentArray = [];
+			comments.forEach (function (comment) {
+				var c = comment.toJSON();
+				var replys = [];
+				c.user = {
+					id: c.user.id,
+					name: c.user.name,
+					sign: c.user.sign,
+					headImgUrl: c.user.headImgUrl
+				};
+				c.replys.forEach(function (reply) {
+					reply.user = {
+						id: reply.user.id,
+						name: reply.user.name,
+						sign: reply.user.sign,
+						headImgUrl: reply.user.headImgUrl
+					}
+					replys.push(reply);
+				});
+				c.replys = replys;
+				commentArray.push(c);
+			});
+			article.comments = commentArray;
+			return promise(ins.likeUser.count, 'insFind', {});
+		})
+		.then(function (count) {
+			var accessToken = ctx.req.accessToken;
+			article.likeCount = count;
+			if (accessToken) {
+				return promise(ins.likeUser.count, 'insFind', {query: { userId: accessToken.userId }});
+			} else {
+				return 0;
+			}
+		})
+		.then(function (n) {
+			article.islike = n > 0;
+			ctx.res.send(article);
 		});
 	});
 };

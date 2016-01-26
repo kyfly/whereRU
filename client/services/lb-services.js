@@ -190,7 +190,7 @@ module.factory(
   'Team', 
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
-    var R = resource(
+    var R = Resource(
       urlBase + '/Teams/:id',
       { 'id': '@id' },
       {
