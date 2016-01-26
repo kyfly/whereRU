@@ -1,0 +1,440 @@
+//学校列表
+[
+  {
+    "name": "杭州电子科技大学"
+  },
+  {
+    "name": "浙江理工大学"
+  },
+  {
+    "name": "浙江工商大学"
+  },
+  {
+    "name": "中国计量学院"
+  },
+  {
+    "name": "浙江传媒大学"
+  }
+]
+//注册用户
+{
+	"phone": 17764592171,
+	"school": "杭州电子科技大学",
+	"sex": "男",
+	"name": "刘建东",
+	"password": "123456"
+}
+//登录用户
+{
+	"phone": 17764592171,
+	"password": "123456"
+}
+/*******************************************************************/
+/*******************************************************************/
+/*****************************有关团队******************************/
+/*******************************************************************/
+/*******************************************************************/
+//团队信息
+ {
+    "name": "团团一家工作室",
+    "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "type": "创业",
+    "hidden": false,
+    "desc": "神一样的团队，有种来干",
+    "created": "2015-12-03T16:00:00.000Z",
+    "school": "杭电",
+    "id": "5672bb5288b7c0a97d0259b8",
+    "userId": "56a70c86d8fe7034d23e43fc",
+    "teamDepartments": [],
+    "pics": [
+      "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+      "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+    ],
+    "videos": [
+      "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+    ],
+    "teamDepartments": [
+      {
+        "name": "技术部",
+        "desc": "技术活",
+        "id": 0
+      },
+      {
+        "name": "技术部",
+        "desc": "技术活",
+        "id": 2
+      },
+      {
+        "name": "技术部",
+        "desc": "技术活",
+        "id": 1
+      }
+    ]
+  }
+//团队成员
+{
+  "phone": "95665355",
+  "name": "张某某",
+  "school": "杭州电子科技大学",
+  "academy": "计算机",
+  "verified": true,
+  "userId": "56a70c86d8fe7034d23e43fc",
+  "department": "技术部",
+  "remark": "",
+  "created": "2015-12-12T00:00:00.000Z",
+  "id": "56a744d7b55089e1371fdc59",
+  "teamId": "56a7430a19a7999d1dc80f37"
+}
+//团队部门
+{
+  "name": "技术部",
+  "desc": "技术活",
+  "id": 1
+}
+//竞赛信息
+{
+  "name": "团团一家最佳程序员竞赛",
+  "imgUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+  "authorName": "团团一家工作室",
+  "authorId": "5672bb5288b7c0a97d0259b8",
+  "explainUrl": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html",
+  "started": "2015-12-03T16:00:00.000Z",
+  "school": "杭州电子科技大学",
+  "ended": "2015-12-03T16:00:00.000Z",
+  "created": "2015-12-03T16:00:00.000Z",
+  "id": "56a7488a4c3428f93289194e",
+  "teamId": "56a7430a19a7999d1dc80f37"
+}
+//参赛团队
+[
+  {
+    "name": "团团一家工作室",
+    "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "type": "创业",
+    "desc": "团队描述",
+    "school": "杭电",
+    "created": "2015-12-04T16:00:00.000Z",
+    "chatId": "id",
+    "id": "5672bb5288b7c0a97d0259b8",
+    "userId": "5672b3f5337626dd96fb52a0",
+    "teamDepartments": [],
+    "pics": [
+      "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+      "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+    ],
+    "videos": [
+      "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+    ]
+  },
+  {
+    "name": "玩家家",
+    "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "type": "兴趣",
+    "hidden": false,
+    "desc": "团队描述",
+    "created": "2015-12-03T16:00:00.000Z",
+    "id": "56a742bf19a7999d1dc80f36",
+    "userId": "56a70c86d8fe7034d23e43fc",
+    "teamDepartments": []
+  },
+  {
+    "name": "买买买",
+    "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "type": "兴趣",
+    "hidden": true,
+    "desc": "团队描述",
+    "created": "2015-12-03T16:00:00.000Z",
+    "id": "56a7430a19a7999d1dc80f37",
+    "userId": "56a70c86d8fe7034d23e43fc",
+    "teamDepartments": [
+      {
+        "name": "技术部",
+        "desc": "技术活",
+        "id": 0
+      },
+      {
+        "name": "技术部",
+        "desc": "技术活",
+        "id": 2
+      },
+      {
+        "name": "技术部",
+        "desc": "技术活",
+        "id": 1
+      }
+    ]
+  }
+]
+//竞赛通知
+{
+  "content": "请上传一份个人资料",
+  "fileName": "文件",
+  "uploadFile": [
+    {
+      "team": "XX参赛团队",
+      "filename": "个人资料.doc",
+      "url": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html"
+    },
+    {
+      "team": "XX参赛团队",
+      "filename": "个人资料.doc",
+      "url": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html"
+    },
+    {
+      "team": "XX参赛团队",
+      "filename": "个人资料.doc",
+      "url": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html"
+    },
+    {
+      "team": "XX参赛团队",
+      "filename": "个人资料.doc",
+      "url": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html"
+    }
+  ],
+  "created": "2015-12-12T00:00:00.000Z",
+  "id": "56a74bcdf4108cf934a4f27d",
+  "raceId": "56a7488a4c3428f93289194e"
+}
+//资料库
+{
+  "name": "2015年嘴角文档",
+  "dataUrl": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html",
+  "created": "2015-12-12T00:00:00.000Z",
+  "loader": "团团一家",
+  "id": "56a74c7cf4108cf934a4f286",
+  "raceId": "56a7488a4c3428f93289194e"
+}
+或
+{
+  "fileName": "文件",
+  "uploadFile": [
+    {
+      "team": "XX参赛团队",
+      "filename": "个人资料.doc",
+      "url": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html"
+    },
+    {
+      "team": "XX参赛团队",
+      "filename": "个人资料.doc",
+      "url": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html"
+    },
+    {
+      "team": "XX参赛团队",
+      "filename": "个人资料.doc",
+      "url": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html"
+    },
+    {
+      "team": "XX参赛团队",
+      "filename": "个人资料.doc",
+      "url": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html"
+    }
+  ],
+  "created": "2015-12-12T00:00:00.000Z",
+  "id": "56a74bcdf4108cf934a4f27d",
+  "raceId": "56a7488a4c3428f93289194e"
+}
+//活动信息
+{
+  "title": "团团一家纪念章抢票",
+  "authorName": "测试",
+  "authorId": "5672b3f5337626dd96fb52a0",
+  "explainUrl": "http://static.etuan.org/html/55c4491678661b2851dd6580/ue/1443678525469931612.html",
+  "verifyRule": "姓名",
+  "created": "2015-12-03T16:00:00.000Z",
+  "school": "杭电",
+  "started": "2015-12-03T16:00:00.000Z",
+  "ended": "2015-12-03T16:00:00.000Z",
+  "keyword": "抢票,团团一阿吉",
+  "hidden": false,
+  "id": "5672bb9d88b7c0a97d0259b9",
+  "teamId": "5672bb5288b7c0a97d0259b8",
+  "actType": "seckill"
+}
+//
+
+/*******************************************************************/
+/*******************************************************************/
+/*****************************有关圈子******************************/
+/*******************************************************************/
+/*******************************************************************/
+//圈子列表
+[
+  {
+    "name": "web开发",
+    "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "id": "56a62cb4ac8353f087cbf175"
+  },
+  {
+    "name": "web开发",
+    "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "lastView": "2015-01-11T16:00:00.000Z",
+    "id": "56a70d939be8d784d3000005"
+  },
+  {
+    "name": "ios开发",
+    "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "lastView": "2015-01-11T16:00:00.000Z",
+    "id": "56a70d939be8d784d3000006"
+  },
+  {
+    "name": "andriod开发",
+    "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "lastView": "2015-01-11T16:00:00.000Z",
+    "id": "56a70d939be8d784d3000007"
+  },
+  {
+    "name": "轮滑",
+    "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "lastView": "2015-01-11T16:00:00.000Z",
+    "id": "56a70d939be8d784d3000008"
+  }
+]
+//用户关注的圈子
+[
+  {
+    "name": "轮滑",
+    "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "id": "56a70d939be8d784d3000008",
+    "lastView": "2015-01-11T16:00:00.000Z",
+    "msgCount": 2
+  },
+  {
+    "name": "andriod开发",
+    "logoUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "id": "56a70d939be8d784d3000007",
+    "lastView": "2015-01-11T16:00:00.000Z",
+    "msgCount": 0
+  }
+]
+//圈子文章列表
+[
+  {
+    "title": "html应该这样",
+    "contentUrl": "url",
+    "created": "2016-01-26T06:35:00.000Z",
+    "id": "56a73525601724e92505ddc8",
+    "coterieId": "56a70d939be8d784d3000005",
+    "userId": "56a70c86d8fe7034d23e43fc",
+    "user": {
+      "id": "56a70c86d8fe7034d23e43fc"
+    },
+    "commentCount": 0,
+    "likeCount": 0,
+    "islike": false
+  },
+  {
+    "title": "陈述事实没错",
+    "contentUrl": "url",
+    "created": "2016-01-26T06:35:00.000Z",
+    "id": "56a73534601724e92505ddc9",
+    "coterieId": "56a70d939be8d784d3000005",
+    "userId": "56a70c86d8fe7034d23e43fc",
+    "user": {
+      "id": "56a70c86d8fe7034d23e43fc"
+    },
+    "commentCount": 0,
+    "likeCount": 0,
+    "islike": false
+  }
+]
+//文章详情
+{
+  "title": "html应该这样",
+  "contentUrl": "url",
+  "created": "2016-01-26T06:35:00.000Z",
+  "id": "56a73525601724e92505ddc8",
+  "coterieId": "56a70d939be8d784d3000005",
+  "userId": "56a70c86d8fe7034d23e43fc",
+  "user": {
+    "headImgUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png",
+    "name": "刘建东",
+    "id": "56a70c86d8fe7034d23e43fc"
+  },
+  "comments": [
+    {
+      "content": "真是这样吗",
+      "id": "56a73bbe19a7999d1dc80f01",
+      "userId": "56a70c86d8fe7034d23e43fc",
+      "articleId": "56a73525601724e92505ddc8",
+      "user": {
+        "id": "56a70c86d8fe7034d23e43fc",
+        "name": "刘建东",
+        "headImgUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+      },
+      "replys": []
+    },
+    {
+      "content": "是你麻痹",
+      "id": "56a73bd619a7999d1dc80f02",
+      "userId": "56a70c86d8fe7034d23e43fc",
+      "articleId": "56a73525601724e92505ddc8",
+      "user": {
+        "id": "56a70c86d8fe7034d23e43fc",
+        "name": "刘建东",
+        "headImgUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+      },
+      "replys": [
+        {
+          "content": "你们都他妈在瞎说，我操，别他妈瞎比比",
+          "id": "56a73c5319a7999d1dc80f03",
+          "userId": "56a70c86d8fe7034d23e43fc",
+          "commentId": "56a73bd619a7999d1dc80f02",
+          "user": {
+            "id": "56a70c86d8fe7034d23e43fc",
+            "name": "刘建东",
+            "headImgUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+          }
+        },
+        {
+          "content": "楼上你好帅哦，我想打死你",
+          "id": "56a73c6a19a7999d1dc80f04",
+          "userId": "56a70c86d8fe7034d23e43fc",
+          "commentId": "56a73bd619a7999d1dc80f02",
+          "user": {
+            "id": "56a70c86d8fe7034d23e43fc",
+            "name": "刘建东",
+            "headImgUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+          }
+        },
+        {
+          "content": "哒哒哒",
+          "id": "56a73c7719a7999d1dc80f05",
+          "userId": "56a70c86d8fe7034d23e43fc",
+          "commentId": "56a73bd619a7999d1dc80f02",
+          "user": {
+            "id": "56a70c86d8fe7034d23e43fc",
+            "name": "刘建东",
+            "headImgUrl": "http://etuan.oss-cn-hangzhou.aliyuncs.com/images/551e910a8e3e731c230d8021/logo/1439479222561196823.png"
+          }
+        }
+      ]
+    }
+  ]
+}
+//发表文章
+{
+  "title": "陈述事实没错",
+  "contentUrl": "url",
+  "created": "2016-01-26 14:35",
+  "coterieId": "56a70d939be8d784d3000005"
+}
+//评论文章
+{
+  "content": "是你麻痹",
+  "articleId": "56a73525601724e92505ddc8"
+}
+//回复评论
+{
+  "content": "哒哒哒",
+  "commentId": "56a73bd619a7999d1dc80f02"
+}
+//点赞文章
+{
+  "articleId": "56a73525601724e92505ddc8"
+}
+//浏览文章
+{
+  "from": "pc",
+  "userId": "56a70c86d8fe7034d23e43fc"
+}
+

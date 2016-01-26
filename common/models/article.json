@@ -11,6 +11,9 @@
     },
     "contentUrl": {
       "type": "string"
+    },
+    "created": {
+      "type": "date"
     }
   },
   "validations": [],

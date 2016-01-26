@@ -1,3 +1,5 @@
+var q = require('q');
+var promise = require(__dirname + '/../../modules/model-promise.js');
 module.exports = function(User) {
 	User.beforeRemote('create', function (ctx, ins, next) {
 		ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
@@ -13,6 +15,36 @@ module.exports = function(User) {
 			ctx.res.send(token);
 		});
 	})
+	User.afterRemote('prototype.__link__coteries', function (ctx, ins, next) {
+		ins.lastView = new Date();
+		ins.save();
+		next();
+	});
+	User.afterRemote('prototype.__get__coteries', function (ctx, ins, next) {
+		var coteriesFn = [];
+		function coterieFn(coterie) {
+			var defer = q.defer();
+			var lastView = coterie.lastView;
+			coterie.articles.count({created: {gt: lastView}}, function (err, count) {
+				if (err) {
+					defer.reject(err);
+				} else {
+					coterie = coterie.toJSON();
+					coterie.msgCount = count;
+					defer.resolve(coterie);
+				}
+			});
+			return defer.promise;
+		}
+		ins.forEach(function (coterie) {
+			coteriesFn.push(coterieFn(coterie));
+		});
+		q.all(coteriesFn).then(function (data) {
+			ctx.res.send(data);
+		}, function (err) {
+			ctx.res.send(err);
+		});
+	});
 	User.remoteMethod('confirmSchool', {
 		accepts: [{
 			arg: 'id', type: 'string',

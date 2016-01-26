@@ -86,20 +86,9 @@ module.exports = function(Coterie) {
 				commentArray.push(c);
 			});
 			article.comments = commentArray;
-			return promise(ins.likeUser.count, 'insFind', {});
-		})
-		.then(function (count) {
-			var accessToken = ctx.req.accessToken;
-			article.likeCount = count;
-			if (accessToken) {
-				return promise(ins.likeUser.count, 'insFind', {query: { userId: accessToken.userId }});
-			} else {
-				return 0;
-			}
-		})
-		.then(function (n) {
-			article.islike = n > 0;
 			ctx.res.send(article);
-		});
+		}, function (err) {
+			ctx.res.send(err);
+		})
 	});
 };

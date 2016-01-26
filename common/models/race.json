@@ -18,14 +18,21 @@
     "authorId": {
       "type": "string"
     },
+
     "explainUrl": {
       "type": "string"
     },
-    "startTime": {
+    "started": {
       "type": "date"
     },
     "school": {
       "type": "string"
+    },
+    "ended": {
+      "type": "date"
+    },
+    "created": {
+      "type": "date"
     }
   },
   "validations": [],

@@ -28,5 +28,5 @@ function modelPromise (model, method, option) {
 		return defer.promise;
 	}
 }
-modelPromise.prototype.all = q.all;
+modelPromise.all = q.all;
 module.exports = modelPromise;
