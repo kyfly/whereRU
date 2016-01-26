@@ -132,7 +132,7 @@
     "dataSource": "db",
     "public": true
   },
-  "Commont": {
+  "Comment": {
     "dataSource": "db",
     "public": true
   },

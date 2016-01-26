@@ -76,7 +76,7 @@
     },
     "articles": {
       "type": "hasMany",
-      "model": "Artical",
+      "model": "Article",
       "foreignKey": "userId"
     },
     "likeUsers": {
@@ -185,6 +185,36 @@
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "confirmSchool"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__coteries"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__articles"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__comments"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__replys"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__create__likeUsers"
     }
   ],
   "methods": {}
