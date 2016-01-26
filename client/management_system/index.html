@@ -1,0 +1,70 @@
+<html ng-app="app" ng-controller="AdminCtrl">
+<head>
+  <title>团团一家竞赛管理</title>
+  <base href="/eventManage">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="icon" href="/lib/img/etuan_logo.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/lib/img/etuan_logo.ico" type="image/x-icon">
+  <link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
+  <link href="/lib/materialize/css/materialize.min.css" rel="stylesheet">
+  <link href="/management_system/styles/admin.css" rel="stylesheet">
+</head>
+<body>
+<!--侧边导航-->
+<ul class="side-nav fixed z-depth-2" id="sideBar" ng-show="access">
+  <h5 class="text-center orgName" ng-bind="orgName"></h5>
+  <a class="logo brand-logo" href="/index.html">
+    <img id="front-page-logo" src="/lib/img/logo.jpg">
+  </a>
+  <hr id="sidebarHr">
+  <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars" ng-class="{active: sidebar.active}" class="bold">
+    <a class="waves-effect" href="{{sidebar.url}}" ng-click="redirect($index)">{{sidebar.display_name}}</a>
+  </li>
+</ul>
+<!--头部nav-->
+<nav id="nav" ng-style="navShow">
+  <div class="nav-wrapper light-blue darken-2">
+    <a href="" data-activates="sideBar" class="button-collapse" ng-show="access"><i class="mdi-navigation-menu"></i></a>
+    <a href="" class="brand-logo center"><img class="topBar-logo" src="/lib/img/full-logo-white.png"></a>
+    <ul class="right">
+      <li ng-show="access">
+        <a tooltipped data-position="bottom" data-delay="0" data-tooltip="退出登陆" class="login-out waves-effect" href ng-click="logout()"><i class="mdi-action-settings-power"></i></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--右侧主要内容-->
+<main >
+  <div class="container" id="main">
+    <div class="col s12" ng-view></div>
+  </div>
+</main>
+<!--底部信息-->
+<footer class="page-footer light-blue darken-2" id="footer" ng-style="footerShow">
+  <div class="footer-copyright">
+    <div class="container">
+      © 2014-2015 Etuan Studio, All rights reserved.
+      <a class="grey-text text-lighten-4 right" href="http://www.etuan.org/">www.etuan.org</a>
+    </div>
+  </div>
+</footer>
+<!--底部引入js加快加载速度-->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/angular/angular.min.js"></script>
+<script src="/lib/materialize/js/materialize.min.js"></script>
+<script src="/lib/angular-components/angular-resource.min.js"></script>
+<script src="/lib/angular-components/angular-route.min.js"></script>
+<script src="/lib/materialize/js/angular-materialize.js"></script>
+<script src="/services/lb-services.js"></script>
+<script src="/management_system/scripts/admin-route.js"></script>
+<script src="/management_system/scripts/admin-controller.js"></script>
+<script src="/management_system/scripts/admin-configure.js"></script>
+
+<script>
+  $(".button-collapse").sideNav();
+</script>
+</body>
+</html>
