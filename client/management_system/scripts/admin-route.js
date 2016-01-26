@@ -1,44 +1,44 @@
 function RouteConfigure($routeProvider) {
   $routeProvider
-    .when('/eventManage/home', {
-      templateUrl: '/admin/partials/index.html',
+    .when('/MS/home', {
+      templateUrl: '/management_system/views/index.html',
       controller: ['$scope', '$resource', HomeCtrl]
     })
-    .when('/eventManage/member', {
-      templateUrl: '/admin/partials/member.html',
+    .when('/MS/member', {
+      templateUrl: '/management_system/views/member.html',
       controller: ['$scope', '$resource', 'Team', MemberCtrl]
     })
-    .when('/eventManage/event', {
-      templateUrl: '/admin/partials/event.html',
+    .when('/MS/event', {
+      templateUrl: '/management_system/views/event.html',
       controller: ['$scope', '$resource', 'ContestOrg', 'Contest', EventCtrl]
     })
-    .when('/eventManage/activity', {
-      templateUrl: '/admin/partials/activity.html',
+    .when('/MS/activity', {
+      templateUrl: '/management_system/views/activity.html',
       controller: ['$scope', '$resource', ActivityCtrl]
     })
-    .when('/eventManage/form', {
-      templateUrl: '/admin/partials/form.html',
+    .when('/MS/form', {
+      templateUrl: '/management_system/views/form.html',
       controller: ['$scope', '$resource', FormCtrl]
     })
-    .when('/eventManage/vote', {
-      templateUrl: '/admin/partials/vote.html',
+    .when('/MS/vote', {
+      templateUrl: '/management_system/views/vote.html',
       controller: ['$scope', '$resource', VoteCtrl]
     })
-    .when('/eventManage/seckill', {
-      templateUrl: '/admin/partials/seckill.html',
+    .when('/MS/seckill', {
+      templateUrl: '/management_system/views/seckill.html',
       controller: ['$scope', '$resource', SeckillCtrl]
     })
-    .when('/eventManage/album', {
-      templateUrl: '/admin/partials/album.html',
+    .when('/MS/album', {
+      templateUrl: '/management_system/views/album.html',
       controller: ['$scope', '$resource', AlbumCtrl]
     })
-    .when('/eventManage/setting', {
-      templateUrl: '/admin/partials/setting.html',
+    .when('/MS/setting', {
+      templateUrl: '/management_system/views/setting.html',
       controller: ['$scope', 'ContestOrg', '$rootScope', 'School', SettingCtrl]
     })
-    .when('/eventManage/help', {
+    .when('/MS/help', {
       templateUrl: '/management_system/help.html',
       controller: HelpCtrl
     })
-    .otherwise({redirectTo: '/eventManage/home'});
+    .otherwise({redirectTo: '/MS/home'});
 }

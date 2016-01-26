@@ -18,7 +18,7 @@ app.controller('RegisterController', ['User', function(){
 }])
 app.controller('TestController', ['User', function(){
 }])
-app.controller('MSController', ['User', function(){
-  console.log('1');
+app.controller('MSController', ['User', '$stateParams', function(User, $stateParams){
+	localStorage.$LoopBack$currentTeamId = $stateParams.id;
   location.href = '/management_system'
 }])

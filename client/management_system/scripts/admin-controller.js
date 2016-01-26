@@ -1,15 +1,9 @@
 var localInfo;
-if (localStorage.CMSCAPTCHA) {
-  localInfo = JSON.parse(localStorage.CMSCAPTCHA);
-} else {
-  localInfo = {id: null, userId: null, name: null};
-}
-
 function AdminCtrl($scope, $timeout, $window, $rootScope) {
-  if (localStorage.CMSCAPTCHA && window.location.pathname === '/eventManage/login') {
-    window.location.pathname = '/eventManage/home';
+  if (localStorage['$LoopBack$currentUserId'] && window.location.pathname === '/MS/login') {
+    window.location.pathname = '/MS/home';
   }
-  if (localStorage.CMSCAPTCHA) {
+  if (localStorage['$LoopBack$currentUserId']) {
     $rootScope.access = true;
   } else {
     $scope.navShow = {'padding-left': 0};
@@ -24,25 +18,25 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
   $scope.$on('$viewContentLoaded', function () {
     $timeout(function () {
       $rootScope.orgName = localInfo.name;
-      if ($window.location.pathname === '/eventManage/home') {
+      if ($window.location.pathname === '/MS/home') {
         $scope.redirect(0);
-      } else if ($window.location.pathname === '/eventManage/member') {
+      } else if ($window.location.pathname === '/MS/member') {
         $scope.redirect(1);
-      } else if ($window.location.pathname === '/eventManage/event') {
+      } else if ($window.location.pathname === '/MS/event') {
         $scope.redirect(2);
-      } else if ($window.location.pathname === '/eventManage/activity') {
+      } else if ($window.location.pathname === '/MS/activity') {
         $scope.redirect(3);
-      } else if ($window.location.pathname === '/eventManage/form') {
+      } else if ($window.location.pathname === '/MS/form') {
         $scope.redirect(4);
-      } else if ($window.location.pathname === '/eventManage/vote') {
+      } else if ($window.location.pathname === '/MS/vote') {
         $scope.redirect(5);
-      } else if ($window.location.pathname === '/eventManage/seckill') {
+      } else if ($window.location.pathname === '/MS/seckill') {
         $scope.redirect(6);
-      } else if ($window.location.pathname === '/eventManage/album') {
+      } else if ($window.location.pathname === '/MS/album') {
         $scope.redirect(7);
-      } else if ($window.location.pathname === '/eventManage/setting') {
+      } else if ($window.location.pathname === '/MS/setting') {
         $scope.redirect(8);
-      } else if ($window.location.pathname === '/eventManage/help') {
+      } else if ($window.location.pathname === '/MS/help') {
         $scope.redirect(9);
       }
     }, 50);
@@ -53,56 +47,57 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
     {
       'id': 'sidebarHome',
       'display_name': '首页',
-      'url': '/eventManage/home'
+      'url': '/MS/home'
     },
     {
       'id': 'sidebarMember',
       'display_name': '成员管理',
-      'url': '/eventManage/member'
+      'url': '/MS/member'
     },
     {
       'id': 'sidebarEvent',
       'display_name': '竞赛管理',
-      'url': '/eventManage/event'
+      'url': '/MS/event'
     },
     {
       'id': 'sidebarActivity',
       'display_name': '活动管理',
-      'url': '/eventManage/activity'
+      'url': '/MS/activity'
     },
     {
       'id': 'sidebarForm',
       'display_name': '表单管理',
-      'url': '/eventManage/form'
+      'url': '/MS/form'
     },
     {
       'id': 'sidebarVote',
       'display_name': '投票管理',
-      'url': '/eventManage/vote'
+      'url': '/MS/vote'
     },
     {
       'id': 'sidebarSeckill',
       'display_name': '抢票管理',
-      'url': '/eventManage/seckill'
+      'url': '/MS/seckill'
     },
     {
       'id': 'sidebarAlbum',
       'display_name': '相册管理',
-      'url': '/eventManage/album'
+      'url': '/MS/album'
     },
     {
       'id': 'sidebarSetting',
       'display_name': '设置',
-      'url': '/eventManage/setting'
+      'url': '/MS/setting'
     },
     {
       'id': 'sidebarHelp',
       'display_name': '帮助',
-      'url': '/eventManage/help'
+      'url': '/MS/help'
     }
   ];
 
   //跳转函数，包括操作侧边栏按钮和跳转至相应页面
+  //这里可以试试css选择器
   $scope.redirect = function (index) {
     for (var i = 0; i < $scope.sidebars.length; i++) {
       $scope.sidebars[i].active = false;
@@ -114,7 +109,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
 
   $scope.logout = function () {
     localStorage.removeItem('CMSCAPTCHA');
-    window.location.pathname = '/eventManage/login/';
+    window.location.pathname = '/MS/login/';
   }
 }
 
@@ -386,46 +381,4 @@ function SettingCtrl($scope, ContestOrg, $rootScope, School) {
 }
 
 function HelpCtrl() {
-}
-
-function LoginCtrl($scope, ContestOrg, $location, $rootScope) {
-  $scope.org = {};
-  $scope.login = function () {
-    ContestOrg.login($scope.org, function (res) {
-      if (res.err) {
-        Materialize.toast('登陆失败！', 2000);
-      } else {
-        $rootScope.access = true;
-        localInfo = res.token;
-        localStorage.CMSCAPTCHA = JSON.stringify(res.token);
-        Materialize.toast('登陆成功！', 2000);
-        $location.path('/eventManage/home');
-      }
-    }, function () {
-    });
-  };
-}
-
-function SignUpCtrl($scope, ContestOrg, $location, $rootScope, School) {
-  $scope.org = {};
-  $scope.schools = School.find({
-    filter: {
-      fields: ['name']
-    }
-  });
-  $scope.signUp = function () {
-    ContestOrg.create($scope.org, function (res) {
-      if (res.err || res.name === 'ValidationError') {
-        Materialize.toast('注册失败！', 2000);
-      } else {
-        localInfo = res.token;
-        $rootScope.access = true;
-        localStorage.CMSCAPTCHA = JSON.stringify(res.token);
-        Materialize.toast('注册成功,已自动登陆', 2000);
-        $location.path('/eventManage/home');
-      }
-    }, function () {
-      Materialize.toast('注册失败，请检查您填写的内容', 2000);
-    });
-  };
 }

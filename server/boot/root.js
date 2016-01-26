@@ -9,4 +9,8 @@ module.exports = function(server) {
   server.get(/^\/w\/*/, function(req, res) {
     res.sendFile(path.join(__dirname, '../../client/index.html'));
   });
+
+  server.get(/^\/MS\/*/, function(req, res) {
+    res.sendFile(path.join(__dirname, '../../client/management_system/index.html'));
+  });
 };
