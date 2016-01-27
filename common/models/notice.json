@@ -9,6 +9,12 @@
     "content": {
       "type": "string"
     },
+    "fileName": {
+      "type": "string"
+    },
+    "uploadFile": [{
+      "type": "object"
+    }],
     "created": {
       "type": "date"
     },

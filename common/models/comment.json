@@ -8,6 +8,9 @@
   "properties": {
     "content": {
       "type": "string"
+    },
+    "created": {
+      "type": "date"
     }
   },
   "validations": [],
@@ -20,7 +23,7 @@
       "type": "hasMany",
       "model": "Reply"
     },
-    "owner": {
+    "user": {
       "type": "belongsTo",
       "model": "whereRUUser"
     }

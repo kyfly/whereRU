@@ -11,9 +11,6 @@
     },
     "logoUrl": {
       "type": "string"
-    },
-    "lastView": {
-      "type": "date"
     }
   },
   "validations": [],

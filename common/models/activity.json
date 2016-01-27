@@ -43,6 +43,9 @@
     "started": {
       "type": "date"
     },
+    "actType": {
+      "type": "string"
+    },
     "ended": {
       "type": "date"
     },

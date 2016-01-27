@@ -8,6 +8,9 @@
   "properties": {
     "content": {
       "type": "string"
+    },
+    "created": {
+      "type": "date"
     }
   },
   "validations": [],
@@ -16,9 +19,10 @@
       "type": "belongsTo",
       "model": "Comment"
     },
-    "owner": {
+    "user": {
       "type": "belongsTo",
-      "model": "whereRUUser"
+      "model": "whereRUUser",
+      "fileds": ["id"]
     }
   },
   "acls": [],
