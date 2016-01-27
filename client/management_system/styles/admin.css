@@ -224,3 +224,16 @@ main {
 .memberCard {
   height: 150px;
 }
+
+.unverifiedName {
+  font-size: 20px;
+}
+
+.deleteMember {
+  cursor: pointer;
+}
+
+.warningText > i {
+  font-size: 40px;
+}
+
