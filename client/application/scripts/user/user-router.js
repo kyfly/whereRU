@@ -20,6 +20,11 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 		controller: 'TestController',
 		templateUrl: '/application/views/index.html'
 	})
+    .state('ucoterie', {
+      url: '/w/ucoteries',
+      controller: 'UCoterieController',
+      templateUrl: '/application/views/ucoterie.html'
+    })
     .state('management_system', {
       url: '/w/team/:id',
       controller: 'MSController',
