@@ -1,10 +1,9 @@
+/**
+* 以下为index.html的样式或全局样式
+*/
 body {
   font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
 }
-
-/*.brand-logo {*/
-/*margin: 15px;*/
-/*}*/
 
 .logo {
   text-align: center;
@@ -132,14 +131,6 @@ main {
   padding: 15px;
 }
 
-.autoLogin {
-  margin-left: 45px;
-}
-
-.loginBtn {
-  margin-left: 30px;
-}
-
 .addFile {
   margin-left: 45px;
 }
@@ -164,7 +155,7 @@ main {
   cursor: default !important;
 }
 
-.collection-item > span{
+.collection-item > span {
   margin: 15px !important;
 }
 
@@ -215,6 +206,9 @@ main {
   font-weight: 300;
 }
 
+/**
+ * 以下部分为member.html的样式
+ */
 .addMember {
   margin-top: 7px;
 }
@@ -225,4 +219,100 @@ main {
 
 .telSpan {
   margin-top: 10px !important;
+}
+
+.memberCard {
+  height: 150px;
+}
+
+.unverifiedName {
+  font-size: 20px;
+}
+
+.deleteMember {
+  cursor: pointer;
+}
+
+.warningText > i {
+  font-size: 40px;
+}
+
+/**
+ * 以下部分为form的样式
+ */
+
+.item-list {
+  height: 300px;
+  padding: 10px !important;
+}
+
+.addItemBox {
+  cursor: pointer;
+}
+
+.addItemBox > .item-list > .text-center {
+  margin-top: 50px !important;
+}
+
+.addItemBox > .item-list > .text-center > i {
+  font-size: 100px;
+}
+
+.item-list > .card-title {
+  color: #A7D86E;
+}
+
+.item-list > p {
+  color: #858585 !important;
+}
+
+.btn-area {
+  padding: 0 !important;
+  position: relative;
+  top: -40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.btn-area > .text-center {
+  line-height: 38px;
+}
+
+.btn-area > .text-center > a {
+  margin: 0;
+}
+
+.btn-area > .text-center > a > .material-icons {
+  vertical-align: middle;
+}
+
+.btn-area .edit-btn {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 33.333%;
+  height: 40px;
+}
+
+.material-icons {
+  display: inline;
+}
+
+.btn-area .result-btn {
+  position: absolute;
+  top: 100%;
+  left: 33.333%;
+  width: 33.333%;
+  height: 40px;
+  border-left: 1px solid rgba(160,160,160,0.2);
+  border-right: 1px solid rgba(160,160,160,0.2);
+}
+
+.btn-area .delete-btn {
+  position: absolute;
+  top: 100%;
+  left: 66.666%;
+  width: 33.333%;
+  height: 40px;
 }

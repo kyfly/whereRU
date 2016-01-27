@@ -11,6 +11,7 @@
   <link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
   <link href="/lib/materialize/css/materialize.min.css" rel="stylesheet">
   <link href="/management_system/styles/admin.css" rel="stylesheet">
+
 </head>
 <body>
 <!--侧边导航-->
@@ -39,7 +40,7 @@
 <!--右侧主要内容-->
 <main >
   <div class="container" id="main">
-    <div class="col s12" ng-view></div>
+    <div class="col s12" ui-view=""></div>
   </div>
 </main>
 <!--底部信息-->
@@ -56,12 +57,22 @@
 <script src="/lib/angular/angular.min.js"></script>
 <script src="/lib/materialize/js/materialize.min.js"></script>
 <script src="/lib/angular-components/angular-resource.min.js"></script>
-<script src="/lib/angular-components/angular-route.min.js"></script>
+<script src="/lib/angular-components/angular-ui-router.min.js"></script>
 <script src="/lib/materialize/js/angular-materialize.js"></script>
 <script src="/services/lb-services.js"></script>
-<script src="/management_system/scripts/admin-route.js"></script>
-<script src="/management_system/scripts/admin-controller.js"></script>
 <script src="/management_system/scripts/admin-configure.js"></script>
+<script src="/management_system/scripts/admin-route.js"></script>
+<script src="/management_system/scripts/controller/homeController.js"></script>
+<script src="/management_system/scripts/controller/memberController.js"></script>
+<script src="/management_system/scripts/controller/eventController.js"></script>
+<script src="/management_system/scripts/controller/activityController.js"></script>
+<script src="/management_system/scripts/controller/formController.js"></script>
+<script src="/management_system/scripts/controller/voteController.js"></script>
+<script src="/management_system/scripts/controller/seckillController.js"></script>
+<script src="/management_system/scripts/controller/albumController.js"></script>
+<script src="/management_system/scripts/controller/settingController.js"></script>
+<script src="/management_system/scripts/controller/helpController.js"></script>
+
 
 <script>
   $(".button-collapse").sideNav();
