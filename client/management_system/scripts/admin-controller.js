@@ -1,4 +1,4 @@
-var localInfo;
+app.controller('AdminCtrl', ['$scope', '$timeout', '$window', '$rootScope', AdminCtrl]);
 function AdminCtrl($scope, $timeout, $window, $rootScope) {
   if (localStorage['$LoopBack$currentUserId'] && window.location.pathname === '/MS/login') {
     window.location.pathname = '/MS/home';
@@ -17,7 +17,6 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
   //监听ngView完成事件，延迟200ms用于页面渲染
   $scope.$on('$viewContentLoaded', function () {
     $timeout(function () {
-      $rootScope.orgName = localInfo.name;
       if ($window.location.pathname === '/MS/home') {
         $scope.redirect(0);
       } else if ($window.location.pathname === '/MS/member') {
@@ -113,143 +112,150 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
   }
 }
 
-function HomeCtrl($scope) {
-}
+app.controller('HomeCtrl', ['$scope', function ($scope) {
 
-function MemberCtrl($scope, Team) {
-  Team.members({},
-    function(){
+}]);
 
+app.controller('ListCtrl', ['$scope', function ($scope) {
+
+}]);
+
+app.controller('EditCtrl', ['$scope', function ($scope) {
+
+}]);
+
+app.controller('ResultCtrl', ['$scope', function ($scope) {
+
+}]);
+
+app.controller('MemberCtrl', ['$scope', 'Team', function ($scope, Team) {
+  Team.prototype_get_members({
+      id: localStorage.$LoopBack$currentTeamId
     },
-    function(){
-
-    }
-  );
-}
-
-function EventCtrl($scope, $resource, ContestOrg, Contest) {
-  $scope.noEvent = false;
-  var GetTeam = $resource('/api/team');
-  var GetProject = $resource('/api/Projects');
-  GetTeam.query({},
     function (res) {
-      console.log(res, '团队');
+      console.log(res,'成员');
+      $scope.members = res;
     },
     function () {
-    }
-  );
-  GetProject.query({},
-    function (res) {
-      console.log(res, '项目');
-      $scope.projects = res;
-    },
-    function () {
-    }
-  );
 
+    }
+  );
+}]);
+
+app.controller('EventCtrl', ['$scope', 'Team', function ($scope, Team) {
   //获取竞赛列表
-  ContestOrg.contests({
-    id: localInfo.userId,
-    access_token: localInfo.id
+  Team.prototype_get_races({
+    id: localStorage.$LoopBack$currentTeamId
   }, function (res) {
     if (res.length === 0) {
       $scope.noEvent = true;
     }
     console.log(res, '竞赛');
     $scope.contestLists = res;
-
-    $scope.deleteContest = function (index) {
-      ContestOrg.contests.destroyById({
-        id: localInfo.userId,
-        fk: res[index].id,
-        access_token: localInfo.id
-      }, function () {
-        history.go(0);
-      })
-    };
-
-    //更新竞赛信息
-    $scope.changeEvent = res;
-    $scope.updateExplainDoc = function (index) {
-      var e = document.getElementById('changeExplainDoc' + index).files;
-      uploadFile(e, function (data) {
-        console.log(data);
-        $scope.changeEvent[index].explainUrl = data[0].url;
-        $scope.$apply();
-      });
-    };
-
-    $scope.updateProcessDoc = function (index) {
-      var e = document.getElementById('changeProcessDoc' + index).files;
-      uploadFile(e, function (data) {
-        $scope.changeEvent[index].processUrl = data[0].url;
-        $scope.$apply();
-      });
-    };
-
-    $scope.updateRuleDoc = function (index) {
-      var e = document.getElementById('changeRuleDoc' + index).files;
-      uploadFile(e, function (data) {
-        $scope.changeEvent[index].ruleUrl = data[0].url;
-        $scope.$apply();
-      });
-    };
-
-    $scope.updateEvent = function (index) {
-      ContestOrg.contests.updateById({
-        id: localInfo.userId,
-        fk: res[index].id,
-        access_token: localInfo.id
-      }, $scope.changeEvent[index], function () {
-        Materialize.toast('更新成功！', 2000)
-      }, function () {
-        Materialize.toast('更新失败！', 2000)
-      })
-    };
-
-    $scope.material = {};
-
-    $scope.materialLoad = function (index) {
-      var e = document.getElementById('addMaterialDoc' + index).files;
-      uploadFile(e, function (data) {
-        $scope.material.name = data[0].original;
-        $scope.material.dataUrl = data[0].url;
-        $scope.$apply();
-      });
-    };
-
-    $scope.creatMaterial = function (index) {
-      $scope.material.loader = localInfo.name;
-      $scope.material.createAt = new Date();
-      if ($scope.material.dataUrl) {
-        Contest.materials.create({
-            id: res[index].id,
-            access_token: localInfo.id
-          }, $scope.material, function () {
-            Materialize.toast('上传成功！', 2000)
-          }, function () {
-            Materialize.toast('上传失败！', 2000)
-          }
-        )
-      } else {
-        Materialize.toast('请先选择文件！', 2000)
-      }
-    };
-
-    $scope.loadContest = function (index) {
-      Contest.materials({
-        id: res[index].id,
-        access_token: localInfo.id,
-        filter: {
-          order: 'createAt DESC'
-        }
-      }, function (res) {
-        $scope.materialList = res;
-      });
-    };
-
-
   });
+  $scope.noEvent = false;
+  //ContestOrg.contests({
+  //  id: localInfo.userId,
+  //  access_token: localInfo.id
+  //}, function (res) {
+  //  if (res.length === 0) {
+  //    $scope.noEvent = true;
+  //  }
+  //  console.log(res, '竞赛');
+  //  $scope.contestLists = res;
+  //
+  //  $scope.deleteContest = function (index) {
+  //    ContestOrg.contests.destroyById({
+  //      id: localInfo.userId,
+  //      fk: res[index].id,
+  //      access_token: localInfo.id
+  //    }, function () {
+  //      history.go(0);
+  //    })
+  //  };
+  //
+  //  //更新竞赛信息
+  //  $scope.changeEvent = res;
+  //  $scope.updateExplainDoc = function (index) {
+  //    var e = document.getElementById('changeExplainDoc' + index).files;
+  //    uploadFile(e, function (data) {
+  //      console.log(data);
+  //      $scope.changeEvent[index].explainUrl = data[0].url;
+  //      $scope.$apply();
+  //    });
+  //  };
+  //
+  //  $scope.updateProcessDoc = function (index) {
+  //    var e = document.getElementById('changeProcessDoc' + index).files;
+  //    uploadFile(e, function (data) {
+  //      $scope.changeEvent[index].processUrl = data[0].url;
+  //      $scope.$apply();
+  //    });
+  //  };
+  //
+  //  $scope.updateRuleDoc = function (index) {
+  //    var e = document.getElementById('changeRuleDoc' + index).files;
+  //    uploadFile(e, function (data) {
+  //      $scope.changeEvent[index].ruleUrl = data[0].url;
+  //      $scope.$apply();
+  //    });
+  //  };
+  //
+  //  $scope.updateEvent = function (index) {
+  //    ContestOrg.contests.updateById({
+  //      id: localInfo.userId,
+  //      fk: res[index].id,
+  //      access_token: localInfo.id
+  //    }, $scope.changeEvent[index], function () {
+  //      Materialize.toast('更新成功！', 2000)
+  //    }, function () {
+  //      Materialize.toast('更新失败！', 2000)
+  //    })
+  //  };
+  //
+  //  $scope.material = {};
+  //
+  //  $scope.materialLoad = function (index) {
+  //    var e = document.getElementById('addMaterialDoc' + index).files;
+  //    uploadFile(e, function (data) {
+  //      $scope.material.name = data[0].original;
+  //      $scope.material.dataUrl = data[0].url;
+  //      $scope.$apply();
+  //    });
+  //  };
+  //
+  //  $scope.creatMaterial = function (index) {
+  //    $scope.material.loader = localInfo.name;
+  //    $scope.material.createAt = new Date();
+  //    if ($scope.material.dataUrl) {
+  //      Contest.materials.create({
+  //          id: res[index].id,
+  //          access_token: localInfo.id
+  //        }, $scope.material, function () {
+  //          Materialize.toast('上传成功！', 2000)
+  //        }, function () {
+  //          Materialize.toast('上传失败！', 2000)
+  //        }
+  //      )
+  //    } else {
+  //      Materialize.toast('请先选择文件！', 2000)
+  //    }
+  //  };
+  //
+  //  $scope.loadContest = function (index) {
+  //    Contest.materials({
+  //      id: res[index].id,
+  //      access_token: localInfo.id,
+  //      filter: {
+  //        order: 'createAt DESC'
+  //      }
+  //    }, function (res) {
+  //      $scope.materialList = res;
+  //    });
+  //  };
+  //
+  //
+  //});
 
   //新建竞赛
   $scope.contest = {};
@@ -333,52 +339,32 @@ function EventCtrl($scope, $resource, ContestOrg, Contest) {
   $scope.clear = '清除';
   $scope.close = '确定';
   $scope.deadline = {};
+}]);
 
-}
+app.controller('ActivityCtrl', ['$scope', function ($scope) {
 
-function ActivityCtrl($scope) {
-}
+}]);
 
-function FormCtrl($scope) {
-}
+app.controller('FormCtrl', ['$scope', function ($scope) {
 
-function VoteCtrl($scope) {
-}
+}]);
 
-function SeckillCtrl($scope) {
-}
+app.controller('VoteCtrl', ['$scope', function ($scope) {
 
-function AlbumCtrl($scope) {
-}
+}]);
 
-function SettingCtrl($scope, ContestOrg, $rootScope, School) {
-  $scope.schools = School.find({
-    filter: {
-      fields: ['name']
-    }
-  });
-  ContestOrg.findById({
-    id: localInfo.userId,
-    access_token: localInfo.id
-  }, function (res) {
-    $scope.orgChange = res;
-  });
+app.controller('SeckillCtrl', ['$scope', function ($scope) {
 
-  $scope.updateOrgInfo = function () {
-    ContestOrg.prototype$updateAttributes({
-      id: localInfo.userId,
-      access_token: localInfo.id
-    }, $scope.orgChange, function () {
-      var recordInfo = JSON.parse(localStorage.CMSCAPTCHA);
-      recordInfo.name = $scope.orgChange.name;
-      localStorage.CMSCAPTCHA = JSON.stringify(recordInfo);
-      $rootScope.orgName = $scope.orgChange.name;
-      Materialize.toast('更新成功！', 2000);
-    }, function () {
-      Materialize.toast('更新失败！', 2000);
-    });
-  };
-}
+}]);
 
-function HelpCtrl() {
-}
+app.controller('AlbumCtrl', ['$scope', function ($scope) {
+
+}]);
+
+app.controller('SettingCtrl', ['$scope', function ($scope) {
+
+}]);
+
+app.controller('HelpCtrl', ['$scope', function ($scope) {
+
+}]);

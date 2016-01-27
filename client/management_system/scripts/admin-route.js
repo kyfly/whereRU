@@ -1,44 +1,85 @@
-function RouteConfigure($routeProvider) {
-  $routeProvider
-    .when('/MS/home', {
-      templateUrl: '/management_system/views/index.html',
-      controller: ['$scope', '$resource', HomeCtrl]
+app.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/MS/home');
+  $stateProvider
+    .state('home', {
+      url: '/MS/home',
+      templateUrl: '/management_system/views/home.html',
+      controller: 'HomeCtrl'
     })
-    .when('/MS/member', {
+    .state('member', {
+      url: '/MS/member',
       templateUrl: '/management_system/views/member.html',
-      controller: ['$scope', '$resource', 'Team', MemberCtrl]
+      controller: 'MemberCtrl'
     })
-    .when('/MS/event', {
+    .state('event', {
+      url: '/MS/event',
       templateUrl: '/management_system/views/event.html',
-      controller: ['$scope', '$resource', 'ContestOrg', 'Contest', EventCtrl]
+      controller: 'EventCtrl'
     })
-    .when('/MS/activity', {
+    .state('activity', {
+      url: '/MS/activity',
       templateUrl: '/management_system/views/activity.html',
-      controller: ['$scope', '$resource', ActivityCtrl]
+      controller: 'ActivityCtrl'
     })
-    .when('/MS/form', {
+    //.state('list', {
+    //  url: '/MS/:type*/list/:id*',
+    //  templateUrl: '/management_system/views/list.html',
+    //  controller: 'ListCtrl'
+    //})
+    .state('edit', {
+      url: '/MS/:type*/edit',
+      templateUrl: '/management_system/views/edit.html',
+      controller: 'EditCtrl'
+    })
+    .state('result', {
+      url: '/MS/:type*/result/:id*',
+      templateUrl: '/management_system/views/result.html',
+      controller: 'ResultCtrl'
+    })
+    .state('form', {
+      url: '/MS/form',
       templateUrl: '/management_system/views/form.html',
-      controller: ['$scope', '$resource', FormCtrl]
+      controller: 'FormCtrl',
+      views: {
+        '': {
+          templateUrl: '/management_system/views/list.html'
+        },
+        'columnOne@form': {
+          template: '这里是第一列的内容'
+        },
+        'columnTwo@form': {
+          template: '2323'
+        }
+      }
     })
-    .when('/MS/vote', {
+    .state('form.list', {
+      url: '/list',
+      template: '/management_system/views/list.html',
+      controller: 'ListCtrl'
+    })
+    .state('vote', {
+      url: '/MS/vote',
       templateUrl: '/management_system/views/vote.html',
-      controller: ['$scope', '$resource', VoteCtrl]
+      controller: 'VoteCtrl'
     })
-    .when('/MS/seckill', {
+    .state('seckill', {
+      url: '/MS/seckill',
       templateUrl: '/management_system/views/seckill.html',
-      controller: ['$scope', '$resource', SeckillCtrl]
+      controller: 'SeckillCtrl'
     })
-    .when('/MS/album', {
+    .state('album', {
+      url: '/MS/album',
       templateUrl: '/management_system/views/album.html',
-      controller: ['$scope', '$resource', AlbumCtrl]
+      controller: 'AlbumCtrl'
     })
-    .when('/MS/setting', {
+    .state('setting', {
+      url: '/MS/setting',
       templateUrl: '/management_system/views/setting.html',
-      controller: ['$scope', 'ContestOrg', '$rootScope', 'School', SettingCtrl]
+      controller: 'SettingCtrl'
     })
-    .when('/MS/help', {
-      templateUrl: '/management_system/help.html',
-      controller: HelpCtrl
+    .state('help', {
+      url: '/MS/help',
+      templateUrl: '/management_system/views/help.html',
+      controller: 'HelpCtrl'
     })
-    .otherwise({redirectTo: '/MS/home'});
-}
+});

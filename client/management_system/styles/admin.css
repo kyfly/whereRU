@@ -1,10 +1,9 @@
+/**
+* 以下为index.html的样式或全局样式
+*/
 body {
   font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
 }
-
-/*.brand-logo {*/
-/*margin: 15px;*/
-/*}*/
 
 .logo {
   text-align: center;
@@ -132,14 +131,6 @@ main {
   padding: 15px;
 }
 
-.autoLogin {
-  margin-left: 45px;
-}
-
-.loginBtn {
-  margin-left: 30px;
-}
-
 .addFile {
   margin-left: 45px;
 }
@@ -164,7 +155,7 @@ main {
   cursor: default !important;
 }
 
-.collection-item > span{
+.collection-item > span {
   margin: 15px !important;
 }
 
@@ -215,6 +206,9 @@ main {
   font-weight: 300;
 }
 
+/**
+ * 以下部分为member.html的样式
+ */
 .addMember {
   margin-top: 7px;
 }
@@ -225,4 +219,8 @@ main {
 
 .telSpan {
   margin-top: 10px !important;
+}
+
+.memberCard {
+  height: 150px;
 }
