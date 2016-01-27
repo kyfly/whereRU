@@ -1,20 +1,60 @@
-<h5 class="left">成员：<span>9</span></h5>
+<h5 class="left">成员：<span ng-bind="memberLength"></span></h5>
 <a href="" class="addMember waves-effect waves-light btn right"><i class="mdi-content-add right"></i>邀请新成员</a>
 <div class="clearfix"></div>
-<hr>
 <div class="row">
-  <div class="col s12 m4">
-    <div class="card waves-effect waves-block">
-      <div class="card-content">
-        <img class="left" width="55px" height="55px" src="/lib/img/logo.jpg">
-        <div class="left memberInfo">
-          <span>刘某某</span>
-          <br>
-          <p class="telSpan">18868462212</p>
+  <div class="col s12 m6" ng-repeat="member in members" ng-show="member.verified === false">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">加入团队申请</span>
+        <p><a ng-click="showMemberDetail()" href="" class="orange-text text-lighten-1 unverifiedName"
+              ng-bind="member.name"></a> 通过团队查找申请加入该团队</p>
+        <div class="white-text container" ng-class="{false: 'hide'}[isShowMemberDetail]">
+          <p>手机：<span ng-bind="member.phone"></span></p>
+          <p>学院：<span ng-bind="member.academy"></span></p>
+          <p>部门：<span ng-bind="member.department"></span></p>
         </div>
-        <div class="clearfix"></div>
+      </div>
+      <div class="card-action">
+        <a href="" ng-click="agreeMemberIn(member.id)">同意</a>
+        <a href="" ng-click="refuseMemberIn(member.id)">拒绝</a>
       </div>
     </div>
   </div>
 </div>
+<hr>
+<div class="row">
+  <div class="col s12 m4" ng-repeat="member in members" ng-show="member.verified === true">
+    <div class="card memberCard">
+      <div class="card-content">
+        <i class="material-icons red-text deleteMember right" ng-href="{{'#deleteMemberConfirm' + $index}}" modal>
+          &#xE14C;</i>
+        <img class="left" width="55px" height="55px" src="/lib/img/logo.jpg">
+        <div class="left memberInfo">
+          <span ng-bind="member.name"></span>
+          <br>
+          <p class="telSpan" ng-bind="member.phone"></p>
+        </div>
+        <div class="clearfix"></div>
+        <hr>
+        <div>
+          <p>学院：<span ng-bind="member.academy"></span></p>
+          <p>部门：<span ng-bind="member.department"></span></p>
+        </div>
+      </div>
+    </div>
+    <div id="{{'deleteMemberConfirm' + $index}}" class="modal">
+      <div class="modal-content">
+        <h4>确认删除？</h4>
+        <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>删除后不可恢复！</span></p>
+      </div>
+      <div class="modal-footer">
+        <a ng-click="deleteMember($index)" href=""
+           class="whiteColor modal-action modal-close waves-effect waves-green btn-flat red darken-1">确认删除</a>
+        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 

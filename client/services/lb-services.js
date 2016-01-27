@@ -7,7 +7,7 @@
  * 使用方法：应用中引入模块'lbServices',控制器中引入相应的服务名称
  * model.method([queryObject, postObject], successFn, errorFn)
  * model       服务名称
- * method      resource参数  
+ * method      resource参数
  * queryObject 参数对象       根据restful接口匹配，不匹配的参数作为query参数,无参数可省略
  * postObject  发送数据对象   PUT，POST需要发送的数据，GET方法无该参数
  * successFn   成功回调
@@ -187,7 +187,7 @@ module.factory(
     return R;
 }])
 .factory(
-  'Team', 
+  'Team',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
     var R = Resource(
@@ -237,7 +237,8 @@ module.factory(
          */
         "prototype_get_members": {
           url: urlBase + '/Teams/:id/members',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
         },
         /**
          * 描述：成员详细信息，已登录用户
@@ -301,6 +302,15 @@ module.factory(
         "getActivitiesData": {
           url: urlBase + '/Teams/:id/activitiesData',
           method: 'GET'
+        },
+        "prototype_get_races": {
+          url: urlBase + '/Teams/:id/races',
+          method: 'GET',
+          isArray: true
+        },
+        "prototype_create_races": {
+          url: urlBase + '/Teams/:id/races',
+          method: 'POST'
         }
       }
     );
@@ -557,7 +567,7 @@ module.factory(
       };
     }])
 .provider('LoopBackResource', function LoopBackResourceProvider() {
-   
+
     this.setAuthHeader = function(header) {
       authHeader = header;
     };
