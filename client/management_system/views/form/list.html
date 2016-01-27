@@ -1,35 +1,29 @@
-<div class="row list-area">
-  <div class="col-lg-3 col-md-4 col-sm-6">
-    <section class="panel list-item create-area" ng-click="edit('create')">
-      <p class="create"><span class="glyphicon glyphicon-plus"></span></p>
-    </section>
+<div class="row">
+  <div class="col s12 m4">
+    <div class="card addItemBox">
+      <div class="card-content item-list">
+        <p class="text-center"><i class="material-icons">&#xE145;</i></p>
+      </div>
+    </div>
   </div>
-  <div class="col-lg-3 col-md-4 col-sm-6 repeat-item" ng-repeat="listItem in listItems">
-    <section class="panel list-item" ng-mouseenter="getQRcode()" ng-mouseleave="mouseleave()">
-
-      <h3 ng-show="contentShow[0]" style="word-break:break-word">{{listItem.title | limitTo:20}}</h3>
-
-      <p ng-show="contentShow[2]">开始：{{listItem.startTime | date:unFormat}}</p>
-
-      <p ng-show="contentShow[3]">结束：{{listItem.stopTime | date:unFormat}}</p>
-
-      <p ng-show="contentShow[1]" style="word-break:break-word">简介：{{listItem.description | limitTo:60}}</p>
-
-      <div ng-class='{"qrcode":qrcodeClass}' id="{{listItem.id}}" ng-show="mouseover"></div>
-
-    </section>
-    <div class="btn-area">
-      <div class="edit-btn btn-success text-center">
-        <a href ng-click="edit(listItem.id)"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
+  <div class="col s12 m4">
+    <div class="card">
+      <div class="card-content item-list">
+        <span class="card-title">测试</span>
+        <p>开始：2015-10-20 00:00:00</p>
+        <p>结束：2015-10-20 00:00:00</p>
+        <p style="word-break:break-word">简介：qweqwewdsad</p>
       </div>
-      <div class="result-btn btn-info text-center">
-        <a href ng-click="result(listItem.id)"><span class="glyphicon glyphicon-list"></span> 结果</a>
-      </div>
-      <div ng-show="!deleteConfirm" class="delete-btn btn-danger text-center">
-        <a href ng-click="deleteConfirm = !deleteConfirm"><span class="glyphicon glyphicon-remove"></span> 删除</a>
-      </div>
-      <div ng-show="deleteConfirm" class="delete-btn btn-danger text-center">
-        <a href ng-click="remove($index,listItem.id)"><span class="glyphicon glyphicon-remove"></span> 确认删除</a>
+      <div class="card-action btn-area">
+        <div class="edit-btn waves-effect text-center">
+          <a href ng-click="edit(listItem.id)"><i class="material-icons">&#xE254;</i> 编辑</a>
+        </div>
+        <div class="result-btn waves-effect text-center">
+          <a href ng-click="result(listItem.id)"><i class="material-icons">&#xE241;</i> 结果</a>
+        </div>
+        <div class="delete-btn waves-effect text-center">
+          <a href ng-click="deleteConfirm = !deleteConfirm"><i class="material-icons">&#xE872;</i> 删除</a>
+        </div>
       </div>
     </div>
   </div>

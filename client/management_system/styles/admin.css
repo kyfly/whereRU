@@ -237,3 +237,82 @@ main {
   font-size: 40px;
 }
 
+/**
+ * 以下部分为form的样式
+ */
+
+.item-list {
+  height: 300px;
+  padding: 10px !important;
+}
+
+.addItemBox {
+  cursor: pointer;
+}
+
+.addItemBox > .item-list > .text-center {
+  margin-top: 50px !important;
+}
+
+.addItemBox > .item-list > .text-center > i {
+  font-size: 100px;
+}
+
+.item-list > .card-title {
+  color: #A7D86E;
+}
+
+.item-list > p {
+  color: #858585 !important;
+}
+
+.btn-area {
+  padding: 0 !important;
+  position: relative;
+  top: -40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.btn-area > .text-center {
+  line-height: 38px;
+}
+
+.btn-area > .text-center > a {
+  margin: 0;
+}
+
+.btn-area > .text-center > a > .material-icons {
+  vertical-align: middle;
+}
+
+.btn-area .edit-btn {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 33.333%;
+  height: 40px;
+}
+
+.material-icons {
+  display: inline;
+}
+
+.btn-area .result-btn {
+  position: absolute;
+  top: 100%;
+  left: 33.333%;
+  width: 33.333%;
+  height: 40px;
+  border-left: 1px solid rgba(160,160,160,0.2);
+  border-right: 1px solid rgba(160,160,160,0.2);
+}
+
+.btn-area .delete-btn {
+  position: absolute;
+  top: 100%;
+  left: 66.666%;
+  width: 33.333%;
+  height: 40px;
+}
