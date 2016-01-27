@@ -21,51 +21,50 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: '/management_system/views/activity.html',
       controller: 'ActivityCtrl'
     })
-    //.state('list', {
-    //  url: '/MS/:type*/list/:id*',
-    //  templateUrl: '/management_system/views/list.html',
-    //  controller: 'ListCtrl'
-    //})
-    .state('edit', {
-      url: '/MS/:type*/edit',
-      templateUrl: '/management_system/views/edit.html',
-      controller: 'EditCtrl'
+    .state('formList', {
+      url: '/MS/form/list',
+      templateUrl: '/management_system/views/form/list.html',
+      controller: 'FormListCtrl'
     })
-    .state('result', {
-      url: '/MS/:type*/result/:id*',
-      templateUrl: '/management_system/views/result.html',
-      controller: 'ResultCtrl'
+    .state('formEdit', {
+      url: '/MS/form/edit/:id',
+      templateUrl: '/management_system/views/form/edit.html',
+      controller: 'FormEditCtrl'
     })
-    .state('form', {
-      url: '/MS/form',
-      templateUrl: '/management_system/views/form.html',
-      controller: 'FormCtrl',
-      views: {
-        '': {
-          templateUrl: '/management_system/views/list.html'
-        },
-        'columnOne@form': {
-          template: '这里是第一列的内容'
-        },
-        'columnTwo@form': {
-          template: '2323'
-        }
-      }
+    .state('formResult', {
+      url: '/MS/form/result/:id',
+      templateUrl: '/management_system/views/form/result.html',
+      controller: 'FormResultCtrl'
     })
-    .state('form.list', {
-      url: '/list',
-      template: '/management_system/views/list.html',
-      controller: 'ListCtrl'
+    .state('voteList', {
+      url: '/MS/vote/list',
+      templateUrl: '/management_system/views/vote/list.html',
+      controller: 'VoteListCtrl'
     })
-    .state('vote', {
-      url: '/MS/vote',
-      templateUrl: '/management_system/views/vote.html',
-      controller: 'VoteCtrl'
+    .state('voteEdit', {
+      url: '/MS/vote/edit/:id',
+      templateUrl: '/management_system/views/vote/edit.html',
+      controller: 'VoteEditCtrl'
     })
-    .state('seckill', {
-      url: '/MS/seckill',
-      templateUrl: '/management_system/views/seckill.html',
-      controller: 'SeckillCtrl'
+    .state('voteResult', {
+      url: '/MS/vote/result/:id',
+      templateUrl: '/management_system/views/vote/result.html',
+      controller: 'VoteResultCtrl'
+    })
+    .state('seckillList', {
+      url: '/MS/seckill/list',
+      templateUrl: '/management_system/views/seckill/list.html',
+      controller: 'SeckillListCtrl'
+    })
+    .state('seckillEdit', {
+      url: '/MS/seckill/edit/:id',
+      templateUrl: '/management_system/views/seckill/edit.html',
+      controller: 'SeckillEditCtrl'
+    })
+    .state('seckillResult', {
+      url: '/MS/seckill/result/:id',
+      templateUrl: '/management_system/views/seckill/result.html',
+      controller: 'SeckillResultCtrl'
     })
     .state('album', {
       url: '/MS/album',
