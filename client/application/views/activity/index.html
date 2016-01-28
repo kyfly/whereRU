@@ -11,16 +11,27 @@
     </ul>
   </div>
 </nav>
+
+<div class="row" style="  margin-top:-2;">
+  <div class="col s12 m12 l12">
 <div class="row menu">
-    <select class="col m2 l1 browser-default hide-on-small-only" ng-model="choice" material-select watch>
+    <select class="col m3 l1 browser-default hide-on-small-only" ng-model="choice" material-select watch>
       <option ng-repeat="value in ['最新','最热']">{{value}}</option>
     </select>
     <div class="col s4 m3 l2 menu-item "><a class="active" href="/w/activities">校园活动</a></div>
     <div class="col s4 m3 l2 menu-item"><a href="/w/races">校园竞赛</a></div>
     <div class="col s4 m3 l2 menu-item"><a href="/w/teams">校园团队</a></div>
 </div>
+    </div>
+  </div>
+
+<!--<hr>-->
+
 <div class="row">
-  <div class="col s12 m6">
+  <div class="col s6 m6 l6">
+<div class="active-picture">
+<div class="row">
+  <div class="col s6 m6">
     <div class="card">
       <div class="card-title">
         <h4>团团一家最佳程序员竞赛</h4>
@@ -30,4 +41,7 @@
       </div>
     </div>
   </div>
+</div>
+</div>
+</div>
 </div>
