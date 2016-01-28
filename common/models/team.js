@@ -10,6 +10,22 @@ module.exports = function(Team) {
 			path: '/search', verb: 'get'
 		}
 	});
+    Team.search = function(keyword,cb){
+        if(keyword) keyword = keyword.replace(' ','.+');
+        Team.find({
+            where:
+            {
+                or:[{name:{like:keyword}},
+                    {desc:{like:keyword}},
+                    {school:{like:keyword}},
+                    {type:{like:keyword}}]
+            },
+            fields:['id','userId','name','logoUrl','desc']
+        },function(err,teams){
+            if(err) return cb(err);
+            cb(null,teams);
+        });
+    };
 // 	Team.afterRemote('prototype.__link__joinRaces', function (ctx, ins, next) {
 // 		 ins.c = 'aaa';
 // 		 ins.save(function (err, r) {

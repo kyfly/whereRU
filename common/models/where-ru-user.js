@@ -7,11 +7,28 @@ module.exports = function(User) {
 		next();
 	});
 	User.beforeRemote('login', function (ctx, ins, next) {
-		ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
+        ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
 		next();
 	});
+    User.afterRemote('login', function (ctx, ins, next) {
+        User.findById(ins.userId, function (err, user) {
+            var token = ins.toJSON();
+            token.user = {
+                "name" : user.name,
+                "school" : user.school,
+                "phone" : user.phone
+            };
+            ctx.res.send(token);
+        });
+	});
 	User.afterRemote('create', function (ctx, ins, next) {
-		ins.createAccessToken(1209600, function (err, token) {
+		ins.createAccessToken(7200, function (err, token) {
+            var token = token.toJSON();
+            token.user = {
+                "name" : ins.name,
+                "school" : ins.school,
+                "phone" : ins.phone
+            };
 			ctx.res.send(token);
 		});
 	})
@@ -75,7 +92,20 @@ module.exports = function(User) {
 			path: '/search', verb: 'get'
 		}
 	});
-	User.search = function () {}
+	User.search = function (keyword,cb) {
+        if(keyword) keyword = keyword.replace(' ','.+');
+        User.find({
+            where:
+            {
+                or:[{name:{like:keyword}},
+                    {sign:{like:keyword}}]
+            },
+            fields:['id','name','sign','headImgUrl']
+        },function(err,User){
+            if(err) return cb(err);
+            cb(null,User);
+        });
+    }
 	User.remoteMethod('getMyTeams', {
 		accepts: {
 			arg: 'id', type: 'string',
@@ -135,8 +165,7 @@ module.exports = function(User) {
 			path: '/:id/activitiesHistories', verb: 'get'
 		}
 	});
-	User.getRaceHistories = function () {}
-
+	User.getRaceHistories = function () {};
 	User.beforeRemote('prototype.__updateAttributes', function () {});
 	User.afterRemote('prototype.__updateAttributes', function () {});
 	User.beforeRemote('prototype.__findById__formResults', function () {})

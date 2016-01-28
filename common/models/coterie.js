@@ -91,4 +91,28 @@ module.exports = function(Coterie) {
 			ctx.res.send(err);
 		})
 	});
+    Coterie.remoteMethod('search', {
+		accepts: {
+			arg: 'keyword', type: 'string',
+		},
+		returns: {
+			arg: 'coteries', type: "array"
+		},
+		http: {
+			path: '/search', verb: 'get'
+		}
+	});
+	Coterie.search = function (keyword,cb){
+        if(keyword) keyword = keyword.replace(' ','.+');
+        Coterie.find({
+            where:
+            {
+                or:[{name:{like:keyword}}]
+            },
+            fields:['name','logoUrl','id']
+        },function(err,coteries){
+            if(err) cb(err);
+            cb(null,coteries);
+        });
+    };
 };
