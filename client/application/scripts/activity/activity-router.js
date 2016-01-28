@@ -1,12 +1,4 @@
 app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
-<<<<<<< HEAD
-  $stateProvider
-    .state('activities', {
-      url: '/w/activities',
-      controller: 'IndexController',
-      templateUrl: 'application/views/activity/index.html'
-    })
-=======
 	$stateProvider
 	.state('activities', {
 		url: '/w/activities',
@@ -18,5 +10,4 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 		controller: 'ActivitieController',
 		templateUrl: 'application/views/activity/detail.html'
 	})
->>>>>>> liuJD
 }]);
