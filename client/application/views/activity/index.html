@@ -1,44 +1,149 @@
-<nav class="header row">
+<nav class="header row hide-on-med-and-down">
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo col offset-s3 offset-m0 offset-l1">whereRU</a>
-    <select class="left col s3 browser-default hide-on-med-only" ng-model="choice" material-select watch>
-      <option ng-repeat="value in ['最新','最热']">{{value}}</option>
-    </select>
-    <ul class="col offset-m9 offset-l9 hide-on-med-and-down">
+    <a href="#!" class="brand-logo col offset-s0 offset-m0 offset-l1">whereRU</a>
+    <ul class="col offset-m9 offset-l8">
       <li><a href="/w/activities">服务</a></li>
       <li><a href="/w/coteries">圈子</a></li>
       <li><a href="#">登录</a></li>
     </ul>
   </div>
 </nav>
+<nav class="header row hide-on-large-only">
+  <div class="nav-wrapper">
+    <a href="#!" class="col offset-s1 brand-logo">whereRU</a>
+    <ul>
+      <li>
+        <a class="dropdown-button right" href="#!" dropdown data-hover="true"
+           data-activates="demoDropdown">{{choice || "全部"}}
+          <i class="material-icons right">arrow_drop_down</i>
+        </a>
+      </li>
+      <ul id='demoDropdown' class='dropdown-content'>
+          <li><a href="javascript:void(0);">最新</a></li>
+          <li><a href="javascript:void(0);">进行中</a></li>
+          <li><a href="javascript:void(0);">未开始</a></li>
+          <li><a href="javascript:void(0);">已结束</a></li>
+      </ul>
+    </ul>
+  </div>
+</nav>
 
-<div class="row" style="  margin-top:-2;">
-  <div class="col s12 m12 l12">
 <div class="row menu">
-    <select class="col m3 l1 browser-default hide-on-small-only" ng-model="choice" material-select watch>
+    <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
       <option ng-repeat="value in ['最新','最热']">{{value}}</option>
     </select>
     <div class="col s4 m3 l2 menu-item "><a class="active" href="/w/activities">校园活动</a></div>
     <div class="col s4 m3 l2 menu-item"><a href="/w/races">校园竞赛</a></div>
     <div class="col s4 m3 l2 menu-item"><a href="/w/teams">校园团队</a></div>
 </div>
-    </div>
-  </div>
-
-<!--<hr>-->
-
-<div class="row">
-  <div class="col s6 m6 l6">
-<div class="active-picture">
-<div class="row">
-  <div class="col s6 m6">
+<div class="row activity">
+  <div class="col s12 m4 l3 activity-list">
     <div class="card">
       <div class="card-title">
-        <h4>团团一家最佳程序员竞赛</h4>
+        <a href="/w/activities/:id"><h4>团团一家最佳程序员竞赛</h4></a>
+      </div>
+      <div class="card-content">
+        <h6>
+          <a href="/w/teams/:id"><b>团团一家 </b><a/>
+          <time>2015-12-12<time>
+        </h6>
       </div>
       <div class="card-image">
-        <img src="http://assets.servedby-buysellads.com/p/manage/asset/id/26625">
+        <a href="/w/activities/:id">
+          <img  style="width:100%" src="http://assets.servedby-buysellads.com/p/manage/asset/id/26625">
+        </a>
       </div>
+      <div class="card-action tag">
+        <h6><span>标签：</span><span>抢票,团团一阿吉抢票,团团一阿吉抢票,团团一阿吉抢票,团团一阿吉</span></h6>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <a href="/w/activities/:id"><h4>团团一家最佳程序员竞赛</h4></a>
+      </div>
+      <div class="card-content">
+        <h6>
+          <a href="/w/teams/:id"><b>团团一家 </b><a/>
+          <time>2015-12-12<time>
+        </h6>
+      </div>
+      <div class="card-image">
+        <a href="/w/activities/:id">
+          <img  style="width:100%" src="http://assets.servedby-buysellads.com/p/manage/asset/id/26625">
+        </a>
+      </div>
+      <div class="card-action tag">
+        <h6><span>标签：</span><span>抢票,团团一阿吉抢票,团团一阿吉抢票,团团一阿吉抢票,团团一阿吉</span></h6>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <a href="/w/activities/:id"><h4>团团一家最佳程序员竞赛</h4></a>
+      </div>
+      <div class="card-content">
+        <h6>
+          <a href="/w/teams/:id"><b>团团一家 </b><a/>
+          <time>2015-12-12<time>
+        </h6>
+      </div>
+      <div class="card-image">
+        <a href="/w/activities/:id">
+          <img  style="width:100%" src="http://assets.servedby-buysellads.com/p/manage/asset/id/26625">
+        </a>
+      </div>
+      <div class="card-action tag">
+        <h6><span>标签：</span><span>抢票,团团一阿吉抢票,团团一阿吉抢票,团团一阿吉抢票,团团一阿吉</span></h6>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <a href="/w/activities/:id"><h4>团团一家最佳程序员竞赛</h4></a>
+      </div>
+      <div class="card-content">
+        <h6>
+          <a href="/w/teams/:id"><b>团团一家 </b><a/>
+          <time>2015-12-12<time>
+        </h6>
+      </div>
+      <div class="card-image">
+        <a href="/w/activities/:id">
+          <img  style="width:100%" src="http://assets.servedby-buysellads.com/p/manage/asset/id/26625">
+        </a>
+      </div>
+      <div class="card-action tag">
+        <h6><span>标签：</span><span>抢票,团团一阿吉抢票,团团一阿吉抢票,团团一阿吉抢票,团团一阿吉</span></h6>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m8 l9 activity-detail">
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs" tabs>
+            <li class="tab col s4">
+              <a href="#about">活动介绍</a>
+            </li>
+            <li class="tab col s4">
+              <a class="active" href="#detail">活动详情</a>
+            </li>
+            <li class="tab col s4">
+              <a href="#join">参与活动</a>
+            </li>
+        </ul>
+      </div>
+      <div id="about" class="col s12 container ">
+        <div class="card">
+          <div class="card-image">
+            <a href="/w/activities/:id">
+              <img  style="width:100%" src="http://assets.servedby-buysellads.com/p/manage/asset/id/26625">
+            </a>
+          </div>
+          <div class="card-action tag">
+
+          </div>
+        </div>
+      </div>
+      <div id="detail" class="col s12">Test 2</div>
+      <div id="join" class="col s12">Test 3</div>
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@
 	background-color: #0CB9F7;
 	padding: 0;
 	margin: 0;
+  height: 4rem;
 }
 .header ul a{
 	font-size: 1.5rem;
@@ -39,8 +40,9 @@
   will-change: left, right;
 }
 .menu{
-  height: 3.3rem;
-  font-size: 1.5rem;
+  height: 2.5rem;
+  font-size: 1.3rem;
+  float: left;
   color: red;
   background-color: #fff;
   width: 100%;
@@ -48,10 +50,53 @@
   padding: 0;
   border-bottom: 5px solid #0CB9F7;
 }
+.browser-default{
+  height: 100%;
+}
 .menu-item{
   height: 100%;
 }
 .active{
   color: #000;
 }
-
+.activity{
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 7.5rem;  /*菜单栏加导航栏高度*/
+  bottom: 0;  /*固定框架高度*/
+  width: 100%;
+}
+.activity-list{
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+}
+.activity-list h4{
+  white-space:nowrap;  /*不换行*/
+  overflow: hidden;   /*隐藏并省略*/
+  text-overflow:ellipsis;
+  margin: 0.5rem 0;
+  font-size: 1.3rem;
+  padding-top: 10px
+}
+.activity-list .tag{
+  white-space:nowrap;
+  font-size: 1rem;
+  padding: 5px 10px;
+  width: 100%;
+}
+.activity-list .tag h6{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  width: 100%;
+}
+.activity-list .card {
+  border-top: rgba(0, 0, 0, 0.16) 1px solid;
+  box-shadow:0 0 0 ;
+  margin: 0;
+  padding: 0;
+}
+.activity-list .card-content{
+  padding: 0;
+}
