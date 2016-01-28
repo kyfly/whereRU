@@ -92,7 +92,20 @@ module.exports = function(User) {
 			path: '/search', verb: 'get'
 		}
 	});
-	User.search = function () {}
+	User.search = function (keyword,cb) {
+        if(keyword) keyword = keyword.replace(' ','.+');
+        User.find({
+            where:
+            {
+                or:[{name:{like:keyword}},
+                    {sign:{like:keyword}}]
+            },
+            fields:['id','name','sign','headImgUrl']
+        },function(err,User){
+            if(err) return cb(err);
+            cb(null,User);
+        });
+    }
 	User.remoteMethod('getMyTeams', {
 		accepts: {
 			arg: 'id', type: 'string',
@@ -152,8 +165,7 @@ module.exports = function(User) {
 			path: '/:id/activitiesHistories', verb: 'get'
 		}
 	});
-	User.getRaceHistories = function () {}
-
+	User.getRaceHistories = function () {};
 	User.beforeRemote('prototype.__updateAttributes', function () {});
 	User.afterRemote('prototype.__updateAttributes', function () {});
 	User.beforeRemote('prototype.__findById__formResults', function () {})

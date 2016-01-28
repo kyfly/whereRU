@@ -42,7 +42,21 @@ module.exports = function(Activity) {
 			path: '/search', verb: 'get'
 		}
 	});
-	Activity.search = function () {}
+	Activity.search = function (keyword,cb) {
+        if(keyword) keyword = keyword.replace(' ','.+');
+        Activity.find({
+            where:
+            {
+                or:[{title:{like:keyword}},
+                    {authorName:{like:keyword}},
+                    {keyword:{like:keyword}}]
+            },
+            fields:['title','authorName','id','authorId','keyword','imgUrl','created','status']
+        },function(err,activities){
+            if(err) return cb(err);
+            cb(null,activities);
+        });
+    };
 	Activity.remoteMethod('getHotActiveties', {
 		accepts: {
 			arg: 'school', type: 'string',
