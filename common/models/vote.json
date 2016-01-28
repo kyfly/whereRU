@@ -34,6 +34,10 @@
       "options": {
         "validate": true
       }
+    },
+    "activity": {
+      "type": "belongsTo",
+      "model": "Activity"
     }
   },
   "acls": [],

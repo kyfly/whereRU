@@ -18,6 +18,9 @@
     },
     "updated": {
       "type": "date"
+    },
+    "teamId": {
+      "type": "string"
     }
   },
   "validations": [],
@@ -25,6 +28,10 @@
     "seckillResults": {
       "type": "hasMany",
       "model": "SeckillResult"
+    },
+    "activity": {
+      "type": "belongsTo",
+      "model": "Activity"
     },
     "seckillItems": {
       "type": "embedsMany",
@@ -35,7 +42,7 @@
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
+      "permission": "ALLOW"
     },
     {
       "principalType": "ROLE",

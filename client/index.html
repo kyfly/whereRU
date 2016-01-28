@@ -6,21 +6,23 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/lib/img/etuan_logo.ico" type="image/x-icon">
-  <link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
-  <link href="/lib/materialize/css/materialize.min.css" rel="stylesheet">
-  <link href="/application/styles/user/ucoterie.css" rel="stylesheet">
-
+	<link rel="stylesheet" type="text/css" href="/lib/materialize/css/material-icons.css">
+	<link rel="stylesheet" type="text/css" href="/lib/materialize/css/materialize.css">
+  <link rel="stylesheet" type="text/css" href="/application/styles/where-r-u.css">
+	<link rel="stylesheet" type="text/css" href="/application/styles/coterie.css">
 </head>
 <body>
 <div>
   <div ui-view></div>
 </div>
-
-
-
-
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
 <!--angular-->
 <script src="/lib/angular/angular.min.js"></script>
+<!-- material -->
+<script src="/lib/materialize/js/materialize.min.js"></script>
+<!-- ng-material -->
+<script src="/lib/materialize/js/angular-materialize.js"></script>
 <!--ui-router-->
 <script src="/lib/angular-components/angular-ui-router.min.js"></script>
 <!--resource-->
@@ -29,13 +31,20 @@
 <script src="/services/lb-services.js"></script>
 <!--angular module-->
 <script src="/app.js"></script>
+<!-- User -->
 <script src="/application/scripts/user/user-controller.js"></script>
 <script src="/application/scripts/user/user-router.js"></script>
-
-<!--ucoterie用到的-->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/materialize/js/materialize.min.js"></script>
-<script src="/lib/materialize/js/angular-materialize.js"></script>
-
+<!-- Activity -->
+<script src="/application/scripts/activity/activity-controller.js"></script>
+<script src="/application/scripts/activity/activity-router.js"></script>
+<!-- Coterie -->
+<script src="/application/scripts/coterie/coterie-controller.js"></script>
+<script src="/application/scripts/coterie/coterie-router.js"></script>
+<!-- Team -->
+<script src="/application/scripts/team/team-controller.js"></script>
+<script src="/application/scripts/team/team-router.js"></script>
+<!-- Race -->
+<script src="/application/scripts/race/race-controller.js"></script>
+<script src="/application/scripts/race/race-router.js"></script>
 </body>
 </html>

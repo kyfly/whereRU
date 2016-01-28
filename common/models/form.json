@@ -19,13 +19,17 @@
     "formItems": {
       "type": "embedsMany",
       "model": "FormItem"
+    },
+    "activity": {
+      "type": "belongsTo",
+      "model": "Activity"
     }
   },
   "acls": [
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
+      "permission": "ALLOW"
     },
     {
       "principalType": "ROLE",
