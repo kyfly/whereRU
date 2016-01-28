@@ -1,4 +1,5 @@
-var app = angular.module('WRU', ['ui.router', 'lbServices'])
+var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize'])
+
   //配置路由方式
 .config(['$locationProvider', '$urlRouterProvider', function ($locationProvider, $urlRouterProvider) {
   $locationProvider.html5Mode({
