@@ -70,7 +70,7 @@
 .activity-list{
   position: relative;
   height: 100%;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 .activity-list h4{
   white-space:nowrap;  /*不换行*/
@@ -100,6 +100,7 @@
 .activity-list .card-content{
   padding: 0;
 }
+<<<<<<< HEAD
 .activity-detail{
   position: fixed;
   top: 7.5rem;
@@ -116,3 +117,5 @@
   overflow: scroll;
   height: 100%;
 }
+=======
+>>>>>>> wangkai

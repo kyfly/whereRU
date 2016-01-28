@@ -15,10 +15,10 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 		controller: 'RegisterController',
 		templateUrl: 'application/views/user/register.html'
 	})
-	.state('index', {
+    .state('index', {
 		url: '/',
 		controller: 'TestController',
-		templateUrl: '/application/views/index.html'
+		templateUrl: '/application/scripts/views/index.html'
 	})
   .state('management_system', {
     url: '/w/team/:id',
