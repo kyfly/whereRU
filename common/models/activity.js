@@ -30,7 +30,7 @@ module.exports = function(Activity) {
 		} , function (err, activties) {
 			cb(null, activties);
 		});
-	}
+	};
 	Activity.remoteMethod('search', {
 		accepts: {
 			arg: 'keyword', type: 'string',
@@ -44,22 +44,26 @@ module.exports = function(Activity) {
 	});
 	Activity.search = function () {}
 	Activity.remoteMethod('getHotActiveties', {
-		accepts: [{
+		accepts: {
 			arg: 'school', type: 'string',
-		},{
-			arg: 'limit', type: 'number',
-		}],
+		},
 		returns: {
-			arg: 'activties', type: 'array'
+			arg: 'hotActivities', type: 'array'
 		},
 		http: {path: '/hotActiveties', verb: 'get'}
 	});
 	//
-	Activity.getHotActiveties = function () {
-
-
-
-    }
+	Activity.getHotActiveties = function (school,cb) {
+      Activity.find({
+        where:{"school":school},
+        order:'readers DESC',
+        limit: 5,
+        fields: ['id','title','imgUrl']
+      },function(err,activities){
+        if(err) return next(err);
+        cb(null,activities);
+      });
+    };
 	//
 	Activity.afterRemote('prototype.__create__readers', function (ctx,ins,next) {
     var readers = ctx.instance.toJSON().readers;
