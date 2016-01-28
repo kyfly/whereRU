@@ -7,11 +7,28 @@ module.exports = function(User) {
 		next();
 	});
 	User.beforeRemote('login', function (ctx, ins, next) {
-		ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
+        ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
 		next();
 	});
+    User.afterRemote('login', function (ctx, ins, next) {
+        User.findById(ins.userId, function (err, user) {
+            var token = ins.toJSON();
+            token.user = {
+                "name" : user.name,
+                "school" : user.school,
+                "phone" : user.phone
+            };
+            ctx.res.send(token);
+        });
+	});
 	User.afterRemote('create', function (ctx, ins, next) {
-		ins.createAccessToken(1209600, function (err, token) {
+		ins.createAccessToken(7200, function (err, token) {
+            var token = token.toJSON();
+            token.user = {
+                "name" : ins.name,
+                "school" : ins.school,
+                "phone" : ins.phone
+            };
 			ctx.res.send(token);
 		});
 	})

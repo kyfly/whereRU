@@ -57,6 +57,10 @@
     },
     "issue": {
       "type": "boolean"
+    },
+    "readers": {
+      "type": "number",
+      "default" : 0
     }
   },
   "validations": [],

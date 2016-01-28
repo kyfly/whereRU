@@ -27,18 +27,15 @@ input{
 }
 
 
-/*.leftPart{*/
-  /*border-right:1px solid #ADADAD;*/
-  /*text-align: center;*/
-  /*margin-top: 64px;*/
-/*}*/
-/*.rightPart{*/
-
-/*}*/
-
-
 .slide-nav{
   position:relative;
   z-index: 999!important;
 }
+
+/*.mainPart{*/
+  /*position: absolute;*/
+  /*left: 250px;*/
+  /*top: 64px;*/
+
+/*}*/
 
