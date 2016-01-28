@@ -3,7 +3,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 	.state('login', {
 		url: '/w/login',
 		controller: 'LoginController',
-		templateUrl: 'application/views/login.html'
+		templateUrl: 'application/views/user/login.html'
 	})
 	.state('confirmSchool', {
 		url: '/w/confirmSchool',
@@ -13,16 +13,16 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 	.state('register', {
 		url: '/w/register',
 		controller: 'RegisterController',
-		templateUrl: 'application/views/register.html'
+		templateUrl: 'application/views/user/register.html'
 	})
 	.state('index', {
 		url: '/',
 		controller: 'TestController',
 		templateUrl: '/application/views/index.html'
 	})
-    .state('management_system', {
-      url: '/w/team/:id',
-      controller: 'MSController',
-      template: '<div></div>'
-    })
-}])
+  .state('management_system', {
+    url: '/w/team/:id',
+    controller: 'MSController',
+    template: '<div></div>'
+  });
+}]);

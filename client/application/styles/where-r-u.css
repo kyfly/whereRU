@@ -1,0 +1,33 @@
+.header {
+	background-color: #0CB9F7;
+	padding: 0;
+	margin: 0;
+}
+.header ul a{
+	font-size: 1.5rem;
+  padding: 0 20px;
+  font-weight: bold;
+}
+.header .brand-logo {
+    position: absolute;
+    color: #fff;
+    display: inline-block;
+    font-size: 2.1rem;
+    padding: 0;
+    white-space: nowrap;
+    font-weight: 900;
+    font-family: cursive;
+}
+.notice {
+  height: 3rem;
+  font-size: 1rem;
+  color: red;
+  background-color: #000;
+  opacity: 0.2;
+  position: absolute;
+  width: 100%;
+}
+.section-first{
+	max-height: 700px;
+	background-color: #eee;
+}
