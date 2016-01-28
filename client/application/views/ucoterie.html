@@ -1,4 +1,5 @@
-<nav>
+<!--头部-->
+<nav class="topNav">
   <div class="nav-wrapper light-blue darken-2 row">
     <span class="col m2 topBarLeft">
       <a href="#" class="">whereRU</a>
@@ -9,7 +10,7 @@
           <label for="search"><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
     </span>
-    
+
 
     <span class="col m6 topBarRight">
       <ul class="right">
@@ -22,47 +23,24 @@
 
   </div>
 </nav>
+<!--侧边-->
+<ul class="side-nav fixed z-depth-2 text-center" id="sideBar">
+  <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars">
+    <a class="waves-effect" href="{{sidebar.url}}" ng-click="redirect($index)">{{sidebar.display_name}}</a>
+  </li>
+</ul>
 
-<div class="row">
-  <div class="col m2 leftPart">
-    <blockquote>
-      This is an example quotation that uses the blockquote tag.
-    </blockquote>
-    <blockquote>
-      This is an example quotation that uses the blockquote tag.
-    </blockquote>
-    <blockquote>
-      This is an example quotation that uses the blockquote tag.
-    </blockquote>
-    <blockquote>
-      This is an example quotation that uses the blockquote tag.
-    </blockquote>
+<!--<div class="row">-->
+  <!--<div class="col m2 leftPart">-->
 
-    <div class="collection">
-      <a href="#!" class="collection-item">Alvin</a>
-      <a href="#!" class="collection-item active">Alvin</a>
-      <a href="#!" class="collection-item">Alvin</a>
-      <a href="#!" class="collection-item">Alvin</a>
-    </div>
+  <!--</div>-->
+  <!--<div class="col m10 rightPart">-->
+    <!--hello3-->
+  <!--</div>-->
+<!--</div>-->
 
-    <div class="collection">
-      <blockquote>
-        <a href="#!" class="collection-item">Alvin</a>
-      </blockquote>
-      <blockquote class="collection-item">
-        <a href="#!" class="collection-item">Alvin</a>
-      </blockquote>
-      <blockquote class="collection-item">
-        <a href="#!" class="collection-item">Alvin</a>
-      </blockquote>
-      <blockquote class="collection-item">
-        <a href="#!" class="collection-item">Alvin</a>
-      </blockquote>
-    </div>
-
+<main >
+  <div class="container" id="main">
+    <div class="col s12" ui-view=""></div>
   </div>
-
-  <div class="col m10 rightPart">
-
-  </div>
-</div>
+</main>

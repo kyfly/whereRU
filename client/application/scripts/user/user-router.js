@@ -25,6 +25,16 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
       controller: 'UCoterieController',
       templateUrl: '/application/views/ucoterie.html'
     })
+    .state('systemInfo', {
+      url: '/w/systemInfo',
+      controller: 'UCoterieController',
+      templateUrl: '/application/views/coterie/systemInfo.html'
+    })
+    .state('hangDianInfo', {
+      url: '/w/hangDianInfo',
+      controller: 'UCoterieController',
+      templateUrl: '/application/views/coterie/hangDianInfo.html'
+    })
     .state('management_system', {
       url: '/w/team/:id',
       controller: 'MSController',
