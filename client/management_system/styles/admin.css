@@ -1,6 +1,4 @@
-/**
-* 以下为index.html的样式或全局样式
-*/
+/*以下为index.html的样式或全局样式*/
 body {
   font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
 }
@@ -206,9 +204,7 @@ main {
   font-weight: 300;
 }
 
-/**
- * 以下部分为member.html的样式
- */
+/*以下部分为list的样式*/
 .addMember {
   margin-top: 7px;
 }
@@ -237,10 +233,6 @@ main {
   font-size: 40px;
 }
 
-/**
- * 以下部分为form的样式
- */
-
 .item-list {
   height: 300px;
   padding: 10px !important;
@@ -258,12 +250,8 @@ main {
   font-size: 100px;
 }
 
-.item-list > .card-title {
-  color: #A7D86E;
-}
-
-.item-list > p {
-  color: #858585 !important;
+.addText {
+  color: #858585;
 }
 
 .btn-area {
@@ -305,8 +293,8 @@ main {
   left: 33.333%;
   width: 33.333%;
   height: 40px;
-  border-left: 1px solid rgba(160,160,160,0.2);
-  border-right: 1px solid rgba(160,160,160,0.2);
+  border-left: 1px solid rgba(160, 160, 160, 0.2);
+  border-right: 1px solid rgba(160, 160, 160, 0.2);
 }
 
 .btn-area .delete-btn {
@@ -315,4 +303,13 @@ main {
   left: 66.666%;
   width: 33.333%;
   height: 40px;
+}
+
+/*以下为activity的样式*/
+.editField {
+  margin-top: 20px;
+}
+
+.editField > h5 {
+  margin-bottom: 30px;
 }
