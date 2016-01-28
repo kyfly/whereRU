@@ -57,6 +57,10 @@
     },
     "issue": {
       "type": "boolean"
+    },
+    "readers": {
+      "type": "number",
+      "default" : 0
     }
   },
   "validations": [],
@@ -86,7 +90,7 @@
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
+      "permission": "ALLOW"
     },
     {
       "principalType": "ROLE",

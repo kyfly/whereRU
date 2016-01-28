@@ -21,7 +21,7 @@ module.exports = function(Activity) {
 		http: {path: '/mySchoolActiveties', verb: 'get'}
 	});
 	Activity.getMySchoolActiveties = function (school, limit, offset, cb) {
-		if (!(school && limit && (offset === 0 ? true: false))) 
+		if (!(school && limit && (offset === 0 ? true: false)))
 			cb('school, limit, offset must required');
 		Activity.find({
 			where: {school: school},
@@ -55,7 +55,20 @@ module.exports = function(Activity) {
 		http: {path: '/hotActiveties', verb: 'get'}
 	});
 	//
-	Activity.getHotActiveties = function () {}
+	Activity.getHotActiveties = function () {
+
+
+
+    }
 	//
-	Activity.afterRemote('__create__readers', function () {});
+	Activity.afterRemote('prototype.__create__readers', function (ctx,ins,next) {
+    var readers = ctx.instance.toJSON().readers;
+    ctx.instance.readers = readers + 1;
+    ctx.instance.save(function(err,ins){
+      if (err) {
+        return next(err);
+      }
+      ctx.res.send({readerNum:ins.toJSON().readers});
+    });
+    });
 };
