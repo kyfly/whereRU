@@ -55,11 +55,15 @@ header{
   font-weight: bold;
 }
 
-li{
-  padding: 0!important;
-}
+/*li{*/
+  /*padding: 0!important;*/
+/*}*/
 
 .coterie-main{
   padding-left: 240px;
+}
+
+.coterieHeader{
+
 }
 
