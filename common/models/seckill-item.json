@@ -11,6 +11,9 @@
     },
     "count": {
       "type": "number"
+    },
+    "margin": {
+      "type": "number"
     }
   },
   "validations": [],

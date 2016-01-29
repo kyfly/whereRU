@@ -226,6 +226,10 @@ module.factory(
           method: 'GET',
           isArray: true
         },
+        "prototype_create_activities": {
+          url: urlBase + '/Teams/:id/activities',
+          method: 'POST'
+        },
         "prototype_destroyById_activities": {
           url: urlBase + '/Teams/:id/activities/:fk',
           method: 'DELETE'
@@ -515,13 +519,13 @@ module.factory(
       this.accessTokenId = accessTokenId;
       this.currentUserId = userId;
       this.currentUserData = userData;
-    }
+    };
 
     LoopBackAuth.prototype.clearUser = function() {
       this.accessTokenId = null;
       this.currentUserId = null;
       this.currentUserData = null;
-    }
+    };
 
     LoopBackAuth.prototype.clearStorage = function() {
       props.forEach(function(name) {
@@ -590,7 +594,6 @@ module.factory(
 
     this.$get = ['$resource', function($resource) {
       return function(url, params, actions) {
-        console.log(url);
         var resource = $resource(url, params, actions);
         resource.prototype.$save = function(success, error) {
           var result = resource.upsert.call(this, {}, this, success, error);

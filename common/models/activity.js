@@ -89,4 +89,13 @@ module.exports = function(Activity) {
       ctx.res.send({readerNum:ins.toJSON().readers});
     });
     });
+  Activity.beforeRemote('prototype.__create__seckills', function (ctx,ins,next){
+    ctx.req.body._seckillItems.forEach(function(item){
+      item.margin = item.count;
+    });
+    console.log(ctx.req.body);
+    ctx.instance.seckills.create(ctx.req.body, function (err, seckill) {
+      ctx.res.send(seckill);
+    });
+  });
 };

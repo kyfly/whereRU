@@ -13,18 +13,19 @@ module.exports = function (app) {
 				cb(err, count > 0);
 			})
 		});
+    function reject (err) {
+      if (err) {
+        return cb(err);
+      }
+      cb(null, false);
+    }
 	});
-	Role.registerResolver('teamOwner', function (role, context, cb) {
-		var userId = context.accessToken.userId;
-		if (!userId) {
-			return reject();
-		}
-		//todo...
-	});
-	function reject (err) {
-		if (err) {
-			return cb(err);
-		}
-		cb(null, false);
-	}
+	//Role.registerResolver('teamOwner', function (role, context, cb) {
+	//	var userId = context.accessToken.userId;
+	//	if (!userId) {
+	//		return reject();
+	//	}
+	//	//todo...
+	//});
+
 };
