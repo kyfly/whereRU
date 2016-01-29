@@ -59,5 +59,18 @@ module.exports = function(Race) {
       if(err) return cb(err);
       cb(null,races);
     });
-  }
+  };
+  Race.afterRemote('prototype.__get__raceTeams',function(ctx,ins,next){
+    var result = [];
+    ins.forEach(function(team){
+      var record = {
+        name:team.name,
+        logoUrl:team.logoUrl,
+        id:team.id,
+        status:team.status
+      };
+      result.push(record);
+    });
+    ctx.res.send(result);
+  });
 };

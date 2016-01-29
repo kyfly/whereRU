@@ -165,6 +165,18 @@ module.exports = function(User) {
 			path: '/:id/activitiesHistories', verb: 'get'
 		}
 	});
+  User.afterRemote('prototype.__get__teams', function (ctx,ins,next){
+    var result = [];
+    ins.forEach(function(team){
+      var record = {
+        name:team.name,
+        logoUrl:team.logoUrl,
+        id:team.id
+      };
+      result.push(record);
+    });
+    ctx.res.send(result);
+  });
 	User.getRaceHistories = function () {};
 	User.beforeRemote('prototype.__updateAttributes', function () {});
 	User.afterRemote('prototype.__updateAttributes', function () {});
