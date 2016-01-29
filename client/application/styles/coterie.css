@@ -67,3 +67,13 @@ header{
 
 }
 
+.font-large{
+  font-size: 25px;
+}
+.withoutPadding{
+  padding: 0!important;
+}
+.withoutMargin{
+  margin: 0;
+}
+
