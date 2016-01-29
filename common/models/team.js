@@ -53,7 +53,7 @@ module.exports = function(Team) {
 				act.seckills.create(active, function (err, seckills) {
 					console.log(err, seckills);
 				});
-			} 
+			}
 		});
 		ctx.res.send('success');
 	});
@@ -65,23 +65,30 @@ module.exports = function(Team) {
 		accepts: [{
 			arg: 'school', type: 'string',
 		},{
-			arg: 'limit', type: 'number',
-		},{
-			arg: 'offset', type: 'number',
+			arg: 'last', type: 'date',
 		}],
 		returns: {
-			arg: 'races', type: 'array'
+			arg: 'teams', type: 'array'
 		},
 		http: {path: '/mySchoolTeams', verb: 'get'}
 	});
-	Team.getMySchoolTeams = function (){}
+	Team.getMySchoolTeams = function (school,last,cb){
+    Team.find({
+      where:{school:school,created:{lt:last}},
+      limit:20,
+      order:"id desc",
+      fields:['id','userId','name','logoUrl','desc','status']
+    },function(err,teams){
+      if(err) return cb(err);
+      cb(null,teams);
+    });
+  };
 	Team.remoteMethod('getActivitiesData', {
 		returns: {
 			arg: 'activities', type: 'array'
 		},
 		http: {path: '/:id/activitiesData', verb: 'get'}
 	});
-	Team.getActivitiesData = function (){}
-	
+	Team.getActivitiesData = function (){};
 	//Team.beforeRemote('prototype.__create__members',function () {});
 };

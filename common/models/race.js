@@ -60,6 +60,12 @@ module.exports = function(Race) {
       cb(null,races);
     });
   };
+  Race.beforeRemote("prototype.__get__raceTeams", function (ctx,ins,next) {
+    ctx.req.query.filter = {
+      fields: ["name", "id", "logoUrl"]
+    };
+    next();
+  });
   Race.afterRemote('prototype.__get__raceTeams',function(ctx,ins,next){
     var result = [];
     ins.forEach(function(team){
