@@ -1,5 +1,5 @@
-app.controller('AdminCtrl', ['$scope', '$timeout', '$window', '$rootScope', AdminCtrl]);
-function AdminCtrl($scope, $timeout, $window, $rootScope) {
+app.controller('AdminCtrl', ['$scope', '$timeout', '$window', '$rootScope', 'Team', AdminCtrl]);
+function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
   if (localStorage['$LoopBack$currentUserId'] && window.location.pathname === '/MS/login') {
     window.location.pathname = '/MS/home';
   }
@@ -106,10 +106,11 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
     $('.button-collapse').sideNav('hide');
   };
 
-  $scope.logout = function () {
-    localStorage.removeItem('CMSCAPTCHA');
-    window.location.pathname = '/MS/login/';
-  }
+  Team.findById({
+    id: localStorage.$LoopBack$currentTeamId
+  },function(res){
+    $scope.teamInfo = res;
+  });
 }
 
 app.controller('HomeCtrl', ['$scope', function ($scope) {

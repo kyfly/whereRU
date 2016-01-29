@@ -16,9 +16,9 @@
 <body>
 <!--侧边导航-->
 <ul class="side-nav fixed z-depth-2" id="sideBar" ng-show="access">
-  <h5 class="text-center orgName" ng-bind="orgName"></h5>
+  <h5 class="text-center orgName" ng-bind="teamInfo.name"></h5>
   <a class="logo brand-logo" href="/index.html">
-    <img id="front-page-logo" src="/lib/img/logo.jpg">
+    <img id="front-page-logo" ng-src="{{teamInfo.logoUrl}}">
   </a>
   <hr id="sidebarHr">
   <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars" ng-class="{active: sidebar.active}" class="bold">
@@ -59,9 +59,13 @@
 <script src="/lib/angular-components/angular-resource.min.js"></script>
 <script src="/lib/angular-components/angular-ui-router.min.js"></script>
 <script src="/lib/materialize/js/angular-materialize.js"></script>
+<script src="/lib/ueditor/ueditor.config.js"></script>
+<script src="/lib/ueditor/ueditor.all.min.js"></script>
+<script src="/lib/angular-ueditor/angular-ueditor.min.js"></script>
 <script src="/services/lb-services.js"></script>
 <script src="/management_system/scripts/admin-configure.js"></script>
 <script src="/management_system/scripts/admin-route.js"></script>
+<script src="/services/uediter-services.js"></script>
 <script src="/management_system/scripts/controller/homeController.js"></script>
 <script src="/management_system/scripts/controller/memberController.js"></script>
 <script src="/management_system/scripts/controller/eventController.js"></script>
