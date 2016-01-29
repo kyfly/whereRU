@@ -24,5 +24,5 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
     url: '/w/team/:id',
     controller: 'MSController',
     template: '<div></div>'
-  });
-}]);
+  })
+}])
