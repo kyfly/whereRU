@@ -12,6 +12,25 @@
 	<link rel="stylesheet" type="text/css" href="/application/styles/coterie.css">
 </head>
 <body>
+<nav class="header row hide-on-small-only">
+  <div class="nav-wrapper">
+    <a href="/" class="left brand-logo col offset-s0 offset-m0 offset-l1">whereRU</a>
+    <ul class="col offset-m2 offset-l5">
+      <li class="col m6 l6">
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </li>
+      <li><a href="/w/activities">服务</a></li>
+      <li><a href="/w/coteries">圈子</a></li>
+      <li><a href="/w/login">登录</a></li>
+    </ul>
+  </div>
+</nav>
+
+
 <div>
   <div ui-view></div>
 </div>

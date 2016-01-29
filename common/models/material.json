@@ -17,6 +17,9 @@
     },
     "loader": {
       "type": "string"
+    },
+    "open": {
+      "type": "boolean"
     }
   },
   "validations": [],

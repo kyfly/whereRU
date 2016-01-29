@@ -22,3 +22,6 @@ app.controller('MSController', ['User', '$stateParams', function (User, $statePa
   localStorage.$LoopBack$currentTeamId = $stateParams.id;
   location.href = '/management_system'
 }]);
+app.controller('ARTController', ['$scope', function(){
+  
+}])
