@@ -33,7 +33,8 @@
       </span>
     </li>
     <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars" class="bold center-align">
-      <a class="waves-effect waves-teal" href="{{sidebar.url}}">{{sidebar.display_name}}</a>
+      <a class="waves-effect waves-teal" href="{{sidebar.url}}" ui-sref="{{sidebar.uiSref}}">{{sidebar.display_name}}</a>
+
     </li>
   </ul>
 </header>
@@ -41,7 +42,6 @@
 
 <main class="coterie-main">
   <div class="container" ui-view="">
-    hello
   </div>
 </main>
 

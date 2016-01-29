@@ -97,12 +97,9 @@
   margin: 0;
   padding: 0;
 }
-.activity-list .card-content{
+.activity-list .card-content {
   padding: 0;
-<<<<<<< HEAD
-=======
 }
-<<<<<<< HEAD
 .activity-detail{
   position: fixed;
   top: 7.5rem;
@@ -118,11 +115,6 @@
   display: block;
   overflow: scroll;
   height: 100%;
-<<<<<<< HEAD
->>>>>>> 85d4ae184aa8d068c36a93810c4f24c59fe3bc80
+
 }
-=======
-}
-=======
->>>>>>> wangkai
->>>>>>> 1ac111ceb9412e5bf3c0a1bd3179007d5e4b9b8a
+
