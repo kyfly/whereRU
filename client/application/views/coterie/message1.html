@@ -1,0 +1,37 @@
+<h3 class="coterieHeader">
+  系统消息
+</h3>
+
+<!--<ul class="collection">-->
+  <!--<li class="collection-item avatar">-->
+    <!--<img src="/application/images/coterie/xiTong.png" alt="无法显示" class="circle">-->
+    <!--<span class="title">Title</span>-->
+    <!--<p>First Line</p>-->
+    <!--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
+  <!--</li>-->
+
+<!--</ul>-->
+
+<ul class="collapsible popout" data-collapsible="accordion" watch>
+  <li ng-repeat="single in systemElements" class="withoutMargin">
+    <div class="collapsible-header">
+      <div >
+        <span class="font-large bold">
+          {{single.title}}
+        </span>
+        <span>
+          {{single.time}}
+        </span>
+      </div>
+      <div>
+        <span>
+          {{single.shortMessage}}
+        </span>
+        <span class="right">
+          详情请点击
+        </span>
+      </div>
+    </div>
+    <div class="collapsible-body"><p>{{single.content}}</p></div>
+  </li>
+</ul>

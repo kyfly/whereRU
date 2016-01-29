@@ -70,7 +70,7 @@
 .activity-list{
   position: relative;
   height: 100%;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 .activity-list h4{
   white-space:nowrap;  /*不换行*/
@@ -97,7 +97,7 @@
   margin: 0;
   padding: 0;
 }
-.activity-list .card-content{
+.activity-list .card-content {
   padding: 0;
 }
 .activity-detail{
@@ -115,4 +115,11 @@
   display: block;
   overflow: scroll;
   height: 100%;
+
 }
+
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> d67c2fd3edda0a3eafce3d1047c5f0207052d190
