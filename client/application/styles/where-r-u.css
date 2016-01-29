@@ -100,7 +100,6 @@
 .activity-list .card-content{
   padding: 0;
 }
-<<<<<<< HEAD
 .activity-detail{
   position: fixed;
   top: 7.5rem;
@@ -117,5 +116,4 @@
   overflow: scroll;
   height: 100%;
 }
-=======
->>>>>>> wangkai
+
