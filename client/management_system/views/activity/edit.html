@@ -7,7 +7,8 @@
     </ul>
   </div>
   <div class="editField col s12">
-    <h5>新建活动  <span ng-bind="activityData.title"></span></h5>
+    <a class="waves-effect waves-light btn grey lighten-1 activityCreateQuit" ui-sref="activityList">取消</a>
+    <h5 class="activityName">新建活动 <span ng-bind="activityData.title"></span></h5>
     <div id="mainInfo" class="col s12">
       <div class="container">
         <div input-field>
@@ -80,17 +81,52 @@
                    placeholder="请上传活动封面,建议900*500像素">
           </div>
         </div>
-        <div class="file-field input-field">
-          <a class="waves-effect waves-light btn grey lighten-1" ui-sref="activityList">取消</a>
-          <button class="btn waves-effect waves-light right orange darken-1" ng-click="nextStep(0)">下一步
+        <div class="input-field">
+          <button class="btn waves-effect waves-light right orange darken-1" ng-click="nextStep(1)">下一步
             <i class="material-icons right">&#xE409;</i>
           </button>
         </div>
       </div>
     </div>
     <div id="copywriter" class="col s12">
+      <div class="container">
+        <div class="file-field input-field">
+          <div class="ueditor" ng-model="activityEditorContent" config="activityEditorConfig"></div>
+        </div>
+        <div class="input-field">
+          <button class="btn waves-effect waves-light left orange darken-1" ng-click="nextStep(0)">上一步
+            <i class="material-icons left">&#xE314;</i>
+          </button>
+          <button class="btn waves-effect waves-light right orange darken-1" ng-click="nextStep(2)">下一步
+            <i class="material-icons right">&#xE409;</i>
+          </button>
+        </div>
+      </div>
     </div>
     <div id="complete" class="col s12">
+      <div class="container">
+        <div class="col s12 text-center">
+          <a class="waves-effect waves-light btn">添加表单<i class="material-icons right">&#xE145;</i></a>
+          <p class="explainText">添加表单可用于与资料收集,问卷调查,<br>招新报名,用户阅读活动文案后可直接参与</p>
+        </div>
+        <div class="col s12 text-center">
+          <a class="waves-effect waves-light btn">添加投票<i class="material-icons right">&#xE145;</i></a>
+          <p class="explainText">添加投票可用于日常投票,<br>用户在阅读活动文案后可直接参与</p>
+        </div>
+        <div class="col s12 text-center">
+          <a class="waves-effect waves-light btn">添加抢票<i class="material-icons right">&#xE145;</i></a>
+          <p class="explainText">添加抢票可用于抢入场券、礼品等,<br>用户阅读活动文案后可直接参与</p>
+        </div>
+        <div class="col s12">
+          <hr>
+          <button class="btn waves-effect waves-light left orange darken-1" ng-click="nextStep(1)">上一步
+            <i class="material-icons left">&#xE314;</i>
+          </button>
+          <button class="waves-effect waves-light btn orange darken-1 right" ng-click="createActivity()">发布
+            <i class="material-icons right">&#xE876;</i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -17,4 +17,4 @@ app.factory('Ueditor', function () {
       enableContextMenu: false
     }
 	}
-})
+});
