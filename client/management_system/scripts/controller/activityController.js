@@ -24,9 +24,11 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', function ($scope, Team) {
   $scope.format = "yyyy-MM-dd";
 
   Team.prototype_get_activities({
-    id: localStorage.$LoopBack$currentTeamId
+    id: localStorage.$LoopBack$currentTeamId,
+    filter: {
+      order: 'created DESC'
+    }
   }, function (res) {
-    console.log(res, '活动列表');
     $scope.activityItems = res;
   }, function () {
     Materialize.toast('获取活动列表失败！', 6000);
@@ -51,8 +53,15 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', function ($scope, Team) {
 
 }]);
 
-app.controller('ActivityEditCtrl', ['$scope', 'Team', function ($scope, Team) {
-  $scope.activityData = {};
+app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', function ($scope, Team, Ueditor, $location) {
+  $scope.activityData = {
+    authorName: $scope.teamInfo.name,     //$scope.teamInfo在homeController里面获取
+    authorId: $scope.teamInfo.id,
+    type: $scope.teamInfo.type,
+    school: $scope.teamInfo.school,
+    hidden: false,
+    created: new Date()
+  };
   //Input-date的配置
   var currentTime = new Date();
   $scope.minDate = (new Date(currentTime.getTime())).toISOString();
@@ -65,15 +74,21 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', function ($scope, Team) {
   $scope.close = '确定';
   $scope.deadline = {};
 
-  $scope.isActive = [];
-
+  var tabSelect = ['mainInfo', 'copywriter', 'complete'];
   $scope.nextStep = function (step) {
-    if(step === 0){
-      $('#editActivityTabs').tabs('select_tab', 'copywriter');
-    } else if(step === 1){
-      $('#editActivityTabs').tabs('select_tab', 'complete');
-    }
+    $('#editActivityTabs').tabs('select_tab', tabSelect[step]);
+  };
 
+  $scope.activityEditorConfig = Ueditor.config;
+  $scope.createActivity = function () {
+    Team.prototype_create_activities({
+      id: localStorage.$LoopBack$currentTeamId
+    }, $scope.activityData, function () {
+      Materialize.toast('创建成功！', 2000);
+      $location.path('/MS/activity/list');
+    }, function () {
+      Materialize.toast('创建失败！', 2000);
+    });
   }
 
 }]);
