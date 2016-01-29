@@ -1,11 +1,9 @@
 <!--头部-->
-<nav class="topNav">
-  <div class="nav-wrapper light-blue darken-2 row">
-    <span class="col m2 topBarLeft">
-      <a href="#" class="">whereRU</a>
-    </span>
+<header>
+  <nav class="topNav">
+    <div class="nav-wrapper light-blue darken-2 row coterie-top">
 
-    <span class="nav-wrapper col m4 topBarCenter input-field">
+    <span class="nav-wrapper col m6 topBarCenter input-field" style="padding: 0">
           <input placeholder="请输入小于10个字" id="search" type="search" maxlength="10" required>
           <label for="search"><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
@@ -16,16 +14,36 @@
       <ul class="right">
         <li><a href="#">服务</a></li>
         <li><a href="#">圈子</a></li>
-        <li><a href="#">登录了吗</a></li>
+        <li><a href="#">登录</a></li>
       </ul>
     </span>
+    </div>
+  </nav>
+  <div class="container">
+    <a href="#" data-activates="nav-mobile"
+       class="button-collapse top-nav full hide-on-large-only">
+      <i class="mdi-navigation-menu"></i>
+    </a>
   </div>
-</nav>
 
-<!--侧边-->
-<ul class="side-nav fixed z-depth-2 text-center" id="sideBar">
-  <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars">
-    <a class="waves-effect" href="{{sidebar.url}}" ng-click="redirect($index)">{{sidebar.display_name}}</a>
-  </li>
-</ul>
+  <ul id="nav-mobile" class="side-nav fixed" style="left: 0px;">
+    <li>
+      <span class="col m2 topBarLeft">
+        <a href="#" class="text-center" style="height: 64px;width: 240px">whereRU</a>
+      </span>
+    </li>
+    <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars" class="bold center-align">
+      <a class="waves-effect waves-teal" href="{{sidebar.url}}">{{sidebar.display_name}}</a>
+    </li>
+  </ul>
+</header>
+
+
+<main class="coterie-main">
+  <div class="container" ui-view="">
+    hello
+  </div>
+</main>
+
+
 

@@ -24,7 +24,7 @@
 <hr>
 <div class="row">
   <div class="col s12 m4" ng-repeat="member in members" ng-show="member.verified === true">
-    <div class="card memberCard">
+    <div class="card memberCard hoverable">
       <div class="card-content">
         <i class="material-icons red-text deleteMember right" ng-href="{{'#deleteMemberConfirm' + $index}}" modal>
           &#xE14C;</i>
@@ -48,7 +48,7 @@
         <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>删除后不可恢复！</span></p>
       </div>
       <div class="modal-footer">
-        <a ng-click="deleteMember($index)" href=""
+        <a ng-click="deleteMember()" href=""
            class="whiteColor modal-action modal-close waves-effect waves-green btn-flat red darken-1">确认删除</a>
         <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
       </div>

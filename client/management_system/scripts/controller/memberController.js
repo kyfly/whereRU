@@ -7,7 +7,7 @@ app.controller('MemberCtrl', ['$scope', 'Team', function ($scope, Team) {
       memberChanged();
     },
     function () {
-      alert("获取成员列表失败！")
+      Materialize.toast('获取成员列表失败！', 6000);
     });
 
   function memberChanged(){
@@ -29,7 +29,9 @@ app.controller('MemberCtrl', ['$scope', 'Team', function ($scope, Team) {
     Team.prototype_updateById_members({
       id: localStorage.$LoopBack$currentTeamId,
       fk: userId
-    }, {verified: true}, function () {
+    }, {
+      verified: true
+    }, function () {
       Materialize.toast('已经同意申请', 2000);
       $scope.members.forEach(function (member) {
         if (member.id === userId) {

@@ -24,7 +24,20 @@ module.exports = function(Race) {
 			path: '/search', verb: 'get'
 		}
 	});
-	Race.search = function (){}
+	Race.search = function (keyword,cb){
+        if(keyword) keyword = keyword.replace(' ','.+');
+        Race.find({
+            where:
+            {
+                or:[{name:{like:keyword}},
+                    {authorName:{like:keyword}}]
+            },
+            fields:['name','imgUrl','started','id','authorName','authorId','ended','created']
+        },function(err,races){
+            if(err) cb(err);
+            cb(null,races);
+        });
+    };
 	Race.remoteMethod('getMySchoolRaces', {
 		accepts: [{
 			arg: 'school', type: 'string',

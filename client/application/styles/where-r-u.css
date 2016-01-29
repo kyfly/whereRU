@@ -99,4 +99,23 @@
 }
 .activity-list .card-content{
   padding: 0;
+<<<<<<< HEAD
+=======
+}
+.activity-detail{
+  position: fixed;
+  top: 7.5rem;
+  right: 0;
+  bottom: 0;
+}
+.activity-detail .row{
+  height: 100%;
+  position: relative;
+  top: 0;
+}
+.activity-detail #about{
+  display: block;
+  overflow: scroll;
+  height: 100%;
+>>>>>>> 85d4ae184aa8d068c36a93810c4f24c59fe3bc80
 }

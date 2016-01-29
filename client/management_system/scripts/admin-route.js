@@ -16,10 +16,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: '/management_system/views/event.html',
       controller: 'EventCtrl'
     })
-    .state('activity', {
-      url: '/MS/activity',
-      templateUrl: '/management_system/views/activity.html',
-      controller: 'ActivityCtrl'
+    .state('activityList', {
+      url: '/MS/activity/list',
+      templateUrl: '/management_system/views/activity/list.html',
+      controller: 'ActivityListCtrl'
+    })
+    .state('activityEdit', {
+      url: '/MS/activity/edit/:id',
+      templateUrl: '/management_system/views/activity/edit.html',
+      controller: 'ActivityEditCtrl'
     })
     .state('formList', {
       url: '/MS/form/list',

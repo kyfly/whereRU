@@ -9,8 +9,7 @@ body{
 }
 
 .topNav{
-  position:relative;
-  z-index:9999!important;
+  height: 64px;
 }
 
 .topBarLeft{
@@ -20,22 +19,47 @@ body{
   text-align: center;
 }
 .topBarRight{
-  text-align: center;
 }
 input{
   color: white;
 }
 
 
-.slide-nav{
-  position:relative;
-  z-index: 999!important;
+/*.slide-nav{*/
+  /*position:relative;*/
+  /*z-index: 999!important;*/
+/*}*/
+
+.coterie-top{
+  margin: 0;
 }
 
+#coterie-sideBar{
+  margin: 0;
+}
 /*.mainPart{*/
   /*position: absolute;*/
   /*left: 250px;*/
   /*top: 64px;*/
 
 /*}*/
+
+header{
+  padding-left: 240px;
+}
+
+.side-nav{
+  width: 240px;
+}
+.bold{
+  font-weight: bold;
+}
+
+li{
+  padding: 0!important;
+}
+
+.coterie-main{
+  padding-left: 240px;
+}
 

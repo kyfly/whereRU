@@ -23,7 +23,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
         $scope.redirect(1);
       } else if ($window.location.pathname === '/MS/event') {
         $scope.redirect(2);
-      } else if ($window.location.pathname === '/MS/activity') {
+      } else if ($window.location.pathname === ('/MS/activity/list')||('/MS/activity/edit')) {
         $scope.redirect(3);
       } else if ($window.location.pathname === '/MS/form/list') {
         $scope.redirect(4);
@@ -61,7 +61,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope) {
     {
       'id': 'sidebarActivity',
       'display_name': '活动管理',
-      'url': '/MS/activity'
+      'url': '/MS/activity/list'
     },
     {
       'id': 'sidebarForm',

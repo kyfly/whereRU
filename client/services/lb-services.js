@@ -223,7 +223,12 @@ module.factory(
          */
         "prototype_get_activities": {
           url: urlBase + '/Teams/:id/activities',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
+        },
+        "prototype_destroyById_activities": {
+          url: urlBase + '/Teams/:id/activities/:fk',
+          method: 'DELETE'
         },
         /**
          * 描述：申请加入团队，已登录用户
@@ -473,7 +478,7 @@ module.factory(
         "prototype_get_raceTeams": {
           url: urlBase + '/Races/:id/raceTeams?filter[fields][name]=true&filter[fields][logoUrl]=true&filter[fields][id]=true',
           method: 'GET'
-        },
+        }
 
 
       }

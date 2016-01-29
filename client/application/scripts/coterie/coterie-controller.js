@@ -2,9 +2,6 @@
 app.controller('CoteriesController', ['$scope', function($scope){
   $scope.sidebars = [
     {
-      'id': ''
-    },
-    {
       'id': 'message1',
       'display_name': '消息1',
       'url': '/w/message1'

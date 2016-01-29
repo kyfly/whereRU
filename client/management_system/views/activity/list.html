@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="tabs" tabs>
+      <li class="tab col s3 waves-effect" ng-click="showAll()"><a href="" class="active">全部活动</a></li>
+      <li class="tab col s3 waves-effect" ng-click="showFormOnly()"><a href="">表单活动</a></li>
+      <li class="tab col s3 waves-effect" ng-click="showVoteOnly()"><a href="">投票活动</a></li>
+      <li class="tab col s3 waves-effect" ng-click="showSeckillOnly()"><a href="">抢票活动</a></li>
+    </ul>
+  </div>
+  <div class="col s12">
+    <div class="row">
+      <div class="col s12 m4">
+        <div class="card addItemBox waves-effect waves-block hoverable" ui-sref="activityEdit">
+          <div class="card-content item-list">
+            <p class="text-center"><i class="material-icons">&#xE145;</i></p>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4" ng-repeat="activityItem in activityItems" ng-show="(activityItem.keyword.indexOf(typeChosen) >= 0) || (allChosen)">
+        <div class="card hoverable">
+          <div class="card-content item-list activityInfo">
+            <span class="card-title green-text text-darken-1 flow-text" ng-bind="activityItem.title"></span>
+            <br>
+            <span class="addText" ng-bind="activityItem.authorName"></span>
+            <span class="addText" ng-bind="activityItem.created | date : format"></span>
+            <hr>
+            <p>开始：<span ng-bind="activityItem.started | date : unFormat"></span></p>
+            <p>结束：<span ng-bind="activityItem.ended | date : unFormat"></span></p>
+            <p>关键字：<span ng-bind="activityItem.keyword || '无'"></span></p>
+          </div>
+          <div class="card-action btn-area">
+            <div class="edit-btn waves-effect text-center">
+              <a class="green-text text-darken-2" href ng-click="edit(listItem.id)"><i class="material-icons">&#xE254;</i>
+                编辑</a>
+            </div>
+            <div class="result-btn waves-effect text-center">
+              <a class="orange-text text-darken-2" href ng-click="result(listItem.id)"><i class="material-icons">
+                &#xE80D;</i> 分享</a>
+            </div>
+            <div class="delete-btn waves-effect text-center">
+              <a class="red-text text-darken-2" href ng-href="{{'#deleteActivityConfirm' + $index}}" modal><i class="material-icons">&#xE872;</i> 删除</a>
+            </div>
+          </div>
+          <div id="{{'deleteActivityConfirm' + $index}}" class="modal">
+            <div class="modal-content">
+              <h4>确认删除？</h4>
+              <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>删除后不可恢复！</span></p>
+            </div>
+            <div class="modal-footer">
+              <a ng-click="deleteActivity()" href=""
+                 class="whiteColor modal-action modal-close waves-effect waves-green btn-flat red darken-1">确认删除</a>
+              <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
