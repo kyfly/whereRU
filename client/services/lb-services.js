@@ -325,7 +325,7 @@ module.factory(
   'Activity',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
-    var R = resource(
+    var R = Resource(
     urlBase + '/Activities/:id',
     { 'id': '@id' },
     {
@@ -334,6 +334,11 @@ module.factory(
        */
       "getHotActiveties": {
         url: urlBase + '/Activities/hotActiveties',
+        method: 'GET',
+        isArray: true
+      },
+      "find": {
+        url: urlBase + '/Activities',
         method: 'GET',
         isArray: true
       },
