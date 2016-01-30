@@ -12,11 +12,11 @@
   },
   "validations": [],
   "relations": {
-    "activeties": {
+    "activity": {
       "type": "belongsTo",
       "model": "Activety"
     },
-    "articals": {
+    "article": {
       "type": "belongsTo",
       "model": "Article"
     }

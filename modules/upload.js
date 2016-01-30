@@ -27,7 +27,7 @@ function upload(c) {
   });
 	return function (req, res, next) {
     var query = req.query;
-    if (!query.dir || !query.id) {
+    if ((!query.dir || !query.id) && req.query.action !== 'config') {
       throw {
         "status": "500",
         "msg":"dir & id 是必须的参数"

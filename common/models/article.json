@@ -18,7 +18,7 @@
   },
   "validations": [],
   "relations": {
-    "viewUser": {
+    "readers": {
       "type": "hasMany",
       "model": "Reader",
       "comments": "浏览量"
@@ -47,5 +47,13 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "scope": {
+    "include": {
+      "relation": "user",
+      "scope": {
+        "fields": ["id", "name", "headImgUrl", "sign"]
+      }
+    }
+  }
 }
