@@ -2,19 +2,15 @@ var fs = require('fs');
 var os = require('os');
 var path = require('path');
 var Busboy = require('busboy');
-var ALY = require('aliyun-sdk');
+var AliYun = require('./AliYun.js');
 var fse = require('fs-extra');
-var mammoth = require("mammoth");
 var guid = 1000;
 var config = {
-    configFile: path.join(__dirname, '../client/lib/ueditor/config.json'),
+    configFile: '../client/lib/ueditor/config.json',
     mode: 'local',
-    AccessKey: '',
-    SecrectKey: '',
     dynamicPath: 'upload',
     staticPath: path.join(__dirname, '../client/lib/temporary')
 };
-
 var setConfig = function(c) {
   for (var i in c) {
       config[i] = c[i];
@@ -22,8 +18,22 @@ var setConfig = function(c) {
 }
 function upload(c) {
 	setConfig(c);
+  AliYun = new AliYun({
+    accessKeyId: c.accessKeyId,
+    secretAccessKey: c.secretAccessKey,
+    endpoint: c.endpoint,
+    bucket: c.bucket,
+    allowOrigin: c.allowOrigin
+  });
 	return function (req, res, next) {
-		config.dynamicPath = req.query.dynamicPath;
+    var query = req.query;
+    if (!query.dir || !query.id) {
+      throw {
+        "status": "500",
+        "msg":"dir & id 是必须的参数"
+      };
+      return;
+    }
 		switch (req.query.action) {
 	    case 'config':
         res.setHeader('Content-Type', 'application/json');
@@ -58,50 +68,72 @@ function upload(c) {
 	}
 }
 var uploadText = function (req, res) {
-  var fileName = getFileName('.html');
-  fs.writeFile(path.join(__dirname, '../client/lib/temporary/html/', fileName), 
-    req.body.content, function (err) {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send({
-          'url': path.join('/client/lib/html/', fileName),
-          //'title': req.body.pictitle,
-          'original': fileName,
-          'state': "SUCCESS"
-        });
-      }
+  var content = req.body.content;
+  var query = req.query;
+  if (!req.body.content) {
+    throw {
+      "status": "500",
+      "msg":"content is not defined"
+    };
+    return;
+  }
+  var file = 'whereru/' + query.dir + '/' + query.id + '/html' + '/' +getFileName('.html');
+  AliYun.putObject({
+    fileName: file,
+    data: req.body.content,
+    contentType: 'text/html'
+  }, function (err, data) {
+    if (err) {
+      throw err;
+    } else {
+      res.send({
+        'url': file,
+        'title': '',
+        'original': file,
+        'state': 'SUCCESS'
+      });
+    }
   });
 }
 var uploadfile = function (req, res) {
-	var result = [];
-	var fileConut = req.query.files || 1;
-	var fileTip = 0;
   var busboy = new Busboy({headers: req.headers});
   busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
     var isReturn = false;
-    save(file, filename, req, function (err, url) {
-      fileTip ++;
-    	
+    save(file, filename, mimetype, req, function (err, url) {
       //防止多次res.end()
       if (isReturn) return;
       isReturn = true;
-      //console.log(req.body);
       var r = {
         'url': url,
-        //'title': req.body.pictitle,
+        'title': req.body.pictitle,
         'original': filename,
       }
       if (err) {
-          r.state = 'ERROR';
-      } else r.state = 'SUCCESS';
-      result.push(r);
-      if (fileTip == fileConut) {
-      	res.json(result);
-      }
+        r.state = 'ERROR';
+      } else 
+        r.state = 'SUCCESS';
+      res.json(r);
     });
   });
   return req.pipe(busboy);
+}
+var save = function (file, filename, mimetype, req, callback) {
+  var realName = getFileName(path.extname(filename));
+  var saveTo = path.join(os.tmpDir(), realName);
+  var query = req.query;
+  file.pipe(fs.createWriteStream(saveTo));
+  file.on('end', function() {
+    fs.readFile(saveTo,function(err,data){
+      var file = 'whereru/' + query.dir + '/' + query.id + '/image' + '/' + realName;
+      AliYun.putObject({
+        fileName: file,
+        data: data,
+        contentType: mimetype
+      }, function (err, data) {
+        callback(err, file)
+      });
+    });
+  });
 }
 var getFileName = function(extname) {
     var d = new Date();
@@ -115,54 +147,6 @@ var getRealDynamicPath = function (req) {
     if (typeof dPath == 'function')
         dPath = dPath(req);
     return dPath;
-}
-var save = function (file, filename, req, callback) {
-  var realName = getFileName(path.extname(filename));
-  var dPath = getRealDynamicPath(req);
-  var saveTo = path.join(os.tmpDir(), realName);
-  file.pipe(fs.createWriteStream(saveTo));
-  file.on('end', function() {
-    
-    if (config.mode == 'ali') {
-       
-    } else {
-      var readPath = path.join(config.staticPath, dPath, realName);
-      
-      fse.move(saveTo, readPath, function(err) {
-
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, '/lib/temporary/' + dPath + '/' + realName);
-        }
-      });
-    }
-  });
-}
-function saveToFile (data, cb) {
-  var fileName = getFileName('.html');
-  fs.writeFile(path.join(__dirname, '../client/lib/temporary/html/', fileName), 
-    data , function (err) {
-      cb(err, path.join('/client/lib/temporary/html/', fileName));
-  });
-}
-function docx2html (path, cb) {
-  var options = {
-    // convertImage: mammoth.images.inline(function(element) {
-    //     return element.read("base64").then(function(imageBuffer) {
-    //         return {
-    //             src: "data:" + element.contentType + ";base64," + imageBuffer
-    //         };
-    //     });
-    // }),
-    styleMap: [
-        "u => em"
-    ],
-  };
-  mammoth.convertToHtml({path: path}, options)
-    .then(function(result){
-      cb(result);
-    })
 }
 // var listfile = function (req, res, fileType) {
 //   var dPath = util.getRealDynamicPath(req);
@@ -215,4 +199,3 @@ function docx2html (path, cb) {
 //   });
 // }
 exports.upload = upload;
-exports.docx2html = docx2html;

@@ -43,7 +43,7 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', function ($scope, Team) {
 
 }]);
 
-app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', function ($scope, Team, Ueditor, $location) {
+app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$http', function ($scope, Team, Ueditor, $location, $http) {
   $scope.activityData = {
     authorName: $scope.teamInfo.name,     //$scope.teamInfo在homeController里面获取
     authorId: $scope.teamInfo.id,
@@ -68,17 +68,48 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', fu
   $scope.nextStep = function (step) {
     $('#editActivityTabs').tabs('select_tab', tabSelect[step]);
   };
-
+  $scope.activityImgLoad = function () {
+    var file = document.getElementById('activityImg').files[0];
+    var Xhr = new XMLHttpRequest();
+    var fileExt = /\.[^\.]+/.exec(document.getElementById('activityImg').value.toLowerCase());
+    if (!((fileExt[0] === '.png') || (fileExt[0] === '.jpg') || (fileExt[0] === '.jpeg') || (fileExt[0] === '.gif'))) {
+      alert('请确认您上传的logo文件格式是jpg、png、gif或jpeg');
+      return false;
+    }
+    var readyHandle = function () {
+      if (Xhr.readyState === 4) {
+        if (Xhr.status === 200) {
+          console.log(JSON.parse(Xhr.responseText).url);
+        }
+      }
+    };
+    var Fd = new FormData();
+    Fd.append('img', file);
+    Xhr.onreadystatechange = readyHandle;
+    Xhr.open('POST', '/ue/uploads?dir=team&id=' + localStorage.$LoopBack$currentTeamId + '&action=uploadimage', false);
+    Xhr.send(Fd);
+  }
   $scope.activityEditorConfig = Ueditor.config;
   $scope.createActivity = function () {
-    Team.prototype_create_activities({
+    
+    $http({
+      url: '/ue/uploads?dir=team&id=' + localStorage.$LoopBack$currentTeamId + '&action=uploadtext',
+      method: "post",
+      data: {
+        'content': $scope.activityEditorContent
+      }
+    })
+    .success(function (res) {
+      console.log(res);
+    });
+    /*Team.prototype_create_activities({
       id: localStorage.$LoopBack$currentTeamId
     }, $scope.activityData, function () {
       Materialize.toast('创建成功！', 2000);
       $location.path('/MS/activity/list');
     }, function () {
       Materialize.toast('创建失败！', 2000);
-    });
+    });*/
   }
 
 }]);
