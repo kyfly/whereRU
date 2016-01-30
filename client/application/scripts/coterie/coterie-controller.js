@@ -18,7 +18,8 @@ app.controller('CoteriesController', ['$scope', function($scope){
       'display_name': '团团一家',
       'url': '/w/message3',
       'uiSref':'coteries.message3'
-    },
+    }
+    ];
     $scope.systemElements = [{
       img:'system.png',
       icon: 'mdi-image-filter-drama',
@@ -42,6 +43,6 @@ app.controller('CoteriesController', ['$scope', function($scope){
       content: '具体信息.'
     }
     ]
-  ];
+
 }]);
 

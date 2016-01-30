@@ -27,14 +27,16 @@
   </div>
 
   <ul id="nav-mobile" class="side-nav fixed" style="left: 0px;">
-    <li>
-      <span class="col m2 topBarLeft">
-        <a href="#" class="text-center" style="height: 64px;width: 240px">whereRU</a>
+    <li class="center-align withoutPadding" style="height: 64px;width: 240px">
+      <span class="">
+        <a href="#" >whereRU</a>
       </span>
     </li>
     <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars" class="bold center-align withoutPadding">
       <a class="waves-effect waves-teal" href="{{sidebar.url}}" ui-sref="{{sidebar.uiSref}}">{{sidebar.display_name}}</a>
-
+    </li>
+    <li class="center-align">
+      <a><i class="material-icons">add</i>发现更多</a>
     </li>
   </ul>
 </header>

@@ -12,9 +12,6 @@ body{
   height: 64px;
 }
 
-.topBarLeft{
-  text-align: center;
-}
 .topBarCenter{
   text-align: center;
 }
@@ -24,11 +21,6 @@ input{
   color: white;
 }
 
-
-/*.slide-nav{*/
-  /*position:relative;*/
-  /*z-index: 999!important;*/
-/*}*/
 
 .coterie-top{
   margin: 0;
