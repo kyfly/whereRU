@@ -1,23 +1,13 @@
 app.controller('ActivityListCtrl', ['$scope', 'Team', function ($scope, Team) {
   $scope.allChosen = true;
 
-  $scope.showAll = function () {
-    $scope.allChosen = true;
-  };
-
-  $scope.showFormOnly = function () {
-    $scope.allChosen = false;
-    $scope.typeChosen = '表单';
-  };
-
-  $scope.showVoteOnly = function () {
-    $scope.allChosen = false;
-    $scope.typeChosen = '投票';
-  };
-
-  $scope.showSeckillOnly = function () {
-    $scope.allChosen = false;
-    $scope.typeChosen = '抢票';
+  $scope.showSingleType = function (type) {
+    if(type === 'all'){
+      $scope.allChosen = true;
+    } else {
+      $scope.allChosen = false;
+      $scope.chosenType = type;
+    }
   };
 
   $scope.unFormat = "yyyy-MM-dd HH:mm";
