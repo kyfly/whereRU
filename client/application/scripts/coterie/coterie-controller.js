@@ -1,5 +1,16 @@
 
-app.controller('CoteriesController', ['$scope', function($scope){
+app.controller('CoteriesController', ['$scope','User', function($scope,User){
+  User.prototype_get_coteries({
+      id: localStorage.$LoopBack$currentUserId,
+      filter: {
+        order: 'created DESC'
+      }
+    },function(res){
+    $scope.existCoterieList=res;
+    console.log(res);
+  },function(){}
+  );
+
   $scope.sidebars = [
     {
       'id': 'message1',
@@ -42,14 +53,14 @@ app.controller('CoteriesController', ['$scope', function($scope){
       shortMessage:'简短消息',
       content: '具体信息.'
     }
-    ]
+    ];
 
 }]);
 app.controller('CoterieDetailController', ['$scope', function($scope){
-  
+
 }]);
 
 app.controller('CoterieController', ['$scope', function($scope){
-  
+
 }]);
 

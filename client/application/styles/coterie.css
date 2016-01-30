@@ -37,7 +37,7 @@ input{
 /*}*/
 
 header{
-  padding-left: 240px;
+
 }
 
 .side-nav{
@@ -67,5 +67,9 @@ header{
 }
 .withoutMargin{
   margin: 0;
+}
+
+.coterie-sideBar{
+  margin-top: 64px;
 }
 

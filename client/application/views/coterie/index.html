@@ -1,87 +1,57 @@
-<<<<<<< HEAD
 <!--头部-->
+<!--<header>-->
+  <!--<nav class="topNav">-->
+    <!--<div class="nav-wrapper light-blue darken-2 row coterie-top">-->
+
+    <!--<span class="nav-wrapper col m6 topBarCenter input-field" style="padding: 0">-->
+          <!--<input placeholder="请输入小于10个字" id="search" type="search" maxlength="10" required>-->
+          <!--<label for="search"><i class="material-icons">search</i></label>-->
+          <!--<i class="material-icons">close</i>-->
+    <!--</span>-->
+
+
+    <!--<span class="col m6 topBarRight">-->
+      <!--<ul class="right">-->
+        <!--<li><a href="#">服务</a></li>-->
+        <!--<li><a href="#">圈子</a></li>-->
+        <!--<li><a href="#">登录</a></li>-->
+      <!--</ul>-->
+    <!--</span>-->
+    <!--</div>-->
+  <!--</nav>-->
+<!--</header>-->
+
 <header>
-  <nav class="topNav">
-    <div class="nav-wrapper light-blue darken-2 row coterie-top">
-
-    <span class="nav-wrapper col m6 topBarCenter input-field" style="padding: 0">
-          <input placeholder="请输入小于10个字" id="search" type="search" maxlength="10" required>
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-    </span>
-
-
-    <span class="col m6 topBarRight">
-      <ul class="right">
-        <li><a href="#">服务</a></li>
-        <li><a href="#">圈子</a></li>
-        <li><a href="#">登录</a></li>
-      </ul>
-    </span>
-    </div>
-  </nav>
   <div class="container">
-    <a href="#" data-activates="nav-mobile"
-       class="button-collapse top-nav full hide-on-large-only">
+    <a href="" data-activates="coterieSideBar" class="button-collapse hide-on-large-only">
       <i class="mdi-navigation-menu"></i>
     </a>
   </div>
 
-  <ul id="nav-mobile" class="side-nav fixed" style="left: 0px;">
-    <li class="center-align withoutPadding" style="height: 64px;width: 240px">
-      <span class="">
-        <a href="#" >whereRU</a>
-      </span>
+
+  <ul id="coterieSideBar" class="side-nav fixed">
+    <li style="height: 64px" class="withoutPadding center-align">
+      <div>whereRU</div>
     </li>
-    <li id="{{sidebar.id}}" ng-repeat="sidebar in sidebars" class="bold center-align withoutPadding">
-      <a class="waves-effect waves-teal" href="{{sidebar.url}}" ui-sref="{{sidebar.uiSref}}">{{sidebar.display_name}}</a>
+    <li class="bold center-align withoutPadding">
+      <span class="left"><img src="/application/images/coterie/system.png"></span>
+      <a class="waves-effect waves-teal" ui-sref="coteries.systemMessage">系统消息</a>
+    </li>
+    <li  ng-repeat="sideBarInfo in existCoterieList" id="{{sideBarInfo.id}}" class="bold center-align withoutPadding">
+      <a class="waves-effect waves-teal" ui-sref="coteries.userMessage({id: sideBarInfo.id})">{{sideBarInfo.name}}</a>
     </li>
     <li class="center-align">
       <a><i class="material-icons">add</i>发现更多</a>
-=======
-<div class="row">
-  <div class="col s12 m4 l3">
-   <ul class="collection">
-    <li class="collection-item avatar">
-      <img src="images/yuna.jpg" alt="" class="circle">
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle">folder</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle green">insert_chart</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle red">play_arrow</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
->>>>>>> ebbb65c36d03f98e75c710fd7e90ec5c0876c175
     </li>
   </ul>
-            
+</header>
+
+<main >
+  <div class="container">
+    <div class="" ui-view=""></div>
   </div>
-  <div class="col s12 m8 l9">
-    
-  </div>
-</div>
+</main>
 
-
-
+<script>
+  $(".button-collapse").sideNav();
+</script>
