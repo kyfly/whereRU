@@ -45,4 +45,11 @@ app.controller('CoteriesController', ['$scope', function($scope){
     ]
 
 }]);
+app.controller('CoterieDetailController', ['$scope', function($scope){
+  
+}]);
+
+app.controller('CoterieController', ['$scope', function($scope){
+  
+}]);
 

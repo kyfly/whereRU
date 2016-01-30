@@ -38,6 +38,9 @@
     },
     "chatId": {
       "type": "string"
+    },
+    "status": {
+      "type": "number"
     }
   },
   "validations": [],

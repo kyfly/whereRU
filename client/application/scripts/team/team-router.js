@@ -1,7 +1,7 @@
 app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 	$stateProvider
-	.state('teams', {
-		url: '/w/teams',
+	.state('art.teams', {
+		url: '/teams',
 		controller: 'TeamsController',
 		templateUrl: 'application/views/team/index.html'
 	})

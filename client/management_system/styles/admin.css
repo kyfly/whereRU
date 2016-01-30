@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*以下为index.html的样式或全局样式*/
 body {
   font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
@@ -313,3 +314,14 @@ main {
 .editField > h5 {
   margin-bottom: 30px;
 }
+
+.activityName {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.explainText {
+  color: #858585;
+}
+
+

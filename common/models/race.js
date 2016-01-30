@@ -42,14 +42,41 @@ module.exports = function(Race) {
 		accepts: [{
 			arg: 'school', type: 'string',
 		},{
-			arg: 'limit', type: 'number',
-		},{
-			arg: 'offset', type: 'number',
+			arg: 'lastTime', type: 'date',
 		}],
 		returns: {
 			arg: 'races', type: 'array'
 		},
 		http: {path: '/mySchoolRaces', verb: 'get'}
 	});
-	Race.getMySchoolRaces = function (){}
+	Race.getMySchoolRaces = function (school,lastTime,cb){
+    Race.find({
+      where:{"school":school,"started":{lt:lastTime}},
+      order:'id DESC',
+      limit: 20,
+      fields: ['name','imgUrl','started','id','authorName','authorId','ended','created']
+    },function(err,races){
+      if(err) return cb(err);
+      cb(null,races);
+    });
+  };
+  Race.beforeRemote("prototype.__get__raceTeams", function (ctx,ins,next) {
+    ctx.req.query.filter = {
+      fields: ["name", "id", "logoUrl"]
+    };
+    next();
+  });
+  Race.afterRemote('prototype.__get__raceTeams',function(ctx,ins,next){
+    var result = [];
+    ins.forEach(function(team){
+      var record = {
+        name:team.name,
+        logoUrl:team.logoUrl,
+        id:team.id,
+        status:team.status
+      };
+      result.push(record);
+    });
+    ctx.res.send(result);
+  });
 };

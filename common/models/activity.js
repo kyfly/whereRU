@@ -95,10 +95,7 @@ module.exports = function(Activity) {
     });
     console.log(ctx.req.body);
     ctx.instance.seckills.create(ctx.req.body, function (err, seckill) {
-      console.log(seckill);
       ctx.res.send(seckill);
     });
-
-
   });
 };
