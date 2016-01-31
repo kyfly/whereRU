@@ -164,11 +164,5 @@
       "property": "__destroyById__departments"
     }
   ],
-  "methods": {},
-  "scope": {
-    "where": {
-      "hidden": false,
-      "deleted": false
-    }
-  }
+  "methods": {}
 }

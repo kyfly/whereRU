@@ -153,6 +153,19 @@ module.exports = function(User) {
 		}
 	});
 	User.getInfo = function () {}
+	User.beforeRemote('getInfo', function (ctx, ins, next) {
+		var userId = ctx.req.accessToken.userId;
+		User.findById(userId, {
+			include : 'data'
+		}, function (err, data) {
+			if (err) {
+				ctx.res.send(err);
+			} else {
+				ctx.res.send(data);
+			}
+			
+		});
+	})
 	User.remoteMethod('getRaceHistories', {
 		accepts: {
 			arg: 'id', type: 'string',

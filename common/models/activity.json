@@ -7,20 +7,24 @@
   },
   "properties": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "authorName": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "authorId": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "type": {
       "type": "string",
       "comment": "区分校园社团和兴趣社团的活动"
     },
     "imgUrl": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "explainUrl": {
       "type": "string"
@@ -32,23 +36,26 @@
       "type": "date"
     },
     "deleted": {
-      "type": "date",
-      "default": "0"
+      "type": "boolean",
+      "default": false
     },
     "school": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "updated": {
       "type": "date"
     },
     "started": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "actType": {
       "type": "string"
     },
     "ended": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "keyword": {
       "type": "string"
@@ -58,11 +65,11 @@
       "default": false
     },
     "issue": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "readers": {
-      "type": "boolean",
-      "default" : false
+      "type": "number"
     }
   },
   "validations": [],
@@ -131,11 +138,5 @@
       "property": "findById"
     }
   ],
-  "methods": {},
-  "scope": {
-    "where": {
-      "hidden": false,
-      "deleted": false
-    }
-  }
+  "methods": {}
 }

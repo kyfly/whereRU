@@ -7,10 +7,12 @@
   },
   "properties": {
     "started": {
-      "type": "date"
+      "type": "date",
+      "require": true
     },
     "total": {
-      "type": "number"
+      "type": "number",
+      "require": true
     },
     "limit": {
       "type": "number",
@@ -20,7 +22,12 @@
       "type": "date"
     },
     "teamId": {
-      "type": "string"
+      "type": "string",
+      "require": true
+    },
+    "margin": {
+      "type": "number",
+      "comment": "票余量"
     }
   },
   "validations": [],
