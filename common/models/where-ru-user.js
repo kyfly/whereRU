@@ -122,7 +122,7 @@ module.exports = function(User) {
   };
   User.remoteMethod('getMyTeams', {
     accepts: {
-      arg: 'id', type: 'string',
+      arg: 'id', type: 'string'
     },
     returns: {
       arg: 'teams', type: "array"
@@ -155,21 +155,46 @@ module.exports = function(User) {
       path: '/info', verb: 'get'
     }
   });
-  User.getInfo = function () {
-  }
+  User.getInfo = function (from,cb) {
+    User.findById(from,{
+      fields:['id','phone','name','sign','email','school','sex','academy','studentId','headImgUrl','created','userData']
+    },function(err,user){
+      if(err) return cb(err);
+      cb(null,user);
+    });
+  };
   User.remoteMethod('getRaceHistories', {
     accepts: {
-      arg: 'id', type: 'string',
+      arg: 'id', type: 'string'
     },
     returns: {
-      arg: 'races', type: "array"
+      arg: 'races', type: 'array'
     },
     http: {
       path: '/:id/raceHistories', verb: 'get'
     }
   });
-  User.getRaceHistories = function () {
-  }
+  User.getRaceHistories = function (id,cb) {
+    User.app.models.members.find({
+      where:{
+        userId:id
+      },
+      include:{
+        relation:'team',
+        scope:{
+          include:{
+            relation:'race',
+            scope:{
+              fields:['name','imgUrl','started','id','authorName','authorId','ended','created']
+            }
+          }
+        }
+      }
+    },function(err,races){
+      if(err) cb(err);
+      cb(null,races);
+    });
+  };
   User.remoteMethod('getActivitiesHistories', {
     accepts: {
       arg: 'id', type: 'string',
