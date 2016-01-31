@@ -39,8 +39,17 @@ module.factory(
     { 'id': '@id' },
     {
       /**
-       *
-       *
+       *  圈子部分详情
+       *  pc圈子
+       */
+      "prototype_get_articles": {
+        url: urlBase + '/Coteries/:id/articles',
+        method: 'GET',
+        isArray: true
+      },
+      /**
+       *描述已加入圈子列表
+       *使用场景：pc侧边栏已存在圈子
        * */
       "prototype_get_coteries": {
         url: urlBase + '/WUsers/:id/coteries',

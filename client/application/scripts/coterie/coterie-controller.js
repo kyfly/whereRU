@@ -1,5 +1,6 @@
 
-app.controller('CoteriesController', ['$scope','User', function($scope,User){
+app.controller('CoteriesController', ['$scope','User', '$location', function($scope,User,$location){
+  console.log($location.search().id);
   User.prototype_get_coteries({
       id: localStorage.$LoopBack$currentUserId,
       filter: {
@@ -10,6 +11,17 @@ app.controller('CoteriesController', ['$scope','User', function($scope,User){
     console.log(res);
   },function(){}
   );
+  User.prototype_get_articles({
+      id: localStorage.$LoopBack$currentUserId,
+      filter: {
+        order: 'created DESC'
+      }
+    },function(res){
+      $scope.coterieArticles=res;
+
+    },function(){}
+  );
+
 
     $scope.systemElements = [{
       img:'system.png',
