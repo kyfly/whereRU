@@ -12,6 +12,8 @@ app.controller('CoteriesController', ['$scope','User', '$location', function($sc
   },function(){}
   );
 
+  $scope.hello=true;
+  
   User.prototype_get_articles({
       id: $location.search().id,
       filter: {
@@ -22,7 +24,6 @@ app.controller('CoteriesController', ['$scope','User', '$location', function($sc
 
     },function(){}
   );
-
 
     $scope.systemElements = [{
       img:'system.png',

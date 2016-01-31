@@ -91,5 +91,21 @@ header{
 .coterieUserMessageLi{
   margin-bottom: 15px;
 }
+.coterieSideTime{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-weight: 400;
+}
+
+.coterieSideLi{
+  position: relative;
+}
+.coterieSideNewNum{
+  position: absolute;
+  right: 0!important;
+  top: 20px;
+
+}
 
 
