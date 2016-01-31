@@ -2,7 +2,7 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', function ($scope, Team) {
   $scope.allChosen = true;
 
   $scope.showSingleType = function (type) {
-    if(type === 'all'){
+    if (type === 'all') {
       $scope.allChosen = true;
     } else {
       $scope.allChosen = false;
@@ -68,6 +68,7 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
   $scope.nextStep = function (step) {
     $('#editActivityTabs').tabs('select_tab', tabSelect[step]);
   };
+
   $scope.activityImgLoad = function () {
     var file = document.getElementById('activityImg').files[0];
     var Xhr = new XMLHttpRequest();
@@ -79,37 +80,38 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
     var readyHandle = function () {
       if (Xhr.readyState === 4) {
         if (Xhr.status === 200) {
-          console.log(JSON.parse(Xhr.responseText).url);
+          $scope.activityData.imgUrl = 'http://oss.etuan.org/' + JSON.parse(Xhr.responseText).url;
         }
       }
     };
     var Fd = new FormData();
     Fd.append('img', file);
     Xhr.onreadystatechange = readyHandle;
-    Xhr.open('POST', '/ue/uploads?dir=team&id=' + localStorage.$LoopBack$currentTeamId + '&action=uploadimage', false);
+    Xhr.open('POST', '/ue/uploads?dir=team&id=' + localStorage.$LoopBack$currentTeamId + '&action=uploadimage', true);
     Xhr.send(Fd);
-  }
+  };
+
   $scope.activityEditorConfig = Ueditor.config;
   $scope.createActivity = function () {
-    
+
     $http({
       url: '/ue/uploads?dir=team&id=' + localStorage.$LoopBack$currentTeamId + '&action=uploadtext',
       method: "post",
       data: {
         'content': $scope.activityEditorContent
       }
-    })
-    .success(function (res) {
-      console.log(res);
+    }).success(function (res) {
+      $scope.activityData.explainUrl = 'http://oss.etuan.org/' + res.url;
+      Team.prototype_create_activities({
+        id: localStorage.$LoopBack$currentTeamId
+      }, $scope.activityData, function () {
+        Materialize.toast('创建成功！', 2000);
+        $location.path('/MS/activity/list');
+      }, function () {
+        Materialize.toast('创建失败！', 2000);
+      });
+      console.log($scope.activityData);
     });
-    /*Team.prototype_create_activities({
-      id: localStorage.$LoopBack$currentTeamId
-    }, $scope.activityData, function () {
-      Materialize.toast('创建成功！', 2000);
-      $location.path('/MS/activity/list');
-    }, function () {
-      Materialize.toast('创建失败！', 2000);
-    });*/
   }
 
 }]);
