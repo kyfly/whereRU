@@ -31,7 +31,8 @@
       "type": "date"
     },
     "updated": {
-      "type": "date"
+      "type": "boolean",
+      "default": false
     },
     "deleted": {
       "type": "date"
@@ -163,5 +164,11 @@
       "property": "__destroyById__departments"
     }
   ],
-  "methods": {}
+  "methods": {},
+  "scope": {
+    "where": {
+      "hidden": false,
+      "deleted": false
+    }
+  }
 }

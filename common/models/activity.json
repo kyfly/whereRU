@@ -32,7 +32,8 @@
       "type": "date"
     },
     "deleted": {
-      "type": "date"
+      "type": "date",
+      "default": "0"
     },
     "school": {
       "type": "string"
@@ -53,14 +54,15 @@
       "type": "string"
     },
     "hidden": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "issue": {
       "type": "boolean"
     },
     "readers": {
-      "type": "number",
-      "default" : 0
+      "type": "boolean",
+      "default" : false
     }
   },
   "validations": [],
@@ -129,5 +131,11 @@
       "property": "findById"
     }
   ],
-  "methods": {}
+  "methods": {},
+  "scope": {
+    "where": {
+      "hidden": false,
+      "deleted": false
+    }
+  }
 }

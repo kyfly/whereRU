@@ -29,5 +29,13 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "scope": {
+    "include": {
+      "relation": "user",
+      "scope": {
+        "fields": ["id", "name", "headImgUrl", "sign"]
+      }
+    }
+  }
 }

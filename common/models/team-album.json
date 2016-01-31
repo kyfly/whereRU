@@ -9,9 +9,6 @@
     "created": {
       "type": "date"
     },
-    "deleted": {
-      "type": "date"
-    },
     "title": {
       "type": "string"
     },

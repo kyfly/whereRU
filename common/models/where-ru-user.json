@@ -30,6 +30,9 @@
     },
     "sign": {
       "type": "string"
+    },
+    "Email": {
+      "type": "string"
     }
   },
   "validations": [],
@@ -235,5 +238,6 @@
       "property": "__get__coteries"
     }
   ],
-  "methods": {}
+  "methods": {},
+  "hidden": ["email"]
 }

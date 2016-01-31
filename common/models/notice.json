@@ -22,7 +22,8 @@
       "type": "date"
     },
     "deleted": {
-      "type": "date"
+      "type": "boolean",
+      "default": false
     }
   },
   "validations": [],
@@ -38,12 +39,14 @@
     "seckill": {
       "type": "hasOne",
       "model": "Seckill"
-    },
-    "readers": {
-      "type": "hasMany",
-      "model": "Reader"
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "scope": {
+    "where": {
+      "hidden": false,
+      "deleted": false
+    }
+  }
 }
