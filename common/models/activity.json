@@ -131,11 +131,5 @@
       "property": "findById"
     }
   ],
-  "methods": {},
-  "scope": {
-    "where": {
-      "hidden": false,
-      "deleted": false
-    }
-  }
+  "methods": {}
 }

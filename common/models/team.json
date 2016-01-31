@@ -93,12 +93,6 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "teamMember",
-      "permission": "ALLOW",
-      "property": "findById"
-    },
-    {
-      "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "getMySchoolTeams"
@@ -164,11 +158,5 @@
       "property": "__destroyById__departments"
     }
   ],
-  "methods": {},
-  "scope": {
-    "where": {
-      "hidden": false,
-      "deleted": false
-    }
-  }
+  "methods": {}
 }
