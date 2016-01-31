@@ -8,12 +8,12 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 	})
     .state('coteries.systemMessage',{
       url: '/systemMessage',
-      controller: 'CoteriesController',
+      controller: 'CoterieDetailController',
       templateUrl: 'application/views/coterie/systemMessage.html'
     })
     .state('coteries.userMessage',{
       url: '/userMessage?:id',
-      controller: 'CoteriesController',
+      controller: 'CoterieDetailController',
       templateUrl: 'application/views/coterie/userMessage.html'
     })
   .state('coteries.detail', {

@@ -39,6 +39,15 @@ module.factory(
     { 'id': '@id' },
     {
       /**
+       *   所有圈子显示
+       *   pc所有圈子的显示
+       */
+      "find": {
+        url: urlBase + '/Coteries',
+        method: 'GET',
+        isArray: true
+      },
+      /**
        *  圈子部分详情
        *  pc圈子
        */
