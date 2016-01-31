@@ -75,11 +75,20 @@ header{
   float: left;
 }
 .coterieSideMargin{
+  margin-left: 15px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
 .coterieSystemMargin{
   margin-top: 15px;
+}
+.coterieArticleIcons{
+  font-size: xx-large;
+}
+.coterieSpace{
+  padding-right: 15px;
+}
+.coterieUserMessageLi{
   margin-bottom: 15px;
 }
 

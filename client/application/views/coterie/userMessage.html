@@ -3,13 +3,13 @@
 </h3>
 
 <ul class="collection">
-  <li class="collection-item avatar" ng-repeat="coterieArticle in coterieArticles">
-    <img src="/application/images/coterie/system.png" alt="无法显示" class="circle">
-    <span>毛豆</span>
-    <p>1-1 2016
+  <li class="collection-item avatar coterieUserMessageLi" ng-repeat="coterieArticle in coterieArticles">
+    <img ng-src="{{coterieArticle.user.headImgUrl}}" alt="无法显示" class="circle">
+    <span ng-bind="coterieArticle.user.name"></span>
+    <p><span ng-bind="coterieArticle.created|date:'yyyy-MM-dd'"></span>
     <br>
       <div class="title bold">
-        this is title.
+        <span ng-bind="coterieArticle.title"></span>
       </div>
     <br>
     <div>
@@ -18,10 +18,11 @@
     </p>
     <!--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
     <a href="#!" class="secondary-content">
-      <img src="/application/images/coterie/good.png" style="width: 40px;height: 40px">
-      <span>999</span>
-      <img src="/application/images/coterie/message.png" style="width: 40px;height: 40px">
-      <span>99</span>
+      <i class="mdi-action-thumb-up coterieArticleIcons"></i>
+      <span ng-bind="coterieArticle.commentCount"></span>
+      <span class="coterieSpace"></span>
+      <i class="mdi-communication-chat coterieArticleIcons"></i>
+      <span ng-bind="coterieArticle.likeCount"></span>
     </a>
 
   </li>

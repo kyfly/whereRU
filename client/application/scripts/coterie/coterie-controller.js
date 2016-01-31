@@ -11,8 +11,9 @@ app.controller('CoteriesController', ['$scope','User', '$location', function($sc
     console.log(res);
   },function(){}
   );
+
   User.prototype_get_articles({
-      id: localStorage.$LoopBack$currentUserId,
+      id: $location.search().id,
       filter: {
         order: 'created DESC'
       }
