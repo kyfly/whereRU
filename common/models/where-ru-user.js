@@ -1,5 +1,6 @@
 var q = require('q');
 var promise = require(__dirname + '/../../modules/model-promise.js');
+var app = require('../../server/server');
 module.exports = function(User) {
   User.beforeRemote('create', function (ctx, ins, next) {
     ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
@@ -29,7 +30,7 @@ module.exports = function(User) {
         "name": ins.name,
         "school": ins.school,
         "phone": ins.phone,
-        "sign": user.sign
+        "sign": ins.sign
       };
       ctx.res.send(token);
     });
@@ -131,7 +132,7 @@ module.exports = function(User) {
     }
   });
   User.getMyTeams = function (id, cb) {
-    this.app.models.Member.find({
+    app.models.Member.find({
       where: {userId: id},
       include: {
         relation: 'team',
@@ -224,7 +225,7 @@ module.exports = function(User) {
   User.beforeRemote('prototype.__create__likeUsers', function (ctx, ins, next) {
     var articleId = ctx.req.body.articleId;
     var userId = ctx.req.params.id;
-    this.app.models.likeUser.find({
+    app.models.likeUser.find({
       where: {
         articleId: articleId,
         userId: userId
@@ -253,7 +254,32 @@ module.exports = function(User) {
   });
   User.beforeRemote('prototype.__create__seckillResults', function (ctx, ins, next) {
     var Seckill = User.app.models.Seckill;
-    this.app.models.SeckillResult.count({
+    /*promise(User.app.models.SeckillResult, 'count', {
+      query: {
+        userId: ctx.req.params.id,
+        seckillId: ctx.req.body.seckillId,
+        get: true
+      }
+    })
+      .then(function (count) {
+        if (count > 0) {
+          return ctx.res.send({
+            "error": {
+              "status": 1000,
+              "message": "您已经抢到了。"
+            }
+          });//抢过票了
+        } else {
+          return promise(Seckill, 'findById', {id: ctx.req.body.seckillId})
+        }
+      })
+      .then(function (seckill) {
+
+      })
+
+    return;
+    */
+    app.models.SeckillResult.count({
       userId: ctx.req.params.id,
       seckillId: ctx.req.body.seckillId,
       get: true
@@ -268,11 +294,11 @@ module.exports = function(User) {
         });//抢过票了
       } else {
         Seckill.findById(ctx.req.body.seckillId, function (err, seckill) {
-          if (!seckill.toJSON()._seckillItems) {
+          if (!seckill.toJSON()._seckillItems.length > 0) {
             //无抢票项
             Seckill.margin(ctx.req.body.seckillId, function (err, result) {
               if(result>0){//有余票，就算抢到了
-                ctx.instance.SeckillResult.create({
+                ctx.instance.seckillResults.create({
                   created:new Date(),
                   get:true,
                   verifyId:ctx.req.body.verifyId
@@ -281,7 +307,7 @@ module.exports = function(User) {
                   ctx.res.send(ins);
                 });
               }else{
-                ctx.instance.SeckillResult.create({
+                ctx.instance.seckillResults.create({
                   created:new Date(),
                   get:false,
                   verifyId:ctx.req.body.verifyId
@@ -296,42 +322,40 @@ module.exports = function(User) {
                 });
               }
             });
-          }
-          seckill.seckillItems.findById(ctx.req.body.itemId, function (err, item) {
-            if (item.toJSON().margin > 0) {
-              //有余票额
-              item.margin = item.toJSON().margin - 1;
-              ctx.instance.SeckillResult.create({
-                created:new Date(),
-                get:true,
-                verifyId:ctx.req.body.verifyId,
-                itemId:ctx.req.body.itemId
-              },function(err,ins){
-                if(err) return next(err);
-                ctx.res.send(ins);
-              });
-            } else {
-              ctx.instance.SeckillResult.create({
-                created:new Date(),
-                get:false,
-                verifyId:ctx.req.body.verifyId,
-                itemId:ctx.req.body.itemId
-              },function(err,ins){
-                if(err) return next(err);
-                ctx.res.send({
-                  "error": {
-                    "status": 1001,
-                    "message": "已被抢完。"
-                  }
+          } else {
+            seckill.seckillItems.findById(ctx.req.body.itemId, function (err, item) {
+              if (item.toJSON().margin > 0) {
+                //有余票额
+                item.margin = item.toJSON().margin - 1;
+                ctx.instance.seckillResults.create({
+                  created:new Date(),
+                  get:true,
+                  verifyId:ctx.req.body.verifyId,
+                  itemId:ctx.req.body.itemId
+                },function(err,ins){
+                  if(err) return next(err);
+                  ctx.res.send(ins);
                 });
-              });
-            }
-          });
+              } else {
+                ctx.instance.seckillResults.create({
+                  created:new Date(),
+                  get:false,
+                  verifyId:ctx.req.body.verifyId,
+                  itemId:ctx.req.body.itemId
+                },function(err,ins){
+                  if(err) return next(err);
+                  ctx.res.send({
+                    "error": {
+                      "status": 1001,
+                      "message": "已被抢完。"
+                    }
+                  });
+                });
+              }
+            });
+          }
         });
       }
     });
-    User.afterRemote('prototype.__create__seckillResults', function (ctx, ins, next) {
-
-    });
   });
-}
+};

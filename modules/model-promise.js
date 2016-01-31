@@ -2,25 +2,28 @@ var q = require('q');
 
 function modelPromise (model, method, option) {
 	var defer = q.defer();
-	
+
 	switch (method) {
-		case 'find': 
+		case 'find':
 			model.find(option.query, callback);
 			return defer.promise;
-		case 'findOne': 
+		case 'findOne':
 			model.findOne(option.query, callback);
 			return defer.promise;
-		case 'findById': 
+		case 'findById':
 			model.findById(option.id, option.query,callback)
 			return defer.promise;
 		case 'insFind':
 			model(option.query, callback);
 			return defer.promise;
+    case 'count':
+      model.count(option.query, callback);
+      return defer.promise;
 	}
 	return defer.promise;
 
 	function callback (err, data) {
-		if (!err && data) {
+		if (!err) {
 			defer.resolve(data);
 		} else {
 			defer.reject(err);
