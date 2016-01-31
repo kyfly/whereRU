@@ -1,7 +1,9 @@
 app.controller('LoginController', ['User', '$scope', function (User, $scope) {
   $scope.login = function () {
     User.login($scope.user, function (data) {
-
+      localStorage.userInfo=JSON.stringify(data);
+      console.log(localStorage.userInfo);
+      console.log(JSON.parse(localStorage.userInfo).user.school);
     });
   }
 }]);
@@ -23,5 +25,5 @@ app.controller('MSController', ['User', '$stateParams', function (User, $statePa
   location.href = '/management_system'
 }]);
 app.controller('ARTController', ['$scope', function(){
-  
+
 }])

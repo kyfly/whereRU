@@ -2,7 +2,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 
   $urlRouterProvider.when("", "/application/views/activity/index.html");
   $stateProvider
-    
+
     .state('art.activities', {
       url: '/activities',
       controller: 'ActivitiesController',

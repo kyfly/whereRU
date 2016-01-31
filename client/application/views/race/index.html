@@ -9,118 +9,136 @@
         </a>
       </li>
       <ul id='demoDropdown' class='dropdown-content'>
-          <li><a href="javascript:void(0);">最新</a></li>
-          <li><a href="javascript:void(0);">进行中</a></li>
-          <li><a href="javascript:void(0);">未开始</a></li>
-          <li><a href="javascript:void(0);">已结束</a></li>
+        <li><a href="javascript:void(0);">最新</a></li>
+        <li><a href="javascript:void(0);">进行中</a></li>
+        <li><a href="javascript:void(0);">未开始</a></li>
+        <li><a href="javascript:void(0);">已结束</a></li>
       </ul>
     </ul>
   </div>
 </nav>
 <div class="row menu">
-    <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
-      <option ng-repeat="value in ['最新','最热']">{{value}}</option>
-    </select>
-    <div class="col s4 m3 l2 menu-item ">
-      <a href="/w/activities">校园活动</a>
-    </div>
-    <div class="col s4 m3 l2 menu-item">
-      <a class="active" href="/w/races">校园竞赛</a>
-    </div>
-    <div class="col s4 m3 l2 menu-item">
-      <a href="/w/teams">校园团队</a>
-    </div>
+  <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
+    <option ng-repeat="value in ['最新','最热']">{{value}}</option>
+  </select>
+  <div class="col s4 m3 l2 menu-item ">
+    <a href="/w/activities">校园活动</a>
+  </div>
+  <div class="col s4 m3 l2 menu-item">
+    <a class="active" href="/w/races">校园竞赛</a>
+  </div>
+  <div class="col s4 m3 l2 menu-item">
+    <a href="/w/teams">校园团队</a>
+  </div>
 </div>
-<div class="row activity">
-  <div class="col s12 m4 l3 activity-list">
-    <div class="card" ng-repeat="activityItem in activityItems">
-      <div class="card-title">
-        <a class="hide-on-med-only hide-on-large-only" ng-href="/w/activities/{{activityItem.id}}">
-          <h4 ng-bind="activityItem.title"></h4>
-        </a>
-        <a class="hide-on-small-only" ng-click="someFN()">
-          <h4 ng-bind="activityItem.title"></h4>
-        </a>
+
+
+<div>
+  <div class="row" ng-repeat="raceItem in raceItems">
+    <div style="border-bottom: 1px solid #86c723">
+      <div class="col s9 m9">
+        <h2 class="left-align" ng-bind="raceItem.name"></h2>
+        <h6 class="left-align">{{raceItem.authorName}},{{raceItem.created | date:'yy-MM-dd'}}</h6>
       </div>
-      <div class="card-content">
-        <h6>
-          <a ng-href="/w/teams/{{activityItem.teamId}}"><b ng-bind="activityItem.authorName"></b></a>
-          <time ng-bind="activityItem.created | date : 'yyyy-MM-dd'"></time>
-        </h6>
-      </div>
-      <div class="card-image">
-        <a class="hide-on-med-only hide-on-large-only" ng-href="/w/activities/{{activityItem.id}}">
-          <img ng-src="{{activityItem.imgUrl}}" style="width:100%" alt="{{activityItem.title}}">
-        </a>
-        <a class="hide-on-small-only" ng-click="someFN()">
-          <img ng-src="{{activityItem.imgUrl}}" style="width:100%" alt="{{activityItem.title}}">
-        </a>
-      </div>
-      <div class="card-action tag">
-        <h6><span>标签：</span><span ng-bind="activityItem.keyword"></span></h6>
+      <div class="col s3">
+        <img ng-href="{{raceItem.imgUrl}}">                 <!--后端数据中现有的url不能用-->
+        报名时间：
+        <m ng-bind="raceItem.created| date:'yy-MM-dd'"></m>  <!-- m是我自己创立的，并没有什么特殊的含义-->
+        -----
+        <m ng-bind="raceItem.ended| date:'yy-MM-dd'"></m>
       </div>
     </div>
   </div>
-  <div class="col s12 m8 l9 activity-detail hide-on-small-only">
-    <div class="row">
-      <div class="col s12">
-        <ul class="tabs" tabs>
-          <li class="tab col s4">
-            <a href="#about" class="active">活动介绍</a>
-          </li>
-          <li class="tab col s4">
-            <a href="#detail">活动详情</a>
-          </li>
-          <li class="tab col s4">
-            <a href="#join">参与活动</a>
-          </li>
-        </ul>
-      </div>
+  <!--<div class="row activity">-->
+  <!--<div class="col s12 m4 l3 activity-list">-->
+  <!--<div class="card" ng-repeat="activityItem in activityItems">-->
+  <!--<div class="card-title">-->
+  <!--<a class="hide-on-med-only hide-on-large-only" ng-href="/w/activities/{{activityItem.id}}">-->
+  <!--<h4 ng-bind="activityItem.title"></h4>-->
+  <!--</a>-->
+  <!--<a class="hide-on-small-only" ng-click="someFN()">-->
+  <!--<h4 ng-bind="activityItem.title"></h4>-->
+  <!--</a>-->
+  <!--</div>-->
+  <!--<div class="card-content">-->
+  <!--<h6>-->
+  <!--<a ng-href="/w/teams/{{activityItem.teamId}}"><b ng-bind="activityItem.authorName"></b></a>-->
+  <!--<time ng-bind="activityItem.created | date : 'yyyy-MM-dd'"></time>-->
+  <!--</h6>-->
+  <!--</div>-->
+  <!--<div class="card-image">-->
+  <!--<a class="hide-on-med-only hide-on-large-only" ng-href="/w/activities/{{activityItem.id}}">-->
+  <!--<img ng-src="{{activityItem.imgUrl}}" style="width:100%" alt="{{activityItem.title}}">-->
+  <!--</a>-->
+  <!--<a class="hide-on-small-only" ng-click="someFN()">-->
+  <!--<img ng-src="{{activityItem.imgUrl}}" style="width:100%" alt="{{activityItem.title}}">-->
+  <!--</a>-->
+  <!--</div>-->
+  <!--<div class="card-action tag">-->
+  <!--<h6><span>标签：</span><span ng-bind="activityItem.keyword"></span></h6>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="col s12 m8 l9 activity-detail hide-on-small-only">-->
+  <!--<div class="row">-->
+  <!--<div class="col s12">-->
+  <!--<ul class="tabs" tabs>-->
+  <!--<li class="tab col s4">-->
+  <!--<a href="#about" class="active">活动介绍</a>-->
+  <!--</li>-->
+  <!--<li class="tab col s4">-->
+  <!--<a href="#detail">活动详情</a>-->
+  <!--</li>-->
+  <!--<li class="tab col s4">-->
+  <!--<a href="#join">参与活动</a>-->
+  <!--</li>-->
+  <!--</ul>-->
+  <!--</div>-->
 
-      <div id="about" class="col s12 container ">
-        <div class="card">
-          <div class="card-image">
-            <a href="/w/activities/:id">
-              <img style="width:100%" src="http://assets.servedby-buysellads.com/p/manage/asset/id/26625">
-            </a>
-          </div>
-          <div class="row">
-            <div class="col s6 m6">
-              结束时间：2016-1-2
-            </div>
-            <div class="col s6 m6">
-              主办方：团团一家
-            </div>
-            <div class="col s6 m6">
-              开始时间：2015-12-02
-            </div>
-            <div class="col s6 m6">
-              学校：杭州电子科技大学
-            </div>
-          </div>
-        </div>
-        <div class="card-action tag">
+  <!--<div id="about" class="col s12 container ">-->
+  <!--<div class="card">-->
+  <!--<div class="card-image">-->
+  <!--<a href="/w/activities/:id">-->
+  <!--<img style="width:100%" src="http://assets.servedby-buysellads.com/p/manage/asset/id/26625">-->
+  <!--</a>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+  <!--<div class="col s6 m6">-->
+  <!--结束时间：2016-1-2-->
+  <!--</div>-->
+  <!--<div class="col s6 m6">-->
+  <!--主办方：团团一家-->
+  <!--</div>-->
+  <!--<div class="col s6 m6">-->
+  <!--开始时间：2015-12-02-->
+  <!--</div>-->
+  <!--<div class="col s6 m6">-->
+  <!--学校：杭州电子科技大学-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="card-action tag">-->
 
-        </div>
-      </div>
+  <!--</div>-->
+  <!--</div>-->
 
-      <div id="detail" class="col s12">   <!-- 活动详情-->
+  <!--<div id="detail" class="col s12">   &lt;!&ndash; 活动详情&ndash;&gt;-->
 
-      </div>
-      <div id="join" class="col s12">   <!--参与活动-->
+  <!--</div>-->
+  <!--<div id="join" class="col s12">   &lt;!&ndash;参与活动&ndash;&gt;-->
 
-        <div class="row">
-          <form class="col s6">
-            <div class="row">
-              <div class="input-field col s6">
-                <input id="email" type="email" class="validate">
-                <label for="email" data-error="wrong" data-success="right">Email</label>
-              </div>
-            </div>
-          </form>
-        </div>
+  <!--<div class="row">-->
+  <!--<form class="col s6">-->
+  <!--<div class="row">-->
+  <!--<div class="input-field col s6">-->
+  <!--<input id="email" type="email" class="validate">-->
+  <!--<label for="email" data-error="wrong" data-success="right">Email</label>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</form>-->
+  <!--</div>-->
 
-      </div>
-    </div>
-  </div>
-</div>
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->

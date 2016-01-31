@@ -370,8 +370,7 @@ module.factory(
        */
       "getMySchoolActiveties": {
         url: urlBase + '/Activities/mySchoolActiveties',
-        method: 'GET',
-        isArray: true
+        method: 'GET'
       },
       /**
        * 描述：活动搜索
@@ -471,7 +470,7 @@ module.factory(
   'Race',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
-    var R = resource(
+    var R = Resource(
       urlBase + '/Races/:id',
       { 'id': "@id"},
       {
@@ -480,8 +479,7 @@ module.factory(
          */
         "getMySchoolRaces": {
           url: urlBase + '/Races/mySchoolRaces',
-          method: 'GET',
-          isArray: true
+          method: 'GET'
         },
         /**
          * 描述：竞赛详情，所有用户
