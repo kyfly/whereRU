@@ -87,7 +87,7 @@ module.exports = function(Team) {
 	});
 	Team.getMySchoolTeams = function (school,last,cb){
     Team.find({
-      where:{school:school,created:{lt:last}},
+      where:{school:school,created:{lt:last},hidden:false,deleted:undefined},
       limit:20,
       order:"id desc",
       fields:['id','userId','name','logoUrl','desc','status']
