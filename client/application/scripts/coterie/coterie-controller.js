@@ -1,24 +1,16 @@
 
-app.controller('CoteriesController', ['$scope', function($scope){
-  $scope.sidebars = [
-    {
-      'id': 'message1',
-      'display_name': '系统消息',
-      'url': '/w/message1',
-      'uiSref':'coteries.message1'
-    },
-    {
-      'id': 'message2',
-      'display_name': ' 杭州电子科技大学',
-      'url': '/w/message2',
-      'uiSref':'coteries.message2'
-    },
-    {
-      'id': 'message3',
-      'display_name': '团团一家',
-      'url': '/w/message3',
-      'uiSref':'coteries.message3'
-    },
+app.controller('CoteriesController', ['$scope','User', function($scope,User){
+  User.prototype_get_coteries({
+      id: localStorage.$LoopBack$currentUserId,
+      filter: {
+        order: 'created DESC'
+      }
+    },function(res){
+    $scope.existCoterieList=res;
+    console.log(res);
+  },function(){}
+  );
+
     $scope.systemElements = [{
       img:'system.png',
       icon: 'mdi-image-filter-drama',
@@ -41,14 +33,14 @@ app.controller('CoteriesController', ['$scope', function($scope){
       shortMessage:'简短消息',
       content: '具体信息.'
     }
-    ]
-  ];
+    ];
+
 }]);
 app.controller('CoterieDetailController', ['$scope', function($scope){
-  
+
 }]);
 
 app.controller('CoterieController', ['$scope', function($scope){
-  
+
 }]);
 

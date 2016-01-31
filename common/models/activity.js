@@ -1,39 +1,41 @@
 module.exports = function(Activity) {
-	//__updateById__forms
-	//__updateById__votes
-	//__updateById__seckills
-	//__destroyById__forms
-	//__destroyById__votes
-	//__destroyById__seckills
-	//这些方法需要检查当前用户使用有权限操作，
-	//即这些活动是否为当前用户创建
 	Activity.remoteMethod('getMySchoolActiveties', {
 		accepts: [{
-			arg: 'school', type: 'string',
+			arg: 'school',
+			type: 'string',
+			required: true
 		},{
-			arg: 'limit', type: 'number',
-		},{
-			arg: 'offset', type: 'number',
+			arg: 'last', type: 'string',
 		}],
 		returns: {
 			arg: 'activties', type: 'array'
 		},
 		http: {path: '/mySchoolActiveties', verb: 'get'}
 	});
-	Activity.getMySchoolActiveties = function (school, limit, offset, cb) {
-		if (!(school && limit && (offset === 0 ? true: false)))
-			cb('school, limit, offset must required');
+	Activity.getMySchoolActiveties = function (school, last, cb) {
+		if (last) {
+			var dateFilter = {
+				school: school, 
+				created: { lt: last}
+			};
+		}	else {
+			var dateFilter = {
+				school: school
+			};
+		}
 		Activity.find({
-			where: {school: school},
-			limit: limit || 20,
-			skip: offset
-		} , function (err, activties) {
+			where: dateFilter,
+			order: "id DESC",
+			limit: 30
+		}, function (err, activties) {
 			cb(null, activties);
 		});
 	};
 	Activity.remoteMethod('search', {
 		accepts: {
-			arg: 'keyword', type: 'string',
+			arg: 'keyword',
+			type: 'string',
+			required: true
 		},
 		returns: {
 			arg: 'activties', type: "array"
@@ -43,23 +45,34 @@ module.exports = function(Activity) {
 		}
 	});
 	Activity.search = function (keyword,cb) {
-        if(keyword) keyword = keyword.replace(' ','.+');
-        Activity.find({
-            where:
-            {
-                or:[{title:{like:keyword}},
-                    {authorName:{like:keyword}},
-                    {keyword:{like:keyword}}]
-            },
-            fields:['title','authorName','id','authorId','keyword','imgUrl','created','status']
-        },function(err,activities){
-            if(err) return cb(err);
-            cb(null,activities);
-        });
-    };
+    var query = [];
+		keywords = keyword.split(' ');
+    keywords.forEach(function (keyword) {
+			query.push({
+				title:{ like:keyword }
+			});
+			query.push({
+				authorName:{ like:keyword }
+			});
+			query.push({
+				keyword:{ like:keyword }
+			});
+    });
+    Activity.find({
+    	where:{ or: query },
+      fields:['title','authorName','id','authorId','keyword','imgUrl','created','status']
+    },function(err,activities){
+        if(err) {
+        	return cb(err);
+        }
+        cb(null,activities);
+    });
+  };
 	Activity.remoteMethod('getHotActiveties', {
 		accepts: {
-			arg: 'school', type: 'string',
+			arg: 'school',
+			type: 'string',
+			required: true
 		},
 		returns: {
 			arg: 'hotActivities', type: 'array'
@@ -68,16 +81,17 @@ module.exports = function(Activity) {
 	});
 	//
 	Activity.getHotActiveties = function (school,cb) {
-      Activity.find({
-        where:{"school":school},
-        order:'readers DESC',
-        limit: 5,
-        fields: ['id','title','imgUrl']
-      },function(err,activities){
-        if(err) return next(err);
-        cb(null,activities);
-      });
-    };
+    Activity.find({
+      where: {"school": school},
+      order: 'readers DESC',
+      limit: 5,
+      fields: ['id','title','imgUrl']
+    },function(err, activities){
+      if(err) 
+      	return next(err);
+      cb(null,activities);
+    });
+  };
 	//
 	Activity.afterRemote('prototype.__create__readers', function (ctx,ins,next) {
     var readers = ctx.instance.toJSON().readers;
@@ -88,7 +102,7 @@ module.exports = function(Activity) {
       }
       ctx.res.send({readerNum:ins.toJSON().readers});
     });
-    });
+  });
   Activity.beforeRemote('prototype.__create__seckills', function (ctx,ins,next){
     ctx.req.body._seckillItems.forEach(function(item){
       item.margin = item.count;

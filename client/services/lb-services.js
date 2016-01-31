@@ -39,6 +39,15 @@ module.factory(
     { 'id': '@id' },
     {
       /**
+       *
+       *
+       * */
+      "prototype_get_coteries": {
+        url: urlBase + '/WUsers/:id/coteries',
+        method: 'GET',
+        isArray: true
+      },
+      /**
        * 描述：新用户注册接口，未登录
        * 使用场景：APP，PC注册
        */
@@ -194,6 +203,7 @@ module.factory(
       urlBase + '/Teams/:id',
       { 'id': '@id' },
       {
+
         /**
          * 描述：团队参与竞赛，已登录用户
          * 使用场景：团队拥有者选择参与竞赛

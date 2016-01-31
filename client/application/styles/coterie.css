@@ -12,9 +12,6 @@ body{
   height: 64px;
 }
 
-.topBarLeft{
-  text-align: center;
-}
 .topBarCenter{
   text-align: center;
 }
@@ -25,43 +22,32 @@ input{
 }
 
 
-/*.slide-nav{*/
-  /*position:relative;*/
-  /*z-index: 999!important;*/
-/*}*/
-
 .coterie-top{
   margin: 0;
+}
+
+.coterieMain{
+  padding-left: 240px;
+}
+
+@media only screen and (max-width: 992px){
+  .coterieMain{
+    padding-left: 0;
+  }
 }
 
 #coterie-sideBar{
   margin: 0;
 }
-/*.mainPart{*/
-  /*position: absolute;*/
-  /*left: 250px;*/
-  /*top: 64px;*/
-
-/*}*/
 
 header{
-  padding-left: 240px;
+
 }
 
-.side-nav{
-  width: 240px;
-}
 .bold{
   font-weight: bold;
 }
 
-/*li{*/
-  /*padding: 0!important;*/
-/*}*/
-
-.coterie-main{
-  padding-left: 240px;
-}
 
 .coterieHeader{
 
@@ -76,4 +62,25 @@ header{
 .withoutMargin{
   margin: 0;
 }
+
+.coterie-sideBar{
+  margin-top: 64px;
+}
+.coterieLogo{
+  width: 64px;
+  height: 64px;
+}
+.coterieLeft{
+  left: 0!important;
+  float: left;
+}
+.coterieSideMargin{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.coterieSystemMargin{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 

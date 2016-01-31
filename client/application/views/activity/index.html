@@ -34,7 +34,11 @@
         <a class="hide-on-med-only hide-on-large-only" ng-href="/w/activities/{{activityItem.id}}">
           <h4 ng-bind="activityItem.title"></h4>
         </a>
+
         <a class="hide-on-small-only" ng-click="someFN()">  <!--我觉得这里不应该加-->
+
+        <a class="hide-on-small-only" ng-click="changeCurrentActivity()">
+
           <h4 ng-bind="activityItem.title"></h4>
         </a>
       </div>
@@ -48,7 +52,7 @@
         <a class="hide-on-med-only hide-on-large-only" ng-href="/w/activities/{{activityItem.id}}">
           <img ng-src="{{activityItem.imgUrl}}" style="width:100%" alt="{{activityItem.title}}">
         </a>
-        <a class="hide-on-small-only" ng-click="someFN()">
+        <a class="hide-on-small-only" ng-click="changeCurrentActivity()">
           <img ng-src="{{activityItem.imgUrl}}" style="width:100%" alt="{{activityItem.title}}">
         </a>
       </div>
@@ -98,12 +102,12 @@
       </div>
 
       <div id="detail" class="col s12">   <!-- 活动详情-->
-
+        {{currentActivity.title}}
       </div>
       <div id="join" class="col s12">   <!--参与活动-->
 
         <div class="row">
-          <form class="col s6" ng-repeat="join in activityJoin">
+          <form class="col s12" ng-repeat="join in activityJoin">
             <div class="row">
               <div class="input-field col s6">
                 <input type="{{join.type}}" class="validate">

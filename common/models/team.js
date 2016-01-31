@@ -10,22 +10,35 @@ module.exports = function(Team) {
 			path: '/search', verb: 'get'
 		}
 	});
-    Team.search = function(keyword,cb){
-        if(keyword) keyword = keyword.replace(' ','.+');
-        Team.find({
-            where:
-            {
-                or:[{name:{like:keyword}},
-                    {desc:{like:keyword}},
-                    {school:{like:keyword}},
-                    {type:{like:keyword}}]
-            },
-            fields:['id','userId','name','logoUrl','desc']
-        },function(err,teams){
-            if(err) return cb(err);
-            cb(null,teams);
-        });
-    };
+  Team.search = function(keyword,cb){
+    var query = [];
+    if(keyword) {
+      key = keyword.replace(' ', '.+');
+      keywords = keyword.split(' ');
+      keywords.push(key);
+    }
+    keywords.forEach(function (keyword) {
+      query.push({
+        name:{like:keyword}
+      });
+      query.push({
+        desc:{like:keyword}
+      });
+      query.push({
+        school:{like:keyword}
+      });
+      query.push({
+        type:{like:keyword}
+      });
+    });
+    Team.find({
+        where: { or: query },
+        fields:['id','userId','name','logoUrl','desc']
+    },function(err,teams){
+        if(err) return cb(err);
+        cb(null,teams);
+    });
+};
 // 	Team.afterRemote('prototype.__link__joinRaces', function (ctx, ins, next) {
 // 		 ins.c = 'aaa';
 // 		 ins.save(function (err, r) {

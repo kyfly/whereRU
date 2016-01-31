@@ -1,16 +1,15 @@
 <div class="row">
   <div class="col s12">
     <ul class="tabs" tabs>
-      <li class="tab col s3 waves-effect" ng-click="showSingleType('all')"><a href="" class="active">全部活动</a></li>
-      <li class="tab col s3 waves-effect" ng-click="showSingleType('form')"><a href="">表单活动</a></li>
-      <li class="tab col s3 waves-effect" ng-click="showSingleType('vote')"><a href="">投票活动</a></li>
-      <li class="tab col s3 waves-effect" ng-click="showSingleType('seckill')"><a href="">抢票活动</a></li>
+      <li class="tab col s3 waves-effect" ng-click="showSingleType('all')"><a href="" class="active">全部竞赛</a></li>
+      <li class="tab col s3 waves-effect" ng-click="showSingleType('')"><a href="">我创建的活动</a></li>
+      <li class="tab col s3 waves-effect" ng-click="showSingleType('')"><a href="">我参与的活动</a></li>
     </ul>
   </div>
   <div class="col s12">
     <div class="row">
       <div class="col s12 m4">
-        <div class="card addItemBox waves-effect waves-block hoverable" ui-sref="activityEdit">
+        <div class="card addItemBox waves-effect waves-block hoverable" ui-sref="eventEdit">
           <div class="card-content item-list">
             <p class="text-center"><i class="material-icons">&#xE145;</i></p>
           </div>

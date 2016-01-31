@@ -7,31 +7,33 @@ module.exports = function(User) {
 		next();
 	});
 	User.beforeRemote('login', function (ctx, ins, next) {
-        ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
+    ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
 		next();
 	});
-    User.afterRemote('login', function (ctx, ins, next) {
-        User.findById(ins.userId, function (err, user) {
-            var token = ins.toJSON();
-            token.user = {
-                "name" : user.name,
-                "school" : user.school,
-                "phone" : user.phone
-            };
-            ctx.res.send(token);
-        });
+  User.afterRemote('login', function (ctx, ins, next) {
+    User.findById(ins.userId, function (err, user) {
+      var token = ins.toJSON();
+      token.user = {
+        "name" : user.name,
+        "school" : user.school,
+        "phone" : user.phone,
+        "sign": user.sign
+      };
+      ctx.res.send(token);
+    });
 	});
 	User.afterRemote('create', function (ctx, ins, next) {
 		ins.createAccessToken(7200, function (err, token) {
-            var token = token.toJSON();
-            token.user = {
-                "name" : ins.name,
-                "school" : ins.school,
-                "phone" : ins.phone
-            };
+      var token = token.toJSON();
+      token.user = {
+        "name" : ins.name,
+        "school" : ins.school,
+        "phone" : ins.phone,
+        "sign": user.sign
+      };
 			ctx.res.send(token);
 		});
-	})
+	});
 	User.afterRemote('prototype.__link__coteries', function (ctx, ins, next) {
 		ins.lastView = new Date();
 		ins.save();
@@ -93,19 +95,28 @@ module.exports = function(User) {
 		}
 	});
 	User.search = function (keyword,cb) {
-        if(keyword) keyword = keyword.replace(' ','.+');
-        User.find({
-            where:
-            {
-                or:[{name:{like:keyword}},
-                    {sign:{like:keyword}}]
-            },
-            fields:['id','name','sign','headImgUrl']
-        },function(err,User){
-            if(err) return cb(err);
-            cb(null,User);
-        });
+    var query = [];
+    if(keyword) {
+      key = keyword.replace(' ', '.+');
+      keywords = keyword.split(' ');
+      keywords.push(key);
     }
+    keywords.forEach(function (keyword) {
+      query.push({
+        name:{like:keyword}
+      });
+      query.push({
+        sign:{like:keyword}
+      });
+    });
+    User.find({
+        where: { or: query },
+        fields:['id','name','sign','headImgUrl']
+    }, function(err,User){
+        if(err) return cb(err);
+        cb(null,User);
+    });
+  };
 	User.remoteMethod('getMyTeams', {
 		accepts: {
 			arg: 'id', type: 'string',
@@ -183,5 +194,21 @@ module.exports = function(User) {
 	User.beforeRemote('prototype.__findById__formResults', function () {})
 	User.beforeRemote('prototype.__findById__voteResults', function () {})
 	User.beforeRemote('prototype.__findById__seckillResults', function () {})
+	User.beforeRemote('prototype.__create__voteResults', function (ctx, ins, next) {
+		var voteId = ctx.req.body.voteId;
+		var voteItem = ctx.req.body.result;
+		var Vote = User.app.models.Vote;
+		Vote.findById(voteId, function (err, vote) {
+			for (var index in voteItem)
+			{
+				console.log(index);
+				vote.voteItems.findById(voteItem[index], function (err, item) {
+					item.count = item.toJSON().count + 1;
+					item.save();
+				})
+			}
+		});
+		next();
+	});
 	User.afterRemote('prototype.__updateById__teams', function() {});
 };
