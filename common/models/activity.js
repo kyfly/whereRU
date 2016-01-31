@@ -12,15 +12,26 @@ module.exports = function(Activity) {
 		},
 		http: {path: '/mySchoolActiveties', verb: 'get'}
 	});
+	/**
+	 * 获取用户所在学校的活动列表
+	 * @param  {string}   school 学校名称
+	 * @param  {date}   	last   最后一条活动信息时间
+	 * @param  {Function} cb     回调函数
+	 * @return {object}          活动列表
+	 */
 	Activity.getMySchoolActiveties = function (school, last, cb) {
-		if (last) {
+		if (last) { //判断是否有‘last’参数，last为上一次返回的最后一条的‘created’
 			var dateFilter = {
-				school: school, 
-				created: { lt: last}
+				school: school, //学校过滤器，只查询该学校活动
+				created: { lt: last},
+				hidden: false,	//活动显示过滤器，只显示不隐藏的活动
+      	deleted: false  //删除过滤器，只显示未被删除的学校
 			};
 		}	else {
 			var dateFilter = {
-				school: school
+				school: school,
+				hidden: false,
+      	deleted: false
 			};
 		}
 		Activity.find({
@@ -44,9 +55,18 @@ module.exports = function(Activity) {
 			path: '/search', verb: 'get'
 		}
 	});
+	/**
+	 * 活动搜索
+	 * @param  {string}   keyword 搜索的关键字
+	 * @param  {Function} cb      [description]
+	 * @return {[type]}           [description]
+	 */
 	Activity.search = function (keyword,cb) {
     var query = [];
 		keywords = keyword.split(' ');
+		/*
+			关键字根据空格分割为数组，组合过滤器
+		 */
     keywords.forEach(function (keyword) {
 			query.push({
 				title:{ like:keyword }
@@ -59,8 +79,11 @@ module.exports = function(Activity) {
 			});
     });
     Activity.find({
-    	where:{ or: query },
-      fields:['title','authorName','id','authorId','keyword','imgUrl','created','status']
+    	where:{
+    	  or: query,
+				hidden: false,
+      	deleted: false 
+      }
     },function(err,activities){
         if(err) {
         	return cb(err);
@@ -79,10 +102,19 @@ module.exports = function(Activity) {
 		},
 		http: {path: '/hotActiveties', verb: 'get'}
 	});
-	//
+	/**
+	 * 获取用户所在学校的最热活动，显示五条信息
+	 * @param  {[type]}   school [description]
+	 * @param  {Function} cb     [description]
+	 * @return {[type]}          [description]
+	 */
 	Activity.getHotActiveties = function (school,cb) {
     Activity.find({
-      where: {"school": school},
+      where: {
+      	"school": school,
+				hidden: false,
+      	deleted: false
+      },
       order: 'readers DESC',
       limit: 5,
       fields: ['id','title','imgUrl']
@@ -92,7 +124,13 @@ module.exports = function(Activity) {
       cb(null,activities);
     });
   };
-	//
+	/**
+	 * 活动访问量加一
+	 * @param  {[type]} ctx   [description]
+	 * @param  {[type]} ins   [description]
+	 * @param  {[type]} next) {               var readers [description]
+	 * @return {[type]}       [description]
+	 */
 	Activity.afterRemote('prototype.__create__readers', function (ctx,ins,next) {
     var readers = ctx.instance.toJSON().readers;
     ctx.instance.readers = readers + 1;
@@ -103,11 +141,19 @@ module.exports = function(Activity) {
       ctx.res.send({readerNum:ins.toJSON().readers});
     });
   });
-  Activity.beforeRemote('prototype.__create__seckills', function (ctx,ins,next){
+  /**
+   * 创建抢票时给抢票添加余票数量
+   * @param  {[type]} ctx     [description]
+   * @param  {[type]} ins     [description]
+   * @param  {[type]}           
+   * @return {[type]}         [description]
+   */
+  Activity.beforeRemote('prototype.__create__seckills', function (ctx, ins, next){
+    ctx.req.body.margin = ctx.req.body.total;	//票余量初始化
     ctx.req.body._seckillItems.forEach(function(item){
-      item.margin = item.count;
+      item.margin = item.count;	//票项余量初始化
     });
-    console.log(ctx.req.body);
+    //保存抢票信息
     ctx.instance.seckills.create(ctx.req.body, function (err, seckill) {
       ctx.res.send(seckill);
     });

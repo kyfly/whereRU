@@ -218,7 +218,7 @@ module.exports = function(User) {
     });
     ctx.res.send(result);
   });
-  User.getRaceHistories = function () {
+  User.getActivitiesHistories = function () {
   };
   User.beforeRemote('prototype.__updateAttributes', function () {
   });

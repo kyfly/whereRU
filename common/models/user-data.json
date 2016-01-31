@@ -8,15 +8,18 @@
   "properties": {
     "integration": {
       "type": "number",
-      "comment": "积分"
+      "comment": "积分",
+      "default": 0
     },
     "balance": {
       "type": "number",
-      "comment": "余额"
+      "comment": "余额",
+      "default": 0
     },
     "credit": {
       "type": "number",
-      "comment": "信用值"
+      "comment": "信用值",
+      "default": 0
     },
     "label": {
       "type": [
