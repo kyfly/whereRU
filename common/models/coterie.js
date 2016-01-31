@@ -43,7 +43,7 @@ module.exports = function(Coterie) {
 				a.likeUser = undefined;
 				a.comments = undefined;
 				if (ctx.req.accessToken) {
-					articles.push(articleFn(article, ctx.req.accessToken.userId, a)); 
+					articles.push(articleFn(article, ctx.req.accessToken.userId, a));
 				} else {
 					a.islike = false;
 					articles.push(a);
