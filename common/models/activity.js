@@ -39,7 +39,10 @@ module.exports = function(Activity) {
 			order: "id DESC",
 			limit: 30
 		}, function (err, activties) {
-			cb(null, activties);
+			if (err)
+				cb({"status": 1201, "message": "活动列表获取失败"});
+			else
+				cb(null, activties);
 		});
 	};
 	Activity.remoteMethod('search', {
@@ -86,7 +89,7 @@ module.exports = function(Activity) {
       }
     },function(err,activities){
         if(err) {
-        	return cb(err);
+        	return cb({"status": 1100, "message": "活动搜索失败"});
         }
         cb(null,activities);
     });
@@ -120,7 +123,7 @@ module.exports = function(Activity) {
       fields: ['id','title','imgUrl']
     },function(err, activities){
       if(err) 
-      	return next(err);
+      	return next({"status": 1201, "message": "活动列表获取失败"});
       cb(null,activities);
     });
   };

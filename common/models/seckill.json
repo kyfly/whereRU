@@ -8,11 +8,11 @@
   "properties": {
     "started": {
       "type": "date",
-      "require": true
+      "required": true
     },
     "total": {
       "type": "number",
-      "require": true
+      "required": true
     },
     "limit": {
       "type": "number",

@@ -10,7 +10,8 @@
       "type": "date"
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "pics": {
       "type": [

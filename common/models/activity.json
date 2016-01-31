@@ -51,7 +51,8 @@
       "required": true
     },
     "actType": {
-      "type": "string"
+      "type": "string",
+      "default": "common"
     },
     "ended": {
       "type": "date",

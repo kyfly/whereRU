@@ -7,10 +7,12 @@
   },
   "properties": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "logoUrl": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "created": {
       "type": "date"
