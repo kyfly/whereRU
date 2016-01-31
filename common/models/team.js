@@ -92,7 +92,7 @@ module.exports = function(Team) {
 	 */
 	Team.getMySchoolTeams = function (school,last,cb){
     Team.find({
-      where:{school:school,created:{lt:last}},
+      where:{school:school,created:{lt:last},hidden:false,deleted:new Date("1970-01-01T00:00:00.000Z")},
       limit:20,
       order:"id desc",
       fields:['id','userId','name','logoUrl','desc','status']
@@ -135,4 +135,37 @@ module.exports = function(Team) {
 		})
 	};
 	//Team.beforeRemote('prototype.__create__members',function () {});
+
+	Team.getActivitiesData = function (){};
+	Team.beforeRemote('prototype.__create__members',function (ctx,ins,next) {
+    var userId = ctx.req.accessToken.userId;
+    ctx.instance.members.count({
+      userId : userId
+    },function(err,result){
+      if(err) return next(err);
+      if (result>0){
+        return ctx.res.send({
+          error:{
+            "status":1002,
+            "message":"用户已加入该团队。"
+          }
+        });
+      }else{
+        Team.app.models.user.findById(userId,function(err,user){
+          if(err) return next(err);
+          ctx.req.body.userId = userId;
+          ctx.req.body.school = user.school;
+          ctx.req.body.phone = user.phone;
+          ctx.req.body.name = user.name;
+          ctx.req.body.created = user.created;
+          ctx.req.body.academy = user.academy;
+          ctx.req.body.verified = false;
+          next();
+        });
+      }
+    });
+  });
+  Team.afterRemote('prototype.__create__members',function (ctx,ins,next) {
+    ctx.res.send({"status":200});
+  });
 };

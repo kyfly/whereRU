@@ -23,6 +23,6 @@ module.exports = function(Article) {
 			ctx.res.send(comments);
 		}, function (err) {
 			ctx.res.send(err);
-		});
+  });
 	})
 };

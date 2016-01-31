@@ -177,7 +177,7 @@ module.exports = function(User) {
    */
   User.remoteMethod('getMyTeams', {
     accepts: {
-      arg: 'id', type: 'string',
+      arg: 'id', type: 'string'
     },
     returns: {
       arg: 'teams', type: "array"
