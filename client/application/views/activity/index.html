@@ -34,6 +34,8 @@
         <a class="hide-on-med-only hide-on-large-only" ng-href="/w/activities/{{activityItem.id}}">
           <h4 ng-bind="activityItem.title"></h4>
         </a>
+
+         <!--我觉得这里不应该加-->
         <a class="hide-on-small-only" ng-click="changeCurrentActivity()">
           <h4 ng-bind="activityItem.title"></h4>
         </a>
@@ -73,30 +75,27 @@
         </ul>
       </div>
 
-      <div id="about" class="col s12 container ">
+      <div id="about" class="col s12  container ">
         <div class="card">
           <div class="card-image">
-            <a href="/w/activities/:id">
-              <img style="width:100%" src="http://assets.servedby-buysellads.com/p/manage/asset/id/26625">
+            <a href="/w/activities/{{activityCurrent.id}}">
+              <img style="width:100%;height: 400px" ng-src="{{activityCurrent.imgUrl}}">
             </a>
           </div>
           <div class="row">
             <div class="col s6 m6">
-              结束时间：2016-1-2
+              结束时间:<time ng-bind="activityCurrent.ended | date : 'yyyy-MM-dd'"></time>
             </div>
             <div class="col s6 m6">
               主办方：团团一家
             </div>
             <div class="col s6 m6">
-              开始时间：2015-12-02
+              开始时间：<time ng-bind="activityCurrent.statrted | date : 'yyyy-MM-dd'"></time>
             </div>
             <div class="col s6 m6">
               学校：杭州电子科技大学
             </div>
           </div>
-        </div>
-        <div class="card-action tag">
-
         </div>
       </div>
 
@@ -106,11 +105,11 @@
       <div id="join" class="col s12">   <!--参与活动-->
 
         <div class="row">
-          <form class="col s6">
+          <form class="col s12" ng-repeat="join in activityJoin">
             <div class="row">
               <div class="input-field col s6">
-                <input id="email" type="email" class="validate">
-                <label for="email" data-error="wrong" data-success="right">Email</label>
+                <input type="{{join.type}}" class="validate">
+                <label>{{join.name}}</label>
               </div>
             </div>
           </form>

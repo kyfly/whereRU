@@ -1,6 +1,3 @@
-/**
- * Created by xuelei on 2016/1/31 0031.
- */
 app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, Activity) {
   $scope.activityCurrent = undefined;
 
