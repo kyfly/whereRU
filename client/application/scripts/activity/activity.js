@@ -9,18 +9,16 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
   );
   $scope.someFN = function () {
     $scope.activityCurrent = this.activityItem;
-    console.log($scope.activityCurrent.id);
     Activity.prototype_get_forms({
-      id:$scope.activityCurrent.id
+      id: $scope.activityCurrent.id
     }, function (res) {
-      console.log(res);
       $scope.activityJoin = res[0]._formItems;
       console.log($scope.activityJoin);
     }, function () {
     });
   };
 
- }
+}
 
 ]);
 app.controller('ActivityController', ['$scope', function ($scope) {

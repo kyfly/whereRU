@@ -346,6 +346,15 @@ module.factory(
         method: 'GET',
         isArray: true
       },
+
+      /**
+       * 参与活动
+       */
+      "prototype_get_forms":{
+        url: urlBase + '/Activities/:id/forms',
+        method: 'GET',
+        isArray: true
+      },
       /**
        * 描述：用户所在学校活动列表
        */
