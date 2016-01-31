@@ -1,53 +1,103 @@
 <div class="row">
   <div class="col s12">
     <ul class="tabs" tabs>
-      <li class="tab col s3 waves-effect" ng-click="showSingleType('all')"><a href="" class="active">全部竞赛</a></li>
-      <li class="tab col s3 waves-effect" ng-click="showSingleType('')"><a href="">我创建的活动</a></li>
-      <li class="tab col s3 waves-effect" ng-click="showSingleType('')"><a href="">我参与的活动</a></li>
+      <li class="tab col s3 waves-effect"><a href="#createEvent">创建的竞赛</a></li>
+      <li class="tab col s3 waves-effect"><a href="#partakedEvent">参与的竞赛</a></li>
     </ul>
   </div>
-  <div class="col s12">
+  <div class="col s12" id="createEvent">
     <div class="row">
-      <div class="col s12 m4">
+      <div class="col s12 m6 l4">
         <div class="card addItemBox waves-effect waves-block hoverable" ui-sref="eventEdit">
           <div class="card-content item-list">
-            <p class="text-center"><i class="material-icons">&#xE145;</i></p>
+            <p class="text-center"><i class="mdi-content-add"></i></p>
           </div>
         </div>
       </div>
-      <div class="col s12 m4" ng-repeat="activityItem in activityItems" ng-show="(activityItem.actType === chosenType) || allChosen">
+      <div class="col s12 m6 l4" ng-repeat="eventItem in eventItems">
         <div class="card hoverable">
           <div class="card-content item-list activityInfo">
-            <span class="card-title green-text text-darken-1 flow-text" ng-bind="activityItem.title"></span>
+            <span class="card-title green-text text-darken-1 flow-text" ng-bind="eventItem.name"></span>
             <br>
-            <span class="addText" ng-bind="activityItem.authorName"></span>
-            <span class="addText" ng-bind="activityItem.created | date : format"></span>
+            <span class="addText" ng-bind="eventItem.authorName"></span>
+            <span class="addText" ng-bind="eventItem.created | date : format"></span>
             <hr>
-            <p>开始：<span ng-bind="activityItem.started | date : unFormat"></span></p>
-            <p>结束：<span ng-bind="activityItem.ended | date : unFormat"></span></p>
-            <p>关键字：<span ng-bind="activityItem.keyword || '无'"></span></p>
+            <p>报名开始：<span ng-bind="eventItem.started | date : unFormat"></span></p>
+            <p>报名结束：<span ng-bind="eventItem.ended | date : unFormat"></span></p>
+            <p>参与团队：<span ng-bind="eventItem.readers || 0"></span></p>
+            <p>浏览量：<span ng-bind="eventItem.readers || 0"></span></p>
           </div>
           <div class="card-action btn-area">
-            <div class="edit-btn waves-effect text-center">
-              <a class="green-text text-darken-2" href ng-click="edit(listItem.id)"><i class="material-icons">&#xE254;</i>
-                编辑</a>
+            <div class="viewEvent-btn waves-effect text-center">
+              <a ui-sref="eventDetail({id: eventItem.id, type: 'author'})" class="blue-text text-darken-1" href><i
+                class="mdi-image-remove-red-eye"></i>
+                详情</a>
             </div>
-            <div class="result-btn waves-effect text-center">
-              <a class="orange-text text-darken-2" href ng-click="result(listItem.id)"><i class="material-icons">
-                &#xE80D;</i> 分享</a>
+            <div class="editEvent-btn waves-effect text-center">
+              <a class="green-text text-darken-2" href ng-click=""><i class="mdi-image-edit"></i> 编辑</a>
             </div>
-            <div class="delete-btn waves-effect text-center">
-              <a class="red-text text-darken-2" href ng-href="{{'#deleteActivityConfirm' + $index}}" modal><i class="material-icons">&#xE872;</i> 删除</a>
+            <div class="shareEvent-btn waves-effect text-center">
+              <a class="orange-text text-darken-2" href ng-click=""><i class="mdi-social-share"></i> 分享</a>
+            </div>
+            <div class="deleteEvent-btn waves-effect text-center">
+              <a class="red-text text-darken-2" href ng-href="{{'#deleteEventConfirm' + $index}}" modal><i
+                class="mdi-action-delete"></i> 删除</a>
             </div>
           </div>
-          <div id="{{'deleteActivityConfirm' + $index}}" class="modal">
+          <div id="{{'deleteEventConfirm' + $index}}" class="modal">
             <div class="modal-content">
               <h4>确认删除？</h4>
               <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>删除后不可恢复！</span></p>
             </div>
             <div class="modal-footer">
-              <a ng-click="deleteActivity()" href=""
-                 class="whiteColor modal-action modal-close waves-effect waves-green btn-flat red darken-1">确认删除</a>
+              <a ng-click="deleteEvent()" href=""
+                 class="white-text modal-action modal-close waves-effect waves-green btn-flat red darken-1">确认删除</a>
+              <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12" id="partakedEvent">
+    <div class="row">
+      <div ng-show="!partakedEventItems.length" class="text-center">
+        <p class="noticeText">还没有参加竞赛哦 ╮(╯▽╰)╭</p>
+      </div>
+      <div class="col s12 m6 l4" ng-repeat="partakedEventItem in partakedEventItems">
+        <div class="card hoverable">
+          <div class="card-content item-list activityInfo">
+            <span class="card-title green-text text-darken-1 flow-text" ng-bind="partakedEventItem.name"></span>
+            <br>
+            <span class="addText" ng-bind="partakedEventItem.authorName"></span>
+            <span class="addText" ng-bind="partakedEventItem.created | date : format"></span>
+            <hr>
+            <p>报名开始：<span ng-bind="partakedEventItem.started | date : unFormat"></span></p>
+            <p>报名结束：<span ng-bind="partakedEventItem.ended | date : unFormat"></span></p>
+          </div>
+          <div class="card-action btn-area">
+            <div class="edit-btn waves-effect text-center">
+              <a ui-sref="eventDetail({id: partakedEventItem.id, type: 'guest'})" class="blue-text text-darken-1" href><i
+                class="mdi-image-remove-red-eye"></i>
+                详情</a>
+            </div>
+            <div class="result-btn waves-effect text-center">
+              <a class="orange-text text-darken-2" href ng-click=""><i class="mdi-social-share"></i> 分享</a>
+            </div>
+            <div class="delete-btn waves-effect text-center">
+              <a class="red-text text-darken-2" href ng-href="{{'#quitEventConfirm' + $index}}" modal><i
+                class="mdi-action-delete"></i> 退出</a>
+            </div>
+          </div>
+          <div id="{{'quitEventConfirm' + $index}}" class="modal">
+            <div class="modal-content">
+              <h4>确认删除？</h4>
+              <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>删除后不可恢复！</span></p>
+            </div>
+            <div class="modal-footer">
+              <a ng-click="quitEvent()" href=""
+                 class="white-text modal-action modal-close waves-effect waves-green btn-flat red darken-1">确认删除</a>
               <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
             </div>
           </div>

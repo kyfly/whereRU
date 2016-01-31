@@ -43,11 +43,5 @@
     }
   },
   "acls": [],
-  "methods": {},
-  "scope": {
-    "where": {
-      "hidden": false,
-      "deleted": false
-    }
-  }
+  "methods": {}
 }

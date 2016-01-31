@@ -62,7 +62,6 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
   $scope.today = '今天';
   $scope.clear = '清除';
   $scope.close = '确定';
-  $scope.deadline = {};
 
   var tabSelect = ['mainInfo', 'copywriter', 'complete'];
   $scope.nextStep = function (step) {
