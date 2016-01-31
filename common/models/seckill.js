@@ -19,7 +19,7 @@ module.exports = function(Seckill) {
           var total = seckill.total;
           var result = total - count;
           cb(null,result);
-        });
+  });
       } else {
         var result = [];
         seckill.seckillItems(function (err, items) {

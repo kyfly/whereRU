@@ -7,22 +7,27 @@
   },
   "properties": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "logoUrl": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "type": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "hidden": {
-      "type": "boolean"
+      "type": "boolean",
+      "required": true
     },
     "videoUrl": {
       "type": "string"
     },
     "desc": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "school": {
       "type": "string"
@@ -41,7 +46,8 @@
       "type": "string"
     },
     "status": {
-      "type": "number"
+      "type": "number",
+      "required": true
     }
   },
   "validations": [],
@@ -164,11 +170,5 @@
       "property": "__destroyById__departments"
     }
   ],
-  "methods": {},
-  "scope": {
-    "where": {
-      "hidden": false,
-      "deleted": false
-    }
-  }
+  "methods": {}
 }

@@ -8,22 +8,27 @@
   },
   "properties": {
     "phone": {
-      "type": "number"
+      "type": "number",
+      "required": true
     },
     "school": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "academy": {
       "type": "string"
     },
     "sex": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "headImgUrl": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "studentId": {
       "type": "number"
@@ -38,7 +43,7 @@
   "validations": [],
   "relations": {
     "data": {
-      "type": "hasOne",
+      "type": "embedsOne",
       "model": "UserData",
       "foreignKey": "userId"
     },
@@ -134,6 +139,12 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "getMyTeams"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getInfo"
     },
     {
       "principalType": "ROLE",

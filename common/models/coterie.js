@@ -15,6 +15,13 @@ function articleFn(article, userId, a) {
 	return defer.promise;
 }
 module.exports = function(Coterie) {
+	/**
+	 * 获取一个圈子内文章列表
+	 * @param  {[type]} ctx   [description]
+	 * @param  {[type]} ins   [description]
+	 * @param  {[type]} next) {		var       date [description]
+	 * @return {object}       文章列表，每个文章都带有评论数量，点赞量，以及当前用户是否点赞
+	 */
 	Coterie.beforeRemote('prototype.__get__articles', function (ctx, ins, next) {
 		var date = ctx.req.query.last;
 		var where = {};
@@ -28,6 +35,7 @@ module.exports = function(Coterie) {
 			limit: 20
 		}, function (err, articleInstances) {
 			var articles = [];
+			//TODO 请在这里检查错误
 			articleInstances.forEach(function (article) {
 				var a = article.toJSON();
 				a.commentCount = a.comments.length;
@@ -35,7 +43,7 @@ module.exports = function(Coterie) {
 				a.likeUser = undefined;
 				a.comments = undefined;
 				if (ctx.req.accessToken) {
-					articles.push(articleFn(article, ctx.req.accessToken.userId, a)); 
+					articles.push(articleFn(article, ctx.req.accessToken.userId, a));
 				} else {
 					a.islike = false;
 					articles.push(a);

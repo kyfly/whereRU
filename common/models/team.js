@@ -1,3 +1,4 @@
+var promise = require(__dirname + '/../../modules/model-promise.js');
 module.exports = function(Team) {
 	Team.remoteMethod('search', {
 		accepts: {
@@ -38,42 +39,39 @@ module.exports = function(Team) {
         if(err) return cb(err);
         cb(null,teams);
     });
-};
-// 	Team.afterRemote('prototype.__link__joinRaces', function (ctx, ins, next) {
-// 		 ins.c = 'aaa';
-// 		 ins.save(function (err, r) {
-// console.log(err, r);
-// 		 });
-// 		 next();
-// 	});
+	};
+	/**
+	 * 创建活动时，保存部分团队信息到活动信息中
+	 * @param  {[type]} ctx   [description]
+	 * @param  {[type]} ins   [description]
+	 * @param  {[type]} next) {		ctx.req.body.school [description]
+	 * @return {[type]}       [description]
+	 */
 	Team.beforeRemote('prototype.__create__activities', function (ctx, ins, next) {
-		var active = ctx.req.body.active;
-		var type = ctx.req.body.actType;
 		ctx.req.body.school = ctx.instance.school;
-		ctx.req.body.active = undefined;
-		ctx.req.body.actType = undefined;
-		ctx.instance.activities.create(ctx.req.body, function (err, act) {
-			if (type === 'form') {
-				act.forms.create(active, function (err, forms) {
-					console.log(err, forms);
-				});
-			}
-			else if (type === 'vote') {
-				act.votes.create(active, function (err, votes) {
-					console.log(err, votes);
-				});
-			} else if (type === 'seckill') {
-				act.seckills.create(active, function (err, seckills) {
-					console.log(err, seckills);
-				});
-			}
-		});
-		ctx.res.send('success');
-	});
-	Team.beforeRemote('prototype.__create__races', function (ctx, ins, next) {
-		ctx.req.body.school = ctx.instance.school;
+		ctx.req.body.authorName = ctx.instance.name;
+		ctx.req.body.authorId = ctx.instance.id;
+		ctx.req.body.created = new Date();
 		next();
 	});
+	/**
+	 * 竞赛创建前保存团队信息到竞赛信息
+	 * @param  {[type]} ctx   [description]
+	 * @param  {[type]} ins   [description]
+	 * @param  {[type]} next) {		ctx.req.body.school [description]
+	 * @return {[type]}       [description]
+	 */
+	Team.beforeRemote('prototype.__create__races', function (ctx, ins, next) {
+		ctx.req.body.school = ctx.instance.school;
+		ctx.req.body.authorName = ctx.instance.name;
+		ctx.req.body.authorId = ctx.instance.id;
+		ctx.req.body.created = new Date();
+		next();
+	});
+	/**
+	 * 校园活动列表接口
+	 * @type {Array}
+	 */
 	Team.remoteMethod('getMySchoolTeams', {
 		accepts: [{
 			arg: 'school', type: 'string',
@@ -85,9 +83,16 @@ module.exports = function(Team) {
 		},
 		http: {path: '/mySchoolTeams', verb: 'get'}
 	});
+	/**
+	 * 校园活动列表
+	 * @param  {[type]}   school [description]
+	 * @param  {[type]}   last   [description]
+	 * @param  {Function} cb     [description]
+	 * @return {[type]}          [description]
+	 */
 	Team.getMySchoolTeams = function (school,last,cb){
     Team.find({
-      where:{school:school,created:{lt:last}},
+      where:{school:school,created:{lt:last},hidden:false,deleted:new Date("1970-01-01T00:00:00.000Z")},
       limit:20,
       order:"id desc",
       fields:['id','userId','name','logoUrl','desc','status']
@@ -97,11 +102,70 @@ module.exports = function(Team) {
     });
   };
 	Team.remoteMethod('getActivitiesData', {
+		accepts: {
+			arg: 'id', type: 'string'
+		},
 		returns: {
 			arg: 'activities', type: 'array'
 		},
 		http: {path: '/:id/activitiesData', verb: 'get'}
 	});
-	Team.getActivitiesData = function (){};
+	Team.getActivitiesData = function (id, cb){
+		var activityFn = [];
+		var activitiesFn = [];
+		Team.findById(id, function (err, team) {
+			team.activities({}, function (err, activities) {
+				activities.forEach(function (activity) {
+					var actType = activity.actType;
+					var actModel = actType + 's';
+					var actResult = actType + 'Results';
+					console.log(activity[actModel][actResult])
+					['app', 'wechat', 'pc', 'QQ', 'else'].forEach(function (from) {
+						activityFn.push(promise(activity.readers, 'count', {query: {form: from}}));
+						if (actType === 'form') {
+							activityFn.push(promise(activity.forms.formResults, 'count', {}));
+						}
+						
+						promise.all(activityFn).then(function (data) {
+							console.log(data);
+						})
+					})
+				});
+			})
+		})
+	};
 	//Team.beforeRemote('prototype.__create__members',function () {});
+
+	Team.getActivitiesData = function (){};
+	Team.beforeRemote('prototype.__create__members',function (ctx,ins,next) {
+    var userId = ctx.req.accessToken.userId;
+    ctx.instance.members.count({
+      userId : userId
+    },function(err,result){
+      if(err) return next(err);
+      if (result>0){
+        return ctx.res.send({
+          error:{
+            "status":1002,
+            "message":"用户已加入该团队。"
+          }
+        });
+      }else{
+        Team.app.models.user.findById(userId,function(err,user){
+          if(err) return next(err);
+          ctx.req.body.userId = userId;
+          ctx.req.body.school = user.school;
+          ctx.req.body.phone = user.phone;
+          ctx.req.body.name = user.name;
+          ctx.req.body.created = user.created;
+          ctx.req.body.academy = user.academy;
+          ctx.req.body.verified = false;
+          next();
+        });
+      }
+    });
+  });
+  Team.afterRemote('prototype.__create__members',function (ctx,ins,next) {
+    ctx.res.send({"status":200});
+  });
 };
