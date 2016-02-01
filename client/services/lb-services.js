@@ -29,7 +29,27 @@
   var authHeader = 'authorization';
 
   var module = angular.module("lbServices", ['ngResource']);
-
+module.factory(
+  'School', 
+  ['LoopBackResource', 'LoopBackAuth', '$injector',
+  function(Resource, LoopBackAuth, $injector){
+    var R = Resource(
+      urlBase + '/Schools/:id', 
+      { 'id': '@id' },
+      {
+        "find": {
+          url: urlBase + '/Schools',
+          params: {
+            filter: {
+              fields: ['name']
+            }
+          },
+          method: 'GET',
+          isArray: true
+        }
+      });
+    return R;
+}])
 module.factory(
   'User',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
@@ -38,6 +58,22 @@ module.factory(
     urlBase + '/WUsers/:id',
     { 'id': '@id' },
     {
+      /**
+       * 圈子关注量
+       * 使用场景：显示圈子关注量
+       */
+      "prototype_count_fans": {
+        url: urlBase + '/Coteries/:id/fans/count',
+        method: 'GET'
+      },
+      /**
+       * 关注圈子
+       * 使用场景：pc端点击关注
+       */
+      "prototype_link_coteries": {
+        url: urlBase + '/WUsers/:id/coteries/rel/:fk',
+        method: 'PUT'
+      },
       /**
        *   所有圈子显示
        *   pc所有圈子的显示
@@ -656,8 +692,8 @@ module.factory(
   .config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('LoopBackAuthRequestInterceptor');
   }])
-  .factory('LoopBackAuthRequestInterceptor', [ '$q', 'LoopBackAuth',
-    function($q, LoopBackAuth) {
+  .factory('LoopBackAuthRequestInterceptor', [ '$q', '$rootScope', 'LoopBackAuth',
+    function($q, $rootScope, LoopBackAuth) {
       return {
         'request': function(config) {
 
@@ -681,7 +717,24 @@ module.factory(
             return $q.reject(res);
           }
           return config || $q.when(config);
-        }
+        },
+        'responseError': function(rejection) {
+          switch(rejection.status) {
+            case 401:
+              $rootScope.$broadcast('auth:loginRequired');
+              break;
+            // case 403:
+            //   $rootScope.$broadcast('auth:forbidden');
+            //   break;
+            // case 404:
+            //   $rootScope.$broadcast('page:notFound');
+            //   break;
+            // case 500:
+            //   $rootScope.$broadcast('server:error');
+            //   break;
+          }
+          return $q.reject(rejection);
+        },
       };
     }])
 .provider('LoopBackResource', function LoopBackResourceProvider() {

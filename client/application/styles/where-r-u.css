@@ -34,6 +34,15 @@
 	max-height: 700px;
 	background-color: #eee;
 }
+.login {
+  position: fixed;
+  top: 4rem;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 3;
+  color:#fff;
+  display: none;
+}
 .tab-active{
   position: absolute;
   bottom: 0;
@@ -117,7 +126,9 @@
   display: block;
   overflow: scroll;
   height: 100%;
-
+}
+.activity-detail #about .collection-item p{
+  padding-top: 10px; 
 }
 #search{
   margin: 0;

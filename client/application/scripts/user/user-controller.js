@@ -1,12 +1,36 @@
-app.controller('LoginController', ['User', '$scope', function (User, $scope) {
+app.controller('LoginController', ['User', '$scope', '$rootScope', function (User, $scope, $rootScope) {
+  $scope.user = {};
+  $scope.cancelLogin = function () {
+    window.document.getElementById('login').style.display = "none";
+  };
   $scope.login = function () {
     User.login($scope.user, function (data) {
-      localStorage.userInfo=JSON.stringify(data);
-      console.log(localStorage.userInfo);
-      console.log(JSON.parse(localStorage.userInfo).user.school);
+      $rootScope.$currentUser = data.user;
+      $rootScope.username = data.user.name;
+      localStorage.$LoopBack$currentUserToken = JSON.stringify(data);
+    });
+  };
+}]);
+
+app.controller('RegisterController', ['User', 'School', '$scope', '$location', '$rootScope', function (User, School, $scope, $location, $rootScope) {
+  $scope.user = {};
+  School.find(function (schools) {
+    $scope.schools = schools;
+  });
+  $scope.register = function () {
+    User.create($scope.user, function (data) {
+      $rootScope.$currentUser = data.user;
+      $rootScope.username = data.user.name;
+      localStorage.$LoopBack$currentUserToken = JSON.stringify(data);
+      Materialize.toast('恭喜你，注册成功', 4000);
+      $location.path('/w/activities').replace();
+    }, function (err) {
+      if (err.status === 1000)
+        Materialize.toast('该手机号已经被注册', 4000);
     });
   }
 }]);
+
 app.controller('ConfirmSchoolController', ['User', '$scope', function (User, $scope) {
   $scope.confirm = function () {
 
@@ -15,14 +39,10 @@ app.controller('ConfirmSchoolController', ['User', '$scope', function (User, $sc
     });
   }
 }]);
-app.controller('RegisterController', ['User', function () {
 
-}]);
-app.controller('TestController', ['User', function () {
-}]);
 app.controller('MSController', ['User', '$stateParams', function (User, $stateParams) {
-  localStorage.$LoopBack$currentTeamId = $stateParams.id;
-  location.href = '/management_system'
+  window.localStorage.$LoopBack$currentTeamId = $stateParams.id;
+  window.location.href = '/management_system'
 }]);
 app.controller('ARTController', ['$scope', function(){
 

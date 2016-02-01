@@ -34,8 +34,6 @@
         <a class="hide-on-med-only hide-on-large-only" ng-href="/w/activities/{{activityItem.id}}">
           <h4 ng-bind="activityItem.title"></h4>
         </a>
-
-        <!--我觉得这里不应该加-->
         <a class="hide-on-small-only" ng-click="changeCurrentActivity()">
           <h4 ng-bind="activityItem.title"></h4>
         </a>
@@ -120,5 +118,9 @@
       </div>
     </div>
   </div>
+=======
+  <div ng-include="'/application/views/activity/detail.html'" class=" hide-on-small-only">
+>>>>>>> 4fc77d39f683b83138838a84a4bdf9c00209212b
 </div>
+
 

@@ -193,4 +193,7 @@ module.exports = function(Team) {
   Team.afterRemote('prototype.__create__members',function (ctx,ins,next) {
     ctx.res.send({"status":200});
   });
+  Team.afterRemote("prototype.__get__partakedRaces", function (ctx, ins, next) {
+
+  })
 };
