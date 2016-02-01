@@ -7,10 +7,12 @@
   },
   "properties": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "imgUrl": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "authorName": {
       "type": "string"
@@ -20,16 +22,19 @@
     },
 
     "explainUrl": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "started": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "school": {
       "type": "string"
     },
     "ended": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "created": {
       "type": "date"

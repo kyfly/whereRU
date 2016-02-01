@@ -11,7 +11,8 @@
       "default": 1
     },
     "max": {
-      "type": "number"
+      "type": "number",
+      "required": true
     },
     "cycle": {
       "type": "number",

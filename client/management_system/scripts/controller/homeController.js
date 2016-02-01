@@ -20,9 +20,9 @@ function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
         $scope.redirect(0);
       } else if ($window.location.pathname === '/MS/member') {
         $scope.redirect(1);
-      } else if ($window.location.pathname === '/MS/event/list' || $window.location.pathname.substr(0,14) === '/MS/event/edit') {
+      } else if ($window.location.pathname === '/MS/event/list' || $window.location.pathname.substr(0, 14) === '/MS/event/edit' || $window.location.pathname.substr(0, 16) === '/MS/event/detail') {
         $scope.redirect(2);
-      } else if ($window.location.pathname === '/MS/activity/list' || $window.location.pathname.substr(0,17) === '/MS/activity/edit') {
+      } else if ($window.location.pathname === '/MS/activity/list' || $window.location.pathname.substr(0, 17) === '/MS/activity/edit') {
         $scope.redirect(3);
       } else if ($window.location.pathname === '/MS/form/list') {
         $scope.redirect(4);

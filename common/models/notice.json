@@ -7,7 +7,8 @@
   },
   "properties": {
     "content": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "fileName": {
       "type": "string"
@@ -42,11 +43,5 @@
     }
   },
   "acls": [],
-  "methods": {},
-  "scope": {
-    "where": {
-      "hidden": false,
-      "deleted": false
-    }
-  }
+  "methods": {}
 }
