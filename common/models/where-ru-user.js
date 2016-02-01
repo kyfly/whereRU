@@ -430,7 +430,10 @@ module.exports = function(User) {
    */
   User.beforeRemote('prototype.__findById__formResults', function () {
     //TODO  查询某个活动结果，可以通过活动结果获取表单信息，
-  })
+  });
+  User.beforeRemote('prototype.__get__formResults', function () {
+    //User.app.FormResult.
+  });
   /**
    * 用户获取参与投票活动所投项
    * @param  {[type]} ) {             } [description]
