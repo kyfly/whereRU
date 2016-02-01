@@ -1,14 +1,6 @@
-app.controller('ActivityListCtrl', ['$scope', 'Team', function ($scope, Team) {
-  $scope.allChosen = true;
-
-  $scope.showSingleType = function (type) {
-    if (type === 'all') {
-      $scope.allChosen = true;
-    } else {
-      $scope.allChosen = false;
-      $scope.chosenType = type;
-    }
-  };
+app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
+  $rootScope.logoHide = false;
+  $scope.chosenType = 'common';
 
   $scope.unFormat = "yyyy-MM-dd HH:mm";
   $scope.format = "yyyy-MM-dd";
