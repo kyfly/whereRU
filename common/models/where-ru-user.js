@@ -420,16 +420,44 @@ module.exports = function(User) {
    * @param  {[type]} ) {             } [description]
    * @return {[type]}   [description]
    */
-  User.beforeRemote('prototype.__findById__formResults', function () {
-    //TODO  查询某个活动结果，可以通过活动结果获取表单信息，
-  })
+  User.beforeRemote('prototype.__findById__formResults', function (ctx,ins,next) {
+    var userId = ctx.req.params.id;
+    var formResultsId = ctx.req.params.fk;
+    var result=[];
+    User.app.models.FormResult.findById(formResultsId,{fields:['verifyId','created','id','formId','userId','result']},function(err,formResults){
+      User.app.models.Form.findById(formResults.formId.toJSON(),function(err,form){
+        for(var i =0;i<form._formItems.length;i++) {
+          var record = {
+            q: form._formItems[i].name,
+            w: formResults.result[i].name,
+            url:formResults.result[i].url
+          };
+          result.push(record);
+        }
+        formResults.result = result;
+        ctx.res.send(formResults);
+      });
+    });
+  });
   /**
    * 用户获取参与投票活动所投项
    * @param  {[type]} ) {             } [description]
    * @return {[type]}   [description]
    */
-  User.beforeRemote('prototype.__findById__voteResults', function () {
-    //TODO  查询某个活动结果，可以通过活动结果获取投票信息，
+  User.beforeRemote('prototype.__findById__voteResults', function (ctx,ins,next) {
+    var userId = ctx.req.params.id;
+    var voteResultsId = ctx.req.params.fk;
+    User.app.models.VoteResult.findById(voteResultsId,{fields:['verifyId','created','id','voteId','userId','result']},function(err,voteResults){
+      //User.app.models.Vote.findById(voteResults.voteId.toJSON(),function(err,vote){
+        Vote.voteItems(function(results){
+          for(var i =0;i<results.length;i++) {
+            results[i].choice = voteResults.result[i] ? true : false;
+          }
+          voteResults.result = result;
+          ctx.res.send(voteResults);
+        });
+      //});
+    });
   })
   /**
    * 用户获取参与抢票活动所得抢票结果

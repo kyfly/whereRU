@@ -91,11 +91,11 @@ module.exports = function(Team) {
 	 * @return {[type]}          [description]
 	 */
 	Team.getMySchoolTeams = function (school,last,cb){
+    //, hidden: false, deleted: false
     Team.find({
-      where:{school:school,created:{lt:last},hidden:false,deleted:new Date("1970-01-01T00:00:00.000Z")},
+      where:{ school:school, created:{lt: last }},
       limit:20,
-      order:"id desc",
-      fields:['id','userId','name','logoUrl','desc','status']
+      order:"id desc"
     },function(err,teams){
       if(err) return cb(err);
       cb(null,teams);
@@ -193,4 +193,7 @@ module.exports = function(Team) {
   Team.afterRemote('prototype.__create__members',function (ctx,ins,next) {
     ctx.res.send({"status":200});
   });
+  Team.afterRemote("prototype.__get__partakedRaces", function (ctx, ins, next) {
+
+  })
 };
