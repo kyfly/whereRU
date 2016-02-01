@@ -166,7 +166,7 @@ module.exports = function(User) {
       where: {or: query},
       fields: ['id', 'name', 'sign', 'headImgUrl']
     }, function (err, User) {
-      if (err) 
+      if (err)
         return cb({"status": 1002, "message": "用户搜索失败"});
       cb(null, User);
     });
@@ -230,8 +230,8 @@ module.exports = function(User) {
    * 获取当前登录用户信息，该接口待修改
    * @param  {[type]} ctx      [description]
    * @param  {[type]} ins      [description]
-   * @param  {[type]} 
-   * @param  {[type]} 
+   * @param  {[type]}
+   * @param  {[type]}
    * @return {[type]}          [description]
    */
 	User.beforeRemote('getInfo', function (ctx, ins, next) {
@@ -244,7 +244,7 @@ module.exports = function(User) {
 			} else {
 				ctx.res.send(data);
 			}
-			
+
 		});
 	})
   /**
@@ -286,10 +286,10 @@ module.exports = function(User) {
         if (user.team && user.team.partakedRaces) {
           races.push.apply(races, user.team.partakedRaces)
         }
-      })
-      cb(null, races)
+      });
+      cb(null, races);
     });
-  }
+  };
   /**
    * 获取用户活动历史接口
    * @type {Object}
@@ -349,7 +349,15 @@ module.exports = function(User) {
     }, function (err, histories) {
       if (err)  throw err;
     });
-    next();
+    ctx.res.send(result);
+  });
+  User.getActivitiesHistories = function (id,cb) {
+    User.app.models.FormResult.count({userId:id},function(err,count){});
+  };
+  User.beforeRemote('prototype.__updateAttributes', function () {
+  });
+  User.afterRemote('prototype.__updateAttributes', function () {
+    //next();
   });
   /**
    * 用户信息更新处理
@@ -422,7 +430,12 @@ module.exports = function(User) {
    */
   User.beforeRemote('prototype.__findById__formResults', function () {
     //TODO  查询某个活动结果，可以通过活动结果获取表单信息，
-  })
+  });
+  User.beforeRemote('prototype.__get__formResults', function () {
+    User.app.FormResult.find({
+      
+    })
+  });
   /**
    * 用户获取参与投票活动所投项
    * @param  {[type]} ) {             } [description]
@@ -462,7 +475,7 @@ module.exports = function(User) {
     });
     next();
   });
- 
+
   /**
    * 处理用户抢票信息，检查用户是否参与过抢票并得票参与过且得票直接提示并退出，
    * 参与过但是没得票则可继续抢票，根据用户选择的抢票项，查看对应的票项是否有

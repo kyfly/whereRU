@@ -266,9 +266,9 @@ module.factory(
           url: urlBase + '/Teams/:id/activities',
           method: 'POST'
         },
-        "prototype_destroyById_activities": {
+        "prototype_updateById_activities": {
           url: urlBase + '/Teams/:id/activities/:fk',
-          method: 'DELETE'
+          method: 'PUT'
         },
         /**
          * 描述：申请加入团队，已登录用户
