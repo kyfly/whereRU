@@ -91,11 +91,11 @@ module.exports = function(Team) {
 	 * @return {[type]}          [description]
 	 */
 	Team.getMySchoolTeams = function (school,last,cb){
+    //, hidden: false, deleted: false
     Team.find({
-      where:{school:school,created:{lt:last},hidden:false,deleted:undefined},
+      where:{ school:school, created:{lt: last }},
       limit:20,
-      order:"id desc",
-      fields:['id','userId','name','logoUrl','desc','status']
+      order:"id desc"
     },function(err,teams){
       if(err) return cb(err);
       cb(null,teams);

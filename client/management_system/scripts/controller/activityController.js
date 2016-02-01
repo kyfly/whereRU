@@ -27,18 +27,22 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', function ($scope, Team) {
   $scope.deleteActivity = function () {
     var thisElement = this;
     console.log(thisElement);
-    Team.prototype_destroyById_activities({
-      id: localStorage.$LoopBack$currentTeamId,
-      fk: thisElement.activityItem.id
-    }, function () {
-      Materialize.toast('删除成功！', 2000);
-      var id = thisElement.activityItem.id;
-      for (var x in $scope.activityItems) if ($scope.activityItems[x].id === id) {
-        $scope.activityItems.splice(x, 1);
+    Team.prototype_updateById_activities({
+        id: localStorage.$LoopBack$currentTeamId,
+        fk: thisElement.activityItem.id
+      }, {deleted: true}, function () {
+        Materialize.toast('删除成功！', 2000);
+        var id = thisElement.activityItem.id;
+        for (var x in $scope.activityItems) if ($scope.activityItems[x].id === id) {
+          $scope.activityItems.splice(x, 1);
+        }
       }
-    }, function () {
-      Materialize.toast('删除失败！', 2000);
-    });
+      ,
+      function () {
+        Materialize.toast('删除失败！', 2000);
+      }
+    )
+    ;
   }
 
 }]);

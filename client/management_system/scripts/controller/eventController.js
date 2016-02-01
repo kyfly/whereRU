@@ -19,11 +19,11 @@ app.controller('EventListCtrl', ['$scope', 'Team', function ($scope, Team) {
       order: 'created DESC'
     }
   }, function (res) {
-    var response = res;
-    for (var x in response) if (response[x].authorId === localStorage.$LoopBack$currentTeamId) {
-      response.splice(x, 1);
+    $scope.partakedEventItems = res;
+    $scope.deletedLength = 0;
+    for (var x in $scope.partakedEventItems) if ($scope.partakedEventItems[x].deleted === true) {
+      $scope.deletedLength ++;
     }
-    $scope.partakedEventItems = response;
   }, function () {
     Materialize.toast('获取参与竞赛列表失败！', 2000);
   });
@@ -35,14 +35,31 @@ app.controller('EventListCtrl', ['$scope', 'Team', function ($scope, Team) {
   $scope.deleteEvent = function () {
     var thisElement = this;
 
-    Team.prototype_destroyById_races({
+    Team.prototype_updateById_races({
       id: localStorage.$LoopBack$currentTeamId,
       fk: thisElement.eventItem.id
-    }, function () {
+    }, {deleted: true}, function () {
       Materialize.toast('删除成功！', 2000);
       var id = thisElement.eventItem.id;
       for (var x in $scope.eventItems) if ($scope.eventItems[x].id === id) {
         $scope.eventItems.splice(x, 1);
+      }
+    }, function () {
+      Materialize.toast('删除失败！', 2000);
+    });
+  };
+
+  $scope.quitEvent = function () {
+    var thisElement = this;
+
+    Team.prototype_unlink_partakedRaces({
+      id: localStorage.$LoopBack$currentTeamId,
+      fk: thisElement.partakedEventItem.id
+    }, {deleted: true}, function () {
+      Materialize.toast('删除成功！', 2000);
+      var id = thisElement.partakedEventItem.id;
+      for (var x in $scope.partakedEventItems) if ($scope.partakedEventItems[x].id === id) {
+        $scope.partakedEventItems.splice(x, 1);
       }
     }, function () {
       Materialize.toast('删除失败！', 2000);
@@ -239,6 +256,23 @@ app.controller('EventDetailCtrl', ['$scope', 'Race', '$http', '$stateParams', fu
     $scope.raceTeams = res;
   });
 
+  $scope.deleteRaceTeam = function () {
+    var thisElement = this;
+
+    Race.prototype_unlink_raceTeams({
+      id: $stateParams.id,
+      fk: thisElement.raceTeam.id
+    }, function () {
+      Materialize.toast('删除参赛团队成功！', 2000);
+      var id = thisElement.raceTeam.id;
+      for (var x in $scope.raceTeams) if ($scope.raceTeams[x].id === id) {
+        $scope.raceTeams.splice(x, 1);
+      }
+    }, function () {
+      Materialize.toast('删除参赛团队失败！', 2000);
+    });
+  };
+
   Race.prototype_get_materials({
     id: $stateParams.id
   }, function (res) {
@@ -254,7 +288,7 @@ app.controller('EventDetailCtrl', ['$scope', 'Race', '$http', '$stateParams', fu
       id: $stateParams.id,
       fk: thisElement.materialSingle.id
     }, function () {
-      Materialize.toast('删除成功！', 2000);
+      Materialize.toast('删除资料成功！', 2000);
       var id = thisElement.materialSingle.id;
       for (var x in $scope.materialList) if ($scope.materialList[x].id === id) {
         $scope.materialList.splice(x, 1);

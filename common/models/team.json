@@ -20,7 +20,7 @@
     },
     "hidden": {
       "type": "boolean",
-      "required": true
+      "default": false
     },
     "videoUrl": {
       "type": "string"
@@ -36,11 +36,11 @@
       "type": "date"
     },
     "updated": {
-      "type": "boolean",
-      "default": false
+      "type": "date"
     },
     "deleted": {
-      "type": "date"
+      "type": "boolean",
+      "default": false
     },
     "chatId": {
       "type": "string"
