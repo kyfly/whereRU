@@ -1,3 +1,4 @@
-app.controller('HelpCtrl', ['$scope', function ($scope) {
+app.controller('HelpCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+  $rootScope.logoHide = false;
 
 }]);

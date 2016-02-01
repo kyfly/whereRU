@@ -1,4 +1,5 @@
-app.controller('VoteListCtrl', ['$scope', function ($scope) {
+app.controller('VoteListCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+  $rootScope.logoHide = false;
 
 }]);
 
