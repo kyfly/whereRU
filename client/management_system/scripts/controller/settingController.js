@@ -1,3 +1,4 @@
-app.controller('SettingCtrl', ['$scope', function ($scope) {
+app.controller('SettingCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+  $rootScope.logoHide = false;
 
 }]);

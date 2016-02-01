@@ -503,7 +503,7 @@ module.factory(
   'Form',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
-    var R = resource(
+    var R = Resource(
       urlBase + '/Forms/:id',
       { 'id': "@id"},
       {
@@ -514,6 +514,13 @@ module.factory(
         "prototype_get_formResults": {
           url: urlBase + '/Forms/:id/formResults',
           method: 'GET'
+        },
+        /**
+         * 描述：上传表单
+         */
+        "create": {
+          url: urlBase + '/Forms',
+          method: 'POST'
         }
       }
     );
@@ -523,7 +530,7 @@ module.factory(
   'Vote',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
-    var R = resource(
+    var R = Resource(
       urlBase + '/Votes/:id',
       { 'id': "@id"},
       {

@@ -1,4 +1,5 @@
-app.controller('EventListCtrl', ['$scope', 'Team', function ($scope, Team) {
+app.controller('EventListCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
+  $rootScope.logoHide = false;
   $scope.unFormat = "yyyy-MM-dd HH:mm";
   $scope.format = "yyyy-MM-dd";
 
