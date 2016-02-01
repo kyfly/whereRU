@@ -240,6 +240,13 @@ module.factory(
           isArray: true
         },
         /**
+         * 描述：退出竞赛（不是删除竞赛）
+         */
+        "prototype_unlink_partakedRaces": {
+          url: urlBase + '/Teams/:id/partakedRaces/rel/:fk',
+          method: 'DELETE'
+        },
+        /**
          * 描述：用户所在学校团队列表，所有用户
          * 使用场景：校园团队列表
          */
@@ -357,9 +364,9 @@ module.factory(
           url: urlBase + '/Teams/:id/races',
           method: 'POST'
         },
-        "prototype_destroyById_races": {
+        "prototype_updateById_races": {
           url: urlBase + '/Teams/:id/races/:fk',
-          method: 'DELETE'
+          method: 'PUT'
         }
       }
     );
@@ -550,6 +557,13 @@ module.factory(
           url: urlBase + '/Races/:id/raceTeams?filter[fields][name]=true&filter[fields][logoUrl]=true&filter[fields][id]=true',
           method: 'GET',
           isArray: true
+        },
+        /**
+         * 描述：退出某个竞赛
+         */
+        "prototype_unlink_raceTeams": {
+          url: urlBase + '/Races/:id/raceTeams/rel/:fk',
+          method: 'DELETE'
         },
         /**
          * 获取资料
