@@ -166,7 +166,7 @@ module.exports = function(User) {
       where: {or: query},
       fields: ['id', 'name', 'sign', 'headImgUrl']
     }, function (err, User) {
-      if (err) 
+      if (err)
         return cb({"status": 1002, "message": "用户搜索失败"});
       cb(null, User);
     });
@@ -230,8 +230,8 @@ module.exports = function(User) {
    * 获取当前登录用户信息，该接口待修改
    * @param  {[type]} ctx      [description]
    * @param  {[type]} ins      [description]
-   * @param  {[type]} 
-   * @param  {[type]} 
+   * @param  {[type]}
+   * @param  {[type]}
    * @return {[type]}          [description]
    */
 	User.beforeRemote('getInfo', function (ctx, ins, next) {
@@ -244,7 +244,7 @@ module.exports = function(User) {
 			} else {
 				ctx.res.send(data);
 			}
-			
+
 		});
 	})
   /**
@@ -279,15 +279,6 @@ module.exports = function(User) {
           }
         }
       }
-<<<<<<< HEAD
-    },function(err,members){
-      if(err) cb(err);
-      var races=[];
-      members.forEach(function(member){
-        races.push(member.team.race);
-      });
-      cb(null,races);
-=======
     }, function (err, users) {
       var races = [];
       users.forEach(function (user) {
@@ -295,11 +286,10 @@ module.exports = function(User) {
         if (user.team && user.team.partakedRaces) {
           races.push.apply(races, user.team.partakedRaces)
         }
-      })
-      cb(null, races)
->>>>>>> 0f549e06e3d381353283adde4ac74c1ddb58a62a
+      });
+      cb(null, races);
     });
-  }
+  };
   /**
    * 获取用户活动历史接口
    * @type {Object}
@@ -483,7 +473,7 @@ module.exports = function(User) {
     });
     next();
   });
- 
+
   /**
    * 处理用户抢票信息，检查用户是否参与过抢票并得票参与过且得票直接提示并退出，
    * 参与过但是没得票则可继续抢票，根据用户选择的抢票项，查看对应的票项是否有
