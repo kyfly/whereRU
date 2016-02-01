@@ -232,6 +232,14 @@ module.factory(
           method: 'PUT'
         },
         /**
+         * 描述：获取参加的竞赛
+         */
+        "prototype_get_partakedRaces": {
+          url: urlBase + '/Teams/:id/partakedRaces',
+          method: 'GET',
+          isArray: true
+        },
+        /**
          * 描述：用户所在学校团队列表，所有用户
          * 使用场景：校园团队列表
          */
@@ -348,6 +356,10 @@ module.factory(
         "prototype_create_races": {
           url: urlBase + '/Teams/:id/races',
           method: 'POST'
+        },
+        "prototype_destroyById_races": {
+          url: urlBase + '/Teams/:id/races/:fk',
+          method: 'DELETE'
         }
       }
     );
@@ -513,7 +525,22 @@ module.factory(
          */
         "prototype_get_notices": {
           url: urlBase + '/Races/:id/notices',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
+        },
+        /**
+         * 描述：新建通知
+         */
+        "prototype_create_notices": {
+          url: urlBase + '/Races/:id/notices',
+          method: 'POST'
+        },
+        /**
+         * 描述：删除某条通知(假删除，只是标记为已删除）
+         */
+        "prototype_updateById_notices": {
+          url: urlBase + '/Races/:id/notices/:fk',
+          method: 'PUT'
         },
         /**
          * 描述：获取参赛团队，所有用户
@@ -521,10 +548,38 @@ module.factory(
          */
         "prototype_get_raceTeams": {
           url: urlBase + '/Races/:id/raceTeams?filter[fields][name]=true&filter[fields][logoUrl]=true&filter[fields][id]=true',
-          method: 'GET'
+          method: 'GET',
+          isArray: true
+        },
+        /**
+         * 获取资料
+         */
+        "prototype_get_materials": {
+          url: urlBase + '/Races/:id/materials',
+          method: 'GET',
+          isArray: true
+        },
+        /**
+         * 更改资料
+         */
+        "prototype_updateById_materials": {
+          url: urlBase + '/Races/:id/materials/:fk',
+          method: 'PUT'
+        },
+        /**
+         * 删除某条资料
+         */
+        "prototype_destroyById_materials": {
+          url: urlBase + '/Races/:id/materials/:fk',
+          method: 'DELETE'
+        },
+        /**
+         * 创建资料
+         */
+        "prototype_create_materials": {
+          url: urlBase + '/Races/:id/materials',
+          method: 'POST'
         }
-
-
       }
     );
     return R;

@@ -99,12 +99,6 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "teamMember",
-      "permission": "ALLOW",
-      "property": "findById"
-    },
-    {
-      "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "getMySchoolTeams"
