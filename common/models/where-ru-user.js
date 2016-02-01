@@ -349,7 +349,6 @@ module.exports = function(User) {
     }, function (err, histories) {
       if (err)  throw err;
     });
-<<<<<<< HEAD
     ctx.res.send(result);
   });
   User.getActivitiesHistories = function (id,cb) {
@@ -358,9 +357,7 @@ module.exports = function(User) {
   User.beforeRemote('prototype.__updateAttributes', function () {
   });
   User.afterRemote('prototype.__updateAttributes', function () {
-=======
-    next();
->>>>>>> 0f549e06e3d381353283adde4ac74c1ddb58a62a
+    //next();
   });
   /**
    * 用户信息更新处理
