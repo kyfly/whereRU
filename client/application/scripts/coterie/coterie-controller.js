@@ -7,6 +7,7 @@ app.controller('CoteriesController', ['$scope', 'User', function ($scope, User) 
       }
     }, function (res) {
       $scope.existCoterieList = res;
+      $scope.contentName = $scope.existCoterieList[0].name;
       console.log(res);
     }, function () {
     }
@@ -27,8 +28,12 @@ app.controller('CoteriesController', ['$scope', 'User', function ($scope, User) 
   $scope.showExitConterie = true;
 
   $scope.showName = function () {
-    $scope.contentName = this.sideBarInfo.name;
-
+    if($scope.showExitConterie == true){
+      $scope.contentName = this.sideBarInfo.name;
+    }
+    if($scope.showAllConterie == true){
+      $scope.contentName = this.allCoterie.name;
+    }
   };
 
 
@@ -49,12 +54,12 @@ app.controller('CoterieDetailController', ['$scope', '$stateParams', 'User', fun
   //关注圈子
   $scope.showDetail = function () {
     thisElement = this;
-    console.log(thisElement)
+    //console.log(thisElement)
   };
 
 
   $scope.coterieConcern = function () {
-    console.log($scope.allCoteries);
+    //console.log($scope.allCoteries);
 
 
     User.prototype_link_coteries({

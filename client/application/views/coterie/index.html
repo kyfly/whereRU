@@ -30,7 +30,7 @@
         style="cursor:pointer">
       <a><i class="mdi-content-add"></i>是否发现更多？</a>
     </li>
-    <li ng-click="showDetail()" ng-repeat="allCoterie in allCoteries" id="{{allCoterie.id}}" class="collection-item bold withoutPadding ng-scope
+    <li ng-click="showDetail();showName()" ng-repeat="allCoterie in allCoteries" id="{{allCoterie.id}}" class="collection-item bold withoutPadding ng-scope
      coterieSideMargin coterieSideLi" ng-show="showAllConterie">
       <span class="coterieLeft"><img class="coterieLogo" ng-src="{{allCoterie.logoUrl}}"></span>
       <a class="waves-effect waves-teal" ui-sref="coteries.userMessage({id: allCoterie.id})">{{allCoterie.name}}</a>

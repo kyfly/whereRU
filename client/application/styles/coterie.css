@@ -111,5 +111,10 @@ body{
   padding-right: 20px;
   color: #ff8a65;
 }
+.coterieSecondaryContent{
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
 
 

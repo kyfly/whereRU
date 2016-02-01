@@ -5,12 +5,7 @@
   <div>
     <!--<span class="coterieHeaderRight" ng-bind="coterieConcernedNum.count"></span>-->
     <div class="coterieHeaderRight">
-      <!--<span data-toggle="tooltip" data-placement="bottom">-->
-        <!--&lt;!&ndash;<i class="mdi-toggle-star-outline coterieConcernStar" ng-click="coterieConcern()" >点击关注哦！</i>&ndash;&gt;-->
-        <!-- -->
-      <!--</span>-->
-
-
+        <i class="mdi-toggle-star-outline coterieConcernStar" ng-click="coterieConcern()" ng-show="showAllConterie" ></i>
       关注人数:<span ng-bind="coterieConcernedNum.count"></span>
     </div>
 
@@ -41,13 +36,19 @@
     </div>
     </p>
 
-    <a href="#!" class="secondary-content">
-      <i class="mdi-action-thumb-up coterieArticleIcons"></i>
-      <span ng-bind="coterieArticle.commentCount"></span>
-      <span class="coterieSpace"></span>
-      <i class="mdi-communication-chat coterieArticleIcons"></i>
-      <span ng-bind="coterieArticle.likeCount"></span>
-    </a>
+    <div class="coterieSecondaryContent">
+      <a href="#!" class="coterieSecondaryPart1">
+        <i class="mdi-action-thumb-up coterieArticleIcons"></i>
+        <span ng-bind="coterieArticle.commentCount"></span>
+      </a>
+        <span class="coterieSpace"></span>
+      <a href="#!" class="coterieSecondaryPart2">
+        <i class="mdi-communication-chat coterieArticleIcons"></i>
+        <span ng-bind="coterieArticle.likeCount"></span>
+      </a>
+
+
+    </div>
 
   </li>
   <li >
