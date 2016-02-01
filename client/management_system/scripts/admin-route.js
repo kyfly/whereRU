@@ -17,9 +17,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
       controller: 'EventListCtrl'
     })
     .state('eventEdit', {
-      url: '/MS/event/edit/:id',
+      url: '/MS/event/edit?:id',
       templateUrl: '/management_system/views/event/edit.html',
       controller: 'EventEditCtrl'
+    })
+    .state('eventDetail', {
+      url: '/MS/event/detail/:type/:id',
+      templateUrl: '/management_system/views/event/detail.html',
+      controller: 'EventDetailCtrl'
     })
     .state('activityList', {
       url: '/MS/activity/list',

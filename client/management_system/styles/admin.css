@@ -108,74 +108,16 @@ main {
   }
 }
 
-.addEvent {
-  margin-top: 17px;
-}
-
-.collapsible-body > .row {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.card-action > .activator > .material-icons {
-  margin-top: -5px;
-}
-
 .card-content > p {
   padding: 5px;
-}
-
-#eventMain {
-  padding: 15px;
-}
-
-#contentView {
-  padding: 15px;
-}
-
-.addFile {
-  margin-left: 45px;
-}
-
-.addGetInfo {
-  margin-left: 45px;
 }
 
 .text-center {
   text-align: center;
 }
 
-.newNoticeContent {
-  margin-left: 45px;
-}
-
-.collection-item {
-  padding: 5px !important;
-}
-
-.noticeSingle {
-  cursor: default !important;
-}
-
-.collection-item > span {
-  margin: 15px !important;
-}
-
-.collection-item > p {
-  color: #000000 !important;
-  padding: 15px !important;
-}
-
-.collection-item > h6 {
-  padding-left: 15px !important;
-}
-
 .addLibraryBtn {
   margin-top: -50px;
-}
-
-.whiteColor {
-  color: #ffffff !important;
 }
 
 .margin-left {
@@ -203,11 +145,6 @@ main {
   color: #272727;
 }
 
-.noticeText {
-  font-size: 30px;
-  font-weight: 300;
-}
-
 /*
   以下部分为list的样式
 */
@@ -233,6 +170,7 @@ main {
 
 .deleteMember {
   cursor: pointer;
+  font-size: 20px;
 }
 
 .warningText > i {
@@ -277,20 +215,12 @@ main {
   margin: 0;
 }
 
-.btn-area > .text-center > a > .material-icons {
-  vertical-align: middle;
-}
-
 .btn-area .edit-btn {
   position: absolute;
   top: 100%;
   left: 0;
   width: 33.333%;
   height: 40px;
-}
-
-.material-icons {
-  display: inline;
 }
 
 .btn-area .result-btn {
@@ -331,4 +261,99 @@ main {
   color: #858585;
 }
 
+/*
+  以下为event.list的样式
+*/
+.viewEvent-btn {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 25%;
+  height: 40px;
+}
+
+.editEvent-btn {
+  position: absolute;
+  top: 100%;
+  left: 25%;
+  width: 25%;
+  height: 40px;
+  border-left: 1px solid rgba(160, 160, 160, 0.2);
+  border-right: 1px solid rgba(160, 160, 160, 0.2);
+}
+
+.shareEvent-btn {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 25%;
+  height: 40px;
+  border-right: 1px solid rgba(160, 160, 160, 0.2);
+}
+
+.deleteEvent-btn {
+  position: absolute;
+  top: 100%;
+  left: 75%;
+  width: 25%;
+  height: 40px;
+}
+
+.card-title {
+  line-height: 30px !important;
+}
+
+.noticeText {
+  font-size: 30px;
+  font-weight: 300;
+}
+
+/*
+  以下为event.detail的样式
+*/
+.noticeCollection {
+  border: none !important;
+}
+
+.collection-item {
+  padding: 5px !important;
+}
+
+.collection-item > span {
+  margin: 15px !important;
+  font-size: 20px;
+}
+
+.collection-item > p {
+  color: #000000 !important;
+  padding: 15px !important;
+}
+
+.addFile {
+  margin-left: 45px;
+}
+
+.addGetInfo {
+  margin-left: 45px;
+}
+
+.teamImg {
+  cursor: pointer;
+}
+
+.teamImg > img {
+  margin: 15px;
+}
+
+.teamImg > p {
+  font-size: 20px;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.margin-top {
+  margin-top: 15px;
+}
 

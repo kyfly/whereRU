@@ -7,14 +7,13 @@
     </ul>
   </div>
   <div class="editField col s12">
-    <a class="waves-effect waves-light btn grey lighten-1 activityCreateQuit" ui-sref="activityList">取消</a>
     <h5 class="activityName">新建活动 <span ng-bind="activityData.title"></span></h5>
     <div id="mainInfo" class="col s12">
       <div class="container">
         <div input-field>
-          <i class="material-icons prefix">&#xE150;</i>
-          <input type="text" ng-model="activityData.title">
-          <label>活动标题</label>
+          <i class="mdi-image-edit prefix"></i>
+          <input id="activityTitle" type="text" ng-model="activityData.title">
+          <label for="activityTitle">活动标题</label>
         </div>
         <div class="input-field">
           <i class="material-icons prefix">&#xE90D;</i>
@@ -67,9 +66,9 @@
                  select-years="16">
         </div>
         <div input-field>
-          <i class="material-icons prefix">&#xE0DA;</i>
-          <input type="text" ng-model="activityData.keyword">
-          <label>关键字（用英文逗号隔开）</label>
+          <i class="mdi-communication-vpn-key prefix"></i>
+          <input id="keyword" type="text" ng-model="activityData.keyword">
+          <label for="keyword">关键字（用英文逗号隔开）</label>
         </div>
         <div class="file-field input-field">
           <div class="btn">
@@ -82,8 +81,9 @@
           </div>
         </div>
         <div class="input-field">
+          <button class="waves-effect waves-light btn grey lighten-1 left" ui-sref="activityList">取消</button>
           <button class="btn waves-effect waves-light right orange darken-1" ng-click="nextStep(1)">下一步
-            <i class="material-icons right">&#xE409;</i>
+            <i class="mdi-hardware-keyboard-arrow-right right"></i>
           </button>
         </div>
       </div>
@@ -95,10 +95,10 @@
         </div>
         <div class="input-field">
           <button class="btn waves-effect waves-light left orange darken-1" ng-click="nextStep(0)">上一步
-            <i class="material-icons left">&#xE314;</i>
+            <i class="mdi-hardware-keyboard-arrow-left left"></i>
           </button>
           <button class="btn waves-effect waves-light right orange darken-1" ng-click="nextStep(2)">下一步
-            <i class="material-icons right">&#xE409;</i>
+            <i class="mdi-hardware-keyboard-arrow-right right"></i>
           </button>
         </div>
       </div>
@@ -106,24 +106,28 @@
     <div id="complete" class="col s12">
       <div class="container">
         <div class="col s12 text-center">
-          <a class="waves-effect waves-light btn">添加表单<i class="material-icons right">&#xE145;</i></a>
+          <a class="waves-effect waves-light btn">添加表单<i class="mdi-content-add right"></i></a>
           <p class="explainText">添加表单可用于与资料收集,问卷调查,<br>招新报名,用户阅读活动文案后可直接参与</p>
         </div>
         <div class="col s12 text-center">
-          <a class="waves-effect waves-light btn">添加投票<i class="material-icons right">&#xE145;</i></a>
+          <a class="waves-effect waves-light btn">添加投票<i class="mdi-content-add right"></i></a>
           <p class="explainText">添加投票可用于日常投票,<br>用户在阅读活动文案后可直接参与</p>
         </div>
         <div class="col s12 text-center">
-          <a class="waves-effect waves-light btn">添加抢票<i class="material-icons right">&#xE145;</i></a>
+          <a class="waves-effect waves-light btn">添加抢票<i class="mdi-content-add right"></i></a>
           <p class="explainText">添加抢票可用于抢入场券、礼品等,<br>用户阅读活动文案后可直接参与</p>
+        </div>
+        <div class="col s12 text-center">
+          <a class="waves-effect waves-light btn">预览</a>
+          <p class="explainText">预览你要发布的信息</p>
         </div>
         <div class="col s12">
           <hr>
           <button class="btn waves-effect waves-light left orange darken-1" ng-click="nextStep(1)">上一步
-            <i class="material-icons left">&#xE314;</i>
+            <i class="mdi-hardware-keyboard-arrow-left left"></i>
           </button>
           <button class="waves-effect waves-light btn orange darken-1 right" ng-click="createActivity()">发布
-            <i class="material-icons right">&#xE876;</i>
+            <i class="mdi-action-done right"></i>
           </button>
         </div>
       </div>
