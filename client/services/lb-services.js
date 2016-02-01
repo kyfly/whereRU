@@ -39,6 +39,22 @@ module.factory(
     { 'id': '@id' },
     {
       /**
+       * 圈子关注量
+       * 使用场景：显示圈子关注量
+       */
+      "prototype_count_fans": {
+        url: urlBase + '/Coteries/:id/fans/count',
+        method: 'GET'
+      },
+      /**
+       * 关注圈子
+       * 使用场景：pc端点击关注
+       */
+      "prototype_link_coteries": {
+        url: urlBase + '/WUsers/:id/coteries/rel/:fk',
+        method: 'PUT'
+      },
+      /**
        *   所有圈子显示
        *   pc所有圈子的显示
        */
