@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="/application/styles/coterie.css">
 </head>
 <body>
-<nav class="header row hide-on-small-only">
+<nav class="header row hide-on-small-only" ng-controller="HeaderController">
   <div class="nav-wrapper">
     <a href="/" class="left brand-logo col offset-s0 offset-m0 offset-l1">whereRU</a>
     <ul class="col offset-m2 offset-l5">
@@ -25,13 +25,13 @@
       </li>
       <li><a href="/w/activities">服务</a></li>
       <li><a href="/w/coteries">圈子</a></li>
-      <li><a href="/w/login">登录</a></li>
+      <li><a ng-show="!username" ng-click="goSignIn()">登录</a></li>
+      <li><a href="/u/home" ng-bind="username"></a></li>
     </ul>
   </div>
 </nav>
-
-
-<div>
+<div ng-include="'application/views/user/login.html'"></div>
+<div id="doc">
   <div ui-view></div>
 </div>
 <!-- jquery -->
@@ -56,7 +56,6 @@
 
 <!--&lt;!&ndash; Activity &ndash;&gt;-->
 <script src="/application/scripts/activity/activity-controller.js"></script>
-<script src="/application/scripts/activity/activity.js"></script>
 <script src="/application/scripts/activity/activity-router.js"></script>
 <!-- Coterie -->
 <script src="/application/scripts/coterie/coterie-controller.js"></script>

@@ -20,7 +20,10 @@
     "authorId": {
       "type": "string"
     },
-
+    "deleted": {
+      "type": "boolean",
+      "required": false
+    },
     "explainUrl": {
       "type": "string",
       "required": true

@@ -9,25 +9,41 @@
         </a>
       </li>
       <ul id='demoDropdown' class='dropdown-content'>
-          <li><a href="javascript:void(0);">最新</a></li>
-          <li><a href="javascript:void(0);">进行中</a></li>
-          <li><a href="javascript:void(0);">未开始</a></li>
-          <li><a href="javascript:void(0);">已结束</a></li>
+        <li><a href="javascript:void(0);">最新</a></li>
+        <li><a href="javascript:void(0);">进行中</a></li>
+        <li><a href="javascript:void(0);">未开始</a></li>
+        <li><a href="javascript:void(0);">已结束</a></li>
       </ul>
     </ul>
   </div>
 </nav>
 <div class="row menu">
-    <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
-      <option ng-repeat="value in ['最新','最热']">{{value}}</option>
-    </select>
-    <div class="col s4 m3 l2 menu-item ">
-      <a href="/w/activities">校园活动</a>
-    </div>
-    <div class="col s4 m3 l2 menu-item">
-      <a href="/w/races">校园竞赛</a>
-    </div>
-    <div class="col s4 m3 l2 menu-item">
-      <a class="active" href="/w/teams">校园团队</a>
-    </div>
+  <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
+    <option ng-repeat="value in ['最新','最热']">{{value}}</option>
+  </select>
+  <div class="col s4 m3 l2 menu-item ">
+    <a href="/w/activities">校园活动</a>
+  </div>
+  <div class="col s4 m3 l2 menu-item">
+    <a href="/w/races">校园竞赛</a>
+  </div>
+  <div class="col s4 m3 l2 menu-item">
+    <a class="active" href="/w/teams">校园团队</a>
+  </div>
 </div>
+
+<!--校园团队列表-->
+<div>
+  <div class="row" ng-repeat="teamItem in teamItems">
+    <div class="col s2">
+      <div class="wrap ">
+        <img ng-src="{{teamItem.logoUrl}}">
+        <h1 class="team-h1" ng-bind="teamItem.name"></h1>
+        <p class=".team-p" ng-bind="teamItem.desc">
+
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+

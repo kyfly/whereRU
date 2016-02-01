@@ -1,4 +1,4 @@
-var promise = require(__dirname + '/../../modules/model-promise.js');
+var q = require('q');
 module.exports = function(Team) {
 	Team.remoteMethod('search', {
 		accepts: {
@@ -91,11 +91,11 @@ module.exports = function(Team) {
 	 * @return {[type]}          [description]
 	 */
 	Team.getMySchoolTeams = function (school,last,cb){
+    //, hidden: false, deleted: false
     Team.find({
-      where:{school:school,created:{lt:last},hidden:false,deleted:new Date("1970-01-01T00:00:00.000Z")},
+      where:{ school:school, created:{lt: last }},
       limit:20,
-      order:"id desc",
-      fields:['id','userId','name','logoUrl','desc','status']
+      order:"id desc"
     },function(err,teams){
       if(err) return cb(err);
       cb(null,teams);
@@ -111,32 +111,57 @@ module.exports = function(Team) {
 		http: {path: '/:id/activitiesData', verb: 'get'}
 	});
 	Team.getActivitiesData = function (id, cb){
-		var activityFn = [];
-		var activitiesFn = [];
+		function relationModelFn(model, query) {
+			var defer = q.defer();
+			model.count(query, function (err, count) {
+				if (err) {
+					defer.reject(err);
+				}
+				defer.resolve(count);
+			});
+			return defer.promise;
+		}
 		Team.findById(id, function (err, team) {
+			var activityData = [];
+			var activitiesFn = [];
 			team.activities({}, function (err, activities) {
 				activities.forEach(function (activity) {
 					var actType = activity.actType;
 					var actModel = actType + 's';
 					var actResult = actType + 'Results';
-					console.log(activity[actModel][actResult])
+					var activityFn = [];
 					['app', 'wechat', 'pc', 'QQ', 'else'].forEach(function (from) {
-						activityFn.push(promise(activity.readers, 'count', {query: {form: from}}));
-						if (actType === 'form') {
-							activityFn.push(promise(activity.forms.formResults, 'count', {}));
-						}
-						
-						promise.all(activityFn).then(function (data) {
-							console.log(data);
+						activityFn.push(relationModelFn(activity.readers, {form: from}));
+					});
+					activityFn.push(relationModelFn(activity.readers, {}));
+					activitiesFn.push(promise());
+					function promise() {
+						var defer = q.defer();
+						q.all(activityFn).then(function (data) {
+							activity = activity.toJSON();
+							activity.readerFrom = {
+								"app": data[0],
+	              "wechat": data[1],
+	              "PC": data[2],
+	              "QQ": data[3],
+	              "else": data[4]
+							}
+							activity.readerNum = data[5];
+							defer.resolve(activity);
+						}, function (err) {
+							defer.reject(err);
 						})
-					})
+						return defer.promise;
+					}
+				});
+				q.all(activitiesFn).then(function (data) {
+					cb(null, data);
 				});
 			})
 		})
 	};
 	//Team.beforeRemote('prototype.__create__members',function () {});
 
-	Team.getActivitiesData = function (){};
 	Team.beforeRemote('prototype.__create__members',function (ctx,ins,next) {
     var userId = ctx.req.accessToken.userId;
     ctx.instance.members.count({
@@ -168,4 +193,7 @@ module.exports = function(Team) {
   Team.afterRemote('prototype.__create__members',function (ctx,ins,next) {
     ctx.res.send({"status":200});
   });
+  Team.afterRemote("prototype.__get__partakedRaces", function (ctx, ins, next) {
+
+  })
 };

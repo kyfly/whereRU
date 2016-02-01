@@ -34,6 +34,15 @@
 	max-height: 700px;
 	background-color: #eee;
 }
+.login {
+  position: fixed;
+  top: 4rem;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 3;
+  color:#fff;
+  display: none;
+}
 .tab-active{
   position: absolute;
   bottom: 0;
@@ -117,8 +126,57 @@
   display: block;
   overflow: scroll;
   height: 100%;
-
+}
+.activity-detail #about .collection-item p{
+  padding-top: 10px; 
 }
 #search{
   margin: 0;
+}
+
+
+.wrap
+{
+  background: #fff;
+  margin: 20px auto;
+  display: block;
+  //width: 300px;
+  //height: 310px;
+  padding:20px;
+  border-radius: 2px 2px 2px 2px;
+  -webkit-box-shadow: 0 1px 4px
+  rgba(0, 0, 0, 0.3), 0 0 40px
+  rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 4px
+  rgba(0, 0, 0, 0.3), 0 0 40px
+  rgba(0, 0, 0, 0.1) inset;
+}
+
+.wrap img{
+  width: 100%;
+  margin-top: 15px;
+}
+
+.team-p{
+  margin-top: 15px;
+  text-align: justify;
+  text-overflow:ellipsis;
+}
+
+.team-h1{
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 5px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+a{
+  text-decoration: none;
+  color: #4A4A4A !important;
+}
+
+a:hover{
+  text-decoration: underline;
+  color: #6B6B6B !important ;
 }

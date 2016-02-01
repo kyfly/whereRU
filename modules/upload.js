@@ -119,12 +119,13 @@ var uploadfile = function (req, res) {
 }
 var save = function (file, filename, mimetype, req, callback) {
   var realName = getFileName(path.extname(filename));
+  console.log(path.extname(filename));
   var saveTo = path.join(os.tmpDir(), realName);
   var query = req.query;
   file.pipe(fs.createWriteStream(saveTo));
   file.on('end', function() {
     fs.readFile(saveTo,function(err,data){
-      var file = 'whereru/' + query.dir + '/' + query.id + '/image' + '/' + realName;
+      var file = 'whereru/' + query.dir + '/' + query.id + '/' + path.extname(filename).substr(0,1) + '/' + realName;
       AliYun.putObject({
         fileName: file,
         data: data,

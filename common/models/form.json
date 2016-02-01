@@ -8,6 +8,10 @@
   "properties": {
     "updated": {
       "type": "date"
+    },
+    "teamId": {
+      "type": "string",
+      "require": true
     }
   },
   "validations": [],

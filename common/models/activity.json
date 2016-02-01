@@ -70,7 +70,8 @@
       "default": false
     },
     "readers": {
-      "type": "number"
+      "type": "number",
+      "default":0
     }
   },
   "validations": [],

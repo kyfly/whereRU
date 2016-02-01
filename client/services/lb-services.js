@@ -29,7 +29,27 @@
   var authHeader = 'authorization';
 
   var module = angular.module("lbServices", ['ngResource']);
-
+module.factory(
+  'School', 
+  ['LoopBackResource', 'LoopBackAuth', '$injector',
+  function(Resource, LoopBackAuth, $injector){
+    var R = Resource(
+      urlBase + '/Schools/:id', 
+      { 'id': '@id' },
+      {
+        "find": {
+          url: urlBase + '/Schools',
+          params: {
+            filter: {
+              fields: ['name']
+            }
+          },
+          method: 'GET',
+          isArray: true
+        }
+      });
+    return R;
+}])
 module.factory(
   'User',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
@@ -256,6 +276,13 @@ module.factory(
           isArray: true
         },
         /**
+         * 描述：退出竞赛（不是删除竞赛）
+         */
+        "prototype_unlink_partakedRaces": {
+          url: urlBase + '/Teams/:id/partakedRaces/rel/:fk',
+          method: 'DELETE'
+        },
+        /**
          * 描述：用户所在学校团队列表，所有用户
          * 使用场景：校园团队列表
          */
@@ -282,9 +309,9 @@ module.factory(
           url: urlBase + '/Teams/:id/activities',
           method: 'POST'
         },
-        "prototype_destroyById_activities": {
+        "prototype_updateById_activities": {
           url: urlBase + '/Teams/:id/activities/:fk',
-          method: 'DELETE'
+          method: 'PUT'
         },
         /**
          * 描述：申请加入团队，已登录用户
@@ -373,9 +400,9 @@ module.factory(
           url: urlBase + '/Teams/:id/races',
           method: 'POST'
         },
-        "prototype_destroyById_races": {
+        "prototype_updateById_races": {
           url: urlBase + '/Teams/:id/races/:fk',
-          method: 'DELETE'
+          method: 'PUT'
         }
       }
     );
@@ -568,6 +595,13 @@ module.factory(
           isArray: true
         },
         /**
+         * 描述：退出某个竞赛
+         */
+        "prototype_unlink_raceTeams": {
+          url: urlBase + '/Races/:id/raceTeams/rel/:fk',
+          method: 'DELETE'
+        },
+        /**
          * 获取资料
          */
         "prototype_get_materials": {
@@ -658,8 +692,8 @@ module.factory(
   .config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('LoopBackAuthRequestInterceptor');
   }])
-  .factory('LoopBackAuthRequestInterceptor', [ '$q', 'LoopBackAuth',
-    function($q, LoopBackAuth) {
+  .factory('LoopBackAuthRequestInterceptor', [ '$q', '$rootScope', 'LoopBackAuth',
+    function($q, $rootScope, LoopBackAuth) {
       return {
         'request': function(config) {
 
@@ -683,7 +717,24 @@ module.factory(
             return $q.reject(res);
           }
           return config || $q.when(config);
-        }
+        },
+        'responseError': function(rejection) {
+          switch(rejection.status) {
+            case 401:
+              $rootScope.$broadcast('auth:loginRequired');
+              break;
+            // case 403:
+            //   $rootScope.$broadcast('auth:forbidden');
+            //   break;
+            // case 404:
+            //   $rootScope.$broadcast('page:notFound');
+            //   break;
+            // case 500:
+            //   $rootScope.$broadcast('server:error');
+            //   break;
+          }
+          return $q.reject(rejection);
+        },
       };
     }])
 .provider('LoopBackResource', function LoopBackResourceProvider() {
