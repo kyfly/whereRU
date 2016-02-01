@@ -1,10 +1,5 @@
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('login', {
-      url: '/w/login',
-      controller: 'LoginController',
-      templateUrl: 'application/views/user/login.html'
-    })
     .state('confirmSchool', {
       url: '/w/confirmSchool',
       controller: 'ConfirmSchoolController',
@@ -15,9 +10,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       controller: 'RegisterController',
       templateUrl: 'application/views/user/register.html'
     })
-    .state('index', {
+  .state('index', {
 		url: '/',
-		controller: 'TestController',
+		controller: 'HomeController',
 		templateUrl: '/application/views/index.html'
 	})
   .state('management_system', {

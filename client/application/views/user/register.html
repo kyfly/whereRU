@@ -1,1 +1,39 @@
-<a href="/">home</a>
+<form class="reg"id="regForm"name="regForm">
+		<div input-field class="col offset-m2 offset-l2 s12 m4 l4">
+		    <input id="phone" type="text" ng-model="user.phone" length="11" required>
+		    <label for="phone">请输入手机号</label>
+		</div>
+
+		<div input-field class="col s12 m4 l4">
+		    <input id="name" type="text" ng-model="user.name" required>
+		    <label for="name">请输入姓名</label>
+		</div>
+	
+		<div input-field class="col s12 m4 l4">
+		    <input id="password" type="text" ng-model="user.password" length="16" required>
+		    <label for="password">请输入密码</label>
+		</div>
+
+		<select class="" ng-model="user.school" material-select watch>
+		  <option ng-repeat="school in schools">{{school.name}}</option>
+		</select>
+		
+		<select class="" ng-model="user.sex" material-select watch>
+		  <option value="男">男</option>
+		  <option value="女">女</option>
+		</select>
+
+		<!-- <input name="sex" type="radio" id="man" ng-model="user.sex" />
+      <label for="man">男</label>
+    <input name="sex" type="radio" id="woman" ng-model="user.sex"/>
+    <label for="woman">女</label> -->
+
+	<div  class="row center">
+		<button type="sumbit" 
+		  class="waves-effect waves-light btn offset-s1" 
+			ng-click="register()" 
+			style="margin-left: 20px"
+			ng-disabled="regForm.$invalid">注册</button>
+	</div>
+</form>
+

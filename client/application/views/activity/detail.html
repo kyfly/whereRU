@@ -1,44 +1,85 @@
-<div id="about" class="col s12 container ">
-  <div class="card">
-    <div class="card-image">
-      <a href="/w/activities/:id">
-        <img style="width:100%" src="http://assets.servedby-buysellads.com/p/manage/asset/id/26625">
-      </a>
-    </div>
-    <div class="row">
-      <div class="col s6 m6">
-        结束时间：2016-1-2
-      </div>
-      <div class="col s6 m6">
-        主办方：团团一家
-      </div>
-      <div class="col s6 m6">
-        开始时间：2015-12-02
-      </div>
-      <div class="col s6 m6">
-        学校：杭州电子科技大学
-      </div>
-    </div>
-  </div>
-  <div class="card-action tag">
-
-  </div>
-</div>
-
-<div id="detail" class="col s12">   <!-- 活动详情-->
-
-</div>
-<div id="join" class="col s12">   <!--参与活动-->
-
+<div class="col s12 m8 l9 activity-detail">
   <div class="row">
-    <form class="col s6">
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="email" type="email" class="validate">
-          <label for="email" data-error="wrong" data-success="right">Email</label>
-        </div>
-      </div>
-    </form>
-  </div>
+    <div class="col s12">
+      <ul class="tabs" tabs>
+        <li class="tab col s4">
+          <a href="#about" class="active">活动介绍</a>
+        </li>
+        <li class="tab col s4">
+          <a href="#detail">活动详情</a>
+        </li>
+        <li class="tab col s4">
+          <a href="#join">参与活动</a>
+        </li>
+      </ul>
+    </div>
 
+    <div id="about" class="col s12 container">
+        <ul class="collection">
+
+          <li class="collection-item avatar">
+            <i class="material-icons circle">folder</i>
+            <span class="title">活动标题</span>
+            <p ng-bind="activityCurrent.title"></p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+
+          <li class="collection-item avatar">
+            <img src="images/yuna.jpg" alt="" class="circle">
+            <span class="title">活动主办方</span>
+            <p ng-bind="activityCurrent.authorName"></p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+          
+          <li class="collection-item avatar">
+            <i class="material-icons circle">folder</i>
+            <span class="title">验证规则</span>
+            <p ng-bind="activityCurrent.verifyRule"></p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle green">insert_chart</i>
+            <span class="title">活动开始时间</span>
+            <p ng-bind="activityCurrent.started | date : 'yyyy-MM-dd HH:mm:ss'"></p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle red">play_arrow</i>
+            <span class="title">活动结束时间</span>
+            <p ng-bind="activityCurrent.ended | date : 'yyyy-MM-dd HH:mm:ss'"></p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle">folder</i>
+            <span class="title">关键字</span>
+            <p ng-bind="activityCurrent.keyword"></p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle red">play_arrow</i>
+            <span class="title">学校所在地</span>
+            <p ng-bind="activityCurrent.school"></p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+        </ul>
+    </div>
+
+    <ng-include id="detail" class="col s12" src="activityCurrent.explainUrl">   <!-- 活动详情-->
+      
+    </ng-include>
+    <div id="join" class="col s12">   <!--参与活动-->
+
+      <div class="row">
+        <form class="col s12" ng-repeat="join in activityJoin">
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="{{join.type}}" class="validate">
+              <label>{{join.name}}</label>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
 </div>

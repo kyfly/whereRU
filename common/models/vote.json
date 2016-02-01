@@ -19,6 +19,10 @@
       "default": 0,
       "commit": "用户可投票周期，单位小时"
     },
+    "teamId": {
+      "type": "string",
+      "require": true
+    },
     "updated": {
       "type": "date"
     }
