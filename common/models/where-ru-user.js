@@ -190,8 +190,12 @@ module.exports = function(User) {
           }
         }
       }
-    },function(err,races){
+    },function(err,members){
       if(err) cb(err);
+      var races=[];
+      members.forEach(function(member){
+        races.push(member.team.race);
+      });
       cb(null,races);
     });
   };
@@ -218,7 +222,8 @@ module.exports = function(User) {
     });
     ctx.res.send(result);
   });
-  User.getActivitiesHistories = function () {
+  User.getActivitiesHistories = function (id,cb) {
+    User.app.models.FormResult.count({userId:id},function(err,count){});
   };
   User.beforeRemote('prototype.__updateAttributes', function () {
   });
