@@ -40,6 +40,7 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($s
 
 app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$http', '$rootScope', 'Form', 'Activity', '$stateParams', function ($scope, Team, Ueditor, $location, $http, $rootScope, Form, Activity, $stateParams) {
   $scope.isEdit = false;
+  $scope.preType = {};
   if ($stateParams.id !== '') {
     $scope.isEdit = true;
 
@@ -55,8 +56,11 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
         Activity.prototype_get_forms({
           id: $stateParams.id
         }, function (res) {
-          $scope.formData = res[0];
-          $scope.preType.id = res[0].id;
+          console.log(res);
+          if(res[0]){
+            $scope.formData = res[0];
+            $scope.preType.id = res[0].id;
+          }
         });
       }
     });
@@ -168,18 +172,23 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
             $scope.formData.updated = new Date();
             $scope.formData.activityId = res.id;
             $scope.formData.id = undefined;
-            $scope.formData.activityId = localStorage.$LoopBack$currentTeamId;
+            $scope.formData.activityId = $stateParams.id;
+
             if ($scope.preType.type === 'form') {
               Activity.prototype_updateById_forms({
                 id: res.id,
                 fk: $scope.preType.id
-              }, $scope.formData, function (res) {
-                console.log(res);
-              })
+              }, $scope.formData)
             } else {
               Activity.prototype_create_forms({
                 id: res.id
               }, $scope.formData)
+            }
+          } else {
+            if ($scope.preType.type === 'form') {
+              Activity.prototype_delete_forms({
+                id: res.id
+              })
             }
           }
 
