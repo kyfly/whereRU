@@ -1,0 +1,42 @@
+<form class="container" name="activityForm">
+	<div ng-repeat="formItem in forms._formItems">
+		<div input-field ng-show="formItem.type === 'text'" >
+	    <input id="name" type="text" ng-model="result[$index]['name']" length="11" required>
+	    <label for="name">请输入{{formItem.name}}</label>
+		</div>
+
+		<div input-field ng-show="formItem.type === 'textarea'">
+	    <textarea ng-model="result[$index]['name']" class="materialize-textarea" ></textarea>
+	    <label>请输入{{formItem.name}}</label>
+		</div>
+
+		<select   ng-show="formItem.type === 'select'" ng-model="result[$index]['option']" 
+			material-select watch required>
+			<option value="" disabled selected>请选择{{formItem.name}}</option>
+		  <option ng-repeat="option in formItem.options">{{option}}</option>
+		</select>
+
+		<div ng-show="formItem.type === 'file'"
+			class="file-field input-field">
+	    <div class="btn">
+	      <span>File</span>
+	      <input type="file" id="file" multiple ng-model="result[$index]['name']"  required>
+	    </div>
+	    <div class="file-path-wrapper">
+	      <input class="file-path validate" ng-model="tem" ng-change="uploadFile()" type="text" placeholder="请上传{{formItem.name}}">
+	    </div>
+	  </div>
+	</div>
+
+	<div input-field ng-show="forms.verifyRule">
+    <input id="name" type="text" ng-model="verifyId">
+    <label for="name">请输入验证信息({{forms.verifyRule}})</label>
+	</div>
+
+	<div  class="row center">
+		<a type="sumbit" 
+			class="waves-effect waves-light"
+			ng-click="submit()">提交
+		</a>
+	</div>
+</form>
