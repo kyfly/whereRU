@@ -30,11 +30,11 @@
 
   var module = angular.module("lbServices", ['ngResource']);
 module.factory(
-  'School', 
+  'School',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
     var R = Resource(
-      urlBase + '/Schools/:id', 
+      urlBase + '/Schools/:id',
       { 'id': '@id' },
       {
         "find": {
@@ -49,7 +49,7 @@ module.factory(
         }
       });
     return R;
-}])
+}]);
 module.factory(
   'User',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
@@ -448,14 +448,27 @@ module.factory(
         method: 'GET',
         isArray: true
       },
-
       /**
-       * 参与活动
+       * 获取活动的表单
        */
       "prototype_get_forms":{
         url: urlBase + '/Activities/:id/forms',
         method: 'GET',
         isArray: true
+      },
+      /**
+       * 活动添加表单
+       */
+      "prototype_create_forms":{
+        url: urlBase + '/Activities/:id/forms',
+        method: 'POST'
+      },
+      /**
+       * 修改活动的表单
+       */
+      "prototype_updateById_forms":{
+        url: urlBase + '/Activities/:id/forms/:fk',
+        method: 'PUT'
       },
       /**
        * 描述：用户所在学校活动列表
@@ -485,6 +498,13 @@ module.factory(
       "findById": {
         url: urlBase + '/Activities/:id',
         method: 'GET'
+      },
+      /**
+       * 描述：更新活动
+       */
+      "prototype_updateAttributes": {
+        url: urlBase + '/Activities/:id',
+        method: 'PUT'
       }
 
     });
@@ -494,7 +514,7 @@ module.factory(
   'Seckill',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
-    var R = resource(
+    var R = Resource(
       urlBase + '/Seckills/:id',
       { 'id': "@id"},
       {
@@ -540,6 +560,21 @@ module.factory(
         "create": {
           url: urlBase + '/Forms',
           method: 'POST'
+        },
+        /**
+         * 描述：获取所有表单
+         */
+        "find": {
+          url: urlBase + '/Forms',
+          method: 'GET',
+          isArray: true
+        },
+        /**
+         * 描述：删除某条表单
+         */
+        "deleteById": {
+          url: urlBase + '/Forms/:id',
+          method: 'DELETE'
         }
       }
     );

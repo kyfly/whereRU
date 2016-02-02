@@ -1,7 +1,8 @@
 <div class="row">
   <div class="col s12">
     <ul class="tabs" tabs>
-      <li class="tab col s3 waves-effect"><a href="" class="active">全部表单</a></li>
+      <li class="tab waves-effect"><a ng-click="showType = 0" href class="active">活动表单</a></li>
+      <li class="tab waves-effect"><a ng-click="showType = 1" href>表单模板</a></li>
     </ul>
   </div>
   <div class="col s12">
@@ -9,35 +10,99 @@
       <div class="col s12 m6 l4">
         <div class="card addItemBox waves-effect waves-block hoverable" ui-sref="formEdit">
           <div class="card-content item-list">
-            <p class="text-center"><i class="mdi-content-add"></i></p>
+            <p class="text-center"><i class="mdi-content-add"></i>
+              <br>
+              <span>创建表单模板</span>
+            </p>
           </div>
         </div>
       </div>
       <div class="col s12 m6 l4" ng-repeat="formItem in formItems"
-           ng-show="formItem.deleted === false">
+           ng-show="isFormAuthor() && isActivity($index)">
         <div class="card hoverable">
           <div class="card-content item-list activityInfo">
+            <span class="card-title green-text text-darken-1 flow-text" ng-show="showType === 1">[模板]</span>
             <span class="card-title green-text text-darken-1 flow-text" ng-bind="formItem.title"></span>
             <br>
-            <span class="addText" ng-bind="formItem.authorName"></span>
-            <span class="addText" ng-bind="formItem.created | date : 'yyyy-MM-dd'"></span>
+            <span class="addText" ng-bind="formItem.updated | date : 'yyyy-MM-dd'"></span>
             <hr>
-            <p>开始：<span ng-bind="formItem.started | date : 'yyyy-MM-dd HH:mm'"></span></p>
-            <p>结束：<span ng-bind="formItem.ended | date : 'yyyy-MM-dd HH:mm'"></span></p>
-            <p>关键字：<span ng-bind="formItem.keyword || '无'"></span></p>
+            <span>包含的表单项：</span><br>
+            <div class="col s6 nobr-text" ng-repeat="singleItem in formItem._formItems.slice(0,6) track by $index">
+              <nobr>
+                <span ng-bind="$index + 1"></span>.&nbsp;
+                <span ng-bind="singleItem.name"></span>
+              </nobr>
+              <br>
+            </div>
+            <div class="col s6" ng-show="formItem._formItems.length > 6">
+              <span>……</span>
+            </div>
+
           </div>
-          <div class="card-action btn-area">
+          <div class="card-action btn-area" ng-show="showType === 0">
+            <div class="viewEvent-btn waves-effect text-center">
+              <a class="green-text text-darken-2" href ui-sref=""><i class="mdi-image-edit"></i>
+                编辑</a>
+            </div>
+            <div class="editEvent-btn waves-effect text-center">
+              <a class="orange-text text-darken-2" href ng-href="#{{'previewModal' + $index}}" modal><i
+                class="mdi-image-remove-red-eye"></i>
+                预览</a>
+            </div>
+            <div class="shareEvent-btn waves-effect text-center">
+              <a class="blue-text text-darken-2" href ng-click=""><i class="mdi-action-view-list"></i> 结果</a>
+            </div>
+            <div class="deleteEvent-btn waves-effect text-center">
+              <a class="red-text text-darken-2" href ng-href="{{'#deleteFormConfirm' + $index}}" modal><i
+                class="mdi-action-delete"></i> 删除</a>
+            </div>
+          </div>
+          <div class="card-action btn-area" ng-show="showType === 1">
             <div class="edit-btn waves-effect text-center">
-              <a class="green-text text-darken-2" href ng-click="edit(listItem.id)"><i class="mdi-image-edit"></i>
+              <a class="green-text text-darken-2" href ng-click="edit(formItem.id)"><i class="mdi-image-edit"></i>
                 编辑</a>
             </div>
             <div class="result-btn waves-effect text-center">
-              <a class="orange-text text-darken-2" href ng-click="result(listItem.id)"><i class="mdi-social-share"></i>
-                分享</a>
+              <a class="orange-text text-darken-2" href ng-href="#{{'previewModal' + $index}}" modal><i
+                class="mdi-image-remove-red-eye"></i>
+                预览</a>
             </div>
             <div class="delete-btn waves-effect text-center">
               <a class="red-text text-darken-2" href ng-href="{{'#deleteFormConfirm' + $index}}" modal><i
                 class="mdi-action-delete"></i> 删除</a>
+            </div>
+          </div>
+          <div id="{{'previewModal' + $index}}" class="modal modal-fixed-footer">
+            <div class="modal-content">
+              <h4 ng-bind="formItem.title || '表单预览'"></h4>
+              <div ng-repeat="singleForm in formItem._formItems">
+                <div input-field ng-show="singleForm.type === 'text'">
+                  <input type="text">
+                  <label ng-bind="singleForm.name"></label>
+                </div>
+                <select ng-show="singleForm.type === 'select'" material-select watch>
+                  <option value="" disabled selected ng-bind="singleForm.name"></option>
+                  <option ng-repeat="onePiece in singleForm.options track by $index">{{onePiece}}</option>
+                </select>
+                <div ng-show="singleForm.type === 'radio'">
+                  <span ng-bind="singleForm.name"></span>
+                  <div class="switch margin-left margin-top" style="display: inline-block">
+                    <label>
+                      否
+                      <input type="checkbox">
+                      <span class="lever"></span>
+                      是
+                    </label>
+                  </div>
+                </div>
+                <div input-field ng-show="singleForm.type === 'textarea'">
+                  <textarea class="materialize-textarea"></textarea>
+                  <label ng-bind="singleForm.name"></label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">完成</a>
             </div>
           </div>
           <div id="{{'deleteFormConfirm' + $index}}" class="modal">
