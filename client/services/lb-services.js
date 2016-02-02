@@ -75,11 +75,10 @@ module.factory(
         method: 'PUT'
       },
       /**
-       *   所有圈子显示
-       *   pc所有圈子的显示
+       * 用户拥有的获取团队
        */
-      "find": {
-        url: urlBase + '/Coteries',
+      'prototype_get_teams': {
+        url: urlBase + '/WUsers/:id/teams',
         method: 'GET',
         isArray: true
       },
@@ -407,6 +406,26 @@ module.factory(
       }
     );
     return R;
+}])
+.factory(
+  'Coterie', 
+  ['LoopBackResource', 'LoopBackAuth', '$injector',
+  function(Resource, LoopBackAuth, $injector){
+    var R = Resource(
+      urlBase + '/Teams/:id',
+      { 'id': '@id' },
+      {
+        /**
+         *   所有圈子显示
+         *   pc所有圈子的显示
+         */
+        "find": {
+          url: urlBase + '/Coteries',
+          method: 'GET',
+          isArray: true
+        }
+      });
+  return R;
 }])
 .factory(
   'Activity',
