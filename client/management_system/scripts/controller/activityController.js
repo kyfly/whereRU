@@ -1,6 +1,6 @@
 app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
   $rootScope.logoHide = false;
-  $scope.chosenType = 'common';
+  $scope.chosenType = 'all';
 
   $scope.unFormat = "yyyy-MM-dd HH:mm";
   $scope.format = "yyyy-MM-dd";
@@ -18,7 +18,6 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($s
 
   $scope.deleteActivity = function () {
     var thisElement = this;
-    console.log(thisElement);
     Team.prototype_updateById_activities({
         id: localStorage.$LoopBack$currentTeamId,
         fk: thisElement.activityItem.id
@@ -39,13 +38,35 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($s
 
 }]);
 
-app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$http', '$rootScope', function ($scope, Team, Ueditor, $location, $http, $rootScope) {
+app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$http', '$rootScope', 'Form', 'Activity', '$stateParams', function ($scope, Team, Ueditor, $location, $http, $rootScope, Form, Activity, $stateParams) {
+  $scope.isEdit = false;
+  if ($stateParams.id !== '') {
+    $scope.isEdit = true;
+
+    Activity.findById({
+      id: $stateParams.id
+    }, function (res) {
+      $scope.activityData = res;
+      if (res.actType === 'form') {
+        $scope.preType = {
+          type: 'form'
+        };
+
+        Activity.prototype_get_forms({
+          id: $stateParams.id
+        }, function (res) {
+          $scope.formData = res[0];
+          $scope.preType.id = res[0].id;
+        });
+      }
+    });
+
+  }
   $scope.activityData = {
     authorName: $rootScope.teamInfo.name,     //$scope.teamInfo在homeController里面获取
     authorId: $scope.teamInfo.id,
     type: $scope.teamInfo.type,
     school: $scope.teamInfo.school,
-    hidden: false,
     created: new Date()
   };
   //Input-date的配置
@@ -87,26 +108,127 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
   };
 
   $scope.activityEditorConfig = Ueditor.config;
-  $scope.createActivity = function () {
 
-    $http({
-      url: '/ue/uploads?dir=team&id=' + localStorage.$LoopBack$currentTeamId + '&action=uploadtext',
-      method: "post",
-      data: {
-        'content': $scope.activityEditorContent
+  $scope.getFormList = function () {
+    Form.find({
+      filter: {
+        order: 'updated DESC'
       }
-    }).success(function (res) {
-      $scope.activityData.explainUrl = 'http://oss.etuan.org/' + res.url;
-      Team.prototype_create_activities({
-        id: localStorage.$LoopBack$currentTeamId
-      }, $scope.activityData, function () {
-        Materialize.toast('创建成功！', 2000);
-        $location.path('/MS/activity/list');
-      }, function () {
-        Materialize.toast('创建失败！', 2000);
-      });
-      console.log($scope.activityData);
+    }, function (res) {
+      $scope.formItems = res;
+      $scope.isActivity = function (index) {
+        return !$scope.formItems[index].activityId
+      };
+    }, function () {
+      Materialize.toast('获取活动列表失败！', 6000);
     });
-  }
+
+    $scope.isFormAuthor = function (index) {
+      return $scope.formItems[index].teamId === localStorage.$LoopBack$currentTeamId;
+    };
+  };
+
+  $scope.addFormFunc = function () {
+    var thisElement = this;
+    $scope.formData = thisElement.formItem;
+    $('#addForm').closeModal();
+  };
+
+  $scope.removeFormData = function () {
+    $scope.formData = undefined;
+  };
+
+  $scope.createActivity = function () {
+    if ($scope.isEdit) {
+      $http({
+        url: '/ue/uploads?dir=team&id=' + localStorage.$LoopBack$currentTeamId + '&action=uploadtext',
+        method: "post",
+        data: {
+          'content': $scope.activityEditorContent
+        }
+      }).success(function (res) {
+        $scope.activityData.explainUrl = 'http://oss.etuan.org/' + res.url;
+        if ($scope.formData) {
+          $scope.activityData.actType = 'form'
+        } else if ($scope.voteData) {
+          $scope.activityData.actType = 'vote'
+        } else if ($scope.seckillData) {
+          $scope.activityData.actType = 'seckill'
+        } else {
+          $scope.activityData.actType = 'common'
+        }
+
+        Team.prototype_updateById_activities({
+          id: localStorage.$LoopBack$currentTeamId,
+          fk: $stateParams.id
+        }, $scope.activityData, function (res) {
+          Materialize.toast('更新成功！', 2000);
+
+          if ($scope.formData) {
+            $scope.formData.updated = new Date();
+            $scope.formData.activityId = res.id;
+            $scope.formData.id = undefined;
+            $scope.formData.activityId = localStorage.$LoopBack$currentTeamId;
+            if ($scope.preType.type === 'form') {
+              Activity.prototype_updateById_forms({
+                id: res.id,
+                fk: $scope.preType.id
+              }, $scope.formData, function (res) {
+                console.log(res);
+              })
+            } else {
+              Activity.prototype_create_forms({
+                id: res.id
+              }, $scope.formData)
+            }
+          }
+
+          $location.path('/MS/activity/list');
+        }, function () {
+          Materialize.toast('更新失败！', 2000);
+        });
+
+      });
+    } else {
+      $http({
+        url: '/ue/uploads?dir=team&id=' + localStorage.$LoopBack$currentTeamId + '&action=uploadtext',
+        method: "post",
+        data: {
+          'content': $scope.activityEditorContent
+        }
+      }).success(function (res) {
+        $scope.activityData.explainUrl = 'http://oss.etuan.org/' + res.url;
+        if ($scope.formData) {
+          $scope.activityData.actType = 'form'
+        } else if ($scope.voteData) {
+          $scope.activityData.actType = 'vote'
+        } else if ($scope.seckillData) {
+          $scope.activityData.actType = 'seckill'
+        } else {
+          $scope.activityData.actType = 'common'
+        }
+
+        Team.prototype_create_activities({
+          id: localStorage.$LoopBack$currentTeamId
+        }, $scope.activityData, function (res) {
+          Materialize.toast('创建成功！', 2000);
+          if ($scope.formData) {
+            $scope.formData.updated = new Date();
+            $scope.formData.activityId = res.id;
+            $scope.formData.id = undefined;
+            $scope.formData.activityId = localStorage.$LoopBack$currentTeamId;
+            Activity.prototype_create_forms({
+              id: res.id
+            }, $scope.formData)
+          }
+
+          $location.path('/MS/activity/list');
+        }, function () {
+          Materialize.toast('创建失败！', 2000);
+        });
+
+      });
+    }
+  };
 
 }]);
