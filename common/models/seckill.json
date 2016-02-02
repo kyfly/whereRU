@@ -21,7 +21,7 @@
     "updated": {
       "type": "date"
     },
-    "teamId": {
+    "title": {
       "type": "string",
       "require": true
     },
