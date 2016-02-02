@@ -1,26 +1,29 @@
 .header {
-	background-color: #0CB9F7;
-	padding: 0;
-	margin: 0;
+  background-color: #0CB9F7;
+  padding: 0;
+  margin: 0;
   height: 4rem;
   position: relative;
-  z-index:9999!important;
+  z-index: 9999 !important;
 }
-.header ul a{
-	font-size: 1.5rem;
+
+.header ul a {
+  font-size: 1.5rem;
   padding: 0 20px;
   font-weight: bold;
 }
+
 .header .brand-logo {
-    position: absolute;
-    color: #fff;
-    display: inline-block;
-    font-size: 2.1rem;
-    padding: 0;
-    white-space: nowrap;
-    font-weight: 900;
-    font-family: cursive;
+  position: absolute;
+  color: #fff;
+  display: inline-block;
+  font-size: 2.1rem;
+  padding: 0;
+  white-space: nowrap;
+  font-weight: 900;
+  font-family: cursive;
 }
+
 .notice {
   height: 3rem;
   font-size: 1rem;
@@ -30,27 +33,31 @@
   position: absolute;
   width: 100%;
 }
-.section-first{
-	max-height: 700px;
-	background-color: #eee;
+
+.section-first {
+  max-height: 700px;
+  background-color: #eee;
 }
+
 .login {
   position: fixed;
   top: 4rem;
   width: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   z-index: 3;
-  color:#fff;
+  color: #fff;
   display: none;
 }
-.tab-active{
+
+.tab-active {
   position: absolute;
   bottom: 0;
   height: 2px;
   background-color: #f6b2b5;
   will-change: left, right;
 }
-.menu{
+
+.menu {
   height: 2.5rem;
   font-size: 1.3rem;
   float: left;
@@ -61,122 +68,132 @@
   padding: 0;
   border-bottom: 5px solid #0CB9F7;
 }
-.browser-default{
+
+.browser-default {
   height: 100%;
 }
-.menu-item{
+
+.menu-item {
   height: 100%;
 }
-.active{
+
+.active {
   color: #000;
 }
-.activity{
+
+.activity {
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 7.5rem;  /*菜单栏加导航栏高度*/
-  bottom: 0;  /*固定框架高度*/
+  top: 7.5rem; /*菜单栏加导航栏高度*/
+  bottom: 0; /*固定框架高度*/
   width: 100%;
 }
-.activity-list{
+
+.activity-list {
   position: relative;
   height: 100%;
   overflow-y: auto;
 }
-.activity-list h4{
-  white-space:nowrap;  /*不换行*/
-  overflow: hidden;   /*隐藏并省略*/
-  text-overflow:ellipsis;
+
+.activity-list h4 {
+  white-space: nowrap; /*不换行*/
+  overflow: hidden; /*隐藏并省略*/
+  text-overflow: ellipsis;
   margin: 0.5rem 0;
   font-size: 1.3rem;
   padding-top: 10px
 }
-.activity-list .tag{
-  white-space:nowrap;
+
+.activity-list .tag {
+  white-space: nowrap;
   font-size: 1rem;
   padding: 5px 10px;
   width: 100%;
 }
-.activity-list .tag h6{
+
+.activity-list .tag h6 {
   overflow: hidden;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   width: 100%;
 }
+
 .activity-list .card {
   border-top: rgba(0, 0, 0, 0.16) 1px solid;
-  box-shadow:0 0 0 ;
+  box-shadow: 0 0 0;
   margin: 0;
   padding: 0;
 }
+
 .activity-list .card-content {
   padding: 0;
 }
-.activity-detail{
+
+.activity-detail {
   position: fixed;
   top: 7.5rem;
   right: 0;
   bottom: 0;
 }
-.activity-detail .row{
+
+.activity-detail .row {
   height: 100%;
   position: relative;
   top: 0;
 }
-.activity-detail #about{
+
+.activity-detail #about {
   display: block;
   overflow: scroll;
   height: 100%;
 }
-.activity-detail #about .collection-item p{
-  padding-top: 10px; 
+
+.activity-detail #about .collection-item p {
+  padding-top: 10px;
 }
-#search{
+
+#search {
   margin: 0;
 }
 
-
-.wrap
-{
+.wrap {
   background: #fff;
   margin: 20px auto;
   display: block;
-  //width: 300px;
-  //height: 310px;
-  padding:20px;
+/ / width: 300 px;
+/ / height: 310 px;
+  padding: 20px;
   border-radius: 2px 2px 2px 2px;
-  -webkit-box-shadow: 0 1px 4px
-  rgba(0, 0, 0, 0.3), 0 0 40px
-  rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  box-shadow: 0 1px 4px
-  rgba(0, 0, 0, 0.3), 0 0 40px
-  rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 
-.wrap img{
+.wrap img {
   width: 100%;
   margin-top: 15px;
 }
 
-.team-p{
+.teamItem > p {
   margin-top: 15px;
   text-align: justify;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
 }
 
-.team-h1{
+.teamItem h1 {
   text-align: center;
   font-size: 20px;
   font-weight: bold;
   margin-top: 5px;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
-a{
+
+a {
   text-decoration: none;
   color: #4A4A4A !important;
 }
 
-a:hover{
+a:hover {
   text-decoration: underline;
-  color: #6B6B6B !important ;
+  color: #6B6B6B !important;
 }
