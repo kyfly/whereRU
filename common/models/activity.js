@@ -85,7 +85,7 @@ module.exports = function(Activity) {
     	where:{
     	  or: query,
 				hidden: false,
-      	deleted: false 
+      	deleted: false
       }
     },function(err,activities){
         if(err) {
@@ -122,7 +122,7 @@ module.exports = function(Activity) {
       limit: 5,
       fields: ['id','title','imgUrl']
     },function(err, activities){
-      if(err) 
+      if(err)
       	return next({"status": 1201, "message": "活动列表获取失败"});
       cb(null,activities);
     });
@@ -148,7 +148,7 @@ module.exports = function(Activity) {
    * 创建抢票时给抢票添加余票数量
    * @param  {[type]} ctx     [description]
    * @param  {[type]} ins     [description]
-   * @param  {[type]}           
+   * @param  {[type]}
    * @return {[type]}         [description]
    */
   Activity.beforeRemote('prototype.__create__seckills', function (ctx, ins, next){

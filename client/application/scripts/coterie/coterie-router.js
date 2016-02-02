@@ -12,7 +12,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
       templateUrl: 'application/views/coterie/systemMessage.html'
     })
     .state('coteries.userMessage',{
-      url: '/userMessage?:id',
+      url: '/userMessage/:id',
       controller: 'CoterieDetailController',
       templateUrl: 'application/views/coterie/userMessage.html'
     })

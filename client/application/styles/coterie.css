@@ -15,11 +15,6 @@ body{
 .topBarCenter{
   text-align: center;
 }
-.topBarRight{
-}
-/*input{
-  color: white;
-}*/
 
 
 .coterie-top{
@@ -40,9 +35,6 @@ body{
   margin: 0;
 }
 
-header{
-
-}
 
 .bold{
   font-weight: bold;
@@ -50,7 +42,12 @@ header{
 
 
 .coterieHeader{
-
+  position: relative;
+}
+.coterieHeaderRight{
+  position: absolute;
+  right: 0;
+  top: 10px;
 }
 
 .font-large{
@@ -106,6 +103,18 @@ header{
   right: 0!important;
   top: 20px;
 
+}
+
+.coterieConcernStar{
+  cursor: pointer;
+  font-size: x-large;
+  padding-right: 20px;
+  color: #ff8a65;
+}
+.coterieSecondaryContent{
+  position: absolute;
+  right: 16px;
+  top: 16px;
 }
 
 

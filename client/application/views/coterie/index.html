@@ -19,17 +19,18 @@
     </li>
 
     <li ng-repeat="sideBarInfo in existCoterieList" id="{{sideBarInfo.id}}" class="collection-item bold withoutPadding ng-scope
-     coterieSideMargin coterieSideLi" ng-click="coterieNewMessage = false" ng-show="showExitConterie">
+     coterieSideMargin coterieSideLi" ng-click="coterieNewMessage = false;showName()" ng-show="showExitConterie">
       <span class="coterieLeft"><img class="coterieLogo" ng-src="{{sideBarInfo.logoUrl}}"></span>
-      <a class="waves-effect waves-teal" ui-sref="coteries.userMessage({id: sideBarInfo.id})">{{sideBarInfo.name}}</a>
+      <a class="waves-effect waves-teal" ui-sref="coteries.userMessage({id: sideBarInfo.id})" >{{sideBarInfo.name}}</a>
       <span ng-bind="sideBarInfo.lastView | date:'MM-dd'" class="coterieSideTime"> </span>
-      <span class="coterieSideNewNum new badge" ng-bind="sideBarInfo.msgCount" ng-show="coterieNewMessage" ></span>
+      <span class="coterieSideNewNum new badge" ng-bind="sideBarInfo.msgCount" ng-show="coterieNewMessage"></span>
     </li>
 
-    <li class="center-align" ng-click="showAllConterie = ! showAllConterie;showExitConterie = ! showExitConterie" style="cursor:pointer">
+    <li class="center-align" ng-click="showAllConterie = ! showAllConterie;showExitConterie = ! showExitConterie"
+        style="cursor:pointer">
       <a><i class="mdi-content-add"></i>是否发现更多？</a>
     </li>
-    <li ng-repeat="allCoterie in allCoteries" id="{{allCoterie.id}}" class="collection-item bold withoutPadding ng-scope
+    <li ng-click="showDetail();showName()" ng-repeat="allCoterie in allCoteries" id="{{allCoterie.id}}" class="collection-item bold withoutPadding ng-scope
      coterieSideMargin coterieSideLi" ng-show="showAllConterie">
       <span class="coterieLeft"><img class="coterieLogo" ng-src="{{allCoterie.logoUrl}}"></span>
       <a class="waves-effect waves-teal" ui-sref="coteries.userMessage({id: allCoterie.id})">{{allCoterie.name}}</a>

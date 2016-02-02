@@ -1,6 +1,19 @@
-<h3 class="coterieHeader">
-  用户消息
-</h3>
+<div class="coterieHeader">
+  <h3 ng-bind="contentName">
+
+  </h3>
+  <div>
+    <!--<span class="coterieHeaderRight" ng-bind="coterieConcernedNum.count"></span>-->
+    <div class="coterieHeaderRight">
+        <i class="mdi-toggle-star-outline coterieConcernStar" ng-click="coterieConcern()" ng-show="showAllConterie" ></i>
+      关注人数:<span ng-bind="coterieConcernedNum.count"></span>
+    </div>
+
+  </div>
+</div>
+
+
+
 
 <ul class="collection">
   <li class="collection-item avatar coterieUserMessageLi" ng-repeat="coterieArticle in coterieArticles">
@@ -12,21 +25,34 @@
         <span ng-bind="coterieArticle.title"></span>
       </div>
     <br>
+
+    <!--简短信息？暂时无法测试-->
+      <!--<div ng-include="'/application/views/coterie/detail.html'"></div>-->
+    <div ng-include="'coterieArticle.contentUrl'"></div>
+
     <div>
+
       <a ng-href="{{coterieArticle.contentUrl}}">详细信息</a>
     </div>
     </p>
-    <!--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
-    <a href="#!" class="secondary-content">
-      <i class="mdi-action-thumb-up coterieArticleIcons"></i>
-      <span ng-bind="coterieArticle.commentCount"></span>
-      <span class="coterieSpace"></span>
-      <i class="mdi-communication-chat coterieArticleIcons"></i>
-      <span ng-bind="coterieArticle.likeCount"></span>
-    </a>
+
+    <div class="coterieSecondaryContent">
+      <a href="#!" class="coterieSecondaryPart1">
+        <i class="mdi-action-thumb-up coterieArticleIcons"></i>
+        <span ng-bind="coterieArticle.commentCount"></span>
+      </a>
+        <span class="coterieSpace"></span>
+      <a href="#!" class="coterieSecondaryPart2">
+        <i class="mdi-communication-chat coterieArticleIcons"></i>
+        <span ng-bind="coterieArticle.likeCount"></span>
+      </a>
+
+
+    </div>
 
   </li>
-  <li>
+  <li >
+
 
   </li>
 

@@ -1,4 +1,5 @@
-app.controller('SeckillListCtrl', ['$scope', function ($scope) {
+app.controller('SeckillListCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+  $rootScope.logoHide = false;
 
 }]);
 

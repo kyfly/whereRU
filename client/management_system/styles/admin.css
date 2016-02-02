@@ -354,6 +354,59 @@ main {
 }
 
 .margin-top {
-  margin-top: 15px;
+  margin-top: 15px !important;
 }
 
+/*
+  以下为form.edit的样式
+*/
+.addFormBtn {
+  font-size: 14px !important;
+}
+
+.textInputLabel {
+  font-size: 1em !important;
+  line-height: 50px;
+}
+
+.singleChooseItem > .input-field {
+  margin-top: 0 !important;
+}
+
+.singleChooseItem > .input-field > a {
+  height: 30px;
+  width: 30px;
+  margin-top: 8px;
+  z-index: 0 !important;
+}
+
+.singleChooseItem > .input-field > a > i {
+  height: 30px;
+  width: 30px;
+  line-height: 31px;
+  font-size: 0.7em;
+}
+
+.singleChooseItem > .input-field > input {
+  margin-bottom: 0 !important;
+}
+
+.dropdown-content {
+  overflow: hidden;
+  z-index: 2 !important;
+  top: 36px !important;;
+}
+
+.createFormBtn {
+  position: fixed;
+  top: 10px;
+  right: auto;
+}
+
+.bottomBtn {
+  margin-bottom: 50px;
+}
+
+.editFormAllBtn {
+  z-index: 0 !important;
+}

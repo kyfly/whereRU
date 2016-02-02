@@ -59,6 +59,22 @@ module.factory(
     { 'id': '@id' },
     {
       /**
+       * 圈子关注量
+       * 使用场景：显示圈子关注量
+       */
+      "prototype_count_fans": {
+        url: urlBase + '/Coteries/:id/fans/count',
+        method: 'GET'
+      },
+      /**
+       * 关注圈子
+       * 使用场景：pc端点击关注
+       */
+      "prototype_link_coteries": {
+        url: urlBase + '/WUsers/:id/coteries/rel/:fk',
+        method: 'PUT'
+      },
+      /**
        *   所有圈子显示
        *   pc所有圈子的显示
        */
@@ -487,7 +503,7 @@ module.factory(
   'Form',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
-    var R = resource(
+    var R = Resource(
       urlBase + '/Forms/:id',
       { 'id': "@id"},
       {
@@ -498,6 +514,13 @@ module.factory(
         "prototype_get_formResults": {
           url: urlBase + '/Forms/:id/formResults',
           method: 'GET'
+        },
+        /**
+         * 描述：上传表单
+         */
+        "create": {
+          url: urlBase + '/Forms',
+          method: 'POST'
         }
       }
     );
@@ -507,7 +530,7 @@ module.factory(
   'Vote',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
-    var R = resource(
+    var R = Resource(
       urlBase + '/Votes/:id',
       { 'id': "@id"},
       {

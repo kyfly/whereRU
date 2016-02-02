@@ -1,4 +1,5 @@
-app.controller('MemberCtrl', ['$scope', 'Team', function ($scope, Team) {
+app.controller('MemberCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
+  $rootScope.logoHide = false;
   Team.prototype_get_members({
       id: localStorage.$LoopBack$currentTeamId
     },
