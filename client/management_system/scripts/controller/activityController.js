@@ -39,9 +39,9 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($s
 
 }]);
 
-app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$http', function ($scope, Team, Ueditor, $location, $http) {
+app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$http', '$rootScope', function ($scope, Team, Ueditor, $location, $http, $rootScope) {
   $scope.activityData = {
-    authorName: $scope.teamInfo.name,     //$scope.teamInfo在homeController里面获取
+    authorName: $rootScope.teamInfo.name,     //$scope.teamInfo在homeController里面获取
     authorId: $scope.teamInfo.id,
     type: $scope.teamInfo.type,
     school: $scope.teamInfo.school,
