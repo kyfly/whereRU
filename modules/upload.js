@@ -125,7 +125,7 @@ var save = function (file, filename, mimetype, req, callback) {
   file.pipe(fs.createWriteStream(saveTo));
   file.on('end', function() {
     fs.readFile(saveTo,function(err,data){
-      var file = 'whereru/' + query.dir + '/' + query.id + '/' + path.extname(filename).substr(0,1) + '/' + realName;
+      var file = 'whereru/' + query.dir + '/' + query.id + '/' + path.extname(filename).substr(1) + '/' + realName;
       AliYun.putObject({
         fileName: file,
         data: data,

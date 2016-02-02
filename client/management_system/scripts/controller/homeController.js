@@ -109,7 +109,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
   Team.findById({
     id: localStorage.$LoopBack$currentTeamId
   }, function (res) {
-    $scope.teamInfo = res;
+    $rootScope.teamInfo = res;
   });
 }
 

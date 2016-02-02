@@ -1,27 +1,39 @@
-app.controller('FormListCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
+app.controller('FormListCtrl', ['$scope', 'Form', '$rootScope', function ($scope, Form, $rootScope) {
   $rootScope.logoHide = false;
-  Team.prototype_get_activities({
-    id: localStorage.$LoopBack$currentTeamId,
+  $scope.showType = 0;
+  Form.find({
     filter: {
-      order: 'created DESC'
+      order: 'updated DESC'
     }
   }, function (res) {
-    $scope.activityItems = res;
+    $scope.formItems = res;
+    $scope.isActivity = function (index) {
+      if($scope.showType === 0){
+        return $scope.formItems[index].activityId
+      } else {
+        return !$scope.formItems[index].activityId
+      }
+    };
   }, function () {
     Materialize.toast('获取活动列表失败！', 6000);
   });
 
-  $scope.deleteActivity = function () {
+  $scope.isFormAuthor = function (){
     var thisElement = this;
-    console.log(thisElement);
-    Team.prototype_updateById_activities({
-      id: localStorage.$LoopBack$currentTeamId,
-      fk: thisElement.activityItem.id
-    }, {deleted: true}, function () {
+    return thisElement.formItem.teamId === localStorage.$LoopBack$currentTeamId;
+  };
+
+
+
+  $scope.deleteForm = function () {
+    var thisElement = this;
+    Form.deleteById({
+      id: thisElement.formItem.id
+    }, function () {
       Materialize.toast('删除成功！', 2000);
-      var id = thisElement.activityItem.id;
-      for (var x in $scope.activityItems) if ($scope.activityItems[x].id === id) {
-        $scope.activityItems.splice(x, 1);
+      var id = thisElement.formItem.id;
+      for (var x in $scope.formItems) if ($scope.formItems[x].id === id) {
+        $scope.formItems.splice(x, 1);
       }
     },
     function () {
@@ -201,22 +213,27 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Form', '$rootScope', fun
   $scope.previewForm = function () {
 
   };
+
+  $scope.uploadData = {
+    teamId: localStorage.$LoopBack$currentTeamId
+  };
   $scope.uploadForm = function () {
     for (x in $scope.forms) {
       $scope.forms[x].id = parseInt(x);
     }
-    $scope.uploadData = {
-      _formItems: $scope.forms
-    };
-    if ($scope.forms.length != 0) {
-      Form.create({}, $scope.uploadData, function (res) {
+    $scope.uploadData.updated = new Date();
+    $scope.uploadData._formItems = $scope.forms;
+    if ($scope.forms.length === 0) {
+      Materialize.toast('请至少添加一个表单项！', 1000);
+    } else if(!$scope.uploadData.title) {
+      Materialize.toast('请填写表单名称！', 1000);
+    } else {
+      Form.create({}, $scope.uploadData, function () {
         Materialize.toast('提交成功！', 2000);
-        console.log(res);
+        $location.path('/MS/form/list');
       }, function () {
         Materialize.toast('提交失败！', 2000);
       });
-    } else {
-      Materialize.toast('请至少添加一个表单项！', 2000);
     }
 
   };

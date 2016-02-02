@@ -315,16 +315,16 @@ main {
   border: none !important;
 }
 
-.collection-item {
+.collection-item-event {
   padding: 5px !important;
 }
 
-.collection-item > span {
+.collection-item-event > span {
   margin: 15px !important;
   font-size: 20px;
 }
 
-.collection-item > p {
+.collection-item-event > p {
   color: #000000 !important;
   padding: 15px !important;
 }
@@ -391,7 +391,7 @@ main {
   margin-bottom: 0 !important;
 }
 
-.dropdown-content {
+.createFormBtn > .dropdown-content {
   overflow: hidden;
   z-index: 2 !important;
   top: 36px !important;;
@@ -400,13 +400,24 @@ main {
 .createFormBtn {
   position: fixed;
   top: 10px;
-  right: auto;
 }
 
 .bottomBtn {
   margin-bottom: 50px;
 }
 
+.noFormNotice {
+  min-height: 200px;
+}
+
 .editFormAllBtn {
   z-index: 0 !important;
+}
+
+.nobr-text {
+  text-overflow: ellipsis;overflow: hidden;
+}
+
+.dropdown-content {
+  top: 0 !important;
 }
