@@ -49,7 +49,7 @@ module.factory(
         }
       });
     return R;
-}])
+}]);
 module.factory(
   'User',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
@@ -76,11 +76,10 @@ module.factory(
         method: 'PUT'
       },
       /**
-       *   所有圈子显示
-       *   pc所有圈子的显示
+       * 用户拥有的获取团队
        */
-      "find": {
-        url: urlBase + '/Coteries',
+      'prototype_get_teams': {
+        url: urlBase + '/WUsers/:id/teams',
         method: 'GET',
         isArray: true
       },
@@ -410,6 +409,26 @@ module.factory(
     return R;
 }])
 .factory(
+  'Coterie', 
+  ['LoopBackResource', 'LoopBackAuth', '$injector',
+  function(Resource, LoopBackAuth, $injector){
+    var R = Resource(
+      urlBase + '/Teams/:id',
+      { 'id': '@id' },
+      {
+        /**
+         *   所有圈子显示
+         *   pc所有圈子的显示
+         */
+        "find": {
+          url: urlBase + '/Coteries',
+          method: 'GET',
+          isArray: true
+        }
+      });
+  return R;
+}])
+.factory(
   'Activity',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
@@ -430,14 +449,34 @@ module.factory(
         method: 'GET',
         isArray: true
       },
-
       /**
-       * 参与活动
+       * 获取活动的表单
        */
       "prototype_get_forms":{
         url: urlBase + '/Activities/:id/forms',
         method: 'GET',
         isArray: true
+      },
+      /**
+       * 活动添加表单
+       */
+      "prototype_create_forms":{
+        url: urlBase + '/Activities/:id/forms',
+        method: 'POST'
+      },
+      /**
+       * 修改活动的表单
+       */
+      "prototype_updateById_forms":{
+        url: urlBase + '/Activities/:id/forms/:fk',
+        method: 'PUT'
+      },
+      /**
+       * 删除活动的表单
+       */
+      "prototype_delete_forms": {
+        url: urlBase + '/Activities/:id/forms',
+        method: 'DELETE'
       },
       /**
        * 描述：用户所在学校活动列表
@@ -467,6 +506,13 @@ module.factory(
       "findById": {
         url: urlBase + '/Activities/:id',
         method: 'GET'
+      },
+      /**
+       * 描述：更新活动
+       */
+      "prototype_updateAttributes": {
+        url: urlBase + '/Activities/:id',
+        method: 'PUT'
       }
 
     });
@@ -476,7 +522,7 @@ module.factory(
   'Seckill',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
-    var R = resource(
+    var R = Resource(
       urlBase + '/Seckills/:id',
       { 'id': "@id"},
       {
@@ -504,7 +550,7 @@ module.factory(
   'Form',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
-    var R = resource(
+    var R = Resource(
       urlBase + '/Forms/:id',
       { 'id': "@id"},
       {
@@ -515,6 +561,28 @@ module.factory(
         "prototype_get_formResults": {
           url: urlBase + '/Forms/:id/formResults',
           method: 'GET'
+        },
+        /**
+         * 描述：上传表单
+         */
+        "create": {
+          url: urlBase + '/Forms',
+          method: 'POST'
+        },
+        /**
+         * 描述：获取所有表单
+         */
+        "find": {
+          url: urlBase + '/Forms',
+          method: 'GET',
+          isArray: true
+        },
+        /**
+         * 描述：删除某条表单
+         */
+        "deleteById": {
+          url: urlBase + '/Forms/:id',
+          method: 'DELETE'
         }
       }
     );
@@ -524,7 +592,7 @@ module.factory(
   'Vote',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
-    var R = resource(
+    var R = Resource(
       urlBase + '/Votes/:id',
       { 'id': "@id"},
       {

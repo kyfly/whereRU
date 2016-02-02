@@ -30,7 +30,8 @@
       "required": true
     },
     "school": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "created": {
       "type": "date"
@@ -83,6 +84,18 @@
     "articles": {
       "type": "hasMany",
       "model": "Artical"
+    },
+    "forms": {
+      "type": "hasMany",
+      "model": "Form"
+    },
+    "votes": {
+      "type": "hasMany",
+      "model": "Vote"
+    },
+    "seckills": {
+      "type": "hasMany",
+      "model": "Seckill"
     }
   },
   "acls": [

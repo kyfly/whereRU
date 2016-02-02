@@ -32,23 +32,91 @@
   </div>
 </div>
 
-
-<div>
-  <div class="row" ng-repeat="raceItem in raceItems">
-    <div style="border-bottom: 1px solid #86c723">
-      <div class="col s9 m9">
-        <a href=""{{raceItem.explainUrl}}"">
-        <h2 class="left-align" ng-bind="raceItem.name"></h2>
+<!--校园竞赛列表-->
+<div class="row activity">
+  <div class="col s12 m2 l2 activity-list">
+    <div class="card" ng-repeat="raceItem in raceItems">
+      <div class="card-title">                                     <!--竞赛题目-->
+        <a class="hide-on-med-only hide-on-large-only " ng-href="{{raceItem.explainUrl">
+          <h4 class="left-align" ng-bind="raceItem.name"></h4>
         </a>
-        <h6 class="left-align">{{raceItem.authorName}},{{raceItem.created | date:'yy-MM-dd'}}</h6>
+        <a class="hide-on-small-only">
+          <h4 class="left-align" ng-bind="raceItem.name"></h4>
+        </a>
       </div>
-      <div class="col s3">
-        <img ng-href="{{raceItem.imgUrl}}">                 <!--后端数据中现有的url不能用-->
-        报名时间：
-        <m ng-bind="raceItem.created| date:'yy-MM-dd'"></m>  <!-- m是我自己创立的，并没有什么特殊的含义-->
-        -----
-        <m ng-bind="raceItem.ended| date:'yy-MM-dd'"></m>
+      <h6 class="left-align" ng-bind="raceItem.authorName"></h6>
+      <!--<div class="card-image">-->
+      <div class="row">
+        <div class="col s8">
+          <img ng-src="{{raceItem.imgUrl}}" ng-click="changeCurrentRace()">                 <!--后端数据中现有的url不能用-->
+        </div>
+      </div>
+      报名时间：
+      <time ng-bind="raceItem.created| date:'yyyy-MM-dd'"></time>
+      <br/>  <!-- time是我自己创立的，并没有什么特殊的含义-->
+      结束时间：
+      <time ng-bind="raceItem.ended| date:'yyyy-MM-dd'"></time>
+    </div>
+  </div>
+</div>
+
+<!--竞赛相关内容-->
+<div class="row">
+  <div class="col s12 m10 l10 activity-detail hide-on-small-only">
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs" tabs>
+          <li class="tab col s3">
+            <a href="#notice">竞赛通知</a>
+          </li>
+          <li class="tab col s3">
+            <a href="#detail">竞赛详情</a>
+          </li>
+          <li class="tab col s3">
+            <a href="#team">参赛团队</a>
+          </li>
+          <li class="tab col s3">
+            <a href="#join">参与竞赛</a>
+          </li>
+        </ul>
+      </div>
+      <!--竞赛通知-->
+      <div id="notice" class="col s12">
+        <div class="col s12 m8 offset-m2 l6 offset-l3" ng-repeat="raceNoticeItem in raceNoticeItems">
+          <div class="card-panel grey lighten-5 z-depth-1">
+            <div class="row valign-wrapper">
+              <div class="col s2">
+                <img ng-src="{{raceCurrent.imgUrl}}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+              </div>
+              <div class="col s10">
+              <span class="black-text">
+                <p ng-bind="raceNoticeItem.content" class="team-p"></p>
+                <p ng-bind="raceNoticeItem.created|date:'yyyy-MM-dd'" class="team-p"></p>
+              </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--竞赛详情-->
+      <div id="detail" class="col s12">
+        <div>
+          <p ng-bind="raceDetail.name"></p>
+        </div>
+      </div>
+
+
+      <!--参赛团队-->
+      <div id="team" class="col s12">
+      </div>
+
+
+      <!--参与竞赛-->
+      <div id="join" class="col s12">
       </div>
     </div>
   </div>
 </div>
+
+

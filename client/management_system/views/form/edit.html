@@ -1,1 +1,124 @@
-formEdit
+<div class="container">
+  <div class="row">
+    <div input-field>
+      <input id="formTitle" type="text" ng-model="uploadData.title">
+      <label for="formTitle">表单名称</label>
+    </div>
+    <div class="col s12" ng-repeat="form in forms">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title"><span ng-bind="$index + 1"></span>. {{formType(form.type)}}</span>
+          <div input-field>
+            <span class="prefix textInputLabel">题目</span>
+            <input class="textInput" id="{{'textInput' + $index}}" type="text" ng-model="form.name">
+            <label for="{{'textInput' + $index}}">请输入题目</label>
+          </div>
+          <div ng-show="form.type === 'select'">
+            <div input-field>
+              <span>选项</span>
+              <a ng-click="appendContent()" class="waves-effect waves-light btn margin-left editFormAllBtn"><i
+                class="mdi-content-add left"></i>增加选项</a>
+            </div>
+            <div input-field class="singleChooseItem" ng-repeat="singleChoice in form.options track by $index">
+              <a ng-click="removeContent()" class="btn-floating waves-effect waves-light red prefix"><i
+                class="mdi-content-remove"></i></a>
+              <input class="" type="text" ng-model="form.options[$index]">
+            </div>
+          </div>
+        </div>
+        <div class="card-action">
+          <a ng-hide="$index === 0" ng-click="moveUpForm()"
+             class="waves-effect waves-light btn white-text blue darken-2 editFormAllBtn"><i
+            class="material-icons left">arrow_upward</i>上移</a>
+          <a ng-hide="$index === forms.length - 1" ng-click="moveDownForm()"
+             class="waves-effect waves-light btn white-text blue darken-2 editFormAllBtn"><i
+            class="material-icons left">arrow_downward</i>下移</a>
+          <a ng-click="removeForm($index)" class="waves-effect waves-light btn red white-text editFormAllBtn"><i
+            class="material-icons left">delete</i>删除</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="createFormBtn">
+    <a class="dropdown-button btn orange darken-2 waves-effect waves-light" href data-activates="addFormBtn" dropdown>
+      添加表单项<i class="mdi-navigation-arrow-drop-down right hide-on-small-only"></i>
+    </a>
+    <ul id="addFormBtn" class="dropdown-content">
+      <li><a ng-click="addForm.simple()" class="addFormBtn" href>简答题（单行输入）</a></li>
+      <li><a ng-click="addForm.complex()" class="addFormBtn" href>陈述题（多行输入）</a></li>
+      <li><a ng-click="addForm.choice()" class="addFormBtn" href>选择题（下拉框）</a></li>
+      <li><a ng-click="addForm.judge()" class="addFormBtn" href>判断题（仅选择是否）</a></li>
+    </ul>
+
+    <a class="dropdown-button btn red darken-2 margin-left waves-effect waves-light" href
+       data-activates="quickAddFormBtn" dropdown>
+      快速添加<i class="mdi-navigation-arrow-drop-down right hide-on-small-only"></i>
+    </a>
+    <ul id="quickAddFormBtn" class="dropdown-content margin-left">
+      <li><a class="addFormBtn" href ng-click="addForm.name()">姓名</a></li>
+      <li><a class="addFormBtn" href ng-click="addForm.sex()">性别</a></li>
+      <li><a class="addFormBtn" href ng-click="addForm.personalID()">身份证号</a></li>
+      <li><a class="addFormBtn" href ng-click="addForm.hometown()">籍贯</a></li>
+      <li class="divider"></li>
+      <li><a class="addFormBtn" href ng-click="addForm.studentID()">学号</a></li>
+      <li><a class="addFormBtn" href ng-click="addForm.school()">学院</a></li>
+      <li><a class="addFormBtn" href ng-click="addForm.major()">专业</a></li>
+      <li class="divider"></li>
+      <li><a class="addFormBtn" href ng-click="addForm.email()">电子邮箱</a></li>
+      <li><a class="addFormBtn" href ng-click="addForm.qqNumber()">QQ号</a></li>
+      <li><a class="addFormBtn" href ng-click="addForm.longCellphoneNumber()">手机长号</a></li>
+      <li><a class="addFormBtn" href ng-click="addForm.shortCellphoneNumber()">手机短号</a></li>
+      <li class="divider"></li>
+      <li><a class="addFormBtn" href ng-click="addForm.introduction()">个人简介</a></li>
+      <li><a class="addFormBtn" href ng-click="addForm.specials()">特长</a></li>
+    </ul>
+  </div>
+
+  <div class="text-center col s12" ng-show="!forms.length">
+    <p class="noticeText noFormNotice">还没有创建表单项哦 (′・ω・`)</p>
+  </div>
+  <div class="clearfix"></div>
+  <div class="bottomBtn">
+    <hr>
+    <a class="btn grey lighten-1 waves-effect waves-light editFormAllBtn" href ui-sref="formList">取消</a>
+    <a ng-click="uploadForm()" class="waves-effect waves-light btn blue darken-2 right margin-left editFormAllBtn" href>创建
+      <i class="mdi-action-done right"></i></a>
+    <a href='#previewModal' modal class="waves-effect waves-light btn blue darken-2 right margin-left editFormAllBtn">预览<i
+      class="mdi-image-remove-red-eye right"></i></a>
+    <div id="previewModal" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4 ng-bind="uploadData.title || '表单预览'"></h4>
+        <div ng-repeat="singleForm in forms">
+          <div input-field ng-show="singleForm.type === 'text'">
+            <input type="text">
+            <label ng-bind="singleForm.name"></label>
+          </div>
+          <select ng-show="singleForm.type === 'select'" material-select watch>
+            <option value="" disabled selected ng-bind="singleForm.name"></option>
+            <option ng-repeat="onePiece in singleForm.options track by $index">{{onePiece}}</option>
+          </select>
+          <div ng-show="singleForm.type === 'radio'">
+            <span>是否服从调剂</span>
+            <div class="switch margin-left margin-top" style="display: inline-block">
+              <label>
+                否
+                <input type="checkbox">
+                <span class="lever"></span>
+                是
+              </label>
+            </div>
+          </div>
+          <div input-field ng-show="singleForm.type === 'textarea'">
+            <textarea class="materialize-textarea"></textarea>
+            <label ng-bind="singleForm.name"></label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">完成</a>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>

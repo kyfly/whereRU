@@ -33,17 +33,22 @@
 </div>
 
 <!--校园团队列表-->
-<div>
-  <div class="row" ng-repeat="teamItem in teamItems">
-    <div class="col s2">
-      <div class="wrap ">
-        <img ng-src="{{teamItem.logoUrl}}">
-        <h1 class="team-h1" ng-bind="teamItem.name"></h1>
-        <p class=".team-p" ng-bind="teamItem.desc">
-
-        </p>
+<div class="row">
+  <div class="col s12">
+    <div class="row" >
+      <div class="col s2" ng-repeat="teamItem in teamItems">
+        <div class="wrap teamItem">
+          <a ng-href="/w/teams/{{teamItem.id}}">
+          <img ng-src="{{teamItem.logoUrl}}">
+            </a>
+          <h1 ng-bind="teamItem.name"></h1>
+          <p ng-bind="teamItem.desc"></p>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+
+<!--团队详情-->
+<div ui-view></div>

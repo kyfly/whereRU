@@ -1,5 +1,6 @@
 app.controller('AdminCtrl', ['$scope', '$timeout', '$window', '$rootScope', 'Team', AdminCtrl]);
 function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
+  $rootScope.logoHide = false;
   if (localStorage['$LoopBack$currentUserId'] && window.location.pathname === '/MS/login') {
     window.location.pathname = '/MS/home';
   }
@@ -24,7 +25,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
         $scope.redirect(2);
       } else if ($window.location.pathname === '/MS/activity/list' || $window.location.pathname.substr(0, 17) === '/MS/activity/edit') {
         $scope.redirect(3);
-      } else if ($window.location.pathname === '/MS/form/list') {
+      } else if ($window.location.pathname === '/MS/form/list' || $window.location.pathname.substr(0, 13) === '/MS/form/edit') {
         $scope.redirect(4);
       } else if ($window.location.pathname === '/MS/vote/list') {
         $scope.redirect(5);
@@ -108,10 +109,11 @@ function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
   Team.findById({
     id: localStorage.$LoopBack$currentTeamId
   }, function (res) {
-    $scope.teamInfo = res;
+    $rootScope.teamInfo = res;
   });
 }
 
 app.controller('HomeCtrl', ['$scope', function ($scope) {
+  $scope.logoHide = false;
 
 }]);

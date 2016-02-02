@@ -1,4 +1,5 @@
-app.controller('EventListCtrl', ['$scope', 'Team', function ($scope, Team) {
+app.controller('EventListCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
+  $rootScope.logoHide = false;
   $scope.unFormat = "yyyy-MM-dd HH:mm";
   $scope.format = "yyyy-MM-dd";
 
@@ -125,6 +126,7 @@ app.controller('EventEditCtrl', ['$scope', 'Team', 'Ueditor', '$http', '$locatio
     }).success(function (res) {
       $scope.eventData.explainUrl = 'http://oss.etuan.org/' + res.url;
       $scope.eventData.created = new Date();
+      $scope.eventData.deleted = false;
       Team.prototype_create_races({
         id: localStorage.$LoopBack$currentTeamId
       }, $scope.eventData, function () {
