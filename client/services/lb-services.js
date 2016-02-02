@@ -471,6 +471,13 @@ module.factory(
         method: 'PUT'
       },
       /**
+       * 删除活动的表单
+       */
+      "prototype_delete_forms": {
+        url: urlBase + '/Activities/:id/forms',
+        method: 'DELETE'
+      },
+      /**
        * 描述：用户所在学校活动列表
        */
       "getMySchoolActiveties": {

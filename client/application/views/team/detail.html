@@ -1,0 +1,104 @@
+<nav class="header row hide-on-med-only hide-on-large-only">
+  <div class="nav-wrapper">
+    <a href="#!" class="col offset-s1 brand-logo">whereRU</a>
+    <ul>
+      <li>
+        <a class="dropdown-button right" href="#!" dropdown data-hover="true"
+           data-activates="demoDropdown">{{choice || "全部"}}
+          <i class="material-icons right">arrow_drop_down</i>
+        </a>
+      </li>
+      <ul id='demoDropdown' class='dropdown-content'>
+        <li><a href="javascript:void(0);">最新</a></li>
+        <li><a href="javascript:void(0);">进行中</a></li>
+        <li><a href="javascript:void(0);">未开始</a></li>
+        <li><a href="javascript:void(0);">已结束</a></li>
+      </ul>
+    </ul>
+  </div>
+</nav>
+<div class="row menu">
+  <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
+    <option ng-repeat="value in ['最新','最热']">{{value}}</option>
+  </select>
+  <div class="col s4 m3 l2 menu-item ">
+    <a href="/w/activities">校园活动</a>
+  </div>
+  <div class="col s4 m3 l2 menu-item">
+    <a class="active" href="/w/races">校园竞赛</a>
+  </div>
+  <div class="col s4 m3 l2 menu-item">
+    <a href="/w/teams">校园团队</a>
+  </div>
+</div>
+
+
+<!--团队详情-->
+<div>
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="col s2"><img ng-src="{{currentTeam.logoUrl}}"><br/>
+          团队名称：
+          <name ng-bind="currentTeam.name"></name>
+        </div>
+        <div class="col s10">
+          <ul class="tabs" tabs>
+            <li class="tab col s2"><a href="#teamIntro" class="active">团队简介</a></li>
+            <li class="tab col s2"><a href="#teamBranch">部门介绍</a></li>
+            <li class="tab col s2"><a href="#teamPhoto">团队相册</a></li>
+            <li class="tab col s2"><a href="#teamAcyivity">团队活动</a></li>
+            <li class="tab col s2"><a href="#teamJoin">申请加入</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div style="margin: 0 100px 0 100px">
+
+  <!--团队简介-->
+  <div id="teamIntro">
+    <div class="row">
+      <div class="col s10">
+        <img ng-src="{{currentTeam.logoUrl}}">
+      </div>
+    </div>
+    <p>{{currentTeam.desc}}</p>
+  </div>
+
+
+  <!--部门介绍-->
+  <div>
+    <h5 class="left-align">部门介绍</h5>
+  </div>
+  <div id="teamBranch" class="col s12" ng-repeat="teamBranch in currentTeam.teamDepartments">
+    <div class="card-panel grey lighten-5 z-depth-1">
+      <div class="row valign-wrapper">
+        <div class="col s2">
+          <img ng-src="{{currentTeam.logoUrl}}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+        </div>
+        <div class="col s10">
+              <span class="black-text">
+                <p ng-bind="teamBranch.name"></p>
+                <p ng-bind="teamBranch.desc"></p>
+              </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--团队相册-->
+  <div id="teamPhoto" class="col s12">
+   
+  </div>
+  <!--团队活动-->
+  <div id="teamAcyivity" class="col s12">
+    aiuhjdfaopi
+  </div>
+  <!--申请加入-->
+  <div id="teamJoin" class="col s12">
+    a;ihda9p
+  </div>
+</div>

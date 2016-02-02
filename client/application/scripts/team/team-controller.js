@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 app.controller('TeamsController', ['$scope','Team', 'User', function ($scope, Team, User) {
   $scope.types = [{
     "name": "校园组织",
@@ -25,7 +26,7 @@ app.controller('TeamsController', ['$scope','Team', 'User', function ($scope, Te
     if (!((fileExt[0] === '.png') || (fileExt[0] === '.jpg') || (fileExt[0] === '.jpeg') || (fileExt[0] === '.gif'))) {
       alert('请确认您上传的logo文件格式是jpg、png、gif或jpeg');
       return false;
-    }
+      }
     var readyHandle = function () {
       if (Xhr.readyState === 4) {
         if (Xhr.status === 200) {
@@ -41,6 +42,18 @@ app.controller('TeamsController', ['$scope','Team', 'User', function ($scope, Te
     Xhr.open('POST', '/ue/uploads?dir=user&id=' + $scope.$currentUser.id + '&action=uploadimage', true);
     Xhr.send(Fd);
   }
+  /**
+   * 团队列表
+   * school参数有问题，i++
+   */
+  Team.getMySchoolTeams({
+      //school: JSON.parse(localStorage.userInfo).user.school,
+      last: new Date('2017-12-03T16:00:00.000Z')
+    }, function (res) {
+      console.log(res);
+      $scope.teamItems = res.teams;
+    }, function () {});
+  }
   $scope.createTeam = function () {
     User.prototype_create_teams({id: $scope.$currentUser.id}, $scope.team, function (team) {
       console.log(team)
@@ -48,3 +61,13 @@ app.controller('TeamsController', ['$scope','Team', 'User', function ($scope, Te
   }
 }]);
 
+app.controller('TeamDetailController', ['$scope', 'Team', '$stateParams', function ($scope, Team, $stateParams) {
+  Team.findById({
+      id: $stateParams.id
+    }, function (res) {
+      $scope.currentTeam = res;
+      console.log($scope.currentTeam);
+    }, function () {
+    }
+  );
+}]);
