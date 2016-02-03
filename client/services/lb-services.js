@@ -67,19 +67,19 @@ module.factory(
         method: 'GET'
       },
       /**
-       * 关注圈子
-       * 使用场景：pc端点击关注
+       * 关注圈子，圈子最后时间上传
+       * 使用场景：pc端点击关注，点击修改最后使用时间
        */
       "prototype_link_coteries": {
         url: urlBase + '/WUsers/:id/coteries/rel/:fk',
+        params: { 'fk': '@fk'},
         method: 'PUT'
       },
       /**
-       *   所有圈子显示
-       *   pc所有圈子的显示
+       * 用户拥有的获取团队
        */
-      "find": {
-        url: urlBase + '/Coteries',
+      'prototype_get_teams': {
+        url: urlBase + '/WUsers/:id/teams',
         method: 'GET',
         isArray: true
       },
@@ -407,6 +407,26 @@ module.factory(
       }
     );
     return R;
+}])
+.factory(
+  'Coterie', 
+  ['LoopBackResource', 'LoopBackAuth', '$injector',
+  function(Resource, LoopBackAuth, $injector){
+    var R = Resource(
+      urlBase + '/Teams/:id',
+      { 'id': '@id' },
+      {
+        /**
+         *   所有圈子显示
+         *   pc所有圈子的显示
+         */
+        "find": {
+          url: urlBase + '/Coteries',
+          method: 'GET',
+          isArray: true
+        }
+      });
+  return R;
 }])
 .factory(
   'Activity',

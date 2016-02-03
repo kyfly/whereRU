@@ -1,26 +1,32 @@
-app.controller('LoginController', ['User', '$scope', '$rootScope', function (User, $scope, $rootScope) {
+app.controller('LoginController', ['User', '$scope', '$rootScope', 'LoopBackAuth', function (User, $scope, $rootScope, LoopBackAuth) {
   $scope.user = {};
   $scope.cancelLogin = function () {
     window.document.getElementById('login').style.display = "none";
   };
   $scope.login = function () {
     User.login($scope.user, function (data) {
+      data.user.id = data.userId;
       $rootScope.$currentUser = data.user;
       $rootScope.username = data.user.name;
+      LoopBackAuth.setUser(data.id, data.userId, data.user);
+      LoopBackAuth.save();
       localStorage.$LoopBack$currentUserToken = JSON.stringify(data);
     });
   };
 }]);
 
-app.controller('RegisterController', ['User', 'School', '$scope', '$location', '$rootScope', function (User, School, $scope, $location, $rootScope) {
+app.controller('RegisterController', ['User', 'School', '$scope', '$rootScope', '$location', 'LoopBackAuth', function (User, School, $scope, $rootScope, $location, LoopBackAuth) {
   $scope.user = {};
   School.find(function (schools) {
     $scope.schools = schools;
   });
   $scope.register = function () {
     User.create($scope.user, function (data) {
+      data.user.id = data.userId;
       $rootScope.$currentUser = data.user;
       $rootScope.username = data.user.name;
+      LoopBackAuth.setUser(data.id, data.userId, data.user);
+      LoopBackAuth.save();
       localStorage.$LoopBack$currentUserToken = JSON.stringify(data);
       Materialize.toast('恭喜你，注册成功', 4000);
       $location.path('/w/activities').replace();

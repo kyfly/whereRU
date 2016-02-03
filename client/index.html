@@ -15,9 +15,9 @@
 <body>
 <nav class="header row hide-on-small-only" ng-controller="HeaderController">
   <div class="nav-wrapper">
-    <a href="/" class="left brand-logo col offset-s0 offset-m0 offset-l1">whereRU</a>
-    <ul class="col offset-m2 offset-l5">
-      <li class="col m6 l6">
+    <a href="/" class="left brand-logo col m3 offset-s0 offset-m0 offset-l1">whereRU</a>
+    <ul class="col m10 l7 right">
+      <li>
         <div class="input-field">
           <input id="search" type="search" required>
           <label for="search"><i class="material-icons">search</i></label>
@@ -26,11 +26,39 @@
       </li>
       <li><a href="/w/activities">服务</a></li>
       <li><a href="/w/coteries">圈子</a></li>
-      <li><a ng-show="!username" ng-click="goSignIn()">登录</a></li>
-      <li><a href="/u/home" ng-bind="username"></a></li>
+      <li ng-show="username">
+        <a ng-mouseover="pullTeams()">管理</a>
+        <div>
+          <ul class="pull-menu">
+            <li ng-repeat="team in teams">
+              <a href="/w/team/{{team.id}}" ng-click="changeTeams()" ng-bind="team.name"></a>
+            </li>
+            <li>
+              <a href="/w/teams/create">新建团队</a>
+            </li>
+          </ul>
+        </div>
+        
+      </li>
+      <li ng-show="!username"><a ng-click="goSignIn()">登录</a></li>
+      <li ng-show="username">
+        <a href="/u/home" ng-bind="username"></a>
+        <div>
+          <ul class="pull-menu">
+            <li>
+              <a href="">个人中心</a>
+            </li>
+            <li>
+              <a href="">退出</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      
     </ul>
   </div>
 </nav>
+  
 <div ng-include="'application/views/user/login.html'"></div>
 <div id="doc">
   <div ui-view></div>

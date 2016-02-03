@@ -1,4 +1,4 @@
-app.controller('CoteriesController', ['$scope', 'User', function ($scope, User) {
+app.controller('CoteriesController', ['$scope', 'User','$stateParams', function ($scope, User,$stateParams) {
 
   User.prototype_get_coteries({
       id: localStorage.$LoopBack$currentUserId,
@@ -8,7 +8,6 @@ app.controller('CoteriesController', ['$scope', 'User', function ($scope, User) 
     }, function (res) {
       $scope.existCoterieList = res;
       $scope.contentName = $scope.existCoterieList[0].name;
-      console.log(res);
     }, function () {
     }
   );
@@ -36,10 +35,41 @@ app.controller('CoteriesController', ['$scope', 'User', function ($scope, User) 
     }
   };
 
+  ////在发现更多里面出去去已有coterie
+  //$scope.coterieRemove = function () {
+  //  for (var i=0;i<count($scope.existCoterieList);i++){
+  //    for (var j=0;j<count($scope.allCoteries);j++){
+  //      if($scope.existCoterieList[i].id == $scope.allCoteries.id){
+  //        $scope.showAllConterie = true;
+  //      }
+  //    }
+  //  }
+  //};
+  //
+
+  //修改最后浏览时间
+  $scope.updateLastView = function (index) {
+
+    if($stateParams.id == $scope.existCoterieList[index].id) {
+      User.prototype_link_coteries({
+          id: localStorage.$LoopBack$currentUserId,
+          fk: $stateParams.id
+        }, {
+          lastView : new Date()
+        }, function () {
+          Materialize.toast('修改最后阅读时间成功！', 2000);
+        }, function () {
+        }
+      );
+    }
+  };
+
+
+
 
 }]);
 
-app.controller('CoterieDetailController', ['$scope', '$stateParams', 'User', function ($scope, $stateParams, User) {
+app.controller('CoterieDetailController', ['$scope', '$stateParams', 'User','$rootScope' ,function ($scope, $stateParams, User,$rootScope) {
   User.prototype_get_articles({
       id: $stateParams.id,
       filter: {
@@ -51,17 +81,34 @@ app.controller('CoterieDetailController', ['$scope', '$stateParams', 'User', fun
     }
   );
 
+
+  //修改最后浏览时间
+  //$rootScope.updateLastView = function (index) {
+  //  console.log(index);
+  //  if($stateParams.id == $rootScope.existCoterieList[index].id) {
+  //    User.prototype_link_coteries({
+  //        id: localStorage.$LoopBack$currentUserId,
+  //        fk: $stateParams.id
+  //      }, {
+  //        lastView : new Date()
+  //      }, function () {
+  //        Materialize.toast('修改最后阅读时间成功！', 2000);
+  //      }, function () {
+  //
+  //      }
+  //    );
+  //  }
+  //};
+
   //关注圈子
   $scope.showDetail = function () {
     thisElement = this;
-    //console.log(thisElement)
   };
 
 
+
+  //用来关注
   $scope.coterieConcern = function () {
-    //console.log($scope.allCoteries);
-
-
     User.prototype_link_coteries({
         id: localStorage.$LoopBack$currentUserId,
         fk: $stateParams.id
@@ -111,7 +158,7 @@ app.controller('CoterieDetailController', ['$scope', '$stateParams', 'User', fun
   }
   ];
 
-  $(function () { $("[data-toggle='tooltip']").tooltip(); });
+
 }]);
 
 

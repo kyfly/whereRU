@@ -18,6 +18,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize'])
 })
 .run(['$rootScope', function ($rootScope) {
 	$rootScope.$on('$stateChangeStart', function(evt, next, current) {
+		console.log(next)
 		if (window.document.getElementById('loginForm'))
 			window.document.getElementById('loginForm').style.display = "none";
 	});
@@ -33,11 +34,11 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize'])
 		}
 	};
 }])
-.controller('HeaderController', ['$scope', '$rootScope', function ($scope, $rootScope){
+.controller('HeaderController', ['$scope', '$rootScope', "User",function ($scope, $rootScope, User){
 	try {
 		var token = JSON.parse(localStorage.$LoopBack$currentUserToken);
+		token.user.id = token.userId;
 		$rootScope.$currentUser = token.user;
-		console.log(new Date().getTime() - new Date(token.created).getTime());
 		if (new Date().getTime() - new Date(token.created).getTime() > token.ttl * 1000) {
 			Materialize.toast('你的TOKEN已失效,你需要重新登录', 4000);
 		} else {
@@ -55,6 +56,18 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize'])
 			$scope.goSignIn();
 		}
 	});
+	$scope.pullTeams = function () {
+		console.log(1)
+		User.prototype_get_teams({
+			id: $scope.$currentUser.id
+		}, function(teams){
+			$scope.teams = teams;
+			console.log($scope.teams);
+		})
+	}
+	$scope.changeTeams = function () {
+		localStorage.$LoopBack$accessTeamId = this.team.id;
+	}
 }])
 .controller('HomeController', ['$scope', function($scope){
 	

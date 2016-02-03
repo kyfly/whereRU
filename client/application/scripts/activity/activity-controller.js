@@ -15,6 +15,7 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
         $scope.activityItems = res[x];
       }
       $scope.activityCurrent = $scope.activityItems[0];
+      getFormInfo();
     });
   }
 
@@ -29,18 +30,34 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
       case 'vote':
         break;
     }
-    function getFormInfo() {
-      Activity.prototype_get_forms({
-        id:$scope.activityCurrent.id
-      }, function (res) {
 
-      });
-    }
   };
+  function getFormInfo() {
+    Activity.prototype_get_forms({
+      id:$scope.activityCurrent.id
+    }, function (res) {
+      $scope.forms = res[0];
+      console.log(res);
+    });
+  }
+}]);
 
-}
+app.controller('ActivityController', ['$scope', 'Activity', function($scope, Activity){
+  $scope.changeCtrl = function () {
+    $scope.result = new Array($scope.forms._formItems.length);
+    $scope.forms = $scope.forms;
+  };
+  $scope.submit = function () {
+    
+    for (var x in $scope.forms._formItems) if ($scope.forms._formItems[x].type === 'select') {
+      $scope.result[x].type = 'selelct';
+      $scope.result[x].name = $scope.result[x].option;
+      $scope.result[x].option = undefined;
+    } else {
+      $scope.result[x].type = $scope.forms._formItems[x].type;
+    }
 
-]);
-
-
+    console.log($scope.result);
+  };
+}])
 

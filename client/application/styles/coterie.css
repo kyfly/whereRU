@@ -17,8 +17,14 @@ body{
 }
 
 
-.coterie-top{
-  margin: 0;
+/*.coterie-top{*/
+  /*margin: 0;*/
+/*}*/
+
+.coterieHideBtn{
+  position: relative;
+  font-size: xx-large;
+  z-index: 99;
 }
 
 .coterieMain{
@@ -31,9 +37,6 @@ body{
   }
 }
 
-#coterie-sideBar{
-  margin: 0;
-}
 
 
 .bold{
@@ -80,7 +83,7 @@ body{
   margin-top: 15px;
 }
 .coterieArticleIcons{
-  font-size: xx-large;
+  font-size: x-large;
 }
 .coterieSpace{
   padding-right: 15px;

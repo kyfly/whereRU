@@ -1,0 +1,67 @@
+<div class="row container create-team">
+	<h5>创建团队须知</h5>
+	<hr>
+	<div class="col m6">
+		<p>所有选项为必填项</p>
+		<p>选择允许加入则其他用户可向团队提交申请加入</p>
+		<p>选择隐藏团队则用户不可以搜索到该团队</p>
+	</div>
+	<div class="col m6">
+		<form name="createTeamForm">
+
+			<div input-field>
+			    <input id="name" type="text" ng-model="team.name" length="11" required>
+			    <label for="name">请输入团队名称</label>
+			</div>
+
+			<div class="switch">
+				<span>是否允许加入</span>
+		    <label>
+		      否
+		      <input checked type="checkbox" ng-model="team.status" required>
+		      <span class="lever"></span>
+		      是
+		    </label>
+		  </div>
+
+		  <div class="switch">
+		  	<span>是否隐藏团队</span>
+		    <label>
+		      否
+		      <input type="checkbox" ng-model="team.hidden" required>
+		      <span class="lever"></span>
+		      是
+		    </label>
+		  </div>
+
+		  <div input-field>
+		    <textarea ng-model="team.desc" class="materialize-textarea" ></textarea>
+		    <label>请输入团队简介</label>
+			</div>
+
+			<select class="" ng-model="team.type" material-select watch required>
+				<option value="" disabled selected>请选择团队类型</option>
+			  <option ng-repeat="type in types">{{type.name}}</option>
+			</select>
+
+			<div class="file-field input-field">
+		    <div class="btn">
+		      <span>File</span>
+		      <input type="file" id="teamlogo" multiple ng-model="team.logoUrl" required>
+		    </div>
+		    <div class="file-path-wrapper">
+		      <input class="file-path validate" ng-model="tem" ng-change="uploadLogo()" type="text" placeholder="请选择团队LOGO">
+		    </div>
+		  </div>
+
+			<div  class="row center">
+				<button type="sumbit" class="waves-effect waves-light btn"
+					ng-click="createTeam()">提交
+					<i class="material-icons right">send</i>
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+		
+
