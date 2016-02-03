@@ -1,4 +1,7 @@
-app.controller('TeamsController', ['$scope','Team', 'User', function ($scope, Team, User) {
+app.controller('TeamsController', ['$scope','Team',  function ($scope, Team) {
+
+  console.log(new Date('2017-12-03T16:00:00.000Z'));
+
   $scope.types = [{
     "name": "校园组织",
   },{
@@ -9,15 +12,15 @@ app.controller('TeamsController', ['$scope','Team', 'User', function ($scope, Te
     "name": "技术团队",
   }];
   $scope.team = {};
-  // Team.getMySchoolTeams({
-  //     school: $scope.$currentUser.school,
-  //     last: new Date('2017-12-03T16:00:00.000Z')
-  //   }, function (res) {
-  //     console.log(res);
-  //     $scope.teamItems = res.teams;
-  //   }, function () {
-  //   }
-  // );
+   //Team.getMySchoolTeams({
+   //    //school:  JSON.parse(localStorage.userInfo).user.school,
+   //    last: new Date('2017-12-03T16:00:00.000Z')
+   //  }, function (res) {
+   //    console.log(res);
+   //    $scope.teamItems = res.teams;
+   //  }, function () {
+   //  }
+   //);
   $scope.uploadLogo = function () {
     var file = document.getElementById('teamlogo').files[0];
     var Xhr = new XMLHttpRequest();
@@ -52,8 +55,11 @@ app.controller('TeamsController', ['$scope','Team', 'User', function ($scope, Te
       console.log(res);
       $scope.teamItems = res.teams;
     }, function () {
+  });
 
-    });
+  /**
+   * 创建团队
+   */
   $scope.createTeam = function () {
     User.prototype_create_teams({id: $scope.$currentUser.id}, $scope.team, function (team) {
       console.log(team)
@@ -61,7 +67,11 @@ app.controller('TeamsController', ['$scope','Team', 'User', function ($scope, Te
   }
 }]);
 
-app.controller('TeamDetailController', ['$scope', 'Team', '$stateParams', function ($scope, Team, $stateParams) {
+/**
+ * 团队详情
+ */
+
+app.controller('TeamController', ['$scope', 'Team', '$stateParams', function ($scope, Team, $stateParams) {
   Team.findById({
       id: $stateParams.id
     }, function (res) {
