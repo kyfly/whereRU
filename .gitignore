@@ -22,3 +22,5 @@ server/config.local.json
 server/datasources.local.json
 server/config.product.json
 server/datasources.peoduct.json
+server/config.dev.json
+server/datasources.dev.json
