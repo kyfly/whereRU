@@ -330,6 +330,12 @@ module.exports = function(User) {
       }
     })
   });
+  User.beforeRemote('prototype.__create__teams', function (ctx, ins, next){
+    ctx.req.body.school = ctx.instance.toJSON().school;
+    ctx.instance.teams.create(ctx.req.body, function (err, data) {
+      ctx.res.send(data)
+    })
+  });
   /**
    * 用户信息跟新处理，保存用户修改记录
    * @param  {[type]} ctx   [description]
