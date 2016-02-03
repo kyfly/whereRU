@@ -48,6 +48,7 @@ app.controller('ActivityController', ['$scope', 'Activity', function($scope, Act
     $scope.forms = $scope.forms;
   };
   $scope.submit = function () {
+    
     for (var x in $scope.forms._formItems) if ($scope.forms._formItems[x].type === 'select') {
       $scope.result[x].type = 'selelct';
       $scope.result[x].name = $scope.result[x].option;
@@ -55,6 +56,7 @@ app.controller('ActivityController', ['$scope', 'Activity', function($scope, Act
     } else {
       $scope.result[x].type = $scope.forms._formItems[x].type;
     }
+
     console.log($scope.result);
   };
 }])

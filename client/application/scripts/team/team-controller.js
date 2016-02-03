@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 app.controller('TeamsController', ['$scope','Team', 'User', function ($scope, Team, User) {
   $scope.types = [{
     "name": "校园组织",
@@ -52,8 +51,9 @@ app.controller('TeamsController', ['$scope','Team', 'User', function ($scope, Te
     }, function (res) {
       console.log(res);
       $scope.teamItems = res.teams;
-    }, function () {});
-  }
+    }, function () {
+
+    });
   $scope.createTeam = function () {
     User.prototype_create_teams({id: $scope.$currentUser.id}, $scope.team, function (team) {
       console.log(team)
