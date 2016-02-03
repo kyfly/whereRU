@@ -26,7 +26,7 @@
       <li class="tab col s4">
         <a href="#detail">活动详情</a>
       </li>
-      <li class="tab col s4" ng-click="changeCtrl()">
+      <li class="tab col s4" ng-click="onClickJoinActivity()">
         <a href="#join">参与活动</a>
       </li>
     </ul>
@@ -36,7 +36,7 @@
       <div ng-include="'/application/views/activity/about.html'"></div>
     </div>
 
-    <div id="detail" class="col s12">   <!-- 活动详情-->
+    <div id="detail" class="col s12 container">   <!-- 活动详情-->
       <div ng-include="activityCurrent.explainUrl" ></div>
     </div>
     <div id="join" class="col s12">   <!--参与活动-->

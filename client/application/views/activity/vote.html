@@ -1,0 +1,37 @@
+<div class="vote">
+	<div>
+		<h5>你最多可选择<span class="vote-tip" ng-bind="votes.max"></span>项</h5>
+		<hr>
+	</div>
+	<div clss="row col 12" ng-if="votes._voteItems[0]['imgUrl']" ng-controller="ActivityController">
+		<div class="card col s5 m5" ng-repeat="vote in votes._voteItems">
+			<div class="card-content">
+				<p>
+		      <input type="checkbox" id="{{vote.id}}" ng-click="checkedForVote()" ng-init="false" ng-model="result[$index]"/>
+		      <label for="{{vote.id}}" ng-bind="vote.name"></label>
+		      <span ng-bind="vote.count" class="right"></span>
+		    </p>
+			</div>
+			<div class="card-image">
+				<img ng-src="{{vote.imgUrl}}">
+			</div>
+			<div class="card-action">
+			</div>
+		</div>
+	</div>
+	<div ng-if="!votes._voteItems[0]['imgUrl']" ng-controller="ActivityController">
+		<form>
+	    <p ng-repeat="vote in votes._voteItems">
+	      <input type="checkbox" id="{{vote.id}}" ng-click="checkedForVote()" ng-init="false" ng-model="result[$index]"/>
+	      <label for="{{vote.id}}" ng-bind="vote.name"></label>
+	      <span ng-bind="vote.count" class="right"></span>
+	    </p>
+  	</form>
+	</div>
+	<div  class="row col s12 center">
+		<a type="sumbit" 
+			class="waves-effect waves-light"
+			ng-click="submitVoteResult()">提交
+		</a>
+	</div>
+</div>

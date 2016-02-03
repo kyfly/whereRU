@@ -18,7 +18,6 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize'])
 })
 .run(['$rootScope', function ($rootScope) {
 	$rootScope.$on('$stateChangeStart', function(evt, next, current) {
-		console.log(next)
 		if (window.document.getElementById('loginForm'))
 			window.document.getElementById('loginForm').style.display = "none";
 	});
