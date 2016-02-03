@@ -458,6 +458,22 @@ module.factory(
         isArray: true
       },
       /**
+       * 获取活动的投票
+       */
+      "prototype_get_votes": {
+        url: urlBase + '/Activities/:id/votes',
+        method: 'GET',
+        isArray: true
+      },
+      /**
+       * 获取活动的抢票
+       */
+      "prototype_get_seckills": {
+        url: urlBase + '/Activities/:id/seckills',
+        method: 'GET',
+        isArray: true
+      },
+      /**
        * 活动添加表单
        */
       "prototype_create_forms":{
