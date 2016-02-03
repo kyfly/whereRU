@@ -67,11 +67,12 @@ module.factory(
         method: 'GET'
       },
       /**
-       * 关注圈子
-       * 使用场景：pc端点击关注
+       * 关注圈子，圈子最后时间上传
+       * 使用场景：pc端点击关注，点击修改最后使用时间
        */
       "prototype_link_coteries": {
         url: urlBase + '/WUsers/:id/coteries/rel/:fk',
+        params: { 'fk': '@fk'},
         method: 'PUT'
       },
       /**
