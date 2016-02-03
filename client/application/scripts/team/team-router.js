@@ -2,7 +2,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 	$stateProvider
 	.state('art.teams', {
 		url: '/teams',
-		controller: 'TeamController',
+		controller: 'TeamsController',
 		templateUrl: 'application/views/team/index.html'
 	})
 	.state('create', {
@@ -12,7 +12,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 	})
 	.state('team', {
 		url: '/w/teams/:id',
-		controller: 'TeamDetailController',
+		controller: 'TeamController',
 		templateUrl: 'application/views/team/detail.html'
 	})
 

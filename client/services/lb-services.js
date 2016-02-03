@@ -409,7 +409,7 @@ module.factory(
     return R;
 }])
 .factory(
-  'Coterie', 
+  'Coterie',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
     var R = Resource(
