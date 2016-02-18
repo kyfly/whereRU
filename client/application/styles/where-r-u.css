@@ -212,3 +212,24 @@
   padding: 5px;
   margin: 0;
 }
+.team-card .card-content{
+  height: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.team-title {
+  text-align: center;
+  background-color: rgba(12,185,247,0.5);
+}
+.team-title img{
+  text-align: center;
+  width: 100px;
+  border-radius: 500px;
+}
+.team-title h4{
+  overflow: hidden;
+  font-size: 1.2rem;
+  padding: 5px;
+  margin: 0;
+  color: #fff
+}

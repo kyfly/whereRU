@@ -331,11 +331,24 @@ module.exports = function(User) {
     })
   });
   User.beforeRemote('prototype.__create__teams', function (ctx, ins, next){
-    ctx.req.body.school = ctx.instance.toJSON().school;
+    var user = ctx.instance.toJSON();
+    ctx.req.body.school = user.school;
     ctx.instance.teams.create(ctx.req.body, function (err, data) {
+      var userInfo = {
+        "phone": user.phone,
+        "name": user.name,
+        "school": user.school,
+        "verified": true,
+        "userId": user.id,
+        "department": "负责人",
+        "created": new Date()
+      };
+    console.log(user)
+      data.members.create(userInfo);
       ctx.res.send(data)
     })
   });
+
   /**
    * 用户信息跟新处理，保存用户修改记录
    * @param  {[type]} ctx   [description]

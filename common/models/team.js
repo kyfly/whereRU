@@ -40,6 +40,22 @@ module.exports = function(Team) {
         cb(null,teams);
     });
 	};
+	Team.afterRemote('findById', function (ctx, ins, next) {
+		ins.members.findOne({
+			where: {
+				userId: ins.userId
+			},
+			fields: ['name']
+		}, function (err, member) {
+			if (err || !member) {
+				return next();
+			}
+			var team = ins.toJSON();
+			var member = member.toJSON();
+			team.username = member.name;
+			ctx.res.send(team);
+		})
+	})
 	/**
 	 * 创建活动时，保存部分团队信息到活动信息中
 	 * @param  {[type]} ctx   [description]
