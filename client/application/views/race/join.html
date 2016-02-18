@@ -1,0 +1,16 @@
+<div class="row col s12">
+	<h5 class="col s12 m4">请选择参赛的团队</h5>
+	<ul class="row col s12 m8">
+		<li ng-repeat="team in teams" class="col s12 m4 user-team">
+			<div class="z-depth-1">
+				<h4><img ng-src="{{team.logoUrl}}">
+			  {{team.name}}</h4>
+			</div>
+			<input name="teams" type="radio" id="{{team.id}}" ng-init="false"/>
+			<label for="{{team.id}}" ng-click="selectedTeam()"></label>
+		</li>
+	</ul>
+	<div class="col s12 center">
+		<a href="" ng-click="joinRace()">确定</a>
+	</div>
+</div>

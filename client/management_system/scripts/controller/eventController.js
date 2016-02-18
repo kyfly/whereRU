@@ -103,7 +103,7 @@ app.controller('EventEditCtrl', ['$scope', 'Team', 'Ueditor', '$http', '$locatio
     var readyHandle = function () {
       if (Xhr.readyState === 4) {
         if (Xhr.status === 200) {
-          $scope.eventData.imgUrl = 'http://oss.etuan.org/' + JSON.parse(Xhr.responseText).url;
+          $scope.eventData.imgUrl = 'http://cdn-img.etuan.org/' + JSON.parse(Xhr.responseText).url + '@4e_0o_0l_200h_360w_90q.src';
         }
       }
     };

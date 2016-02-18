@@ -27,7 +27,7 @@ function upload(c) {
   });
 	return function (req, res, next) {
     var query = req.query;
-    if ((!query.dir || !query.id) && req.query.action !== 'config') {
+    if (query.dir !== 'ue' && (!query.dir || !query.id) && req.query.action !== 'config') {
       throw {
         "status": "500",
         "msg":"dir & id 是必须的参数"
@@ -103,6 +103,10 @@ var uploadfile = function (req, res) {
       //防止多次res.end()
       if (isReturn) return;
       isReturn = true;
+      if (req.query.dir === 'ue')
+      {
+        url = "http://oss.etuan.org/" + url;
+      }
       var r = {
         'url': url,
         'title': req.body.pictitle,
@@ -119,7 +123,6 @@ var uploadfile = function (req, res) {
 }
 var save = function (file, filename, mimetype, req, callback) {
   var realName = getFileName(path.extname(filename));
-  console.log(path.extname(filename));
   var saveTo = path.join(os.tmpDir(), realName);
   var query = req.query;
   file.pipe(fs.createWriteStream(saveTo));

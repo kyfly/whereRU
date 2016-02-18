@@ -1,19 +1,13 @@
 <!-- 手机显示选择 -->
 <nav class="header row hide-on-med-only hide-on-large-only">
   <div class="nav-wrapper">
-    <a href="#!" class="col offset-s1 brand-logo">whereRU</a>
-    <ul>
+    <a href="#!" class="col offset-s1 brand-logo left s5">whereRU</a>
+    <ul class="col s6 right">
       <li>
-        <a class="dropdown-button right" href="#!" dropdown data-hover="true"
-           data-activates="demoDropdown">{{choice || "全部"}}
-          <i class="material-icons right">arrow_drop_down</i>
-        </a>
+        <select class="col s10" ng-model="choice" material-select watch>
+          <option ng-repeat="value in ['最新','最热']">{{value}}</option>
+        </select>
       </li>
-      <ul id='demoDropdown' class='dropdown-content'>
-        <li><a href="javascript:void(0);">进行中</a></li>
-        <li><a href="javascript:void(0);">未开始</a></li>
-        <li><a href="javascript:void(0);">已结束</a></li>
-      </ul>
     </ul>
   </div>
 </nav>
@@ -22,34 +16,30 @@
   <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
     <option ng-repeat="value in ['最新','最热']">{{value}}</option>
   </select>
-  <div class="col s4 m3 l2 menu-item ">
+  <div class="col s4 m3 l2 item active">
     <a class="active" sref="/w/activities">校园活动</a>
   </div>
-  <div class="col s4 m3 l2 menu-item"><a href="/w/races">校园竞赛</a></div>
-  <div class="col s4 m3 l2 menu-item"><a href="/w/teams">校园团队</a></div>
+  <div class="col s4 m3 l2 item"><a href="/w/races">校园竞赛</a></div>
+  <div class="col s4 m3 l2 item"><a href="/w/teams">校园团队</a></div>
 </div>
-<div class="row activity col m12">
-  <div class="col s12 m4 l3 activity-list">
-    <div class="card s4" ng-repeat="activityItem in activityItems">
+<div class="row">
+  <div class="col s12 m6 l3 list" ng-repeat="activityItem in activityItems">
+    <div class="card">
       <div class="card-title">
-        <a class="hide-on-med-only hide-on-large-only" ng-href="/w/activities/{{activityItem.id}}">
-          <h4 ng-bind="activityItem.title"></h4>
-        </a>
-        <a class="hide-on-small-only" ng-click="changeCurrentActivity()">
+        <a ng-href="/w/activities/{{activityItem.id}}">
           <h4 ng-bind="activityItem.title"></h4>
         </a>
       </div>
       <div class="card-content">
         <h6>
-          <a ng-href="/w/teams/{{activityItem.teamId}}"><b ng-bind="activityItem.authorName"></b></a>
+          <a ng-href="/w/teams/{{activityItem.teamId}}">
+            <b ng-bind="activityItem.authorName"></b>
+          </a>
           <time ng-bind="activityItem.created | date : 'yyyy-MM-dd'"></time>
         </h6>
       </div>
       <div class="card-image">
-        <a class="hide-on-med-only hide-on-large-only" ng-href="/w/activities/{{activityItem.id}}">
-          <img ng-src="{{activityItem.imgUrl}}" style="width:100%" alt="{{activityItem.title}}">
-        </a>
-        <a class="hide-on-small-only" ng-click="changeCurrentActivity()">
+        <a ng-href="/w/activities/{{activityItem.id}}">
           <img ng-src="{{activityItem.imgUrl}}" style="width:100%" alt="{{activityItem.title}}">
         </a>
       </div>
@@ -58,8 +48,5 @@
       </div>
     </div>
   </div>
-  <div  class="col s12 m8 l9 activity-detail hide-on-small-only"
-   ng-include="'/application/views/activity/detail.html'">
 </div>
-
 

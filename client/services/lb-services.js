@@ -632,6 +632,11 @@ module.factory(
       urlBase + '/Races/:id',
       { 'id': "@id"},
       {
+        "find": {
+          url: urlBase + '/Races',
+          method: 'GET',
+          isArray: true
+        },
         /**
          * 描述：用户所在学校竞赛列表，所有用户
          */
@@ -654,6 +659,11 @@ module.factory(
         "prototype_get_notices": {
           url: urlBase + '/Races/:id/notices',
           method: 'GET',
+          params: {
+            filter: {
+              order: 'id DESC'
+            }
+          },
           isArray: true
         },
         /**
@@ -675,7 +685,12 @@ module.factory(
          * 使用场景：1、用户查看竞赛详情-参赛团队，2、竞赛发布方查看参赛团队
          */
         "prototype_get_raceTeams": {
-          url: urlBase + '/Races/:id/raceTeams?filter[fields][name]=true&filter[fields][logoUrl]=true&filter[fields][id]=true',
+          url: urlBase + '/Races/:id/raceTeams',
+          params: {
+            filter: {
+              fields: ['id', 'name', 'logoUrl', 'status', 'desc']
+            }
+          },
           method: 'GET',
           isArray: true
         },

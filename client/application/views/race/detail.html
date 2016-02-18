@@ -1,36 +1,30 @@
-<nav class="header row hide-on-med-only hide-on-large-only">
-  <div class="nav-wrapper">
-    <a href="#!" class="col offset-s1 brand-logo">whereRU</a>
-    <ul>
-      <li>
-        <a class="dropdown-button right" href="#!" dropdown data-hover="true"
-           data-activates="demoDropdown">{{choice || "全部"}}
-          <i class="material-icons right">arrow_drop_down</i>
-        </a>
+<div>
+  <div class="row s12 detail-menu">
+    <ul class="tabs" tabs>
+      <li class="tab col s3">
+        <a href="#about" class="active">竞赛简介</a>
       </li>
-      <ul id='demoDropdown' class='dropdown-content'>
-        <li><a href="javascript:void(0);">最新</a></li>
-        <li><a href="javascript:void(0);">进行中</a></li>
-        <li><a href="javascript:void(0);">未开始</a></li>
-        <li><a href="javascript:void(0);">已结束</a></li>
-      </ul>
+      <li class="tab col s3" ng-click="onClickJoinActivity()">
+        <a href="#notice">竞赛通知</a>
+      </li>
+      <li class="tab col s3" ng-click="onClickJoinActivity()">
+        <a href="#teams">参赛团队</a>
+      </li>
+      <li class="tab col s3">
+        <a href="#join">参与竞赛</a>
+      </li>
     </ul>
   </div>
-</nav>
-<div class="row menu">
-  <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
-    <option ng-repeat="value in ['最新','最热']">{{value}}</option>
-  </select>
-  <div class="col s4 m3 l2 menu-item ">
-    <a href="/w/activities">校园活动</a>
+  <div id="about">
+    <div ng-include="'/application/views/race/about.html'"></div>
   </div>
-  <div class="col s4 m3 l2 menu-item">
-    <a class="active" href="/w/races">校园竞赛</a>
+  <div id="notice">
+    <div ng-include="'/application/views/race/notice.html'"></div>
   </div>
-  <div class="col s4 m3 l2 menu-item">
-    <a href="/w/teams">校园团队</a>
+  <div id="teams">
+    <div ng-include="'/application/views/race/teams.html'"></div>
+  </div>
+  <div id="join">
+    <div ng-include="'/application/views/race/join.html'"></div>
   </div>
 </div>
-
-
-

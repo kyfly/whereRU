@@ -1,50 +1,58 @@
 app.controller('RacesController', ['$scope', 'Race', function ($scope, Race) {
-  $scope.raceCurrent = undefined;     //当前竞赛
-  /**
-   * 竞赛通知
-   * 参数：学校   返回值：竞赛对象
-   */
-  Race.getMySchoolRaces({
-      school: JSON.parse(localStorage.userInfo).user.school
+  if (!$scope.username) {
+    Race.find(function (races) {
+      $scope.raceItems = races;
+    });
+  } else {
+    Race.getMySchoolRaces({
+      school: $scope.$currentUser.school
     }, function (res) {
-      console.log(res);
       for (x in res) if (x === 'races') {
         $scope.raceItems = res[x];
       }
-    $scope.changeCurrentRace($scope.raceItems[0]);
-    }, function () {
-    }
-  );
-  /**
-   * 竞赛通知
-   * 参数：当前对象Id  返回值：对象
-   */
-    //获取当前竞赛
-  $scope.changeCurrentRace = function (items) {
-    $scope.raceCurrent = items || this.raceItem;
-    console.log($scope.raceCurrent.id);
-    //活动详情
-    Race.findById({
-        id: $scope.raceCurrent.id
-      }, function (res) {
-      console.log('活动详情');
-      $scope.raceDetail = res;
-      console.log($scope.raceDetail);
-      }, function () {
-      }
-    );
-
-    //活动通知
-    Race.prototype_get_notices({
-        id: $scope.raceCurrent.id
-      }, function (res) {
-        console.log(res);
-      $scope.raceNoticeItems = res;
-      }, function () {
-      }
-    );
+    });
+  }
+}]);
+app.controller('RaceController', ['$scope', 'Race', '$stateParams', 'User', 'Team', function ($scope, Race, $stateParams, User, Team) {
+  Race.findById({
+    id: $stateParams.id
+  }, function (race) {
+    $scope.race = race;
+  });
+  Race.prototype_get_notices({
+    id: $stateParams.id
+  }, function (notices) {
+    $scope.notices = notices;
+  });
+  Race.prototype_get_raceTeams({
+    id: $stateParams.id
+  }, function (teams) {
+    $scope.raceTeams = teams;
+  });
+  User.prototype_get_teams({
+    id: $scope.$currentUser.id
+  }, function (teams) {
+    $scope.teams = teams;
+  });
+  $scope.selectedTeam = function () {
+    $scope.selected = this.team.id;
   };
-
+  $scope.joinRace = function () {
+    Team.prototype_link_partakedRaces({
+      id: $scope.selected,
+      fk: $stateParams.id
+    }, function (status) {
+      console.log(status);
+    });
+  };
+  $scope.joinTeam = function () {
+    if (this.team) {
+      $scope.teamId = this.team.id;
+    } else {
+      $scope.teamId = false;
+    }
+    
+  };
 }]);
 
 

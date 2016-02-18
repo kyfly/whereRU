@@ -91,9 +91,13 @@ module.exports = function(Team) {
 	 * @return {[type]}          [description]
 	 */
 	Team.getMySchoolTeams = function (school,last,cb){
-    //, hidden: false, deleted: false
+    if (last) {
+    	var query = { school:school, created:{lt: last }, hidden: false, deleted: false};
+    } else {
+    	var query = { school:school, hidden: false, deleted: false};
+    }
     Team.find({
-      where:{ school:school, created:{lt: last }},
+      where: query,
       limit:20,
       order:"id desc"
     },function(err,teams){
@@ -169,14 +173,12 @@ module.exports = function(Team) {
     },function(err,result){
       if(err) return next(err);
       if (result>0){
-        return ctx.res.send({
-          error:{
+        return next({
             "status":1002,
-            "message":"用户已加入该团队。"
-          }
+            "message":"用户已加入该团队"
         });
       }else{
-        Team.app.models.user.findById(userId,function(err,user){
+        Team.app.models.whereRUUser.findById(userId,function(err,user){
           if(err) return next(err);
           ctx.req.body.userId = userId;
           ctx.req.body.school = user.school;
@@ -185,13 +187,15 @@ module.exports = function(Team) {
           ctx.req.body.created = user.created;
           ctx.req.body.academy = user.academy;
           ctx.req.body.verified = false;
-          next();
+          ctx.instance.members.create(ctx.req.body, function (err, members) {
+          	if (err)
+          		return next(err);
+          	else
+          		ctx.res.send({"status":200});
+          });
         });
       }
     });
-  });
-  Team.afterRemote('prototype.__create__members',function (ctx,ins,next) {
-    ctx.res.send({"status":200});
   });
   Team.afterRemote("prototype.__get__partakedRaces", function (ctx, ins, next) {
 

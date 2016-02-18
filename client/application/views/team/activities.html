@@ -1,0 +1,29 @@
+<div>
+	<ul class="row col s12">
+		 <li class="col s12 m6 l3 list" ng-repeat="activity in activities">
+	    <div class="card">
+	      <div class="card-title">
+	        <a ng-href="/w/activities/{{activity.id}}">
+	          <h4 ng-bind="activity.title"></h4>
+	        </a>
+	      </div>
+	      <div class="card-content">
+	        <h6>
+	          <a ng-href="/w/teams/{{activity.teamId}}">
+	            <b ng-bind="activity.authorName"></b>
+	          </a>
+	          <time ng-bind="activity.created | date : 'yyyy-MM-dd'"></time>
+	        </h6>
+	      </div>
+	      <div class="card-image">
+	        <a ng-href="/w/activities/{{activity.id}}">
+	          <img ng-src="{{activity.imgUrl}}" style="width:100%" alt="{{activity.title}}">
+	        </a>
+	      </div>
+	      <div class="card-action tag">
+	        <h6><span>标签：</span><span ng-bind="activity.keyword"></span></h6>
+	      </div>
+	    </div>
+	  </li>
+	</ul>
+</div>

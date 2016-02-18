@@ -1,7 +1,4 @@
-app.controller('TeamsController', ['$scope','Team',  function ($scope, Team) {
-
-  console.log(new Date('2017-12-03T16:00:00.000Z'));
-
+app.controller('TeamsController', ['$scope','Team',  'User', function ($scope, Team, User) {
   $scope.types = [{
     "name": "校园组织",
   },{
@@ -12,15 +9,6 @@ app.controller('TeamsController', ['$scope','Team',  function ($scope, Team) {
     "name": "技术团队",
   }];
   $scope.team = {};
-   //Team.getMySchoolTeams({
-   //    //school:  JSON.parse(localStorage.userInfo).user.school,
-   //    last: new Date('2017-12-03T16:00:00.000Z')
-   //  }, function (res) {
-   //    console.log(res);
-   //    $scope.teamItems = res.teams;
-   //  }, function () {
-   //  }
-   //);
   $scope.uploadLogo = function () {
     var file = document.getElementById('teamlogo').files[0];
     var Xhr = new XMLHttpRequest();
@@ -33,7 +21,7 @@ app.controller('TeamsController', ['$scope','Team',  function ($scope, Team) {
       if (Xhr.readyState === 4) {
         if (Xhr.status === 200) {
           $scope.$apply(function () {
-            $scope.team.logoUrl = 'http://oss.etuan.org/' + JSON.parse(Xhr.responseText).url;
+            $scope.team.logoUrl = 'http://cdn-img.etuan.org/' + JSON.parse(Xhr.responseText).url + '@1e_1c_0o_0l_100h_100w_100q.src';
           });
         }
       }
@@ -41,26 +29,31 @@ app.controller('TeamsController', ['$scope','Team',  function ($scope, Team) {
     var Fd = new FormData();
     Fd.append('img', file);
     Xhr.onreadystatechange = readyHandle;
-    Xhr.open('POST', '/ue/uploads?dir=user&id=' + $scope.$currentUser.id + '&action=uploadimage', true);
+    Xhr.open('POST', '/ue/uploads?dir=teamlogo&id=' + $scope.$currentUser.id + '&action=uploadimage', true);
     Xhr.send(Fd);
   }
   /**
    * 团队列表
    * school参数有问题，i++
    */
-  Team.getMySchoolTeams({
-      //school: JSON.parse(localStorage.userInfo).user.school,
-      last: new Date('2017-12-03T16:00:00.000Z')
+  if (!$scope.username) {
+    Team.find(function (teams) {
+      $scope.teams = teams;
+    })
+  } else {
+    Team.getMySchoolTeams({
+      school: $scope.$currentUser.school
     }, function (res) {
-      console.log(res);
-      $scope.teamItems = res.teams;
-    }, function () {
-  });
+      $scope.teams = res.teams;
+    });
+  }
+  
 
   /**
    * 创建团队
    */
   $scope.createTeam = function () {
+
     User.prototype_create_teams({id: $scope.$currentUser.id}, $scope.team, function (team) {
       console.log(team)
     })
@@ -71,13 +64,36 @@ app.controller('TeamsController', ['$scope','Team',  function ($scope, Team) {
  * 团队详情
  */
 
-app.controller('TeamController', ['$scope', 'Team', '$stateParams', function ($scope, Team, $stateParams) {
+app.controller('TeamController', ['$scope', 'Team', '$stateParams', 'User', function ($scope, Team, $stateParams, User) {
+  $scope.userInfomation = {};
+  
+  if (!$scope.teamId) {
+    $scope.teamId = $stateParams.id;
+  }
+  User.getInfo(function (user) {
+    $scope.user = user;
+  });
   Team.findById({
-      id: $stateParams.id
+      id: $scope.teamId
     }, function (res) {
-      $scope.currentTeam = res;
-      console.log($scope.currentTeam);
+      $scope.team = res;
     }, function () {
     }
   );
+  Team.prototype_get_activities({
+    id: $scope.teamId
+  }, function (activities) {
+    $scope.activities = activities;
+  });
+  
+  $scope.joinTeam = function () {
+    Team.prototype_create_members({
+      id: $scope.teamId
+    }, $scope.userInfomation, function (member) {
+      Materialize.toast('加入团队成功', 4000);
+    }, function (err) {
+      console.log(err)
+      Materialize.toast(err.data.error.message, 4000);
+    });
+  }
 }]);

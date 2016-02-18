@@ -1,23 +1,4 @@
-<!-- 手机显示选择 -->
-<nav class="header row hide-on-med-only hide-on-large-only">
-  <div class="nav-wrapper">
-    <a href="#!" class="col offset-s1 brand-logo">whereRU</a>
-    <ul>
-      <li>
-        <a class="dropdown-button right" href="#!" dropdown data-hover="true"
-           data-activates="demoDropdown">{{choice || "全部"}}
-          <i class="material-icons right">arrow_drop_down</i>
-        </a>
-      </li>
-      <ul id='demoDropdown' class='dropdown-content'>
-        <li><a href="javascript:void(0);">进行中</a></li>
-        <li><a href="javascript:void(0);">未开始</a></li>
-        <li><a href="javascript:void(0);">已结束</a></li>
-      </ul>
-    </ul>
-  </div>
-</nav>
-<div ng-controller="ActivityController">
+<div>
   <div class="row s12 detail-menu">
     <ul class="tabs" tabs>
       <li class="tab col s4">
@@ -31,12 +12,12 @@
       </li>
     </ul>
   </div>
-  <div class="">
+  <div>
     <div id="about">
       <div ng-include="'/application/views/activity/about.html'"></div>
     </div>
 
-    <div id="detail" class="col s12 container">   <!-- 活动详情-->
+    <div id="detail" class="col s12">   <!-- 活动详情-->
       <div ng-include="activityCurrent.explainUrl" ></div>
     </div>
     <div id="join" class="col s12">   <!--参与活动-->
@@ -51,5 +32,4 @@
       </div>
     </div>
   </div>
-
 </div>

@@ -96,4 +96,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: '/management_system/views/help.html',
       controller: 'HelpCtrl'
     })
+    .state('index', {
+      url: '/',
+      controller: function () {
+        window.location.href = '/';
+      },
+      templateUrl: '/application/views/index.html'
+    })
 });

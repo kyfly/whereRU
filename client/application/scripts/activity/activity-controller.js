@@ -2,7 +2,6 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
   //匿名用户获取部分活动信息
   if (!$scope.username) {
     Activity.find(function (activities) {
-      $scope.activityCurrent = activities[0];
       $scope.activityItems = activities;
     });
   } 
@@ -14,24 +13,8 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
       for (x in res) if (x === 'activties') {
         $scope.activityItems = res[x];
       }
-      $scope.activityCurrent = $scope.activityItems[0];
-      getActivityInfo({
-        model: Activity,
-        id: $scope.activityCurrent.id,
-        actType: $scope.activityCurrent.actType
-      }, $scope);
     });
   }
-  //切换当前活动
-  $scope.changeCurrentActivity = function () {
-    $scope.activityCurrent = this.activityItem;
-    var option = {
-      model: Activity,
-      id: $scope.activityCurrent.id,
-      actType: $scope.activityCurrent.actType
-    };
-    getActivityInfo(option, $scope);
-  };
 }]);
 
 function getActivityInfo (arg, scope) {
@@ -42,7 +25,7 @@ function getActivityInfo (arg, scope) {
   }, function (res) {
     scope[arg.actType + 's'] = res[0];
     if (arg.actType === 'seckill') {
-      scope.countDown = (new Date() - new Date(res[0].started))/1000;
+      scope.countDown = (new Date(res[0].started) - new Date(res[0].serverTime));
     }
   });
 }
@@ -58,7 +41,7 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
         model: Activity,
         actType: res.actType,
         id: $stateParams.id
-      }, $scope)
+      }, $scope);
     });
   }
   $scope.onClickJoinActivity = function () {
@@ -68,15 +51,28 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
       $scope.result = new Array($scope[actType + 's']['_'+ actType +'Items'].length);
       $scope[actType + 's'] = $scope[actType + 's'];
     }
-    if (actType === 'seckill') {
+    if (actType === 'seckill' && $scope.countDown > 0) {
+      var countDown = $scope.countDown / 1000;
       var timer = $interval(function () {
-        $scope.countDown --;
-        if ($scope.countDown <= 0) {
-          $interval.cancel(timer)
-        }
+        var time = $scope.countDown --;
+        $scope.seckillState = time;
+        // if ($scope.countDown <= 0) {
+        //   $interval.cancel(timer)
+        // }
       }, 1000);
+    } else {
+      $scope.seckillState = "正在进行中";
     }
   };
+
+  function formatTime (time) {
+    time = Math.floor(time/1000);
+    var s = time % 60;
+    var d = Math.floor(time / (3600*24));
+    var h = Math.floor((time - d * 3600 * 24) / 3600);
+    var m = Math.floor((time - d * 3600 * 24 - h * 3600) / 60);
+    return d + '天' + h + '小时' + m + '分' + s;
+  }
 
   $scope.checkedForVote = function () {
     var results = $scope.result.filter(function (item) {

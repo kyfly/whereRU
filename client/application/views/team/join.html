@@ -1,0 +1,26 @@
+<div>
+	<div input-field class="col s12 m4 l4">
+	    <input id="name" type="text" ng-model="user.name" disabled>
+	    <label for="name">姓名</label>
+	</div>
+
+	<div input-field class="col offset-m2 offset-l2 s12 m4 l4">
+    <input id="phone" type="text" ng-model="user.phone" length="11" disabled>
+    <label for="phone">手机号</label>
+	</div>
+
+	<div input-field>
+	  <textarea ng-model="userInfomation.remark" class="materialize-textarea" length="200"></textarea>
+	  <label>请输入个人简介</label>
+	</div>
+	<select ng-model="userInfomation.department" material-select watch>
+		<option value="" disabled selected>请选择部门</option>
+	  <option ng-repeat="department in team.teamDepartments">{{department.name}}</option>
+	</select>
+	<div  class="row center">
+		<button type="sumbit" class="waves-effect waves-light btn"
+			ng-click="joinTeam()">提交
+			<i class="material-icons right">send</i>
+		</button>
+	</div>
+</div>

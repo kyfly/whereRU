@@ -1,7 +1,7 @@
 app.factory('Ueditor', function () {
 	return {
 		config: {
-      serverUrl: "/ue/uploads",
+      serverUrl: "/ue/uploads?dir=ue&id=ue",
       toolbars: [[
         'fullscreen', 'source', '|', 'undo', 'redo', '|',
         'bold', 'italic', 'underline', 'fontborder', 'strikethrough', '|',

@@ -161,4 +161,13 @@ module.exports = function(Activity) {
       ctx.res.send(seckill);
     });
   });
+  Activity.afterRemote('prototype.__get__seckills', function (ctx, ins, next) {
+  	var activities = [];
+  	ins.forEach(function (activity) {
+  		var act = activity.toJSON();
+  		act['serverTime'] = new Date();
+  		activities.push(act);
+  	});
+  	ctx.res.send(activities);
+  });
 };

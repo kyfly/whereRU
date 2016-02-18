@@ -321,7 +321,7 @@ module.exports = function(User) {
    */
   User.beforeRemote('prototype.__get__teams', function (ctx, ins, next){
     ctx.instance.teams({
-      fields: ["id", "name", "logoUrl"]
+      fields: ["id", "name", "logoUrl", 'desc']
     }, function (err, teams) {
       if (err) {
         throw {"status": 1005, "message": "团队列表获取失败"}

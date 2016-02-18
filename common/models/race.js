@@ -71,21 +71,8 @@ module.exports = function(Race) {
   };
   Race.beforeRemote("prototype.__get__raceTeams", function (ctx,ins,next) {
     ctx.req.query.filter = {
-      fields: ["name", "id", "logoUrl"]
+      fields: ["name", "id", "logoUrl", "desc", "status"]
     };
     next();
-  });
-  Race.afterRemote('prototype.__get__raceTeams',function(ctx,ins,next){
-    var result = [];
-    ins.forEach(function(team){
-      var record = {
-        name:team.name,
-        logoUrl:team.logoUrl,
-        id:team.id,
-        status:team.status
-      };
-      result.push(record);
-    });
-    ctx.res.send(result);
   });
 };

@@ -3,7 +3,7 @@
 	background-color: #0CB9F7;
 	padding: 0;
 	margin: 0;
-  height: 64px;
+  height: 4.2rem;
   position: relative;
   z-index: 2;
   white-space:nowrap;  /*不换行*/
@@ -60,88 +60,97 @@
   color: #fff;
   display: none;
 }
+/*@media only screen and (min-width : 993px) {
+  .container {
+    width: 80%; } }*/
 /*校园服务导航菜单*/
 .menu{
-  height: 40px;
+  height: 45px;
   font-size: 1.3rem;
-  float: left;
-  color: red;
   background-color: #fff;
   width: 100%;
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
+  padding-top: 5px;
   white-space:nowrap;
   overflow: hidden; 
   border-bottom: 5px solid #0CB9F7;
 }
-/*.tab-active{
-  position: absolute;
-  bottom: 0;
-  height: 2px;
-  background-color: #f6b2b5;
-  will-change: left, right;
-}*/
+
 
 .browser-default{
   height: 100%;
+  border: 1px #fff;
 }
 
-.menu-item {
+.menu .item {
   height: 100%;
+  line-height: 45px;
+  text-align: center;
 }
 
-/*.active{
-  color: #000;
-}*/
-.activity{
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 104px;  /*菜单栏加导航栏高度*/
-  bottom: 0;  /*固定框架高度*/
-  width: 100%;
+.menu .active{
+  color: #fff;
+  background-color: #0CB9F7;
 }
-@media only screen and (min-width: 600px) {
-  .activity-list{
-    position: relative;
-    height: 100%;
-    overflow: auto;
-    overflow-x: hidden;
-  }
-  }
-.activity-list h4{
+
+.container .row{
+  margin: 0;
+}
+
+
+
+.list {
+  padding: 0.5rem;
+}
+.list h4{
   white-space:nowrap;  
   overflow: hidden;   
   text-overflow:ellipsis;
-  margin: 0.5rem 0;
+  padding: 5px 10px;
+  margin: 0;
   font-size: 1.3rem;
-  padding-top: 10px
+  padding-top: 10px;
+  color: #000;
 }
-
-.activity-list .tag {
+.list h6 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  margin: 0;
+}
+.list .card-content {
+  white-space: nowrap;
+  font-size: 1rem;
+  padding: 5px 10px;
+  width: 100%;
+}
+.list .card-image img{
+  width: 100%;
+}
+.list .card-image h6{
+  white-space:nowrap;  
+  overflow: hidden;   
+  text-overflow:ellipsis;
+  font-size: 1.2rem;
+  padding: 10px 0;
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+.list .tag {
   white-space: nowrap;
   font-size: 1rem;
   padding: 5px 10px;
   width: 100%;
 }
 
-.activity-list .tag h6 {
+.list .tag h6{
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
 }
-
-.activity-list .card {
-  border-top: rgba(0, 0, 0, 0.16) 1px solid;
-  box-shadow: 0 0 0;
-  margin: 0;
-  padding: 0;
-}
-
-.activity-list .card-content {
-  padding: 0;
-}
-
 @media only screen and (min-width : 601px) {
   .create-team {
     padding-top: 200px; 
@@ -163,4 +172,43 @@
 }
 .vote .card{
   margin: 10px 20px;
+}
+.user-team {
+  padding: 5px !important; 
+  position: relative;
+}
+.user-team img {
+  width: 50px;
+  border-radius: 25px;
+}
+.user-team h4{
+  overflow: hidden;
+  font-size: 1.2rem;
+  padding: 5px;
+  margin: 0;
+}
+.user-team h4 *{
+  vertical-align:middle;
+}
+.user-team p {
+  text-align: left;
+}
+.user-team label{
+  position: absolute !important;
+  top: 22.5px;
+  right: 0px;
+}
+.team-card .card-title{
+  padding: 20px 0; 
+  text-align: center;
+}
+.team-card .card-title img{
+  width: 100px;
+  border-radius: 50px;
+}
+.team-card .card-title h4{
+  overflow: hidden;
+  font-size: 1.2rem;
+  padding: 5px;
+  margin: 0;
 }

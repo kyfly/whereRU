@@ -1,0 +1,11 @@
+<div>
+	<ul class="collection z-depth-1">
+		<li ng-repeat="notice in notices" class="collection-item">
+			<time class="green-text" ng-bind="notice.created | date: 'yyyy-MM-dd HH:mm:ss'"></time>
+			<p ng-bind="notice.content"></p>
+			<div ng-show="notice.fileName">
+				<span class="orange-text">参赛团队请在竞赛管理上传《{{notice.fileName}}》</span>
+			</div>
+		</li>
+	</ul>
+</div>

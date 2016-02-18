@@ -1,0 +1,25 @@
+<div>
+	<div ng-if="teamId">
+		<ng-include src="'/application/views/team/join.html'" ng-controller="TeamController"></ng-include>
+	</div>
+	<a ng-show="teamId" class="waves-effect waves-light btn red"
+		ng-click="joinTeam()">返回
+	</a>
+	<ul ng-show="!teamId" class="row col s12">
+		<li ng-repeat="team in raceTeams"  class="col s12 m4 team-card">
+			<div class="card">
+				<div class="card-title">
+					<img ng-src="{{team.logoUrl}}">
+				  <h4>{{team.name}}</h4>
+				</div>
+				<div class="card-content">
+				  <p ng-bind="team.desc"></p>
+				</div>
+				<div class="card-action center">
+					<a href="" class="btn" ng-click="joinTeam()" ng-disabled="team.status">申请加入</a>
+				</div>
+			</div>
+		</li>
+	</ul>
+	
+</div>
