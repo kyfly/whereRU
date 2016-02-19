@@ -1,17 +1,24 @@
 <!-- 手机显示选择 -->
-<nav class="header row hide-on-med-only hide-on-large-only">
+<nav class="header row hide-on-large-only">
   <div class="nav-wrapper">
-    <a href="#!" class="col offset-s1 brand-logo left s5">whereRU</a>
-    <ul class="col s6 right">
+    <a href="#!" class="col offset-s1 brand-logo">whereRU</a>
+    <ul>
       <li>
-        <select class="col s10" ng-model="choice" material-select watch>
-          <option ng-repeat="value in ['最新','最热']">{{value}}</option>
-        </select>
+        <a class="dropdown-button right" href="#!" dropdown data-hover="true"
+           data-activates="demoDropdown">{{choice || "全部"}}
+          <i class="material-icons right">arrow_drop_down</i>
+        </a>
       </li>
+      <ul id='demoDropdown' class='dropdown-content'>
+        <li><a href="javascript:void(0);">最新</a></li>
+        <li><a href="javascript:void(0);">进行中</a></li>
+        <li><a href="javascript:void(0);">未开始</a></li>
+        <li><a href="javascript:void(0);">已结束</a></li>
+      </ul>
     </ul>
   </div>
 </nav>
-<div class="row menu">
+<div class="row menu container">
   <!-- 大屏幕选择 -->
   <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
     <option ng-repeat="value in ['最新','最热']">{{value}}</option>
@@ -22,7 +29,7 @@
   <div class="col s4 m3 l2 item"><a href="/w/races">校园竞赛</a></div>
   <div class="col s4 m3 l2 item"><a href="/w/teams">校园团队</a></div>
 </div>
-<div class="row">
+<div class="row container">
   <div class="col s12 m6 l3 list" ng-repeat="activityItem in activityItems">
     <div class="card">
       <div class="card-title">

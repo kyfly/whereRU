@@ -17,7 +17,7 @@
     </ul>
   </div>
 </nav>
-<div class="row menu">
+<div class="row menu container">
   <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
     <option ng-repeat="value in ['最新','最热']">{{value}}</option>
   </select>
@@ -33,7 +33,7 @@
 </div>
 
 <!--校园团队列表-->
-<div class="row" >
+<div class="row container" >
   <div class="col s12 m4 l3 team-card" ng-repeat="team in teams">
     <div class="card">
       <div class="card-title">

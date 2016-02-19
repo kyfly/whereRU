@@ -32,6 +32,9 @@
   font-weight: 900;
   font-family: cursive;
 }
+.dropdown-content {
+  top: 4.2rem !important;
+}
 #search{
   margin: 0;
 }
@@ -217,14 +220,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+@media only screen and (max-width : 993px) {
+  .team-title.container {
+    width: 100%;
+  }
+}
 .team-title {
+  padding: 20px;
   text-align: center;
   background-color: rgba(12,185,247,0.5);
 }
 .team-title img{
-  text-align: center;
   width: 100px;
-  border-radius: 500px;
+  border-radius: 50px;
 }
 .team-title h4{
   overflow: hidden;

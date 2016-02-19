@@ -1,28 +1,30 @@
 <div>
-  <div class="row col s12 m12 team-title center">
+  <div class="col s12 m12 team-title center container">
     <img ng-src="{{team.logoUrl}}">
     <h4><span ng-bind="team.name"></span></h4>
   </div>
-  <div class="row col s12 detail-menu">
-    <ul class="tabs" tabs>
-      <li class="tab col s4">
-        <a href="#about">团队简介</a>
-      </li>
-      <li class="tab col s4">
-        <a href="#activities">团队活动</a>
-      </li>
-      <li class="tab col s4">
-        <a href="#join">申请加入</a>
-      </li>
-    </ul>
-  </div>
-  <div id="about">
-    <ng-include src="'/application/views/team/about.html'"></ng-include>
-  </div>
-  <div id="activities">
-    <ng-include src="'/application/views/team/activities.html'"></ng-include>
-  </div>
-  <div id="join">
-    <ng-include src="'/application/views/team/join.html'"></ng-include>
+  <div class="container">
+    <div class="row col s12 detail-menu">
+      <ul class="tabs" tabs>
+        <li class="tab col s4">
+          <a href="#about">团队简介</a>
+        </li>
+        <li class="tab col s4">
+          <a href="#activities">团队活动</a>
+        </li>
+        <li class="tab col s4">
+          <a href="#join">申请加入</a>
+        </li>
+      </ul>
+    </div>
+    <div id="about">
+      <ng-include src="'/application/views/team/about.html'"></ng-include>
+    </div>
+    <div id="activities">
+      <ng-include src="'/application/views/team/activities.html'"></ng-include>
+    </div>
+    <div id="join">
+      <ng-include src="'/application/views/team/join.html'"></ng-include>
+    </div>
   </div>
 </div>
