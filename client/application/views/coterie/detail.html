@@ -1,0 +1,97 @@
+<div class="row s12 coterie-header">
+	<img ng-src="{{coterie.logoUrl}}">
+  <h4><span ng-bind="coterie.name"></span></h4>
+  <a ng-show="!coterie.isAttentioned" href="" class="btn waves-effect waves-light" ng-click="attention()">
+  	<i class="material-icons">add</i>
+  	<span>关注</span>
+  </a>
+  <a href="/w/coteries/{{coterie.id}}/edit" ng-show="coterie.isAttentioned" class="btn waves-effect waves-light">
+  	<i class="material-icons">mode_edit</i>
+  	<span>写文章</span>
+  </a>
+</div>
+<div class="container row">
+	<div class="card article" ng-repeat="article in articles">
+		<a href="/u/{{article.user.id}}">
+			<h4 class="author">
+				<img ng-src="{{article.user.headImgUrl}}">
+				<span ng-bind="article.user.name"></span>
+			</h4>
+		</a>
+		<div class="card-content">
+			<h4 ng-bind="article.title"></h4>
+			<ng-include src="article.contentUrl"></ng-include>
+			<span><a href="/w/articles/{{article.id}}">查看原文</a></span>
+		</div>
+		<div class="card-action">
+			<div class="waves-effect text-center action">
+       	<a href="">
+       		<i class="material-icons">share</i></i>分享
+       	</a>
+      </div>
+      <div class="waves-effect text-center action" ng-click="loadComment()">
+       	<a href="">
+       		<i class="material-icons">comment</i>评论(<span ng-bind="article.commentCount"></span>)
+       	</a>
+      </div>
+      <div class="waves-effect text-center action" ng-show="islike">
+        <a href="">
+        	<i class="material-icons">star</i>喜欢(<span ng-bind="article.likeCount"></span>)
+        </a>
+      </div>
+      <div class="waves-effect text-center action" ng-show="!islike" ng-click="addLike()">
+        <a href="">
+        	<i class="material-icons">star_border</i>喜欢(<span ng-bind="article.likeCount"></span>)
+        </a>
+      </div>
+		</div>
+		<div ng-show="article.showCommentBox">
+      	<ul class="collapsible avatar" data-collapsible="accordion" watch>
+      		<li >
+      			<div class="collapsible-header">
+      				<img src="/lib/icon/edit.png" alt="" class="circle">
+				      <span class="title">写评论</span>
+				      <div>
+				      	<div input-field>
+							    <textarea ng-model="article.writingCommentContent" class="materialize-textarea" ></textarea>
+								</div>
+								<a href="" class="btn waves-effect waves-light red" ng-click="createComment()">发布</a>
+							</div>
+      			</div>
+      		</li>
+			    <li ng-repeat="comment in article.comments">
+		        <div class="collapsible-header">
+		        	<img ng-src="{{comment.user.headImgUrl}}" alt="" class="circle">
+			      	<span class="title" ng-bind="comment.user.name"></span>
+			      	<p ng-click="loadReply()">
+			      		<time class="green-text" ng-bind="comment.created | date: 'yyyy-MM-dd HH:mm:ss'"></time>
+			      		<br>
+			         {{comment.content}}
+			      </p>
+		        </div>
+		        <div class="collapsible-body">
+							<ul class="collection">
+							
+			      	<li class="collection-item" ng-repeat="reply in comment.replys">
+			      		<span class="title" ng-bind="reply.user.name"></span>
+			      		<p>
+			      			<time class="green-text" ng-bind="reply.created | date: 'yyyy-MM-dd HH:mm:ss'"></time>
+			      			<br>
+			      			{{reply.content}}
+			      		</p>
+			      	</li>
+			      	<li class="collection-item">
+					      <span class="title">写回复</span>
+					      <div input-field>
+							    <textarea ng-model="comment.writingReplyContent" class="materialize-textarea" ></textarea>
+								</div>
+								<a href="" class="btn waves-effect waves-light red" ng-click="createReply()">提交</a>
+		      		</li>
+			      </ul>
+		        </div>
+			    </li>
+				</ul>
+      </div>
+	</div>
+</div>
+<!--  -->

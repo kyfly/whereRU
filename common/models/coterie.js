@@ -15,6 +15,21 @@ function articleFn(article, userId, a) {
 	return defer.promise;
 }
 module.exports = function(Coterie) {
+	Coterie.afterRemote('findById', function (ctx, ins, next) {
+		if (ctx.req.accessToken) {
+			ins.fans.findById(ctx.req.accessToken.userId, function (err, user) {
+				if (err || !user) {
+					next();
+				} else {
+					var coterie = ins.toJSON();
+					coterie.isAttentioned = true;
+					ctx.res.send(coterie);
+				}
+			})
+		} else {
+			next();
+		}
+	})
 	/**
 	 * 获取一个圈子内文章列表
 	 * @param  {[type]} ctx   [description]

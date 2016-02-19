@@ -59,13 +59,17 @@
 </nav>
   
 <div ng-include="'application/views/user/login.html'"></div>
-<div id="doc" class="container">
+<div id="doc">
   <div ui-view></div>
 </div>
 <!-- jquery -->
 <script src="/lib/jquery/jquery.min.js"></script>
 <!--angular-->
 <script src="/lib/angular/angular.min.js"></script>
+
+<script src="/lib/ueditor/ueditor.config.js"></script>
+<script src="/lib/ueditor/ueditor.all.min.js"></script>
+<script src="/lib/angular-ueditor/angular-ueditor.min.js"></script>
 <!-- material -->
 <script src="/lib/materialize/js/materialize.min.js"></script>
 <!-- ng-material -->
@@ -76,8 +80,12 @@
 <script src="/lib/angular-components/angular-resource.min.js"></script>
 <!--model service-->
 <script src="/services/lb-services.js"></script>
+
 <!--angular module-->
 <script src="/app.js"></script>
+<!--ueditor service-->
+<script src="/services/ueditor-services.js"></script>
+
 <!-- User -->
 <script src="/application/scripts/user/user-controller.js"></script>
 <script src="/application/scripts/user/user-router.js"></script>

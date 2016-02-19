@@ -1,49 +1,27 @@
-<header>
-
-  <div class="left">
-    <a href="" data-activates="coterieSideBar" class="button-collapse hide-on-large-only">
-      <i class="mdi-navigation-menu coterieHideBtn"></i>
+<div class="row s12 coterie">
+  <header>
+    <a href="#" data-activates="nav-mobile" class="button-collapse hide-on-large-only" data-sidenav="left" data-menuwidth="300" data-closeonclick="false">
+      <i class="mdi-navigation-menu"></i>
     </a>
+    <ul id="nav-mobile" class="side-nav fixed">
+      <li class="icon-logo ">
+        <a href="/">whereRU</a>
+      </li>
+      <li>
+        <a href="#" ng-click="moreCoteries()" ng-bind="moreOrBack"></a>
+      </li>
+      <li ng-repeat="coterie in coteries">
+        <a href="/w/coteries/{{coterie.id}}">
+          <h4>
+            <img ng-src="{{coterie.logoUrl}}">
+            <span ng-bind="coterie.name"></span>
+          </h4>
+        </a>
+      </li>
+    </ul>
+  </header>
+  <div class="coterie-detail">
+    <div ui-view></div>
   </div>
+</div>
 
-
-  <ul id="coterieSideBar" class="side-nav fixed">
-    <li class="withoutPadding">
-      <div style="height: 64px" class="center-align">whereRU</div>
-    </li>
-
-
-    <li class="bold withoutPadding ng-scope coterieSideMargin">
-      <span class="coterieLeft"><img class="coterieLogo" ng-src="/application/images/coterie/system.png"></span>
-      <a class="waves-effect waves-teal" ui-sref="coteries.systemMessage">系统信息</a>
-    </li>
-
-    <li ng-repeat="sideBarInfo in existCoterieList" id="{{sideBarInfo.id}}" class="collection-item bold withoutPadding ng-scope
-     coterieSideMargin coterieSideLi" ng-click="coterieNewMessage = false;showName();updateLastView($index)" ng-show="showExitConterie">
-      <span class="coterieLeft"><img class="coterieLogo" ng-src="{{sideBarInfo.logoUrl}}"></span>
-      <a class="waves-effect waves-teal" ui-sref="coteries.userMessage({id: sideBarInfo.id})" >{{sideBarInfo.name}}</a>
-      <!--<span ng-bind="sideBarInfo.lastView | date:'MM-dd'" class="coterieSideTime"> </span>-->
-      <span class="coterieSideNewNum new badge" ng-bind="sideBarInfo.msgCount" ng-show="coterieNewMessage"></span>
-    </li>
-
-    <li class="center-align" ng-click="showAllConterie = ! showAllConterie;showExitConterie = ! showExitConterie"
-        style="cursor:pointer">
-      <a><i class="mdi-content-add"></i>是否发现更多？</a>
-    </li>
-    <li ng-click="showDetail();showName()" ng-repeat="allCoterie in allCoteries" id="{{allCoterie.id}}" class="collection-item bold withoutPadding ng-scope
-     coterieSideMargin coterieSideLi" ng-show="showAllConterie">
-      <span class="coterieLeft"><img class="coterieLogo" ng-src="{{allCoterie.logoUrl}}"></span>
-      <a class="waves-effect waves-teal" ui-sref="coteries.userMessage({id: allCoterie.id})">{{allCoterie.name}}</a>
-    </li>
-  </ul>
-</header>
-
-<main class="coterieMain">
-  <div class="container">
-    <div class="" ui-view=""></div>
-  </div>
-</main>
-
-<script>
-  $(".button-collapse").sideNav();
-</script>

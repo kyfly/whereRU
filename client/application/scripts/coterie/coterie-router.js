@@ -6,23 +6,14 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 		controller: 'CoteriesController',
     templateUrl: 'application/views/coterie/index.html'
 	})
-    .state('coteries.systemMessage',{
-      url: '/systemMessage',
-      controller: 'CoterieDetailController',
-      templateUrl: 'application/views/coterie/systemMessage.html'
-    })
-    .state('coteries.userMessage',{
-      url: '/userMessage/:id',
-      controller: 'CoterieDetailController',
-      templateUrl: 'application/views/coterie/userMessage.html'
-    })
   .state('coteries.detail', {
-    url: 'detail/:id',
-    controller: 'CoterieDetailController'
+    url: '/:id',
+    controller: 'CoterieController',
+    templateUrl: 'application/views/coterie/detail.html'
   })
-	.state('coterie', {
-		url: '/w/coteries/:id',
-		controller: 'CoterieController',
-		templateUrl: 'application/views/coterie/detail.html'
+	.state('coteries.edit', {
+		url: '/:id/edit',
+		controller: 'ArticleController',
+		templateUrl: 'application/views/coterie/edit.html'
 	})
 }]);

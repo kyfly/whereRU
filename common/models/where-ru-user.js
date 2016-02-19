@@ -400,7 +400,7 @@ module.exports = function(User) {
   User.beforeRemote('prototype.__create__likeUsers', function (ctx, ins, next) {
     var articleId = ctx.req.body.articleId;
     var userId = ctx.req.params.id;
-    User.app.models.likeUser.find({
+    User.app.models.LikeUser.findOne({
       where: {
         articleId: articleId,
         userId: userId

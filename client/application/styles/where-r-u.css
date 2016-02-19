@@ -5,7 +5,7 @@
 	margin: 0;
   height: 4.2rem;
   position: relative;
-  z-index: 2;
+  z-index: 1000;
   white-space:nowrap;  /*不换行*/
  /* overflow: hidden; */
 }
@@ -232,4 +232,166 @@
   padding: 5px;
   margin: 0;
   color: #fff
+}
+.coterie {
+
+}
+
+.coterie header .button-collapse{
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  width: 30px;
+  z-index: 999;
+  color: #fff;
+  font-size: 30px;
+}
+.coterie header li{
+  border-bottom: solid 1px #eee;
+}
+.coterie header li h4 {
+  font-size: 1.2rem;
+  margin: 10px 5px;
+  overflow: hidden;
+}
+.coterie header li h4 *{
+  vertical-align: middle;
+}
+
+.coterie header li h4 >img:first-child {
+  width: 2.5rem;
+  border-radius: 1.25rem;
+}
+.coterie header li h4 .attention{
+  float: right;
+  width: 2.5rem;
+}
+.coterie .side-nav .icon-logo {
+  height: 4.2rem;
+  margin-bottom: 2rem;
+}
+.coterie .side-nav .icon-logo a{
+  font-size: 2rem;
+  font-family: cursive;
+  padding: 2rem 3rem;
+}
+.coterie .side-nav a {
+  color: #444; 
+  display: block;
+  font-size: 1.2rem;
+  height: 100%;
+  line-height: 100%;
+  padding: 10px 0;
+}
+@media only screen and (min-width : 993px) {
+  .coterie .coterie-detail{
+    margin-left: 300px;
+    padding: 20px; 
+  }
+}
+
+.coterie .coterie-header{
+  background-size: 100% 300px;
+  background-color: rgb(99, 113, 125);
+  height: 300px;
+  padding: 30px 0;
+  text-align: center;
+}
+.coterie .coterie-header img {
+  border-radius: 50px;
+  width: 100px;
+}
+.coterie .coterie-header h4 {
+  color: #fff;
+}
+.coterie .article .author{
+  padding: 0.5rem 1rem;
+  margin: 0;
+}
+.coterie .article .author * {
+  vertical-align: middle;
+}
+.coterie .article .author img {
+  width: 3rem;
+  border-radius: 1.5rem;
+}
+.coterie .article .author span{
+  color: #444; 
+  font-size: 1.2rem;
+}
+.coterie .article .card-content{
+  position: relative;
+  padding-top: 0;
+  max-height: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.coterie .article .card-content>span{
+  position: absolute;
+  right: 20px;
+  top: 0;
+  padding: 5px;
+  font-size: 1.1rem;
+}
+.coterie .article .card-action{
+  padding: 5px 0px;
+}
+.coterie .article .card-action .action{
+  width: 30%;
+  text-align: center;
+}
+.coterie .article .card-action .action *{
+  vertical-align: middle;
+  font-size: 1.1rem;
+}
+.coterie .article .card-action .action i {
+  padding: 10px;
+}
+.coterie .article .card-action .waves-effect{
+  cursor: auto !important;
+}
+.coterie .collapsible p{
+  line-height: 1.5rem;
+}
+.coterie .collapsible>li{
+  padding-left: 3rem;
+  border-bottom: 1px solid #ddd;
+}
+.coterie .collapsible.avatar{
+  position: relative;
+}
+.coterie .collapsible.avatar .circle{
+    position: absolute;
+    width: 2rem;
+    overflow: hidden;
+    left: 0.5rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+.coterie .collapsible-header {
+  display: block;
+  cursor: pointer;
+  min-height: 100%; 
+  line-height: 100%; 
+  padding: 10px 0;
+  background-color: #fff;
+  border-bottom: 0px solid #ddd;
+}
+.coterie .collapsible-body{
+  border-bottom: 0px solid #ddd;
+}
+.coterie .collapsible-body p {
+  line-height: 2rem;
+  padding: 0;
+  margin: 0;
+}
+.coterie .collapsible .collection {
+  margin: 10px 10px 10px 0;
+  border: 1px solid #e0e0e0;
+}
+.collapsible {
+  border-top: 0 solid #ddd; 
+  border-right: 0 solid #ddd; 
+  border-left: 0 solid #ddd;  
+  margin: 0.5rem 0 1rem 0; 
 }

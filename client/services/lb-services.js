@@ -58,13 +58,21 @@ module.factory(
     urlBase + '/WUsers/:id',
     { 'id': '@id' },
     {
-      /**
-       * 圈子关注量
-       * 使用场景：显示圈子关注量
-       */
-      "prototype_count_fans": {
-        url: urlBase + '/Coteries/:id/fans/count',
-        method: 'GET'
+      "prototype_create_replys": {
+        url: urlBase + '/WUsers/:id/replys',
+        method: 'POST'
+      },
+      "prototype_create_comments": {
+        url: urlBase + '/WUsers/:id/comments',
+        method: 'POST'
+      },
+      "prototype_create_articles": {
+        url: urlBase + '/WUsers/:id/articles',
+        method: 'POST'
+      },
+      "prototype_create_likeUsers": {
+        url: urlBase + '/WUsers/:id/likeUsers',
+        method: 'POST'
       },
       /**
        * 关注圈子，圈子最后时间上传
@@ -409,6 +417,40 @@ module.factory(
     return R;
 }])
 .factory(
+  'Article', 
+  ['LoopBackResource', 'LoopBackAuth', '$injector',
+  function(Resource, LoopBackAuth, $injector){
+    var R = Resource(
+      urlBase + '/Articles/:id',
+      { 'id': '@id' },
+      {
+        "prototype_get_comments": {
+          url: urlBase + '/Articles/:id/comments',
+          method: "GET",
+          isArray: true
+        }
+      }
+    );
+    return R;
+  }])
+.factory(
+  'Comment', 
+  ['LoopBackResource', 'LoopBackAuth', '$injector',
+  function(Resource, LoopBackAuth, $injector){
+    var R = Resource(
+      urlBase + '/Comments/:id',
+      { 'id': '@id' },
+      {
+        "prototype_get_replys": {
+          url: urlBase + '/Comments/:id/replys',
+          method: "GET",
+          isArray: true
+        }
+      }
+    );
+    return R;
+  }])
+.factory(
   'Coterie',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
@@ -416,6 +458,15 @@ module.factory(
       urlBase + '/Teams/:id',
       { 'id': '@id' },
       {
+
+        /**
+         * 圈子关注量
+         * 使用场景：显示圈子关注量
+         */
+        "prototype_count_fans": {
+          url: urlBase + '/Coteries/:id/fans/count',
+          method: 'GET'
+        },
         /**
          *   所有圈子显示
          *   pc所有圈子的显示
@@ -424,9 +475,22 @@ module.factory(
           url: urlBase + '/Coteries',
           method: 'GET',
           isArray: true
+        },
+        "prototype_get_articles": {
+          url: urlBase + '/Coteries/:id/articles',
+          method: 'GET',
+          isArray: true
+        },
+        "prototype_count_fans": {
+          url: urlBase + '/Coteries/:id/fans/count',
+          method: 'GET'
+        },
+        "findById": {
+          url: urlBase + '/Coteries/:id',
+          method: 'GET'
         }
       });
-  return R;
+    return R;
 }])
 .factory(
   'Activity',
