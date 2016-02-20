@@ -385,6 +385,15 @@
   background-color: #fff;
   border-bottom: 0px solid #ddd;
 }
+.coterie .collapsible-header .reply{
+  position: absolute;
+  right: 20px;
+  vertical-align: middle;
+}
+.coterie .collapsible-header .reply i {
+  margin: 0;
+  line-height: 100%;
+}
 .coterie .collapsible-body{
   border-bottom: 0px solid #ddd;
 }
@@ -402,4 +411,40 @@
   border-right: 0 solid #ddd; 
   border-left: 0 solid #ddd;  
   margin: 0.5rem 0 1rem 0; 
+}
+.user-header {
+  margin-top: 20px; 
+  padding: 10px;
+}
+.user-header img {
+  width: 100px;
+  border-radius: 50px;
+  margin: 10px;
+}
+.user-header h4 {
+  font-size: 1.2rem;
+  color: #bbb;
+}
+.user-header h4 span{
+  margin: 5px;
+}
+.user-header ul.row{
+  margin-top: 50px;
+}
+.user-header ul li {
+  display: inline;
+}
+.user-activity {
+  padding: 10px 0;
+}
+.user-activity ul li {
+  display: inline;
+  padding: 5px;
+}
+.user-activity ul .title{
+  font-size: 1.5rem;
+  font-weight: 500;
+} 
+.user-activity .content {
+  min-height: 200px;
 }

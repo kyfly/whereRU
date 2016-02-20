@@ -42,7 +42,8 @@ module.exports = function(User) {
         "name": ins.name,
         "school": ins.school,
         "phone": ins.phone,
-        "sign": ins.sign
+        "sign": ins.sign,
+        "headImgUrl": ins.headImgUrl
       };
       ctx.res.send(token);
     });
@@ -59,7 +60,8 @@ module.exports = function(User) {
         "name": user.name,
         "school": user.school,
         "phone": user.phone,
-        "sign": user.sign
+        "sign": user.sign,
+        "headImgUrl": ins.headImgUrl
       };
       ctx.res.send(token);
     });

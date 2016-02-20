@@ -10,17 +10,22 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       controller: 'RegisterController',
       templateUrl: 'application/views/user/register.html'
     })
-  .state('index', {
-		url: '/',
-		controller: 'HomeController',
-		templateUrl: '/application/views/index.html'
-	})
-  .state('management_system', {
-    url: '/w/team/:id',
-    controller: 'MSController',
-    template: '<div></div>'
-  })
-  .state('art', {
+    .state('index', {
+  		url: '/',
+  		controller: 'HomeController',
+  		templateUrl: '/application/views/index.html'
+  	})
+    .state('home', {
+      url: '/u/home',
+      controller: 'UserController',
+      templateUrl: '/application/views/user/index.html'
+    })
+    .state('management_system', {
+      url: '/w/team/:id',
+      controller: 'MSController',
+      template: '<div></div>'
+    })
+    .state('art', {
       url: '/w',
       controller: 'ARTController',
       template: '<div ui-view></div>'

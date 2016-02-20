@@ -20,6 +20,10 @@ module.exports = function(server) {
     res.sendFile(path.join(__dirname, '../../client/index.html'));
   });
 
+  server.get(/^\/u\/*/, function(req, res) {
+    res.sendFile(path.join(__dirname, '../../client/index.html'));
+  });
+
   server.get(/^\/MS\/*/, function(req, res) {
     res.sendFile(path.join(__dirname, '../../client/management_system/index.html'));
   });

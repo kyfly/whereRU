@@ -45,11 +45,15 @@ app.controller('ConfirmSchoolController', ['User', '$scope', function (User, $sc
     });
   }
 }]);
-
+app.controller('UserController', ['$scope', 'User', function($scope, User){
+  User.getInfo(function (user) {
+    $scope.user = user;
+  });
+}]);
 app.controller('MSController', ['User', '$stateParams', function (User, $stateParams) {
   window.localStorage.$LoopBack$currentTeamId = $stateParams.id;
-  window.location.href = '/management_system'
+  window.location.href = '/management_system';
 }]);
 app.controller('ARTController', ['$scope', function(){
 
-}])
+}]);

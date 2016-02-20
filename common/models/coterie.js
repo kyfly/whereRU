@@ -78,15 +78,15 @@ module.exports = function(Coterie) {
 
 	Coterie.afterRemote('prototype.__findById__articles', function (ctx, ins, next) {
 		var article = ins.toJSON();
-		promise(ins.readers.count, 'insFind', {})
+		promise(ins.readers, 'count', {})
 		.then(function (count) {
 			article.readerCount = count;
-			return promise(ins.likeUser.count, 'insFind', {});
+			return promise(ins.likeUser, 'count', {});
 		})
 		.then(function (count) {
 			article.likeCount = count;
 			if (ctx.req.accessToken) {
-				promise(ins.likeUser.count, 'insFind', { userId: ctx.req.accessToken.userId})
+				promise(ins.likeUser, 'count', { userId: ctx.req.accessToken.userId})
 				.then(function (count) {
 					article.islike = count > 0;
 					ctx.res.send(article);

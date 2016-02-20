@@ -5,7 +5,7 @@
   	<i class="material-icons">add</i>
   	<span>关注</span>
   </a>
-  <a href="/w/coteries/{{coterie.id}}/edit" ng-show="coterie.isAttentioned" class="btn waves-effect waves-light">
+  <a href="/w/coteries/{{coterie.id}}/articles/edit" ng-show="coterie.isAttentioned" class="btn waves-effect waves-light">
   	<i class="material-icons">mode_edit</i>
   	<span>写文章</span>
   </a>
@@ -21,7 +21,7 @@
 		<div class="card-content">
 			<h4 ng-bind="article.title"></h4>
 			<ng-include src="article.contentUrl"></ng-include>
-			<span><a href="/w/articles/{{article.id}}">查看原文</a></span>
+			<span><a href="/w/coteries/{{coterie.id}}/articles/{{article.id}}">查看原文</a></span>
 		</div>
 		<div class="card-action">
 			<div class="waves-effect text-center action">
@@ -34,12 +34,12 @@
        		<i class="material-icons">comment</i>评论(<span ng-bind="article.commentCount"></span>)
        	</a>
       </div>
-      <div class="waves-effect text-center action" ng-show="islike">
+      <div class="waves-effect text-center action" ng-show="article.islike">
         <a href="">
         	<i class="material-icons">star</i>喜欢(<span ng-bind="article.likeCount"></span>)
         </a>
       </div>
-      <div class="waves-effect text-center action" ng-show="!islike" ng-click="addLike()">
+      <div class="waves-effect text-center action" ng-show="!article.islike" ng-click="addLike()">
         <a href="">
         	<i class="material-icons">star_border</i>喜欢(<span ng-bind="article.likeCount"></span>)
         </a>
@@ -66,7 +66,10 @@
 			      	<p ng-click="loadReply()">
 			      		<time class="green-text" ng-bind="comment.created | date: 'yyyy-MM-dd HH:mm:ss'"></time>
 			      		<br>
-			         {{comment.content}}
+			          {{comment.content}}
+			         	<a href="" class="reply">
+				        	<i class="material-icons">reply</i>(<span ng-bind="comment.replyCount"></span>)
+				        </a>
 			      </p>
 		        </div>
 		        <div class="collapsible-body">

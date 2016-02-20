@@ -265,7 +265,11 @@ module.factory(
       urlBase + '/Teams/:id',
       { 'id': '@id' },
       {
-
+        "find": {
+          url: urlBase + '/Teams',
+          method: 'GET',
+          isArray: true
+        },
         /**
          * 描述：团队参与竞赛，已登录用户
          * 使用场景：团队拥有者选择参与竞赛
@@ -428,6 +432,10 @@ module.factory(
           url: urlBase + '/Articles/:id/comments',
           method: "GET",
           isArray: true
+        },
+        "prototype_create_readers": {
+          url: urlBase + '/Articles/:id/readers',
+          method: "POST"
         }
       }
     );
@@ -480,6 +488,13 @@ module.factory(
           url: urlBase + '/Coteries/:id/articles',
           method: 'GET',
           isArray: true
+        },
+        "prototype_findById_articles": {
+          url: urlBase + '/Coteries/:id/articles/:fk',
+          params: {
+            'fk': '@fk'
+          },
+          method: 'GET'
         },
         "prototype_count_fans": {
           url: urlBase + '/Coteries/:id/fans/count',
