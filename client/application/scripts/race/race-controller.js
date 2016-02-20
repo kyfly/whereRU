@@ -29,11 +29,12 @@ app.controller('RaceController', ['$scope', 'Race', '$stateParams', 'User', 'Tea
   }, function (teams) {
     $scope.raceTeams = teams;
   });
-  User.prototype_get_teams({
-    id: $scope.$currentUser.id
-  }, function (teams) {
-    $scope.teams = teams;
-  });
+  if ($scope.$currentUser)
+    User.prototype_get_teams({
+      id: $scope.$currentUser.id
+    }, function (teams) {
+      $scope.teams = teams;
+    });
   $scope.selectedTeam = function () {
     $scope.selected = this.team.id;
   };

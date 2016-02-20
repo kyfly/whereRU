@@ -13,22 +13,22 @@
 		<div class="card-action">
 			<div class="waves-effect text-center action">
        	<a href="">
-       		<i class="material-icons">share</i></i>分享
+       		<i class="mdi-social-share"></i>分享
        	</a>
       </div>
       <div class="waves-effect text-center action" ng-click="loadComment()">
        	<a href="">
-       		<i class="material-icons">comment</i>阅读(<span ng-bind="article.readerCount"></span>)
+       		<i class="mdi-action-visibility"></i>阅读(<span ng-bind="article.readerCount"></span>)
        	</a>
       </div>
       <div class="waves-effect text-center action" ng-show="article.islike">
         <a href="">
-        	<i class="material-icons">star</i>喜欢(<span ng-bind="article.likeCount"></span>)
+        	<i class="mdi-toggle-star"></i>喜欢(<span ng-bind="article.likeCount"></span>)
         </a>
       </div>
       <div class="waves-effect text-center action" ng-show="!article.islike" ng-click="addLike()">
         <a href="">
-        	<i class="material-icons">star_border</i>喜欢(<span ng-bind="article.likeCount"></span>)
+        	<i class="mdi-toggle-star-border"></i>喜欢(<span ng-bind="article.likeCount"></span>)
         </a>
       </div>
 		</div>
@@ -56,7 +56,7 @@
 		      		<br>
 		          {{comment.content}}
 			        <a href="" class="reply">
-			        	<i class="material-icons">reply</i>(<span ng-bind="comment.replyCount"></span>)
+			        	<i class="mdi-content-reply"></i>(<span ng-bind="comment.replyCount"></span>)
 			        </a>
 		      	</p>
 

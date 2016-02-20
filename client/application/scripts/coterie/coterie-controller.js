@@ -2,15 +2,15 @@ app.controller('CoteriesController',
   ['$scope', 'User','Coterie', '$location', function ($scope, User, Coterie, $location) {
   $scope.more = false;
   $scope.moreOrBack = $scope.more ? '返回' : '发现';
-  var getCoteries = function () {
+  function getCoteries() {
     User.prototype_get_coteries({
       id: $scope.$currentUser.id
     }, function (coteries) {
       $scope.coteries = coteries;
       $location.path('/w/coteries/' + $scope.coteries[0].id);
     });
-  };
-  getCoteries();
+  }
+  //getCoteries();
   $scope.moreCoteries = function () {
     $scope.more = !$scope.more;
     if ($scope.more) {
@@ -23,6 +23,9 @@ app.controller('CoteriesController',
     }
     $scope.moreOrBack = $scope.more ? '返回' : '发现';
   };
+  if ($scope.$currentUser) {
+    getCoteries();
+  } 
 }]);
 
 app.controller('CoterieController', 
@@ -44,7 +47,7 @@ app.controller('CoterieController',
     $scope.articles = articles;
   }, function () {
   });
-  if (!$scope.more) {
+  if (!$scope.more && $scope.$currentUser) {
     User.prototype_link_coteries({
       id: $scope.$currentUser.id,
       fk: $stateParams.id
@@ -201,6 +204,7 @@ app.controller('ArticleController',
   ['$scope', '$stateParams', 'User','Coterie', 'Article', 'Comment',
   function ($scope, $stateParams, User, Coterie, Article, Comment) {
   if (!$scope.$currentUser) {
+    $scope.$currentUser = {};
     $scope.$currentUser.id = 0;
   }
   Coterie.prototype_findById_articles({

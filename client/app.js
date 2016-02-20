@@ -71,5 +71,36 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 .controller('HomeController', ['$scope', function($scope){
 	
 }])
+.controller('BottomBarController', ['$scope', '$location', function($scope, $location){
+	
+	$scope.menus = [{
+		name: '圈子',
+		path: '/w/coteries',
+		active: false
+	},{
+		name: '校园',
+		path: '/w/activities',
+		active: false
+	},{
+		name: '我的',
+		path: '/u/home',
+		active: false
+	}];
+	console.log($location.path())
+	if($location.path().match(/^\/w\/coteries/)) {
+		$scope.menus[0].active = true;
+	} else if ($location.path().match(/^\/u\//)) {
+		$scope.menus[2].active = true;
+	} else {
+		$scope.menus[1].active = true;
+	}
+	$scope.changePage = function () {
+		$scope.menus.forEach(function(menu){
+			menu.active = false;
+		});
+		this.menu.active = true;
+		$location.path(this.menu.path)
+	}
+}]);
 
 

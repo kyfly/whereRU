@@ -32,9 +32,25 @@
   font-weight: 900;
   font-family: cursive;
 }
+nav .nav-wrapper i {
+  position: absolute;
+  top: 0;
+  left: 4rem;
+}
 .dropdown-content {
   top: 4.2rem !important;
+  width: 20% !important;
 }
+.tabs {
+  display: -moz-box;  /* Firefox */ 
+  display: -ms-flexbox;    /* IE10 */ 
+  display: -webkit-box;    /* Safari */  
+  display: -webkit-flex;    /* Chrome, WebKit */ 
+  display: box;  
+  display: flexbox;  
+  display: block;
+}
+
 #search{
   margin: 0;
 }
@@ -55,13 +71,69 @@
 }
 
 .login {
-  position: fixed;
+  position: absolute;
   top: 64px;
   width: 100%;
   background: rgba(0, 0, 0, 0.8);
   z-index: 3;
   color: #fff;
   display: none;
+}
+.bottom-bar{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 0;
+  z-index: 999;
+  left: 0;
+  right: 0;
+}
+.bottom-bar a{
+  font-size: 1.3rem;
+}
+.bottom-bar .menus{
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: box;
+  display: flexbox;
+  display: block;
+  position: relative;
+  height: 48px;
+  margin: 0 auto;
+  width: 100%;
+  white-space: nowrap;
+}
+.bottom-bar .menus .menu{
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  display: block;
+  float: left;
+  text-align: center;
+  line-height: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  letter-spacing: .8px;
+  min-width: 80px;
+  border-bottom: 0;
+}
+.bottom-bar .menus .menu a{
+  width: 100%;
+  display: block;
+  height: 90%;
+  font-size: 2rem;
+}
+.bottom-bar .menus .menu .active{
+  background-color: #fff;
+  color: #ee6e73;
+  border-bottom: 2px solid #f6b2b5;
 }
 /*@media only screen and (min-width : 993px) {
   .container {
@@ -78,7 +150,9 @@
   overflow: hidden; 
   border-bottom: 5px solid #0CB9F7;
 }
-
+.row{
+  margin-bottom: 0;
+}
 
 .browser-default{
   height: 100%;
@@ -129,6 +203,7 @@
 }
 .list .card-image img{
   width: 100%;
+  max-height: 250px;
 }
 .list .card-image h6{
   white-space:nowrap;  
@@ -206,8 +281,8 @@
   text-align: center;
 }
 .team-card .card-title img{
-  width: 100px;
-  border-radius: 50px;
+  width: 50px;
+  border-radius: 25px;
 }
 .team-card .card-title h4{
   overflow: hidden;
@@ -216,8 +291,9 @@
   margin: 0;
 }
 .team-card .card-content{
-  height: 250px;
+  height: 150px;
   overflow: hidden;
+  padding: 0 20px;
   text-overflow: ellipsis;
 }
 @media only screen and (max-width : 993px) {
@@ -287,7 +363,6 @@
   color: #444; 
   display: block;
   font-size: 1.2rem;
-  height: 100%;
   line-height: 100%;
   padding: 10px 0;
 }
@@ -353,7 +428,7 @@
   font-size: 1.1rem;
 }
 .coterie .article .card-action .action i {
-  padding: 10px;
+  padding-left: 5px;
 }
 .coterie .article .card-action .waves-effect{
   cursor: auto !important;
@@ -379,7 +454,6 @@
 .coterie .collapsible-header {
   display: block;
   cursor: pointer;
-  min-height: 100%; 
   line-height: 100%; 
   padding: 10px 0;
   background-color: #fff;
@@ -414,6 +488,7 @@
 }
 .user-header {
   margin-top: 20px; 
+  margin-bottom: 20px;
   padding: 10px;
 }
 .user-header img {

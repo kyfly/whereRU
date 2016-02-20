@@ -29,7 +29,8 @@
   var authHeader = 'authorization';
 
   var module = angular.module("lbServices", ['ngResource']);
-module.factory(
+module
+.factory(
   'School',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
@@ -48,8 +49,9 @@ module.factory(
           isArray: true
         }
       });
+    R.modelName = "School";
     return R;
-}]);
+}])
 module.factory(
   'User',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
@@ -463,7 +465,7 @@ module.factory(
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
     var R = Resource(
-      urlBase + '/Teams/:id',
+      urlBase + '/Coteries/:id',
       { 'id': '@id' },
       {
 
@@ -494,10 +496,6 @@ module.factory(
           params: {
             'fk': '@fk'
           },
-          method: 'GET'
-        },
-        "prototype_count_fans": {
-          url: urlBase + '/Coteries/:id/fans/count',
           method: 'GET'
         },
         "findById": {

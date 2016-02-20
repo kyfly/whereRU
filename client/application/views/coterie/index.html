@@ -1,6 +1,19 @@
+<!-- 手机显示选择 -->
+<nav class="header row hide-on-large-only">
+  <div class="nav-wrapper">
+    <a href="#!" class="col offset-s1 brand-logo">whereRU</a>
+    <ul>
+      <li>
+        <a href="#">
+          <i class="mdi-image-looks"></i><span>发现</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class="row s12 coterie">
   <header>
-    <a href="#" data-activates="nav-mobile" class="button-collapse hide-on-large-only" data-sidenav="left" data-menuwidth="300" data-closeonclick="false">
+    <a href="#" data-activates="nav-mobile" class="button-collapse hide-on-large-only" data-sidenav="top" data-menuwidth="300" data-closeonclick="true">
       <i class="mdi-navigation-menu"></i>
     </a>
     <ul id="nav-mobile" class="side-nav fixed">
@@ -10,7 +23,7 @@
       <li>
         <a href="#" ng-click="moreCoteries()" ng-bind="moreOrBack"></a>
       </li>
-      <li ng-repeat="coterie in coteries">
+      <li ng-repeat="coterie in coteries" ng-click="hideSideBar()">
         <a href="/w/coteries/{{coterie.id}}">
           <h4>
             <img ng-src="{{coterie.logoUrl}}">
