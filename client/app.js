@@ -22,7 +22,9 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	});
 	
 }])
-.controller('HeaderController', ['$scope', '$rootScope', "User",function ($scope, $rootScope, User){
+.controller('HeaderController', 
+	['$scope', '$rootScope', "User", "$location",
+	function ($scope, $rootScope, User, $location){
 	try {
 		var token = JSON.parse(localStorage.$LoopBack$currentUserToken);
 		token.user.id = token.userId;
@@ -36,24 +38,21 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		console.log(err);
 	}
 	$scope.$on('auth:loginRequired', function () {
-		if (window.document.getElementById('loginForm').style.display === "block") {
-			Materialize.toast('验证失败,请检查是否输入正确', 4000);
-		} else if (localStorage.$LoopBack$accessTokenId) {
-			Materialize.toast('你需要重新登录或者可能没有权限访问', 4000);
-		} else {
-			$scope.goSignIn();
-		}
+		Materialize.toast('你需要重新登录或者可能没有权限访问', 4000);
 	});
 	$scope.pullTeams = function () {
 		User.prototype_get_teams({
 			id: $scope.$currentUser.id
 		}, function(teams){
 			$scope.teams = teams;
-			console.log($scope.teams);
 		})
 	}
-	$scope.changeTeams = function () {
-		localStorage.$LoopBack$accessTeamId = this.team.id;
+	$scope.logOut = function () {
+		$rootScope.$currentUser = null;
+		localStorage.$LoopBack$currentUserToken = null;
+		$rootScope.username = false;
+		Materialize.toast('退出成功', 4000);
+		$location.path("/");
 	}
 }])
 .controller('HomeController', ['$scope', function($scope){

@@ -17,9 +17,7 @@
 			<span ng-bind="user.phone"></span>
 		</h4>
 		<h4 ng-show="!user">
-			<a href="#" data-activates="nav-signIn" class="button-collapse" data-sidenav="top" data-menuwidth="300" data-closeonclick="false">
-	      登录
-	    </a>
+			<a  href='#login-modal' modal>登录</a>
 			<span> | </span>
 			<a href="/w/register">注册</a>
 		</h4>
@@ -39,14 +37,19 @@
 	</div>
 </div>
 <div class="container row z-depth-1 user-activity">
-	<ul class="row">
-		<li><a href="">我的团队</a></li>
-		<li><a href="">参赛竞赛</a></li>
-		<li><a href="">活动历史</a></li>
-		<li><a href="">喜欢文章</a></li>
+	<ul class="row menus">
+		<li ng-repeat="menu in activeMenus">
+			<a href="" ng-class="{true: 'active'}[menu.active]" 
+					ng-click="pullData()" ng-bind="menu.name"></a>
+		</li>
 	</ul>
 	<hr>
 	<div class="content">
-		
+		<div ng-if="!user">
+			<h4>你还没有<span><a  href='#login-modal' modal>登录</a><span>噢</h4>
+		</div>
+		<div ng-if="user">
+			<ng-include src="'/application/views/user/' + selectedMenu + '.html'"></ng-include>
+		</div>
 	</div>
 </div>

@@ -8,7 +8,10 @@ app.controller('TeamsController', ['$scope','Team',  'User', function ($scope, T
   },{
     "name": "技术团队",
   }];
-  $scope.team = {};
+  $scope.team = {
+    status: false,
+    hidden: false
+  };
   $scope.uploadLogo = function () {
     var file = document.getElementById('teamlogo').files[0];
     var Xhr = new XMLHttpRequest();
@@ -16,7 +19,7 @@ app.controller('TeamsController', ['$scope','Team',  'User', function ($scope, T
     if (!((fileExt[0] === '.png') || (fileExt[0] === '.jpg') || (fileExt[0] === '.jpeg') || (fileExt[0] === '.gif'))) {
       alert('请确认您上传的logo文件格式是jpg、png、gif或jpeg');
       return false;
-      }
+    }
     var readyHandle = function () {
       if (Xhr.readyState === 4) {
         if (Xhr.status === 200) {
@@ -90,7 +93,7 @@ app.controller('TeamController', ['$scope', 'Team', '$stateParams', 'User', func
     Team.prototype_create_members({
       id: $scope.teamId
     }, $scope.userInfomation, function (member) {
-      Materialize.toast('加入团队成功', 4000);
+      Materialize.toast('申请成功,等待管理员同意', 4000);
     }, function (err) {
       console.log(err)
       Materialize.toast(err.data.error.message, 4000);

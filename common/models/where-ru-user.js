@@ -196,7 +196,7 @@ module.exports = function(User) {
    */
   User.getMyTeams = function (id, cb) {
     User.app.models.Member.find({
-      where: {userId: id},
+      where: {userId: id,verified: true},
       include: {
         relation: 'team',
         scope: {
@@ -206,8 +206,14 @@ module.exports = function(User) {
     }, function (err, teamsIns) {
       var teams = [];
       //TODO 待真实测试
-      teamsIns.forEach(function (team) {
-        teams.push(team.toJSON().team);
+      teamsIns.forEach(function (tepMember) {
+        var team = tepMember.toJSON().team;
+        var member = tepMember.toJSON();
+        tepMember = {};
+        tepMember.team = team;
+        tepMember.owner = id == team.userId;
+        tepMember.role = member.department;
+        teams.push(tepMember);
       });
       cb(null, teams);
     });

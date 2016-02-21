@@ -1,0 +1,14 @@
+<ul>
+  <li class="item col s12 m6 l3" ng-repeat="team in teams">
+    <img ng-src="{{team.team.logoUrl}}">
+    <div>
+    	<span class="title">
+	    	<a href="/w/team/{{team.team.id}}" ng-bind="team.team.name"></a>
+
+	    </span>
+	    <br>
+	    <h6 ng-if="team.owner" ><i class="mdi-action-grade"></i><span>拥有者</span></h6>
+	    <p>角色 | <span ng-bind="team.role || '未选择'"></span></p>
+    </div>
+  </li>
+</ul>

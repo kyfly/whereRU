@@ -98,7 +98,7 @@ module.factory(
        *  pc圈子
        */
       "prototype_get_articles": {
-        url: urlBase + '/Coteries/:id/articles',
+        url: urlBase + '/WUsers/:id/articles',
         method: 'GET',
         isArray: true
       },
@@ -184,8 +184,7 @@ module.factory(
        */
       "getMyTeams": {
         url: urlBase + '/WUsers/:id/myTeams',
-        method: 'GET',
-        isArray: true
+        method: 'GET'
       },
       /**
        * 描述：获取用户信息，已登录用户

@@ -15,7 +15,7 @@
 </head>
 <body>
 <!--侧边导航-->
-<ul class="side-nav fixed z-depth-2" id="sideBar" ng-show="access">
+<ul class="side-nav fixed z-depth-2" id="sideBar">
   <h5 class="text-center orgName" ng-bind="teamInfo.name"></h5>
   <a class="logo brand-logo" href="/">
     <img id="front-page-logo" ng-src="{{teamInfo.logoUrl}}">
@@ -28,7 +28,7 @@
 <!--头部nav-->
 <nav id="nav" ng-style="navShow">
   <div class="nav-wrapper light-blue darken-2">
-    <a href="" data-activates="sideBar" class="button-collapse" ng-show="access"><i class="mdi-navigation-menu"></i></a>
+    <a href="" data-activates="sideBar" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
     <a ng-hide="logoHide" href="" class="brand-logo center"><img class="topBar-logo" src="/lib/img/full-logo-white.png"></a>
     <!--<ul class="right">-->
       <!--<li ng-show="access">-->

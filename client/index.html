@@ -33,7 +33,7 @@
         <div>
           <ul class="pull-menu">
             <li ng-repeat="team in teams">
-              <a href="/w/team/{{team.id}}" ng-click="changeTeams()" ng-bind="team.name"></a>
+              <a href="/w/team/{{team.id}}" ng-bind="team.name"></a>
             </li>
             <li>
               <a href="/w/teams/create">新建团队</a>
@@ -42,7 +42,7 @@
         </div>
       </li>
       <li ng-show="!username">
-        <a ng-click="goSignIn()">登录</a>
+        <a href='#login-modal' modal>登录</a>
       </li>
       <li ng-show="username">
         <a ng-bind="username"></a>
@@ -52,7 +52,7 @@
               <a href="/u/home">个人中心</a>
             </li>
             <li>
-              <a href="">退出</a>
+              <a href="" ng-click="logOut()">退出</a>
             </li>
           </ul>
         </div>
@@ -60,8 +60,8 @@
     </ul>
   </div>
 </nav>
-  
-<div id="nav-signIn" class="side-nav" ng-include="'application/views/user/login.html'"></div>
+
+<div id="login-modal" class="modal" ng-include="'application/views/user/login.html'"></div>
 <div id="doc">
   <div ui-view></div>
 </div>

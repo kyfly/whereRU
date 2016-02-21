@@ -8,6 +8,11 @@
     width: 100%;
   }
 }
+@media only screen and (max-width: 601px) {
+  .modal {
+    width: 100%;
+  }
+}
 /*头部设置*/
 .header {
 	background-color: #0CB9F7;
@@ -84,6 +89,9 @@ nav .nav-wrapper i {
   position: absolute;
   top: 64px;
   width: 100%;
+}
+.login .btn{
+  margin: 10px;
 }
 .login a {
   display: inline-flex;
@@ -242,9 +250,11 @@ nav .nav-wrapper i {
   text-overflow: ellipsis;
   width: 100%;
 }
-@media only screen and (min-width : 601px) {
+@media only screen and (min-width : 903px) {
   .create-team {
-    padding-top: 200px; 
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px; 
   }
 }
 
@@ -270,7 +280,7 @@ nav .nav-wrapper i {
 }
 .user-team img {
   width: 50px;
-  border-radius: 25px;
+ /* border-radius: 25px;*/
 }
 .user-team h4{
   overflow: hidden;
@@ -527,7 +537,7 @@ nav .nav-wrapper i {
   }
 }
 .user-header ul.row{
-  margin-top: 10px;
+  margin-top: 50px;
 }
 .user-header ul li {
   display: inline;
@@ -538,14 +548,38 @@ nav .nav-wrapper i {
   overflow: hidden;
   background-color: rgb(255, 255, 255);
 }
+.user-activity hr{
+  border: solid 1px #eee;
+  /*clear: both;*/
+}
+.user-activity .menus {
+  white-space: nowrap;
+  overflow: hidden;
+  /*float: left;*/
+}
 .user-activity ul li {
   display: inline;
   padding: 5px;
+}
+.user-activity .active{
+      color: #444;
+    font-size: 1.3rem;
 }
 .user-activity ul .title{
   font-size: 1.5rem;
   font-weight: 500;
 } 
 .user-activity .content {
-  min-height: 200px;
+  /*min-height: 200px;
+  padding: 1rem;*/
+}
+.user-activity .item{
+  position: relative;
+  margin: 10px 0;
+  margin-top: 10px;
+}
+.user-activity .item>div{
+  position: absolute;
+  left: 120px;
+  top: 10px;
 }

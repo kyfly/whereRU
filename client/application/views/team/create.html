@@ -18,7 +18,7 @@
 				<span>是否允许加入</span>
 		    <label>
 		      否
-		      <input checked type="checkbox" ng-model="team.status" required>
+		      <input checked type="checkbox" ng-model="team.status" ng-init="false" required>
 		      <span class="lever"></span>
 		      是
 		    </label>
@@ -28,7 +28,7 @@
 		  	<span>是否隐藏团队</span>
 		    <label>
 		      否
-		      <input type="checkbox" ng-model="team.hidden" required>
+		      <input type="checkbox" ng-model="team.hidden" ng-init="false" required>
 		      <span class="lever"></span>
 		      是
 		    </label>
