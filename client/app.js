@@ -18,20 +18,9 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 })
 .run(['$rootScope', function ($rootScope) {
 	$rootScope.$on('$stateChangeStart', function(evt, next, current) {
-		if (window.document.getElementById('loginForm'))
-			window.document.getElementById('loginForm').style.display = "none";
+		
 	});
-	$rootScope.goback = function () {
-		window.history.back();
-	}
-	$rootScope.goSignIn = function () {
-		window.document.getElementById('loginForm').style.display = "block";
-	};
-	window.document.getElementById('doc').onclick = function () {
-		if (window.document.getElementById('loginForm').style.display === "block") {
-			window.document.getElementById('loginForm').style.display="none"
-		}
-	};
+	
 }])
 .controller('HeaderController', ['$scope', '$rootScope', "User",function ($scope, $rootScope, User){
 	try {
@@ -56,7 +45,6 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		}
 	});
 	$scope.pullTeams = function () {
-		console.log(1)
 		User.prototype_get_teams({
 			id: $scope.$currentUser.id
 		}, function(teams){
@@ -86,7 +74,6 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		path: '/u/home',
 		active: false
 	}];
-	console.log($location.path())
 	if($location.path().match(/^\/w\/coteries/)) {
 		$scope.menus[0].active = true;
 	} else if ($location.path().match(/^\/u\//)) {

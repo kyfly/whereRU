@@ -1,4 +1,14 @@
-﻿/*头部设置*/
+﻿body{
+  background-color: #EEE;
+}
+@media only screen and (max-width: 601px) {
+  .container {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 100%;
+  }
+}
+/*头部设置*/
 .header {
 	background-color: #0CB9F7;
 	padding: 0;
@@ -74,17 +84,20 @@ nav .nav-wrapper i {
   position: absolute;
   top: 64px;
   width: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 3;
+}
+.login a {
+  display: inline-flex;
+  font-size: 1rem;
+  height: 36px;
+  line-height: 36px;
   color: #fff;
-  display: none;
 }
 .bottom-bar{
   position: fixed;
   bottom: 0;
   width: 100%;
   margin-bottom: 0;
-  z-index: 999;
+  z-index: 1;
   left: 0;
   right: 0;
 }
@@ -486,14 +499,16 @@ nav .nav-wrapper i {
   border-left: 0 solid #ddd;  
   margin: 0.5rem 0 1rem 0; 
 }
-.user-header {
-  margin-top: 20px; 
+.user-header { 
   margin-bottom: 20px;
   padding: 10px;
+  background-color: #fff;
+}
+.user-header .user-info{
+  height: 170px;
 }
 .user-header img {
   width: 100px;
-  border-radius: 50px;
   margin: 10px;
 }
 .user-header h4 {
@@ -503,14 +518,25 @@ nav .nav-wrapper i {
 .user-header h4 span{
   margin: 5px;
 }
+.user-header .user-data{
+  height: 170px;
+}
+@media only screen and (max-width: 601px){
+  .user-header .user-data{
+    border-top: solid 1px #eee;
+  }
+}
 .user-header ul.row{
-  margin-top: 50px;
+  margin-top: 10px;
 }
 .user-header ul li {
   display: inline;
 }
 .user-activity {
   padding: 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: rgb(255, 255, 255);
 }
 .user-activity ul li {
   display: inline;

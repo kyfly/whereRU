@@ -1,8 +1,5 @@
 app.controller('LoginController', ['User', '$scope', '$rootScope', 'LoopBackAuth', function (User, $scope, $rootScope, LoopBackAuth) {
   $scope.user = {};
-  $scope.cancelLogin = function () {
-    window.document.getElementById('login').style.display = "none";
-  };
   $scope.login = function () {
     User.login($scope.user, function (data) {
       data.user.id = data.userId;
@@ -46,9 +43,16 @@ app.controller('ConfirmSchoolController', ['User', '$scope', function (User, $sc
   }
 }]);
 app.controller('UserController', ['$scope', 'User', function($scope, User){
-  User.getInfo(function (user) {
-    $scope.user = user;
-  });
+  if ($scope.$currentUser) {
+    User.getInfo(function (user) {
+      $scope.user = user;
+    });
+  } else {
+    $scope.user = null;
+  }
+  $scope.goLogin = function () {
+    $scope.goSignIn();
+  };
 }]);
 app.controller('MSController', ['User', '$stateParams', function (User, $stateParams) {
   window.localStorage.$LoopBack$currentTeamId = $stateParams.id;

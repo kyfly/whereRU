@@ -1,9 +1,30 @@
+<!-- 手机显示选择 -->
+<nav class="header row hide-on-large-only">
+  <div class="nav-wrapper">
+    <a href="#!" class="col offset-s1 brand-logo">whereRU</a>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class="container row z-depth-1 user-header">
-	<div class="col s12 m6 center">
-		<img ng-src="{{user.headImgUrl}}">
-		<h4 ><span ng-bind="user.name"></span><span ng-bind="user.phone"></span></h4>
+	<div class="col s12 m6 center user-info">
+		<img ng-src="{{user.headImgUrl || 'http://oss.etuan.org/whereru/headImgUrl/%E9%BB%98%E8%AE%A4%E5%A4%B4%E5%83%8F.jpg'}}">
+		<h4 ng-show="user">
+			<span ng-bind="user.name"></span>
+			<span ng-bind="user.phone"></span>
+		</h4>
+		<h4 ng-show="!user">
+			<a href="#" data-activates="nav-signIn" class="button-collapse" data-sidenav="top" data-menuwidth="300" data-closeonclick="false">
+	      登录
+	    </a>
+			<span> | </span>
+			<a href="/w/register">注册</a>
+		</h4>
 	</div>
-	<div class="col s12 m6 center">
+	<div class="col s12 m6 center user-data">
 		<ul class="row">
 			<li class="col s4">
 				<a href="">余额</a>
