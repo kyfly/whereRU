@@ -1,0 +1,24 @@
+<div class="center" ng-if="!races.length">
+  <h4>没有内容</h4>
+</div>
+<ul ng-if="races.length">
+  <li class="item col s12" ng-repeat="race in races">
+    <img ng-src="{{race.imgUrl}}">
+    <div>
+    	<h6 class="title">
+	    	<a href="/w/races/{{race.id}}" ng-bind="race.name"></a>
+	    </h6>
+	    <h6>发布方 | 
+    		<a ng-href="/w/teams/{{race.teamId}}">
+          <b ng-bind="race.authorName"></b>
+        </a>
+	    </h6>
+	    <h6>
+        <span>报名时间:</span>
+        <time ng-bind="race.created| date:'yy/MM/dd'"></time>
+        <span>-</span>
+        <time ng-bind="race.ended| date:'yy/MM/dd'"></time>
+      </h6>
+    </div>
+  </li>
+</ul>

@@ -45,7 +45,6 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     });
   }
   $scope.onClickJoinActivity = function () {
-    console.log($scope.activityCurrent)
     var actType = $scope.activityCurrent.actType;
     if (actType !== 'common') {
       $scope.result = new Array($scope[actType + 's']['_'+ actType +'Items'].length);

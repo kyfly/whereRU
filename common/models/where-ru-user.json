@@ -162,6 +162,12 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
+      "property": "getLikeArticles"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
       "property": "__updateAttributes"
     },
     {
@@ -175,6 +181,12 @@
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "__get__teams"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__get__articles"
     },
     {
       "principalType": "ROLE",

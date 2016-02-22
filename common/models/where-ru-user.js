@@ -318,7 +318,66 @@ module.exports = function(User) {
    * @return {[type]}         [description]
    */
   User.getActivitiesHistories = function (id, cb) {
-    //根据活动结果可获取到活动信息
+    User.findById(id, {
+      include: [{
+        formResults:{form: 'activity'}
+      },{
+        voteResults:{vote: 'activity'}
+      },{
+        seckillResults: {seckill: 'activity'}
+      }]
+    }, function (err, user) {
+      var activities = [];
+      user = user.toJSON();
+      user.formResults.forEach(function (results) {
+        var activity = results.form.activity;
+        pushActivity (activity, results);
+      });
+      user.voteResults.forEach(function (results) {
+        var activity = results.vote.activity;
+        pushActivity (activity, results);
+      });
+      user.seckillResults.forEach(function (results) {
+        var activity = results.seckill.activity;
+        pushActivity (activity, results);
+      });
+      function pushActivity (activity, results) {
+        activities.push({
+          authorId: activity.authorId,
+          authorName: activity.authorName,
+          id: activity.id,
+          imgUrl: activity.imgUrl,
+          title: activity.title,
+          actType: activity.actType,
+          created: results.created,
+          resultId: results.id
+        });
+      }
+      cb(err, activities);
+    });
+  };
+  User.remoteMethod('getLikeArticles', {
+    accepts: {
+      arg: 'id', type: 'string',
+    },
+    returns: {
+      arg: 'articles', type: "array"
+    },
+    http: {
+      path: '/:id/likeArticles', verb: 'get'
+    }
+  });
+  User.getLikeArticles = function (id, cb) {
+    User.findById(id, function (err, user) {
+      user.likeUsers({
+        where: {
+          userId: id
+        },
+        include: 'article'
+      }, function (err, articles) {
+        cb(err, articles);
+      });
+    });
   };
   /**
    * 获取用户所拥有的团队列表
@@ -447,24 +506,49 @@ module.exports = function(User) {
    * @param  {[type]} ) {             } [description]
    * @return {[type]}   [description]
    */
-  User.beforeRemote('prototype.__findById__formResults', function (ctx,ins,next) {
-    var userId = ctx.req.params.id;
-    var formResultsId = ctx.req.params.fk;
-    var result=[];
-    User.app.models.FormResult.findById(formResultsId,{fields:['verifyId','created','id','formId','userId','result']},function(err,formResults){
-      User.app.models.Form.findById(formResults.formId.toJSON(),function(err,form){
-        for(var i =0;i<form._formItems.length;i++) {
-          var record = {
-            q: form._formItems[i].name,
-            w: formResults.result[i].name,
-            url:formResults.result[i].url
-          };
-          result.push(record);
+  User.afterRemote('prototype.__findById__formResults', function (ctx,ins,next) {
+    var result = ins.toJSON();
+    ins.form({
+      include: {
+        relation: 'activity',
+        scope: {
+          fields: ['title', 'authorName', 'authorId', 'id']
         }
-        formResults.result = result;
-        ctx.res.send(formResults);
+      }
+    }, function (err, form) {
+      if (err)
+        return next(err);
+      var form = form.toJSON();
+      var activityResult = [];
+      for(var i =0; i<form._formItems[i].length; i++) {
+        activityResult.push({
+          q: form._formItems[i].name,
+          w: result.result[i].name,
+          url:result.result[i].url
+        });
+      }
+      ctx.res.send({
+        activity: form.activity,
+        result: activityResult
       });
-    });
+    })
+    // var result=[];
+    // User.app.models.FormResult.findById(formResultsId,
+    //   {fields:['verifyId','created','id','formId','userId','result']},
+    //   function(err,formResults){
+    //   User.app.models.Form.findById(formResults.formId.toJSON(),function(err,form){
+    //     for(var i =0;i<form._formItems.length;i++) {
+    //       var record = {
+    //         q: form._formItems[i].name,
+    //         w: formResults.result[i].name,
+    //         url:formResults.result[i].url
+    //       };
+    //       result.push(record);
+    //     }
+    //     formResults.result = result;
+    //     ctx.res.send(formResults);
+    //   });
+    // });
   });
   /**
    * 用户获取参与投票活动所投项
@@ -517,7 +601,9 @@ module.exports = function(User) {
     });
     next();
   });
-
+  User.beforeRemote('prototype.__get__articles', function (ctx, ins, next) {
+    User.app.models.Coterie.__get__articles(ctx, ins, next);
+  })
   /**
    * 处理用户抢票信息，检查用户是否参与过抢票并得票参与过且得票直接提示并退出，
    * 参与过但是没得票则可继续抢票，根据用户选择的抢票项，查看对应的票项是否有

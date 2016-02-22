@@ -7,10 +7,10 @@ app.controller('CoteriesController',
       id: $scope.$currentUser.id
     }, function (coteries) {
       $scope.coteries = coteries;
-      $location.path('/w/coteries/' + $scope.coteries[0].id);
+      if (coteries.length)
+        $location.path('/w/coteries/' + $scope.coteries[0].id);
     });
   }
-  //getCoteries();
   $scope.moreCoteries = function () {
     $scope.more = !$scope.more;
     if ($scope.more) {
@@ -27,19 +27,23 @@ app.controller('CoteriesController',
     getCoteries();
   } 
 }]);
-
 app.controller('CoterieController', 
-  ['$scope', '$stateParams', 'User','Coterie', 'Article', 'Comment',
-  function ($scope, $stateParams, User, Coterie, Article, Comment) {
+  ['$scope', '$stateParams', 'Coterie', 'User', 'Ueditor', '$http', '$location',
+  function ($scope, $stateParams, Coterie, User, Ueditor, $http, $location) {
   Coterie.findById({
     id: $stateParams.id
   }, function (coterie) {
     $scope.coterie = coterie;
-  });
-  Coterie.prototype_count_fans({
-    id: $stateParams.id
-  }, function (fans) {
-    $scope.fansCount = fans.count;
+    if (coterie.isAttentioned) {
+      User.prototype_link_coteries({
+        id: $scope.$currentUser.id,
+        fk: coterie.id
+      }, {}, function (res) {
+        
+      }, function (err) {
+        console.log(err);
+      });
+    }
   });
   Coterie.prototype_get_articles({
     id: $stateParams.id
@@ -47,127 +51,7 @@ app.controller('CoterieController',
     $scope.articles = articles;
   }, function () {
   });
-  if (!$scope.more && $scope.$currentUser) {
-    User.prototype_link_coteries({
-      id: $scope.$currentUser.id,
-      fk: $stateParams.id
-    }, {}, function (res) {
-      
-    }, function (err) {
-      console.log(err);
-    });
-  }
-  $scope.attention = function () {
-    User.prototype_link_coteries({
-        id: $scope.$currentUser.id,
-        fk: $stateParams.id
-      }, {}, function (res) {
-        $scope.coterie.isAttentioned = true;
-        Materialize.toast('关注成功！', 2000);
-      }, function (err) {
-        console.log(err);
-        Materialize.toast('关注失败！', 2000);
-      }
-    );
-  };
 
-  $scope.loadComment = function () {
-    var article = this.article;
-    this.article.commentTextarea = true;
-    if (article.showCommentBox) {
-      article.showCommentBox = false;
-      return;
-    }
-    Article.prototype_get_comments({
-      id: article.id
-    }, function (comments) {
-      article.comments = comments;
-    });
-    article.showCommentBox = true;
-  }
-  $scope.createComment = function () {
-    var article = this.article;
-    if (!article.writingCommentContent) {
-      Materialize.toast('请先输入评论内容', 4000);
-      return;
-    }
-    User.prototype_create_comments({
-      id: $scope.$currentUser.id
-    }, {
-      articleId: article.id,
-      created: new Date(),
-      content: article.writingCommentContent
-    }, function (comment) {
-      comment.user = {
-        headImgUrl: $scope.$currentUser.headImgUrl,
-        id: $scope.$currentUser.id,
-        name: $scope.$currentUser.name
-      };
-      article.comments.push(comment);
-      article.writingCommentContent = null;
-      Materialize.toast('评论成功', 4000);
-    });
-  };
-  $scope.loadReply = function () {
-    var comment = this.comment;
-    this.article.commentTextarea = false;
-    if (comment.showReplyBox) {
-      comment.showReplyBox = false;
-      return;
-    }
-    Comment.prototype_get_replys({
-      id: this.comment.id
-    }, function (replys) {
-      console.log(replys);
-      comment.replys = replys;
-    });
-    comment.showReplyBox = true;
-  };
-  $scope.createReply = function () {
-    var comment = this.comment;
-    User.prototype_create_replys({
-      id: $scope.$currentUser.id
-    }, {
-      commentId: comment.id,
-      created: new Date(),
-      content: comment.writingReplyContent
-    }, function (reply) {
-      reply.user = {
-        id: $scope.$currentUser.id,
-        name: $scope.$currentUser.name
-      };
-      comment.replys.push(reply);
-      comment.writingReplyContent = null;
-      Materialize.toast('回复成功', 4000);
-    });
-  }
-  $scope.addLike = function () {
-    var article = this.article;
-    User.prototype_create_likeUsers({
-      id: $scope.$currentUser.id
-    }, {
-      articleId: article.id,
-      created: new Date()
-    }, function (res) {
-
-      if (res.status === 1) {
-        article.likeCount ++;
-        article.islike = true;
-        Materialize.toast('文章标记为喜欢', 4000);
-      } else {
-        Materialize.toast('文章已经被标记为喜欢', 4000);
-      }
-    });
-  };
-}]);
-app.controller('ArticlesController', 
-  ['$scope', '$stateParams', 'User','Coterie' , 'Ueditor', '$http', '$location',
-  function ($scope, $stateParams, User, Coterie, Ueditor, $http, $location) {
-  Coterie.findById({
-    id: $stateParams.id
-  }, function (coterie) {
-    $scope.coterie = coterie;
-  });
   $scope.editorConfig = Ueditor.config;
   $scope.article = {};
   $scope.createArticle = function () {
@@ -197,72 +81,96 @@ app.controller('ArticlesController',
       });
     })
   };
+  $scope.attention = function () {
+    User.prototype_link_coteries({
+        id: $scope.$currentUser.id,
+        fk: $stateParams.id
+      }, {}, function (res) {
+        $scope.coterie.isAttentioned = true;
+        Materialize.toast('关注成功！', 2000);
+      }, function (err) {
+        console.log(err);
+        Materialize.toast('关注失败！', 2000);
+      }
+    );
+  };
 
+  $scope.addLike = function () {
+    var article = this.article;
+    User.prototype_create_likeUsers({
+      id: $scope.$currentUser.id
+    }, {
+      articleId: article.id,
+      created: new Date()
+    }, function (res) {
+      if (res.status === 1) {
+        article.likeCount ++;
+        article.islike = true;
+        Materialize.toast('文章标记为喜欢', 4000);
+      } else {
+        Materialize.toast('文章已经被标记为喜欢', 4000);
+      }
+    });
+  };
 }]);
-
-app.controller('ArticleController', 
-  ['$scope', '$stateParams', 'User','Coterie', 'Article', 'Comment',
-  function ($scope, $stateParams, User, Coterie, Article, Comment) {
-  if (!$scope.$currentUser) {
-    $scope.$currentUser = {};
-    $scope.$currentUser.id = 0;
-  }
-  Coterie.prototype_findById_articles({
-    id: $stateParams.id,
-    fk: $stateParams.fk
-  }, function (article) {
-    $scope.article = article;
-  });
-  Article.prototype_get_comments({
-    id: $stateParams.fk
-  }, function (comments) {
-    $scope.comments = comments;
-  });
-  Article.prototype_create_readers({
-    id: $stateParams.fk
-  }, {
-    userId: $scope.$currentUser.id,
-    form: 'pc'//带修改
-  });
+app.controller('ArticlesController', 
+  ['$scope', 'Article', function($scope, Article){
+  $scope.loadComment = function () {
+    var article = this.article;
+    this.article.commentTextarea = true;
+    if (article.showCommentBox) {
+      article.showCommentBox = false;
+      return;
+    }
+    Article.prototype_get_comments({
+      id: article.id
+    }, function (comments) {
+      article.comments = comments;
+    });
+    article.showCommentBox = true;
+  };
+}]);
+app.controller('CommentsController',
+  ['$scope', 'Comment', 'User', function($scope, Comment, User){
   $scope.createComment = function () {
-    if (!$scope.article.writingCommentContent) {
+    var article = this.article;
+    if (!article.writingCommentContent) {
       Materialize.toast('请先输入评论内容', 4000);
       return;
     }
     User.prototype_create_comments({
       id: $scope.$currentUser.id
     }, {
-      articleId: $scope.article.id,
+      articleId: article.id,
       created: new Date(),
-      content: $scope.article.writingCommentContent
+      content: article.writingCommentContent
     }, function (comment) {
       comment.user = {
         headImgUrl: $scope.$currentUser.headImgUrl,
         id: $scope.$currentUser.id,
         name: $scope.$currentUser.name
       };
-      $scope.comments.push(comment);
-      $scope.article.writingCommentContent = null;
+      article.commentCount ++;
+      comment.replyCount = 0;
+      article.comments.push(comment);
+      article.writingCommentContent = null;
       Materialize.toast('评论成功', 4000);
     });
   };
   $scope.loadReply = function () {
     var comment = this.comment;
-    this.article.commentTextarea = false;
-    if (comment.showReplyBox) {
-      comment.showReplyBox = false;
-      return;
-    }
     Comment.prototype_get_replys({
       id: this.comment.id
     }, function (replys) {
-      console.log(replys);
       comment.replys = replys;
     });
-    comment.showReplyBox = true;
   };
   $scope.createReply = function () {
     var comment = this.comment;
+    if (!comment.writingReplyContent) {
+      Materialize.toast('请先输入回复内容', 4000);
+      return;
+    }
     User.prototype_create_replys({
       id: $scope.$currentUser.id
     }, {
@@ -274,29 +182,38 @@ app.controller('ArticleController',
         id: $scope.$currentUser.id,
         name: $scope.$currentUser.name
       };
+      comment.replyCount ++;
       comment.replys.push(reply);
       comment.writingReplyContent = null;
       Materialize.toast('回复成功', 4000);
     });
   }
-  $scope.addLike = function () {
-    var article = this.article;
-    User.prototype_create_likeUsers({
-      id: $scope.$currentUser.id
-    }, {
-      articleId: article.id,
-      created: new Date()
-    }, function (res) {
-
-      if (res.status === 1) {
-        article.likeCount ++;
-        article.islike = true;
-        Materialize.toast('文章标记为喜欢', 4000);
-      } else {
-        Materialize.toast('文章已经被标记为喜欢', 4000);
-      }
-    });
-  };
 }]);
+app.controller('ArticleController', 
+  ['$scope', '$stateParams', 'User','Coterie', 'Article', 'Comment',
+  function ($scope, $stateParams, User, Coterie, Article, Comment) {
+  if (!$scope.$currentUser) {
+    $scope.$currentUser = {};
+    $scope.$currentUser.id = 0;
+  }
+  Article.findById({
+    id: $stateParams.id,
+  }, function (article) {
+    $scope.article = article;
+    Article.prototype_get_comments({
+      id: $stateParams.id
+    }, function (comments) {
+      $scope.article.comments = comments;
+    });
+    $scope.article.showCommentBox = true;
+  });
+  
+  Article.prototype_create_readers({
+    id: $stateParams.id
+  }, {
+    userId: $scope.$currentUser.id,
+    form: 'pc'//带修改
+  });
 
+}]);
 

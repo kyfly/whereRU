@@ -140,7 +140,7 @@ module.factory(
        * 使用场景：用户查看参与活动历史，点击单个表单活动
        */
       "prototype_findById_formResults": {
-        url: urlBase + '/WUsers/:id/formResults/fk',
+        url: urlBase + '/WUsers/:id/formResults/:fk',
         params: { 'fk': '@fk'},
         method: 'GET'
       },
@@ -157,7 +157,7 @@ module.factory(
        * 使用场景：用户查看参与活动历史，点击单个投票活动
        */
       "prototype_findById_voteResults": {
-        url: urlBase + '/WUsers/:id/voteResults/fk',
+        url: urlBase + '/WUsers/:id/voteResults/:fk',
         params: { 'fk': '@fk'},
         method: 'GET'
       },
@@ -174,7 +174,7 @@ module.factory(
        * 使用场景：用户查看参与活动历史，点击单个抢票活动
        */
       "prototype_findById_seckillResults": {
-        url: urlBase + '/WUsers/:id/seckillResults/fk',
+        url: urlBase + '/WUsers/:id/seckillResults/:fk',
         params: { 'fk': '@fk'},
         method: 'GET'
       },
@@ -208,6 +208,10 @@ module.factory(
        */
       "getRaceHistories": {
         url: urlBase + '/WUsers/:id/raceHistories',
+        method: 'GET'
+      },
+      "getLikeArticles": {
+        url: urlBase + '/WUsers/:id/likeArticles',
         method: 'GET'
       },
       /**
@@ -322,10 +326,28 @@ module.factory(
           url: urlBase + '/Teams/:id/activities',
           method: 'POST'
         },
+        "prototype_create_forms": {
+          url: urlBase + '/Teams/:id/forms',
+          method: 'POST'
+        },
+        "prototype_create_votes": {
+          url: urlBase + '/Teams/:id/votes',
+          method: 'POST'
+        },
+        "prototype_create_seckills": {
+          url: urlBase + '/Teams/:id/seckills',
+          method: 'POST'
+        },
+        "prototype_get_forms": {
+          url: urlBase + '/Teams/:id/forms',
+          method: 'GET',
+          isArray: true
+        },
         "prototype_updateById_activities": {
           url: urlBase + '/Teams/:id/activities/:fk',
           method: 'PUT'
         },
+
         /**
          * 描述：申请加入团队，已登录用户
          */
@@ -429,6 +451,10 @@ module.factory(
       urlBase + '/Articles/:id',
       { 'id': '@id' },
       {
+        "findById": {
+          url: urlBase + '/Articles/:id',
+          method: "GET"
+        },
         "prototype_get_comments": {
           url: urlBase + '/Articles/:id/comments',
           method: "GET",

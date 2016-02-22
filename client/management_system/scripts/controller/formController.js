@@ -3,7 +3,10 @@ app.controller('FormListCtrl', ['$scope', 'Form', '$rootScope', function ($scope
   $scope.showType = 0;
   Form.find({
     filter: {
-      order: 'updated DESC'
+      order: 'updated DESC',
+      where: {
+        teamId: localStorage.$LoopBack$currentTeamId
+      }
     }
   }, function (res) {
     $scope.formItems = res;
@@ -43,7 +46,7 @@ app.controller('FormListCtrl', ['$scope', 'Form', '$rootScope', function ($scope
 
 }]);
 
-app.controller('FormEditCtrl', ['$scope', '$location', 'Form', '$rootScope', function ($scope, $location, Form, $rootScope) {
+app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', function ($scope, $location, Team, $rootScope) {
   $rootScope.logoHide = true;
   $scope.forms = [];
   //$scope.formType = ['简答题', '陈述题', '选择题', '判断题'];
@@ -228,7 +231,9 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Form', '$rootScope', fun
     } else if(!$scope.uploadData.title) {
       Materialize.toast('请填写表单名称！', 1000);
     } else {
-      Form.create({}, $scope.uploadData, function () {
+      Team.prototype_create_forms({
+        id: localStorage.$LoopBack$currentTeamId
+      }, $scope.uploadData, function () {
         Materialize.toast('提交成功！', 2000);
         $location.path('/MS/form/list');
       }, function () {

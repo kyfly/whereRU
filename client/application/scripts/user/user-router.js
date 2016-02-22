@@ -20,7 +20,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       controller: 'UserController',
       templateUrl: '/application/views/user/index.html'
     })
-    .state('management_system', {
+    .state('activityResult', {
+      url: '/u/results/:id/:type',
+      controller: 'ActivityResultController',
+      templateUrl: '/application/views/user/activity-result.html'
+    })
+    .state('MS', {
       url: '/w/team/:id',
       controller: 'MSController',
       template: '<div></div>'

@@ -47,7 +47,11 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
     Activity.findById({
       id: $stateParams.id
     }, function (res) {
-      $scope.activityData = res;
+      $http.get(res.explainUrl)
+        .success(function (contentHtml) {
+          $scope.activityEditorContent = contentHtml;
+          $scope.activityData = res;
+        });
       if (res.actType === 'form') {
         $scope.preType = {
           type: 'form'
@@ -114,10 +118,8 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
   $scope.activityEditorConfig = Ueditor.config;
 
   $scope.getFormList = function () {
-    Form.find({
-      filter: {
-        order: 'updated DESC'
-      }
+    Team.prototype_get_forms({
+      id: localStorage.$LoopBack$currentTeamId
     }, function (res) {
       $scope.formItems = res;
       $scope.isActivity = function (index) {

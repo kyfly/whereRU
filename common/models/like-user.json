@@ -11,7 +11,12 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "article": {
+      "type": "belongsTo",
+      "model": "Article"
+    }
+  },
   "acls": [],
   "methods": {}
 }

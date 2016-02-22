@@ -13,16 +13,21 @@
     width: 100%;
   }
 }
+/*.collection{
+  margin: 0
+}*/
 /*头部设置*/
 .header {
 	background-color: #0CB9F7;
 	padding: 0;
 	margin: 0;
+  top: 0;
   height: 4.2rem;
-  position: relative;
+  position: fixed;
   z-index: 1000;
   white-space:nowrap;  /*不换行*/
- /* overflow: hidden; */
+  left: 0;
+  right: 0;
 }
 .header ul a{
 	font-size: 1.3rem;
@@ -48,9 +53,8 @@
   font-family: cursive;
 }
 nav .nav-wrapper i {
-  position: absolute;
   top: 0;
-  left: 4rem;
+  line-height: 4.2rem;
 }
 .dropdown-content {
   top: 4.2rem !important;
@@ -343,130 +347,141 @@ nav .nav-wrapper i {
 .coterie {
 
 }
-
-.coterie header .button-collapse{
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  width: 30px;
-  z-index: 999;
-  color: #fff;
-  font-size: 30px;
+.coterie-find span i {
+  line-height: 2.2rem;
+  top:0.1rem;
 }
-.coterie header li{
+.coterie-find span{
+  top: 0;
+  position: relative;
+  height: 4.2rem;
+}
+.coterie-find span:after{
+  content: "发现";
+  position: absolute;
+  font-size: 1rem;
+  top: 0;
+  /* left: 0; */
+  line-height: 2rem;
+}
+.coterie .coterie-list li{
+  background-color: #fff;
+  padding: 10px;
   border-bottom: solid 1px #eee;
 }
-.coterie header li h4 {
+.coterie .coterie-list li *{
+  vertical-align: middle;
+}
+.coterie .coterie-list li h4 {
   font-size: 1.2rem;
   margin: 10px 5px;
   overflow: hidden;
 }
-.coterie header li h4 *{
-  vertical-align: middle;
-}
 
-.coterie header li h4 >img:first-child {
-  width: 2.5rem;
-  border-radius: 1.25rem;
+.coterie .coterie-list li h4 img {
+  width: 3rem;
+  border-radius: 1.5rem;
 }
-.coterie header li h4 .attention{
-  float: right;
-  width: 2.5rem;
+.coterie .coterie-list li h4 span:last-child{
+  position: absolute;
+  right: 10px;
+  padding-top: 5px;
+  width: 30px;
+  border-radius: 20px;
+  background: rgba(42, 98, 101, 0.69);
+  color: #fff;
+  height: 30px;
+  margin-top: 10px;
+  text-align: center;
 }
-.coterie .side-nav .icon-logo {
-  height: 4.2rem;
-  margin-bottom: 2rem;
-}
-.coterie .side-nav .icon-logo a{
-  font-size: 2rem;
-  font-family: cursive;
-  padding: 2rem 3rem;
+.coterie .side-nav{
+  top: 4.2rem;
 }
 .coterie .side-nav a {
   color: #444; 
   display: block;
   font-size: 1.2rem;
   line-height: 100%;
-  padding: 10px 0;
+  padding: 0;
 }
-@media only screen and (min-width : 993px) {
-  .coterie .coterie-detail{
+@media only screen and (min-width : 992px) {
+  .coterie-detail{
     margin-left: 300px;
     padding: 20px; 
   }
 }
 
-.coterie .coterie-header{
+.coterie-header{
   background-size: 100% 300px;
   background-color: rgb(99, 113, 125);
   height: 300px;
   padding: 30px 0;
   text-align: center;
 }
-.coterie .coterie-header img {
+.coterie-header img {
   border-radius: 50px;
   width: 100px;
 }
-.coterie .coterie-header h4 {
+.coterie-header h4 {
   color: #fff;
 }
-.coterie .article .author{
+.article .author{
   padding: 0.5rem 1rem;
   margin: 0;
 }
-.coterie .article .author * {
+.article .author * {
   vertical-align: middle;
 }
-.coterie .article .author img {
+.article .author img {
   width: 3rem;
   border-radius: 1.5rem;
 }
-.coterie .article .author span{
+.article .author span{
   color: #444; 
   font-size: 1.2rem;
 }
-.coterie .article .card-content{
+.article .card-content{
   position: relative;
   padding-top: 0;
   max-height: 400px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.coterie .article .card-content>span{
+.article .card-content>span{
   position: absolute;
   right: 20px;
   top: 0;
   padding: 5px;
   font-size: 1.1rem;
 }
-.coterie .article .card-action{
+.article .card-action{
   padding: 5px 0px;
 }
-.coterie .article .card-action .action{
+.article .card-action .action{
   width: 30%;
   text-align: center;
 }
-.coterie .article .card-action .action *{
+.article .card-action .action *{
   vertical-align: middle;
   font-size: 1.1rem;
 }
-.coterie .article .card-action .action i {
+.article .card-action .action i {
   padding-left: 5px;
 }
-.coterie .article .card-action .waves-effect{
+.article .card-action .waves-effect{
   cursor: auto !important;
 }
-.coterie .collapsible p{
+.comments-section .collapsible p{
   line-height: 1.5rem;
 }
-.coterie .collapsible>li{
+.comments-section .collapsible>li{
   padding-left: 3rem;
   border-bottom: 1px solid #ddd;
 }
-.coterie .collapsible.avatar{
+.comments-section .collapsible.avatar{
   position: relative;
 }
-.coterie .collapsible.avatar .circle{
+.comments-section .collapsible.avatar .circle{
     position: absolute;
     width: 2rem;
     overflow: hidden;
@@ -474,7 +489,10 @@ nav .nav-wrapper i {
     display: inline-block;
     vertical-align: middle;
 }
-.coterie .collapsible-header {
+.comments-section .comment-area{
+  padding: 10px 0;
+}
+.comments-section .collapsible-header {
   display: block;
   cursor: pointer;
   line-height: 100%; 
@@ -482,24 +500,24 @@ nav .nav-wrapper i {
   background-color: #fff;
   border-bottom: 0px solid #ddd;
 }
-.coterie .collapsible-header .reply{
+.comments-section .collapsible-header .reply{
   position: absolute;
   right: 20px;
   vertical-align: middle;
 }
-.coterie .collapsible-header .reply i {
+.comments-section .collapsible-header .reply i {
   margin: 0;
   line-height: 100%;
 }
-.coterie .collapsible-body{
+.comments-section .collapsible-body{
   border-bottom: 0px solid #ddd;
 }
-.coterie .collapsible-body p {
+.comments-section .collapsible-body p {
   line-height: 2rem;
   padding: 0;
   margin: 0;
 }
-.coterie .collapsible .collection {
+.comments-section .collapsible .collection {
   margin: 10px 10px 10px 0;
   border: 1px solid #e0e0e0;
 }
@@ -570,16 +588,28 @@ nav .nav-wrapper i {
   font-weight: 500;
 } 
 .user-activity .content {
-  /*min-height: 200px;
-  padding: 1rem;*/
+  min-height: 100px;
+  padding: 0 1rem;
 }
 .user-activity .item{
   position: relative;
   margin: 10px 0;
   margin-top: 10px;
 }
+.user-activity .item .result{
+  position: absolute;
+  right: 0;
+  color: red;
+}
+.user-activity .item h6{
+  font-size: 1.1rem;
+}
+.user-activity .item img{
+  width: 100px;
+  height: 100px;
+}
 .user-activity .item>div{
   position: absolute;
   left: 120px;
-  top: 10px;
+  top: 0px;
 }

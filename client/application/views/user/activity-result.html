@@ -1,0 +1,14 @@
+<div class="container">
+	<ul class="collection with-header">
+    <li class="collection-header">
+    	<h4 ng-bind="activity.title"></h4>
+    	<a href="/w/teams/{{activity.authorId}}" ng-bind="activity.authorName"></a>
+    </li>
+    <li class="collection-item" ng-repeat="result in results">
+    	<div>
+    		<span ng-bind="result.q"></span>
+    		<a href="#!" class="secondary-content"><span ng-bind="result.w"></span></a>
+    	</div>
+    </li>
+  </ul>
+</div>

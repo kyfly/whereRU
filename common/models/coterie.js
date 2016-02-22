@@ -30,14 +30,7 @@ module.exports = function(Coterie) {
 			next();
 		}
 	})
-	/**
-	 * 获取一个圈子内文章列表
-	 * @param  {[type]} ctx   [description]
-	 * @param  {[type]} ins   [description]
-	 * @param  {[type]} next) {		var       date [description]
-	 * @return {object}       文章列表，每个文章都带有评论数量，点赞量，以及当前用户是否点赞
-	 */
-	Coterie.beforeRemote('prototype.__get__articles', function (ctx, ins, next) {
+	Coterie.__get__articles = function (ctx, ins, cb) {
 		var date = ctx.req.query.last;
 		var where = {};
 		if (date) {
@@ -74,32 +67,20 @@ module.exports = function(Coterie) {
 				ctx.res.send(articles);
 			}
 		});
+	}
+	/**
+	 * 获取一个圈子内文章列表
+	 * @param  {[type]} ctx   [description]
+	 * @param  {[type]} ins   [description]
+	 * @param  {[type]} next) {		var       date [description]
+	 * @return {object}       文章列表，每个文章都带有评论数量，点赞量，以及当前用户是否点赞
+	 */
+	Coterie.beforeRemote('prototype.__get__articles', function (ctx, ins, next) {
+		Coterie.__get__articles(ctx, ins, next);
 	});
 
 	Coterie.afterRemote('prototype.__findById__articles', function (ctx, ins, next) {
-		var article = ins.toJSON();
-		promise(ins.readers, 'count', {})
-		.then(function (count) {
-			article.readerCount = count;
-			return promise(ins.likeUser, 'count', {});
-		})
-		.then(function (count) {
-			article.likeCount = count;
-			if (ctx.req.accessToken) {
-				promise(ins.likeUser, 'count', { userId: ctx.req.accessToken.userId})
-				.then(function (count) {
-					article.islike = count > 0;
-					ctx.res.send(article);
-				});
-			} else {
-				article.islike = false;
-				ctx.res.send(article);
-			}
-		}, function (err) {
-			if (err) {
-				ctx.res.send(err);
-			}
-		});
+		
 	});
   Coterie.remoteMethod('search', {
 		accepts: {

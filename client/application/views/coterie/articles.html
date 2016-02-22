@@ -1,0 +1,36 @@
+<div class="card article" ng-controller="ArticlesController" ng-repeat="article in articles">
+	<a href="/u/{{article.user.id}}">
+		<h4 class="author">
+			<img ng-src="{{article.user.headImgUrl}}">
+			<span ng-bind="article.user.name"></span>
+		</h4>
+	</a>
+	<div class="card-content">
+		<h4 ng-bind="article.title"></h4>
+		<ng-include src="article.contentUrl"></ng-include>
+		<span><a href="/w/articles/{{article.id}}">查看原文</a></span>
+	</div>
+	<div class="card-action">
+		<div class="waves-effect text-center action">
+     	<a href="">
+     		<i class="mdi-social-share"></i>分享
+     	</a>
+    </div>
+    <div class="waves-effect text-center action" ng-click="loadComment()">
+     	<a href="">
+     		<i class="mdi-communication-comment"></i>评论(<span ng-bind="article.commentCount"></span>)
+     	</a>
+    </div>
+    <div class="waves-effect text-center action" ng-show="article.islike">
+      <a href="">
+      	<i class="mdi-toggle-star"></i>喜欢(<span ng-bind="article.likeCount"></span>)
+      </a>
+    </div>
+    <div class="waves-effect text-center action" ng-show="!article.islike" ng-click="addLike()">
+      <a href="">
+      	<i class="mdi-toggle-star-border"></i>喜欢(<span ng-bind="article.likeCount"></span>)
+      </a>
+    </div>
+	</div>
+	<ng-include src="'/application/views/coterie/comments.html'"></ng-include>
+</div>

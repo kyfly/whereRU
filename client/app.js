@@ -23,8 +23,8 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	
 }])
 .controller('HeaderController', 
-	['$scope', '$rootScope', "User", "$location",
-	function ($scope, $rootScope, User, $location){
+	['$scope', '$rootScope', "User", "$location", "$window",
+	function ($scope, $rootScope, User, $location, $window){
 	try {
 		var token = JSON.parse(localStorage.$LoopBack$currentUserToken);
 		token.user.id = token.userId;
@@ -53,6 +53,9 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		$rootScope.username = false;
 		Materialize.toast('退出成功', 4000);
 		$location.path("/");
+	}
+	$rootScope.goback = function () {
+		$window.history.back();
 	}
 }])
 .controller('HomeController', ['$scope', function($scope){
