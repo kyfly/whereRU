@@ -4,7 +4,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 .config(['$locationProvider', '$urlRouterProvider', function ($locationProvider, $urlRouterProvider) {
   $locationProvider.html5Mode({
   	enabled: true
-   	//requireBase: false
+  	//requireBase: false
   });
   $urlRouterProvider.otherwise('/');
 }])
@@ -22,9 +22,21 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	});
 	
 }])
-.controller('HeaderController', 
+.controller('HeaderController',
 	['$scope', '$rootScope', "User", "$location", "$window",
 	function ($scope, $rootScope, User, $location, $window){
+	$scope.$on('$stateChangeStart', function(evt, next, current) {
+		if (!next.name.match(/home|^art\.|^coteries$|coteries.articles/)) {
+			$scope.topBar = true;
+		} else {
+			$scope.topBar = false;
+		}
+		if (next.name === 'index') {
+			$scope.goBackIcon = false;
+		} else {
+			$scope.goBackIcon = true;
+		}
+	});
 	try {
 		var token = JSON.parse(localStorage.$LoopBack$currentUserToken);
 		token.user.id = token.userId;
@@ -54,7 +66,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		Materialize.toast('退出成功', 4000);
 		$location.path("/");
 	}
-	$rootScope.goback = function () {
+	$scope.goback = function () {
 		$window.history.back();
 	}
 }])
@@ -63,6 +75,16 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 }])
 .controller('BottomBarController', ['$scope', '$location', function($scope, $location){
 	
+	$scope.$on('$stateChangeStart', function(evt, next, current) {
+		if (next.name.match(/home|^art\.|^coteries$|coteries.articles/)) {
+			$scope.bottomBar = true;
+		} else {
+			$scope.bottomBar = false;
+		}
+		if (next.name === 'index') {
+			$scope.bottomBar = true;
+		}
+	});
 	$scope.menus = [{
 		name: '圈子',
 		path: '/w/coteries',

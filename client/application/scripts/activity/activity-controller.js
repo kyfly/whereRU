@@ -17,33 +17,27 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
   }
 }]);
 
-function getActivityInfo (arg, scope) {
-  if (arg.actType === 'common')
-    return;
-  arg.model['prototype_get_'+ arg.actType +'s']({
-    id: arg.id
-  }, function (res) {
-    scope[arg.actType + 's'] = res[0];
-    if (arg.actType === 'seckill') {
-      scope.countDown = (new Date(res[0].started) - new Date(res[0].serverTime));
-    }
-  });
-}
-
 app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParams', '$interval',function($scope, Activity, User, $stateParams, $interval){
-  if ($stateParams.id) {
-    //获取当前活动信息
-    Activity.findById({
+  Activity.findById({
+    id: $stateParams.id
+  }, function (activity) {
+    $scope.activityCurrent = activity;
+    $scope.$emit('shareContentArrive', {
+      bdText: activity.title,
+      bdDesc: activity.keyword,
+      bdPic: activity.imgUrl
+    });
+    if (activity.actType === 'common')
+      return;
+    Activity['prototype_get_'+ activity.actType +'s']({
       id: $stateParams.id
     }, function (res) {
-      $scope.activityCurrent = res;
-      getActivityInfo ({
-        model: Activity,
-        actType: res.actType,
-        id: $stateParams.id
-      }, $scope);
+      $scope[activity.actType + 's'] = res[0];
+      if (activity.actType === 'seckill') {
+        scope.countDown = (new Date(res[0].started) - new Date(res[0].serverTime));
+      }
     });
-  }
+  });
   $scope.onClickJoinActivity = function () {
     var actType = $scope.activityCurrent.actType;
     if (actType !== 'common') {

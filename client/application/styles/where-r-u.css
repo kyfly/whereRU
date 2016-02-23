@@ -349,10 +349,9 @@ nav .nav-wrapper i {
 }
 .coterie-find span i {
   line-height: 2.2rem;
-  top:0.1rem;
+  margin-top: 1rem;
 }
 .coterie-find span{
-  top: 0;
   position: relative;
   height: 4.2rem;
 }
@@ -361,8 +360,36 @@ nav .nav-wrapper i {
   position: absolute;
   font-size: 1rem;
   top: 0;
-  /* left: 0; */
+  line-height: 1rem;
+}
+.coterie .side-nav a.find-more-btn {
+  text-align: right;
+  height: 3rem;
+  padding-right: 3rem;
+}
+.coterie .find-more-btn i{
+  color: red;
+  font-size: 2rem;
+  position: relative;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  height: 2rem;
   line-height: 2rem;
+}
+.coterie .find-more-btn i:after{
+  content: '更多';
+  position: absolute;
+  font-size: 1rem;
+  left: 0;
+  top: 1.6rem;
+  color: #000;
+}
+.coterie .my-coterie-btn i {
+  color: rgb(21, 208, 114);
+}
+.coterie .my-coterie-btn i:after{
+  content: '我的';
 }
 .coterie .coterie-list li{
   background-color: #fff;

@@ -18,6 +18,10 @@ app.controller('RaceController', ['$scope', 'Race', '$stateParams', 'User', 'Tea
     id: $stateParams.id
   }, function (race) {
     $scope.race = race;
+    $scope.$emit('shareContentArrive', {
+      bdText: race.name,
+      bdPic: race.imgUrl
+    });
   });
   Race.prototype_get_notices({
     id: $stateParams.id

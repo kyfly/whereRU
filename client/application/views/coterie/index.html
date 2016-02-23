@@ -1,16 +1,16 @@
 <!-- 手机显示选择 -->
 <nav class="header row hide-on-large-only">
   <div class="nav-wrapper">
-    <a href="#!" class="col offset-s1 brand-logo">whereRU</a>
+    <a href="/" class="col brand-logo">whereRU</a>
     <ul>
       <li ng-click="moreCoteries()">
         <a ng-if="!more" href="#" class="coterie-find">
           <span>
-            <i class="mdi-image-looks"></i>
+            <i class="mdi-device-wifi-tethering"></i>
           </span>
         </a>
         <a ng-if="more" href="#" class="coterie-find">
-          wo
+          <i class="mdi-av-album"></i>
         </a>
       </li>
     </ul>
@@ -19,30 +19,33 @@
 <div class="row s12 coterie hide-on-large-only">
   <ul class="coterie-list">
     <li ng-repeat="coterie in coteries">
-      <a href="/w/coteries/{{coterie.id}}/articles">
+      <a href="/w/coteries/{{coterie.id}}/articles" ng-click="coterie.msgCount=0">
         <h4>
           <img ng-src="{{coterie.logoUrl}}">
           <span ng-bind="coterie.name"></span>
-          <span ng-show="!more" ng-bind="coterie.msgCount"></span>
+          <span ng-show="coterie.msgCount" ng-bind="coterie.msgCount"></span>
         </h4>
       </a>
     </li>
   </ul>
 </div>
 <div class="row s12 coterie hide-on-med-and-down">
-  <a href="#" class="button-collapse" data-activates="nav-coterie" data-sidenav="left" data-menuwidth="300" data-closeonclick="false">
-    Show side-nav
-</a>
+  <a href="#" class="button-collapse" data-activates="nav-coterie" data-sidenav="left" data-menuwidth="300" data-closeonclick="false"></a>
   <ul id="nav-coterie" class="side-nav fixed coterie-list">
     <li>
-      <a href="#" ng-click="moreCoteries()" ng-bind="moreOrBack"></a>
+      <a ng-show="!more" class="find-more-btn" href="#" ng-click="moreCoteries()">
+        <i class="mdi-device-wifi-tethering"></i>
+      </a>
+      <a ng-show="more" class="my-coterie-btn find-more-btn" href="#" ng-click="moreCoteries()">
+       <i class="mdi-av-album"></i>
+      </a>
     </li>
     <li ng-repeat="coterie in coteries" ng-click="hideSideBar()">
-      <a href="/w/coteries/{{coterie.id}}">
+      <a href="/w/coteries/{{coterie.id}}" ng-click="coterie.msgCount=0">
         <h4>
           <img ng-src="{{coterie.logoUrl}}">
           <span ng-bind="coterie.name"></span>
-          <span ng-bind="coterie.msgCount"></span>
+          <span ng-show="coterie.msgCount" ng-bind="coterie.msgCount"></span>
         </h4>
       </a>
     </li>

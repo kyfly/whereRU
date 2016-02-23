@@ -21,9 +21,9 @@
   "validations": [],
   "relations": {
     "fans": {
-      "type": "hasAndBelongsToMany",
-      "model": "whereRUUser",
-      "foreignKey": "userId"
+      "type": "hasMany",
+      "model": "CoteriewhereRUUser",
+      "foreignKey": "coterieId"
     },
     "articles": {
       "type": "hasMany",

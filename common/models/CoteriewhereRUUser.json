@@ -1,0 +1,26 @@
+{
+  "name": "CoteriewhereRUUser",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "lastView": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "whereRUUser"
+    },
+    "coterie": {
+      "type": "belongsTo",
+      "model": "Coterie"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -78,8 +78,8 @@
       "foreignKey": "userId"
     },
     "coteries": {
-      "type": "hasAndBelongsToMany",
-      "model": "Coterie",
+      "type": "hasMany",
+      "model": "CoteriewhereRUUser",
       "foreignKey": "userId"
     },
     "articles": {
@@ -228,7 +228,13 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__link__coteries"
+      "property": "__create__coteries"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__updateById__coteries"
     },
     {
       "principalType": "ROLE",

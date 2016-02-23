@@ -73,11 +73,37 @@ module.exports = function(User) {
    * @param  {Date}   next) {               ins.lastView [description]
    * @return {[type]}       [description]
    */
-  User.afterRemote('prototype.__link__coteries', function (ctx, ins, next) {
-    ins.lastView = new Date();
-    ins.save();
-    next();
+  User.beforeRemote('prototype.__create__coteries', function (ctx, ins, next) {
+    ctx.instance.coteries.count({
+      coterieId: ctx.req.body.coterieId,
+      userId: ctx.instance.toJSON().id
+    }, function (err, count) {
+      if (err) {
+        next(err);
+      } else if (count) {
+        next({"status": 1006, "message": "已经关注"});
+      } else {
+        next();
+      }
+    });
   });
+  User.beforeRemote('prototype.__updateById__coteries', function (ctx, ins, next) {
+    ctx.instance.coteries.findOne({
+      where: {
+        userId: ctx.req.params.id,
+        coterieId: ctx.req.params.fk
+      }
+    }, function (err, userCoterie) {
+      if (err) {
+        next(err);
+      } else {
+        userCoterie.lastView = new Date();
+        userCoterie.save(function (err, userCoterie) {
+          ctx.res.send(200);
+        });
+      }
+    })
+  })
   /**
    * 用户所拥有的圈子列表
    * @param  {[type]} ctx      [description]
@@ -87,21 +113,36 @@ module.exports = function(User) {
    * @param  {[type]} function (err)         {                                      ctx.res.send(err [description]
    * @return {[type]}          [description]
    */
+  User.beforeRemote('prototype.__get__coteries', function (ctx, ins, next) {
+    ctx.req.query.filter = {
+      include: 'coterie'
+    };
+    next();
+  });
   User.afterRemote('prototype.__get__coteries', function (ctx, ins, next) {
     var coteriesFn = [];
-
-    function coterieFn(coterie) {
+    function coterieFn(userCoterie) {
       var defer = q.defer();
-      var lastView = coterie.lastView;
-      coterie.articles.count({created: {gt: lastView}}, function (err, count) {
+      var lastView = userCoterie.lastView;
+      userCoterie.coterie({
+        coterieId: userCoterie.coterieId,
+        include: {
+          relation: 'articles',
+          scope: {
+            where: {
+              created: {gt: lastView}
+            }
+          }
+        }
+      }, function (err, coterie) {
         if (err) {
           defer.reject(err);
         } else {
           coterie = coterie.toJSON();
-          coterie.msgCount = count;
+          coterie.msgCount = coterie.articles.length;
           defer.resolve(coterie);
         }
-      });
+      })
       return defer.promise;
     }
 

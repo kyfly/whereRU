@@ -17,7 +17,11 @@ function articleFn(article, userId, a) {
 module.exports = function(Coterie) {
 	Coterie.afterRemote('findById', function (ctx, ins, next) {
 		if (ctx.req.accessToken) {
-			ins.fans.findById(ctx.req.accessToken.userId, function (err, user) {
+			ins.fans.findOne({
+				where: {
+					userId: ctx.req.accessToken.userId
+				}
+			}, function (err, user) {
 				if (err || !user) {
 					next();
 				} else {

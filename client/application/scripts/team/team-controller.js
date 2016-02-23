@@ -80,6 +80,11 @@ app.controller('TeamController', ['$scope', 'Team', '$stateParams', 'User', func
       id: $scope.teamId
     }, function (res) {
       $scope.team = res;
+      $scope.$emit('shareContentArrive', {
+        bdText: res.name,
+        bdPic: res.logoUrl,
+        bdDesc: res.desc
+      });
     }, function () {
     }
   );

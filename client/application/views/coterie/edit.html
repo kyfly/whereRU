@@ -1,20 +1,21 @@
-<div class="row s12 coterie-header" style="height: 220px">
-	<img ng-src="{{coterie.logoUrl}}">
-  <h4><span ng-bind="coterie.name"></span></h4>
-</div>
-
-<div>
-  <div input-field>
-    <input id="name" type="text" ng-model="article.title" length="11" required>
-    <label for="name">请输入文章标题</label>
+<div class="container">
+  <div class="row s12 coterie-header" style="height: 220px">
+    <img ng-src="{{coterie.logoUrl}}">
+    <h4><span ng-bind="coterie.name"></span></h4>
   </div>
+
   <div>
-    <div class="file-field input-field">
-      <div class="ueditor" ng-model="articleEditorContent" config="editorConfig"></div>
+    <div input-field>
+      <input id="name" type="text" ng-model="article.title" length="11" required>
+      <label for="name">请输入文章标题</label>
+    </div>
+    <div>
+      <div class="file-field input-field">
+        <div class="ueditor" ng-model="articleEditorContent" config="editorConfig"></div>
+      </div>
     </div>
   </div>
-</div>
-<div style="margin-top: 30px">
-  <a href="/w/coteries/{{coterie.id}}" class="btn waves-effect waves-light  grey darken-1 left">返回</a>
-  <a href="" class="btn waves-effect waves-light red right" ng-click="createArticle()">发布</a>
+  <div style="margin: 20px" class="center">
+    <a href="" class="btn waves-effect waves-light red" ng-click="createArticle()">发布</a>
+  </div>
 </div>

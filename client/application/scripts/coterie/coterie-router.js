@@ -6,8 +6,13 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 		controller: 'CoteriesController',
     templateUrl: 'application/views/coterie/index.html'
 	})
-	.state('coteries.edit', {
-		url: '/:id/articles/edit',
+  .state('coteries.articles', {
+    url: '/:id',
+    controller: 'CoterieController',
+    templateUrl: 'application/views/coterie/detail.html'
+  })
+	.state('edit', {
+		url: '/w/articles/:id/edit',
 		controller: 'CoterieController',
 		templateUrl: 'application/views/coterie/edit.html'
 	})
@@ -16,11 +21,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
     controller: 'CoterieController',
     templateUrl: 'application/views/coterie/detail.html'
   })
-  .state('coteries.articles', {
-    url: '/:id',
-    controller: 'CoterieController',
-    templateUrl: 'application/views/coterie/detail.html'
-  })
+  
 	.state('article', {
     url: '/w/articles/:id',
     controller: 'ArticleController',

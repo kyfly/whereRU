@@ -143,5 +143,9 @@
   "LikeUser": {
     "dataSource": "db",
     "public": false
+  },
+  "CoteriewhereRUUser": {
+    "dataSource": "db",
+    "public": false
   }
 }

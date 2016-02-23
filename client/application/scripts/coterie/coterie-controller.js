@@ -34,11 +34,17 @@ app.controller('CoterieController',
     id: $stateParams.id
   }, function (coterie) {
     $scope.coterie = coterie;
+    $scope.$emit('shareContentArrive', {
+      bdText: coterie.name,
+      bdPic: coterie.logoUrl
+    });
     if (coterie.isAttentioned) {
-      User.prototype_link_coteries({
+      User.prototype_updateById_coteries({
         id: $scope.$currentUser.id,
-        fk: coterie.id
-      }, {}, function (res) {
+        fk: $stateParams.id
+      }, {
+        lastView: new Date()
+      }, function (res) {
         
       }, function (err) {
         console.log(err);
@@ -82,10 +88,12 @@ app.controller('CoterieController',
     })
   };
   $scope.attention = function () {
-    User.prototype_link_coteries({
-        id: $scope.$currentUser.id,
-        fk: $stateParams.id
-      }, {}, function (res) {
+    User.prototype_create_coteries({
+        id: $scope.$currentUser.id
+      }, {
+        lastView: new Date(),
+        coterieId: $stateParams.id
+      }, function (res) {
         $scope.coterie.isAttentioned = true;
         Materialize.toast('关注成功！', 2000);
       }, function (err) {
@@ -200,6 +208,9 @@ app.controller('ArticleController',
     id: $stateParams.id,
   }, function (article) {
     $scope.article = article;
+    $scope.$emit('shareContentArrive', {
+      bdText: article.title
+    });
     Article.prototype_get_comments({
       id: $stateParams.id
     }, function (comments) {
