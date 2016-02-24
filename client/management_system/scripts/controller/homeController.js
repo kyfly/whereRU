@@ -27,9 +27,9 @@ function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
         $scope.redirect(3);
       } else if ($window.location.pathname === '/MS/form/list' || $window.location.pathname.substr(0, 13) === '/MS/form/edit') {
         $scope.redirect(4);
-      } else if ($window.location.pathname === '/MS/vote/list') {
+      } else if ($window.location.pathname === '/MS/vote/list' || $window.location.pathname.substr(0, 13) === '/MS/vote/edit') {
         $scope.redirect(5);
-      } else if ($window.location.pathname === '/MS/seckill/list') {
+      } else if ($window.location.pathname === '/MS/seckill/list' || $window.location.pathname.substr(0, 16) === '/MS/seckill/edit') {
         $scope.redirect(6);
       } else if ($window.location.pathname === '/MS/album') {
         $scope.redirect(7);
