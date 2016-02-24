@@ -90,7 +90,7 @@ module.exports = function(Team) {
 	 */
 	Team.remoteMethod('getMySchoolTeams', {
 		accepts: [{
-			arg: 'school', type: 'string',
+			arg: 'school', type: 'string',required: true
 		},{
 			arg: 'last', type: 'date',
 		}],
@@ -123,7 +123,7 @@ module.exports = function(Team) {
   };
 	Team.remoteMethod('getActivitiesData', {
 		accepts: {
-			arg: 'id', type: 'string'
+			arg: 'id', type: 'string',
 		},
 		returns: {
 			arg: 'activities', type: 'array'
