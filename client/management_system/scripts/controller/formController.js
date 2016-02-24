@@ -1,12 +1,10 @@
-app.controller('FormListCtrl', ['$scope', 'Form', '$rootScope', function ($scope, Form, $rootScope) {
+app.controller('FormListCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
   $rootScope.logoHide = false;
   $scope.showType = 0;
-  Form.find({
+  Team.prototype_get_forms({
+    id: localStorage.$LoopBack$currentTeamId,
     filter: {
-      order: 'updated DESC',
-      where: {
-        teamId: localStorage.$LoopBack$currentTeamId
-      }
+      order: 'updated DESC'
     }
   }, function (res) {
     $scope.formItems = res;
@@ -21,17 +19,11 @@ app.controller('FormListCtrl', ['$scope', 'Form', '$rootScope', function ($scope
     Materialize.toast('获取活动列表失败！', 6000);
   });
 
-  $scope.isFormAuthor = function (){
-    var thisElement = this;
-    return thisElement.formItem.teamId === localStorage.$LoopBack$currentTeamId;
-  };
-
-
-
   $scope.deleteForm = function () {
     var thisElement = this;
-    Form.deleteById({
-      id: thisElement.formItem.id
+    Team.prototype_destroyById_forms({
+      id: localStorage.$LoopBack$currentTeamId,
+      fk: thisElement.formItem.id
     }, function () {
       Materialize.toast('删除成功！', 2000);
       var id = thisElement.formItem.id;
@@ -234,7 +226,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', fun
       Team.prototype_create_forms({
         id: localStorage.$LoopBack$currentTeamId
       }, $scope.uploadData, function () {
-        Materialize.toast('提交成功！', 2000);
+        Materialize.toast('创建成功！请在表单模板里查看', 2000);
         $location.path('/MS/form/list');
       }, function () {
         Materialize.toast('提交失败！', 2000);

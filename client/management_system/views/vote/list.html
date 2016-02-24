@@ -1,1 +1,106 @@
-voteList
+<div class="row">
+  <div class="col s12">
+    <ul class="tabs" tabs>
+      <li class="tab waves-effect"><a ng-click="showType = 0" href class="active">活动投票</a></li>
+      <li class="tab waves-effect"><a ng-click="showType = 1" href>投票模板</a></li>
+    </ul>
+  </div>
+  <div class="col s12">
+    <div class="row">
+      <div class="col s12 m6 l4">
+        <div class="card addItemBox waves-effect waves-block hoverable" ui-sref="voteEdit">
+          <div class="card-content item-list">
+            <p class="text-center"><i class="mdi-content-add"></i>
+              <br>
+              <span>创建投票模板</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l4" ng-repeat="voteItem in voteItems"
+           ng-show="isActivity($index)">
+        <div class="card hoverable">
+          <div class="card-content item-list activityInfo">
+            <span class="card-title green-text text-darken-1 flow-text" ng-show="showType === 1">[模板]</span>
+            <span class="card-title green-text text-darken-1 flow-text word-wrap" ng-bind="voteItem.title"></span>
+            <br>
+            <span class="addText" ng-bind="voteItem.updated | date : 'yyyy-MM-dd'"></span>
+            <hr>
+            <span>包含的投票项：</span><br>
+            <div class="col s6 nobr-text" ng-repeat="singleItem in voteItem._voteItems.slice(0,6) track by $index">
+              <nobr>
+                <span ng-bind="$index + 1"></span>.&nbsp;
+                <span ng-bind="singleItem.name"></span>
+              </nobr>
+              <br>
+            </div>
+            <div class="col s6" ng-show="formItem._formItems.length > 6">
+              <span>……</span>
+            </div>
+
+          </div>
+          <div class="card-action btn-area" ng-show="showType === 0">
+            <div class="viewEvent-btn waves-effect text-center">
+              <a class="green-text text-darken-2" href><i class="mdi-image-edit"></i>
+                编辑</a>
+            </div>
+            <div class="editEvent-btn waves-effect text-center">
+              <a class="orange-text text-darken-2" href ng-href="#{{'previewModal' + $index}}" modal><i
+                class="mdi-image-remove-red-eye"></i>
+                预览</a>
+            </div>
+            <div class="shareEvent-btn waves-effect text-center">
+              <a class="blue-text text-darken-2" href ng-click=""><i class="mdi-action-view-list"></i> 结果</a>
+            </div>
+            <div class="deleteEvent-btn waves-effect text-center">
+              <a class="red-text text-darken-2" href ng-href="{{'#deleteFormConfirm' + $index}}" modal><i
+                class="mdi-action-delete"></i> 删除</a>
+            </div>
+          </div>
+          <div class="card-action btn-area" ng-show="showType === 1">
+            <div class="edit-btn waves-effect text-center">
+              <a class="green-text text-darken-2" href ng-click="edit(voteItem.id)"><i class="mdi-image-edit"></i>
+                编辑</a>
+            </div>
+            <div class="result-btn waves-effect text-center">
+              <a class="orange-text text-darken-2" href ng-href="#{{'previewVoteModal' + $index}}" modal><i
+                class="mdi-image-remove-red-eye"></i>
+                预览</a>
+            </div>
+            <div class="delete-btn waves-effect text-center">
+              <a class="red-text text-darken-2" href ng-href="{{'#deleteVoteConfirm' + $index}}" modal><i
+                class="mdi-action-delete"></i> 删除</a>
+            </div>
+          </div>
+          <div id="{{'previewVoteModal' + $index}}" class="modal modal-fixed-footer">
+            <div class="modal-content">
+              <h4 ng-bind="voteItem.title || '投票预览'"></h4>
+              <div class="col s12 nobr-text text-center" ng-repeat="singleItem in voteItem._voteItems track by $index">
+                <nobr>
+                  <span ng-bind="$index + 1"></span>.&nbsp;
+                  <span ng-bind="singleItem.name"></span>
+                </nobr>
+                <br>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">完成</a>
+            </div>
+          </div>
+          <div id="{{'deleteVoteConfirm' + $index}}" class="modal">
+            <div class="modal-content">
+              <h4>确认删除？</h4>
+              <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>删除后不可恢复！</span></p>
+            </div>
+            <div class="modal-footer">
+              <a ng-click="deleteVote()" href=""
+                 class="white-text modal-action modal-close waves-effect waves-green btn-flat red darken-1">确认删除</a>
+              <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -99,7 +99,7 @@
             <option ng-repeat="onePiece in singleForm.options track by $index">{{onePiece}}</option>
           </select>
           <div ng-show="singleForm.type === 'radio'">
-            <span>是否服从调剂</span>
+            <span ng-bind="singleForm.name"></span>
             <div class="switch margin-left margin-top" style="display: inline-block">
               <label>
                 否

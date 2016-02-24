@@ -47,10 +47,11 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
     Activity.findById({
       id: $stateParams.id
     }, function (res) {
+      console.log(res);
+      $scope.activityData = res;
       $http.get(res.explainUrl)
         .success(function (contentHtml) {
           $scope.activityEditorContent = contentHtml;
-          $scope.activityData = res;
         });
       if (res.actType === 'form') {
         $scope.preType = {
@@ -60,7 +61,6 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
         Activity.prototype_get_forms({
           id: $stateParams.id
         }, function (res) {
-          console.log(res);
           if(res[0]){
             $scope.formData = res[0];
             $scope.preType.id = res[0].id;

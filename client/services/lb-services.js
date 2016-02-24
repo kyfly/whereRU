@@ -349,6 +349,19 @@ module.factory(
           method: 'GET',
           isArray: true
         },
+        "prototype_destroyById_forms": {
+          url: urlBase + '/Teams/:id/forms/:fk',
+          method: 'DELETE'
+        },
+        "prototype_get_votes": {
+          url: urlBase + '/Teams/:id/votes',
+          method: 'GET',
+          isArray: true
+        },
+        "prototype_destroyById_votes": {
+          url: urlBase + '/Teams/:id/votes/:fk',
+          method: 'DELETE'
+        },
         "prototype_updateById_activities": {
           url: urlBase + '/Teams/:id/activities/:fk',
           method: 'PUT'
@@ -450,7 +463,7 @@ module.factory(
     return R;
 }])
 .factory(
-  'Article', 
+  'Article',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
     var R = Resource(
@@ -475,7 +488,7 @@ module.factory(
     return R;
   }])
 .factory(
-  'Comment', 
+  'Comment',
   ['LoopBackResource', 'LoopBackAuth', '$injector',
   function(Resource, LoopBackAuth, $injector){
     var R = Resource(
