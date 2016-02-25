@@ -14,7 +14,7 @@
 		<img ng-src="{{user.headImgUrl || 'http://oss.etuan.org/whereru/headImgUrl/%E9%BB%98%E8%AE%A4%E5%A4%B4%E5%83%8F.jpg'}}">
 		<h4 ng-show="user">
 			<span ng-bind="user.name"></span>
-			<span ng-bind="user.phone"></span>
+			<a href="" ng-click="logout()">退出</a>
 		</h4>
 		<h4 ng-show="!user">
 			<a  href='#login-modal' modal>登录</a>

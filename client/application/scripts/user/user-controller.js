@@ -54,7 +54,7 @@ app.controller('ConfirmSchoolController', ['User', '$scope', function (User, $sc
     });
   }
 }]);
-app.controller('UserController', ['$scope', 'User', function($scope, User){
+app.controller('UserController', ['$scope', 'User', '$rootScope', '$location',function($scope, User, $rootScope, $location){
   var pullTeams = function () {
     User.getMyTeams({
       id: $scope.$currentUser.id
@@ -111,6 +111,14 @@ app.controller('UserController', ['$scope', 'User', function($scope, User){
     "active": false,
     "eName": 'article'
   }];
+  $scope.logout = function () {
+    $rootScope.$currentUser = null;
+    localStorage.$LoopBack$currentUserToken = '';
+    localStorage.$LoopBack$accessTokenId = '';
+    $rootScope.username = false;
+    Materialize.toast('退出成功', 4000);
+    $location.path("/w/activities");
+  }
   $scope.pullData = function () {
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');
