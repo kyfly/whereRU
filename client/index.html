@@ -63,7 +63,7 @@
       </div>
     </nav>
 
-    <nav ng-show="topBar" class="header hide-on-large-only">
+    <!-- <nav ng-show="topBar" class="header hide-on-large-only">
       <div class="nav-wrapper">
         <a ng-show="goBackIcon" href="#" 
           class="brand-logo left" 
@@ -71,8 +71,9 @@
           <i class="mdi-image-navigate-before"></i>
         </a>
        <a href="/" class="col offset-s1 brand-logo">whereRU</a>
-    </nav>
-    <div style="height:4.2rem"></div>
+    </nav> -->
+    <div style="height:4.2rem" class="hide-on-med-and-down"></div>
+    <!-- <div ng-if="topBar" style="height:4.2rem"></div> -->
   </header>
   
   <div id="login-modal" class="modal" ng-include="'application/views/user/login.html'"></div>

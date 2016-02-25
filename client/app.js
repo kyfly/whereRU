@@ -113,5 +113,3 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		$location.path(this.menu.path)
 	}
 }]);
-
-

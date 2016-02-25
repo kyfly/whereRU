@@ -8,6 +8,9 @@ app.controller('TeamsController', ['$scope','Team',  'User', function ($scope, T
   },{
     "name": "技术团队",
   }];
+  $scope.changeFilter = function () {
+    $scope.choice = this.type.name;
+  }
   $scope.team = {
     status: false,
     hidden: false

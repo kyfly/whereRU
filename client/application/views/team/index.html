@@ -1,4 +1,4 @@
-<nav class="header row hide-on-large-only">
+<!-- <nav class="header row hide-on-large-only">
   <div class="nav-wrapper">
     <a href="/" class="col brand-logo">whereRU</a>
     <ul>
@@ -9,17 +9,16 @@
         </a>
       </li>
       <ul id='demoDropdown' class='dropdown-content'>
-        <li><a href="javascript:void(0);">最新</a></li>
-        <li><a href="javascript:void(0);">进行中</a></li>
-        <li><a href="javascript:void(0);">未开始</a></li>
-        <li><a href="javascript:void(0);">已结束</a></li>
+        <li ng-repeat="type in types">
+          <a href="javascript:void(0);" ng-bind="type.name" ng-chick="changeFilter()"></a>
+        </li>
       </ul>
     </ul>
   </div>
-</nav>
+</nav> -->
 <div class="row menu container">
   <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
-    <option ng-repeat="value in ['最新','最热']">{{value}}</option>
+    <option ng-repeat="type in types">{{type.name}}</option>
   </select>
   <div class="col s4 m3 l2 item ">
     <a href="/w/activities">校园活动</a>
@@ -34,7 +33,7 @@
 
 <!--校园团队列表-->
 <div class="row container" >
-  <div class="col s12 m4 l3 team-card" ng-repeat="team in teams">
+  <div class="col s12 m4 l3 team-card" ng-repeat="team in teams | filter: choice">
     <div class="card">
       <div class="card-title">
         <a href="/w/teams/{{team.id}}"><img ng-src="{{team.logoUrl}}">

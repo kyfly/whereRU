@@ -1,5 +1,5 @@
 ﻿body{
-  background-color: #EEE;
+  background-color: #fff;
 }
 @media only screen and (max-width: 601px) {
   .container {
@@ -33,6 +33,14 @@
 	font-size: 1.3rem;
   padding: 0 8px;
   font-weight: bold;
+}
+.header ul .dropdown-button {
+  position: relative;
+}
+.header ul .dropdown-button i {
+      position: absolute;
+    top: 0;
+    right: -20px;
 }
 .header ul li:hover ul{
   display: block;
@@ -86,9 +94,28 @@ nav .nav-wrapper i {
 
 .section-first {
   max-height: 700px;
-  background-color: #eee;
 }
-
+.action-menu {
+ 
+}
+.action-menu a div {
+  background-color: #008000;
+  display: inline-block;
+  color: #fff;
+  margin: 10px;
+  margin-left:0; 
+  line-height: 20px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  padding-top: 5px;
+  font-weight: 700;
+}
+.action-menu a>span{
+  position: absolute;
+  margin-top: 15px;
+  color: #444;
+}
 .login {
   position: absolute;
   top: 64px;
@@ -170,7 +197,7 @@ nav .nav-wrapper i {
   background-color: #fff;
   width: 100%;
   margin: 0 auto;
-  padding-top: 5px;
+  /*padding-top: 5px;*/
   white-space:nowrap;
   overflow: hidden; 
   border-bottom: 5px solid #0CB9F7;
@@ -390,6 +417,9 @@ nav .nav-wrapper i {
 }
 .coterie .my-coterie-btn i:after{
   content: '我的';
+}
+.coterie-list{
+  margin: 0;
 }
 .coterie .coterie-list li{
   background-color: #fff;

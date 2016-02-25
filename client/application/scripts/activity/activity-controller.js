@@ -1,10 +1,44 @@
+
 app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, Activity) {
-  //匿名用户获取部分活动信息
+  $scope.activityFilter = ['全部', '进行中', '未开始', '已结束'];
+  $scope.choice = '全部';
+  $scope.changeFilter = function () {
+    $scope.choice = this.filter;
+  }
+  $scope.filterFun = function (activity) {
+    switch($scope.choice) {
+      case '全部':
+        return true;
+      case '进行中':
+        if (activity.status === 'ing')
+          return true;
+      case '未开始':
+        if (activity.status === 'nos')
+          return true;
+      case '已结束':
+        if (activity.status === 'end')
+          return true;
+    }
+  }
+  function getActivityStatus(activity) {
+    var now = new Date();
+    if (activity.ended < now) {
+      activity.status = 'end';
+    } else if (activity.started > now){
+      activity.status = 'nos';
+    } else {
+      activity.status = 'ing';
+    }
+  }
   if (!$scope.username) {
     Activity.find(function (activities) {
       $scope.activityItems = activities;
+      $scope.activityItems.forEach(function (activity) {
+        getActivityStatus(activity);
+      });
     });
-  } 
+  }
+
   //登录用户获取所在学校活动信息
   else {
     Activity.getMySchoolActiveties({
@@ -12,10 +46,14 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
     }, function(res){
       for (x in res) if (x === 'activties') {
         $scope.activityItems = res[x];
+        $scope.activityItems.forEach(function (activity) {
+          getActivityStatus(activity);
+        });
       }
     });
   }
 }]);
+
 
 app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParams', '$interval',function($scope, Activity, User, $stateParams, $interval){
   Activity.findById({
