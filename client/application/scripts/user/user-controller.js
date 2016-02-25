@@ -1,7 +1,15 @@
 app.controller('LoginController', 
-  ['User', '$scope', '$location', 'LoopBackAuth', '$window',
-  function (User, $scope, $location, LoopBackAuth, $window) {
+  ['User', '$scope', '$location', 'LoopBackAuth', '$window', '$rootScope',
+  function (User, $scope, $location, LoopBackAuth, $window, $rootScope) {
   $scope.user = {};
+  $scope.focus = function () {
+    $rootScope.bottomBar = false;
+    $scope.$emit('hiddenBottomBar');
+  }
+  $scope.blur = function () {
+    $rootScope.bottomBar = true;
+    $scope.$emit('showBottomBar');
+  }
   $scope.login = function () {
     User.login($scope.user, function (data) {
       data.user.id = data.userId;

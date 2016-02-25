@@ -25,7 +25,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		$('#login-modal').openModal();
 	});
 
-	
+
 }])
 .controller('HeaderController',
 	['$scope', '$rootScope', "User", "$location", "$window",
@@ -76,7 +76,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 .controller('HomeController', ['$scope', function($scope){
 	
 }])
-.controller('BottomBarController', ['$scope', '$location', function($scope, $location){
+.controller('BottomBarController', ['$scope', '$location', '$rootScope',function($scope, $location, $rootScope){
 	
 	$scope.$on('$stateChangeStart', function(evt, next, current) {
 		if (next.name.match(/home|^art\.|^coteries$|coteries.articles/)) {
@@ -87,6 +87,12 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		if (next.name === 'index') {
 			$scope.bottomBar = true;
 		}
+	});
+	$rootScope.$on('hiddenBottomBar', function () {
+		$scope.bottomBar = false;
+	});
+	$rootScope.$on('showBottomBar', function () {
+		$scope.bottomBar = true;
 	});
 	$scope.menus = [{
 		name: '圈子',

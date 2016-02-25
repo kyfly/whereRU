@@ -2,22 +2,20 @@
 	name="loginForm"
 	ng-controller="LoginController">
 	<div  class="row center">
-		<h3>亲爱的,登录后更精彩</h3>
+		<h3>登录后更精彩</h3>
 	</div>
 	<div class="row">
 		<div input-field class="col s12">
-		    <input id="phone" type="text" ng-model="user.phone" length="11" required>
+		    <input id="phone" type="text" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="phone">请输入手机号</label>
 		</div>
 		<div input-field class="col s12">
-		    <input id="password" type="text" ng-model="user.password" min="8" length="16" required>
+		    <input id="password" type="text" ng-model="user.password" min="8" ng-focus="focus()" ng-blur="blur()" length="16" required>
 		    <label for="password">请输入密码</label>
 		    <a href="/" class="right">忘记密码</a>
 		</div>
 	</div>
 	<div  class="row center modal-footer">
-		
-		
 		<button type="sumbit" class="waves-effect waves-light btn-flat"
 			ng-click="login()" 
 			ng-disabled="loginForm.$invalid">登录</button>

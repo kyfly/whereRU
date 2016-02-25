@@ -13,6 +13,10 @@
     width: 100%;
   }
 }
+#login-modal{
+  position: absolute;
+  top: 0 !important
+}
 /*.collection{
   margin: 0
 }*/
