@@ -393,10 +393,11 @@ nav .nav-wrapper i {
   top: 0;
   line-height: 1rem;
 }
-.coterie .side-nav a.find-more-btn {
+.coterie .coterie-list a.find-more-btn {
   text-align: right;
   height: 3rem;
   padding-right: 3rem;
+  display: block;
 }
 .coterie .find-more-btn i{
   color: red;
@@ -421,6 +422,11 @@ nav .nav-wrapper i {
 }
 .coterie .my-coterie-btn i:after{
   content: '我的';
+}
+.coterie .coterie-list .tip{
+  text-align: center;
+  margin-top: 50px;
+  font-size: 1.2rem;
 }
 .coterie-list{
   margin: 0;

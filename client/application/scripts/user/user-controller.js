@@ -16,10 +16,10 @@ app.controller('LoginController',
       LoopBackAuth.setUser(data.id, data.userId, data.user);
       LoopBackAuth.save();
       localStorage.$LoopBack$currentUserToken = JSON.stringify(data);
-      Materialize.toast('登录成功', 4000);
+      Materialize.toast('登录成功', 2000);
       $window.location.href = $location.path();
     }, function (err) {
-      Materialize.toast('登录失败,请检查输入是否正确', 4000);
+      Materialize.toast('登录失败,请检查输入是否正确', 2000);
     });
   };
 }]);
@@ -37,11 +37,11 @@ app.controller('RegisterController', ['User', 'School', '$scope', '$rootScope', 
       LoopBackAuth.setUser(data.id, data.userId, data.user);
       LoopBackAuth.save();
       localStorage.$LoopBack$currentUserToken = JSON.stringify(data);
-      Materialize.toast('恭喜你，注册成功', 4000);
+      Materialize.toast('恭喜你，注册成功', 2000);
       $location.path('/w/activities').replace();
     }, function (err) {
       if (err.status === 1000)
-        Materialize.toast('该手机号已经被注册', 4000);
+        Materialize.toast('该手机号已经被注册', 2000);
     });
   }
 }]);
@@ -116,7 +116,7 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location',fu
     localStorage.$LoopBack$currentUserToken = '';
     localStorage.$LoopBack$accessTokenId = '';
     $rootScope.username = false;
-    Materialize.toast('退出成功', 4000);
+    Materialize.toast('退出成功', 2000);
     $location.path("/w/activities");
   }
   $scope.pullData = function () {

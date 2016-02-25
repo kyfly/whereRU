@@ -109,10 +109,10 @@ app.controller('TeamController', ['$scope', 'Team', '$stateParams', 'User', func
     Team.prototype_create_members({
       id: $scope.teamId
     }, $scope.userInfomation, function (member) {
-      Materialize.toast('申请成功,等待管理员同意', 4000);
+      Materialize.toast('申请成功,等待管理员同意', 2000);
     }, function (err) {
       console.log(err)
-      Materialize.toast(err.data.error.message, 4000);
+      Materialize.toast(err.data.error.message, 2000);
     });
   }
 }]);

@@ -111,7 +111,7 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     });
     if (results.length > $scope.votes.max) {
       this.result[this.$index] = undefined;
-      Materialize.toast('只能选择' + $scope.votes.max + '项哦', 4000);
+      Materialize.toast('只能选择' + $scope.votes.max + '项哦', 2000);
       return;
     }
     if (this.result[this.$index]) {
@@ -141,7 +141,7 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     User.prototype_create_formResults({
       id: $scope.$currentUser.id
     }, formResult, function (res) {
-      Materialize.toast('参与成功', 4000);
+      Materialize.toast('参与成功', 2000);
     });
   };
   $scope.submitVoteResult = function () {
@@ -153,10 +153,10 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
       result.push($scope.votes._voteItems[x].id);
     }
     if (result.length > $scope.votes.max) {
-      Materialize.toast('只能选择' + $scope.votes.max + '项哦', 4000);
+      Materialize.toast('只能选择' + $scope.votes.max + '项哦', 2000);
       return;
     } else if (result.length <= 0) {
-      Materialize.toast('至少选择一项哦', 4000);
+      Materialize.toast('至少选择一项哦', 2000);
       return;
     }
     var voteResult = {
@@ -168,7 +168,7 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     User.prototype_create_voteResults({
       id: $scope.$currentUser.id
     }, voteResult, function (res) {
-      Materialize.toast('参与成功', 4000);
+      Materialize.toast('参与成功', 2000);
     });
   };
   $scope.submitSeckillResult = function () {

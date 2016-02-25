@@ -11,22 +11,28 @@ app.controller('CoteriesController',
         $location.path('/w/coteries/' + $scope.coteries[0].id);
     });
   }
+  $scope.goLogin = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
+  }
   $scope.moreCoteries = function () {
     $scope.more = !$scope.more;
     if ($scope.more) {
-       Coterie.find(function (coteries) {
+      Coterie.find(function (coteries) {
         $scope.coteries = coteries;
       });
     }
     else {
+      if (!$scope.$currentUser) {
+        return $scope.$emit('auth:loginRequired');
+      }
       getCoteries();
     }
     $scope.moreOrBack = $scope.more ? '返回' : '发现';
   };
   if ($scope.$currentUser) {
     getCoteries();
-  } else {
-    $scope.more = true;
   }
 }]);
 app.controller('CoterieController', 
@@ -70,7 +76,7 @@ app.controller('CoterieController',
     var title = $scope.article.title;
 
     if (!content || !title) {
-      Materialize.toast('文章标题和内容都不能为空', 4000);
+      Materialize.toast('文章标题和内容都不能为空', 2000);
       return;
     }
     $http({
@@ -87,7 +93,7 @@ app.controller('CoterieController',
         id: $scope.$currentUser.id
       }, $scope.article, function (article) {
         console.log(article);
-        Materialize.toast('文章发布成功', 4000);
+        Materialize.toast('文章发布成功', 2000);
         $location.path('/w/coteries/' + $stateParams.id);
       });
     })
@@ -125,9 +131,9 @@ app.controller('CoterieController',
       if (res.status === 1) {
         article.likeCount ++;
         article.islike = true;
-        Materialize.toast('文章标记为喜欢', 4000);
+        Materialize.toast('文章标记为喜欢', 2000);
       } else {
-        Materialize.toast('文章已经被标记为喜欢', 4000);
+        Materialize.toast('文章已经被标记为喜欢', 2000);
       }
     });
   };
@@ -157,7 +163,7 @@ app.controller('CommentsController',
       return $scope.$emit('auth:loginRequired');
     }
     if (!article.writingCommentContent) {
-      Materialize.toast('请先输入评论内容', 4000);
+      Materialize.toast('请先输入评论内容', 2000);
       return;
     }
     User.prototype_create_comments({
@@ -176,7 +182,7 @@ app.controller('CommentsController',
       comment.replyCount = 0;
       article.comments.push(comment);
       article.writingCommentContent = null;
-      Materialize.toast('评论成功', 4000);
+      Materialize.toast('评论成功', 2000);
     });
   };
   $scope.loadReply = function () {
@@ -193,7 +199,7 @@ app.controller('CommentsController',
       return $scope.$emit('auth:loginRequired');
     }
     if (!comment.writingReplyContent) {
-      Materialize.toast('请先输入回复内容', 4000);
+      Materialize.toast('请先输入回复内容', 2000);
       return;
     }
     User.prototype_create_replys({
@@ -210,7 +216,7 @@ app.controller('CommentsController',
       comment.replyCount ++;
       comment.replys.push(reply);
       comment.writingReplyContent = null;
-      Materialize.toast('回复成功', 4000);
+      Materialize.toast('回复成功', 2000);
     });
   }
 }]);

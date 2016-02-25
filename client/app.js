@@ -47,7 +47,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		token.user.id = token.userId;
 		$rootScope.$currentUser = token.user;
 		if (new Date().getTime() - new Date(token.created).getTime() > token.ttl * 1000) {
-			Materialize.toast('你的TOKEN已失效,你需要重新登录', 4000);
+			Materialize.toast('你的TOKEN已失效,你需要重新登录', 2000);
 		} else {
 			$rootScope.username = token.user.name;
 		}
@@ -66,7 +66,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		localStorage.$LoopBack$currentUserToken = '';
 		localStorage.$LoopBack$accessTokenId = '';
 		$rootScope.username = false;
-		Materialize.toast('退出成功', 4000);
+		Materialize.toast('退出成功', 2000);
 		$location.path("/w/activities");
 	}
 	$scope.goback = function () {
