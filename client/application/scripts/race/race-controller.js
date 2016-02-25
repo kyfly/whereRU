@@ -43,6 +43,9 @@ app.controller('RaceController', ['$scope', 'Race', '$stateParams', 'User', 'Tea
     $scope.selected = this.team.id;
   };
   $scope.joinRace = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     Team.prototype_link_partakedRaces({
       id: $scope.selected,
       fk: $stateParams.id

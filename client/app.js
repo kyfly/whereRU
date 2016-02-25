@@ -21,6 +21,11 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		
 	});
 	
+	$rootScope.$on('auth:loginRequired', function () {
+		$('#login-modal').openModal();
+	});
+
+	
 }])
 .controller('HeaderController',
 	['$scope', '$rootScope', "User", "$location", "$window",
@@ -49,9 +54,6 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	} catch (err) {
 		console.log(err);
 	}
-	$scope.$on('auth:loginRequired', function () {
-		Materialize.toast('你需要重新登录或者可能没有权限访问', 4000);
-	});
 	$scope.pullTeams = function () {
 		User.prototype_get_teams({
 			id: $scope.$currentUser.id
@@ -61,10 +63,11 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	}
 	$scope.logOut = function () {
 		$rootScope.$currentUser = null;
-		localStorage.$LoopBack$currentUserToken = null;
+		localStorage.$LoopBack$currentUserToken = '';
+		localStorage.$LoopBack$accessTokenId = '';
 		$rootScope.username = false;
 		Materialize.toast('退出成功', 4000);
-		$location.path("/");
+		$location.path("/w/activities");
 	}
 	$scope.goback = function () {
 		$window.history.back();

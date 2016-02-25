@@ -30,7 +30,7 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
       activity.status = 'ing';
     }
   }
-  if (!$scope.username) {
+  if (!$scope.$currentUser) {
     Activity.find(function (activities) {
       $scope.activityItems = activities;
       $scope.activityItems.forEach(function (activity) {
@@ -122,6 +122,9 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
   }
 
   $scope.submitFormResult = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     for (var x in $scope.forms._formItems) if ($scope.forms._formItems[x].type === 'select') {
       $scope.result[x].type = 'selelct';
       $scope.result[x].name = $scope.result[x].option;
@@ -143,6 +146,9 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
   };
   $scope.submitVoteResult = function () {
     var result = [];
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     for (var x in $scope.result) if ($scope.result[x]) {
       result.push($scope.votes._voteItems[x].id);
     }
@@ -166,7 +172,9 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     });
   };
   $scope.submitSeckillResult = function () {
-
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
   }
 }]);
 

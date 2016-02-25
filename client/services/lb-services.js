@@ -942,6 +942,7 @@ module.factory(
         'responseError': function(rejection) {
           switch(rejection.status) {
             case 401:
+            console.log(rejection);
               $rootScope.$broadcast('auth:loginRequired');
               break;
             // case 403:

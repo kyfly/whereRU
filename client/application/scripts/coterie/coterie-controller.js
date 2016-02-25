@@ -25,7 +25,9 @@ app.controller('CoteriesController',
   };
   if ($scope.$currentUser) {
     getCoteries();
-  } 
+  } else {
+    $scope.more = true;
+  }
 }]);
 app.controller('CoterieController', 
   ['$scope', '$stateParams', 'Coterie', 'User', 'Ueditor', '$http', '$location',
@@ -61,6 +63,9 @@ app.controller('CoterieController',
   $scope.editorConfig = Ueditor.config;
   $scope.article = {};
   $scope.createArticle = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     var content = $scope.articleEditorContent;
     var title = $scope.article.title;
 
@@ -88,6 +93,9 @@ app.controller('CoterieController',
     })
   };
   $scope.attention = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     User.prototype_create_coteries({
         id: $scope.$currentUser.id
       }, {
@@ -104,6 +112,9 @@ app.controller('CoterieController',
   };
 
   $scope.addLike = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     var article = this.article;
     User.prototype_create_likeUsers({
       id: $scope.$currentUser.id
@@ -142,6 +153,9 @@ app.controller('CommentsController',
   ['$scope', 'Comment', 'User', function($scope, Comment, User){
   $scope.createComment = function () {
     var article = this.article;
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     if (!article.writingCommentContent) {
       Materialize.toast('请先输入评论内容', 4000);
       return;
@@ -175,6 +189,9 @@ app.controller('CommentsController',
   };
   $scope.createReply = function () {
     var comment = this.comment;
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     if (!comment.writingReplyContent) {
       Materialize.toast('请先输入回复内容', 4000);
       return;

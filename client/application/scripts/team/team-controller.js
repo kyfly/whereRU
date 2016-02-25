@@ -16,6 +16,9 @@ app.controller('TeamsController', ['$scope','Team',  'User', function ($scope, T
     hidden: false
   };
   $scope.uploadLogo = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     var file = document.getElementById('teamlogo').files[0];
     var Xhr = new XMLHttpRequest();
     var fileExt = /\.[^\.]+/.exec(document.getElementById('teamlogo').value.toLowerCase());
@@ -59,7 +62,9 @@ app.controller('TeamsController', ['$scope','Team',  'User', function ($scope, T
    * 创建团队
    */
   $scope.createTeam = function () {
-
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     User.prototype_create_teams({id: $scope.$currentUser.id}, $scope.team, function (team) {
       console.log(team)
     })
@@ -98,6 +103,9 @@ app.controller('TeamController', ['$scope', 'Team', '$stateParams', 'User', func
   });
   
   $scope.joinTeam = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     Team.prototype_create_members({
       id: $scope.teamId
     }, $scope.userInfomation, function (member) {

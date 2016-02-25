@@ -104,8 +104,8 @@ app.controller('UserController', ['$scope', 'User', function($scope, User){
     "eName": 'article'
   }];
   $scope.pullData = function () {
-    if (!$scope.user) {
-      return;
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
     }
     $scope.activeMenus.forEach(function (menu) {
       menu.active = false;
@@ -129,6 +129,9 @@ app.controller('UserController', ['$scope', 'User', function($scope, User){
 app.controller('ActivityResultController', 
   ['$scope', '$stateParams', 'User', 
   function($scope, $stateParams, User){
+  if (!$scope.$currentUser) {
+    return $scope.$emit('auth:loginRequired');
+  }
   User['prototype_findById_' + $stateParams.type + 'Results']({
     id: $scope.$currentUser.id,
     fk: $stateParams.id
