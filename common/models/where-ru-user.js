@@ -441,6 +441,7 @@ module.exports = function(User) {
   User.beforeRemote('prototype.__create__teams', function (ctx, ins, next){
     var user = ctx.instance.toJSON();
     ctx.req.body.school = user.school;
+    ctx.req.body.created = new Date();
     ctx.instance.teams.create(ctx.req.body, function (err, data) {
       var userInfo = {
         "phone": user.phone,
