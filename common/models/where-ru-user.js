@@ -452,7 +452,6 @@ module.exports = function(User) {
         "department": "负责人",
         "created": new Date()
       };
-    console.log(user)
       data.members.create(userInfo);
       ctx.res.send(data)
     })

@@ -7,7 +7,7 @@ app.controller('CoteriesController',
       id: $scope.$currentUser.id
     }, function (coteries) {
       $scope.coteries = coteries;
-      if (coteries.length)
+      if (coteries.length && !$location.path().match(/\/w\/coteries\/.+/))
         $location.path('/w/coteries/' + $scope.coteries[0].id);
     });
   }

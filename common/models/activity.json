@@ -140,5 +140,13 @@
       "property": "findById"
     }
   ],
-  "methods": {}
+  "methods": {},
+  "scope": {
+    "include": {
+      "relation": "team",
+      "scope": {
+        "fields": ["id", "name", "logoUrl"]
+      }
+    }
+  }
 }

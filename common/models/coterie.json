@@ -16,6 +16,9 @@
     },
     "created": {
       "type": "date"
+    },
+    "teamId": {
+      "type": "string"
     }
   },
   "validations": [],

@@ -87,5 +87,13 @@
       "property": "__link__raceTeams"
     }
   ],
-  "methods": {}
+  "methods": {},
+  "scope": {
+    "include": {
+      "relation": "team",
+      "scope": {
+        "fields": ["id", "name", "logoUrl"]
+      }
+    }
+  }
 }

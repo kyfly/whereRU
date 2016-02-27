@@ -83,7 +83,7 @@
     },
     "articles": {
       "type": "hasMany",
-      "model": "Artical"
+      "model": "Article"
     },
     "forms": {
       "type": "hasMany",
