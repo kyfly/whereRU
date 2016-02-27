@@ -16,7 +16,7 @@ app.controller('FormListCtrl', ['$scope', 'Team', '$rootScope', function ($scope
       }
     };
   }, function () {
-    Materialize.toast('获取活动列表失败！', 6000);
+    Materialize.toast('获取表单列表失败！', 6000);
   });
 
   $scope.deleteForm = function () {

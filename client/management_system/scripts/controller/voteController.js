@@ -16,7 +16,7 @@ app.controller('VoteListCtrl', ['$scope', 'Team', '$rootScope', function ($scope
       }
     };
   }, function () {
-    Materialize.toast('获取活动列表失败！', 6000);
+    Materialize.toast('获取投票列表失败！', 6000);
   });
 
 

@@ -17,24 +17,24 @@
           </div>
         </div>
       </div>
-      <div class="col s12 m6 l4" ng-repeat="voteItem in voteItems"
+      <div class="col s12 m6 l4" ng-repeat="seckillItem in seckillItems"
            ng-show="isActivity($index)">
         <div class="card hoverable">
           <div class="card-content item-list activityInfo">
             <span class="card-title green-text text-darken-1 flow-text" ng-show="showType === 1">[模板]</span>
-            <span class="card-title green-text text-darken-1 flow-text word-wrap" ng-bind="voteItem.title"></span>
+            <span class="card-title green-text text-darken-1 flow-text word-wrap" ng-bind="seckillItem.title"></span>
             <br>
-            <span class="addText" ng-bind="voteItem.updated | date : 'yyyy-MM-dd'"></span>
+            <span class="addText" ng-bind="seckillItem.updated | date : 'yyyy-MM-dd'"></span>
             <hr>
             <span>包含的抢票项：</span><br>
-            <div class="col s6 nobr-text" ng-repeat="singleItem in voteItem._voteItems.slice(0,6) track by $index">
+            <div class="col s6 nobr-text" ng-repeat="singleItem in seckillItem._seckillItems.slice(0,6) track by $index">
               <nobr>
                 <span ng-bind="$index + 1"></span>.&nbsp;
                 <span ng-bind="singleItem.name"></span>
               </nobr>
               <br>
             </div>
-            <div class="col s6" ng-show="formItem._formItems.length > 6">
+            <div class="col s6" ng-show="seckillItem._seckillItems.length > 6">
               <span>……</span>
             </div>
 
@@ -45,7 +45,7 @@
                 编辑</a>
             </div>
             <div class="editEvent-btn waves-effect text-center">
-              <a class="orange-text text-darken-2" href ng-href="#{{'previewModal' + $index}}" modal><i
+              <a class="orange-text text-darken-2" href ng-href="#{{'previewSeckillModal' + $index}}" modal><i
                 class="mdi-image-remove-red-eye"></i>
                 预览</a>
             </div>
@@ -53,29 +53,29 @@
               <a class="blue-text text-darken-2" href ng-click=""><i class="mdi-action-view-list"></i> 结果</a>
             </div>
             <div class="deleteEvent-btn waves-effect text-center">
-              <a class="red-text text-darken-2" href ng-href="{{'#deleteFormConfirm' + $index}}" modal><i
+              <a class="red-text text-darken-2" href ng-href="{{'#deleteSeckillConfirm' + $index}}" modal><i
                 class="mdi-action-delete"></i> 删除</a>
             </div>
           </div>
           <div class="card-action btn-area" ng-show="showType === 1">
             <div class="edit-btn waves-effect text-center">
-              <a class="green-text text-darken-2" href ng-click="edit(voteItem.id)"><i class="mdi-image-edit"></i>
+              <a class="green-text text-darken-2" href ng-click="edit(seckillItem.id)"><i class="mdi-image-edit"></i>
                 编辑</a>
             </div>
             <div class="result-btn waves-effect text-center">
-              <a class="orange-text text-darken-2" href ng-href="#{{'previewVoteModal' + $index}}" modal><i
+              <a class="orange-text text-darken-2" href ng-href="#{{'previewSeckillModal' + $index}}" modal><i
                 class="mdi-image-remove-red-eye"></i>
                 预览</a>
             </div>
             <div class="delete-btn waves-effect text-center">
-              <a class="red-text text-darken-2" href ng-href="{{'#deleteVoteConfirm' + $index}}" modal><i
+              <a class="red-text text-darken-2" href ng-href="{{'#deleteSeckillConfirm' + $index}}" modal><i
                 class="mdi-action-delete"></i> 删除</a>
             </div>
           </div>
-          <div id="{{'previewVoteModal' + $index}}" class="modal modal-fixed-footer">
+          <div id="{{'previewSeckillModal' + $index}}" class="modal modal-fixed-footer">
             <div class="modal-content">
-              <h4 ng-bind="voteItem.title || '投票预览'"></h4>
-              <div class="col s12 nobr-text text-center" ng-repeat="singleItem in voteItem._voteItems track by $index">
+              <h4 ng-bind="seckillItem.title || '投票预览'"></h4>
+              <div class="col s12 nobr-text text-center" ng-repeat="singleItem in seckillItem._seckillItems track by $index">
                 <nobr>
                   <span ng-bind="$index + 1"></span>.&nbsp;
                   <span ng-bind="singleItem.name"></span>
@@ -87,13 +87,13 @@
               <a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">完成</a>
             </div>
           </div>
-          <div id="{{'deleteVoteConfirm' + $index}}" class="modal">
+          <div id="{{'deleteSeckillConfirm' + $index}}" class="modal">
             <div class="modal-content">
               <h4>确认删除？</h4>
               <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>删除后不可恢复！</span></p>
             </div>
             <div class="modal-footer">
-              <a ng-click="deleteVote()" href=""
+              <a ng-click="deleteSeckill()" href=""
                  class="white-text modal-action modal-close waves-effect waves-green btn-flat red darken-1">确认删除</a>
               <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
             </div>
