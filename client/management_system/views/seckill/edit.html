@@ -1,1 +1,98 @@
-seckillEdit
+<div class="container">
+  <div class="row">
+    <div input-field>
+      <input id="seckillTitle" type="text" ng-model="uploadData.title">
+      <label for="seckillTitle">抢票名称</label>
+    </div>
+    <div input-field>
+      <input id="seckillMax" type="text" ng-model="uploadData.limit">
+      <label for="seckillMax">每人可抢票数</label>
+    </div>
+    <div input-field>
+      <input id="seckillTotal" type="text" ng-model="uploadData.total">
+        <label for="seckillTotal">一共票数</label>
+    </div>
+    <div input-field>
+      <label for="startTime">开始时间</label>
+      <input input-date
+             type="text"
+             name="started"
+             id="startTime"
+             ng-model="uploadData.started"
+             container="body"
+             format="yyyy/mm/dd"
+             months-full="{{ month }}"
+             months-short="{{ monthShort }}"
+             weekdays-full="{{ weekdaysFull }}"
+             weekdays-short="{{ weekdaysShort }}"
+             weekdays-letter="{{ weekdaysLetter }}"
+             min="{{ minDate }}"
+             today="today"
+             clear="clear"
+             close="close"
+             select-years="16">
+    </div>
+    <div class="col s12" ng-repeat="seckill in seckills">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">第 <span ng-bind="$index + 1"></span> 项</span>
+          <div input-field>
+            <span class="prefix textInputLabel">名称</span>
+            <input class="textInput" id="{{'textInput' + $index}}" type="text" ng-model="seckill.name">
+            <label for="{{'textInput' + $index}}">请输入抢票项名称</label>
+          </div>
+          <div input-field>
+            <span class="prefix textInputLabel">票数</span>
+            <input class="textInput" id="{{'textInput2' + $index}}" type="text" ng-model="seckill.count">
+            <label for="{{'textInput2' + $index}}">请输入票数</label>
+          </div>
+        </div>
+        <div class="card-action">
+          <a ng-hide="$index === 0" ng-click="moveUpSeckill()"
+             class="waves-effect waves-light btn white-text blue darken-2 editFormAllBtn"><i
+            class="material-icons left">arrow_upward</i>上移</a>
+          <a ng-hide="$index === seckills.length - 1" ng-click="moveDownSeckill()"
+             class="waves-effect waves-light btn white-text blue darken-2 editFormAllBtn"><i
+            class="material-icons left">arrow_downward</i>下移</a>
+          <a ng-click="removeSeckill($index)" class="waves-effect waves-light btn red white-text editFormAllBtn"><i
+            class="material-icons left">delete</i>删除</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="createFormBtn">
+    <a ng-click="addSeckill()" class="btn orange darken-2 waves-effect waves-light" href>
+      添加抢票项
+    </a>
+  </div>
+
+  <div class="text-center col s12" ng-show="!seckills.length">
+    <p class="noticeText noFormNotice">还没有创建抢票项哦 (′・ω・`)</p>
+  </div>
+  <div class="clearfix"></div>
+  <div class="bottomBtn">
+    <hr>
+    <a class="btn grey lighten-1 waves-effect waves-light editFormAllBtn" href ui-sref="formList">取消</a>
+    <a ng-click="uploadSeckill()" class="waves-effect waves-light btn blue darken-2 right margin-left editFormAllBtn" href>创建
+      <i class="mdi-action-done right"></i></a>
+    <a href='#previewModal' modal class="waves-effect waves-light btn blue darken-2 right margin-left editFormAllBtn">预览<i
+      class="mdi-image-remove-red-eye right"></i></a>
+    <div id="previewModal" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4 ng-bind="uploadData.title || '抢票预览'"></h4>
+        <div class="text-center" ng-repeat="singleSeckill in seckills">
+          <nobr>
+            <span ng-bind="$index + 1"></span>.&nbsp;
+            <span ng-bind="singleSeckill.name"></span>
+          </nobr>
+          <br>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">完成</a>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>

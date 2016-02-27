@@ -34,7 +34,7 @@
               </nobr>
               <br>
             </div>
-            <div class="col s6" ng-show="formItem._formItems.length > 6">
+            <div class="col s6" ng-show="voteItem._voteItems.length > 6">
               <span>……</span>
             </div>
 
@@ -45,7 +45,7 @@
                 编辑</a>
             </div>
             <div class="editEvent-btn waves-effect text-center">
-              <a class="orange-text text-darken-2" href ng-href="#{{'previewModal' + $index}}" modal><i
+              <a class="orange-text text-darken-2" href ng-href="#{{'previewVoteModal' + $index}}" modal><i
                 class="mdi-image-remove-red-eye"></i>
                 预览</a>
             </div>
@@ -53,7 +53,7 @@
               <a class="blue-text text-darken-2" href ng-click=""><i class="mdi-action-view-list"></i> 结果</a>
             </div>
             <div class="deleteEvent-btn waves-effect text-center">
-              <a class="red-text text-darken-2" href ng-href="{{'#deleteFormConfirm' + $index}}" modal><i
+              <a class="red-text text-darken-2" href ng-href="{{'#deleteVoteConfirm' + $index}}" modal><i
                 class="mdi-action-delete"></i> 删除</a>
             </div>
           </div>

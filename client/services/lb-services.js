@@ -344,6 +344,15 @@ module.factory(
           url: urlBase + '/Teams/:id/seckills',
           method: 'POST'
         },
+        "prototype_get_seckills": {
+          url: urlBase + '/Teams/:id/seckills',
+          method: 'GET',
+          isArray: true
+        },
+        "prototype_destroyById_seckills": {
+          url: urlBase + '/Teams/:id/seckills/:fk',
+          method: 'DELETE'
+        },
         "prototype_get_forms": {
           url: urlBase + '/Teams/:id/forms',
           method: 'GET',
