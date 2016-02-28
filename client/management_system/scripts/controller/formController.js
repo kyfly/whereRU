@@ -9,7 +9,7 @@ app.controller('FormListCtrl', ['$scope', 'Team', '$rootScope', function ($scope
   }, function (res) {
     $scope.formItems = res;
     $scope.isActivity = function (index) {
-      if($scope.showType === 0){
+      if ($scope.showType === 0) {
         return $scope.formItems[index].activityId
       } else {
         return !$scope.formItems[index].activityId
@@ -22,24 +22,37 @@ app.controller('FormListCtrl', ['$scope', 'Team', '$rootScope', function ($scope
   $scope.deleteForm = function () {
     var thisElement = this;
     Team.prototype_destroyById_forms({
-      id: localStorage.$LoopBack$currentTeamId,
-      fk: thisElement.formItem.id
-    }, function () {
-      Materialize.toast('删除成功！', 2000);
-      var id = thisElement.formItem.id;
-      for (var x in $scope.formItems) if ($scope.formItems[x].id === id) {
-        $scope.formItems.splice(x, 1);
-      }
-    },
-    function () {
-      Materialize.toast('删除失败！', 2000);
-    });
+        id: localStorage.$LoopBack$currentTeamId,
+        fk: thisElement.formItem.id
+      }, function () {
+        Materialize.toast('删除成功！', 2000);
+        var id = thisElement.formItem.id;
+        for (var x in $scope.formItems) if ($scope.formItems[x].id === id) {
+          $scope.formItems.splice(x, 1);
+        }
+      },
+      function () {
+        Materialize.toast('删除失败！', 2000);
+      });
   };
 
 }]);
 
-app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', function ($scope, $location, Team, $rootScope) {
+app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$stateParams', function ($scope, $location, Team, $rootScope, $stateParams) {
   $rootScope.logoHide = true;
+  $scope.isEdit = false;
+  if ($stateParams.id !== '') {
+    $scope.isEdit = true;
+    Team.prototype_findById_forms({
+      id: localStorage.$LoopBack$currentTeamId,
+      fk: $stateParams.id
+    }, function (res) {
+      console.log(res);
+      $scope.uploadData.title = res.title;
+      $scope.forms = res._formItems;
+    });
+  }
+
   $scope.forms = [];
   //$scope.formType = ['简答题', '陈述题', '选择题', '判断题'];
   $scope.formType = function (type) {
@@ -220,17 +233,29 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', fun
     $scope.uploadData._formItems = $scope.forms;
     if ($scope.forms.length === 0) {
       Materialize.toast('请至少添加一个表单项！', 1000);
-    } else if(!$scope.uploadData.title) {
+    } else if (!$scope.uploadData.title) {
       Materialize.toast('请填写表单名称！', 1000);
     } else {
-      Team.prototype_create_forms({
-        id: localStorage.$LoopBack$currentTeamId
-      }, $scope.uploadData, function () {
-        Materialize.toast('创建成功！请在表单模板里查看', 2000);
-        $location.path('/MS/form/list');
-      }, function () {
-        Materialize.toast('提交失败！', 2000);
-      });
+      if ($scope.isEdit) {
+        Team.prototype_updateById_forms({
+          id: localStorage.$LoopBack$currentTeamId,
+          fk: $stateParams.id
+        }, $scope.uploadData, function () {
+          Materialize.toast('修改成功！请在表单模板里查看', 2000);
+          $location.path('/MS/form/list');
+        }, function () {
+          Materialize.toast('修改失败！', 2000);
+        });
+      } else {
+        Team.prototype_create_forms({
+          id: localStorage.$LoopBack$currentTeamId
+        }, $scope.uploadData, function () {
+          Materialize.toast('创建成功！请在表单模板里查看', 2000);
+          $location.path('/MS/form/list');
+        }, function () {
+          Materialize.toast('创建失败！', 2000);
+        });
+      }
     }
 
   };

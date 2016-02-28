@@ -38,7 +38,7 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($s
 
 }]);
 
-app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$http', '$rootScope', 'Form', 'Activity', '$stateParams', function ($scope, Team, Ueditor, $location, $http, $rootScope, Form, Activity, $stateParams) {
+app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$http', '$rootScope', 'Activity', '$stateParams', function ($scope, Team, Ueditor, $location, $http, $rootScope, Activity, $stateParams) {
   $scope.isEdit = false;
   $scope.preType = {};
   if ($stateParams.id !== '') {
@@ -61,8 +61,34 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
         Activity.prototype_get_forms({
           id: $stateParams.id
         }, function (res) {
-          if(res[0]){
+          if (res[0]) {
             $scope.formData = res[0];
+            $scope.preType.id = res[0].id;
+          }
+        });
+      } else if (res.actType === 'vote') {
+        $scope.preType = {
+          type: 'vote'
+        };
+
+        Activity.prototype_get_votes({
+          id: $stateParams.id
+        }, function (res) {
+          if (res[0]) {
+            $scope.voteData = res[0];
+            $scope.preType.id = res[0].id;
+          }
+        });
+      } else if (res.actType === 'seckill') {
+        $scope.preType = {
+          type: 'seckill'
+        };
+
+        Activity.prototype_get_seckills({
+          id: $stateParams.id
+        }, function (res) {
+          if (res[0]) {
+            $scope.seckillData = res[0];
             $scope.preType.id = res[0].id;
           }
         });
@@ -70,6 +96,7 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
     });
 
   }
+
   $scope.activityData = {
     authorName: $rootScope.teamInfo.name,     //$scope.teamInfo在homeController里面获取
     authorId: $scope.teamInfo.id,
@@ -77,6 +104,7 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
     school: $scope.teamInfo.school,
     created: new Date()
   };
+
   //Input-date的配置
   var currentTime = new Date();
   $scope.minDate = (new Date(currentTime.getTime())).toISOString();
@@ -126,12 +154,34 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
         return !$scope.formItems[index].activityId
       };
     }, function () {
-      Materialize.toast('获取活动列表失败！', 6000);
+      Materialize.toast('获取表单模板列表失败！', 2000);
     });
+  };
 
-    $scope.isFormAuthor = function (index) {
-      return $scope.formItems[index].teamId === localStorage.$LoopBack$currentTeamId;
-    };
+  $scope.getVoteList = function () {
+    Team.prototype_get_votes({
+      id: localStorage.$LoopBack$currentTeamId
+    }, function (res) {
+      $scope.voteItems = res;
+      $scope.isActivity = function (index) {
+        return !$scope.voteItems[index].activityId
+      };
+    }, function () {
+      Materialize.toast('获取投票模板列表失败！', 2000);
+    });
+  };
+
+  $scope.getSeckillList = function () {
+    Team.prototype_get_seckills({
+      id: localStorage.$LoopBack$currentTeamId
+    }, function (res) {
+      $scope.seckillItems = res;
+      $scope.isActivity = function (index) {
+        return !$scope.seckillItems[index].activityId
+      };
+    }, function () {
+      Materialize.toast('获取抢票模板列表失败！', 2000);
+    });
   };
 
   $scope.addFormFunc = function () {
@@ -140,8 +190,28 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
     $('#addForm').closeModal();
   };
 
+  $scope.addVoteFunc = function () {
+    var thisElement = this;
+    $scope.voteData = thisElement.voteItem;
+    $('#addVote').closeModal();
+  };
+
+  $scope.addSeckillFunc = function () {
+    var thisElement = this;
+    $scope.seckillData = thisElement.seckillItem;
+    $('#addSeckill').closeModal();
+  };
+
   $scope.removeFormData = function () {
     $scope.formData = undefined;
+  };
+
+  $scope.removeVoteData = function () {
+    $scope.voteData = undefined;
+  };
+
+  $scope.removeSeckillData = function () {
+    $scope.seckillData = undefined;
   };
 
   $scope.createActivity = function () {
@@ -172,7 +242,6 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
 
           if ($scope.formData) {
             $scope.formData.updated = new Date();
-            $scope.formData.activityId = res.id;
             $scope.formData.id = undefined;
             $scope.formData.activityId = $stateParams.id;
 
@@ -189,6 +258,52 @@ app.controller('ActivityEditCtrl', ['$scope', 'Team', 'Ueditor', '$location', '$
           } else {
             if ($scope.preType.type === 'form') {
               Activity.prototype_delete_forms({
+                id: res.id
+              })
+            }
+          }
+
+          if ($scope.voteData) {
+            $scope.voteData.updated = new Date();
+            $scope.voteData.id = undefined;
+            $scope.voteData.activityId = $stateParams.id;
+
+            if ($scope.preType.type === 'vote') {
+              Activity.prototype_updateById_votes({
+                id: res.id,
+                fk: $scope.preType.id
+              }, $scope.voteData)
+            } else {
+              Activity.prototype_create_votes({
+                id: res.id
+              }, $scope.voteData)
+            }
+          } else {
+            if ($scope.preType.type === 'vote') {
+              Activity.prototype_delete_votes({
+                id: res.id
+              })
+            }
+          }
+
+          if ($scope.seckillData) {
+            $scope.seckillData.updated = new Date();
+            $scope.seckillData.id = undefined;
+            $scope.seckillData.activityId = $stateParams.id;
+
+            if ($scope.preType.type === 'seckill') {
+              Activity.prototype_updateById_seckills({
+                id: res.id,
+                fk: $scope.preType.id
+              }, $scope.seckillData)
+            } else {
+              Activity.prototype_create_seckills({
+                id: res.id
+              }, $scope.seckillData)
+            }
+          } else {
+            if ($scope.preType.type === 'seckill') {
+              Activity.prototype_delete_seckills({
                 id: res.id
               })
             }

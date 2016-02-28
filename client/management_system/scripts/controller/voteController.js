@@ -39,8 +39,24 @@ app.controller('VoteListCtrl', ['$scope', 'Team', '$rootScope', function ($scope
 
 }]);
 
-app.controller('VoteEditCtrl', ['$scope', '$location', 'Team', '$rootScope', function ($scope, $location, Team, $rootScope) {
+app.controller('VoteEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$stateParams', function ($scope, $location, Team, $rootScope, $stateParams) {
   $rootScope.logoHide = true;
+  $scope.isEdit = false;
+  if ($stateParams.id !== '') {
+    $scope.isEdit = true;
+    Team.prototype_findById_votes({
+      id: localStorage.$LoopBack$currentTeamId,
+      fk: $stateParams.id
+    }, function (res) {
+      console.log(res);
+      $scope.uploadData.title = res.title;
+      $scope.uploadData.max = res.max;
+      $scope.uploadData.limit = res.limit;
+      $scope.uploadData.cycle = res.cycle;
+      $scope.votes = res._voteItems;
+    });
+  }
+
   $scope.votes = [];
   $scope.addVote = function () {
     $scope.votes.push({
@@ -85,14 +101,26 @@ app.controller('VoteEditCtrl', ['$scope', '$location', 'Team', '$rootScope', fun
     }else if (!($scope.uploadData.max || $scope.uploadData.limit)) {
       Materialize.toast('请填写投票票数限制！', 1000);
     } else {
-      Team.prototype_create_votes({
-        id: localStorage.$LoopBack$currentTeamId
-      }, $scope.uploadData, function () {
-        Materialize.toast('创建成功！请在投票模板里查看', 2000);
-        $location.path('/MS/vote/list');
-      }, function () {
-        Materialize.toast('提交失败！', 2000);
-      });
+      if($scope.isEdit){
+        Team.prototype_updateById_votes({
+          id: localStorage.$LoopBack$currentTeamId,
+          fk: $stateParams.id
+        }, $scope.uploadData, function () {
+          Materialize.toast('修改成功！请在投票模板里查看', 2000);
+          $location.path('/MS/vote/list');
+        }, function () {
+          Materialize.toast('修改失败！', 2000);
+        });
+      } else {
+        Team.prototype_create_votes({
+          id: localStorage.$LoopBack$currentTeamId
+        }, $scope.uploadData, function () {
+          Materialize.toast('创建成功！请在投票模板里查看', 2000);
+          $location.path('/MS/vote/list');
+        }, function () {
+          Materialize.toast('创建失败！', 2000);
+        });
+      }
     }
 
   };

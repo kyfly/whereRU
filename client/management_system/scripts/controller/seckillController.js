@@ -39,8 +39,24 @@ app.controller('SeckillListCtrl', ['$scope', 'Team', '$rootScope', function ($sc
 
 }]);
 
-app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', function ($scope, $location, Team, $rootScope) {
+app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$stateParams', function ($scope, $location, Team, $rootScope, $stateParams) {
   $rootScope.logoHide = true;
+  $scope.isEdit = false;
+  if ($stateParams.id !== '') {
+    $scope.isEdit = true;
+    Team.prototype_findById_seckills({
+      id: localStorage.$LoopBack$currentTeamId,
+      fk: $stateParams.id
+    }, function (res) {
+      console.log(res);
+      $scope.uploadData.title = res.title;
+      $scope.uploadData.limit = res.limit;
+      $scope.uploadData.total = res.total;
+      $scope.uploadData.started = res.started;
+      $scope.seckills = res._seckillItems;
+    });
+  }
+
   //Input-date的配置
   var currentTime = new Date();
   $scope.minDate = (new Date(currentTime.getTime())).toISOString();
@@ -93,17 +109,29 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
       Materialize.toast('请至少添加一个抢票项！', 1000);
     } else if (!$scope.uploadData.title) {
       Materialize.toast('请填写抢票名称！', 1000);
-    }else if (!$scope.uploadData.limit) {
+    } else if (!$scope.uploadData.limit) {
       Materialize.toast('请填写每人可抢票数！', 1000);
     } else {
-      Team.prototype_create_seckills({
-        id: localStorage.$LoopBack$currentTeamId
-      }, $scope.uploadData, function () {
-        Materialize.toast('创建成功！请在抢票模板里查看', 2000);
-        $location.path('/MS/seckill/list');
-      }, function () {
-        Materialize.toast('提交失败！', 2000);
-      });
+      if($scope.isEdit){
+        Team.prototype_updateById_seckills({
+          id: localStorage.$LoopBack$currentTeamId,
+          fk:　$stateParams.id
+        }, $scope.uploadData, function () {
+          Materialize.toast('更新成功！请在抢票模板里查看', 2000);
+          $location.path('/MS/seckill/list');
+        }, function () {
+          Materialize.toast('更新失败！', 2000);
+        });
+      } else {
+        Team.prototype_create_seckills({
+          id: localStorage.$LoopBack$currentTeamId
+        }, $scope.uploadData, function () {
+          Materialize.toast('创建成功！请在抢票模板里查看', 2000);
+          $location.path('/MS/seckill/list');
+        }, function () {
+          Materialize.toast('创建失败！', 2000);
+        });
+      }
     }
 
   };
