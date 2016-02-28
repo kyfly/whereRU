@@ -30,18 +30,6 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 .controller('HeaderController',
 	['$scope', '$rootScope', "User", "$location", "$window",
 	function ($scope, $rootScope, User, $location, $window){
-	$scope.$on('$stateChangeStart', function(evt, next, current) {
-		if (!next.name.match(/home|^art\.|^coteries$|coteries.articles/)) {
-			$scope.topBar = true;
-		} else {
-			$scope.topBar = false;
-		}
-		if (next.name === 'index') {
-			$scope.goBackIcon = false;
-		} else {
-			$scope.goBackIcon = true;
-		}
-	});
 	try {
 		var token = JSON.parse(localStorage.$LoopBack$currentUserToken);
 		token.user.id = token.userId;
@@ -69,23 +57,45 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		Materialize.toast('退出成功', 2000);
 		$location.path("/w/activities");
 	}
-	$scope.goback = function () {
-		$window.history.back();
-	}
+	
 }])
 .controller('HomeController', ['$scope', function($scope){
 	
 }])
-.controller('BottomBarController', ['$scope', '$location', '$rootScope',function($scope, $location, $rootScope){
-	
-	$scope.$on('$stateChangeStart', function(evt, next, current) {
-		if (next.name.match(/home|^art\.|^coteries$|coteries.articles/)) {
-			$scope.bottomBar = true;
-		} else {
-			$scope.bottomBar = false;
+.controller('BottomBarController', ['$scope', '$location', '$rootScope', '$window',
+	function($scope, $location, $rootScope, $window){
+	function IsPC()
+	{
+		var userAgentInfo = navigator.userAgent;
+		var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+		var flag = true;
+		for (var v = 0; v < Agents.length; v++) {
+			if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
 		}
-		if (next.name === 'index') {
+		return flag;
+	}
+	$scope.$on('$stateChangeStart', function(evt, next, current) {
+		// if (next.name.match(/home|^art\.|^coteries$|coteries.articles/)) {
+		// 	$scope.bottomBar = true;
+		// } else {
+		// 	$scope.bottomBar = false;
+		// }
+		//if (next.name === 'index') {
 			$scope.bottomBar = true;
+		//}
+		if (!IsPC() && next.name === 'index') {
+			$location.path('/w/activities');
+		}
+		$scope.menus.forEach(function(menu){
+			menu.active = false;
+		});
+
+		if($location.path().match(/^\/w\/coteries/)) {
+			$scope.menus[0].active = true;
+		} else if ($location.path().match(/^\/u\//)) {
+			$scope.menus[2].active = true;
+		} else {
+			$scope.menus[1].active = true;
 		}
 	});
 	$rootScope.$on('hiddenBottomBar', function () {
@@ -94,6 +104,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	$rootScope.$on('showBottomBar', function () {
 		$scope.bottomBar = true;
 	});
+
 	$scope.menus = [{
 		name: '圈子',
 		path: '/w/coteries',
@@ -120,5 +131,8 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		});
 		this.menu.active = true;
 		$location.path(this.menu.path)
+	}
+	$scope.goback = function () {
+		$window.history.back();
 	}
 }]);

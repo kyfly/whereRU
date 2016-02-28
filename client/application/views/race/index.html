@@ -5,6 +5,9 @@
   </div>
 </nav> -->
 <div class="row menu">
+  <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
+    <option ng-repeat="filter in raceFilter">{{filter}}</option>
+  </select>
   <div class="col s4 m3 l2 item ">
     <a href="/w/activities">校园活动</a>
   </div>
@@ -15,6 +18,7 @@
     <a href="/w/teams">校园团队</a>
   </div>
 </div>
+
 
 <!--校园竞赛列表-->
 <div class="row container">

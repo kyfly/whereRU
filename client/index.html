@@ -83,10 +83,17 @@
   <div ng-show="bottomBar" class="hide-on-large-only" ng-controller="BottomBarController">
     <div style="height:48px" ></div>
     <div class="row s12 bottom-bar z-depth-1">
+      
       <ul class="tabs">
-        <li class="tab col s4 waves-effect waves-light" ng-repeat="menu in menus">
+        <li class="tab col s3 waves-effect">
+          <span ng-click="goback()">
+            <i class="mdi-image-navigate-before"></i>返回
+          </span>
+        </li>
+        <li class="tab col s3 waves-effect" ng-repeat="menu in menus">
           <a href="{{menu.path}}" ng-click="changePage()" ng-class="{true: 'active'}[menu.active]" ng-bind="menu.name"></a>
         </li>
+        
       </ul>
     </div>
   </div>

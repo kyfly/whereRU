@@ -3,11 +3,9 @@ app.controller('LoginController',
   function (User, $scope, $location, LoopBackAuth, $window, $rootScope) {
   $scope.user = {};
   $scope.focus = function () {
-    $rootScope.bottomBar = false;
     $scope.$emit('hiddenBottomBar');
   }
   $scope.blur = function () {
-    $rootScope.bottomBar = true;
     $scope.$emit('showBottomBar');
   }
   $scope.login = function () {

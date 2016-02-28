@@ -951,8 +951,8 @@ module.factory(
         'responseError': function(rejection) {
           switch(rejection.status) {
             case 401:
-            console.log(rejection);
-              $rootScope.$broadcast('auth:loginRequired');
+              if (rejection.config.url !== "/api/WUsers/login")
+                $rootScope.$broadcast('auth:loginRequired');
               break;
             // case 403:
             //   $rootScope.$broadcast('auth:forbidden');

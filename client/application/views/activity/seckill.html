@@ -1,5 +1,41 @@
-<div>
-	<h5 class="center">开始倒计时：<span class="seckill-time" ng-bind="seckillState"></span></h5>
+<div class="row">
+	<h5 ng-if="countDown > 0" class="center">开始倒计时：
+		<span class="red-text" ng-bind="seckillTime.d"></span>天
+		<span class="red-text" ng-bind="seckillTime.h"></span>时
+		<span class="red-text" ng-bind="seckillTime.m"></span>分
+		<span class="red-text" ng-bind="seckillTime.s"></span>秒
+	</h5>
+	<h5 ng-if="countDown <= 0" class="center">
+		<span class="seckill-time red-text">正在进行中...</span>
+	</h5>
 	<hr>
+	<div input-field ng-show="form.verifyRule">
+    <input id="name" type="text" ng-model="verifyId">
+    <label for="name">请输入验证信息({{form.verifyRule}})</label>
+	</div>
+
+	<div>
+		<ul>
+			<li class="col s12 m6 l4" ng-repeat="seckillItem in seckill._seckillItems">
+				<div class="card">
+					<div class="card-content">
+						<h5 class="card-title" ng-bind="seckillItem.name"></h5>
+						<h6>票数：<span ng-bind="seckillItem.count"></span></h6>
+						<h6>余量：<span ng-bind="seckillItem.margin"></span></h6>
+					</div>
+					<div class="card-action center">
+						<h4 >
+							<a ng-if="countDown <= 0" 
+							class="btn-floating btn-large waves-effect waves-light red white-text" 
+							ng-click="submitSeckillResult()" href="">抢</a>
+							<a class="btn-floating btn-large waves-effect red lighten-4 white-text"
+							ng-if="countDown > 0" href="">抢</a>
+						</h4>
+					</div>
+				</div>
+			</li>
+			
+		</ul>
+	</div>
 	
 </div>

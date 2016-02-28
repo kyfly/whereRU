@@ -19,7 +19,7 @@ module.exports = function(Seckill) {
           var total = seckill.total;
           var result = total - count;
           cb(null,result);
-  });
+      });
       } else {
         var result = [];
         seckill.seckillItems(function (err, items) {
@@ -36,5 +36,12 @@ module.exports = function(Seckill) {
       }
     });
   };
+  // Seckill.observe('before save', function (ctx, next) {
+  //   ctx.instance.margin = ctx.instance.total; //票余量初始化
+  //   ctx.instance._seckillItems.forEach(function(item){
+  //     item.margin = item.count; //票项余量初始化
+  //   });
+  //   next();
+  // });
 	Seckill.beforeRemote('prototype.__get__seckillResults', function(){});
 };

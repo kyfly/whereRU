@@ -10,7 +10,7 @@
   </div>
 </nav> -->
 <div class="container row z-depth-1 user-header">
-	<div class="col s12 m6 center user-info">
+	<div class="col s12 center user-info">
 		<img ng-src="{{user.headImgUrl || 'http://oss.etuan.org/whereru/headImgUrl/%E9%BB%98%E8%AE%A4%E5%A4%B4%E5%83%8F.jpg'}}">
 		<h4 ng-show="user">
 			<span ng-bind="user.name"></span>
@@ -22,7 +22,7 @@
 			<a href="/w/register">注册</a>
 		</h4>
 	</div>
-	<div class="col s12 m6 center user-data">
+	<!-- <div class="col s12 m6 center user-data">
 		<ul class="row">
 			<li class="col s4">
 				<a href="">余额</a>
@@ -34,7 +34,7 @@
 				<a href="">积分</a>
 			</li>
 		</ul>
-	</div>
+	</div> -->
 </div>
 <div class="container row z-depth-1 user-activity">
 	<ul class="row menus">

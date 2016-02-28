@@ -13,6 +13,13 @@
     width: 100%;
   }
 }
+@media only screen and (max-width: 600px) {
+  #toast-container {
+    min-width: 100%;
+    bottom: 48px;
+  }
+}
+
 #login-modal{
   position: absolute;
   top: 0 !important
@@ -67,10 +74,6 @@
 nav .nav-wrapper i {
   top: 0;
   line-height: 4.2rem;
-}
-.dropdown-content {
-  top: 4.2rem !important;
-  width: 20% !important;
 }
 .tabs {
   display: -moz-box;  /* Firefox */ 
@@ -143,6 +146,18 @@ nav .nav-wrapper i {
   z-index: 1;
   left: 0;
   right: 0;
+}
+.tabs .tab a {
+  color: #263238
+}
+.tabs .tab a:hover{
+  color: #263238
+}
+.bottom-bar .tabs .indicator{
+  display: none
+}
+.bottom-bar .active{
+  color: #ee6e73 !important;
 }
 .bottom-bar a{
   font-size: 1.3rem;
@@ -284,6 +299,9 @@ nav .nav-wrapper i {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
+}
+.detail-menu{
+  width: 99%;
 }
 @media only screen and (min-width : 903px) {
   .create-team {

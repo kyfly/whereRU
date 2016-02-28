@@ -241,6 +241,7 @@ module.exports = function(User) {
       include: {
         relation: 'team',
         scope: {
+          where: {deleted: false},
           fields: ['id', 'name', 'logoUrl', "userId"]
         }
       }
@@ -250,11 +251,13 @@ module.exports = function(User) {
       teamsIns.forEach(function (tepMember) {
         var team = tepMember.toJSON().team;
         var member = tepMember.toJSON();
-        tepMember = {};
-        tepMember.team = team;
-        tepMember.owner = id == team.userId;
-        tepMember.role = member.department;
-        teams.push(tepMember);
+        if (team) {
+          tepMember = {};
+          tepMember.team = team;
+          tepMember.owner = id == team.userId;
+          tepMember.role = member.department;
+          teams.push(tepMember);
+        }
       });
       cb(null, teams);
     });
@@ -657,108 +660,28 @@ module.exports = function(User) {
    */
   User.beforeRemote('prototype.__create__seckillResults', function (ctx, ins, next) {
     var Seckill = User.app.models.Seckill;
-    /*promise(User.app.models.SeckillResult, 'count', {
-      query: {
+    User.app.models.SeckillResult.count({
         userId: ctx.req.params.id,
         seckillId: ctx.req.body.seckillId,
         get: true
-      }
-    })
-      .then(function (count) {
-        if (count > 0) {
-          return ctx.res.send({
-            "error": {
-              "status": 1000,
-              "message": "您已经抢到了。"
-            }
-          });//抢过票了
-        } else {
-          return promise(Seckill, 'findById', {id: ctx.req.body.seckillId})
-        }
-      })
-      .then(function (seckill) {
-
-      })
-
-    return;
-    */
-    User.app.models.SeckillResult.count({
-      userId: ctx.req.params.id,
-      seckillId: ctx.req.body.seckillId,
-      get: true
     }, function (err, count) {
-      if (err) return next(err);
       if (count > 0) {
         ctx.res.send({
-          "error": {
-            "status": 1000,
-            "message": "您已经抢到了。"
-          }
-        });//抢过票了
-      } else {
-        Seckill.findById(ctx.req.body.seckillId, function (err, seckill) {
-          if (!seckill.toJSON()._seckillItems.length > 0) {
-            //无抢票项
-            Seckill.margin(ctx.req.body.seckillId, function (err, result) {
-              if(result>0){//有余票，就算抢到了
-                ctx.instance.seckillResults.create({
-                  created:new Date(),
-                  get:true,
-                  verifyId:ctx.req.body.verifyId
-                },function(err,ins){
-                  if(err) return next(err);
-                  ctx.res.send(ins);
-                });
-              }else{
-                ctx.instance.seckillResults.create({
-                  created:new Date(),
-                  get:false,
-                  verifyId:ctx.req.body.verifyId
-                },function(err,ins){
-                  if(err) return next(err);
-                  ctx.res.send({
-                    "error": {
-                      "status": 1001,
-                      "message": "已被抢完。"
-                    }
-                  });//抢过票了
-                });
-              }
-            });
-          } else {
-            seckill.seckillItems.findById(ctx.req.body.itemId, function (err, item) {
-              if (item.toJSON().margin > 0) {
-                //有余票额
-                item.margin = item.toJSON().margin - 1;
-                ctx.instance.seckillResults.create({
-                  created:new Date(),
-                  get:true,
-                  verifyId:ctx.req.body.verifyId,
-                  itemId:ctx.req.body.itemId
-                },function(err,ins){
-                  if(err) return next(err);
-                  ctx.res.send(ins);
-                });
-              } else {
-                ctx.instance.seckillResults.create({
-                  created:new Date(),
-                  get:false,
-                  verifyId:ctx.req.body.verifyId,
-                  itemId:ctx.req.body.itemId
-                },function(err,ins){
-                  if(err) return next(err);
-                  ctx.res.send({
-                    "error": {
-                      "status": 1001,
-                      "message": "已被抢完。"
-                    }
-                  });
-                });
-              }
-            });
-          }
+          "status": 1000,
+          "message": "您已经抢过了"
         });
+      } else {
+        next();
       }
-    });
+    })
   });
+  User.afterRemote('prototype.__create__seckillResults', function (ctx, ins, next) {
+    if (!ins.get)
+      ctx.res.send({
+        status: 1100,
+        message: "对不起,被抢光了"
+      });
+    else
+      next();
+  })
 };
