@@ -336,13 +336,37 @@ module.factory(
           url: urlBase + '/Teams/:id/forms',
           method: 'POST'
         },
+        "prototype_findById_forms": {
+          url: urlBase + '/Teams/:id/forms/:fk',
+          method: 'GET'
+        },
+        "prototype_updateById_forms": {
+          url: urlBase + '/Teams/:id/forms/:fk',
+          method: 'PUT'
+        },
         "prototype_create_votes": {
           url: urlBase + '/Teams/:id/votes',
           method: 'POST'
         },
+        "prototype_findById_votes": {
+          url: urlBase + '/Teams/:id/votes/:fk',
+          method: 'GET'
+        },
+        "prototype_updateById_votes": {
+          url: urlBase + '/Teams/:id/votes/:fk',
+          method: 'PUT'
+        },
         "prototype_create_seckills": {
           url: urlBase + '/Teams/:id/seckills',
           method: 'POST'
+        },
+        "prototype_findById_seckills": {
+          url: urlBase + '/Teams/:id/seckills/:fk',
+          method: 'GET'
+        },
+        "prototype_updateById_seckills": {
+          url: urlBase + '/Teams/:id/seckills/:fk',
+          method: 'PUT'
         },
         "prototype_get_seckills": {
           url: urlBase + '/Teams/:id/seckills',
@@ -596,6 +620,20 @@ module.factory(
         isArray: true
       },
       /**
+       * 修改活动的投票
+       */
+      "prototype_updateById_votes": {
+        url: urlBase + '/Activities/:id/votes/:fk',
+        method: 'PUT'
+      },
+      /**
+       * 修改活动的抢票
+       */
+      "prototype_updateById_seckills": {
+        url: urlBase + '/Activities/:id/seckills/:fk',
+        method: 'PUT'
+      },
+      /**
        * 获取活动的抢票
        */
       "prototype_get_seckills": {
@@ -611,6 +649,20 @@ module.factory(
         method: 'POST'
       },
       /**
+       * 活动添加表单
+       */
+      "prototype_create_votes":{
+        url: urlBase + '/Activities/:id/votes',
+        method: 'POST'
+      },
+      /**
+       * 活动添加表单
+       */
+      "prototype_create_seckills":{
+        url: urlBase + '/Activities/:id/seckills',
+        method: 'POST'
+      },
+      /**
        * 修改活动的表单
        */
       "prototype_updateById_forms":{
@@ -622,6 +674,20 @@ module.factory(
        */
       "prototype_delete_forms": {
         url: urlBase + '/Activities/:id/forms',
+        method: 'DELETE'
+      },
+      /**
+       * 删除活动的投票
+       */
+      "prototype_delete_votes": {
+        url: urlBase + '/Activities/:id/votes',
+        method: 'DELETE'
+      },
+      /**
+       * 删除活动的表单
+       */
+      "prototype_delete_seckills": {
+        url: urlBase + '/Activities/:id/seckills',
         method: 'DELETE'
       },
       /**

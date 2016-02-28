@@ -142,7 +142,7 @@
           <div class="modal-content">
             <h4>请选择表单模板</h4>
             <div class="collection" ng-show="formItems.length">
-              <a ng-click="addFormFunc()" ng-show="isFormAuthor($index) && isActivity($index)"
+              <a ng-click="addFormFunc()" ng-show="isActivity($index)"
                  ng-repeat="formItem in formItems" href="" class="collection-item" ng-bind="formItem.title"></a>
             </div>
           </div>
@@ -152,16 +152,56 @@
         </div>
 
         <div class="col s12 text-center">
-          <button ng-disabled="formData || seckillData" class="waves-effect waves-light btn">添加投票<i
+          <button ng-disabled="formData || seckillData" ng-click="getVoteList()" modal href="#addVote" class="waves-effect waves-light btn">添加投票<i
             class="mdi-content-add right"></i>
           </button>
+          <p ng-show="voteData" class="orange-text text-darken-2">
+            <a ng-click="removeVoteData()" tooltipped data-position="top" data-delay="0" data-tooltip="删除投票"
+               class="btn-floating waves-effect waves-light red">
+              <i class="mdi-content-remove"></i>
+            </a>
+            &nbsp;&nbsp;已选择投票：
+            <span ng-bind="voteData.title"></span>
+          </p>
           <p class="explainText">添加投票可用于日常投票,<br>用户在阅读活动文案后可直接参与</p>
+        </div>
+        <div id="addVote" class="modal">
+          <div class="modal-content">
+            <h4>请选择投票模板</h4>
+            <div class="collection" ng-show="voteItems.length">
+              <a ng-click="addVoteFunc()" ng-show="isActivity($index)"
+                 ng-repeat="voteItem in voteItems" href="" class="collection-item" ng-bind="voteItem.title"></a>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+          </div>
         </div>
 
         <div class="col s12 text-center">
-          <button ng-disabled="formData || voteData" class="waves-effect waves-light btn">添加抢票<i
+          <button ng-disabled="formData || voteData" ng-click="getSeckillList()" modal href="#addSeckill" class="waves-effect waves-light btn">添加抢票<i
             class="mdi-content-add right"></i></button>
+          <p ng-show="seckillData" class="orange-text text-darken-2">
+            <a ng-click="removeSeckillData()" tooltipped data-position="top" data-delay="0" data-tooltip="删除抢票"
+               class="btn-floating waves-effect waves-light red">
+              <i class="mdi-content-remove"></i>
+            </a>
+            &nbsp;&nbsp;已选择抢票：
+            <span ng-bind="seckillData.title"></span>
+          </p>
           <p class="explainText">添加抢票可用于抢入场券、礼品等,<br>用户阅读活动文案后可直接参与</p>
+        </div>
+        <div id="addSeckill" class="modal">
+          <div class="modal-content">
+            <h4>请选择抢票模板</h4>
+            <div class="collection" ng-show="seckillItems.length">
+              <a ng-click="addSeckillFunc()" ng-show="isActivity($index)"
+                 ng-repeat="seckillItem in seckillItems" href="" class="collection-item" ng-bind="seckillItem.title"></a>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+          </div>
         </div>
 
         <div class="col s12 text-center">

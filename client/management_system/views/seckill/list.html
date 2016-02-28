@@ -41,7 +41,7 @@
           </div>
           <div class="card-action btn-area" ng-show="showType === 0">
             <div class="viewEvent-btn waves-effect text-center">
-              <a class="green-text text-darken-2" href><i class="mdi-image-edit"></i>
+              <a class="green-text text-darken-2" href ui-sref="seckillEdit({id: seckillItem.id})"><i class="mdi-image-edit"></i>
                 编辑</a>
             </div>
             <div class="editEvent-btn waves-effect text-center">
@@ -59,7 +59,7 @@
           </div>
           <div class="card-action btn-area" ng-show="showType === 1">
             <div class="edit-btn waves-effect text-center">
-              <a class="green-text text-darken-2" href ng-click="edit(seckillItem.id)"><i class="mdi-image-edit"></i>
+              <a class="green-text text-darken-2" href ui-sref="seckillEdit({id: seckillItem.id})"><i class="mdi-image-edit"></i>
                 编辑</a>
             </div>
             <div class="result-btn waves-effect text-center">
