@@ -2,12 +2,7 @@ app.controller('LoginController',
   ['User', '$scope', '$location', 'LoopBackAuth', '$window', '$rootScope',
   function (User, $scope, $location, LoopBackAuth, $window, $rootScope) {
   $scope.user = {};
-  $scope.focus = function () {
-    $scope.$emit('hiddenBottomBar');
-  }
-  $scope.blur = function () {
-    $scope.$emit('showBottomBar');
-  }
+  
   $scope.login = function () {
     User.login($scope.user, function (data) {
       data.user.id = data.userId;
@@ -80,13 +75,18 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location',fu
     }, function (res) {
       $scope.likeArticles = res.articles;
     });
-  }
+  };
   var pullArticles = function () {
     User.prototype_get_articles({
       id: $scope.$currentUser.id
     }, function (articles) {
       $scope.articles = articles;
     })
+  };
+  $scope.goLogin = function (){
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
   }
   $scope.activeMenus = [{
     "name": "我的团队",

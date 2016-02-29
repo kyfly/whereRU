@@ -19,16 +19,9 @@
   <header ng-controller="HeaderController">
     <nav class="header row  hide-on-med-and-down">
       <div class="nav-wrapper">
-        <a href="/" class="left brand-logo col m3 offset-s0 offset-m0 offset-l1">whereRU</a>
-        <ul class="col m10 l7 right">
-          <li>
-            <div class="input-field">
-              <input id="search" type="search" required>
-              <label for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-            </div>
-          </li>
-          <li><a href="/w/activities">服务</a></li>
+        <a href="/" class="left brand-logo col l3 offset-l1">whereRU</a>
+        <ul class="col l4 offset-l4 right">
+          <li ><a href="/w/activities">服务</a></li>
           <li><a href="/w/coteries">圈子</a></li>
           <li ng-show="username">
             <a ng-mouseover="pullTeams()">团队</a>
@@ -44,7 +37,7 @@
             </div>
           </li>
           <li ng-show="!username">
-            <a href='#login-modal' modal>登录</a>
+            <a ng-click="goLogin()">登录</a>
           </li>
           <li ng-show="username">
             <a ng-bind="username"></a>
@@ -76,7 +69,7 @@
     <!-- <div ng-if="topBar" style="height:4.2rem"></div> -->
   </header>
   
-  <div id="login-modal" class="modal" ng-include="'application/views/user/login.html'"></div>
+  <div ng-show="loginShow" id="login" ng-include="'application/views/user/login.html'"></div>
   <div id="doc">
     <div ui-view></div>
   </div>

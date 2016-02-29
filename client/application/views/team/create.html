@@ -1,16 +1,16 @@
 <div class="row container create-team">
 	<h5>创建团队须知</h5>
 	<hr>
-	<div class="col m6">
+	<div class="col s12 m6 orange-text">
 		<p>所有选项为必填项</p>
 		<p>选择允许加入则其他用户可向团队提交申请加入</p>
 		<p>选择隐藏团队则用户不可以搜索到该团队</p>
 	</div>
-	<div class="col m6">
+	<div class="col s12 m6">
 		<form name="createTeamForm">
 
 			<div input-field>
-			    <input id="name" type="text" ng-model="team.name" length="11" required>
+			    <input id="name" type="text" ng-model="team.name" length="11" ng-focus="focus()" ng-blur="blur()" required>
 			    <label for="name">请输入团队名称</label>
 			</div>
 
@@ -18,7 +18,7 @@
 				<span>是否允许加入</span>
 		    <label>
 		      否
-		      <input checked type="checkbox" ng-model="team.status" ng-init="false" required>
+		      <input checked type="checkbox" ng-model="team.status" ng-init="false" ng-focus="focus()" ng-blur="blur()" required>
 		      <span class="lever"></span>
 		      是
 		    </label>
@@ -28,14 +28,14 @@
 		  	<span>是否隐藏团队</span>
 		    <label>
 		      否
-		      <input type="checkbox" ng-model="team.hidden" ng-init="false" required>
+		      <input type="checkbox" ng-model="team.hidden" ng-init="false" ng-focus="focus()" ng-blur="blur()" required>
 		      <span class="lever"></span>
 		      是
 		    </label>
 		  </div>
 
 		  <div input-field>
-		    <textarea ng-model="team.desc" class="materialize-textarea" ></textarea>
+		    <textarea ng-model="team.desc" class="materialize-textarea" ng-focus="focus()" ng-blur="blur()"></textarea>
 		    <label>请输入团队简介</label>
 			</div>
 
@@ -55,9 +55,9 @@
 		  </div>
 
 			<div  class="row center">
-				<button type="sumbit" class="waves-effect waves-light btn"
+				<button type="sumbit" class="waves-effect btn-flat"
 					ng-click="createTeam()">提交
-					<i class="material-icons right">send</i>
+					<i class="mdi-content-send right"></i></a>
 				</button>
 			</div>
 		</form>

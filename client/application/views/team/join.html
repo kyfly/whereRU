@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="TeamController">
 	<div input-field class="col s12 m4 l4">
 	    <input id="name" type="text" ng-model="user.name" disabled>
 	    <label for="name">姓名</label>
@@ -10,7 +10,7 @@
 	</div>
 
 	<div input-field>
-	  <textarea ng-model="userInfomation.remark" class="materialize-textarea" length="200"></textarea>
+	  <textarea ng-model="userInfomation.remark" class="materialize-textarea" length="200" ng-focus="focus()" ng-blur="blur()"></textarea>
 	  <label>请输入个人简介</label>
 	</div>
 	<select ng-model="userInfomation.department" material-select watch>
@@ -19,8 +19,8 @@
 	</select>
 	<div  class="row center">
 		<button type="sumbit" class="waves-effect btn-flat"
-			ng-click="joinTeam()">提交
-			<i class="material-icons right">send</i>
+			ng-click="join()">提交
+			<i class="mdi-content-send right"></i></a>
 		</button>
 	</div>
 </div>

@@ -1,16 +1,16 @@
 <form class="reg container" id="regForm" name="regForm">
 		<div input-field class="col offset-m2 offset-l2 s12 m4 l4">
-		    <input id="phone" type="text" ng-model="user.phone" length="11" required>
+		    <input id="phone" type="text" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="phone">请输入手机号</label>
 		</div>
 
 		<div input-field class="col s12 m4 l4">
-		    <input id="name" type="text" ng-model="user.name" required>
+		    <input id="name" type="text" ng-model="user.name" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="name">请输入姓名</label>
 		</div>
 	
 		<div input-field class="col s12 m4 l4">
-		    <input id="password" type="text" ng-model="user.password" length="16" required>
+		    <input id="password" type="text" ng-model="user.password" length="16" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="password">请输入密码</label>
 		</div>
 

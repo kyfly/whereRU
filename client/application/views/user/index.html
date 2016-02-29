@@ -17,7 +17,7 @@
 			<a href="" ng-click="logout()">退出</a>
 		</h4>
 		<h4 ng-show="!user">
-			<a  href='#login-modal' modal>登录</a>
+			<a  href='' ng-click="goLogin()">登录</a>
 			<span> | </span>
 			<a href="/w/register">注册</a>
 		</h4>
@@ -46,7 +46,7 @@
 	<hr>
 	<div class="content">
 		<div ng-if="!user">
-			<h4>你还没有<span><a  href='#login-modal' modal>登录</a><span>噢</h4>
+			<h4>你还没有<span><a  href='' ng-click="goLogin()">登录</a><span>噢</h4>
 		</div>
 		<div ng-if="user">
 			<ng-include src="'/application/views/user/' + selectedMenu + '.html'"></ng-include>

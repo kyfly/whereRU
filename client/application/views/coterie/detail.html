@@ -2,11 +2,11 @@
 	<img ng-src="{{coterie.logoUrl}}">
   <h4><span ng-bind="coterie.name"></span></h4>
   <a ng-show="!coterie.isAttentioned" href="" class="btn waves-effect waves-light" ng-click="attention()">
-  	<i class="material-icons">add</i>
+  	<i class="mdi-content-add"></i>
   	<span>关注</span>
   </a>
   <a href="/w/articles/{{coterie.id}}/edit" ng-show="coterie.isAttentioned" class="btn waves-effect waves-light">
-  	<i class="material-icons">mode_edit</i>
+  	<i class="mdi-editor-mode-edit"></i>
   	<span>写文章</span>
   </a>
 </div>

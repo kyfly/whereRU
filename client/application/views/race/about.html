@@ -4,39 +4,36 @@
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/title.png" alt="" class="circle">
       <span class="title">竞赛标题</span>
-      <p ng-bind="race.name"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <p class="blue-text text-darken-2"><br><span ng-bind="race.name"></span></p>
     </li>
 
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/sponsor.png" alt="" class="circle">
       <span class="title">竞赛主办方</span>
-      <p ng-bind="race.authorName"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <p class="blue-text text-darken-2"><br><span ng-bind="race.authorName"></span></p>
     </li>
     
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/start-time.png" alt="" class="circle">
       <span class="title">报名开始时间</span>
-      <p ng-bind="race.started | date : 'yyyy-MM-dd HH:mm:ss'"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <p class="blue-text text-darken-2"><br><span ng-bind="race.started | date : 'yyyy-MM-dd HH:mm:ss'"></span></p>
     </li>
 
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/end-time.png" alt="" class="circle">
       <span class="title">报名结束时间</span>
-      <p ng-bind="race.ended | date : 'yyyy-MM-dd HH:mm:ss'"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <p class="blue-text text-darken-2"><br><span ng-bind="race.ended | date : 'yyyy-MM-dd HH:mm:ss'"></span></p>
     </li>
 
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/school.png" alt="" class="circle">
       <span class="title">学校</span>
-      <p ng-bind="race.school"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <p class="blue-text text-darken-2"><br><span ng-bind="race.school"></span></p>
     </li>
-    <li class="collection-item">
-      <ng-include src="race.explainUrl"></ng-include>
+    <li class="collection-item avatar">
+      <img src="/lib/img/avatar/team-desc.png" alt="" class="circle">
+      <span class="title">竞赛简介</span>
     </li>
+    <ng-include src="race.explainUrl"></ng-include>
   </ul>
 </div>

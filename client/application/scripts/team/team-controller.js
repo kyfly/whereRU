@@ -81,9 +81,11 @@ app.controller('TeamController', ['$scope', 'Team', '$stateParams', 'User', func
   if (!$scope.teamId) {
     $scope.teamId = $stateParams.id;
   }
-  User.getInfo(function (user) {
-    $scope.user = user;
-  });
+  if ($scope.$currentUser) {
+    User.getInfo(function (user) {
+      $scope.user = user;
+    });
+  }
   Team.findById({
       id: $scope.teamId
     }, function (res) {
@@ -102,7 +104,7 @@ app.controller('TeamController', ['$scope', 'Team', '$stateParams', 'User', func
     $scope.activities = activities;
   });
   
-  $scope.joinTeam = function () {
+  $scope.join = function () {
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');
     }

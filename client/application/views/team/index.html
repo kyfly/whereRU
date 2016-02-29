@@ -18,34 +18,37 @@
 </nav> -->
 <div class="row menu">
   <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
+    <option value="" disabled selected>全部</option>
     <option ng-repeat="type in types">{{type.name}}</option>
   </select>
-  <div class="col s4 m3 l2 item ">
+  <div class="col s4 m4 l2 item waves-effect">
     <a href="/w/activities">校园活动</a>
   </div>
-  <div class="col s4 m3 l2 item">
+  <div class="col s4 m4 l2 item waves-effect">
     <a href="/w/races">校园竞赛</a>
   </div>
-  <div class="col s4 m3 l2 item active">
+  <div class="col s4 m4 l2 item active waves-effect">
     <a class="active" href="/w/teams">校园团队</a>
   </div>
 </div>
 
 <!--校园团队列表-->
 <div class="row container" >
-  <div class="col s12 m4 l3 team-card" ng-repeat="team in teams | filter: choice">
-    <div class="card">
-      <div class="card-title">
-        <a href="/w/teams/{{team.id}}"><img ng-src="{{team.logoUrl}}">
-        <h4>{{team.name}}</h4></a>
+  <ul>
+    <li class="col s12 m6 l3 team-card" ng-repeat="team in teams | filter: choice">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-title">
+            <a href="/w/teams/{{team.id}}"><img ng-src="{{team.logoUrl}}">
+            <h4>{{team.name}}</h4></a>
+          </div>
+          <p ng-bind="team.desc"></p>
+        </div>
+        <div class="card-action">
+          <a href="/w/teams/{{team.id}}" ng-bind="team.status ? '正在找人': '不可加入'"></a>
+        </div>
       </div>
-      <div class="card-content">
-        <p ng-bind="team.desc"></p>
-      </div>
-      <div class="card-action">
-        <a href="" ng-bind="team.status ? '正在找人': '不可加入'"></a>
-      </div>
-    </div>
-  </div>
+    </li>
+  </ul>
 </div>
 

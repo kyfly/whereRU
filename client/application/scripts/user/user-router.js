@@ -6,7 +6,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       templateUrl: 'application/views/confirm-school.html'
     })
     .state('register', {
-      url: '/w/register',
+      url: '/u/register',
       controller: 'RegisterController',
       templateUrl: 'application/views/user/register.html'
     })

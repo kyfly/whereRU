@@ -22,40 +22,54 @@
   <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
     <option ng-repeat="filter in activityFilter">{{filter}}</option>
   </select>
-  <div class="col s4 m3 l2 item active">
+  <div class="col s4 m4 l2 item active waves-effect">
     <a class="active" sref="/w/activities">校园活动</a>
   </div>
-  <div class="col s4 m3 l2 item"><a href="/w/races">校园竞赛</a></div>
-  <div class="col s4 m3 l2 item"><a href="/w/teams">校园团队</a></div>
-</div>
-<div class="row container">
-  <div class="col s12 m6 l3 list" ng-repeat="activityItem in activityItems | filter: filterFun">
-    <div class="card">
-      <div class="card-title">
-        <a ng-href="/w/activities/{{activityItem.id}}">
-          <h4 >
-            <span ng-bind="activityItem.status"></span>
-            <span ng-bind="activityItem.title"></span>
-          </h4>
-        </a>
-      </div>
-      <div class="card-content">
-        <h6>
-          <a ng-href="/w/teams/{{activityItem.teamId}}">
-            <b ng-bind="activityItem.authorName"></b>
-          </a>
-          <time ng-bind="activityItem.created | date : 'yyyy-MM-dd'"></time>
-        </h6>
-      </div>
-      <div class="card-image">
-        <a ng-href="/w/activities/{{activityItem.id}}">
-          <img ng-src="{{activityItem.imgUrl}}" style="width:100%" alt="{{activityItem.title}}">
-        </a>
-      </div>
-      <div class="card-action tag">
-        <h6><span>标签：</span><span ng-bind="activityItem.keyword"></span></h6>
-      </div>
-    </div>
+  <div class="col s4 m4 l2 item waves-effect">
+    <a href="/w/races">校园竞赛</a>
   </div>
+  <div class="col s4 m4 l2 item waves-effect">
+    <a href="/w/teams">校园团队</a>
+  </div>
+</div>
+<div class="row container card-list">
+  <ul>
+    <li class="col s12 m6 l3" ng-repeat="activityItem in activityItems | filter: filterFun">
+      <div class="card">
+        <div class="card-content">
+          <h4 class="card-title">
+            <a ng-href="/w/activities/{{activityItem.id}}">
+              <span ng-if="activityItem.status === 'ing'" 
+                  class="red white-text act-status" 
+                  ng-bind="activityItem.status"></span>
+              <span ng-if="activityItem.status === 'end'" 
+                  class="grey white-text act-status" 
+                  ng-bind="activityItem.status"></span>
+              <span ng-if="activityItem.status === 'nos'" 
+                  class="orange white-text act-status" 
+                  ng-bind="activityItem.status"></span>
+              <span ng-bind="activityItem.title"></span>
+            </a>
+          </h4>
+          <h6>
+            <a ng-href="/w/teams/{{activityItem.teamId}}">
+              <b ng-bind="activityItem.authorName"></b>
+            </a>
+            <time ng-bind="activityItem.created | date : 'yyyy-MM-dd'"></time>
+          </h6>
+        </div>
+        <div class="card-image">
+          <a ng-href="/w/activities/{{activityItem.id}}">
+            <img ng-src="{{activityItem.imgUrl}}" style="width:100%" alt="{{activityItem.title}}">
+          </a>
+        </div>
+        <div class="card-action">
+          <h6>
+            <span>标签：</span><span class="orange-text" ng-bind="activityItem.keyword"></span>
+          </h6>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
 

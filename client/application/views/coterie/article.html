@@ -11,24 +11,17 @@
 			<ng-include src="article.contentUrl"></ng-include>
 		</div>
 		<div class="card-action">
-			<div class="waves-effect text-center action">
-       	<a href="">
-       		<i class="mdi-social-share"></i>分享
-       	</a>
-      </div>
       <div class="waves-effect text-center action" ng-click="loadComment()">
-       	<a href="">
-       		<i class="mdi-action-visibility"></i>阅读(<span ng-bind="article.readerCount"></span>)
+       	<a href="" class="black-text">
+       		<i class="mdi-action-visibility"></i>阅读量(<span ng-bind="article.readerCount"></span>)
        	</a>
       </div>
-      <div class="waves-effect text-center action" ng-show="article.islike">
-        <a href="">
-        	<i class="mdi-toggle-star"></i>喜欢(<span ng-bind="article.likeCount"></span>)
+      <div class="waves-effect text-center action">
+        <a href="" class="red-text" ng-show="article.islike">
+          <i class="mdi-toggle-star"></i>收藏(<span ng-bind="article.likeCount"></span>)
         </a>
-      </div>
-      <div class="waves-effect text-center action" ng-show="!article.islike" ng-click="addLike()">
-        <a href="">
-        	<i class="mdi-toggle-star-border"></i>喜欢(<span ng-bind="article.likeCount"></span>)
+        <a href="" class="red-text" ng-show="!article.islike" ng-click="addLike()">
+          <i class="mdi-toggle-star-border"></i>收藏(<span ng-bind="article.likeCount"></span>)
         </a>
       </div>
 		</div>

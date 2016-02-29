@@ -49,8 +49,8 @@ app.controller('RaceController', ['$scope', 'Race', '$stateParams', 'User', 'Tea
     Team.prototype_link_partakedRaces({
       id: $scope.selected,
       fk: $stateParams.id
-    }, function (status) {
-      console.log(status);
+    }, {},function (status) {
+      Materialize.toast('加入成功,请经常关注竞赛信息', 2000);
     });
   };
   $scope.joinTeam = function () {

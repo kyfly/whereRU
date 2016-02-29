@@ -1,5 +1,9 @@
 <div>
-	<ul class="collection z-depth-1">
+	
+	<ul class="collection">
+		<div ng-show="!notices.length" class="center collection-item">
+			该竞赛没有发布通知
+		</div>
 		<li ng-repeat="notice in notices" class="collection-item">
 			<time class="green-text" ng-bind="notice.created | date: 'yyyy-MM-dd HH:mm:ss'"></time>
 			<p ng-bind="notice.content"></p>

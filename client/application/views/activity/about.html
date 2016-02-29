@@ -4,46 +4,60 @@
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/title.png" alt="" class="circle">
       <span class="title">活动标题</span>
-      <p ng-bind="activityCurrent.title"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <p class="blue-text text-darken-2">
+        <br>
+        <span ng-bind="activityCurrent.title"></span>
+      </p>
     </li>
 
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/sponsor.png" alt="" class="circle">
       <span class="title">活动主办方</span>
-      <p ng-bind="activityCurrent.authorName"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <p class="blue-text text-darken-2">
+        <br>
+        <span ng-bind="activityCurrent.authorName"></span>
+      </p>
     </li>
     
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/rule.png" alt="" class="circle">
       <span class="title">验证规则</span>
-      <p ng-bind="activityCurrent.verifyRule"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <p class="blue-text text-darken-2">
+        <br>
+        <span ng-bind="activityCurrent.verifyRule"></span>
+      </p>
     </li>
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/start-time.png" alt="" class="circle">
       <span class="title">活动开始时间</span>
-      <p ng-bind="activityCurrent.started | date : 'yyyy-MM-dd HH:mm:ss'"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <p class="blue-text text-darken-2">
+        <br>
+        <span ng-bind="activityCurrent.started | date : 'yyyy-MM-dd HH:mm:ss'"></span>
+      </p>
     </li>
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/end-time.png" alt="" class="circle">
       <span class="title">活动结束时间</span>
-      <p ng-bind="activityCurrent.ended | date : 'yyyy-MM-dd HH:mm:ss'"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <p class="blue-text text-darken-2">
+        <br>
+        <span ng-bind="activityCurrent.ended | date : 'yyyy-MM-dd HH:mm:ss'"></span>
+      </p>
     </li>
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/keyword.png" alt="" class="circle">
       <span class="title">关键字</span>
-      <p ng-bind="activityCurrent.keyword"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <p class="blue-text text-darken-2">
+        <br>
+        <span ng-bind="activityCurrent.keyword"></span>
+      </p>
     </li>
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/school.png" alt="" class="circle">
-      <span class="title">学校所在地</span>
-      <p ng-bind="activityCurrent.school"></p>
-      <a href=" " class="secondary-content"><i class="material-icons">grade</i></a>
+      <span class="title">学校</span>
+      <p class="blue-text text-darken-2">
+        <br>
+        <span ng-bind="activityCurrent.school"></span>
+      </p>
     </li>
   </ul>
 </div>

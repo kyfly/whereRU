@@ -8,21 +8,22 @@
     width: 100%;
   }
 }
+
 @media only screen and (max-width: 601px) {
-  .modal {
-    width: 100%;
-  }
-}
-@media only screen and (max-width: 600px) {
   #toast-container {
     min-width: 100%;
     bottom: 48px;
   }
 }
-
-#login-modal{
-  position: absolute;
-  top: 0 !important
+.row{
+  margin-bottom: 0;
+}
+nav ul li{
+  height: 4.2rem;
+}
+.browser-default{
+  height: 100%;
+  border: 1px #fff;
 }
 /*.collection{
   margin: 0
@@ -42,8 +43,6 @@
 }
 .header ul a{
 	font-size: 1.3rem;
-  padding: 0 8px;
-  font-weight: bold;
 }
 .header ul .dropdown-button {
   position: relative;
@@ -61,6 +60,13 @@
   background: #000;
   display: none;
 }
+.header .pull-menu li{
+  float: none;
+  line-height: 48px;
+  text-align: left;
+  padding: 0 20px;
+  height: 100%;
+}
 .header .brand-logo {
   position: absolute;
   color: #fff;
@@ -74,15 +80,6 @@
 nav .nav-wrapper i {
   top: 0;
   line-height: 4.2rem;
-}
-.tabs {
-  display: -moz-box;  /* Firefox */ 
-  display: -ms-flexbox;    /* IE10 */ 
-  display: -webkit-box;    /* Safari */  
-  display: -webkit-flex;    /* Chrome, WebKit */ 
-  display: box;  
-  display: flexbox;  
-  display: block;
 }
 
 #search{
@@ -123,20 +120,23 @@ nav .nav-wrapper i {
   margin-top: 15px;
   color: #444;
 }
-.login {
-  position: absolute;
-  top: 64px;
+#login{
+  position: fixed;
+  background: rgba(0, 0, 0, 0.48);
+  z-index: 3;
   width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: scroll;
 }
-.login .btn{
-  margin: 10px;
+#login form{
+  background: #fff;
+  padding: 1rem;
 }
-.login a {
-  display: inline-flex;
-  font-size: 1rem;
-  height: 36px;
-  line-height: 36px;
-  color: #fff;
+#login form h3{
+  margin: 0;
+  font-size: 2rem;
 }
 .bottom-bar{
   position: fixed;
@@ -162,53 +162,8 @@ nav .nav-wrapper i {
 .bottom-bar a{
   font-size: 1.3rem;
 }
-.bottom-bar .menus{
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: box;
-  display: flexbox;
-  display: block;
-  position: relative;
-  height: 48px;
-  margin: 0 auto;
-  width: 100%;
-  white-space: nowrap;
-}
-.bottom-bar .menus .menu{
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  display: block;
-  float: left;
-  text-align: center;
-  line-height: 48px;
-  height: 48px;
-  padding: 0;
-  margin: 0;
-  text-transform: uppercase;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  letter-spacing: .8px;
-  min-width: 80px;
-  border-bottom: 0;
-}
-.bottom-bar .menus .menu a{
-  width: 100%;
-  display: block;
-  height: 90%;
-  font-size: 2rem;
-}
-.bottom-bar .menus .menu .active{
-  background-color: #fff;
-  color: #ee6e73;
-  border-bottom: 2px solid #f6b2b5;
-}
-/*@media only screen and (min-width : 993px) {
-  .container {
-    width: 80%; } }*/
+
+
 /*校园服务导航菜单*/
 .menu{
   height: 45px;
@@ -219,26 +174,34 @@ nav .nav-wrapper i {
   /*padding-top: 5px;*/
   white-space:nowrap;
   overflow: hidden; 
-  border-bottom: 5px solid #0CB9F7;
+  border-bottom: 3px solid #0CB9F7;
 }
-.row{
-  margin-bottom: 0;
-}
-
-.browser-default{
-  height: 100%;
-  border: 1px #fff;
-}
-
 .menu .item {
   height: 100%;
   line-height: 45px;
   text-align: center;
 }
-
-.menu .active{
-  color: #fff;
-  background-color: #0CB9F7;
+.menu .item a{
+  display: block;
+  width: 100%;
+  color: #000;
+}
+.menu a.active{
+  color: #FF0000;
+  text-shadow: 0 1px 25px #FF0000;
+  font-size: 1.5rem;
+}
+@media only screen and (max-width: 902px) {
+  .menu .item.active{
+    background-color: #0CB9F7;
+  }
+  .menu .item a{
+    /*color: #fff;*/
+  }
+  .menu a.active{
+    color: #fff;
+    text-shadow: 0 2px 25px #fff;
+  }
 }
 
 .container .row{
@@ -246,59 +209,60 @@ nav .nav-wrapper i {
 }
 
 
+.card-list{
 
-.list {
-  padding: 0.5rem;
 }
-.list h4{
+.card-list .card .card-content{
+  padding: 10px
+}
+.card-list .card .card-content .card-title{
   white-space:nowrap;  
   overflow: hidden;   
   text-overflow:ellipsis;
-  padding: 5px 10px;
   margin: 0;
   font-size: 1.3rem;
-  padding-top: 10px;
+  line-height: 32px;
+}
+.card-list .card .card-content .card-title a{
   color: #000;
 }
-.list h6 {
+.card-list .act-status{
+  padding: 0.15rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+.card-list .card .card-content h6{
+  white-space:nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
-  margin: 0;
 }
-.list .card-content {
+.card-list .card .card-image{
+  padding: 0 10px;
+}
+.card-list .card .card-action{
+  border-top: 0;
+  padding: 10px;
+}
+.card-list .card .card-action h6{
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-list .card .card-image h6{
   white-space: nowrap;
-  font-size: 1rem;
-  padding: 5px 10px;
-  width: 100%;
-}
-.list .card-image img{
-  width: 100%;
-  max-height: 250px;
-}
-.list .card-image h6{
-  white-space:nowrap;  
-  overflow: hidden;   
-  text-overflow:ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 1.2rem;
-  padding: 10px 0;
+  padding: 10px;
   position: absolute;
   bottom: 0;
   color: #fff;
   background: rgba(0, 0, 0, 0.8);
   z-index: 2;
-}
-.list .tag {
-  white-space: nowrap;
-  font-size: 1rem;
-  padding: 5px 10px;
-  width: 100%;
-}
-
-.list .tag h6{
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
+  margin: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0 0 2px 2px;
 }
 .detail-menu{
   width: 99%;
@@ -333,6 +297,7 @@ nav .nav-wrapper i {
 }
 .user-team img {
   width: 50px;
+  height: 50px;
  /* border-radius: 25px;*/
 }
 .user-team h4{
@@ -352,25 +317,39 @@ nav .nav-wrapper i {
   top: 22.5px;
   right: 0px;
 }
-.team-card .card-title{
-  padding: 20px 0; 
+.team-card .card-content{
+
+  padding: 10px
+}
+.team-card .card-content .card-title{
   text-align: center;
 }
-.team-card .card-title img{
-  width: 50px;
-  border-radius: 25px;
+.team-card .card-content .card-title img{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
 }
-.team-card .card-title h4{
+.team-card .card-content .card-title h4{
   overflow: hidden;
   font-size: 1.2rem;
   padding: 5px;
   margin: 0;
+  color: #000;
 }
-.team-card .card-content{
+
+.team-card .card-content p{
   height: 150px;
   overflow: hidden;
-  padding: 0 20px;
-  text-overflow: ellipsis;
+  word-wrap:break-word; 
+  word-break:normal;
+}
+@media only screen and (max-width : 601px) {
+  .team-card .card-content p{
+    height: 100%;
+  }
+}
+.team-card .card-action{
+  padding: 10px;
 }
 @media only screen and (max-width : 993px) {
   .team-title.container {
@@ -384,6 +363,7 @@ nav .nav-wrapper i {
 }
 .team-title img{
   width: 100px;
+  height: 100px;
   border-radius: 50px;
 }
 .team-title h4{
@@ -697,4 +677,11 @@ nav .nav-wrapper i {
   position: absolute;
   left: 120px;
   top: 0px;
+}
+.edui-default .edui-editor-messageholder{
+  position: absolute !important;
+  top: 0px !important;
+  right: 3px !important;
+  z-index: 3 !important;
+  width: 200px !important;
 }

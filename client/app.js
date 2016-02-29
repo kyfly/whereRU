@@ -20,12 +20,29 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	$rootScope.$on('$stateChangeStart', function(evt, next, current) {
 		
 	});
-	
+	function IsPC()
+	{
+		var userAgentInfo = navigator.userAgent;
+		var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+		var flag = true;
+		for (var v = 0; v < Agents.length; v++) {
+			if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
+		}
+		return flag;
+	}
+	$rootScope.mediaIsPC = IsPC();
 	$rootScope.$on('auth:loginRequired', function () {
-		$('#login-modal').openModal();
+		$rootScope.loginShow = true;
 	});
-
-
+	$rootScope.cancelLogin = function () {
+		$rootScope.loginShow = false;
+	};
+	$rootScope.focus = function () {
+    $rootScope.$broadcast('hiddenBottomBar');
+  };
+  $rootScope.blur = function () {
+    $rootScope.$broadcast('showBottomBar');
+  };
 }])
 .controller('HeaderController',
 	['$scope', '$rootScope', "User", "$location", "$window",
@@ -57,33 +74,20 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		Materialize.toast('退出成功', 2000);
 		$location.path("/w/activities");
 	}
-	
+	$scope.goLogin = function (){
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
+  }
 }])
 .controller('HomeController', ['$scope', function($scope){
 	
 }])
 .controller('BottomBarController', ['$scope', '$location', '$rootScope', '$window',
 	function($scope, $location, $rootScope, $window){
-	function IsPC()
-	{
-		var userAgentInfo = navigator.userAgent;
-		var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
-		var flag = true;
-		for (var v = 0; v < Agents.length; v++) {
-			if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
-		}
-		return flag;
-	}
 	$scope.$on('$stateChangeStart', function(evt, next, current) {
-		// if (next.name.match(/home|^art\.|^coteries$|coteries.articles/)) {
-		// 	$scope.bottomBar = true;
-		// } else {
-		// 	$scope.bottomBar = false;
-		// }
-		//if (next.name === 'index') {
-			$scope.bottomBar = true;
-		//}
-		if (!IsPC() && next.name === 'index') {
+		$scope.bottomBar = true;
+		if (!$rootScope.mediaIsPC && next.name === 'index') {
 			$location.path('/w/activities');
 		}
 		$scope.menus.forEach(function(menu){
