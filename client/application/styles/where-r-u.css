@@ -103,7 +103,132 @@ nav .nav-wrapper i {
 }
 
 .section-first {
-  max-height: 700px;
+  height: 500px;
+  width: 100%;
+  position: relative;
+  /*background-color: #000;*/
+  -webkit-transform-style:preserve-3d;
+  -webkit-perspective:-200px;
+  -moz-transform-style:preserve-3d;
+  -moz-perspective:0px;
+
+  
+}
+@-webkit-keyframes mydhua{
+
+  
+  90%{
+    
+  }
+}
+@-moz-keyframes mydhua{
+
+  0%{
+    -moz-transform:rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -webkit-transform-origin: center center;
+  }
+  100%{
+    -moz-transform:rotateX(180deg) rotateY(180deg) rotateZ(180deg); 
+    -webkit-transform-origin: center center;
+  }
+}
+.section-first .desc{
+  width: 800px;
+  
+  position: absolute;
+  text-align: center;
+  font-size: 1.3rem;
+  color: white;
+  top: 0;
+  left: 50%;
+  margin:0 0 0 -450px;
+}
+.section-first .activity-desc {
+  -webkit-transform:rotatey(0deg) translatez(450px);
+  background: rgb(128,0,128);
+  -webkit-animation:activity-anima 25s infinite;
+  -moz-animation:mydhua 5s infinite;
+}
+@-webkit-keyframes activity-anima{
+  0% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+  16% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+  20%{z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
+  36% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
+  40% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
+  56% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
+  60% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
+  76% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
+  80% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
+  96% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
+  100% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+}
+.section-first .race-desc {
+  background: rgb(255,0,255);
+  -webkit-animation:race-anima 25s infinite;
+}
+@-webkit-keyframes race-anima{
+  0% {z-index: 1;height: 300px;height: 300px;-webkit-transform:translatex(200px);}
+  16% {z-index: 1;height: 300px;height: 300px;-webkit-transform:translatex(200px);}
+  20%{z-index: 0;height: 300px;height: 300px;-webkit-transform:translatex(100px);}
+  36% {z-index: 0;height: 300px;height: 300px;-webkit-transform:translatex(100px);}
+  40% {z-index: 0;height: 300px;height: 300px;-webkit-transform:translatex(-100px);}
+  56% {z-index: 0;height: 300px;height: 300px;-webkit-transform:translatex(-100px);}
+  60% {z-index: 1;height: 300px;height: 300px;-webkit-transform:translatex(-200px);}
+  76% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
+  80% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+  96% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+  100% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
+}
+.section-first .team-desc {
+  background: rgb(255,153,204);
+  -webkit-animation:team-anima 25s infinite;
+}
+@-webkit-keyframes team-anima{
+  0% {z-index: 0;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(100px);}
+  16% {z-index: 0;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(100px);}
+  20%{z-index: 0;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(-100px);}
+  36% {z-index: 0;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(-100px);}
+  40% {z-index: 1;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(-200px);}
+  56% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
+  60% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+  76% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+  80% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
+  96% {z-index: 1;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(200px);}
+  100% {z-index: 0;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(100px);}
+}
+.section-first .coterie-desc {
+  background: rgb(0,204,255);
+  -webkit-animation:coterie-anima 25s infinite;
+}
+@-webkit-keyframes coterie-anima{
+  0% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
+  16% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
+  20%{z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
+  36% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
+  40% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+  56% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+  60% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
+  76% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
+  80% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
+  96% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
+  100% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
+}
+.section-first .main-desc{
+  background: rgb(0,0,0);
+  -webkit-animation:main-anima 25s infinite;
+}
+@-webkit-keyframes main-anima{
+  0% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
+  16% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
+  20%{z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+  36% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+  40% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
+  56% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
+  60% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
+  76% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
+  80% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
+  96% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
+  100% {z-index: 0;height: 300px;-webkit-transform:translatex(-200px);}
 }
 .action-menu {
  
@@ -340,9 +465,9 @@ nav .nav-wrapper i {
   text-align: center;
 }
 .team-card .card-content .card-title img{
-  width: 80px;
-  height: 80px;
-  border-radius: 40px;
+  width: 100px;
+  height: 100px;
+  border-radius: 0;
 }
 .team-card .card-content .card-title h4{
   overflow: hidden;
@@ -523,7 +648,7 @@ nav .nav-wrapper i {
 .article .card-content{
   position: relative;
   padding-top: 0;
-  max-height: 400px;
+  max-height: 350px;
   overflow: hidden;
   text-overflow: ellipsis;
 }

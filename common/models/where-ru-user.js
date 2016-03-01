@@ -446,6 +446,9 @@ module.exports = function(User) {
     ctx.req.body.school = user.school;
     ctx.req.body.created = new Date();
     ctx.instance.teams.create(ctx.req.body, function (err, data) {
+      if (err) {
+        return next(err);
+      }
       var userInfo = {
         "phone": user.phone,
         "name": user.name,
