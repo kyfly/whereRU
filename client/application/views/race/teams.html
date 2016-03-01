@@ -1,11 +1,13 @@
 <div>
-	<div ng-if="teamId">
-		<ng-include src="'/application/views/team/join.html'"></ng-include>
-	</div>
-	<a ng-show="teamId" class="waves-effect btn red"
-		ng-click="joinTeam()">返回
-	</a>
-	<ul class="row col s12" ng-show="!teamId">
+  <div ng-if="!raceTeams.length" class="center z-depth-1">
+    还没有团队参与呢
+  </div>
+  <div ng-show="takePartIn" class="row col s12">
+    <div ng-include="'/application/views/race/join.html'"></div>
+  </div>
+  <a href="" class="join-race btn-floating btn-large waves-effect waves-light red" 
+      ng-click="takePartIn = !takePartIn">{{!takePartIn? '参与': '取消'}}</a>
+	<ul class="row col s12" ng-show="!takePartIn">
     <li class="col s12 m6 l3 team-card" ng-repeat="team in raceTeams">
       <div class="card">
         <div class="card-content">
@@ -16,7 +18,7 @@
           <p ng-bind="team.desc"></p>
         </div>
         <div class="card-action center">
-          <a href="" class="btn" ng-click="joinTeam()" ng-disabled="!team.status">申请加入</a>
+          <a href="/w/teams/{{team.id}}">申请加入</a>
         </div>
       </div>
     </li>

@@ -1,4 +1,4 @@
-app.controller('TeamsController', ['$scope','Team',  'User', function ($scope, Team, User) {
+app.controller('TeamsController', ['$scope','Team',  'User', '$location', function ($scope, Team, User, $location) {
   $scope.types = [{
     "name": "校园组织",
   },{
@@ -65,8 +65,11 @@ app.controller('TeamsController', ['$scope','Team',  'User', function ($scope, T
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');
     }
-    User.prototype_create_teams({id: $scope.$currentUser.id}, $scope.team, function (team) {
-      console.log(team)
+    User.prototype_create_teams({
+      id: $scope.$currentUser.id
+    }, $scope.team, function (team) {
+      Materialize.toast('创建团队成功', 2000);
+      $location.path('/w/teams/' + team.id);
     })
   }
 }]);

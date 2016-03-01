@@ -46,20 +46,15 @@ app.controller('RaceController', ['$scope', 'Race', '$stateParams', 'User', 'Tea
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');
     }
+    if (!$scope.selected) {
+      return Materialize.toast('必须选择一个团队', 2000);
+    }
     Team.prototype_link_partakedRaces({
       id: $scope.selected,
       fk: $stateParams.id
     }, {},function (status) {
-      Materialize.toast('加入成功,请经常关注竞赛信息', 2000);
+      Materialize.toast('参与成功,请经常关注竞赛信息', 2000);
     });
-  };
-  $scope.joinTeam = function () {
-    if (this.team) {
-      $scope.teamId = this.team.id;
-    } else {
-      $scope.teamId = false;
-    }
-    
   };
 }]);
 

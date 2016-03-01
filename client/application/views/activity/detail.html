@@ -1,14 +1,29 @@
+<div class="row menu hide-on-med-and-down">
+  <!-- 大屏幕选择 -->
+  <div class="col m2 item l2">
+    
+  </div>
+  <div class="col s4 m4 l2 item active waves-effect">
+    <a class="active" sref="/w/activities">校园活动</a>
+  </div>
+  <div class="col s4 m4 l2 item waves-effect">
+    <a href="/w/races">校园竞赛</a>
+  </div>
+  <div class="col s4 m4 l2 item waves-effect">
+    <a href="/w/teams">校园团队</a>
+  </div>
+</div>
 <div class="container">
   <div class="row s12 detail-menu">
     <ul class="tabs" tabs>
       <li class="tab col s4 waves-effect">
-        <a href="#about" class="active">活动介绍</a>
+        <a href="#about" class="active">简介</a>
       </li>
       <li class="tab col s4 waves-effect">
-        <a href="#detail">活动详情</a>
+        <a href="#detail">详情</a>
       </li>
       <li class="tab col s4 waves-effect" ng-click="onClickJoinActivity()">
-        <a href="#join">参与活动</a>
+        <a href="#join">参与</a>
       </li>
     </ul>
   </div>
@@ -17,17 +32,17 @@
       <div ng-include="'/application/views/activity/about.html'"></div>
     </div>
 
-    <div id="detail" class="col s12">   <!-- 活动详情-->
-      <div ng-include="activityCurrent.explainUrl" ></div>
+    <div id="detail" class="col s12 detail-container">
+      <div ng-include="activity.explainUrl" ></div>
     </div>
-    <div id="join" class="col s12">   <!--参与活动-->
-      <div ng-if="activityCurrent.actType === 'form'" ng-controller="ActivityController">
+    <div id="join" class="col s12">
+      <div ng-if="activity.actType === 'form'" ng-controller="ActivityController">
         <div ng-include="'/application/views/activity/form.html'"></div>
       </div>
-      <div ng-if="activityCurrent.actType === 'vote'">
+      <div ng-if="activity.actType === 'vote'" class="detail-container">
         <div ng-include="'/application/views/activity/vote.html'"  ng-controller="ActivityController"></div>
       </div>
-      <div ng-if="activityCurrent.actType === 'seckill'">
+      <div ng-if="activity.actType === 'seckill'">
         <div ng-include="'/application/views/activity/seckill.html'"></div>
       </div>
     </div>

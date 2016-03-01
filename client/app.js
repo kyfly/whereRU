@@ -43,6 +43,9 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
   $rootScope.blur = function () {
     $rootScope.$broadcast('showBottomBar');
   };
+  $rootScope.errorTip = function (err) {
+    Materialize.toast(err.data.error.message + '<br>' +'好像遇到了一点小问题,请您联系我们哦', 4000);
+  }
 }])
 .controller('HeaderController',
 	['$scope', '$rootScope', "User", "$location", "$window",

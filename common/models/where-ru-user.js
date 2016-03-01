@@ -575,24 +575,7 @@ module.exports = function(User) {
         activity: form.activity,
         result: activityResult
       });
-    })
-    // var result=[];
-    // User.app.models.FormResult.findById(formResultsId,
-    //   {fields:['verifyId','created','id','formId','userId','result']},
-    //   function(err,formResults){
-    //   User.app.models.Form.findById(formResults.formId.toJSON(),function(err,form){
-    //     for(var i =0;i<form._formItems.length;i++) {
-    //       var record = {
-    //         q: form._formItems[i].name,
-    //         w: formResults.result[i].name,
-    //         url:formResults.result[i].url
-    //       };
-    //       result.push(record);
-    //     }
-    //     formResults.result = result;
-    //     ctx.res.send(formResults);
-    //   });
-    // });
+    });
   });
   /**
    * 用户获取参与投票活动所投项
@@ -622,6 +605,21 @@ module.exports = function(User) {
   User.beforeRemote('prototype.__findById__seckillResults', function () {
     //TODO  查询某个活动结果，可以通过活动结果获取抢票信息，
   })
+  User.beforeRemote('prototype.__create__formResults', function (ctx, ins, next) {
+    ctx.instance.formResults.count({
+      formId: ctx.req.body.formId,
+      userId: ctx.req.params.id
+    }, function (err, count) {
+      if (count) {
+        ctx.res.send({
+          "status": 1000,
+          "message": "您已经参与过了"
+        });
+      } else {
+        next();
+      }
+    })
+  });
   /**
    * 处理用户投票信息，投票后需要吧投票项数量加一
    * @param  {[type]} ctx   [description]
@@ -630,20 +628,19 @@ module.exports = function(User) {
    * @return {[type]}       [description]
    */
   User.beforeRemote('prototype.__create__voteResults', function (ctx, ins, next) {
-    var voteId = ctx.req.body.voteId;
-    var voteItem = ctx.req.body.result;
-    var Vote = User.app.models.Vote;
-    //TODO 判断用户是否投票过，并过来周期时间，可考虑hook
-    Vote.findById(voteId, function (err, vote) {
-      for (var index in voteItem) {
-        console.log(index);
-        vote.voteItems.findById(voteItem[index], function (err, item) {
-          item.count = item.toJSON().count + 1;
-          item.save();
-        })
+    ctx.instance.voteResults.count({
+      voteId: ctx.req.body.voteId,
+      userId: ctx.req.params.id
+    }, function (err, count) {
+      if (count > 0) {
+        ctx.res.send({
+          "status": 1000,
+          "message": "您已经投过了"
+        });
+      } else {
+        next()
       }
     });
-    next();
   });
   User.beforeRemote('prototype.__get__articles', function (ctx, ins, next) {
     User.app.models.Coterie.__get__articles(ctx, ins, next);

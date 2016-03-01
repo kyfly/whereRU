@@ -36,6 +36,8 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
       $scope.activityItems.forEach(function (activity) {
         getActivityStatus(activity);
       });
+    }, function (err) {
+      $scope.errorTip(err);
     });
   }
 
@@ -50,6 +52,8 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
           getActivityStatus(activity);
         });
       }
+    }, function (err) {
+      $scope.errorTip(err);
     });
   }
 }]);
@@ -59,7 +63,7 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
   Activity.findById({
     id: $stateParams.id
   }, function (activity) {
-    $scope.activityCurrent = activity;
+    $scope.activity = activity;
     $scope.$emit('shareContentArrive', {
       bdText: activity.title,
       bdDesc: activity.keyword,
@@ -96,10 +100,14 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
           $interval.cancel(timer);
         });
       }
+    }, function (err) {
+      $scope.errorTip(err);
     });
+  }, function (err) {
+    $scope.errorTip(err);
   });
   $scope.onClickJoinActivity = function () {
-    var actType = $scope.activityCurrent.actType;
+    var actType = $scope.activity.actType;
     if (actType !== 'common') {
       $scope.result = new Array($scope[actType]['_'+ actType +'Items'].length);
     }
@@ -128,11 +136,11 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
       return;
     }
     if (this.result[this.$index]) {
-      this.vote.count ++;
+      this.voteIteam.count ++;
     } else {
-      this.vote.count --;
+      this.voteIteam.count --;
     }
-  }
+  };
 
   $scope.submitFormResult = function () {
     if (!$scope.$currentUser) {
@@ -155,12 +163,18 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
       id: $scope.$currentUser.id
     }, formResult, function (res) {
       Materialize.toast('参与成功', 2000);
+    }, function (err) {
+      $scope.errorTip(err);
     });
   };
   $scope.submitVoteResult = function () {
     var result = [];
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');
+    }
+    if ($scope.activity.verifyRule && !$scope.verifyId) {
+      Materialize.toast('验证规则必须填', 2000);
+      return;
     }
     for (var x in $scope.result) if ($scope.result[x]) {
       result.push($scope.vote._voteItems[x].id);
@@ -181,7 +195,13 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     User.prototype_create_voteResults({
       id: $scope.$currentUser.id
     }, voteResult, function (res) {
-      Materialize.toast('参与成功', 2000);
+      if (res.status === 1000) {
+        Materialize.toast(res.message, 2000);
+      } 
+      else
+        Materialize.toast('参与成功', 2000);
+    }, function (err) {
+      $scope.errorTip(err);
     });
   };
   $scope.submitSeckillResult = function () {
@@ -201,8 +221,8 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
         Materialize.toast(res.message, 2000);
       else 
         Materialize.toast('恭喜你,抢到了', 2000);
-    }, function () {
-      Materialize.toast('哎呀！服务器出问题了', 2000);
+    }, function (err) {
+      $scope.errorTip(err);
     });
   }
 }]);

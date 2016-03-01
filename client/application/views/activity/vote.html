@@ -3,7 +3,8 @@
 		<h5>你最多可选择<span class="vote-tip" ng-bind="vote.max"></span>项</h5>
 		<hr>
 	</div>
-	<div class="row col s12" ng-if="vote._voteItems[0]['imgUrl']" ng-controller="ActivityController">
+
+	<div class="row col s12" ng-if="vote._voteItems[0]['imgUrl']">
 		<div class="col s6 m4 l3"  ng-repeat="voteIteam in vote._voteItems">
 			<div class="card">
 				<div class="card-image">
@@ -19,7 +20,8 @@
 			</div>
 		</div>
 	</div>
-	<div ng-if="!vote._voteItems[0]['imgUrl']" ng-controller="ActivityController">
+
+	<div ng-if="!vote._voteItems[0]['imgUrl']">
 		<form>
 	    <p ng-repeat="voteIteam in vote._voteItems">
 	      <input type="checkbox" id="{{voteIteam.id}}" ng-click="checkedForVote()" ng-init="false" ng-model="result[$index]"/>
@@ -28,13 +30,13 @@
 	    </p>
   	</form>
 	</div>
-	<div input-field ng-show="vote.verifyRule">
+	<div input-field ng-if="activity.verifyRule">
     <input id="name" type="text" ng-model="verifyId">
-    <label for="name">请输入验证信息({{vote.verifyRule}})</label>
+    <label for="name">请输入验证信息({{activity.verifyRule}})</label>
 	</div>
 	<div  class="row col s12 center">
 		<a type="sumbit" 
-			class="waves-effect  btn-flat"
+			class="waves-effect btn-flat"
 			ng-click="submitVoteResult()">提交
 		</a>
 	</div>
