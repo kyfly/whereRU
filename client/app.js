@@ -83,9 +83,6 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
     }
   }
 }])
-.controller('HomeController', ['$scope', function($scope){
-	
-}])
 .controller('BottomBarController', ['$scope', '$location', '$rootScope', '$window',
 	function($scope, $location, $rootScope, $window){
 	$scope.$on('$stateChangeStart', function(evt, next, current) {
@@ -142,4 +139,27 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	$scope.goback = function () {
 		$window.history.back();
 	}
-}]);
+}])
+.controller('HomeController', ['$scope', 'Activity', 'Race',function($scope, Activity, Race){
+	var tenDay = new Date() - 10*24*3600;
+	var filter = {
+		where: {
+			created: {
+				lt: tenDay
+			}
+		},
+		limit: 8,
+		order: 'readers DESC'
+	};
+	Activity.find({
+		filter: filter
+	}, function (res) {
+		$scope.activities = res;
+	});
+	Race.find({
+		filter: filter
+	}, function (res) {
+		$scope.races = res;
+	});
+}])
+

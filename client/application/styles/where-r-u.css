@@ -72,6 +72,10 @@ nav ul li{
   text-align: left;
   padding: 0 20px;
   height: 100%;
+  display: block;
+}
+.header .pull-menu li:hover{
+  background-color: #0CB9F7;
 }
 .header .brand-logo {
   position: absolute;
@@ -103,7 +107,9 @@ nav .nav-wrapper i {
 }
 
 .section-first {
-  height: 500px;
+  height: 300px;
+  min-height: 250px;
+  max-height: 300px;
   width: 100%;
   position: relative;
   /*background-color: #000;*/
@@ -111,124 +117,195 @@ nav .nav-wrapper i {
   -webkit-perspective:-200px;
   -moz-transform-style:preserve-3d;
   -moz-perspective:0px;
-
-  
-}
-@-webkit-keyframes mydhua{
-
-  
-  90%{
-    
-  }
-}
-@-moz-keyframes mydhua{
-
-  0%{
-    -moz-transform:rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-    -webkit-transform-origin: center center;
-  }
-  100%{
-    -moz-transform:rotateX(180deg) rotateY(180deg) rotateZ(180deg); 
-    -webkit-transform-origin: center center;
-  }
 }
 .section-first .desc{
-  width: 800px;
-  
+  width: 50%;
+  max-width: 700px;
+  min-width: 500px;
   position: absolute;
   text-align: center;
   font-size: 1.3rem;
   color: white;
   top: 0;
   left: 50%;
-  margin:0 0 0 -450px;
+  margin:0 0 0 -25%;
 }
-.section-first .activity-desc {
-  -webkit-transform:rotatey(0deg) translatez(450px);
-  background: rgb(128,0,128);
-  -webkit-animation:activity-anima 25s infinite;
+.section-first .screen{
+  width: 100%;
+  background: #eee;
+  height: 100%;
+}
+.section-first .main-desc {
+  -webkit-transform:rotatey(0deg) translatez(35%);
+  background-image: url('/lib/img/bg/main.png');
+  background-size: 100% 100%;
+  -webkit-animation:main-anima 25s infinite;
   -moz-animation:mydhua 5s infinite;
 }
+@-webkit-keyframes main-anima{
+  0% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
+  16% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
+  20%{z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
+  36% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
+  40% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
+  56% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
+  60% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
+  76% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
+  80% {z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
+  96% {z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
+  100% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
+}
+
+.section-first .activity-desc {
+  background: rgb(255,0,255);
+   background-image: url('/lib/img/bg/activity.jpg');
+  background-size: 100% 100%;
+  -webkit-animation:activity-anima 25s infinite;
+}
 @-webkit-keyframes activity-anima{
-  0% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
-  16% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
-  20%{z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
-  36% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
-  40% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
-  56% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
-  60% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
-  76% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
-  80% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
-  96% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
-  100% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
+  0% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
+  16% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
+  20%{z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
+  36% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
+  40% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
+  56% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
+  60% {z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
+  76% {z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
+  80% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
+  96% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
+  100% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
 }
 .section-first .race-desc {
-  background: rgb(255,0,255);
+  background: rgb(255,153,204);
+   background-image: url('/lib/img/bg/race.jpg');
+  background-size: 100% 100%;
   -webkit-animation:race-anima 25s infinite;
 }
 @-webkit-keyframes race-anima{
-  0% {z-index: 1;height: 300px;height: 300px;-webkit-transform:translatex(200px);}
-  16% {z-index: 1;height: 300px;height: 300px;-webkit-transform:translatex(200px);}
-  20%{z-index: 0;height: 300px;height: 300px;-webkit-transform:translatex(100px);}
-  36% {z-index: 0;height: 300px;height: 300px;-webkit-transform:translatex(100px);}
-  40% {z-index: 0;height: 300px;height: 300px;-webkit-transform:translatex(-100px);}
-  56% {z-index: 0;height: 300px;height: 300px;-webkit-transform:translatex(-100px);}
-  60% {z-index: 1;height: 300px;height: 300px;-webkit-transform:translatex(-200px);}
-  76% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
-  80% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
-  96% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
-  100% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
+  0% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
+  16% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
+  20%{z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
+  36% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
+  40% {z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
+  56% {z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
+  60% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
+  76% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
+  80% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
+  96% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
+  100% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
 }
 .section-first .team-desc {
-  background: rgb(255,153,204);
+  background: rgb(0,204,255);
+   background-image: url('/lib/img/bg/team.jpg');
+  background-size: 100% 100%;
   -webkit-animation:team-anima 25s infinite;
 }
 @-webkit-keyframes team-anima{
-  0% {z-index: 0;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(100px);}
-  16% {z-index: 0;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(100px);}
-  20%{z-index: 0;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(-100px);}
-  36% {z-index: 0;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(-100px);}
-  40% {z-index: 1;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(-200px);}
-  56% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
-  60% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
-  76% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
-  80% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
-  96% {z-index: 1;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(200px);}
-  100% {z-index: 0;height: 300px;height: 300px;height: 300px;-webkit-transform:translatex(100px);}
+  0% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
+  16% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
+  20%{z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
+  36% {z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
+  40% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
+  56% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
+  60% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
+  76% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
+  80% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
+  96% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
+  100% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
 }
-.section-first .coterie-desc {
-  background: rgb(0,204,255);
+.section-first .coterie-desc{
+  background: rgb(0,0,0);
+   background-image: url('/lib/img/bg/coterie.jpg');
+  background-size: 100% 100%;
   -webkit-animation:coterie-anima 25s infinite;
 }
 @-webkit-keyframes coterie-anima{
-  0% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
-  16% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
-  20%{z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
-  36% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
-  40% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
-  56% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
-  60% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
-  76% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
-  80% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
-  96% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
-  100% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
+  0% {z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
+  16% {z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
+  20%{z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
+  36% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
+  40% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
+  56% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
+  60% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
+  76% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
+  80% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
+  96% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
+  100% {z-index: 0;height: 90%;-webkit-transform:translatex(-25%);}
 }
-.section-first .main-desc{
-  background: rgb(0,0,0);
-  -webkit-animation:main-anima 25s infinite;
+.section-second {
+  padding-top: 30px;
 }
-@-webkit-keyframes main-anima{
-  0% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
-  16% {z-index: 1;height: 300px;-webkit-transform:translatex(-200px);}
-  20%{z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
-  36% {z-index: 2;height: 350px;-webkit-transform:translatex(0px);}
-  40% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
-  56% {z-index: 1;height: 300px;-webkit-transform:translatex(200px);}
-  60% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
-  76% {z-index: 0;height: 300px;-webkit-transform:translatex(100px);}
-  80% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
-  96% {z-index: 0;height: 300px;-webkit-transform:translatex(-100px);}
-  100% {z-index: 0;height: 300px;-webkit-transform:translatex(-200px);}
+.section-second .section-header {
+  position: relative;
+  height: 50px;
+}
+.section-second .left-line {
+    width: 35%;
+    position: absolute;
+    left: 5%;
+    margin-top: 15px;
+}
+.section-second .title {
+    position: absolute;
+    left: 40%;
+    display: block;
+    width: 20%;
+    text-align: center;
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.1;
+}
+.section-second .right-line {
+  position: absolute;
+  width: 35%;
+  right: 5%;
+  margin-top: 15px;
+}
+.section-third {
+      height: 300px;
+    background: #eee;
+    margin-top: 50px;
+}
+.section-third .about-this ul{
+  margin-left: 20px;
+}
+.section-third .about-us p{
+  font-size: 1.2rem;
+  margin-left: 20px;
+  text-indent:35px
+}
+.section-third .link-us {
+
+}
+.section-third .link-us img {
+  width: 200px;
+  margin-left: 20px;
+}
+.section-third a{
+  font-size: 1.5rem;
+  color: #444;
+}
+.section-third h4 {
+  text-align: left;
+  border-left: 10px solid #0CB9F7;
+  padding-left: 10px;
+}
+html, body, .wrap {
+  height: 100%;
+}
+body > .wrap {
+  height: auto; min-height: 100%;
+}
+.main {
+  padding-bottom: 50px;
+}  
+footer {
+  position: relative;
+  margin-top: -50px; 
+  height: 50px;
+  font-size: 1.2rem;
+  padding-top: 15px;
+  clear:both;
 }
 .action-menu {
  
