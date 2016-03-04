@@ -1,45 +1,14 @@
 app.controller('AdminCtrl', ['$scope', '$timeout', '$window', '$rootScope', 'Team', AdminCtrl]);
 function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
   $rootScope.logoHide = false;
-  if (localStorage['$LoopBack$currentUserId'] && window.location.pathname === '/MS/login') {
-    window.location.pathname = '/MS/home';
-  }
-  if (localStorage['$LoopBack$currentUserId']) {
-    $rootScope.access = true;
-  } else {
-    $scope.navShow = {'padding-left': 0};
-    $scope.footerShow = {'margin-left': 0};
-  }
+  
+  
 
-  document.getElementById('main').style.minHeight = document.body.clientHeight
-    - document.getElementById('footer').offsetHeight
-    - document.getElementById('nav').offsetHeight - 30 + 'px';
-  //监听ngView完成事件，延迟200ms用于页面渲染
-  $scope.$on('$viewContentLoaded', function () {
-    $timeout(function () {
-      if ($window.location.pathname === '/MS/home') {
-        $scope.redirect(0);
-      } else if ($window.location.pathname === '/MS/member') {
-        $scope.redirect(1);
-      } else if ($window.location.pathname === '/MS/event/list' || $window.location.pathname.substr(0, 14) === '/MS/event/edit' || $window.location.pathname.substr(0, 16) === '/MS/event/detail') {
-        $scope.redirect(2);
-      } else if ($window.location.pathname === '/MS/activity/list' || $window.location.pathname.substr(0, 17) === '/MS/activity/edit') {
-        $scope.redirect(3);
-      } else if ($window.location.pathname === '/MS/form/list' || $window.location.pathname.substr(0, 13) === '/MS/form/edit') {
-        $scope.redirect(4);
-      } else if ($window.location.pathname === '/MS/vote/list' || $window.location.pathname.substr(0, 13) === '/MS/vote/edit') {
-        $scope.redirect(5);
-      } else if ($window.location.pathname === '/MS/seckill/list' || $window.location.pathname.substr(0, 16) === '/MS/seckill/edit') {
-        $scope.redirect(6);
-      } else if ($window.location.pathname === '/MS/album') {
-        $scope.redirect(7);
-      } else if ($window.location.pathname === '/MS/setting') {
-        $scope.redirect(8);
-      } else if ($window.location.pathname === '/MS/help') {
-        $scope.redirect(9);
-      }
-    }, 0);
+  $scope.$on('$stateChangeStart', function (evt, next, current) {
+    if (next.name !== 'index')
+    $scope.redirect(next.stateIndex);
   });
+  
 
   //侧边栏显示内容
   $scope.sidebars = [
@@ -106,11 +75,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
     $('.button-collapse').sideNav('hide');
   };
 
-  Team.findById({
-    id: localStorage.$LoopBack$currentTeamId
-  }, function (res) {
-    $rootScope.teamInfo = res;
-  });
+  
 }
 
 app.controller('HomeCtrl', ['$scope', function ($scope) {

@@ -263,9 +263,10 @@ module.exports = function(Team) {
       }
     });
   });
-  Team.afterRemote("prototype.__get__partakedRaces", function (ctx, ins, next) {
+  // Team.afterRemote("prototype.__get__partakedRaces", function (ctx, ins, next) {
 
-  })
+  // })
+  // prototype_unlink_partakedRaces 团队退出竞赛时通知主办方
   Team.observe('after save', function (ctx, next) {
   	Team.app.models.Coterie.create({
   		name: ctx.instance.name,

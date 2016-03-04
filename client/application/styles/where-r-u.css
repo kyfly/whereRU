@@ -1,5 +1,6 @@
 ﻿body{
   background-color: #fff;
+  overflow-y: scroll;
 }
 @media only screen and (max-width: 601px) {
   .container {
@@ -105,11 +106,17 @@ nav .nav-wrapper i {
   position: absolute;
   width: 100%;
 }
-
+@media screen and (min-width: 1200px) {
+  .section-first {
+    height: 400px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .section-first {
+    height: 300px;
+  }
+}
 .section-first {
-  height: 300px;
-  min-height: 250px;
-  max-height: 300px;
   width: 100%;
   position: relative;
   /*background-color: #000;*/
@@ -120,8 +127,6 @@ nav .nav-wrapper i {
 }
 .section-first .desc{
   width: 50%;
-  max-width: 700px;
-  min-width: 500px;
   position: absolute;
   text-align: center;
   font-size: 1.3rem;

@@ -1,6 +1,5 @@
 app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
-  $rootScope.logoHide = false;
-  $scope.chosenType = 'all';
+  $scope.chosenType = '';
 
   $scope.unFormat = "yyyy-MM-dd HH:mm";
   $scope.format = "yyyy-MM-dd";
@@ -8,6 +7,9 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($s
   Team.prototype_get_activities({
     id: localStorage.$LoopBack$currentTeamId,
     filter: {
+      where: {
+        deleted: false
+      },
       order: 'created DESC'
     }
   }, function (res) {
@@ -19,22 +21,20 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($s
   $scope.deleteActivity = function () {
     var thisElement = this;
     Team.prototype_updateById_activities({
-        id: localStorage.$LoopBack$currentTeamId,
-        fk: thisElement.activityItem.id
-      }, {deleted: true}, function () {
-        Materialize.toast('删除成功！', 2000);
-        var id = thisElement.activityItem.id;
-        for (var x in $scope.activityItems) if ($scope.activityItems[x].id === id) {
+      id: localStorage.$LoopBack$currentTeamId,
+      fk: thisElement.activityItem.id
+    }, {deleted: true}, function () {
+      Materialize.toast('删除成功！', 2000);
+      var id = thisElement.activityItem.id;
+      for (var x in $scope.activityItems)
+        if ($scope.activityItems[x].id === id)
+        {
           $scope.activityItems.splice(x, 1);
         }
-      }
-      ,
-      function () {
-        Materialize.toast('删除失败！', 2000);
-      }
-    )
-    ;
-  }
+    }, function () {
+      Materialize.toast('删除失败！', 2000);
+    });
+  };
 
 }]);
 

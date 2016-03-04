@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col s12">
     <ul class="tabs" tabs>
-      <li class="tab col s3 waves-effect" ng-click="chosenType = 'all'">
+      <li class="tab col s3 waves-effect" ng-click="chosenType = ''">
         <a href="" class="active">全部活动</a>
       </li>
       <li class="tab col s3 waves-effect" ng-click="chosenType = 'form'">
@@ -24,8 +24,7 @@
           </div>
         </div>
       </div>
-      <div class="col s12 m6 l4" ng-repeat="activityItem in activityItems"
-           ng-show="(chosenType === 'all' || (activityItem.actType === chosenType) )&& activityItem.deleted === false">
+      <div class="col s12 m6 l4" ng-repeat="activityItem in activityItems | filter: {actType:chosenType}">
         <div class="card hoverable">
           <div class="card-content item-list activityInfo">
             <span class="card-title green-text text-darken-1 flow-text" ng-show="activityItem.hidden">[已隐藏]</span>

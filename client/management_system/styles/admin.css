@@ -7,6 +7,24 @@ body {
   font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
 }
 
+html, body, .wrap {
+  height: 100%;
+}
+body > .wrap {
+  height: auto; min-height: 100%;
+}
+.main {
+  padding-bottom: 50px;
+}  
+footer {
+  position: relative;
+  margin-top: -50px; 
+  height: 50px;
+  font-size: 1.2rem;
+  padding-top: 15px;
+  clear:both;
+}
+
 .logo {
   text-align: center;
   margin-top: 32px;
@@ -71,10 +89,10 @@ hr {
   line-height: 56px;
 }
 
-main {
+/*main {
   padding: 15px 0 15px 0;
   background-color: #FCFCFC;
-}
+}*/
 
 @media only screen and (min-width: 993px) {
   .container {
@@ -93,7 +111,6 @@ main {
 
   footer {
     margin-left: 240px;
-    margin-top: 0 !important;
   }
 }
 
@@ -104,7 +121,6 @@ main {
 
   footer {
     margin-left: 0;
-    margin-top: 0 !important;
   }
 }
 
