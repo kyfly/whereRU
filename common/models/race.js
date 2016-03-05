@@ -1,5 +1,5 @@
 module.exports = function(Race) {
-	Race.beforeRemote('prototype.__link__raceTeams', function(){});
+	//Race.beforeRemote('prototype.__link__raceTeams', function(){});
 	Race.remoteMethod('search', {
 		accepts: {
 			arg: 'keyword',
@@ -69,6 +69,41 @@ module.exports = function(Race) {
       cb(null,races);
     });
   };
+  
+  Race.beforeRemote("prototype.__updateById__notices", function (ctx, ins, next) {
+    ctx.instance.raceTeams.count({
+      id: ctx.req.body.teamId
+    }, function (err, count) {
+      if (count)
+        return next('你的团队不是竞赛团队，不能上传资料');
+      else {
+        ctx.instance.notices.findOne({
+          where:{
+            id: ctx.req.params.fk,
+            'uploadFile.teamId': ctx.req.body.teamId
+          }
+        }, function (err, notice) {
+          if (err)
+            return next(err);
+          else if (notice) {
+            next('你的团队已经上传过了');
+          } else {
+            ctx.instance.notices.updateAll({
+              id: ctx.req.params.fk
+            }, {
+              $push:{
+                uploadFile: ctx.req.body
+              }
+            }, function (err, notice) {
+              if (err)
+                return next(err);
+              ctx.res.send(notice);
+            });
+          }
+        });
+      }
+    });
+  });
   Race.beforeRemote("prototype.__get__raceTeams", function (ctx,ins,next) {
     ctx.req.query.filter = {
       fields: ["name", "id", "logoUrl", "desc", "status"]

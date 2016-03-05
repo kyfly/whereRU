@@ -4,6 +4,12 @@ app.config(['$locationProvider', function ($locationProvider) {
     enabled: true
   });
 }])
+.config(function($sceDelegateProvider) {
+  $sceDelegateProvider.resourceUrlWhitelist([
+    'self',
+    'http://*.etuan.org/**'
+  ]);
+})
 .run(['$rootScope', 'Team', '$timeout', function($rootScope, Team, $timeout){
 	if (localStorage.$LoopBack$currentTeamId) {
 		Team.findById({

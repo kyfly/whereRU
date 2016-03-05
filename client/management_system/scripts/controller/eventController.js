@@ -1,4 +1,4 @@
-app.controller('EventListCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
+app.controller('EventListCtrl', ['$scope', 'Team', '$rootScope', 'Race', function ($scope, Team, $rootScope, Race) {
   $rootScope.logoHide = false;
   $scope.unFormat = "yyyy-MM-dd HH:mm";
   $scope.format = "yyyy-MM-dd";
@@ -24,19 +24,24 @@ app.controller('EventListCtrl', ['$scope', 'Team', '$rootScope', function ($scop
     }
   }, function (res) {
     $scope.partakedEventItems = res;
-    //这里没必要，这里的竞赛犹如参与竞赛的历史
-    // $scope.deletedLength = 0;
-    // for (var x in $scope.partakedEventItems) if ($scope.partakedEventItems[x].deleted === true) {
-    //   $scope.deletedLength ++;
-    // }
   }, function () {
     Materialize.toast('获取参与竞赛列表失败！', 2000);
   });
-
-  $scope.showSingleType = function (type) {
-    $scope.allChosen = type === 'all';
-  };
-
+  var oneMonthAfter = new Date() + 30*24*3600;
+  Race.find({
+    filter: {
+      where: {
+        or:[{
+          started: {gt: oneMonthAfter}
+        }, {
+          ended: {lt: new Date()}
+        }],
+        school: $scope.teamInfo.school
+      }
+    }
+  }, function (res) {
+    $scope.recommendRaces = res;
+  });
   $scope.deleteEvent = function () {
     var thisElement = this;
 
@@ -67,7 +72,14 @@ app.controller('EventListCtrl', ['$scope', 'Team', '$rootScope', function ($scop
       Materialize.toast('删除失败！', 2000);
     });
   };
-
+  $scope.joinRace = function () {
+    Team.prototype_link_partakedRaces({
+      id: $scope.teamInfo.id,
+      fk: this.race.id
+    }, {},function (status) {
+      Materialize.toast('参与成功,刷新后可在参与列表查看', 2000);
+    });
+  }
 }]);
 
 app.controller('EventEditCtrl', 
@@ -222,7 +234,33 @@ app.controller('EventDetailCtrl',
       Materialize.toast('请先填写通知内容哦', 2000);
     }
   };
+  $scope.uploadNoticeFile = function () {
+    var file = document.getElementById(this.notice.id).files[0];
+    notice = this.notice;
+    uploadFile.file(file, 'team', $scope.teamInfo.id)
+    .success(function (res) {
+      notice.dataUrl = appConfig.FILE_URL + res.url;
+      $scope.putFileInfo(notice);
 
+    })
+    .error();
+  };
+  $scope.putFileInfo = function (notice) {
+    Race.prototype_updateById_notices({
+      id: $stateParams.id,
+      fk: notice.id
+    }, {
+      name: notice.file,
+      dataUrl: notice.dataUrl,
+      created: new Date(),
+      loader: $scope.teamInfo.name,
+      teamId: $scope.teamInfo.id
+    }, function (res) {
+      Materialize.toast('资料上传成功！', 2000);
+    }, function (err) {
+      Materialize.toast(err.data.error.message, 2000);
+    });
+  };
   Race.prototype_get_raceTeams({
     id: $stateParams.id
   }, function (res) {

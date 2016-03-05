@@ -111,6 +111,26 @@
         </div>
       </div>
     </div>
-
+    <hr>
+    <h5 class="center">近期竞赛推荐</h5>
+    <hr>
+    <div class="recommend-races row">
+      <ul>
+        <li ng-repeat="race in recommendRaces" class="z-depth-1">
+          <img ng-src="{{race.imgUrl}}">
+          <div class="race-info">
+            <h4 ng-bind="race.name"></h4>
+            发布方：<a href="" ng-bind="race.authorName"></a>
+            <span>报名时间：
+              <em ng-bind="race.started | date: format"></em> 到 
+              <em ng-bind="race.ended | date: format"></em>
+            </span>
+          </div>
+          <div class="red white-text join-race waves-effect">
+            <i class="mdi-content-add" ng-click="joinRace()"></i>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

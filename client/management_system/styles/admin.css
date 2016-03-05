@@ -327,7 +327,43 @@ hr {
   font-size: 30px;
   font-weight: 300;
 }
+.recommend-races li {
+      position: relative;
+    height: 120px;
+    padding: 10px;
+    margin: 10px;
+}
+.recommend-races li h4{
+  font-size: 1.5rem;
+  line-height: 110%;
+  margin: 5px 0;
+}
+.recommend-races li img{
+  width: 100px;
+  height: 100px;
 
+}
+.recommend-races li .race-info{
+  position: absolute;
+    top: 10px;
+    left: 110px;
+    right: 40px;
+}
+.recommend-races li .join-race{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    text-align: center;
+    width: 40px;
+}
+.recommend-races li .join-race i{
+  padding-top: 35px;
+    font-size: 30px;
+}
+.recommend-races li span{
+  display: block;
+}
 /*
   以下为event.detail的样式
 */
@@ -344,7 +380,7 @@ hr {
   font-size: 20px;
 }
 
-.collection-item-event > p {
+.collection-item-event > section {
   color: #000000 !important;
   padding: 15px !important;
 }
