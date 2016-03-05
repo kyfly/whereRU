@@ -15,10 +15,10 @@ body > .wrap {
 }
 .main {
   padding-bottom: 50px;
-}  
+}
 footer {
   position: relative;
-  margin-top: -50px; 
+  margin-top: -50px;
   height: 50px;
   font-size: 1.2rem;
   padding-top: 15px;
@@ -441,4 +441,16 @@ hr {
 
 .dropdown-content {
   top: 0 !important;
+}
+
+/*
+  以下为setting的样式
+*/
+.switch{
+  line-height: 3rem;
+  font-size: 1rem;
+  color: #9e9e9e;
+}
+.switch>span{
+  padding-right: 20px;
 }

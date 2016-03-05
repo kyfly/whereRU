@@ -321,6 +321,13 @@ module.factory(
           method: 'GET'
         },
         /**
+         * 描述：更新团队信息
+         */
+        "prototype_updateAttributes": {
+          url: urlBase + '/Teams/:id',
+          method: 'PUT'
+        },
+        /**
          * 描述：团队发布过的活动列表，所有用户
          */
         "prototype_get_activities": {

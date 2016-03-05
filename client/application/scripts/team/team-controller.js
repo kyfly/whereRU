@@ -1,16 +1,16 @@
-app.controller('TeamsController', ['$scope','Team',  'User', '$location', function ($scope, Team, User, $location) {
+app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', function ($scope, Team, User, $location) {
   $scope.types = [{
-    "name": "校园组织",
-  },{
-    "name": "校园团队",
-  },{
-    "name": "兴趣团队",
-  },{
-    "name": "技术团队",
+    "name": "校园组织"
+  }, {
+    "name": "校园团队"
+  }, {
+    "name": "兴趣团队"
+  }, {
+    "name": "技术团队"
   }];
   $scope.changeFilter = function () {
     $scope.choice = this.type.name;
-  }
+  };
   $scope.team = {
     status: false,
     hidden: false
@@ -19,6 +19,7 @@ app.controller('TeamsController', ['$scope','Team',  'User', '$location', functi
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');
     }
+    console.log($scope.$currentUser);
     var file = document.getElementById('teamlogo').files[0];
     var Xhr = new XMLHttpRequest();
     var fileExt = /\.[^\.]+/.exec(document.getElementById('teamlogo').value.toLowerCase());
@@ -40,7 +41,7 @@ app.controller('TeamsController', ['$scope','Team',  'User', '$location', functi
     Xhr.onreadystatechange = readyHandle;
     Xhr.open('POST', '/ue/uploads?dir=teamlogo&id=' + $scope.$currentUser.id + '&action=uploadimage', true);
     Xhr.send(Fd);
-  }
+  };
   /**
    * 团队列表
    * school参数有问题，i++
@@ -56,7 +57,7 @@ app.controller('TeamsController', ['$scope','Team',  'User', '$location', functi
       $scope.teams = res.teams;
     });
   }
-  
+
 
   /**
    * 创建团队
@@ -80,7 +81,7 @@ app.controller('TeamsController', ['$scope','Team',  'User', '$location', functi
 
 app.controller('TeamController', ['$scope', 'Team', '$stateParams', 'User', function ($scope, Team, $stateParams, User) {
   $scope.userInfomation = {};
-  
+
   if (!$scope.teamId) {
     $scope.teamId = $stateParams.id;
   }
@@ -106,7 +107,7 @@ app.controller('TeamController', ['$scope', 'Team', '$stateParams', 'User', func
   }, function (activities) {
     $scope.activities = activities;
   });
-  
+
   $scope.join = function () {
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');

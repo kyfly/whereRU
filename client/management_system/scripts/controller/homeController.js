@@ -1,14 +1,14 @@
 app.controller('AdminCtrl', ['$scope', '$timeout', '$window', '$rootScope', 'Team', AdminCtrl]);
 function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
   $rootScope.logoHide = false;
-  
-  
+
+
 
   $scope.$on('$stateChangeStart', function (evt, next, current) {
     if (next.name !== 'index')
     $scope.redirect(next.stateIndex);
   });
-  
+
 
   //侧边栏显示内容
   $scope.sidebars = [
@@ -49,7 +49,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
     },
     {
       'id': 'sidebarAlbum',
-      'display_name': '相册管理',
+      'display_name': '资料管理',
       'url': '/MS/album'
     },
     {
@@ -75,7 +75,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
     $('.button-collapse').sideNav('hide');
   };
 
-  
+
 }
 
 app.controller('HomeCtrl', ['$scope', function ($scope) {

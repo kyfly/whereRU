@@ -1,27 +1,101 @@
 <div class="row">
-  <div class="input-field">
-    <i class="mdi-action-account-circle prefix"></i>
-    <input id="name" type="text" ng-model="orgChange.name">
-    <label for="name">主办方名称</label>
+  <ul id="editInfoTabs" class="tabs" tabs>
+    <li class="tab col s3"><a class="active" href="#editInfo">基本信息</a></li>
+    <li class="tab col s3"><a href="#editLogo">LOGO</a></li>
+    <li class="tab col s3"><a href="#editDepartment">部门管理</a></li>
+    <li class="tab col s3"><a href="#editPassword">更改密码</a></li>
+  </ul>
+  <div id="editInfo" class="col s12">
+    <div class="input-field">
+      <i class="mdi-action-account-circle prefix"></i>
+      <input id="name" type="text" ng-model="team.name">
+      <label for="name">团队名称</label>
+    </div>
+    <div class="input-field">
+      <i class="mdi-action-room prefix"></i>
+      <select class="selectMargin" ng-model="team.type" material-select watch required>
+        <option value="" disabled selected>请选择团队类型</option>
+        <option ng-repeat="type in types">{{type.name}}</option>
+      </select>
+    </div>
+    <div class="input-field">
+      <i class="mdi-action-description prefix"></i>
+      <textarea id="desc" ng-model="team.desc" class="materialize-textarea"></textarea>
+      <label for="desc">团队描述</label>
+    </div>
+    <div class="switch">
+      <span>是否允许加入</span>
+      <label>
+        否
+        <input checked type="checkbox" ng-model="team.status" required>
+        <span class="lever"></span>
+        是
+      </label>
+    </div>
+    <div class="switch">
+      <span>是否隐藏团队</span>
+      <label>
+        否
+        <input type="checkbox" ng-model="team.hidden" required>
+        <span class="lever"></span>
+        是
+      </label>
+    </div>
+    <a href="#" class="waves-effect waves-light btn orange darken-4 right"
+       ng-click="updateInfo()">更新资料</a>
   </div>
-  <div class="input-field">
-    <i class="mdi-action-room prefix"></i>
-    <select class="selectMargin" ng-model="orgChange.school"
-            material-select watch>
-      <option value="" disabled selected>选择你的学校</option>
-      <option ng-repeat="school in schools">{{school.name}}</option>
-    </select>
+
+  <div id="editLogo" class="col s12">
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>团队LOGO</span>
+        <input type="file" id="teamlogo" multiple ng-model="team.logoUrl" required>
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" ng-model="tem" ng-change="uploadLogo()" type="text" placeholder="请选择团队LOGO">
+      </div>
+    </div>
+    <a href="#" class="waves-effect waves-light btn orange darken-4 right"
+       ng-click="updateInfo()">更新LOGO</a>
   </div>
-  <div class="input-field">
-    <i class="mdi-communication-phone prefix"></i>
-    <input id="phone" type="text" ng-model="orgChange.phone">
-    <label for="phone">手机长号</label>
+
+  <div id="editDepartment" class="col s12">
+    <div class="col-sm-10 col-sm-offset-2">
+      <button type="button" class="btn" ng-click="addDepartment()">
+        添加部门
+      </button>
+    </div>
+    <div ng-repeat="teamDepartment in team.teamDepartments" class="margin-top">
+      <div class="col s10">
+        <button class="waves-effect waves-light btn white-text blue darken-2" type="button" ng-click="moveUpDepartment($index)">
+          <i class="material-icons left">arrow_upward</i>上移
+        </button>
+        <button class="waves-effect waves-light btn white-text blue darken-2" type="button" ng-click="moveDownDepartment($index)">
+          <i class="material-icons left">arrow_downward</i>下移
+        </button>
+        <button class="waves-effect waves-light btn red white-text" type="button" ng-click="removeDepartment($index)">
+          <i class="material-icons left">delete</i>删除
+        </button>
+      </div>
+      <div class="clearfix"></div>
+      <div class="input-field">
+        <i class="mdi-action-account-circle prefix"></i>
+        <input id="{{'name' + $index}}" type="text" ng-model="teamDepartment.name">
+        <label for="{{'name' + $index}}">部门名称</label>
+      </div>
+      <div class="input-field">
+        <i class="mdi-action-description prefix"></i>
+        <textarea id="{{'desc' + $index}}" rows="5" ng-model="teamDepartment.desc"
+                  class="materialize-textarea"></textarea>
+        <label for="{{'desc' + $index}}">部门描述</label>
+      </div>
+    </div>
+    <a href="#" class="waves-effect waves-light btn orange darken-4 right"
+       ng-click="updateInfo()">更新部门</a>
   </div>
-  <div class="input-field">
-    <i class="mdi-communication-email prefix"></i>
-    <input id="email" type="text" ng-model="orgChange.email">
-    <label for="email">邮箱</label>
+
+  <div id="editPassword" class="col s12">
+
   </div>
+
 </div>
-<a href="#" class="waves-effect waves-light btn orange darken-4 right"
-   ng-click="updateOrgInfo()">更新资料</a>
