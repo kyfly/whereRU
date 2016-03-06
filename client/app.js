@@ -161,5 +161,39 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	}, function (res) {
 		$scope.races = res;
 	});
+		//首页移动动画 hear为当前展示 n为总张数
+	var time1;
+	function move(hear,n){
+		var P=document.getElementsByClassName("desc");
+		P[hear].className="desc p2";
+		P[(hear+1)%n].className="desc p3";
+		P[((hear-1)%n+n)%n].className="desc p0";
+		P[((hear-2)%n+n)%n].className="desc p1";
+	}
+	function headtra(n){//动画n为图片数量
+		var P=document.getElementsByClassName("desc");
+		var show= 1,i;
+		P[0].className="desc p1";
+		P[1].className="desc p0";
+		P[2].className="desc p2";
+		for(i=0;i<3;i++){
+			P[i].style.transition="all 1.5s ease 0s";
+		}
+		for(i=3;i<n;i++){
+			P[i].className="desc p3";
+			P[i].style.transition="all 1.6s ease 0s";
+		}
+		time1=setInterval(function(){
+			move(show,n);
+			show--;
+			if(show<0){
+				show=n-1;
+			}
+		},5000);
+	}
+	headtra(5);
+	$scope.$on("$destroy", function() {
+		clearInterval(time1);
+	})
 }]);
 
