@@ -129,6 +129,7 @@ nav .nav-wrapper i {
   top: 0;
   left: 50%;
   margin:0 0 0 -25%;
+  border-radius: 12px;
 }
 .section-first .screen{
   width: 100%;
