@@ -891,7 +891,13 @@ module.factory(
           url: urlBase + '/Races/:id/raceTeams',
           params: {
             filter: {
-              fields: ['id', 'name', 'logoUrl', 'status', 'desc']
+              fields: ['id', 'name', 'logoUrl', 'status', 'desc'],
+              include: {
+                relation: 'members',
+                scope: {
+                  fields: ["name", "academy", "userId", "department", "phone"],
+                }
+              }
             }
           },
           method: 'GET',

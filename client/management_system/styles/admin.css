@@ -6,7 +6,13 @@
 body {
   font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
 }
-
+@media only screen and (max-width: 601px) {
+  .container {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 95%;
+  }
+}
 html, body, .wrap {
   height: 100%;
 }

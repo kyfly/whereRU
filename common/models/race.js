@@ -104,10 +104,4 @@ module.exports = function(Race) {
       }
     });
   });
-  Race.beforeRemote("prototype.__get__raceTeams", function (ctx,ins,next) {
-    ctx.req.query.filter = {
-      fields: ["name", "id", "logoUrl", "desc", "status"]
-    };
-    next();
-  });
 };

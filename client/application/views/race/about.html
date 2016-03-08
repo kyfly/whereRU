@@ -31,8 +31,14 @@
     </li>
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/team-desc.png" alt="" class="circle">
-      <span class="title">历年资料</span>
-      <a href="" class="secondary-content"><i class="mdi-content-send"></i></a>
+      <span class="title">公开资料</span>
+      <p><br>
+        <ul>
+          <li ng-repeat="material in materials">
+           <h6><span ng-bind="$index + 1"></span>. <a ng-href="{{material.dataUrl}}" ng-bind="material.name"></a></h6>
+          </li>
+        </ul>
+      </p>
     </li>
   </ul>
 </div>

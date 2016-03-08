@@ -119,11 +119,6 @@ nav .nav-wrapper i {
 .section-first {
   width: 100%;
   position: relative;
-  /*background-color: #000;*/
-  -webkit-transform-style:preserve-3d;
-  -webkit-perspective:-200px;
-  -moz-transform-style:preserve-3d;
-  -moz-perspective:0px;
 }
 .section-first .desc{
   width: 50%;
@@ -141,11 +136,11 @@ nav .nav-wrapper i {
   height: 100%;
 }
 .section-first .main-desc {
-  -webkit-transform:rotatey(0deg) translatez(35%);
   background-image: url('/lib/img/bg/main.png');
   background-size: 100% 100%;
   -webkit-animation:main-anima 25s infinite;
-  -moz-animation:mydhua 5s infinite;
+  -moz-animation:main-anima 25s infinite;
+  -ms-animation:main-anima 25s infinite;
 }
 @-webkit-keyframes main-anima{
   0% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
@@ -160,12 +155,39 @@ nav .nav-wrapper i {
   96% {z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
   100% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
 }
+@-moz-keyframes main-anima{
+  0% {z-index: 2;height: 100%;-moz-transform:translatex(0px);}
+  16% {z-index: 2;height: 100%;-moz-transform:translatex(0px);}
+  20%{z-index: 1;height: 90%;-moz-transform:translatex(25%);}
+  36% {z-index: 1;height: 90%;-moz-transform:translatex(25%);}
+  40% {z-index: 0;height: 90%;-moz-transform:translatex(50px);}
+  56% {z-index: 0;height: 90%;-moz-transform:translatex(50px);}
+  60% {z-index: 0;height: 90%;-moz-transform:translatex(-50px);}
+  76% {z-index: 0;height: 90%;-moz-transform:translatex(-50px);}
+  80% {z-index: 1;height: 90%;-moz-transform:translatex(-25%);}
+  96% {z-index: 1;height: 90%;-moz-transform:translatex(-25%);}
+  100% {z-index: 2;height: 100%;-moz-transform:translatex(0px);}
+}
+@-ms-keyframes main-anima{
+  0% {z-index: 2;height: 100%;-ms-transform:translatex(0px);}
+  16% {z-index: 2;height: 100%;-ms-transform:translatex(0px);}
+  20%{z-index: 1;height: 90%;-ms-transform:translatex(25%);}
+  36% {z-index: 1;height: 90%;-ms-transform:translatex(25%);}
+  40% {z-index: 0;height: 90%;-ms-transform:translatex(50px);}
+  56% {z-index: 0;height: 90%;-ms-transform:translatex(50px);}
+  60% {z-index: 0;height: 90%;-ms-transform:translatex(-50px);}
+  76% {z-index: 0;height: 90%;-ms-transform:translatex(-50px);}
+  80% {z-index: 1;height: 90%;-ms-transform:translatex(-25%);}
+  96% {z-index: 1;height: 90%;-ms-transform:translatex(-25%);}
+  100% {z-index: 2;height: 100%;-ms-transform:translatex(0px);}
+}
 
 .section-first .activity-desc {
-  background: rgb(255,0,255);
    background-image: url('/lib/img/bg/activity.jpg');
   background-size: 100% 100%;
   -webkit-animation:activity-anima 25s infinite;
+  -moz-animation:activity-anima 25s infinite;
+  -ms-animation:activity-anima 25s infinite;
 }
 @-webkit-keyframes activity-anima{
   0% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
@@ -180,11 +202,38 @@ nav .nav-wrapper i {
   96% {z-index: 2;height: 100%;-webkit-transform:translatex(0px);}
   100% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
 }
+@-moz-keyframes activity-anima{
+  0% {z-index: 1;height: 90%;-moz-transform:translatex(25%);}
+  16% {z-index: 1;height: 90%;-moz-transform:translatex(25%);}
+  20%{z-index: 0;height: 90%;-moz-transform:translatex(50px);}
+  36% {z-index: 0;height: 90%;-moz-transform:translatex(50px);}
+  40% {z-index: 0;height: 90%;-moz-transform:translatex(-50px);}
+  56% {z-index: 0;height: 90%;-moz-transform:translatex(-50px);}
+  60% {z-index: 1;height: 90%;-moz-transform:translatex(-25%);}
+  76% {z-index: 1;height: 90%;-moz-transform:translatex(-25%);}
+  80% {z-index: 2;height: 100%;-moz-transform:translatex(0px);}
+  96% {z-index: 2;height: 100%;-moz-transform:translatex(0px);}
+  100% {z-index: 1;height: 90%;-moz-transform:translatex(25%);}
+}
+@-ms-keyframes activity-anima{
+  0% {z-index: 1;height: 90%;-ms-transform:translatex(25%);}
+  16% {z-index: 1;height: 90%;-ms-transform:translatex(25%);}
+  20%{z-index: 0;height: 90%;-ms-transform:translatex(50px);}
+  36% {z-index: 0;height: 90%;-ms-transform:translatex(50px);}
+  40% {z-index: 0;height: 90%;-ms-transform:translatex(-50px);}
+  56% {z-index: 0;height: 90%;-ms-transform:translatex(-50px);}
+  60% {z-index: 1;height: 90%;-ms-transform:translatex(-25%);}
+  76% {z-index: 1;height: 90%;-ms-transform:translatex(-25%);}
+  80% {z-index: 2;height: 100%;-ms-transform:translatex(0px);}
+  96% {z-index: 2;height: 100%;-ms-transform:translatex(0px);}
+  100% {z-index: 1;height: 90%;-ms-transform:translatex(25%);}
+}
 .section-first .race-desc {
-  background: rgb(255,153,204);
    background-image: url('/lib/img/bg/race.jpg');
   background-size: 100% 100%;
   -webkit-animation:race-anima 25s infinite;
+  -moz-animation:race-anima 25s infinite;
+  -ms-animation:race-anima 25s infinite;
 }
 @-webkit-keyframes race-anima{
   0% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
@@ -199,11 +248,38 @@ nav .nav-wrapper i {
   96% {z-index: 1;height: 90%;-webkit-transform:translatex(25%);}
   100% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
 }
+@-moz-keyframes race-anima{
+  0% {z-index: 0;height: 90%;-moz-transform:translatex(50px);}
+  16% {z-index: 0;height: 90%;-moz-transform:translatex(50px);}
+  20%{z-index: 0;height: 90%;-moz-transform:translatex(-50px);}
+  36% {z-index: 0;height: 90%;-moz-transform:translatex(-50px);}
+  40% {z-index: 1;height: 90%;-moz-transform:translatex(-25%);}
+  56% {z-index: 1;height: 90%;-moz-transform:translatex(-25%);}
+  60% {z-index: 2;height: 100%;-moz-transform:translatex(0px);}
+  76% {z-index: 2;height: 100%;-moz-transform:translatex(0px);}
+  80% {z-index: 1;height: 90%;-moz-transform:translatex(25%);}
+  96% {z-index: 1;height: 90%;-moz-transform:translatex(25%);}
+  100% {z-index: 0;height: 90%;-moz-transform:translatex(50px);}
+}
+@-ms-keyframes race-anima{
+  0% {z-index: 0;height: 90%;-ms-transform:translatex(50px);}
+  16% {z-index: 0;height: 90%;-ms-transform:translatex(50px);}
+  20%{z-index: 0;height: 90%;-ms-transform:translatex(-50px);}
+  36% {z-index: 0;height: 90%;-ms-transform:translatex(-50px);}
+  40% {z-index: 1;height: 90%;-ms-transform:translatex(-25%);}
+  56% {z-index: 1;height: 90%;-ms-transform:translatex(-25%);}
+  60% {z-index: 2;height: 100%;-ms-transform:translatex(0px);}
+  76% {z-index: 2;height: 100%;-ms-transform:translatex(0px);}
+  80% {z-index: 1;height: 90%;-ms-transform:translatex(25%);}
+  96% {z-index: 1;height: 90%;-ms-transform:translatex(25%);}
+  100% {z-index: 0;height: 90%;-ms-transform:translatex(50px);}
+}
 .section-first .team-desc {
-  background: rgb(0,204,255);
    background-image: url('/lib/img/bg/team.jpg');
   background-size: 100% 100%;
   -webkit-animation:team-anima 25s infinite;
+  -ms-animation:team-anima 25s infinite;
+  -moz-animation:team-anima 25s infinite;
 }
 @-webkit-keyframes team-anima{
   0% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
@@ -218,11 +294,38 @@ nav .nav-wrapper i {
   96% {z-index: 0;height: 90%;-webkit-transform:translatex(50px);}
   100% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
 }
+@-moz-keyframes team-anima{
+  0% {z-index: 0;height: 90%;-moz-transform:translatex(-50px);}
+  16% {z-index: 0;height: 90%;-moz-transform:translatex(-50px);}
+  20%{z-index: 1;height: 90%;-moz-transform:translatex(-25%);}
+  36% {z-index: 1;height: 90%;-moz-transform:translatex(-25%);}
+  40% {z-index: 2;height: 100%;-moz-transform:translatex(0px);}
+  56% {z-index: 2;height: 100%;-moz-transform:translatex(0px);}
+  60% {z-index: 1;height: 90%;-moz-transform:translatex(25%);}
+  76% {z-index: 1;height: 90%;-moz-transform:translatex(25%);}
+  80% {z-index: 0;height: 90%;-moz-transform:translatex(50px);}
+  96% {z-index: 0;height: 90%;-moz-transform:translatex(50px);}
+  100% {z-index: 0;height: 90%;-moz-transform:translatex(-50px);}
+}
+@-ms-keyframes team-anima{
+  0% {z-index: 0;height: 90%;-ms-transform:translatex(-50px);}
+  16% {z-index: 0;height: 90%;-ms-transform:translatex(-50px);}
+  20%{z-index: 1;height: 90%;-ms-transform:translatex(-25%);}
+  36% {z-index: 1;height: 90%;-ms-transform:translatex(-25%);}
+  40% {z-index: 2;height: 100%;-ms-transform:translatex(0px);}
+  56% {z-index: 2;height: 100%;-ms-transform:translatex(0px);}
+  60% {z-index: 1;height: 90%;-ms-transform:translatex(25%);}
+  76% {z-index: 1;height: 90%;-ms-transform:translatex(25%);}
+  80% {z-index: 0;height: 90%;-ms-transform:translatex(50px);}
+  96% {z-index: 0;height: 90%;-ms-transform:translatex(50px);}
+  100% {z-index: 0;height: 90%;-ms-transform:translatex(-50px);}
+}
 .section-first .coterie-desc{
-  background: rgb(0,0,0);
    background-image: url('/lib/img/bg/coterie.jpg');
   background-size: 100% 100%;
   -webkit-animation:coterie-anima 25s infinite;
+  -ms-animation:coterie-anima 25s infinite;
+  -moz-animation:coterie-anima 25s infinite;
 }
 @-webkit-keyframes coterie-anima{
   0% {z-index: 1;height: 90%;-webkit-transform:translatex(-25%);}
@@ -236,6 +339,32 @@ nav .nav-wrapper i {
   80% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
   96% {z-index: 0;height: 90%;-webkit-transform:translatex(-50px);}
   100% {z-index: 0;height: 90%;-webkit-transform:translatex(-25%);}
+}
+@-moz-keyframes coterie-anima{
+  0% {z-index: 1;height: 90%;-moz-transform:translatex(-25%);}
+  16% {z-index: 1;height: 90%;-moz-transform:translatex(-25%);}
+  20%{z-index: 2;height: 100%;-moz-transform:translatex(0px);}
+  36% {z-index: 2;height: 100%;-moz-transform:translatex(0px);}
+  40% {z-index: 1;height: 90%;-moz-transform:translatex(25%);}
+  56% {z-index: 1;height: 90%;-moz-transform:translatex(25%);}
+  60% {z-index: 0;height: 90%;-moz-transform:translatex(50px);}
+  76% {z-index: 0;height: 90%;-moz-transform:translatex(50px);}
+  80% {z-index: 0;height: 90%;-moz-transform:translatex(-50px);}
+  96% {z-index: 0;height: 90%;-moz-transform:translatex(-50px);}
+  100% {z-index: 0;height: 90%;-moz-transform:translatex(-25%);}
+}
+@-ms-keyframes coterie-anima{
+  0% {z-index: 1;height: 90%;-ms-transform:translatex(-25%);}
+  16% {z-index: 1;height: 90%;-ms-transform:translatex(-25%);}
+  20%{z-index: 2;height: 100%;-ms-transform:translatex(0px);}
+  36% {z-index: 2;height: 100%;-ms-transform:translatex(0px);}
+  40% {z-index: 1;height: 90%;-ms-transform:translatex(25%);}
+  56% {z-index: 1;height: 90%;-ms-transform:translatex(25%);}
+  60% {z-index: 0;height: 90%;-ms-transform:translatex(50px);}
+  76% {z-index: 0;height: 90%;-ms-transform:translatex(50px);}
+  80% {z-index: 0;height: 90%;-ms-transform:translatex(-50px);}
+  96% {z-index: 0;height: 90%;-ms-transform:translatex(-50px);}
+  100% {z-index: 0;height: 90%;-ms-transform:translatex(-25%);}
 }
 .section-second {
   padding-top: 30px;

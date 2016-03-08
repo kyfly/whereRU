@@ -23,6 +23,13 @@ app.controller('RaceController', ['$scope', 'Race', '$stateParams', 'User', 'Tea
       bdPic: race.imgUrl
     });
   });
+  Race.prototype_get_materials({
+    id: $stateParams.id
+  }, function (res) {
+    $scope.materials = res;
+  }, function () {
+    Materialize.toast('获取资料列表失败！', 2000);
+  });
   Race.prototype_get_notices({
     id: $stateParams.id
   }, function (notices) {

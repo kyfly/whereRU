@@ -16,11 +16,11 @@
                   class="materialize-textarea"></textarea>
           <label for="newNoticeContent">新通知内容</label>
         </div>
-        <div class="addFile left">
-          <a class="waves-effect waves-light btn light-blue darken-2"
-             ng-click="uploadAttachmentBtn = !uploadAttachmentBtn; addGetInfoBtn = false">上传附件</a>
-          <a class="waves-effect waves-light btn light-blue darken-2"
-             ng-click="addGetInfoBtn = !addGetInfoBtn; uploadAttachmentBtn = false">
+        <div class="addFile">
+          <a class="waves-effect waves-light darken-2"
+             ng-click="uploadAttachmentBtn = !uploadAttachmentBtn;">上传附件</a>
+          <a class="waves-effect waves-light darken-2"
+             ng-click="addGetInfoBtn = !addGetInfoBtn;">
              资料收集</a>
 
           <div ng-show="uploadAttachmentBtn" class="file-field input-field">
@@ -112,21 +112,45 @@
     </div>
   </div>
   <div id="eventTeams">
-    <ul class="collection with-header z-depth-1 hoverable">
+    <ul class="collection with-header hoverable">
       <li class="collection-header"><h4>参赛团队</h4></li>
-
-      <li class="collection-item collection-item-event teamImg" ng-repeat="raceTeam in raceTeams">
-        <img class="left"
-             ng-src="{{raceTeam.logoUrl}}"
-             width="70px" height="70px">
-        <p class="left" ng-bind="raceTeam.name"></p>
-        <i ng-show="isAuthor" class="mdi-content-clear red-text deleteMember right"
+      <li class="collection-item avatar" ng-repeat="raceTeam in raceTeams">
+        <img ng-src="{{raceTeam.logoUrl}}" class="circle">
+        <span class="title">
+          <a ng-href="/w/teams/{{raceTeam.id}}" target="_blank"
+              ng-bind="raceTeam.name"></a> 
+        <p>
+          <table>
+            <thead>
+              <tr>
+                  <th data-field="id">姓名</th>
+                  <th data-field="name">联系方式</th>
+                  <th data-field="price">学院</th>
+                  <th data-field="price">角色</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="member in raceTeam.members">
+                <td ng-bind="member.name"></td>
+                <td ng-bind="member.phone"></td>
+                <td ng-bind="member.academy || '未填写'"></td>
+                <td ng-bind="member.department"></td>
+              </tr>
+            </tbody>
+          </table>
+        </p>
+        <a href="#!" class="secondary-content">
+          <i ng-show="isAuthor" class="mdi-content-clear red-text deleteMember right"
            ng-href="{{'#deleteRaceTeamConfirm' + $index}}"
            modal></i>
+        </a>
         <div id="{{'deleteRaceTeamConfirm' + $index}}" class="modal">
           <div class="modal-content">
             <h4>确认删除？</h4>
-            <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>删除后不可恢复！</span></p>
+            <p class="text-center warningText">
+              <i class="mdi-alert-warning"></i> 
+              <span>删除后不可恢复！</span>
+            </p>
           </div>
           <div class="modal-footer">
             <a ng-click="deleteRaceTeam()" href=""
@@ -135,70 +159,44 @@
           </div>
 
         </div>
-        <div class="clearfix"></div>
-      </li>
-      <li class="collection-item text-center collection-item-event" ng-show="!raceTeams.length">
-        <p class="noticeText">还没有团队参加哦 (′・ω・`)</p>
       </li>
     </ul>
   </div>
   <div id="eventLibrary" class="col s12">
-    <div class="col s12 m12 l5" ng-show="isAuthor">
-      <h4>文件收集结果</h4>
-      <p ng-show="!(noticeList.length - deletedNum)">还没有要收集的文件哦 (*ω* )</p>
-      <ul class="collapsible popout" data-collapsible="accordion" watch ng-show="noticeList.length - deletedNum">
-        <li ng-repeat="notice in noticeList | orderBy: 'created': true"
-            ng-show="notice.fileName && notice.deleted === false">
-          <div class="collapsible-header" ng-bind="notice.fileName"></div>
-          <div class="collapsible-body">
-            <div ng-repeat="uploadfile in notice.uploadFile">
-              <p>
-                <span ng-bind="$index + 1"></span>.
-                <span class="orange-text text-darken-2"
-                      ng-bind="uploadfile.team"></span>
-                上传：
-                <a target="_blank"
-                   ng-href="{{uploadfile.url}}"
-                   ng-bind="uploadfile.filename"></a>
-              </p>
-            </div>
-            <p ng-show="!notice.uploadFile">还没有团队上传资料哦 (* ￣︿￣)</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="col s12 m12" ng-class="{true:'offset-l2 l5',false:'l12'}[isAuthor]">
-      <div ng-show="isAuthor">
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>添加资料</span>
-            <input type="file" id="addMaterialDoc">
-          </div>
-          <div class="file-path-wrapper">
-            <input ng-model="materialInfo.name" class="file-path validate" type="text"
-                   placeholder="点我添加文件（.doc）" ng-change="materialLoad()">
-          </div>
+    <div ng-show="isAuthor" class="col s12">
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>添加资料</span>
+          <input type="file" id="addMaterialDoc">
         </div>
-        <div class="file-field input-field">
-          <input type="checkbox" id="isOpen" ng-model="materialInfo.open">
-          <label for="isOpen">公开该文件（所有人可见）</label>
+        <div class="file-path-wrapper">
+          <input ng-model="materialInfo.name" class="file-path validate" type="text"
+                 placeholder="点我添加文件" ng-change="materialLoad()">
         </div>
-
-        <a href="" class="waves-effect waves-light btn right orange darken-4 margin-top"
-           ng-click="createMaterial()"><i class="mdi-content-add right"></i>上传资料</a>
       </div>
-
-      <div class="clearfix"></div>
-      <h4>资料库</h4>
+      <div class="file-field input-field">
+        <input type="checkbox" id="isOpen" ng-model="materialInfo.open">
+        <label for="isOpen">公开该文件（所有人可见）</label>
+      </div>
+      <a href="" class="waves-effect waves-light btn right orange darken-4 margin-top"
+         ng-click="createMaterial()"><i class="mdi-content-add right"></i>上传资料</a>
+    </div>
+    <div class="col s12 m12">
+      <h4>组织方上传资料</h4>
       <p ng-show="!materialList.length">资料库空空荡荡~ (●′ω`●)</p>
       <ul class="collection z-depth-1 hoverable" ng-show="materialList.length">
-        <li ng-show="materialSingle.open || isAuthor" class="collection-item avatar collection-item-event"
-            ng-repeat="materialSingle in materialList | orderBy: 'created': true">
+        <li ng-show="materialSingle.open || isAuthor" 
+              class="collection-item avatar collection-item-event"
+              ng-repeat="materialSingle in materialList | orderBy: 'created': true">
           <i ng-show="isAuthor" class="mdi-content-clear red-text deleteMember right"
-             ng-href="{{'#deleteMaterialConfirm' + $index}}"
-             modal></i>
-          <span class="green-text text-darken-2" ng-bind="materialSingle.created | date: 'yyyy-MM-dd HH:mm'"></span>
-          <p><a target="_blank" ng-href="{{materialSingle.dataUrl}}" ng-bind="materialSingle.name"></a></p>
+              ng-href="{{'#deleteMaterialConfirm' + $index}}" modal></i>
+          <span class="green-text text-darken-2" 
+                ng-bind="materialSingle.created | date: 'yyyy-MM-dd HH:mm'">
+          </span>
+          <section>
+            <a target="_blank" ng-href="{{materialSingle.dataUrl}}" 
+                  ng-bind="materialSingle.name"></a>
+          </section>
           <div class="switch right" ng-show="isAuthor">
             <label>
               隐藏
@@ -220,6 +218,32 @@
               <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
             </div>
 
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col s12 m12" ng-show="isAuthor">
+      <h4>竞赛收集的资料</h4>
+      <p ng-show="!(noticeList.length - deletedNum)">还没有要收集的文件哦 (*ω* )</p>
+      <ul class="collapsible" data-collapsible="accordion" watch ng-show="noticeList.length - deletedNum">
+        <li ng-repeat="notice in noticeList | orderBy: 'created': true"
+            ng-show="notice.fileName && notice.deleted === false">
+          <div class="collapsible-header">
+            <h5 ng-bind="notice.fileName"></h5>
+          </div>
+          <div class="collapsible-body">
+            <div ng-repeat="uploadfile in notice.uploadFile">
+              <p>
+                <span ng-bind="$index + 1"></span>.
+                <span class="orange-text text-darken-2"
+                      ng-bind="uploadfile.loader"></span>
+                <span ng-bind="uploadfile.created|date: 'M月d日'"></span>上传
+                <a target="_blank"
+                   ng-href="{{uploadfile.dataUrl}}"
+                   ng-bind="uploadfile.name"></a>
+              </p>
+            </div>
+            <p ng-show="!notice.uploadFile">还没有团队上传资料哦 (* ￣︿￣)</p>
           </div>
         </li>
       </ul>
