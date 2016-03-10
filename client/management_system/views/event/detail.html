@@ -17,11 +17,11 @@
           <label for="newNoticeContent">新通知内容</label>
         </div>
         <div class="addFile">
-          <a class="waves-effect waves-light darken-2"
+          <a class="btn waves-effect waves-light darken-2 blue"
              ng-click="uploadAttachmentBtn = !uploadAttachmentBtn;">上传附件</a>
-          <a class="waves-effect waves-light darken-2"
+          <a class="btn waves-effect waves-light darken-2 blue"
              ng-click="addGetInfoBtn = !addGetInfoBtn;">
-             资料收集</a>
+            资料收集</a>
 
           <div ng-show="uploadAttachmentBtn" class="file-field input-field">
             <div class="btn">
@@ -63,34 +63,34 @@
         <p class="noticeText">还没有通知哦 (>_<)</p>
       </div>
       <ul class="collection z-depth-1 hoverable" ng-show="noticeList.length">
-        <li class="collection-item avatar collection-item-event" 
+        <li class="collection-item avatar collection-item-event"
             ng-repeat="notice in noticeList | orderBy: 'created': true">
           <i ng-show="isAuthor" class="mdi-content-clear red-text deleteMember right"
              ng-href="{{'#deleteNoticeConfirm' + $index}}"
              modal></i>
-          <span class="green-text text-darken-2" 
-                  ng-bind="notice.created | date: 'yyyy-MM-dd HH:mm'"></span>
+          <span class="green-text text-darken-2"
+                ng-bind="notice.created | date: 'yyyy-MM-dd HH:mm'"></span>
           <section ng-bind="notice.content"></section>
           <section ng-show="notice.attachmentUrl">
             <span class="orange-text text-darken-2">附件：</span>
             <a target="_blank"
                ng-href="{{notice.attachmentUrl}}"
                ng-bind="notice.attachmentName">
-             </a>
+            </a>
           </section>
           <section ng-show="notice.fileName">
             <span class="orange-text text-darken-2">需要收集的文件：</span>
             <span ng-bind="notice.fileName"></span>
             <div input-field class="file-field input-field">
               <div class="btn">
-                <span>File</span>
+                <span>文件收集</span>
                 <input type="file" id="{{notice.id}}">
               </div>
               <div class="file-path-wrapper">
-                <input ng-model="notice.file" 
-                        ng-change="uploadNoticeFile()" class="file-path validate"
-                        type="text"
-                        placeholder="点我上传《{{notice.fileName}}》">
+                <input ng-model="notice.file"
+                       ng-change="uploadNoticeFile()" class="file-path validate"
+                       type="text"
+                       placeholder="点我上传《{{notice.fileName}}》">
               </div>
             </div>
           </section>
@@ -118,37 +118,38 @@
         <img ng-src="{{raceTeam.logoUrl}}" class="circle">
         <span class="title">
           <a ng-href="/w/teams/{{raceTeam.id}}" target="_blank"
-              ng-bind="raceTeam.name"></a> 
+             ng-bind="raceTeam.name"></a>
+        </span>
         <p>
-          <table>
-            <thead>
-              <tr>
-                  <th data-field="id">姓名</th>
-                  <th data-field="name">联系方式</th>
-                  <th data-field="price">学院</th>
-                  <th data-field="price">角色</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="member in raceTeam.members">
-                <td ng-bind="member.name"></td>
-                <td ng-bind="member.phone"></td>
-                <td ng-bind="member.academy || '未填写'"></td>
-                <td ng-bind="member.department"></td>
-              </tr>
-            </tbody>
-          </table>
+        <table>
+          <thead>
+          <tr>
+            <th data-field="id">姓名</th>
+            <th data-field="name">联系方式</th>
+            <th data-field="price">学院</th>
+            <th data-field="price">角色</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="member in raceTeam.members">
+            <td ng-bind="member.name"></td>
+            <td ng-bind="member.phone"></td>
+            <td ng-bind="member.academy || '未填写'"></td>
+            <td ng-bind="member.department"></td>
+          </tr>
+          </tbody>
+        </table>
         </p>
         <a href="#!" class="secondary-content">
           <i ng-show="isAuthor" class="mdi-content-clear red-text deleteMember right"
-           ng-href="{{'#deleteRaceTeamConfirm' + $index}}"
-           modal></i>
+             ng-href="{{'#deleteRaceTeamConfirm' + $index}}"
+             modal></i>
         </a>
         <div id="{{'deleteRaceTeamConfirm' + $index}}" class="modal">
           <div class="modal-content">
             <h4>确认删除？</h4>
             <p class="text-center warningText">
-              <i class="mdi-alert-warning"></i> 
+              <i class="mdi-alert-warning"></i>
               <span>删除后不可恢复！</span>
             </p>
           </div>
@@ -159,6 +160,9 @@
           </div>
 
         </div>
+      </li>
+      <li class="collection-item text-center" ng-hide="raceTeams.length">
+        <p class="noticeText">还没有团队参加哦 (´・ω・`)</p>
       </li>
     </ul>
   </div>
@@ -185,17 +189,17 @@
       <h4>组织方上传资料</h4>
       <p ng-show="!materialList.length">资料库空空荡荡~ (●′ω`●)</p>
       <ul class="collection z-depth-1 hoverable" ng-show="materialList.length">
-        <li ng-show="materialSingle.open || isAuthor" 
-              class="collection-item avatar collection-item-event"
-              ng-repeat="materialSingle in materialList | orderBy: 'created': true">
+        <li ng-show="materialSingle.open || isAuthor"
+            class="collection-item avatar collection-item-event"
+            ng-repeat="materialSingle in materialList | orderBy: 'created': true">
           <i ng-show="isAuthor" class="mdi-content-clear red-text deleteMember right"
-              ng-href="{{'#deleteMaterialConfirm' + $index}}" modal></i>
-          <span class="green-text text-darken-2" 
+             ng-href="{{'#deleteMaterialConfirm' + $index}}" modal></i>
+          <span class="green-text text-darken-2"
                 ng-bind="materialSingle.created | date: 'yyyy-MM-dd HH:mm'">
           </span>
           <section>
-            <a target="_blank" ng-href="{{materialSingle.dataUrl}}" 
-                  ng-bind="materialSingle.name"></a>
+            <a target="_blank" ng-href="{{materialSingle.dataUrl}}"
+               ng-bind="materialSingle.name"></a>
           </section>
           <div class="switch right" ng-show="isAuthor">
             <label>
