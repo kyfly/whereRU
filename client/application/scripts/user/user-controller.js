@@ -25,6 +25,7 @@ app.controller('RegisterController', ['User', 'School', '$scope', '$rootScope', 
   $scope.register = function () {
     User.create($scope.user, function (data) {
       data.user.id = data.userId;
+      data.user.accessToken = data.id;
       $rootScope.$currentUser = data.user;
       $rootScope.username = data.user.name;
       LoopBackAuth.setUser(data.id, data.userId, data.user);
@@ -39,12 +40,21 @@ app.controller('RegisterController', ['User', 'School', '$scope', '$rootScope', 
   }
 }]);
 
-app.controller('ConfirmSchoolController', ['User', '$scope', function (User, $scope) {
+app.controller('ConfirmSchoolController', ['User', '$scope', 'School', function (User, $scope, School) {
+  $scope.user = $scope.$currentUser;
+  School.findOne({
+    filter: {
+      where: { name: $scope.$currentUser.school},
+      fields: ['academy']
+    }
+  }, function (res) {
+    $scope.academies = res[0].academy;
+  })
   $scope.confirm = function () {
 
-    User.confirmSchool({id: localStorage['$LoopBack$currentUserId']}, $scope.user, function () {
-
-    });
+    // User.confirmSchool({id: localStorage['$LoopBack$currentUserId']}, $scope.user, function () {
+    //   hex_md5($scope.studentPassword)
+    // });
   }
 }]);
 app.controller('UserController', ['$scope', 'User', '$rootScope', '$location',function($scope, User, $rootScope, $location){

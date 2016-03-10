@@ -1,4 +1,6 @@
-app.controller('EventListCtrl', ['$scope', 'Team', '$rootScope', 'Race', function ($scope, Team, $rootScope, Race) {
+app.controller('EventListCtrl', 
+  ['$scope', 'Team', '$rootScope', 'Race', 
+  function ($scope, Team, $rootScope, Race) {
   $rootScope.logoHide = false;
   $scope.unFormat = "yyyy-MM-dd HH:mm";
   $scope.format = "yyyy-MM-dd";
@@ -123,7 +125,7 @@ app.controller('EventEditCtrl',
   $scope.eventEditorConfig = Ueditor.config;
 
   $scope.createEvent = function () {
-    uploadFile($scope.eventEditorContent, 'team', $scope.teamInfo.id)
+    uploadFile.text($scope.eventEditorContent, 'team', $scope.teamInfo.id)
     .success(function (res) {
       $scope.eventData.explainUrl = appConfig.FILE_URL + res.url;
       $scope.eventData.created = new Date();

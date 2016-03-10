@@ -1,5 +1,5 @@
 ﻿body{
-  background-color: #fff;
+  background-color: #eee;
   overflow-y: scroll;
 }
 @media only screen and (max-width: 601px) {
@@ -21,7 +21,10 @@
     padding: 0 10px;
   }
 }
-
+.detail-container{
+  min-height: 300px;
+  padding: 0 10px;
+}
 .row{
   margin-bottom: 0;
 }
@@ -92,7 +95,9 @@ nav .nav-wrapper i {
   top: 0;
   line-height: 4.2rem;
 }
-
+.card {
+  box-shadow:0 2px 4px rgba(0,0,0,0.1)
+}
 #search{
   margin: 0;
 }
@@ -129,7 +134,6 @@ nav .nav-wrapper i {
   top: 0;
   left: 50%;
   margin:0 0 0 -25%;
-  border-radius: 12px;
 }
 .section-first .screen{
   width: 100%;
@@ -551,7 +555,9 @@ footer {
   margin: 0;
 }
 
-
+.detail-box{
+  background-color: #fff;
+}
 .card-list{
 
 }
@@ -608,9 +614,6 @@ footer {
   left: 0;
   right: 0;
   border-radius: 0 0 2px 2px;
-}
-.detail-menu{
-  width: 99%;
 }
 @media only screen and (min-width : 903px) {
   .create-team {
@@ -724,6 +727,11 @@ footer {
   padding: 5px;
   margin: 0;
   color: #fff
+}
+#join{
+  padding: 20px;
+  margin: 0.5rem 0 1rem 0;
+  background: #fff;
 }
 .coterie {
 
@@ -870,6 +878,10 @@ footer {
   top: 0;
   padding: 5px;
   font-size: 1.1rem;
+}
+.article .card-content{
+  word-wrap: break-word;
+  word-break: normal;
 }
 .article .card-action{
   padding: 5px 0px;
@@ -1032,7 +1044,7 @@ footer {
 }
 .edui-default .edui-editor-messageholder{
   position: absolute !important;
-  top: 0px !important;
+  top: 1px !important;
   right: 3px !important;
   z-index: 3 !important;
   width: 200px !important;

@@ -58,14 +58,13 @@ app.config(['$locationProvider', function ($locationProvider) {
 			});
 		},
 		text: function uploadText (text, type, id) {
-			var path = '/ue/uploads?dir=' + type + '&id=' + id + '&action=uploadfile';
 			return $http({
-				url: path,
-				method: "POST",
-				data: {
-				  'content': text
-				}
-			})
+        url: '/ue/uploads?dir=' + type+ '&id=' + id + '&action=uploadtext',
+        method: "post",
+        data: {
+          'content': text
+        }
+      });
 		}
 	};
 }]);

@@ -1,20 +1,5 @@
-<div class="row menu hide-on-med-and-down">
-  <!-- 大屏幕选择 -->
-  <div class="col m2 item l2">
-    
-  </div>
-  <div class="col s4 m4 l2 item waves-effect">
-    <a href="/w/activities">校园活动</a>
-  </div>
-  <div class="col s4 m4 l2 item waves-effect active">
-    <a class="active" href="/w/races">校园竞赛</a>
-  </div>
-  <div class="col s4 m4 l2 item waves-effect">
-    <a href="/w/teams">校园团队</a>
-  </div>
-</div>
-<div class="container">
-  <div class="row s12 detail-menu">
+<div class="container row col s12 ">
+  <div class="detail-menu">
     <ul class="tabs" tabs>
       <li class="tab col s3 waves-effect">
         <a href="#about" class="active">简介</a>
@@ -30,16 +15,19 @@
       </li>
     </ul>
   </div>
-  <div id="about">
-    <div ng-include="'/application/views/race/about.html'"></div>
+  <div class="detail-box">
+    <div id="about">
+      <div ng-include="'/application/views/race/about.html'"></div>
+    </div>
+    <div id="desc" class="detail-container">
+      <ng-include src="race.explainUrl"></ng-include>
+    </div>
+    <div id="notice">
+      <div ng-include="'/application/views/race/notice.html'"></div>
+    </div>
+    <div id="teams">
+      <div ng-include="'/application/views/race/teams.html'"></div>
+    </div>
   </div>
-  <div id="desc" class="detail-container">
-    <ng-include src="race.explainUrl"></ng-include>
-  </div>
-  <div id="notice">
-    <div ng-include="'/application/views/race/notice.html'"></div>
-  </div>
-  <div id="teams">
-    <div ng-include="'/application/views/race/teams.html'"></div>
-  </div>
+  
 </div>

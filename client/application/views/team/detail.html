@@ -1,25 +1,10 @@
-<div class="row menu hide-on-med-and-down">
-  <!-- 大屏幕选择 -->
-  <div class="col m2 item l2">
-    
-  </div>
-  <div class="col s4 m4 l2 item waves-effect">
-    <a href="/w/activities">校园活动</a>
-  </div>
-  <div class="col s4 m4 l2 item waves-effect">
-    <a href="/w/races">校园竞赛</a>
-  </div>
-  <div class="col s4 m4 l2 item active waves-effect">
-    <a class="active" href="/w/teams">校园团队</a>
-  </div>
-</div>
 <div>
   <div class="col s12 m12 team-title center container">
     <img ng-src="{{team.logoUrl}}">
     <h4><span ng-bind="team.name"></span></h4>
   </div>
   <div class="container">
-    <div class="row col s12 detail-menu">
+    <div class="detail-menu  col s12 ">
       <ul class="tabs" tabs>
         <li class="tab col s4 waves-effect">
           <a href="#about">简介</a>
@@ -28,18 +13,20 @@
           <a href="#activities">活动</a>
         </li>
         <li class="tab col s4 waves-effect">
-          <a href="#join">加入</a>
+          <a href="#join" ng-click="getUserInfo()">加入</a>
         </li>
       </ul>
     </div>
-    <div id="about">
-      <ng-include src="'/application/views/team/about.html'"></ng-include>
-    </div>
-    <div id="activities">
-      <ng-include src="'/application/views/team/activities.html'"></ng-include>
-    </div>
-    <div id="join">
-      <ng-include src="'/application/views/team/join.html'"></ng-include>
+    <div class="detail-box">
+      <div id="about" >
+        <ng-include src="'/application/views/team/about.html'"></ng-include>
+      </div>
+      <div id="activities">
+        <ng-include src="'/application/views/team/activities.html'"></ng-include>
+      </div>
+      <div id="join">
+        <ng-include src="'/application/views/team/join.html'"></ng-include>
+      </div>
     </div>
   </div>
 </div>

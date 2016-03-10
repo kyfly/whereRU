@@ -53,6 +53,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	try {
 		var token = JSON.parse(localStorage.$LoopBack$currentUserToken);
 		token.user.id = token.userId;
+    token.user.accessToken = token.id;
 		$rootScope.$currentUser = token.user;
 		if (new Date().getTime() - new Date(token.created).getTime() > token.ttl * 1000) {
 			Materialize.toast('你的TOKEN已失效,你需要重新登录', 2000);

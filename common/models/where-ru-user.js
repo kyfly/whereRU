@@ -8,6 +8,7 @@
  */
 var q = require('q');
 var promise = require(__dirname + '/../../modules/model-promise.js');
+var hdu = require(__dirname + '/../../modules/hdu.js');
 module.exports = function(User) {
   /**
    * 用户注册，给用户添加默认头像
@@ -161,11 +162,7 @@ module.exports = function(User) {
    */
   User.remoteMethod('confirmSchool', {
     accepts: [{
-      arg: 'id', type: 'string',
-    }, {
-      arg: 'studentId', type: 'string',
-    }, {
-      arg: 'password', type: 'string',
+      arg: 'user', type: 'object',
     }],
     returns: {
       arg: 'status', type: 'number'
@@ -174,9 +171,16 @@ module.exports = function(User) {
       path: '/:id/confirmSchool', verb: 'post'
     }
   });
-  User.confirmSchool = function (id, studentId, password, cb) {
-    //TODO 根据用户ID验证用户是否属于该学校
+  User.confirmSchool = function (user, cb) {
+
   }
+  User.beforeRemote('confirmSchool', function (ctx, ins, next) {
+    if (ctx.req.query.ticket && ctx.req.query.ticket) {
+      ctx.instance.studentId = 1;
+    } else {
+
+    }
+  });
   /**
    * 用户搜索
    * @type {Object}

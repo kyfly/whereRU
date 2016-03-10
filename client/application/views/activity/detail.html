@@ -1,19 +1,4 @@
-<div class="row menu hide-on-med-and-down">
-  <!-- 大屏幕选择 -->
-  <div class="col m2 item l2">
-    
-  </div>
-  <div class="col s4 m4 l2 item active waves-effect">
-    <a class="active" href="/w/activities">校园活动</a>
-  </div>
-  <div class="col s4 m4 l2 item waves-effect">
-    <a href="/w/races">校园竞赛</a>
-  </div>
-  <div class="col s4 m4 l2 item waves-effect">
-    <a href="/w/teams">校园团队</a>
-  </div>
-</div>
-<div class="container">
+<div class="container row">
   <div class="row s12 detail-menu">
     <ul class="tabs" tabs>
       <li class="tab col s4 waves-effect">
@@ -27,12 +12,12 @@
       </li>
     </ul>
   </div>
-  <div>
+  <div  class="detail-box">
     <div id="about">
       <div ng-include="'/application/views/activity/about.html'"></div>
     </div>
 
-    <div id="detail" class="col s12 detail-container">
+    <div id="detail" class="detail-container">
       <div ng-include="activity.explainUrl" ></div>
     </div>
     <div id="join" class="col s12">

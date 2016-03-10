@@ -79,17 +79,15 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', functi
  * 团队详情
  */
 
-app.controller('TeamController', ['$scope', 'Team', '$stateParams', 'User', function ($scope, Team, $stateParams, User) {
+app.controller('TeamController', 
+  ['$scope', 'Team', '$stateParams', 'User', '$location',
+  function ($scope, Team, $stateParams, User, $location) {
   $scope.userInfomation = {};
 
   if (!$scope.teamId) {
     $scope.teamId = $stateParams.id;
   }
-  if ($scope.$currentUser) {
-    User.getInfo(function (user) {
-      $scope.user = user;
-    });
-  }
+  
   Team.findById({
       id: $scope.teamId
     }, function (res) {
@@ -107,7 +105,26 @@ app.controller('TeamController', ['$scope', 'Team', '$stateParams', 'User', func
   }, function (activities) {
     $scope.activities = activities;
   });
-
+  $scope.getUserInfo = function() {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
+    User.getInfo(function (user) {
+      $scope.user = user;
+      // if (!user.studentId) {
+      //   console.log($location.url());
+      //   url = 'http://cas.hdu.edu.cn/cas/login?service='
+      //   + $location.protocol()
+      //   + "://" + $location.host()
+      //   + ":" + $location.port()
+      //   + "/api/WUsers/"+ $scope.$currentUser.id + "/confirmSchool"
+      //   + "?access_token=" + $scope.$currentUser.accessToken
+      //   + "&from=" + $location.url();
+      //   location.href = url;
+      // }
+        
+    });
+  };
   $scope.join = function () {
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');

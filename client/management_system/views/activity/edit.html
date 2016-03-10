@@ -108,9 +108,7 @@
     </div>
     <div id="copywriter" class="col s12">
       <div class="container">
-        <div class="file-field input-field">
-          <div class="ueditor" ng-model="activityEditorContent" config="activityEditorConfig"></div>
-        </div>
+        <div class="ueditor" ng-model="activityEditorContent" config="activityEditorConfig"></div>
         <div class="input-field">
           <button class="btn waves-effect waves-light left orange darken-1" ng-click="nextStep(0)">上一步
             <i class="mdi-hardware-keyboard-arrow-left left"></i>
@@ -125,7 +123,7 @@
       <div class="container">
 
         <div class="col s12 text-center">
-          <button ng-disabled="voteData || seckillData" ng-click="getFormList()" modal href="#addForm"
+          <button ng-disabled="voteData || seckillData" ng-click="getActivityList('form')" modal href="#addForm"
                   class="waves-effect waves-light btn">添加表单<i
             class="mdi-content-add right"></i></button>
           <p ng-show="formData" class="orange-text text-darken-2">
@@ -142,7 +140,7 @@
           <div class="modal-content">
             <h4>请选择表单模板</h4>
             <div class="collection" ng-show="formItems.length">
-              <a ng-click="addFormFunc()" ng-show="isActivity($index)"
+              <a ng-click="addFormFunc()"
                  ng-repeat="formItem in formItems" href="" class="collection-item" ng-bind="formItem.title"></a>
             </div>
           </div>
@@ -152,7 +150,7 @@
         </div>
 
         <div class="col s12 text-center">
-          <button ng-disabled="formData || seckillData" ng-click="getVoteList()" modal href="#addVote" class="waves-effect waves-light btn">添加投票<i
+          <button ng-disabled="formData || seckillData" ng-click="getActivityList('vote')" modal href="#addVote" class="waves-effect waves-light btn">添加投票<i
             class="mdi-content-add right"></i>
           </button>
           <p ng-show="voteData" class="orange-text text-darken-2">
@@ -169,7 +167,7 @@
           <div class="modal-content">
             <h4>请选择投票模板</h4>
             <div class="collection" ng-show="voteItems.length">
-              <a ng-click="addVoteFunc()" ng-show="isActivity($index)"
+              <a ng-click="addVoteFunc()"
                  ng-repeat="voteItem in voteItems" href="" class="collection-item" ng-bind="voteItem.title"></a>
             </div>
           </div>
@@ -179,23 +177,29 @@
         </div>
 
         <div class="col s12 text-center">
-          <button ng-disabled="formData || voteData" ng-click="getSeckillList()" modal href="#addSeckill" class="waves-effect waves-light btn">添加抢票<i
-            class="mdi-content-add right"></i></button>
+          <button ng-disabled="formData || voteData" 
+            ng-click="getActivityList('seckill')" modal 
+            href="#addSeckill" class="waves-effect waves-light btn">添加抢票
+            <i class="mdi-content-add right"></i>
+          </button>
           <p ng-show="seckillData" class="orange-text text-darken-2">
-            <a ng-click="removeSeckillData()" tooltipped data-position="top" data-delay="0" data-tooltip="删除抢票"
-               class="btn-floating waves-effect waves-light red">
+            <a ng-click="removeSeckillData()" tooltipped 
+                data-position="top" data-delay="0" data-tooltip="删除抢票"
+                class="btn-floating waves-effect waves-light red">
               <i class="mdi-content-remove"></i>
             </a>
             &nbsp;&nbsp;已选择抢票：
             <span ng-bind="seckillData.title"></span>
           </p>
-          <p class="explainText">添加抢票可用于抢入场券、礼品等,<br>用户阅读活动文案后可直接参与</p>
+          <p class="explainText">添加抢票可用于抢入场券、礼品等,
+            <br>用户阅读活动文案后可直接参与
+          </p>
         </div>
         <div id="addSeckill" class="modal">
           <div class="modal-content">
             <h4>请选择抢票模板</h4>
             <div class="collection" ng-show="seckillItems.length">
-              <a ng-click="addSeckillFunc()" ng-show="isActivity($index)"
+              <a ng-click="addSeckillFunc()"
                  ng-repeat="seckillItem in seckillItems" href="" class="collection-item" ng-bind="seckillItem.title"></a>
             </div>
           </div>

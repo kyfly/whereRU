@@ -47,6 +47,11 @@ module
           },
           method: 'GET',
           isArray: true
+        },
+        "findOne": {
+          url: urlBase + '/Schools',
+          method: 'GET',
+          isArray: true
         }
       });
     R.modelName = "School";
