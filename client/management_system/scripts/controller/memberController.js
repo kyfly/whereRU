@@ -5,6 +5,7 @@ app.controller('MemberCtrl', ['$scope', 'Team', '$rootScope', function ($scope, 
     },
     function (res) {
       $scope.members = res;
+      memberChanged();
     },
     function () {
       Materialize.toast('获取成员列表失败！', 6000);
