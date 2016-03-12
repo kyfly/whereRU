@@ -34,9 +34,9 @@ app.controller('EventListCtrl',
         filter: {
           where: {
             or: [{
-              started: {gt: oneMonthAfter}
+              started: {lt: oneMonthAfter}
             }, {
-              ended: {lt: new Date()}
+              ended: {gt: new Date()}
             }],
             school: $scope.teamInfo.school
           }
@@ -96,13 +96,15 @@ app.controller('EventEditCtrl',
       $scope.isEdit = $stateParams.id || false;
 
       $scope.picNotice = $scope.isEdit ? "如果要更换图片请上传,建议900*500像素" : "请上传活动封面,建议900*500像素";
-
-      Team.prototype_findById_races({
-        id: $scope.teamInfo.id,
-        fk: $stateParams.id
-      }, function (res) {
-        $scope.eventData = res;
-      });
+      if ($scope.isEdit) {
+        Team.prototype_findById_races({
+          id: $scope.teamInfo.id,
+          fk: $stateParams.id
+        }, function (res) {
+          $scope.eventData = res;
+        });
+      }
+      
 
       //Input-date的配置
       var currentTime = new Date();
@@ -325,20 +327,19 @@ app.controller('EventDetailCtrl',
           Materialize.toast(err.data.error.message, 2000);
         });
       };
-      $scope.answer = [];
       $scope.submitForm = function () {
-        var resultTmp = [];
-        for (var i = 0; i < $scope.answer.length; i++) {
-          if ($scope.answer[i] != '') {
-            resultTmp.push({
-              'questionId': i,
-              'content': $scope.answer[i]
-            });
-          } else {
-            alert('请确保填写完整哦');
-            return false;
-          }
-        }
+        // var resultTmp = [];
+        // for (var i = 0; i < $scope.answer.length; i++) {
+        //   if ($scope.answer[i] != '') {
+        //     resultTmp.push({
+        //       'questionId': i,
+        //       'content': $scope.answer[i]
+        //     });
+        //   } else {
+        //     alert('请确保填写完整哦');
+        //     return false;
+        //   }
+        // }
         console.log(resultTmp);
       };
 

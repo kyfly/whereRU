@@ -176,10 +176,10 @@
                     <h4 ng-bind="notice.form.title || '表单填写'"></h4>
                     <div ng-repeat="singleForm in notice.form._formItems">
                       <div input-field ng-show="singleForm.type === 'text'">
-                        <input type="text" ng-model="answer[$index]">
+                        <input type="text" ng-model="singleForm.result">
                         <label ng-bind="singleForm.name"></label>
                       </div>
-                      <select ng-model="answer[$index]" ng-show="singleForm.type === 'select'" material-select watch>
+                      <select ng-model="singleForm.result" ng-show="singleForm.type === 'select'" material-select watch>
                         <option value="" disabled selected ng-bind="singleForm.name"></option>
                         <option ng-repeat="onePiece in singleForm.options track by $index">{{onePiece}}</option>
                       </select>
@@ -188,14 +188,14 @@
                         <div class="switch margin-left margin-top" style="display: inline-block">
                           <label>
                             否
-                            <input type="checkbox" ng-model="answer[$index]">
+                            <input type="checkbox" ng-model="singleForm.result">
                             <span class="lever"></span>
                             是
                           </label>
                         </div>
                       </div>
                       <div input-field ng-show="singleForm.type === 'textarea'">
-                        <textarea class="materialize-textarea" ng-model="answer[$index]"></textarea>
+                        <textarea class="materialize-textarea" ng-model="singleForm.result"></textarea>
                         <label ng-bind="singleForm.name"></label>
                       </div>
                     </div>
