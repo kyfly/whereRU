@@ -115,7 +115,7 @@
           <section ng-show="notice.fileName">
             <span class="orange-text text-darken-2">需要收集的文件：</span>
             <span ng-bind="notice.fileName"></span>
-            <div input-field class="file-field input-field">
+            <div input-field class="file-field input-field" ng-hide="isAuthor">
               <div class="btn">
                 <span>文件收集</span>
                 <input type="file" id="{{notice.id}}">
@@ -125,6 +125,83 @@
                        ng-change="uploadNoticeFile()" class="file-path validate"
                        type="text"
                        placeholder="点我上传《{{notice.fileName}}》">
+              </div>
+            </div>
+          </section>
+          <section ng-show="notice.form">
+            <span class="orange-text text-darken-2">该通知包含表单：</span>
+            <span ng-bind="notice.form.title"></span>
+            <a class="btn margin-left" href ng-href="#{{'previewModal' + $index}}" modal ng-show="isAuthor">预览</a>
+            <a class="btn margin-left" href ng-hide="isAuthor"
+               ng-click="submitResult = !submitResult">填写</a>
+            <a class="btn margin-left" href ng-show="isAuthor">查看结果</a>
+            <div id="{{'previewModal' + $index}}" class="modal modal-fixed-footer">
+              <div class="modal-content">
+                <h4 ng-bind="notice.form.title || '表单预览'"></h4>
+                <div ng-repeat="singleForm in notice.form._formItems">
+                  <div input-field ng-show="singleForm.type === 'text'">
+                    <input type="text">
+                    <label ng-bind="singleForm.name"></label>
+                  </div>
+                  <select ng-show="singleForm.type === 'select'" material-select watch>
+                    <option value="" disabled selected ng-bind="singleForm.name"></option>
+                    <option ng-repeat="onePiece in singleForm.options track by $index">{{onePiece}}</option>
+                  </select>
+                  <div ng-show="singleForm.type === 'radio'">
+                    <span ng-bind="singleForm.name"></span>
+                    <div class="switch margin-left margin-top" style="display: inline-block">
+                      <label>
+                        否
+                        <input type="checkbox">
+                        <span class="lever"></span>
+                        是
+                      </label>
+                    </div>
+                  </div>
+                  <div input-field ng-show="singleForm.type === 'textarea'">
+                    <textarea class="materialize-textarea"></textarea>
+                    <label ng-bind="singleForm.name"></label>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a href class="modal-action modal-close waves-effect waves-green btn-flat">完成</a>
+              </div>
+            </div>
+
+            <div ng-show="submitResult" class="card addGetInfo">
+              <div class="card-content">
+                <div class="row">
+                  <div class="col s12">
+                    <h4 ng-bind="notice.form.title || '表单填写'"></h4>
+                    <div ng-repeat="singleForm in notice.form._formItems">
+                      <div input-field ng-show="singleForm.type === 'text'">
+                        <input type="text" ng-model="answer[$index]">
+                        <label ng-bind="singleForm.name"></label>
+                      </div>
+                      <select ng-model="answer[$index]" ng-show="singleForm.type === 'select'" material-select watch>
+                        <option value="" disabled selected ng-bind="singleForm.name"></option>
+                        <option ng-repeat="onePiece in singleForm.options track by $index">{{onePiece}}</option>
+                      </select>
+                      <div ng-show="singleForm.type === 'radio'">
+                        <span ng-bind="singleForm.name"></span>
+                        <div class="switch margin-left margin-top" style="display: inline-block">
+                          <label>
+                            否
+                            <input type="checkbox" ng-model="answer[$index]">
+                            <span class="lever"></span>
+                            是
+                          </label>
+                        </div>
+                      </div>
+                      <div input-field ng-show="singleForm.type === 'textarea'">
+                        <textarea class="materialize-textarea" ng-model="answer[$index]"></textarea>
+                        <label ng-bind="singleForm.name"></label>
+                      </div>
+                    </div>
+                    <a href class="btn waves-effect orange darken-2 right" ng-click="submitResult()">提交</a>
+                  </div>
+                </div>
               </div>
             </div>
           </section>

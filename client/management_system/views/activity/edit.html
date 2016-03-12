@@ -80,10 +80,8 @@
             <input type="file" id="activityImg" ng-model="activityData.imgName">
           </div>
           <div class="file-path-wrapper">
-            <input ng-show="!isEdit" ng-model="activityImg" ng-change="activityImgLoad()" class="file-path validate" type="text"
-                   placeholder="请上传活动封面,建议900*500像素">
-            <input ng-show="isEdit" ng-model="activityImg" ng-change="activityImgLoad()" class="file-path validate" type="text"
-                   placeholder="如果要更换图片请上传,建议900*500像素">
+            <input ng-model="activityImg" ng-change="activityImgLoad()" class="file-path validate" type="text"
+                   placeholder="{{picNotice}}">
           </div>
         </div>
 
@@ -177,13 +175,13 @@
         </div>
 
         <div class="col s12 text-center">
-          <button ng-disabled="formData || voteData" 
-            ng-click="getActivityList('seckill')" modal 
+          <button ng-disabled="formData || voteData"
+            ng-click="getActivityList('seckill')" modal
             href="#addSeckill" class="waves-effect waves-light btn">添加抢票
             <i class="mdi-content-add right"></i>
           </button>
           <p ng-show="seckillData" class="orange-text text-darken-2">
-            <a ng-click="removeSeckillData()" tooltipped 
+            <a ng-click="removeSeckillData()" tooltipped
                 data-position="top" data-delay="0" data-tooltip="删除抢票"
                 class="btn-floating waves-effect waves-light red">
               <i class="mdi-content-remove"></i>

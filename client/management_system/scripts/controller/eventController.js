@@ -85,13 +85,24 @@ app.controller('EventListCtrl',
     }]);
 
 app.controller('EventEditCtrl',
-  ['$scope', 'Team', 'Ueditor', '$http', '$location', 'appConfig', 'uploadFile',
-    function ($scope, Team, Ueditor, $http, $location, appConfig, uploadFile) {
+  ['$scope', 'Team', 'Ueditor', '$http', '$location', 'appConfig', 'uploadFile', '$stateParams',
+    function ($scope, Team, Ueditor, $http, $location, appConfig, uploadFile, $stateParams) {
       $scope.eventData = {
         authorName: $scope.teamInfo.name,     //$scope.teamInfo在homeController里面获取
         authorId: $scope.teamInfo.id,
         school: $scope.teamInfo.school
       };
+
+      $scope.isEdit = $stateParams.id || false;
+
+      $scope.picNotice = $scope.isEdit ? "如果要更换图片请上传,建议900*500像素" : "请上传活动封面,建议900*500像素";
+
+      Team.prototype_findById_races({
+        id: $scope.teamInfo.id,
+        fk: $stateParams.id
+      }, function (res) {
+        $scope.eventData = res;
+      });
 
       //Input-date的配置
       var currentTime = new Date();
@@ -130,26 +141,39 @@ app.controller('EventEditCtrl',
             $scope.eventData.explainUrl = appConfig.FILE_URL + res.url;
             $scope.eventData.created = new Date();
             $scope.eventData.deleted = false;
-            Team.prototype_create_races({
-              id: $scope.teamInfo.id
-            }, $scope.eventData, function () {
-              Materialize.toast('创建成功！', 2000);
-              $location.path('/MS/event/list');
-            }, function () {
-              Materialize.toast('创建失败！', 2000);
-            });
+            if ($stateParams.id) {
+              Team.prototype_updateById_races({
+                id: $scope.teamInfo.id,
+                fk: $stateParams.id
+              }, $scope.eventData, function () {
+                Materialize.toast('更新成功！', 2000);
+                $location.path('/MS/event/list');
+              }, function () {
+                Materialize.toast('更新失败！', 2000);
+              });
+            } else {
+              Team.prototype_create_races({
+                id: $scope.teamInfo.id
+              }, $scope.eventData, function () {
+                Materialize.toast('创建成功！', 2000);
+                $location.path('/MS/event/list');
+              }, function () {
+                Materialize.toast('创建失败！', 2000);
+              });
+            }
           });
       };
 
     }]);
 
 app.controller('EventDetailCtrl',
-  ['$scope', 'Race', '$http', '$stateParams', 'appConfig', 'uploadFile', 'Team',
-    function ($scope, Race, $http, $stateParams, appConfig, uploadFile, Team) {
+  ['$scope', 'Race', '$http', '$stateParams', 'appConfig', 'uploadFile', 'Team', 'Notice',
+    function ($scope, Race, $http, $stateParams, appConfig, uploadFile, Team, Notice) {
       $scope.isAuthor = $stateParams.type === 'author';
       $scope.uploadAttachmentBtn = false;
       $scope.addGetInfoBtn = false;
       $scope.addNoticeForm = false;
+      $scope.submitResult = false;
       $scope.newNotice = {};
       $scope.materialInfo = {
         loader: $scope.teamInfo.name,
@@ -175,7 +199,7 @@ app.controller('EventDetailCtrl',
           id: $scope.teamInfo.id
         }, function (res) {
           $scope[type + 'Items'] = res.filter(function (item) {
-            return !item.activityId;
+            return !(item.activityId || item.noticeId);
           });
         });
       };
@@ -206,13 +230,18 @@ app.controller('EventDetailCtrl',
         }
       };
 
+      //$scope.initResult = function () {
+      //  var form = this.notice.form;
+      //  form._formItems.forEach(function (item) {
+      //    item.result = {
+      //      type: item.type,
+      //      name: ""
+      //    };
+      //  });
+      //};
+
       Race.prototype_get_notices({
-        id: $stateParams.id,
-        filter: {
-          where: {
-            deleted: false
-          }
-        }
+        id: $stateParams.id
       }, function (res) {
         $scope.noticeList = res;
       }, function () {
@@ -249,6 +278,17 @@ app.controller('EventDetailCtrl',
           }, $scope.newNotice, function (res) {
             Materialize.toast('创建成功！', 2000);
             $scope.newNotice = undefined;
+            if ($scope.formData) {
+              $scope.formData.updated = new Date();
+              $scope.formData.noticeId = res.id;
+              $scope.formData.id = undefined;
+              $scope.formData.teamId = localStorage.$LoopBack$currentTeamId;
+              res.form = $scope.formData;
+              Notice.prototype_create_form({
+                id: res.id
+              }, $scope.formData);
+              $scope.formData = undefined;
+            }
             $scope.noticeList.push(res);
           }, function () {
             Materialize.toast('创建失败！', 2000);
@@ -257,17 +297,18 @@ app.controller('EventDetailCtrl',
           Materialize.toast('请先填写通知内容哦', 2000);
         }
       };
+
       $scope.uploadNoticeFile = function () {
         var file = document.getElementById(this.notice.id).files[0];
-        notice = this.notice;
+        var notice = this.notice;
         uploadFile.file(file, 'team', $scope.teamInfo.id)
           .success(function (res) {
             notice.dataUrl = appConfig.FILE_URL + res.url;
             $scope.putFileInfo(notice);
-
           })
           .error();
       };
+
       $scope.putFileInfo = function (notice) {
         Race.prototype_updateById_notices({
           id: $stateParams.id,
@@ -284,6 +325,23 @@ app.controller('EventDetailCtrl',
           Materialize.toast(err.data.error.message, 2000);
         });
       };
+      $scope.answer = [];
+      $scope.submitForm = function () {
+        var resultTmp = [];
+        for (var i = 0; i < $scope.answer.length; i++) {
+          if ($scope.answer[i] != '') {
+            resultTmp.push({
+              'questionId': i,
+              'content': $scope.answer[i]
+            });
+          } else {
+            alert('请确保填写完整哦');
+            return false;
+          }
+        }
+        console.log(resultTmp);
+      };
+
       Race.prototype_get_raceTeams({
         id: $stateParams.id
       }, function (res) {
