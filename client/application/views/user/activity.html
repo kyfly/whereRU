@@ -7,14 +7,16 @@
     <img ng-src="{{activity.imgUrl}}">
     <div>
     	<h6 class="title">
-	    	<a class="black-text" href="/w/activities/{{activity.id}}" ng-bind="activity.title"></a>
-        <a href="/u/results/{{activity.resultId}}/{{activity.actType}}">查看结果</a>
+	    	<a href="/w/activities/{{activity.id}}" ng-bind="activity.title"></a>
 	    </h6>
 	    <h6>发布方 | 
 	    	<a href="/w/teams/{{activity.authorId}}"  ng-bind="activity.authorName"></a>
 		  </h6>
       <h6>
         参与时间 | <span ng-bind="activity.created | date: 'yyyy-MM-dd HH:mm:ss'"></span>
+      </h6>
+      <h6>
+        <a href="/u/results/{{activity.resultId}}/{{activity.actType}}">查看结果</a>
       </h6>
     </div>
   </li>

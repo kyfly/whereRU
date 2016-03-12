@@ -1,58 +1,14 @@
 <div class="container">
 	<ul class="collection with-header">
     <li class="collection-header">
-    	<h4>
-       [<span class="red-text">活动结果</span>]
-       <span ng-bind="activity.title"></span>
-      </h4>
+    	<h4 ng-bind="activity.title"></h4>
     	<a href="/w/teams/{{activity.authorId}}" ng-bind="activity.authorName"></a>
     </li>
-    <li class="collection-item" ng-repeat="result in results.result">
-    	<div ng-if="type === 'form'">
+    <li class="collection-item" ng-repeat="result in results">
+    	<div>
     		<span ng-bind="result.q"></span>
     		<a href="" class="secondary-content"><span ng-bind="result.w"></span></a>
     	</div>
-      <div ng-if="type === 'vote'">
-        <div ng-if="vote._voteItems[0]['imgUrl']" class="col s6 m4 l3">
-          <div class="card">
-            <div class="card-image">
-              <img ng-src="{{result.imgUrl}}">
-            </div>
-            <div class="card-content">
-              <p>
-                <input type="checkbox" id="{{result.id}}" ngIteam-click="checkedForVote()" ng-model="result.chioce" disabled/>
-                <label for="{{result.id}}" ng-bind="result.name"></label>
-                <span ng-bind="result.count" class="right"></span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div ng-if="!vote._voteItems[0]['imgUrl']">
-          <input type="checkbox" id="{{result.id}}" ng-click="checkedForVote()" ng-init="false" ng-model="result.chioce" disabled/>
-          <label for="{{result.id}}" ng-bind="result.name"></label>
-          <span ng-bind="result.count" class="right"></span>
-        </div>
-      </div>
-      
-    </li>
-    <li  ng-if="type === 'seckill'" class="row z-depth-1 seckill-result">
-      <img class="col m6 s12" ng-src="{{activity.imgUrl}}">
-      <div class="col m6 s12">
-        <h5>
-          票项名称：<span ng-bind="results.itemId"></span>
-        </h5>
-        <h5>
-          是否抢票成功：<span class="red-text" ng-bind="results.get?'是':'否'"></span>
-        </h5>
-        
-        <h5>
-          参与活动时间：<span ng-bind="results.created | date: 'yyyy-MM-dd HH:mm:ss'"></span>
-        </h5>
-        <h5>
-          活动结束时间：<span class="red-text" ng-bind="activity.ended | date: 'yyyy-MM-dd HH:mm:ss'"></span>
-        </h5>
-        
-      </div>
     </li>
   </ul>
 </div>

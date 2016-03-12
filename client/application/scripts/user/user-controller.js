@@ -156,15 +156,14 @@ app.controller('ActivityResultController',
   if (!$scope.$currentUser) {
     return $scope.$emit('auth:loginRequired');
   }
-  $scope.type = $stateParams.type;
   User['prototype_findById_' + $stateParams.type + 'Results']({
     id: $scope.$currentUser.id,
     fk: $stateParams.id
   }, function (res) {
-    $scope.results = res.results;
+    $scope.results = res.result;
     $scope.activity = res.activity;
   });
-}]);
+}])
 app.controller('MSController', ['User', '$stateParams', function (User, $stateParams) {
   window.localStorage.$LoopBack$currentTeamId = $stateParams.id;
   window.location.href = '/MS';
