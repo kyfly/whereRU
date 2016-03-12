@@ -5,7 +5,6 @@ app.controller('SettingCtrl', ['$scope', '$rootScope', 'Team', function ($scope,
   Team.findById({
     id: localStorage.$LoopBack$currentTeamId
   }, function (res) {
-    console.log(res);
     $scope.team = res;
   });
 

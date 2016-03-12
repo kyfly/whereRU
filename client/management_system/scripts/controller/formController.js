@@ -10,9 +10,9 @@ app.controller('FormListCtrl', ['$scope', 'Team', '$rootScope', function ($scope
     $scope.formItems = res;
     $scope.isActivity = function (index) {
       if ($scope.showType === 0) {
-        return $scope.formItems[index].activityId
+        return $scope.formItems[index].activityId || $scope.formItems[index].noticeId
       } else {
-        return !$scope.formItems[index].activityId
+        return !($scope.formItems[index].activityId || $scope.formItems[index].noticeId)
       }
     };
   }, function () {

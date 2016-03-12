@@ -22,6 +22,8 @@
         <div class="card hoverable">
           <div class="card-content item-list activityInfo">
             <span class="card-title green-text text-darken-1 flow-text" ng-show="showType === 1">[模板]</span>
+            <span class="card-title green-text text-darken-1 flow-text" ng-show="showType === 0 && formItem.activityId">[活动]</span>
+            <span class="card-title green-text text-darken-1 flow-text" ng-show="showType === 0 && formItem.noticeId">[竞赛]</span>
             <span class="card-title green-text text-darken-1 flow-text word-wrap" ng-bind="formItem.title"></span>
             <br>
             <span class="addText" ng-bind="formItem.updated | date : 'yyyy-MM-dd'"></span>
