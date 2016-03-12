@@ -1877,8 +1877,14 @@ footer {
   left: 100px;
   top: 0px;
 }
-
-.edui-default .edui-editor-messageholder {
+.seckill-result{
+  background-color: #fff;
+  padding: 20px 0;
+}
+.seckill-result h5{
+  font-size: 1.2rem;
+}
+.edui-default .edui-editor-messageholder{
   position: absolute !important;
   top: 1px !important;
   right: 3px !important;

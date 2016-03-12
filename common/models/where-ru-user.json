@@ -210,7 +210,7 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__findById__VoteResults"
+      "property": "__findById__voteResults"
     },
     {
       "principalType": "ROLE",
