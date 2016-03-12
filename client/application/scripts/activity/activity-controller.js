@@ -162,7 +162,10 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     User.prototype_create_formResults({
       id: $scope.$currentUser.id
     }, formResult, function (res) {
-      Materialize.toast('参与成功', 2000);
+      if (res.status === 1000 || res.status === 1100)
+        Materialize.toast(res.message, 2000);
+      else
+        Materialize.toast('参与成功', 2000);
     }, function (err) {
       $scope.errorTip(err);
     });

@@ -133,7 +133,7 @@
             <span ng-bind="notice.form.title"></span>
             <a class="btn margin-left" href ng-href="#{{'previewModal' + $index}}" modal ng-show="isAuthor">预览</a>
             <a class="btn margin-left" href ng-hide="isAuthor"
-               ng-click="submitResult = !submitResult">填写</a>
+               ng-click="initFormResult()">填写</a>
             <a class="btn margin-left" href ng-show="isAuthor">查看结果</a>
             <div id="{{'previewModal' + $index}}" class="modal modal-fixed-footer">
               <div class="modal-content">
@@ -169,7 +169,7 @@
               </div>
             </div>
 
-            <div ng-show="submitResult" class="card addGetInfo">
+            <div ng-show="notice.showForm" class="card addGetInfo">
               <div class="card-content">
                 <div class="row">
                   <div class="col s12">
@@ -179,11 +179,11 @@
                         <input type="text" ng-model="singleForm.result">
                         <label ng-bind="singleForm.name"></label>
                       </div>
-                      <select ng-model="singleForm.result" ng-show="singleForm.type === 'select'" material-select watch>
+                      <select ng-model="singleForm.result" ng-if="singleForm.type === 'select'" material-select watch>
                         <option value="" disabled selected ng-bind="singleForm.name"></option>
                         <option ng-repeat="onePiece in singleForm.options track by $index">{{onePiece}}</option>
                       </select>
-                      <div ng-show="singleForm.type === 'radio'">
+                      <div ng-if="singleForm.type === 'radio'">
                         <span ng-bind="singleForm.name"></span>
                         <div class="switch margin-left margin-top" style="display: inline-block">
                           <label>
@@ -194,7 +194,7 @@
                           </label>
                         </div>
                       </div>
-                      <div input-field ng-show="singleForm.type === 'textarea'">
+                      <div input-field ng-if="singleForm.type === 'textarea'">
                         <textarea class="materialize-textarea" ng-model="singleForm.result"></textarea>
                         <label ng-bind="singleForm.name"></label>
                       </div>

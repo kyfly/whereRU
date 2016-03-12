@@ -169,8 +169,8 @@ app.controller('EventEditCtrl',
     }]);
 
 app.controller('EventDetailCtrl',
-  ['$scope', 'Race', '$http', '$stateParams', 'appConfig', 'uploadFile', 'Team', 'Notice',
-    function ($scope, Race, $http, $stateParams, appConfig, uploadFile, Team, Notice) {
+  ['$scope', 'Race', '$http', '$stateParams', 'appConfig', 'uploadFile', 'Team', 'Notice', 'User',
+    function ($scope, Race, $http, $stateParams, appConfig, uploadFile, Team, Notice, User) {
       $scope.isAuthor = $stateParams.type === 'author';
       $scope.uploadAttachmentBtn = false;
       $scope.addGetInfoBtn = false;
@@ -327,20 +327,33 @@ app.controller('EventDetailCtrl',
           Materialize.toast(err.data.error.message, 2000);
         });
       };
-      $scope.submitForm = function () {
-        // var resultTmp = [];
-        // for (var i = 0; i < $scope.answer.length; i++) {
-        //   if ($scope.answer[i] != '') {
-        //     resultTmp.push({
-        //       'questionId': i,
-        //       'content': $scope.answer[i]
-        //     });
-        //   } else {
-        //     alert('请确保填写完整哦');
-        //     return false;
-        //   }
-        // }
-        console.log(resultTmp);
+      $scope.initFormResult = function () {
+        this.notice.showForm = !this.notice.showForm;
+        this.notice.form._formItems.forEach(function (item) {
+          item.result = undefined
+        });
+      };
+      $scope.submitResult = function () {
+        var result = [];
+        var resultData = {};
+        this.notice.form._formItems.forEach(function (item) {
+          result.push({
+            name: item.result,
+            type: item.type
+          });
+        });
+        resultData.formId = this.notice.form.id;
+        resultData.created = new Date();
+        resultData.result = result;
+        User.prototype_create_formResults({
+          id: localStorage.$LoopBack$currentUserId
+        }, resultData, function (res) {
+          if (res.status === 1000 || res.status === 1100)
+            Materialize.toast(res.message, 2000);
+          else
+            Materialize.toast('表单提交成功', 2000);
+        }, function (err) {
+        });
       };
 
       Race.prototype_get_raceTeams({
