@@ -378,14 +378,23 @@ module.exports = function(User) {
       var activities = [];
       user = user.toJSON();
       user.formResults.forEach(function (results) {
+        if (!results.form) {
+          return;
+        }
         var activity = results.form.activity;
         pushActivity (activity, results);
       });
       user.voteResults.forEach(function (results) {
+        if (!results.vote) {
+          return;
+        }
         var activity = results.vote.activity;
         pushActivity (activity, results);
       });
       user.seckillResults.forEach(function (results) {
+        if (!results.seckill) {
+          return;
+        }
         var activity = results.seckill.activity;
         pushActivity (activity, results);
       });
@@ -571,16 +580,18 @@ module.exports = function(User) {
         return next(err);
       var form = form.toJSON();
       var activityResult = [];
-      for(var i =0; i<form._formItems[i].length; i++) {
+
+      for(var i =0; i<form._formItems.length; i++) {
         activityResult.push({
           q: form._formItems[i].name,
           w: result.result[i].name,
           url:result.result[i].url
         });
       }
+      result.result = activityResult;
       ctx.res.send({
         activity: form.activity,
-        result: activityResult
+        results: result
       });
     });
   });
@@ -589,19 +600,33 @@ module.exports = function(User) {
    * @param  {[type]} ) {             } [description]
    * @return {[type]}   [description]
    */
-  User.beforeRemote('prototype.__findById__voteResults', function (ctx,ins,next) {
-    var userId = ctx.req.params.id;
-    var voteResultsId = ctx.req.params.fk;
-    User.app.models.VoteResult.findById(voteResultsId,{fields:['verifyId','created','id','voteId','userId','result']},function(err,voteResults){
-      //User.app.models.Vote.findById(voteResults.voteId.toJSON(),function(err,vote){
-        Vote.voteItems(function(results){
-          for(var i =0;i<results.length;i++) {
-            results[i].choice = voteResults.result[i] ? true : false;
-          }
-          voteResults.result = result;
-          ctx.res.send(voteResults);
-        });
-      //});
+  User.afterRemote('prototype.__findById__voteResults', function (ctx,ins,next) {
+    var results = ins.toJSON();
+    ins.vote({
+      include: {
+        relation: 'activity',
+        scope: {
+          fields: ['title', 'authorName', 'authorId', 'id']
+        }
+      }
+    }, function (err, vote) {
+      if (err)
+      {
+        return next(err);
+      }
+      voteItems = vote.toJSON()._voteItems;
+      voteItems.forEach(function (item) {
+        for (id in results.result) if (item.id === results.result[id]){
+          item.chioce = true;
+        } else {
+          item.chioce = false;
+        }
+      });
+      results.result = voteItems;
+      ctx.res.send({
+        activity: vote.toJSON().activity,
+        results: results
+      });
     });
   })
   /**
@@ -609,8 +634,28 @@ module.exports = function(User) {
    * @param  {[type]} ) {             } [description]
    * @return {[type]}   [description]
    */
-  User.beforeRemote('prototype.__findById__seckillResults', function () {
-    //TODO  查询某个活动结果，可以通过活动结果获取抢票信息，
+  User.afterRemote('prototype.__findById__seckillResults', function (ctx, ins, next) {
+    var results = ins.toJSON();
+    ins.seckill({
+      include: {
+        relation: 'activity',
+        scope: {
+          fields: ['title', 'authorName', 'authorId', 'id', 'imgUrl', 'ended']
+        }
+      }
+    }, function (err, seckill) {
+      seckill.toJSON()._seckillItems.forEach(function (item) {
+        if (item.id === results.itemId) {
+          results.itemId = item.name;
+          return;
+        }
+      });
+      
+      ctx.res.send({
+        activity: seckill.toJSON().activity,
+        results: results
+      });
+    });
   })
   User.beforeRemote('prototype.__create__formResults', function (ctx, ins, next) {
     ctx.instance.formResults.count({
