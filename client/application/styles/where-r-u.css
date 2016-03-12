@@ -1270,7 +1270,7 @@ footer {
 
 .menu a.active {
   color: #FF0000;
-  text-shadow: 0 1px 25px #FF0000;
+  text-shadow: 0 1px 25px #ccc;
   font-size: 1.5rem;
 }
 
