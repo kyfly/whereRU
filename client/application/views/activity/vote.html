@@ -8,7 +8,7 @@
 		<div class="col s6 m4 l3"  ng-repeat="voteIteam in vote._voteItems">
 			<div class="card">
 				<div class="card-image">
-					<img ng-src="{{voteIteam.imgUrl}}">
+					<img ng-src="{{voteIteam.imgUrl}}@4e_0o_0l_200h_360w_90q.src">
 				</div>
 				<div class="card-content">
 					<p>
@@ -30,9 +30,9 @@
 	    </p>
   	</form>
 	</div>
-	<div input-field ng-if="activity.verifyRule">
-    <input id="name" type="text" ng-model="verifyId">
-    <label for="name">请输入验证信息({{activity.verifyRule}})</label>
+	<div input-field ng-show="activity.verifyRule">
+    <input id="verifyRule" type="text" ng-model="activity.verifyId">
+    <label for="verifyRule">请输入验证信息({{activity.verifyRule}})</label>
 	</div>
 	<div  class="row col s12 center">
 		<a type="sumbit" 

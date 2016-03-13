@@ -1431,44 +1431,13 @@ footer {
   font-size: 1.2rem;
   font-weight: 500;
 }
-
-.team-card .card-content {
-
-  padding: 10px
-}
-
-.team-card .card-content .card-title {
-  text-align: center;
-}
-
-.team-card .card-content .card-title img {
-  width: 100px;
-  height: 100px;
-  border-radius: 0;
-}
-
-.team-card .card-content .card-title h4 {
-  overflow: hidden;
-  font-size: 1.2rem;
-  padding: 5px;
-  margin: 0;
-  color: #000;
-}
-
-.team-card .card-content p {
-  height: 150px;
+.team-desc {
+  color: #444 !important;
   overflow: hidden;
   word-wrap: break-word;
   word-break: normal;
 }
-
-@media only screen and (max-width: 601px) {
-  .team-card .card-content p {
-    height: 100%;
-  }
-}
-
-.team-card .card-action {
+.team-card .card-image{
   padding: 10px;
 }
 
@@ -1831,11 +1800,27 @@ footer {
   /*float: left;*/
 }
 
-.user-activity ul li {
+.user-activity>ul>li {
   display: inline;
   padding: 5px;
 }
-
+.user-activity .collection .collection-item.avatar {
+  min-height: 120px;
+  padding-left: 130px;
+}
+.user-activity .collection .collection-item.avatar .circle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    left: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 0;
+}
+.user-activity .collection .collection-item.avatar p{
+  line-height: 2.2rem;
+}
 .user-activity .active {
   color: #444;
   font-size: 1.3rem;

@@ -18,7 +18,7 @@ module.exports = function(User) {
    * @return {[type]}       [description]
    */
   User.beforeRemote('create', function (ctx, ins, next) {
-    ctx.req.body.headImgUrl = "http://oss.etuan.org/whereru/headImgUrl/%E9%BB%98%E8%AE%A4%E5%A4%B4%E5%83%8F.jpg"
+    ctx.req.body.headImgUrl = "http://cdn-img.etuan.org/whereru/headImgUrl/%E9%BB%98%E8%AE%A4%E5%A4%B4%E5%83%8F.jpg"
     ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
     ctx.req.body.created = new Date();
     User.count({ phone: ctx.req.body.phone }, function (err, count) {
@@ -44,7 +44,8 @@ module.exports = function(User) {
         "school": ins.school,
         "phone": ins.phone,
         "sign": ins.sign,
-        "headImgUrl": ins.headImgUrl
+        "headImgUrl": ins.headImgUrl,
+        "studentId": ins.studentId
       };
       ctx.res.send(token);
     });
@@ -62,7 +63,8 @@ module.exports = function(User) {
         "school": user.school,
         "phone": user.phone,
         "sign": user.sign,
-        "headImgUrl": ins.headImgUrl
+        "headImgUrl": ins.headImgUrl,
+        "studentId": ins.studentId
       };
       ctx.res.send(token);
     });
@@ -382,7 +384,9 @@ module.exports = function(User) {
           return;
         }
         var activity = results.form.activity;
-        pushActivity (activity, results);
+        if (activity) {
+          pushActivity (activity, results);
+        }
       });
       user.voteResults.forEach(function (results) {
         if (!results.vote) {

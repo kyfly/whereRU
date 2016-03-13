@@ -10,15 +10,27 @@
 	<ul class="row col s12" ng-show="!takePartIn">
     <li class="col s12 m6 l3 team-card" ng-repeat="team in raceTeams">
       <div class="card">
-        <div class="card-content">
-          <div class="card-title">
-            <a href="/w/teams/{{team.id}}"><img ng-src="{{team.logoUrl}}">
-            <h4>{{team.name}}</h4></a>
-          </div>
-          <p ng-bind="team.desc"></p>
+        <div class="card-image">
+          <a href="/w/teams/{{team.id}}">
+            <img ng-src="{{team.logoUrl}}@1e_1c_0o_0l_100h_100w_100q.src">
+            
+          </a>
         </div>
-        <div class="card-action center">
-          <a href="/w/teams/{{team.id}}">申请加入</a>
+        <div class="card-content team-desc">
+            <span class="card-title activator grey-text text-darken-4">
+              <a href="/w/teams/{{team.id}}" class="grey-text text-darken-4" ng-bind="team.name"></a>
+              <i class="material-icons right">more_vert</i>
+            </span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">
+            <a href="/w/teams/{{team.id}}"  class="grey-text text-darken-4" ng-bind="team.name"></a>
+            <i class="material-icons right">close</i>
+          </span>
+          <p class="team-desc" ng-bind="team.desc"></p>
+        </div>
+        <div class="card-action">
+          <a href="/w/teams/{{team.id}}" ng-bind="team.status ? '正在找人': '不可加入'"></a>
         </div>
       </div>
     </li>

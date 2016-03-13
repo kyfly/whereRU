@@ -142,12 +142,18 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	}
 }])
 .controller('HomeController', ['$scope', 'Activity', 'Race',function($scope, Activity, Race){
-	var tenDay = new Date() - 10*24*3600;
+	var tenDayBefore = new Date() - 10*24*3600;
 	var filter = {
 		where: {
-			created: {
-				lt: tenDay
-			}
+			or: [{
+				created: {
+					gt: tenDayBefore
+				}
+			}, {
+				ended: {
+					gt: new Date()
+				}
+			}]
 		},
 		limit: 8,
 		order: 'readers DESC'

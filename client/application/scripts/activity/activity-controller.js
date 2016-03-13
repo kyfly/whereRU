@@ -108,6 +108,14 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
   });
   $scope.onClickJoinActivity = function () {
     var actType = $scope.activity.actType;
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
+    if ($scope.activity.verifyRule === '学号') {
+      $scope.activity.verifyId = $scope.$currentUser.studentId;
+    } else if ($scope.activity.verifyRule === '手机') {
+      $scope.activity.verifyId = $scope.$currentUser.phone;
+    }
     if (actType !== 'common') {
       $scope.result = new Array($scope[actType]['_'+ actType +'Items'].length);
     }
@@ -143,8 +151,9 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
   };
 
   $scope.submitFormResult = function () {
-    if (!$scope.$currentUser) {
-      return $scope.$emit('auth:loginRequired');
+    if ($scope.activity.verifyRule && !$scope.activity.verifyId) {
+      Materialize.toast('验证规则必须填', 2000);
+      return;
     }
     for (var x in $scope.form._formItems) if ($scope.form._formItems[x].type === 'select') {
       $scope.result[x].type = 'selelct';
@@ -154,7 +163,7 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
       $scope.result[x].type = $scope.form._formItems[x].type;
     }
     var formResult = {
-      'verifyId': $scope.verifyId,
+      'verifyId': $scope.activity.verifyId,
       'formId': $scope.form.id,
       'created': new Date(),
       'result': $scope.result
@@ -172,10 +181,7 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
   };
   $scope.submitVoteResult = function () {
     var result = [];
-    if (!$scope.$currentUser) {
-      return $scope.$emit('auth:loginRequired');
-    }
-    if ($scope.activity.verifyRule && !$scope.verifyId) {
+    if ($scope.activity.verifyRule && !$scope.activity.verifyId) {
       Materialize.toast('验证规则必须填', 2000);
       return;
     }
@@ -190,7 +196,7 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
       return;
     }
     var voteResult = {
-      'verifyId': $scope.verifyId,
+      'verifyId': $scope.activity.verifyId,
       'voteId': $scope.vote.id,
       'created': new Date(),
       'result': result
@@ -208,12 +214,13 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     });
   };
   $scope.submitSeckillResult = function () {
-    if (!$scope.$currentUser) {
-      return $scope.$emit('auth:loginRequired');
+    if ($scope.activity.verifyRule && !$scope.activity.verifyId) {
+      Materialize.toast('验证规则必须填', 2000);
+      return;
     }
     var seckillResult = {
       "created": new Date(),
-      "verifyId": $scope.verifyId,
+      "verifyId": $scope.activity.verifyId,
       "itemId": this.seckillItem.id,
       "seckillId": $scope.seckill.id
     };

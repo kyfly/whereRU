@@ -11,7 +11,7 @@
 </nav> -->
 <div class="container row z-depth-1 user-header">
 	<div class="col s12 center user-info">
-		<img ng-src="{{user.headImgUrl || 'http://oss.etuan.org/whereru/headImgUrl/%E9%BB%98%E8%AE%A4%E5%A4%B4%E5%83%8F.jpg'}}">
+		<img ng-src="{{(user.headImgUrl || 'http://cdn-img.etuan.org/whereru/headImgUrl/%E9%BB%98%E8%AE%A4%E5%A4%B4%E5%83%8F.jpg')}}@1e_1c_0o_0l_100h_100w_100q.src">
 		<h4 ng-show="user">
 			<span ng-bind="user.name"></span>
 			<a href="" ng-click="logout()">退出</a>
