@@ -104,4 +104,33 @@ module.exports = function(Race) {
       }
     });
   });
+  Race.beforeCreate = function(next, instance){
+    instance.team(function (err, team) {
+      Race.app.models.Coterie.findOne({
+        where: {
+          teamId: instance.teamId
+        }
+      }, function (err, coterie) {
+        if (err || !coterie)
+          next(err);
+        if (!instance.explainUrl)
+          next();
+        else {
+          coterie.articles.create({
+            "title": instance.name,
+            "contentUrl": instance.explainUrl,
+            "created": new Date(),
+            "coterieId": coterie.id,
+            "userId": team.userId
+          }, function (err, article) {
+            if (err) {
+              next(err);
+            } else {
+              next();
+            }
+          });
+        }
+      })
+    });
+  };
 };

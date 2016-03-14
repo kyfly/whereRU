@@ -19,6 +19,15 @@
     },
     "teamId": {
       "type": "string"
+    },
+    "school": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "string"
     }
   },
   "validations": [],

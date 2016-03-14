@@ -70,31 +70,6 @@ module.exports = function(Team) {
 		ctx.req.body.created = new Date();
 		next();
 	});
-	Team.afterRemote('prototype.__create__activities', function (ctx, ins, next) {
-		var userId = ctx.req.accessToken.userId;
-		Team.app.models.Coterie.findOne({
-			where: {
-				teamId: ctx.instance.id
-			}
-		}, function (err, coterie) {
-			if (err || !coterie)
-				next(err);
-			else {
-				ctx.instance.articles.create({
-					"title": ins.title,
-			    "contentUrl": ins.explainUrl,
-			    "created": new Date(),
-			    "coterieId": coterie.id,
-			    "userId": userId
-				}, function (err, article) {
-					if (err) {
-						next(err);
-					}
-					next();
-				});
-			}
-		})
-	});
 	/**
 	 * 竞赛创建前保存团队信息到竞赛信息
 	 * @param  {[type]} ctx   [description]
@@ -108,31 +83,6 @@ module.exports = function(Team) {
 		ctx.req.body.authorId = ctx.instance.id;
 		ctx.req.body.created = new Date();
 		next();
-	});
-	Team.afterRemote('prototype.__create__races', function (ctx, ins, next) {
-		var userId = ctx.req.accessToken.userId;
-		Team.app.models.Coterie.findOne({
-			where: {
-				teamId: ctx.instance.id
-			}
-		}, function (err, coterie) {
-			if (err || !coterie)
-				next(err);
-			else {
-				ctx.instance.articles.create({
-					"title": ins.name,
-			    "contentUrl": ins.explainUrl,
-			    "created": new Date(),
-			    "coterieId": coterie.id,
-			    "userId": userId
-				}, function (err, article) {
-					if (err) {
-						next(err);
-					}
-					next();
-				});
-			}
-		})
 	});
 	/**
 	 * 校园活动列表接口
@@ -267,12 +217,14 @@ module.exports = function(Team) {
 
   // })
   // prototype_unlink_partakedRaces 团队退出竞赛时通知主办方
-  Team.observe('after save', function (ctx, next) {
+  Team.beforeCreate = function (next, instance) {
   	Team.app.models.Coterie.create({
-  		name: ctx.instance.name,
-			logoUrl: ctx.instance.logoUrl,
+  		name: instance.name,
+			logoUrl: instance.logoUrl,
 			created: new Date(),
-			teamId: ctx.instance.id
+			teamId:  instance.id,
+			school: instance.school,
+			type: instance.type
   	}, function (err, coterie) {
   		if (err) {
   			next(err);
@@ -280,5 +232,5 @@ module.exports = function(Team) {
   			next()
   		}
   	});
-  });
+  };
 };

@@ -170,4 +170,54 @@ module.exports = function(Activity) {
   	});
   	ctx.res.send(activities);
   });
+  Activity.beforeRemote('find', function (ctx, ins, next) {
+
+  	if (!ctx.req.query.filter) {
+  		ctx.req.query.filter = {
+  			limit: 32,
+  			skip: 0,
+  			order: 'id DESC'
+  		};
+  	} else if (ctx.req.query.filter.limit > 30 || !ctx.req.query.filter.limit) {
+  		ctx.req.query.filter.limit = 32;
+  		ctx.req.query.filter.skip = 0;
+  		ctx.req.query.filter.order = 'id DESC';
+  	} else {
+  		ctx.req.query.filter.limit = 32;
+  		ctx.req.query.filter.skip = 0;
+  		ctx.req.query.filter.order = 'id DESC';
+  	}
+  	Activity.find(ctx.req.query.filter, function (err, activities) {
+  		ctx.res.send(activities);
+  	});
+  });
+  Activity.beforeCreate = function(next, instance){
+  	instance.team(function (err, team) {
+  		Activity.app.models.Coterie.findOne({
+				where: {
+					teamId: instance.teamId
+				}
+			}, function (err, coterie) {
+				if (err || !coterie)
+					next(err);
+				if (!instance.explainUrl)
+					next();
+				else {
+					coterie.articles.create({
+						"title": instance.title,
+				    "contentUrl": instance.explainUrl,
+				    "created": new Date(),
+				    "coterieId": coterie.id,
+				    "userId": team.userId
+					}, function (err, article) {
+						if (err) {
+							next(err);
+						} else {
+              next();
+            }
+					});
+				}
+			})
+  	});
+  };
 };

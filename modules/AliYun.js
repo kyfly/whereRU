@@ -30,4 +30,13 @@ AliYun.prototype.putObject = function(option, cb) {
     cb(err, data);
   });
 };
+AliYun.prototype.getObject = function (option, cb) {
+  this.oss.getObject({
+    Bucket: this.config.bucket,
+    Key: option.fileName       // 参考: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
+  },
+  function (err, data) {
+    cb(err, data);
+  });
+}
 module.exports = AliYun;

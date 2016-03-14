@@ -1,4 +1,11 @@
-<form class="reg container" id="regForm" name="regForm">
+<nav class="header row hide-on-large-only">
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">whereRU</a>
+  </div>
+</nav>
+<div class="register container">
+	<h4>用户注册 <small class="grey-text"> 信息完善</small></h4>
+	<form class="reg " id="regForm" name="regForm">
 		<div input-field class="col offset-m2 offset-l2 s12 m4 l4">
 		    <input id="phone" type="text" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="phone">请输入手机号</label>
@@ -15,25 +22,23 @@
 		</div>
 
 		<select class="" ng-model="user.school" material-select watch>
+		  <option value="" disabled selected>请选择学校</option>
 		  <option ng-repeat="school in schools">{{school.name}}</option>
 		</select>
 		
 		<select class="" ng-model="user.sex" material-select watch>
+		  <option value="" disabled selected>请选择性别</option>
 		  <option value="男">男</option>
 		  <option value="女">女</option>
 		</select>
+		<div  class="row center">
+			<button type="sumbit" 
+			  class="waves-effect waves-light btn offset-s1" 
+				ng-click="register()" 
+				style="margin-left: 20px"
+				ng-disabled="regForm.$invalid">注册</button>
+		</div>
+	</form>
+</div>
 
-		<!-- <input name="sex" type="radio" id="man" ng-model="user.sex" />
-      <label for="man">男</label>
-    <input name="sex" type="radio" id="woman" ng-model="user.sex"/>
-    <label for="woman">女</label> -->
-
-	<div  class="row center">
-		<button type="sumbit" 
-		  class="waves-effect waves-light btn offset-s1" 
-			ng-click="register()" 
-			style="margin-left: 20px"
-			ng-disabled="regForm.$invalid">注册</button>
-	</div>
-</form>
 

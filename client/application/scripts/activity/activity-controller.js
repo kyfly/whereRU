@@ -22,12 +22,16 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
   }
   function getActivityStatus(activity) {
     var now = new Date();
-    if (activity.ended < now) {
-      activity.status = 'end';
-    } else if (activity.started > now){
-      activity.status = 'nos';
-    } else {
-      activity.status = 'ing';
+    try{
+      if (new Date(activity.ended) < now) {
+        activity.status = 'end';
+      } else if (new(activity.started) > now){
+        activity.status = 'nos';
+      } else {
+        activity.status = 'ing';
+      }
+    } catch (err){
+      
     }
   }
   if (!$scope.$currentUser) {
@@ -109,7 +113,7 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
   $scope.onClickJoinActivity = function () {
     var actType = $scope.activity.actType;
     if (!$scope.$currentUser) {
-      return $scope.$emit('auth:loginRequired');
+      $scope.$emit('auth:loginRequired');
     }
     if ($scope.activity.verifyRule === '学号') {
       $scope.activity.verifyId = $scope.$currentUser.studentId;
@@ -151,6 +155,9 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
   };
 
   $scope.submitFormResult = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     if ($scope.activity.verifyRule && !$scope.activity.verifyId) {
       Materialize.toast('验证规则必须填', 2000);
       return;
@@ -181,6 +188,9 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
   };
   $scope.submitVoteResult = function () {
     var result = [];
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     if ($scope.activity.verifyRule && !$scope.activity.verifyId) {
       Materialize.toast('验证规则必须填', 2000);
       return;
@@ -214,6 +224,9 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     });
   };
   $scope.submitSeckillResult = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
     if ($scope.activity.verifyRule && !$scope.activity.verifyId) {
       Materialize.toast('验证规则必须填', 2000);
       return;

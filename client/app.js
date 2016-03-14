@@ -18,7 +18,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 })
 .run(['$rootScope', function ($rootScope) {
 	$rootScope.$on('$stateChangeStart', function(evt, next, current) {
-		
+		$rootScope.cancelLogin();
 	});
 	function IsPC()
 	{

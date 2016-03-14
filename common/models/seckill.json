@@ -10,10 +10,6 @@
       "type": "date",
       "required": true
     },
-    "total": {
-      "type": "number",
-      "required": true
-    },
     "limit": {
       "type": "number",
       "default": 1
@@ -24,10 +20,6 @@
     "title": {
       "type": "string",
       "require": true
-    },
-    "margin": {
-      "type": "number",
-      "comment": "票余量"
     }
   },
   "validations": [],

@@ -8,8 +8,7 @@
   },
   "properties": {
     "phone": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
     "school": {
       "type": "string",

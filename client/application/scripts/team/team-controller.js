@@ -94,7 +94,24 @@ app.controller('TeamController',
     id: $scope.teamId
   }, function (activities) {
     $scope.activities = activities;
+    $scope.activities.forEach(function (activity) {
+      getActivityStatus(activity);
+    });
   });
+  function getActivityStatus(activity) {
+    var now = new Date();
+    try{
+      if (new Date(activity.ended) < now) {
+        activity.status = 'end';
+      } else if (new(activity.started) > now){
+        activity.status = 'nos';
+      } else {
+        activity.status = 'ing';
+      }
+    } catch (err){
+      
+    }
+  }
   $scope.getUserInfo = function() {
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');
