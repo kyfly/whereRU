@@ -1,3 +1,4 @@
+var q = require('q');
 module.exports = function(Activity) {
 	Activity.remoteMethod('getMySchoolActiveties', {
 		accepts: [{
@@ -23,7 +24,7 @@ module.exports = function(Activity) {
 		if (last) { //判断是否有‘last’参数，last为上一次返回的最后一条的‘created’
 			var dateFilter = {
 				school: school, //学校过滤器，只查询该学校活动
-				created: { lt: last},
+				ended: { lt: last},
 				hidden: false,	//活动显示过滤器，只显示不隐藏的活动
       	deleted: false  //删除过滤器，只显示未被删除的学校
 			};
@@ -36,11 +37,11 @@ module.exports = function(Activity) {
 		}
 		Activity.find({
 			where: dateFilter,
-			order: "id DESC",
-			limit: 30
+			order: "ended DESC",
+			limit: 32
 		}, function (err, activties) {
 			if (err)
-				cb({"status": 1201, "message": "活动列表获取失败"});
+				cb("活动列表获取失败");
 			else
 				cb(null, activties);
 		});
@@ -135,7 +136,7 @@ module.exports = function(Activity) {
 	 * @return {[type]}       [description]
 	 */
 	Activity.afterRemote('prototype.__create__readers', function (ctx,ins,next) {
-    var readers = ctx.instance.toJSON().readers;
+    var readers = ctx.instance.toJSON().readers || 0;
     ctx.instance.readers = readers + 1;
     ctx.instance.save(function(err,ins){
       if (err) {
@@ -144,52 +145,47 @@ module.exports = function(Activity) {
       ctx.res.send({readerNum:ins.toJSON().readers});
     });
   });
-  /**
-   * 创建抢票时给抢票添加余票数量
-   * @param  {[type]} ctx     [description]
-   * @param  {[type]} ins     [description]
-   * @param  {[type]}
-   * @return {[type]}         [description]
-   */
-  Activity.beforeRemote('prototype.__create__seckills', function (ctx, ins, next){
-    ctx.req.body.margin = ctx.req.body.total;	//票余量初始化
-    ctx.req.body._seckillItems.forEach(function(item){
-      item.margin = item.count;	//票项余量初始化
-    });
-    //保存抢票信息
-    ctx.instance.seckills.create(ctx.req.body, function (err, seckill) {
-      ctx.res.send(seckill);
-    });
-  });
   Activity.afterRemote('prototype.__get__seckills', function (ctx, ins, next) {
-  	var activities = [];
-  	ins.forEach(function (activity) {
-  		var act = activity.toJSON();
-  		act['serverTime'] = new Date();
-  		activities.push(act);
-  	});
-  	ctx.res.send(activities);
+		var activities = [];
+		var seckill = ins[0];
+		var act = seckill.toJSON();
+		var qFn = [];
+		function seckillMargin(s, id) {
+	  	var defer = q.defer();
+			s.seckillResults.count({
+				get: true,
+				itemId: id
+			}, function (err, count) {
+				if (!err) {
+					defer.resolve(count);
+				} else {
+					defer.reject(err);
+				}
+			});
+			return defer.promise;
+		}
+		act['serverTime'] = new Date();
+		act._seckillItems.forEach(function (item) {
+			qFn.push(seckillMargin(seckill, item.id));
+		});
+		q.all(qFn).then(function (args) {
+			for (var i = act._seckillItems.length - 1; i >= 0; i--) {
+				act._seckillItems[i].margin = act._seckillItems[i].count - args[i];
+			};
+			activities.push(act);
+			ctx.res.send(activities);
+		}, function (err) {
+			next(err);
+		});
   });
   Activity.beforeRemote('find', function (ctx, ins, next) {
-
-  	if (!ctx.req.query.filter) {
-  		ctx.req.query.filter = {
-  			limit: 32,
-  			skip: 0,
-  			order: 'id DESC'
-  		};
-  	} else if (ctx.req.query.filter.limit > 30 || !ctx.req.query.filter.limit) {
-  		ctx.req.query.filter.limit = 32;
-  		ctx.req.query.filter.skip = 0;
-  		ctx.req.query.filter.order = 'id DESC';
-  	} else {
-  		ctx.req.query.filter.limit = 32;
-  		ctx.req.query.filter.skip = 0;
-  		ctx.req.query.filter.order = 'id DESC';
-  	}
-  	Activity.find(ctx.req.query.filter, function (err, activities) {
-  		ctx.res.send(activities);
-  	});
+		var filter = JSON.parse(ctx.req.query.filter) || {};
+		filter.limit = filter.limit > 32? 32 : filter.limit;
+		filter.skip = 0;
+		filter.order = filter.order || 'readers DESC';
+		Activity.find(filter, function (err, activities) {
+			ctx.res.send(activities);
+		});
   });
   Activity.beforeCreate = function(next, instance){
   	instance.team(function (err, team) {

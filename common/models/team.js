@@ -40,6 +40,15 @@ module.exports = function(Team) {
         cb(null,teams);
     });
 	};
+	/**
+	 * [description]
+	 * @param  {[type]} ctx      [description]
+	 * @param  {[type]} ins      [description]
+	 * @param  {[type]} next)    {		ins.members.findOne({			where: {				userId: ins.userId			} [description]
+	 * @param  {[type]} fields:  ['name']		}                        [description]
+	 * @param  {[type]} function (err,                               member)       {			if         (err          || !member) {				return next();			}			var team [description]
+	 * @return {[type]}          [description]
+	 */
 	Team.afterRemote('findById', function (ctx, ins, next) {
 		ins.members.findOne({
 			where: {
@@ -90,9 +99,11 @@ module.exports = function(Team) {
 	 */
 	Team.remoteMethod('getMySchoolTeams', {
 		accepts: [{
-			arg: 'school', type: 'string',required: true
+			arg: 'school',
+			type: 'string',
+			required: true
 		},{
-			arg: 'last', type: 'date',
+			arg: 'page', type: 'number',
 		}],
 		returns: {
 			arg: 'teams', type: 'array'
@@ -106,21 +117,26 @@ module.exports = function(Team) {
 	 * @param  {Function} cb     [description]
 	 * @return {[type]}          [description]
 	 */
-	Team.getMySchoolTeams = function (school,last,cb){
-    if (last) {
-    	var query = { school:school, created:{lt: last }, hidden: false, deleted: false};
-    } else {
-    	var query = { school:school, hidden: false, deleted: false};
-    }
+	Team.getMySchoolTeams = function (school, page, cb){
+		page = page || 0;
     Team.find({
-      where: query,
-      limit:20,
-      order:"id desc"
+      where: {
+      	school:school,
+      	hidden: false,
+      	deleted: false
+      },
+      limit: 32,
+      skip: page * 32,
+      order: "id DESC"
     },function(err,teams){
       if(err) return cb(err);
       cb(null,teams);
     });
   };
+  /**
+   * [accepts description]
+   * @type {Object}
+   */
 	Team.remoteMethod('getActivitiesData', {
 		accepts: {
 			arg: 'id', type: 'string',
@@ -181,7 +197,14 @@ module.exports = function(Team) {
 		})
 	};
 	//Team.beforeRemote('prototype.__create__members',function () {});
-
+	/**
+	 * [description]
+	 * @param  {[type]} ctx                    [description]
+	 * @param  {[type]} ins                    [description]
+	 * @param  {[type]} next)                  {               var userId  [description]
+	 * @param  {[type]} function(err,result){                      if(err) return        next(err);      if (result>0){        return next({            "status":1002,            "message":"用户已加入该团队"        });      }else{        Team.app.models.whereRUUser.findById( userId, function(err,user){          if(err) return next(err);          ctx.req.body.userId [description]
+	 * @return {[type]}                        [description]
+	 */
 	Team.beforeRemote('prototype.__create__members',function (ctx,ins,next) {
     var userId = ctx.req.accessToken.userId;
     ctx.instance.members.count({
@@ -194,7 +217,7 @@ module.exports = function(Team) {
             "message":"用户已加入该团队"
         });
       }else{
-        Team.app.models.whereRUUser.findById(userId,function(err,user){
+        Team.app.models.whereRUUser.findById( userId, function(err,user){
           if(err) return next(err);
           ctx.req.body.userId = userId;
           ctx.req.body.school = user.school;
@@ -217,14 +240,22 @@ module.exports = function(Team) {
 
   // })
   // prototype_unlink_partakedRaces 团队退出竞赛时通知主办方
+  /**
+   * [beforeCreate description]
+   * @param  {Function} next     [description]
+   * @param  {[type]}   instance [description]
+   * @return {[type]}            [description]
+   */
   Team.beforeCreate = function (next, instance) {
   	Team.app.models.Coterie.create({
   		name: instance.name,
 			logoUrl: instance.logoUrl,
 			created: new Date(),
 			teamId:  instance.id,
+			id: instance.id,
 			school: instance.school,
-			type: instance.type
+			type: instance.type,
+			desc: instance.desc
   	}, function (err, coterie) {
   		if (err) {
   			next(err);
@@ -233,4 +264,20 @@ module.exports = function(Team) {
   		}
   	});
   };
+  /**
+   * [description]
+   * @param  {[type]} ctx   [description]
+   * @param  {[type]} ins   [description]
+   * @param  {[type]} next) {               var filter [description]
+   * @return {[type]}       [description]
+   */
+  Team.beforeRemote('find', function (ctx, ins, next) {
+    var filter = JSON.parse(ctx.req.query.filter) || {};
+		filter.limit = filter.limit > 32? 32 : filter.limit;
+		filter.skip = 0;
+		filter.order = filter.order || 'id DESC';
+    Team.find(filter, function (err, teams) {
+      ctx.res.send(teams);
+    });
+  });
 };

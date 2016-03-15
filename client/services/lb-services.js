@@ -459,36 +459,12 @@
                 method: 'POST'
               },
               /**
-               * 描述：部门详情，已登录用户
-               */
-              "prototype_findById_departments": {
-                url: urlBase + '/Teams/:id/departments/:fk',
-                params: {'fk': '@fk'},
-                method: 'GET'
-              },
-              /**
-               * 描述：更新部门信息，已登录用户
-               */
-              "prototype_updateById_departments": {
-                url: urlBase + '/Teams/:id/departments/:fk',
-                params: {'fk': '@fk'},
-                method: 'PUT'
-              },
-              /**
                * 描述：删除部门，已登录用户
                */
               "prototype_destroyById_departments": {
                 url: urlBase + '/Teams/:id/departments/:fk',
                 params: {'fk': '@fk'},
                 method: 'DELETE'
-              },
-              /**
-               * 描述：获取活动信息，已登录用户
-               * 使用场景：活动管理列表
-               */
-              "getActivitiesData": {
-                url: urlBase + '/Teams/:id/activitiesData',
-                method: 'GET'
               },
               "prototype_get_races": {
                 url: urlBase + '/Teams/:id/races',

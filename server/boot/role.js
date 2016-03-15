@@ -8,7 +8,12 @@ module.exports = function (app) {
 		if (!userId) {
 			return reject();
 		}
+		if (!context.modelId) {
+			return reject();
+		}
+		console.log(context.modelId);
 		context.model.findById(context.modelId, function (err, team) {
+
 			team.members.count({'userId': userId}, function (err, count) {
 				cb(err, count > 0);
 			})

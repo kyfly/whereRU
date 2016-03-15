@@ -1,7 +1,7 @@
 module.exports = function(SeckillResult) {
 	SeckillResult.observe('before save', function (ctx, next) {
     ctx.instance.seckill({
-    	include: 'activity'
+    	include: ['activity', 'seckillResults']
     }, function (err, seckill) {
     	if (err) {
     		return next(err);
@@ -12,19 +12,24 @@ module.exports = function(SeckillResult) {
 			} else if (new Date(ctx.instance.created) > new Date(seckill.activity.ended)) {
 				return next('活动已经结束了');
 			} else {
-				seckill.seckillItems.forEach(function (item) {
-					if (item.id === ctx.instance.itemId)
-					{
-						if (item.margin > 0) {
-							item.margin --;
-							seckill.save();
-							ctx.instance.get = true;
+				seckill.seckillResults.count({
+					itemId: ctx.instance.itemId
+				}, function (err, count) {
+					if (err) {
+		    		return next(err);
+		    	}
+		    	seckill.toJSON()._seckillItems.forEach(function (item) {
+						if (item.id === ctx.instance.itemId)
+						{
+							if ((item.count - count) > 0) {
+								ctx.instance.get = true;
+							}
+							else {
+								ctx.instance.get = false;
+							}
+							return next();
 						}
-						else {
-							ctx.instance.get = false;
-						}
-						next();
-					}
+					});
 				});
 			}
     });

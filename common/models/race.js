@@ -40,28 +40,22 @@ module.exports = function(Race) {
       type: 'string',
       required: true
 		},{
-			arg: 'last', type: 'string',
+			arg: 'page', type: 'number',
 		}],
 		returns: {
 			arg: 'races', type: 'array'
 		},
 		http: {path: '/mySchoolRaces', verb: 'get'}
 	});
-	Race.getMySchoolRaces = function (school, last, cb){
-    if (last) {
-      var dateFilter = {
-        school: school, 
-        created: { lt: last}
-      };
-    } else {
-      var dateFilter = {
-        school: school
-      };
-    }
+	Race.getMySchoolRaces = function (school, page, cb){
+    page = page || 0;
     Race.find({
-      where: dateFilter,
+      where: {
+        school: school
+      },
       order:'id DESC',
-      limit: 30
+      skip: 32 * page,
+      limit: 32
     },function(err, races){
       if(err) {
         return cb(err);
@@ -133,4 +127,13 @@ module.exports = function(Race) {
       })
     });
   };
+  Race.beforeRemote('find', function (ctx, ins, next) {
+    var filter = JSON.parse(ctx.req.query.filter) || {};
+    filter.limit = filter.limit > 32? 32 : filter.limit;
+    filter.skip = 0;
+    filter.order = filter.order || 'id DESC';
+    Race.find(filter, function (err, races) {
+      ctx.res.send(races);
+    });
+  });
 };
