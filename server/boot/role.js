@@ -11,9 +11,10 @@ module.exports = function (app) {
 		if (!context.modelId) {
 			return reject();
 		}
-		console.log(context.modelId);
 		context.model.findById(context.modelId, function (err, team) {
-
+			if (err) {
+				return reject();
+			}
 			team.members.count({'userId': userId}, function (err, count) {
 				cb(err, count > 0);
 			})
@@ -25,12 +26,35 @@ module.exports = function (app) {
       cb(null, false);
     }
 	});
-	//Role.registerResolver('teamOwner', function (role, context, cb) {
-	//	var userId = context.accessToken.userId;
-	//	if (!userId) {
-	//		return reject();
-	//	}
-	//	//todo...
-	//});
+	Role.registerResolver('teamOwner', function (role, context, cb) {
+		var userId = context.accessToken.userId;
+		if (!userId) {
+			return reject();
+		}
+		app.models[context.modelName].findOne({
+			where: {
+				id: context.modelId
+			}
+		}, function (err, ins) {
+			if (err || !ins) {
+				return reject();
+			}
+			app.models.Team.findOne({
+				where: {
+					id: ins.teamId,
+					userId: userId
+				},
+				fields: ['userId']
+			}, function (err, team) {
+				cb(err, team);
+			});
+		});
+		function reject (err) {
+      if (err) {
+        return cb(err);
+      }
+      cb(null, false);
+    }
+	});
 
 };

@@ -1,5 +1,6 @@
-app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploadFile',
-  function ($scope, Team, User, $location, uploadFile) {
+app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploadFile', '$window',
+  function ($scope, Team, User, $location, uploadFile, $window) {
+  //$scope.filterBar = 'ng-hide';
   $scope.types = [{
     "name": "校园组织"
   }, {
@@ -9,6 +10,25 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
   }, {
     "name": "技术团队"
   }];
+  $window.pull = true;
+  $scope.teams = [];
+  var page = 0;
+  angular.element($window).bind('scroll', function (e) {
+    var body = e.target.body;
+    if (body.scrollHeight - body.clientHeight - body.scrollTop < 500 && $window.pull) {
+      $scope.getTeams();
+      $window.pull = false;
+    } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 500) {
+      $window.pull = true;
+    }
+    if (body.scrollTop > 50) {
+      $scope.filterBar = 'ng-hide';
+      console.log(1)
+    }
+  });
+  $scope.$on('$destroy', function (event,data) {
+    angular.element($window).unbind('scroll');
+  });
   $scope.changeFilter = function () {
     $scope.choice = this.type.name;
   };
@@ -32,6 +52,23 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
       $scope.team.logoUrl = 'http://cdn-img.etuan.org/' + res.url;
     });
   };
+  
+  $scope.getTeams = function () {
+    if (!$scope.$currentUser) {
+      $scope.$emit('auth:loginRequired');
+      return;
+    }
+    Team.getMySchoolTeams({
+      school: $scope.$currentUser.school,
+      page: page
+    }, function (res) {
+      if (res.teams.length < 32 || res.teams.length === 0) {
+        $scope.last = true;
+      }
+      page ++;
+      $scope.teams.push.apply($scope.teams, res.teams);
+    });
+  }
   /**
    * 团队列表
    * school参数有问题，i++
@@ -41,11 +78,7 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
       $scope.teams = teams;
     })
   } else {
-    Team.getMySchoolTeams({
-      school: $scope.$currentUser.school
-    }, function (res) {
-      $scope.teams = res.teams;
-    });
+    $scope.getTeams();
   }
 
 

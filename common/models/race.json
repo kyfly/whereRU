@@ -66,7 +66,7 @@
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW"
+      "permission": "DENY"
     },
     {
       "principalType": "ROLE",
@@ -78,13 +78,73 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
       "property": "getMySchoolRaces"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__get__notices"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "teamOwner",
+      "permission": "ALLOW",
+      "property": "__create__notices"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "teamOwner",
+      "permission": "ALLOW",
+      "property": "__updateById__notices"
     },
     {
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW",
-      "property": "__link__raceTeams"
+      "property": "__get__raceTeams"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "teamOwner",
+      "permission": "ALLOW",
+      "property": "__unlink__raceTeams"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__get__materials"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "teamOwner",
+      "permission": "ALLOW",
+      "property": "__updateById__materials"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "teamOwner",
+      "permission": "ALLOW",
+      "property": "__destroyById__materials"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "teamOwner",
+      "permission": "ALLOW",
+      "property": "__create__materials"
     }
   ],
   "methods": {},

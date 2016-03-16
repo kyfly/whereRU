@@ -272,7 +272,12 @@ module.exports = function(Team) {
    * @return {[type]}       [description]
    */
   Team.beforeRemote('find', function (ctx, ins, next) {
-    var filter = JSON.parse(ctx.req.query.filter) || {};
+  	if(ctx.req.query.filter)
+    	var filter = JSON.parse(ctx.req.query.filter) || {};
+    else
+    	var filter = {
+        limit: 32
+      };
 		filter.limit = filter.limit > 32? 32 : filter.limit;
 		filter.skip = 0;
 		filter.order = filter.order || 'id DESC';

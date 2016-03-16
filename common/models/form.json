@@ -27,17 +27,21 @@
     "activity": {
       "type": "belongsTo",
       "model": "Activity"
+    },
+    "team": {
+      "type": "belongsTo",
+      "model": "Team"
     }
   },
   "acls": [
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW"
+      "permission": "DENY"
     },
     {
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "teamOwner",
       "permission": "ALLOW",
       "property": "__get__formResults"
     }

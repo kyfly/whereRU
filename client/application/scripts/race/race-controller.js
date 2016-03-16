@@ -1,16 +1,44 @@
-app.controller('RacesController', ['$scope', 'Race', function ($scope, Race) {
+app.controller('RacesController', ['$scope', 'Race', '$window', function ($scope, Race, $window) {
+  $window.pull = true;
+  $scope.raceItems = [];
+  var page = 0;
+  angular.element($window).bind('scroll', function (e) {
+    var body = e.target.body;
+    if (body.scrollHeight - body.clientHeight - body.scrollTop < 500 && $window.pull) {
+      $scope.getRaces();
+      $window.pull = false;
+    } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 500) {
+      $window.pull = true;
+    }
+  });
+  $scope.$on('$destroy', function (event,data) {
+    angular.element($window).unbind('scroll');
+  });
+
+  $scope.getRaces = function () {
+    if (!$scope.$currentUser) {
+      $scope.$emit('auth:loginRequired');
+      return;
+    }
+    Race.getMySchoolRaces({
+      school: $scope.$currentUser.school,
+      page: page
+    }, function (res) {
+      for (x in res) if (x === 'races') {
+        if (res[x].length < 32 || res[x].length === 0) {
+          $scope.last = true;
+        }
+        $scope.raceItems.push.apply($scope.raceItems, res[x]);
+        page ++;
+      }
+    });
+  };
   if (!$scope.username) {
     Race.find(function (races) {
       $scope.raceItems = races;
     });
   } else {
-    Race.getMySchoolRaces({
-      school: $scope.$currentUser.school
-    }, function (res) {
-      for (x in res) if (x === 'races') {
-        $scope.raceItems = res[x];
-      }
-    });
+    $scope.getRaces();
   }
 }]);
 app.controller('RaceController', ['$scope', 'Race', '$stateParams', 'User', 'Team', function ($scope, Race, $stateParams, User, Team) {

@@ -1299,7 +1299,15 @@ footer {
 .card-list {
 
 }
+.list-more{
 
+}
+.list-more a {
+  padding: 20px 30px;
+    font-size: 1.5rem;
+    background-color: rgba(7, 7, 7, 0.7);
+    color: #FFF;
+}
 .card-list .card .card-content {
   padding: 10px
 }

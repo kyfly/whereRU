@@ -18,10 +18,9 @@
   </div>
 </nav> -->
 <div class="row menu">
-  <!-- 大屏幕选择 -->
-  <select class="col m2 l2 browser-default hide-on-med-and-down" ng-model="choice" material-select watch>
-    <option ng-repeat="filter in activityFilter">{{filter}}</option>
-  </select>
+  <div class="col s4 m4 l2 item active waves-effect hide-on-med-and-down">
+    <a class="active" href=""></a>
+  </div>
   <div class="col s4 m4 l2 item active waves-effect">
     <a class="active" href="/w/activities">校园活动</a>
   </div>
@@ -34,7 +33,8 @@
 </div>
 <div class="row container card-list">
   <ul>
-    <li class="col s12 m6 l3" ng-repeat="activityItem in activityItems | filter: filterFun">
+    <li class="col s12 m6 l3" 
+    ng-repeat="activityItem in activityItems track by $id(activityItem.id)">
       <div class="card">
         <div class="card-content">
           <h4 class="card-title">
@@ -71,5 +71,10 @@
       </div>
     </li>
   </ul>
+</div>
+<div ng-show="activityItems.length > 32" class="col s12 center list-more">
+  <a ng-show="$currentUser && !last" href="" ng-click="getActivities()">加载更多</a>
+  <a ng-show="last" href="" >没有更多活动了</a>
+  <a ng-show="!$currentUser" href="" ng-click="getActivities()">登录</a>
 </div>
 

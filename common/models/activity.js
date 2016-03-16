@@ -6,7 +6,7 @@ module.exports = function(Activity) {
 			type: 'string',
 			required: true
 		},{
-			arg: 'last', type: 'string',
+			arg: 'page', type: 'number',
 		}],
 		returns: {
 			arg: 'activties', type: 'array'
@@ -20,24 +20,15 @@ module.exports = function(Activity) {
 	 * @param  {Function} cb     回调函数
 	 * @return {object}          活动列表
 	 */
-	Activity.getMySchoolActiveties = function (school, last, cb) {
-		if (last) { //判断是否有‘last’参数，last为上一次返回的最后一条的‘created’
-			var dateFilter = {
-				school: school, //学校过滤器，只查询该学校活动
-				ended: { lt: last},
-				hidden: false,	//活动显示过滤器，只显示不隐藏的活动
-      	deleted: false  //删除过滤器，只显示未被删除的学校
-			};
-		}	else {
-			var dateFilter = {
+	Activity.getMySchoolActiveties = function (school, page, cb) {
+		Activity.find({
+			where: {
 				school: school,
 				hidden: false,
       	deleted: false
-			};
-		}
-		Activity.find({
-			where: dateFilter,
+			},
 			order: "ended DESC",
+			skip: page* 32,
 			limit: 32
 		}, function (err, activties) {
 			if (err)
@@ -179,7 +170,12 @@ module.exports = function(Activity) {
 		});
   });
   Activity.beforeRemote('find', function (ctx, ins, next) {
-		var filter = JSON.parse(ctx.req.query.filter) || {};
+		if(ctx.req.query.filter)
+    	var filter = JSON.parse(ctx.req.query.filter) || {};
+    else
+    	var filter = {
+        limit: 32
+      };
 		filter.limit = filter.limit > 32? 32 : filter.limit;
 		filter.skip = 0;
 		filter.order = filter.order || 'readers DESC';

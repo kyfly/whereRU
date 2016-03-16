@@ -9,5 +9,5 @@ module.exports = function(Seckill) {
       next();
     }
   });
-	Seckill.beforeRemote('prototype.__get__seckillResults', function(){});
+	//Seckill.beforeRemote('prototype.__get__seckillResults', function(){});
 };

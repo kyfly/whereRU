@@ -57,9 +57,10 @@
           R.modelName = "School";
           return R;
         }]);
-  module.factory(
-    'User',
-    ['LoopBackResource', 'LoopBackAuth', '$injector',
+  module
+    .factory(
+      'User',
+      ['LoopBackResource', 'LoopBackAuth', '$injector',
       function (Resource, LoopBackAuth, $injector) {
         var R = Resource(
           urlBase + '/WUsers/:id',
@@ -726,15 +727,7 @@
               "findById": {
                 url: urlBase + '/Activities/:id',
                 method: 'GET'
-              },
-              /**
-               * 描述：更新活动
-               */
-              "prototype_updateAttributes": {
-                url: urlBase + '/Activities/:id',
-                method: 'PUT'
               }
-
             });
           return R;
         }])
@@ -747,19 +740,11 @@
             {'id': "@id"},
             {
               /**
-               * 描述：获取剩余票量，所有用户
-               * 使用场景：参与抢票活动
-               */
-              "margin": {
-                url: urlBase + '/Seckills/:id/margin',
-                method: 'GET'
-              },
-              /**
                * 描述：获取抢票结果，已登录用户
                * 使用场景：抢票管理
                */
               "prototype_get_seckillResults": {
-                url: urlBase + '/Forms/:id/seckillResults',
+                url: urlBase + '/Seckills/:id/seckillResults',
                 method: 'GET'
               }
             }
@@ -781,28 +766,6 @@
               "prototype_get_formResults": {
                 url: urlBase + '/Forms/:id/formResults',
                 method: 'GET'
-              },
-              /**
-               * 描述：上传表单
-               */
-              "create": {
-                url: urlBase + '/Forms',
-                method: 'POST'
-              },
-              /**
-               * 描述：获取所有表单
-               */
-              "find": {
-                url: urlBase + '/Forms',
-                method: 'GET',
-                isArray: true
-              },
-              /**
-               * 描述：删除某条表单
-               */
-              "deleteById": {
-                url: urlBase + '/Forms/:id',
-                method: 'DELETE'
               }
             }
           );

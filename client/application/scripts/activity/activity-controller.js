@@ -1,23 +1,41 @@
 
-app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, Activity) {
+app.controller('ActivitiesController', ['$scope', 'Activity', '$window', function ($scope, Activity, $window) {
   $scope.activityFilter = ['全部', '进行中', '未开始', '已结束'];
   $scope.choice = '全部';
+  $window.pull = true;
+  var page = 0;
   $scope.changeFilter = function () {
     $scope.choice = this.filter;
   }
+  angular.element($window).bind('scroll', function (e) {
+    var body = e.target.body;
+    if (body.scrollHeight - body.clientHeight - body.scrollTop < 500 && $window.pull) {
+      $scope.getActivities();
+      $window.pull = false;
+    } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 500) {
+      $window.pull = true;
+    }
+  });
+  $scope.$on('$destroy', function (event,data) {
+    angular.element($window).unbind('scroll');
+  });
   $scope.filterFun = function (activity) {
+    console.log($scope.choice);
     switch($scope.choice) {
       case '全部':
         return true;
       case '进行中':
         if (activity.status === 'ing')
           return true;
+        break;
       case '未开始':
         if (activity.status === 'nos')
           return true;
+        break;
       case '已结束':
         if (activity.status === 'end')
           return true;
+        break;
     }
   }
   function getActivityStatus(activity) {
@@ -33,6 +51,30 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
     } catch (err){
       
     }
+    return activity;
+  }
+  $scope.activityItems = [];
+  $scope.getActivities = function () {
+    if (!$scope.$currentUser) {
+      $scope.$emit('auth:loginRequired');
+      return;
+    }
+    Activity.getMySchoolActiveties({
+      school: $scope.$currentUser.school,
+      page: page
+    }, function(res){
+      for (x in res) if (x === 'activties') {
+        page ++;
+        if (res[x].length < 32 || res[x].length === 0) {
+          $scope.last = true;
+        }
+        res[x].forEach(function (activity) {
+          $scope.activityItems.push(getActivityStatus(activity));
+        });
+      }
+    }, function (err) {
+      $scope.errorTip(err);
+    });
   }
   if (!$scope.$currentUser) {
     Activity.find(function (activities) {
@@ -43,22 +85,8 @@ app.controller('ActivitiesController', ['$scope', 'Activity', function ($scope, 
     }, function (err) {
       $scope.errorTip(err);
     });
-  }
-
-  //登录用户获取所在学校活动信息
-  else {
-    Activity.getMySchoolActiveties({
-      school: $scope.$currentUser.school
-    }, function(res){
-      for (x in res) if (x === 'activties') {
-        $scope.activityItems = res[x];
-        $scope.activityItems.forEach(function (activity) {
-          getActivityStatus(activity);
-        });
-      }
-    }, function (err) {
-      $scope.errorTip(err);
-    });
+  } else {
+    $scope.getActivities();
   }
 }]);
 

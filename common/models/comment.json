@@ -29,7 +29,19 @@
       "model": "whereRUUser"
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__get__replys"
+    }
+  ],
   "methods": {},
   "scope": {
     "include": {
