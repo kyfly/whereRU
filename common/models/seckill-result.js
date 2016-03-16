@@ -18,18 +18,17 @@ module.exports = function(SeckillResult) {
 					if (err) {
 		    		return next(err);
 		    	}
-		    	seckill.toJSON()._seckillItems.forEach(function (item) {
-						if (item.id === ctx.instance.itemId)
-						{
-							if ((item.count - count) > 0) {
+		    	for (var i = seckill.toJSON()._seckillItems.length - 1; i >= 0; i--) 
+		    		if (seckill.toJSON()._seckillItems[i].id == ctx.instance.itemId) {
+		    			if ((seckill.toJSON()._seckillItems[i].count - count) > 0) {
 								ctx.instance.get = true;
 							}
 							else {
 								ctx.instance.get = false;
 							}
 							return next();
-						}
-					});
+		    		}
+		    	next('数据有错误');	
 				});
 			}
     });

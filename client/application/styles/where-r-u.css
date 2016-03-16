@@ -16,6 +16,11 @@
   #toast-container {
     min-width: 100%;
     bottom: 48px;
+    position: absolute;
+    left: 0;
+  }
+  #toast-container .toast{
+    float: none;
   }
 }
 

@@ -72,7 +72,7 @@
     </li>
   </ul>
 </div>
-<div ng-show="activityItems.length > 32" class="col s12 center list-more">
+<div ng-show="activityItems.length >= 32" class="col s12 center list-more">
   <a ng-show="$currentUser && !last" href="" ng-click="getActivities()">加载更多</a>
   <a ng-show="last" href="" >没有更多活动了</a>
   <a ng-show="!$currentUser" href="" ng-click="getActivities()">登录</a>
