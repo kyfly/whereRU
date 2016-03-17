@@ -287,15 +287,14 @@ app.controller('FormResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Form'
     id: $stateParams.id
   }, function (results) {
     $scope.results = results;
-    $scope.form.result = results[0].result;
   });
   var active = 'active';
-  $scope.pageViewActive = false;
+  $scope.pageViewActive = active;
   $scope.pageView = function () {
     $scope.pageViewActive = active;
     $scope.allViewActive = false;
   }
-  $scope.allViewActive = active;
+  $scope.allViewActive = false;
   $scope.allView = function () {
     $scope.pageViewActive = false;
     $scope.allViewActive = active;

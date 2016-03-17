@@ -1,45 +1,44 @@
 <div>
 	<h6 class="row form-action-bar">
-		<span class="col s3">
+		<span class="col s3 waves-effect">
 			结果：{{results.length}}
 		</span>
-		<span ng-class="pageViewActive" ng-click="pageView()" class="col s3">
+		<span ng-class="pageViewActive" ng-click="pageView()" class="col s3 waves-effect">
 			分页显示
 		</span>
-		<span class="col s3" ng-class="allViewActive" ng-click="allView()">
+		<span class="col s3 waves-effect" ng-class="allViewActive" ng-click="allView()">
 			列表显示
 		</span>
-		<span class="col s3">
+		<span class="col s3 waves-effect">
 			<a href="" class="">excl下载</a>
 		</span>
 	</h6>
 </div>
 <div>
-	<table ng-show="false" class="striped centered">
+	<table ng-show="allViewActive" class="striped centered">
     <thead>
       <tr>
-      	<th ng-show="results[0].verifyId">验证信息</th>
         <th ng-repeat="item in form._formItems" ng-bind="item.name"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="resultItem in results">
-      	<td ng-show="resultItem.verifyId" ng-bind="resultItem.verifyId"></td>
-        <td ng-repeat="result in resultItem.result" ng-bind="result.name"></td>
-      </tr>
-    </tbody>
-  </table>
-	<table class="responsive-table">
-    <thead>
-      <tr>
-      	
-        <th data-field="{{item.id}}" ng-repeat="item in form._formItems" ng-bind="item.name"></th>
+        <th ng-show="results[0].verifyId">验证信息</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="resultItem in results">
         <td ng-repeat="result in resultItem.result" ng-bind="result.name"></td>
+        <td ng-show="resultItem.verifyId" ng-bind="resultItem.verifyId"></td>
       </tr>
     </tbody>
   </table>
+  <div ng-show="pageViewActive" class="row page-view">
+  	<ul ng-repeat="resultItem in results" class="col s12 z-depth-1">
+  		<li ng-show="results[0].verifyId" class="col s12">
+  			<h5 class="col s3"  ng-show="results[0].verifyId">验证信息</h5>
+  			<h6 class="col s9"  ng-show="resultItem.verifyId" ng-bind="resultItem.verifyId"></h6>
+  		</li>
+  		<li ng-repeat="item in form._formItems" class="col s12">
+  			<h5 class="col s3"  ng-bind="item.name"></h5>
+  			<h6 class="col s9"  ng-bind="resultItem.result[$index].name"></h6>
+  		</li>
+  	</ul>
+  </div>
 </div>

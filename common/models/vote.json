@@ -59,7 +59,7 @@
       "principalType": "ROLE",
       "principalId": "teamOwner",
       "permission": "ALLOW",
-      "property": "__get__formResults"
+      "property": "__get__voteResults"
     }
   ],
   "methods": {}

@@ -1,1 +1,25 @@
-voteResult
+<div>
+	<h6 class="row form-action-bar">
+		<span class="col s3 waves-effect">
+			参与量：{{sum}}
+		</span>
+		<span ng-class="ASCActive" ng-click="ASC()" class="col s3 waves-effect">
+			升序
+		</span>
+		<span class="col s3 waves-effect" ng-class="DESCActive" ng-click="DESC()">
+			降序
+		</span>
+	</h6>
+</div>
+<div class="vote-result">
+	<ul class="row">
+		<li ng-repeat="item in vote._voteItems" class="col s12">
+			<p class="col s3 center">
+				<span ng-bind="item.name"></span>
+				<br>
+				<span class="red-text" ng-bind="item.count"></span>
+			</p>
+			<h6 class="col s9 vote-bg"><span class="vote-point" ng-style="{'width': item.point + '%'}"></span></h6>
+		</li>
+	</ul>
+</div>

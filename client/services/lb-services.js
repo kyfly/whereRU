@@ -786,7 +786,7 @@
                * 使用场景：投票管理
                */
               "prototype_get_voteResults": {
-                url: urlBase + '/Forms/:id/voteResults',
+                url: urlBase + '/Votes/:id/voteResults',
                 method: 'GET',
                 isArray: true
               }

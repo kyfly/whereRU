@@ -1,1 +1,64 @@
-seckillResult
+<div>
+	<h6 class="row form-action-bar">
+		<span class="col s3 waves-effect">
+			结果：{{results.length}}
+		</span>
+		<span ng-class="pageViewActive" ng-click="pageView()" class="col s3 waves-effect">
+			分页显示
+		</span>
+		<span class="col s3 waves-effect" ng-class="allViewActive" ng-click="allView()">
+			列表显示
+		</span>
+		<span class="col s3 waves-effect">
+			<a href="" class="">excl下载</a>
+		</span>
+	</h6>
+</div>
+<div>
+	<table ng-show="allViewActive" class="striped centered">
+    <thead>
+      <tr>
+        <th ng-repeat="item in seckill._seckillItems" ng-bind="item.name"></th>
+        <th>姓名</th>
+        <th ng-show="results[0].verifyId">验证信息</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="resultItem in results">
+        <td ng-repeat="item in seckill._seckillItems" class="seckill-result">
+        	<span ng-show="item.id == resultItem.itemId">
+        		<b ng-show="resultItem.get">√</b>
+        		<i ng-show="!resultItem.get">×</i>
+        	</span>
+        	<span ng-show="item.id != resultItem.itemId">
+        		<i>×</i>
+        	</span>
+        </td>
+				<td ng-show="resultItem.user" ng-bind="resultItem.user.name"></td>
+      	<td ng-show="resultItem.verifyId" ng-bind="resultItem.verifyId"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div ng-show="pageViewActive" class="row page-view">
+  	<ul ng-repeat="resultItem in results" class="col s12 z-depth-1">
+  		<li class="col s12">
+  			<h5 class="col s3">得票</h5>
+  			<h6 class="col s9" ng-bind="resultItem.get? '是': '否'"></h6>
+  		</li>
+  		<li class="col s12">
+  			<h5 class="col s3">所抢票</h5>
+  			<h6 class="col s9" ng-repeat="item in seckill._seckillItems" 
+  				ng-if="item.id == resultItem.itemId" ng-bind="item.name"></h6>
+  		</li>
+  		<li class="col s12">
+  			<h5 class="col s3">姓名</h5>
+  			<h6 class="col s9" ng-bind="resultItem.user.name"></h6>
+  		</li>
+  		<li ng-show="results[0].verifyId" class="col s12">
+  			<h5 class="col s3"  ng-show="results[0].verifyId">验证信息</h5>
+  			<h6 class="col s9"  ng-show="resultItem.verifyId" ng-bind="resultItem.verifyId"></h6>
+  		</li>
+  	</ul>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 app.controller('SeckillListCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
-  $rootScope.logoHide = false;
+  $rootScope.pageTitle = '抢票列表';
   $scope.showType = 0;
   Team.prototype_get_seckills({
     id: localStorage.$LoopBack$currentTeamId,
@@ -40,7 +40,7 @@ app.controller('SeckillListCtrl', ['$scope', 'Team', '$rootScope', function ($sc
 }]);
 
 app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$stateParams', function ($scope, $location, Team, $rootScope, $stateParams) {
-  $rootScope.logoHide = true;
+  $rootScope.pageTitle = '创建抢票';
   $scope.isEdit = false;
   if ($stateParams.id !== '') {
     $scope.isEdit = true;
@@ -48,7 +48,7 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
       id: localStorage.$LoopBack$currentTeamId,
       fk: $stateParams.id
     }, function (res) {
-      console.log(res);
+      $rootScope.pageTitle = '更新[' + res.title + ']';
       $scope.uploadData = res;
       $scope.seckills = res._seckillItems;
     });
@@ -136,7 +136,30 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
   };
 }]);
 
-
-app.controller('SeckillResultCtrl', ['$scope', function ($scope) {
-
+app.controller('SeckillResultCtrl', 
+  ['$scope', '$rootScope', '$stateParams', 'Seckill', 'Team',
+  function ($scope, $rootScope, $stateParams, Seckill, Team) {
+  Team.prototype_findById_seckills({
+      id: localStorage.$LoopBack$currentTeamId,
+      fk: $stateParams.id
+    }, function (res) {
+      $rootScope.pageTitle = '[' + res.title + ']结果';
+      $scope.seckill = res;
+    });
+  Seckill.prototype_get_seckillResults({
+    id: $stateParams.id
+  }, function (results) {
+    $scope.results = results;
+  });
+  var active = 'active';
+  $scope.pageViewActive = active;
+  $scope.pageView = function () {
+    $scope.pageViewActive = active;
+    $scope.allViewActive = false;
+  }
+  $scope.allViewActive = false;
+  $scope.allView = function () {
+    $scope.pageViewActive = false;
+    $scope.allViewActive = active;
+  }
 }]);

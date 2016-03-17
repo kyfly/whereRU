@@ -106,7 +106,7 @@ module.exports = function(Race) {
         }
       }, function (err, coterie) {
         if (err || !coterie)
-          next(err);
+          return next(err);
         if (!instance.explainUrl)
           next();
         else {

@@ -55,6 +55,7 @@ hr {
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 1.5rem;
+  display: block;
 }
 .logo:hover {
   background-color: #ffffff;
@@ -240,7 +241,9 @@ hr {
   right: 0;
   bottom: 0;
 }
-
+.btn-area a {
+  display: block;
+}
 .btn-area > .text-center {
   line-height: 38px;
 }
@@ -541,4 +544,50 @@ hr {
   background-color: #000;
   color: #fff;
   
+}
+.page-view ul.col{
+  padding: 0;
+}
+.page-view li{
+  padding: 10px 0 !important;
+}
+.page-view li:nth-child(2n){
+  background: #fff;
+}
+.page-view li:nth-child(2n + 1){
+  background: #eee;
+}
+.page-view h5{
+  margin: 0;
+  font-size: 1.2rem;
+  text-align: right;
+}
+.page-view h6{
+  margin: 0;
+  font-size: 1rem;
+  border-left: solid 2px #ddd;
+}
+.seckill-result{
+
+}
+.seckill-result b {
+  font-size: 1.5rem;
+  color: green;
+}
+.seckill-result i {
+  font-size: 1.5rem;
+  color: red;
+}
+.vote-result h5{
+  font-size: 1.3rem;
+}
+.vote-bg{
+  height: 50px;
+  background: #000;
+  padding: 0 !important;
+}
+.vote-point{
+  display: block;
+  height: 50px;
+  background: #0ff;
 }

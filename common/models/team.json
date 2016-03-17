@@ -47,7 +47,7 @@
       "type": "string"
     },
     "status": {
-      "type": "number",
+      "type": "boolean",
       "required": true
     }
   },
