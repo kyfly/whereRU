@@ -4,15 +4,16 @@ app.controller('RacesController', ['$scope', 'Race', '$window', function ($scope
   var page = 0;
   angular.element($window).bind('scroll', function (e) {
     var body = e.target.body;
-    if (body.scrollHeight - body.clientHeight - body.scrollTop < 500 && $window.pull) {
+    if (body.scrollHeight - body.clientHeight - body.scrollTop < 600 && $window.pull) {
       $scope.getRaces();
       $window.pull = false;
-    } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 500) {
+    } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 600) {
       $window.pull = true;
     }
   });
   $scope.$on('$destroy', function (event,data) {
     angular.element($window).unbind('scroll');
+    $scope.raceItems = undefined;
   });
 
   $scope.getRaces = function () {

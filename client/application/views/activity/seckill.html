@@ -5,8 +5,8 @@
 		<span class="red-text" ng-bind="seckillTime.m"></span>分
 		<span class="red-text" ng-bind="seckillTime.s"></span>秒
 	</h5>
-	<h5 ng-if="countDown <= 0" class="center">
-		<span class="seckill-time red-text">正在进行中...</span>
+	<h5 ng-if="countDown <= 0 " class="center">
+		<span class="seckill-time red-text">{{activityEnded ? '已结束': '正在进行中...'}}</span>
 	</h5>
 	<hr>
 	<div input-field ng-show="activity.verifyRule">
@@ -25,11 +25,9 @@
 					</div>
 					<div class="card-action center">
 						<h4 >
-							<a ng-if="countDown <= 0" 
+							<button ng-disabled="activityEnded"
 							class="btn-floating btn-large waves-effect waves-light red white-text" 
-							ng-click="submitSeckillResult()" href="">抢</a>
-							<a class="btn-floating btn-large waves-effect red lighten-4 white-text"
-							ng-if="countDown > 0" href="">抢</a>
+							ng-click="submitSeckillResult()" href="">抢</button>
 						</h4>
 					</div>
 				</div>

@@ -731,7 +731,7 @@ module.exports = function(User) {
   User.afterRemote('prototype.__create__seckillResults', function (ctx, ins, next) {
     if (!ins.get)
       ctx.res.send({
-        status: 1100,
+        status: 1000,
         message: "对不起,被抢光了"
       });
     else

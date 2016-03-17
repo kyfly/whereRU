@@ -15,10 +15,10 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
   var page = 0;
   angular.element($window).bind('scroll', function (e) {
     var body = e.target.body;
-    if (body.scrollHeight - body.clientHeight - body.scrollTop < 500 && $window.pull) {
+    if (body.scrollHeight - body.clientHeight - body.scrollTop < 600 && $window.pull) {
       $scope.getTeams();
       $window.pull = false;
-    } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 500) {
+    } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 600) {
       $window.pull = true;
     }
     if (body.scrollTop > 50) {
@@ -28,6 +28,7 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
   });
   $scope.$on('$destroy', function (event,data) {
     angular.element($window).unbind('scroll');
+    $scope.teams = undefined;
   });
   $scope.changeFilter = function () {
     $scope.choice = this.type.name;
@@ -136,7 +137,7 @@ app.controller('TeamController',
     try{
       if (new Date(activity.ended) < now) {
         activity.status = 'end';
-      } else if (new(activity.started) > now){
+      } else if (new Date(activity.started) > now){
         activity.status = 'nos';
       } else {
         activity.status = 'ing';

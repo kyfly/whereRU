@@ -1,6 +1,7 @@
 <div class="vote">
 	<div>
-		<h5>你最多可选择<span class="vote-tip" ng-bind="vote.max"></span>项</h5>
+		<h5 ng-show="vote.max">你最多可选择<span class="vote-tip" ng-bind="vote.max"></span>项</h5>
+		<h5 ng-show="vote.limit">你必须选择<span class="vote-tip" ng-bind="vote.limit"></span>项</h5>
 		<hr>
 	</div>
 
@@ -35,9 +36,11 @@
     <label for="verifyRule">请输入验证信息({{activity.verifyRule}})</label>
 	</div>
 	<div  class="row col s12 center">
-		<a type="sumbit" 
-			class="waves-effect btn-flat"
+		<button type="sumbit" ng-disabled="activityEnded"
+			class="btn waves-effect waves-light red"
 			ng-click="submitVoteResult()">提交
-		</a>
+			<i class="mdi-content-send"></i>
+		</button>
+		<span ng-if="activityEnded" class="red-text">已结束</span>
 	</div>
 </div>

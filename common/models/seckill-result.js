@@ -6,10 +6,10 @@ module.exports = function(SeckillResult) {
     	if (err) {
     		return next(err);
     	}
-			if (new Date(ctx.instance.created) < new Date(seckill.started))
+			if (new Date() < new Date(seckill.started))
 			{
 				return next('还没开始呢');
-			} else if (new Date(ctx.instance.created) > new Date(seckill.activity.ended)) {
+			} else if (new Date() > new Date(seckill.toJSON().activity.ended)) {
 				return next('活动已经结束了');
 			} else {
 				seckill.seckillResults.count({

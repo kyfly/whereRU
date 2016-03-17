@@ -1,26 +1,26 @@
-
 app.controller('ActivitiesController', ['$scope', 'Activity', '$window', function ($scope, Activity, $window) {
   $scope.activityFilter = ['全部', '进行中', '未开始', '已结束'];
   $scope.choice = '全部';
   $window.pull = true;
+  $scope.activityItems = [];
   var page = 0;
   $scope.changeFilter = function () {
     $scope.choice = this.filter;
   }
   angular.element($window).bind('scroll', function (e) {
     var body = e.target.body;
-    if (body.scrollHeight - body.clientHeight - body.scrollTop < 500 && $window.pull) {
+    if (body.scrollHeight - body.clientHeight - body.scrollTop < 600 && $window.pull) {
       $scope.getActivities();
       $window.pull = false;
-    } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 500) {
+    } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 600) {
       $window.pull = true;
     }
   });
   $scope.$on('$destroy', function (event,data) {
     angular.element($window).unbind('scroll');
+    $scope.activityItems = undefined;
   });
   $scope.filterFun = function (activity) {
-    console.log($scope.choice);
     switch($scope.choice) {
       case '全部':
         return true;
@@ -43,7 +43,7 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
     try{
       if (new Date(activity.ended) < now) {
         activity.status = 'end';
-      } else if (new(activity.started) > now){
+      } else if (new Date(activity.started) > now){
         activity.status = 'nos';
       } else {
         activity.status = 'ing';
@@ -53,7 +53,7 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
     }
     return activity;
   }
-  $scope.activityItems = [];
+  
   $scope.getActivities = function () {
     if (!$scope.$currentUser) {
       $scope.$emit('auth:loginRequired');
@@ -140,6 +140,7 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
   });
   $scope.onClickJoinActivity = function () {
     var actType = $scope.activity.actType;
+    $scope.activityEnded = false;
     if (!$scope.$currentUser) {
       $scope.$emit('auth:loginRequired');
     }
@@ -150,6 +151,9 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     }
     if (actType !== 'common') {
       $scope.result = new Array($scope[actType]['_'+ actType +'Items'].length);
+    }
+    if (new Date() - new Date($scope.activity.ended) > 0) {
+      $scope.activityEnded = true;
     }
   };
 
@@ -170,7 +174,7 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     var results = $scope.result.filter(function (item) {
       return item;
     });
-    if (results.length > $scope.vote.max) {
+    if ($scope.vote.max && results.length > $scope.vote.max) {
       this.result[this.$index] = undefined;
       Materialize.toast('只能选择' + $scope.vote.max + '项哦', 2000);
       return;
@@ -226,7 +230,11 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
     for (var x in $scope.result) if ($scope.result[x]) {
       result.push($scope.vote._voteItems[x].id);
     }
-    if (result.length > $scope.vote.max) {
+    if ($scope.vote.limit && result.length < $scope.vote.limit) {
+      Materialize.toast('必须选择' + $scope.vote.max + '项哦', 2000);
+      return;
+    }
+    if ($scope.vote.max && result.length > $scope.vote.max) {
       Materialize.toast('只能选择' + $scope.vote.max + '项哦', 2000);
       return;
     } else if (result.length <= 0) {
