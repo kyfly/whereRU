@@ -179,10 +179,12 @@ app.controller('EventEditCtrl',
                 Materialize.toast('创建成功！', 2000);
                 $location.path('/MS/event/list');
               }, function () {
-                Materialize.toast('创建失败！', 2000);
+                Materialize.toast('创建失败！请不要漏填信息哦！', 2000);
               });
             }
-          });
+          }).error(function () {
+          Materialize.toast('别忘了写竞赛介绍哦！', 2000);
+        });
       };
 
     }]);

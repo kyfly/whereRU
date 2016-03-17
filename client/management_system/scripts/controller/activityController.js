@@ -293,9 +293,11 @@ app.controller('ActivityEditCtrl',
                 }
                 $location.path('/MS/activity/list');
               }, function () {
-                Materialize.toast('创建失败！', 2000);
+                Materialize.toast('创建失败！请不要漏填信息哦！', 2000);
               });
             }
-          });
+          }).error(function () {
+          Materialize.toast('别忘了写活动文案哦！', 2000);
+        });
       };
     }]);
