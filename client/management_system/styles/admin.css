@@ -275,6 +275,10 @@ hr {
   height: 40px;
 }
 
+.timeDivide {
+  font-size: 20px
+}
+
 /*
   以下为activity的样式
 */
@@ -540,5 +544,5 @@ hr {
 .form-action-bar .active{
   background-color: #000;
   color: #fff;
-  
+
 }

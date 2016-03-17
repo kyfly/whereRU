@@ -58,7 +58,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
     };
   }
 
-  
+
   //$scope.formType = ['简答题', '陈述题', '选择题', '判断题'];
   $scope.formType = function (type) {
     switch (type) {
@@ -185,6 +185,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       $scope.forms.push({
         type: 'text',
         name: '手机长号',
+        len: 11,
         options: []
       });
     },
@@ -192,6 +193,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       $scope.forms.push({
         type: 'text',
         name: '移动短号',
+        len: 6,
         options: []
       });
     },
@@ -234,7 +236,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
 
   };
 
-  
+
   $scope.uploadForm = function () {
     for (x in $scope.forms) {
       $scope.forms[x].id = parseInt(x);

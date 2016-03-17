@@ -93,6 +93,9 @@ app.controller('EventEditCtrl',
         school: $scope.teamInfo.school
       };
 
+      $scope.startTime = {};
+      $scope.endTime = {};
+
       $scope.isEdit = $stateParams.id || false;
 
       $scope.picNotice = $scope.isEdit ? "如果要更换图片请上传,建议900*500像素" : "请上传活动封面,建议900*500像素";
@@ -102,9 +105,15 @@ app.controller('EventEditCtrl',
           fk: $stateParams.id
         }, function (res) {
           $scope.eventData = res;
+          $scope.startTime.date = res.started.getDate();
+          $scope.startTime.hour = res.started.getHours();
+          $scope.startTime.minute = res.started.getMinutes();
+          $scope.endTime.date = res.ended.getDate();
+          $scope.endTime.hour = res.ended.getHours();
+          $scope.endTime.minute = res.ended.getMinutes();
         });
       }
-      
+
 
       //Input-date的配置
       var currentTime = new Date();
@@ -138,6 +147,16 @@ app.controller('EventEditCtrl',
       $scope.eventEditorConfig = Ueditor.config;
 
       $scope.createEvent = function () {
+        var startTimeSet = new Date($scope.startTime.date);
+        startTimeSet.setHours($scope.startTime.hour);
+        startTimeSet.setMinutes($scope.startTime.minute);
+        startTimeSet.setSeconds(0);
+        $scope.eventData.started = startTimeSet;
+        var endTimeSet = new Date($scope.endTime.date);
+        endTimeSet.setHours($scope.endTime.hour);
+        endTimeSet.setMinutes($scope.endTime.minute);
+        endTimeSet.setSeconds(0);
+        $scope.eventData.ended = endTimeSet;
         uploadFile.text($scope.eventEditorContent, 'team', $scope.teamInfo.id)
           .success(function (res) {
             $scope.eventData.explainUrl = appConfig.FILE_URL + res.url;
