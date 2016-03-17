@@ -28,7 +28,7 @@
 <!--校园团队列表-->
 <div class="row container" >
   <ul>
-    <li class="col s12 m6 l3 team-card" ng-repeat="team in teams track by team.id | filter: choice">
+    <li class="col s12 m6 l3 team-card" ng-repeat="team in teams  track by $id(team.id)">
       <div class="card">
         <div class="card-image">
           <a href="/w/teams/{{team.id}}">

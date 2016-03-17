@@ -91,7 +91,9 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
 }]);
 
 
-app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParams', '$interval',function($scope, Activity, User, $stateParams, $interval){
+app.controller('ActivityController', 
+  ['$scope', 'Activity', 'User', '$stateParams', '$interval', 'uploadFile', 'appConfig',
+  function($scope, Activity, User, $stateParams, $interval, uploadFile, appConfig){
   Activity.findById({
     id: $stateParams.id
   }, function (activity) {
@@ -216,6 +218,24 @@ app.controller('ActivityController', ['$scope', 'Activity', 'User', '$stateParam
         Materialize.toast('参与成功', 2000);
     }, function (err) {
       $scope.errorTip(err);
+    });
+  };
+  $scope.uploadFile = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
+    var that = this.$parent;
+    $scope.result[that['$index']] = {};
+    var file = document.getElementById('file').files[0];
+    if (!file) {
+      return;
+    }
+    var fileName = $scope.tem;
+    
+    uploadFile.file(file, 'user', $scope.$currentUser.id)
+    .success(function (res) {
+      $scope.result[that['$index']].name = fileName;
+      $scope.result[that['$index']].url = appConfig.FILE_URL + res.url;
     });
   };
   $scope.submitVoteResult = function () {

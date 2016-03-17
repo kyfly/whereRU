@@ -49,12 +49,14 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
       fk: $stateParams.id
     }, function (res) {
       console.log(res);
-      $scope.uploadData.title = res.title;
-      $scope.uploadData.limit = res.limit;
-      $scope.uploadData.total = res.total;
-      $scope.uploadData.started = res.started;
+      $scope.uploadData = res;
       $scope.seckills = res._seckillItems;
     });
+  } else {
+    $scope.seckills = [];
+    $scope.uploadData = {
+      teamId: localStorage.$LoopBack$currentTeamId
+    };
   }
 
   //Input-date的配置
@@ -68,7 +70,7 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
   $scope.clear = '清除';
   $scope.close = '确定';
 
-  $scope.seckills = [];
+  
   $scope.addSeckill = function () {
     $scope.seckills.push({
       name: ''
@@ -96,9 +98,7 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
     $scope.seckills[this.$parent.$parent.$parent.$index].options.splice(this.$index, 1);
   };
 
-  $scope.uploadData = {
-    teamId: localStorage.$LoopBack$currentTeamId
-  };
+  
   $scope.uploadSeckill = function () {
     for (x in $scope.seckills) {
       $scope.seckills[x].id = parseInt(x);
@@ -133,10 +133,7 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
         });
       }
     }
-
   };
-
-
 }]);
 
 

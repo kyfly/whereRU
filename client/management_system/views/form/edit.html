@@ -13,6 +13,11 @@
             <input class="textInput" id="{{'textInput' + $index}}" type="text" ng-model="form.name">
             <label for="{{'textInput' + $index}}">请输入题目</label>
           </div>
+          <div input-field ng-show="form.type !== 'select' && form.type !== 'file'">
+            <span class="prefix textInputLabel">字数</span>
+            <input class="textInput" id="textInput{{$index}}len" type="number" ng-model="form.len">
+            <label for="textInput{{$index}}len">请输入可输入字数</label>
+          </div>
           <div ng-show="form.type === 'select'">
             <div input-field>
               <span>选项</span>
@@ -49,6 +54,7 @@
       <li><a ng-click="addForm.complex()" class="addFormBtn" href>陈述题（多行输入）</a></li>
       <li><a ng-click="addForm.choice()" class="addFormBtn" href>选择题（下拉框）</a></li>
       <li><a ng-click="addForm.judge()" class="addFormBtn" href>判断题（仅选择是否）</a></li>
+      <li><a ng-click="addForm.file()" class="addFormBtn" href>上传文件</a></li>
     </ul>
 
     <a class="dropdown-button btn red darken-2 margin-left waves-effect waves-light" href

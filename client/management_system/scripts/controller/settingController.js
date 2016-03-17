@@ -1,4 +1,5 @@
-app.controller('SettingCtrl', ['$scope', '$rootScope', 'Team', function ($scope, $rootScope, Team) {
+app.controller('SettingCtrl', ['$scope', '$rootScope', 'Team', 'uploadFile', 'appConfig',
+  function ($scope, $rootScope, Team, uploadFile, appConfig) {
   $rootScope.logoHide = false;
   $scope.team = {};
 
@@ -20,26 +21,18 @@ app.controller('SettingCtrl', ['$scope', '$rootScope', 'Team', function ($scope,
 
   $scope.uploadLogo = function () {
     var file = document.getElementById('teamlogo').files[0];
-    var Xhr = new XMLHttpRequest();
+    if (!file) {
+      return;
+    }
     var fileExt = /\.[^\.]+/.exec(document.getElementById('teamlogo').value.toLowerCase());
     if (!((fileExt[0] === '.png') || (fileExt[0] === '.jpg') || (fileExt[0] === '.jpeg') || (fileExt[0] === '.gif'))) {
       alert('请确认您上传的logo文件格式是jpg、png、gif或jpeg');
       return false;
     }
-    var readyHandle = function () {
-      if (Xhr.readyState === 4) {
-        if (Xhr.status === 200) {
-          $scope.$apply(function () {
-            $scope.team.logoUrl = 'http://cdn-img.etuan.org/' + JSON.parse(Xhr.responseText).url + '@1e_1c_0o_0l_100h_100w_100q.src';
-          });
-        }
-      }
-    };
-    var Fd = new FormData();
-    Fd.append('img', file);
-    Xhr.onreadystatechange = readyHandle;
-    Xhr.open('POST', '/ue/uploads?dir=teamlogo&id=' + localStorage.$LoopBack$currentUserId + '&action=uploadimage', true);
-    Xhr.send(Fd);
+    uploadFile.file(file, 'team', $scope.teamInfo.id)
+    .success(function (res) {
+      $scope.team.logoUrl = appConfig.IMG_URL + res.url;
+    });
   };
 
   $scope.addDepartment = function () {

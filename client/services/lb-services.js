@@ -745,7 +745,8 @@
                */
               "prototype_get_seckillResults": {
                 url: urlBase + '/Seckills/:id/seckillResults',
-                method: 'GET'
+                method: 'GET',
+                isArray: true
               }
             }
           );
@@ -765,7 +766,8 @@
                */
               "prototype_get_formResults": {
                 url: urlBase + '/Forms/:id/formResults',
-                method: 'GET'
+                method: 'GET',
+                isArray: true
               }
             }
           );
@@ -785,7 +787,8 @@
                */
               "prototype_get_voteResults": {
                 url: urlBase + '/Forms/:id/voteResults',
-                method: 'GET'
+                method: 'GET',
+                isArray: true
               }
             }
           );

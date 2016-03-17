@@ -8,6 +8,12 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
   });
   $urlRouterProvider.otherwise('/');
 }])
+.factory('appConfig', function(){
+	return {
+		FILE_URL: 'http://oss.etuan.org/',
+		IMG_URL: 'http://cdn-img.etuan.org/'
+	};
+})
 .config(function($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist([
     // Allow same origin resource loads.

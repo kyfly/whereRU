@@ -5,18 +5,18 @@
       <label for="voteTitle">投票名称</label>
     </div>
     <div input-field>
-      <input ng-disabled="uploadData.max" id="voteLimit" type="text" ng-model="uploadData.limit">
-      <label for="voteLimit">规定投票数</label>
+      <input id="voteLimit" type="text" ng-model="uploadData.limit">
+      <label for="voteLimit">最少投票数</label>
     </div>
     <div input-field>
-      <input ng-disabled="uploadData.limit" id="voteMax" type="text" ng-model="uploadData.max">
+      <input id="voteMax" type="text" ng-model="uploadData.max">
       <label for="voteMax">最大投票数</label>
     </div>
     <div input-field>
       <input id="voteCycle" type="text" ng-model="uploadData.cycle">
       <label for="voteCycle">投票周期（小时为单位，如填写24即为一天投一次，无需周期投票请填写 0）</label>
     </div>
-    <div class="col s12" ng-repeat="vote in votes">
+    <div class="col s12" ng-init="tem=[]" ng-repeat="vote in votes">
       <div class="card">
         <div class="card-content">
           <span class="card-title">第 <span ng-bind="$index + 1"></span> 项</span>
@@ -24,6 +24,19 @@
             <span class="prefix textInputLabel">名称</span>
             <input class="textInput" id="{{'textInput' + $index}}" type="text" ng-model="vote.name">
             <label for="{{'textInput' + $index}}">请输入投票项名称</label>
+          </div>
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>image</span>
+              <input type="file" id="vote_{{$index}}" multiple ng-model="vote.imgUrl" accept="image/*">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" ng-init="" ng-model="tem[$index]" ng-change="uploadImg()" type="text" placeholder="请上传图片(建议200*200)">
+            </div>
+            <div ng-show="vote.imgUrl">
+              图片预览
+              <img class="img-view" ng-src="{{vote.imgUrl}}@1e_1c_0o_0l_100h_100w_100q.src">
+            </div>
           </div>
         </div>
         <div class="card-action">
@@ -40,7 +53,7 @@
     </div>
   </div>
 
-  <div class="createFormBtn">
+  <div class="">
     <a ng-click="addVote()" class="btn orange darken-2 waves-effect waves-light" href>
       添加投票项
     </a>

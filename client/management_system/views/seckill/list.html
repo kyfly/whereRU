@@ -41,8 +41,11 @@
           </div>
           <div class="card-action btn-area" ng-show="showType === 0">
             <div class="viewEvent-btn waves-effect text-center">
-              <a class="green-text text-darken-2" href ui-sref="seckillEdit({id: seckillItem.id})"><i class="mdi-image-edit"></i>
-                编辑</a>
+              <a class="green-text text-darken-2" href 
+                ui-sref="seckillEdit({id: seckillItem.id})">
+                <i class="mdi-image-edit"></i>
+                编辑
+              </a>
             </div>
             <div class="editEvent-btn waves-effect text-center">
               <a class="orange-text text-darken-2" href ng-href="#{{'previewSeckillModal' + $index}}" modal><i
@@ -50,7 +53,9 @@
                 预览</a>
             </div>
             <div class="shareEvent-btn waves-effect text-center">
-              <a class="blue-text text-darken-2" href ng-click=""><i class="mdi-action-view-list"></i> 结果</a>
+              <a class="blue-text text-darken-2" ui-sref="seckillResult({id: seckillItem.id})">
+                <i class="mdi-action-view-list"></i> 结果
+              </a>
             </div>
             <div class="deleteEvent-btn waves-effect text-center">
               <a class="red-text text-darken-2" href ng-href="{{'#deleteSeckillConfirm' + $index}}" modal><i

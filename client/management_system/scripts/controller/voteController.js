@@ -39,7 +39,9 @@ app.controller('VoteListCtrl', ['$scope', 'Team', '$rootScope', function ($scope
 
 }]);
 
-app.controller('VoteEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$stateParams', function ($scope, $location, Team, $rootScope, $stateParams) {
+app.controller('VoteEditCtrl', 
+  ['$scope', '$location', 'Team', '$rootScope', '$stateParams', 'uploadFile', 'appConfig',
+  function ($scope, $location, Team, $rootScope, $stateParams, uploadFile, appConfig) {
   $rootScope.logoHide = true;
   $scope.isEdit = false;
   if ($stateParams.id !== '') {
@@ -48,22 +50,22 @@ app.controller('VoteEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       id: localStorage.$LoopBack$currentTeamId,
       fk: $stateParams.id
     }, function (res) {
-      console.log(res);
-      $scope.uploadData.title = res.title;
-      $scope.uploadData.max = res.max;
-      $scope.uploadData.limit = res.limit;
-      $scope.uploadData.cycle = res.cycle;
+      $scope.uploadData = res;
       $scope.votes = res._voteItems;
     });
+  } else {
+    $scope.votes = [];
+    $scope.uploadData = {
+      teamId: localStorage.$LoopBack$currentTeamId
+    };
   }
 
-  $scope.votes = [];
+  
   $scope.addVote = function () {
     $scope.votes.push({
       name: ''
     });
-  }
-  ;
+  };
 
   $scope.removeVote = function (index) {
     $scope.votes.splice(index, 1);
@@ -84,10 +86,23 @@ app.controller('VoteEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
   $scope.removeContent = function () {
     $scope.votes[this.$parent.$parent.$parent.$index].options.splice(this.$index, 1);
   };
-
-  $scope.uploadData = {
-    teamId: localStorage.$LoopBack$currentTeamId
+  $scope.uploadImg = function () {
+    var vote = this.vote;
+    var file = document.getElementById('vote_' + this.$index).files[0];
+    if (!file) {
+      return;
+    }
+    var fileExt = /\.[^\.]+/.exec(document.getElementById('vote_' + this.$index).value.toLowerCase());
+    if (!((fileExt[0] === '.png') || (fileExt[0] === '.jpg') || (fileExt[0] === '.jpeg') || (fileExt[0] === '.gif'))) {
+      alert('请确认您上传的logo文件格式是jpg、png、gif或jpeg');
+      return false;
+    }
+    uploadFile.file(file, 'team', $scope.teamInfo.id)
+    .success(function (res) {
+      vote.imgUrl = appConfig.IMG_URL + res.url;
+    });
   };
+  
   $scope.uploadVote = function () {
     for (x in $scope.votes) {
       $scope.votes[x].id = parseInt(x);
@@ -122,10 +137,7 @@ app.controller('VoteEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
         });
       }
     }
-
   };
-
-
 }]);
 
 

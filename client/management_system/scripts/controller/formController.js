@@ -1,5 +1,5 @@
 app.controller('FormListCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
-  $rootScope.logoHide = false;
+  $rootScope.pageTitle = '表单列表';
   $scope.showType = 0;
   Team.prototype_get_forms({
     id: localStorage.$LoopBack$currentTeamId,
@@ -39,7 +39,7 @@ app.controller('FormListCtrl', ['$scope', 'Team', '$rootScope', function ($scope
 }]);
 
 app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$stateParams', function ($scope, $location, Team, $rootScope, $stateParams) {
-  $rootScope.logoHide = true;
+  $rootScope.pageTitle = '创建表单';
   $scope.isEdit = false;
   if ($stateParams.id !== '') {
     $scope.isEdit = true;
@@ -47,13 +47,18 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       id: localStorage.$LoopBack$currentTeamId,
       fk: $stateParams.id
     }, function (res) {
-      console.log(res);
-      $scope.uploadData.title = res.title;
+      $scope.uploadData = res;
+      $rootScope.pageTitle = '更新表单[' + res.title + ']';
       $scope.forms = res._formItems;
     });
+  } else {
+    $scope.forms = [];
+    $scope.uploadData = {
+      teamId: localStorage.$LoopBack$currentTeamId
+    };
   }
 
-  $scope.forms = [];
+  
   //$scope.formType = ['简答题', '陈述题', '选择题', '判断题'];
   $scope.formType = function (type) {
     switch (type) {
@@ -96,9 +101,16 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
     },
     judge: function () {
       $scope.forms.push({
-        type: 'radio',
+        type: 'select',
         name: '',
         options: ['是', '否']
+      });
+    },
+    file: function () {
+      $scope.forms.push({
+        type: 'file',
+        name: '',
+        options: []
       });
     },
     name: function () {
@@ -222,9 +234,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
 
   };
 
-  $scope.uploadData = {
-    teamId: localStorage.$LoopBack$currentTeamId
-  };
+  
   $scope.uploadForm = function () {
     for (x in $scope.forms) {
       $scope.forms[x].id = parseInt(x);
@@ -264,6 +274,30 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
 }]);
 
 
-app.controller('FormResultCtrl', ['$scope', function ($scope) {
-
+app.controller('FormResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Form', 'Team',
+  function ($scope, $rootScope, $stateParams, Form, Team) {
+  Team.prototype_findById_forms({
+      id: localStorage.$LoopBack$currentTeamId,
+      fk: $stateParams.id
+    }, function (res) {
+      $rootScope.pageTitle = '表单[' + res.title + ']结果';
+      $scope.form = res;
+    });
+  Form.prototype_get_formResults({
+    id: $stateParams.id
+  }, function (results) {
+    $scope.results = results;
+    $scope.form.result = results[0].result;
+  });
+  var active = 'active';
+  $scope.pageViewActive = false;
+  $scope.pageView = function () {
+    $scope.pageViewActive = active;
+    $scope.allViewActive = false;
+  }
+  $scope.allViewActive = active;
+  $scope.allView = function () {
+    $scope.pageViewActive = false;
+    $scope.allViewActive = active;
+  }
 }]);
