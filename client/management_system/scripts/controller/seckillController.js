@@ -40,7 +40,12 @@ app.controller('SeckillListCtrl', ['$scope', 'Team', '$rootScope', function ($sc
 }]);
 
 app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$stateParams', function ($scope, $location, Team, $rootScope, $stateParams) {
+<<<<<<< HEAD
   $rootScope.pageTitle = '创建抢票';
+=======
+  $rootScope.logoHide = true;
+  $scope.startTime = {};
+>>>>>>> 2a62340fe2640ee4394804af7fc659a029565b3e
   $scope.isEdit = false;
   if ($stateParams.id !== '') {
     $scope.isEdit = true;
@@ -51,6 +56,10 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
       $rootScope.pageTitle = '更新[' + res.title + ']';
       $scope.uploadData = res;
       $scope.seckills = res._seckillItems;
+      var startInfo = new Date(res.started);
+      $scope.startTime.date = startInfo;
+      $scope.startTime.hour = startInfo.getHours();
+      $scope.startTime.minute = startInfo.getMinutes();
     });
   } else {
     $scope.seckills = [];
@@ -70,7 +79,7 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
   $scope.clear = '清除';
   $scope.close = '确定';
 
-  
+
   $scope.addSeckill = function () {
     $scope.seckills.push({
       name: ''
@@ -98,19 +107,22 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
     $scope.seckills[this.$parent.$parent.$parent.$index].options.splice(this.$index, 1);
   };
 
-  
+
   $scope.uploadSeckill = function () {
     for (x in $scope.seckills) {
       $scope.seckills[x].id = parseInt(x);
     }
     $scope.uploadData.updated = new Date();
+    var startTimeSet = new Date($scope.startTime.date);
+    startTimeSet.setHours($scope.startTime.hour);
+    startTimeSet.setMinutes($scope.startTime.minute);
+    startTimeSet.setSeconds(0);
+    $scope.uploadData.started = startTimeSet;
     $scope.uploadData._seckillItems = $scope.seckills;
     if ($scope.seckills.length === 0) {
       Materialize.toast('请至少添加一个抢票项！', 1000);
     } else if (!$scope.uploadData.title) {
       Materialize.toast('请填写抢票名称！', 1000);
-    } else if (!$scope.uploadData.limit) {
-      Materialize.toast('请填写每人可抢票数！', 1000);
     } else {
       if($scope.isEdit){
         Team.prototype_updateById_seckills({

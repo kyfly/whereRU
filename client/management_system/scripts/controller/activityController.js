@@ -58,6 +58,8 @@ app.controller('ActivityEditCtrl',
         school: $scope.teamInfo.school,
         created: new Date()
       };
+      $scope.startTime = {};
+      $scope.endTime = {};
       var tabSelect = ['mainInfo', 'copywriter', 'complete'];
       $scope.isEdit = $stateParams.id || false;
       $scope.picNotice = $scope.isEdit ? "如果要更换图片请上传,建议900*500像素" : "请上传活动封面,建议900*500像素";
@@ -67,6 +69,14 @@ app.controller('ActivityEditCtrl',
           id: $stateParams.id
         }, function (activity) {
           $scope.activityData = activity;
+          var startInfo = new Date(activity.started);
+          var endInfo = new Date(activity.ended);
+          $scope.startTime.date = startInfo;
+          $scope.startTime.hour = startInfo.getHours();
+          $scope.startTime.minute = startInfo.getMinutes();
+          $scope.endTime.date = endInfo;
+          $scope.endTime.hour = endInfo.getHours();
+          $scope.endTime.minute = endInfo.getMinutes();
           if ($stateParams.id) {
             $http.get($scope.activityData.explainUrl)
               .success(function (contentHtml) {
@@ -144,6 +154,16 @@ app.controller('ActivityEditCtrl',
       };
 
       $scope.createActivity = function () {
+        var startTimeSet = new Date($scope.startTime.date);
+        startTimeSet.setHours($scope.startTime.hour);
+        startTimeSet.setMinutes($scope.startTime.minute);
+        startTimeSet.setSeconds(0);
+        $scope.activityData.started = startTimeSet;
+        var endTimeSet = new Date($scope.endTime.date);
+        endTimeSet.setHours($scope.endTime.hour);
+        endTimeSet.setMinutes($scope.endTime.minute);
+        endTimeSet.setSeconds(0);
+        $scope.activityData.ended = endTimeSet;
         uploadFile.text($scope.activityEditorContent, 'team', $scope.teamInfo.id)
           .success(function (res) {
             $scope.activityData.explainUrl = appConfig.FILE_URL + res.url;
@@ -273,9 +293,11 @@ app.controller('ActivityEditCtrl',
                 }
                 $location.path('/MS/activity/list');
               }, function () {
-                Materialize.toast('创建失败！', 2000);
+                Materialize.toast('创建失败！请不要漏填信息哦！', 2000);
               });
             }
-          });
+          }).error(function () {
+          Materialize.toast('别忘了写活动文案哦！', 2000);
+        });
       };
     }]);

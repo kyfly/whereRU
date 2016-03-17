@@ -92,7 +92,8 @@ app.controller('EventEditCtrl',
         authorId: $scope.teamInfo.id,
         school: $scope.teamInfo.school
       };
-
+      $scope.startTime = {};
+      $scope.endTime = {};
       $scope.isEdit = $stateParams.id || false;
 
       $scope.picNotice = $scope.isEdit ? "如果要更换图片请上传,建议900*500像素" : "请上传活动封面,建议900*500像素";
@@ -102,9 +103,17 @@ app.controller('EventEditCtrl',
           fk: $stateParams.id
         }, function (res) {
           $scope.eventData = res;
+          var startInfo = new Date(res.started);
+          var endInfo = new Date(res.ended);
+          $scope.startTime.date = startInfo;
+          $scope.startTime.hour = startInfo.getHours();
+          $scope.startTime.minute = startInfo.getMinutes();
+          $scope.endTime.date = endInfo;
+          $scope.endTime.hour = endInfo.getHours();
+          $scope.endTime.minute = endInfo.getMinutes();
         });
       }
-      
+
 
       //Input-date的配置
       var currentTime = new Date();
@@ -138,6 +147,16 @@ app.controller('EventEditCtrl',
       $scope.eventEditorConfig = Ueditor.config;
 
       $scope.createEvent = function () {
+        var startTimeSet = new Date($scope.startTime.date);
+        startTimeSet.setHours($scope.startTime.hour);
+        startTimeSet.setMinutes($scope.startTime.minute);
+        startTimeSet.setSeconds(0);
+        $scope.eventData.started = startTimeSet;
+        var endTimeSet = new Date($scope.endTime.date);
+        endTimeSet.setHours($scope.endTime.hour);
+        endTimeSet.setMinutes($scope.endTime.minute);
+        endTimeSet.setSeconds(0);
+        $scope.eventData.ended = endTimeSet;
         uploadFile.text($scope.eventEditorContent, 'team', $scope.teamInfo.id)
           .success(function (res) {
             $scope.eventData.explainUrl = appConfig.FILE_URL + res.url;
@@ -160,10 +179,12 @@ app.controller('EventEditCtrl',
                 Materialize.toast('创建成功！', 2000);
                 $location.path('/MS/event/list');
               }, function () {
-                Materialize.toast('创建失败！', 2000);
+                Materialize.toast('创建失败！请不要漏填信息哦！', 2000);
               });
             }
-          });
+          }).error(function () {
+          Materialize.toast('别忘了写竞赛介绍哦！', 2000);
+        });
       };
 
     }]);
