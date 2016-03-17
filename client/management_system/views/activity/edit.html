@@ -27,14 +27,14 @@
             <option>手机</option>
           </select>
         </div>
-        <div input-field>
+        <div input-field class="col m7 s12">
           <i class="material-icons prefix">&#xE916;</i>
           <label for="startTime">开始时间</label>
           <input input-date
                  type="text"
                  name="created"
                  id="startTime"
-                 ng-model="activityData.started"
+                 ng-model="startTime.date"
                  container="body"
                  format="yyyy/mm/dd"
                  months-full="{{ month }}"
@@ -48,14 +48,25 @@
                  close="close"
                  select-years="16">
         </div>
-        <div input-field>
+        <div input-field class="col m2 s4 offset-s3">
+          <input id="startHour" type="number" max="23" min="0" ng-model="startTime.hour">
+          <label for="startHour">小时</label>
+        </div>
+        <div class="col m1 s1 text-center timeDivide">
+          <p>:</p>
+        </div>
+        <div input-field class="col m2 s4">
+          <input id="startMinute" type="number" max="60" min="0" ng-model="startTime.minute">
+          <label for="startMinute">分钟</label>
+        </div>
+        <div input-field class="col m7 s12">
           <i class="prefix"></i>
           <label for="endTime">结束时间</label>
           <input input-date
                  type="text"
                  name="created"
                  id="endTime"
-                 ng-model="activityData.ended"
+                 ng-model="endTime.date"
                  container="body"
                  format="yyyy/mm/dd"
                  months-full="{{ month }}"
@@ -69,12 +80,23 @@
                  close="close"
                  select-years="16">
         </div>
-        <div input-field>
+        <div input-field class="col m2 s4 offset-s3">
+          <input id="endHour" type="number" max="23" min="0" ng-model="endTime.hour">
+          <label for="endHour">小时</label>
+        </div>
+        <div class="col m1 s1 text-center timeDivide">
+          <p>:</p>
+        </div>
+        <div input-field class="col m2 s4">
+          <input id="endMinute" type="number" max="60" min="0" ng-model="endTime.minute">
+          <label for="endMinute">分钟</label>
+        </div>
+        <div input-field class="col s12">
           <i class="mdi-communication-vpn-key prefix"></i>
           <input id="keyword" type="text" ng-model="activityData.keyword">
           <label for="keyword">关键字（用英文逗号隔开）</label>
         </div>
-        <div class="file-field input-field">
+        <div class="file-field input-field col s12">
           <div class="btn">
             <span>活动图片</span>
             <input type="file" id="activityImg" ng-model="activityData.imgName">

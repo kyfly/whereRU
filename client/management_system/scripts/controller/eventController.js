@@ -92,10 +92,8 @@ app.controller('EventEditCtrl',
         authorId: $scope.teamInfo.id,
         school: $scope.teamInfo.school
       };
-
       $scope.startTime = {};
       $scope.endTime = {};
-
       $scope.isEdit = $stateParams.id || false;
 
       $scope.picNotice = $scope.isEdit ? "如果要更换图片请上传,建议900*500像素" : "请上传活动封面,建议900*500像素";
@@ -105,12 +103,14 @@ app.controller('EventEditCtrl',
           fk: $stateParams.id
         }, function (res) {
           $scope.eventData = res;
-          $scope.startTime.date = res.started.getDate();
-          $scope.startTime.hour = res.started.getHours();
-          $scope.startTime.minute = res.started.getMinutes();
-          $scope.endTime.date = res.ended.getDate();
-          $scope.endTime.hour = res.ended.getHours();
-          $scope.endTime.minute = res.ended.getMinutes();
+          var startInfo = new Date(res.started);
+          var endInfo = new Date(res.ended);
+          $scope.startTime.date = startInfo;
+          $scope.startTime.hour = startInfo.getHours();
+          $scope.startTime.minute = startInfo.getMinutes();
+          $scope.endTime.date = endInfo;
+          $scope.endTime.hour = endInfo.getHours();
+          $scope.endTime.minute = endInfo.getMinutes();
         });
       }
 

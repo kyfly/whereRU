@@ -1,16 +1,16 @@
 <div class="container">
   <div class="row">
-    <div input-field>
+    <div input-field class="col s12">
       <input id="seckillTitle" type="text" ng-model="uploadData.title">
       <label for="seckillTitle">抢票名称</label>
     </div>
-    <div input-field>
+    <div input-field class="col m7 s12">
       <label for="startTime">开始时间</label>
       <input input-date
              type="text"
              name="started"
              id="startTime"
-             ng-model="uploadData.started"
+             ng-model="startTime.date"
              container="body"
              format="yyyy/mm/dd"
              months-full="{{ month }}"
@@ -23,6 +23,17 @@
              clear="clear"
              close="close"
              select-years="16">
+    </div>
+    <div input-field class="col m2 s4 offset-s3">
+      <input id="startHour" type="number" max="23" min="0" ng-model="startTime.hour">
+      <label for="startHour">小时</label>
+    </div>
+    <div class="col m1 s1 text-center timeDivide">
+      <p>:</p>
+    </div>
+    <div input-field class="col m2 s4">
+      <input id="startMinute" type="number" max="60" min="0" ng-model="startTime.minute">
+      <label for="startMinute">分钟</label>
     </div>
     <div class="col s12" ng-repeat="seckill in seckills">
       <div class="card">
