@@ -1,5 +1,5 @@
 app.controller('MemberCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
-  $rootScope.logoHide = false;
+  $rootScope.pageTitle = '成员管理';
   Team.prototype_get_members({
       id: $scope.teamInfo.id
     },

@@ -25,14 +25,14 @@
              select-years="16">
     </div>
     <div input-field class="col m2 s4 offset-s3">
-      <input id="startHour" type="number" max="23" min="0" ng-model="startTime.hour">
+      <input ng-change="hourChange()" id="startHour" type="number" ng-model="startTime.hour">
       <label for="startHour">小时</label>
     </div>
     <div class="col m1 s1 text-center timeDivide">
       <p>:</p>
     </div>
     <div input-field class="col m2 s4">
-      <input id="startMinute" type="number" max="60" min="0" ng-model="startTime.minute">
+      <input ng-change="minuteChange()" id="startMinute" type="number" ng-model="startTime.minute">
       <label for="startMinute">分钟</label>
     </div>
     <div class="col s12" ng-repeat="seckill in seckills">

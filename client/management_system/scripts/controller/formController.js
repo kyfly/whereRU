@@ -39,7 +39,7 @@ app.controller('FormListCtrl', ['$scope', 'Team', '$rootScope', function ($scope
 }]);
 
 app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$stateParams', function ($scope, $location, Team, $rootScope, $stateParams) {
-  $rootScope.pageTitle = '创建表单';
+  $rootScope.pageTitle = '';
   $scope.isEdit = false;
   if ($stateParams.id !== '') {
     $scope.isEdit = true;
@@ -48,7 +48,6 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       fk: $stateParams.id
     }, function (res) {
       $scope.uploadData = res;
-      $rootScope.pageTitle = '更新表单[' + res.title + ']';
       $scope.forms = res._formItems;
     });
   } else {
@@ -278,27 +277,27 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
 
 app.controller('FormResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Form', 'Team',
   function ($scope, $rootScope, $stateParams, Form, Team) {
-  Team.prototype_findById_forms({
+    Team.prototype_findById_forms({
       id: localStorage.$LoopBack$currentTeamId,
       fk: $stateParams.id
     }, function (res) {
       $rootScope.pageTitle = '表单[' + res.title + ']结果';
       $scope.form = res;
     });
-  Form.prototype_get_formResults({
-    id: $stateParams.id
-  }, function (results) {
-    $scope.results = results;
-  });
-  var active = 'active';
-  $scope.pageViewActive = active;
-  $scope.pageView = function () {
+    Form.prototype_get_formResults({
+      id: $stateParams.id
+    }, function (results) {
+      $scope.results = results;
+    });
+    var active = 'active';
     $scope.pageViewActive = active;
+    $scope.pageView = function () {
+      $scope.pageViewActive = active;
+      $scope.allViewActive = false;
+    }
     $scope.allViewActive = false;
-  }
-  $scope.allViewActive = false;
-  $scope.allView = function () {
-    $scope.pageViewActive = false;
-    $scope.allViewActive = active;
-  }
-}]);
+    $scope.allView = function () {
+      $scope.pageViewActive = false;
+      $scope.allViewActive = active;
+    }
+  }]);

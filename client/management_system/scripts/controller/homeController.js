@@ -1,8 +1,6 @@
 app.controller('AdminCtrl', ['$scope', '$timeout', '$window', '$rootScope', 'Team', AdminCtrl]);
 function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
-  $rootScope.logoHide = false;
-
-
+  $rootScope.pageTitle = '首页';
 
   $scope.$on('$stateChangeStart', function (evt, next, current) {
     if (next.name !== 'index')

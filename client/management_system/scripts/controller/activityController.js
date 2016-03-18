@@ -1,4 +1,5 @@
 app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($scope, Team, $rootScope) {
+  $rootScope.pageTitle = '活动列表';
   $scope.chosenType = '';
 
   $scope.unFormat = "yyyy-MM-dd HH:mm";
@@ -38,8 +39,8 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($s
 }]);
 
 app.controller('ActivityEditCtrl',
-  ['$scope', 'Team', 'Ueditor', '$location', '$http', 'Activity', '$stateParams', 'uploadFile', 'appConfig', '$timeout',
-    function ($scope, Team, Ueditor, $location, $http, Activity, $stateParams, uploadFile, appConfig, $timeout) {
+  ['$scope', 'Team', 'Ueditor', '$location', '$http', 'Activity', '$stateParams', 'uploadFile', 'appConfig', '$timeout', '$rootScope',
+    function ($scope, Team, Ueditor, $location, $http, Activity, $stateParams, uploadFile, appConfig, $timeout, $rootScope) {
       //Input-date的配置
       var currentTime = new Date();
       $scope.minDate = (new Date(currentTime.getTime())).toISOString();
@@ -62,6 +63,7 @@ app.controller('ActivityEditCtrl',
       $scope.endTime = {};
       var tabSelect = ['mainInfo', 'copywriter', 'complete'];
       $scope.isEdit = $stateParams.id || false;
+      $rootScope.pageTitle = $scope.isEdit ? '编辑活动' : '新建活动';
       $scope.picNotice = $scope.isEdit ? "如果要更换图片请上传,建议900*500像素" : "请上传活动封面,建议900*500像素";
       $scope.preType = {};
       if ($stateParams.id) {
@@ -97,7 +99,43 @@ app.controller('ActivityEditCtrl',
           }
         });
       }
-      ;
+
+      $scope.hourChange = function (type) {
+        if (type === 0) {
+          if ($scope.startTime.hour > 23) {
+            $scope.startTime.hour = 23;
+          } else if ($scope.startTime.hour < 0) {
+            $scope.startTime.hour = 0;
+          }
+          $scope.startTime.hour = parseInt($scope.startTime.hour);
+        } else {
+          if ($scope.endTime.hour > 23) {
+            $scope.endTime.hour = 23;
+          } else if ($scope.endTime.hour < 0) {
+            $scope.endTime.hour = 0;
+          }
+          $scope.endTime.hour = parseInt($scope.endTime.hour);
+        }
+      };
+
+      $scope.minuteChange = function (type) {
+        if (type === 0) {
+          if ($scope.startTime.minute > 59) {
+            $scope.startTime.minute = 59;
+          } else if ($scope.startTime.minute < 0) {
+            $scope.startTime.minute = 0;
+          }
+          $scope.startTime.minute = parseInt($scope.startTime.minute);
+        } else {
+          if ($scope.endTime.minute > 59) {
+            $scope.endTime.minute = 59;
+          } else if ($scope.endTime.minute < 0) {
+            $scope.endTime.minute = 0;
+          }
+          $scope.endTime.minute = parseInt($scope.endTime.minute);
+        }
+      };
+
       $scope.nextStep = function (step) {
         $('#editActivityTabs').tabs('select_tab', tabSelect[step]);
       };

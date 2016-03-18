@@ -1,7 +1,7 @@
 app.controller('EventListCtrl',
   ['$scope', 'Team', '$rootScope', 'Race',
     function ($scope, Team, $rootScope, Race) {
-      $rootScope.logoHide = false;
+      $rootScope.pageTitle = '竞赛列表';
       $scope.unFormat = "yyyy-MM-dd HH:mm";
       $scope.format = "yyyy-MM-dd";
 
@@ -85,8 +85,8 @@ app.controller('EventListCtrl',
     }]);
 
 app.controller('EventEditCtrl',
-  ['$scope', 'Team', 'Ueditor', '$http', '$location', 'appConfig', 'uploadFile', '$stateParams',
-    function ($scope, Team, Ueditor, $http, $location, appConfig, uploadFile, $stateParams) {
+  ['$scope', 'Team', 'Ueditor', '$http', '$location', 'appConfig', 'uploadFile', '$stateParams', '$rootScope',
+    function ($scope, Team, Ueditor, $http, $location, appConfig, uploadFile, $stateParams, $rootScope) {
       $scope.eventData = {
         authorName: $scope.teamInfo.name,     //$scope.teamInfo在homeController里面获取
         authorId: $scope.teamInfo.id,
@@ -95,7 +95,7 @@ app.controller('EventEditCtrl',
       $scope.startTime = {};
       $scope.endTime = {};
       $scope.isEdit = $stateParams.id || false;
-
+      $rootScope.pageTitle = $scope.isEdit ? '编辑竞赛' : '新建竞赛';
       $scope.picNotice = $scope.isEdit ? "如果要更换图片请上传,建议900*500像素" : "请上传活动封面,建议900*500像素";
       if ($scope.isEdit) {
         Team.prototype_findById_races({
@@ -114,6 +114,41 @@ app.controller('EventEditCtrl',
         });
       }
 
+      $scope.hourChange = function (type) {
+        if (type === 0) {
+          if ($scope.startTime.hour > 23) {
+            $scope.startTime.hour = 23;
+          } else if ($scope.startTime.hour < 0) {
+            $scope.startTime.hour = 0;
+          }
+          $scope.startTime.hour = parseInt($scope.startTime.hour);
+        } else {
+          if ($scope.endTime.hour > 23) {
+            $scope.endTime.hour = 23;
+          } else if ($scope.endTime.hour < 0) {
+            $scope.endTime.hour = 0;
+          }
+          $scope.endTime.hour = parseInt($scope.endTime.hour);
+        }
+      };
+
+      $scope.minuteChange = function (type) {
+        if (type === 0) {
+          if ($scope.startTime.minute > 59) {
+            $scope.startTime.minute = 59;
+          } else if ($scope.startTime.minute < 0) {
+            $scope.startTime.minute = 0;
+          }
+          $scope.startTime.minute = parseInt($scope.startTime.minute);
+        } else {
+          if ($scope.endTime.minute > 59) {
+            $scope.endTime.minute = 59;
+          } else if ($scope.endTime.minute < 0) {
+            $scope.endTime.minute = 0;
+          }
+          $scope.endTime.minute = parseInt($scope.endTime.minute);
+        }
+      };
 
       //Input-date的配置
       var currentTime = new Date();
@@ -190,8 +225,9 @@ app.controller('EventEditCtrl',
     }]);
 
 app.controller('EventDetailCtrl',
-  ['$scope', 'Race', '$http', '$stateParams', 'appConfig', 'uploadFile', 'Team', 'Notice', 'User',
-    function ($scope, Race, $http, $stateParams, appConfig, uploadFile, Team, Notice, User) {
+  ['$scope', 'Race', '$http', '$stateParams', 'appConfig', 'uploadFile', 'Team', 'Notice', 'User', '$rootScope',
+    function ($scope, Race, $http, $stateParams, appConfig, uploadFile, Team, Notice, User, $rootScope) {
+      $rootScope.pageTitle = '竞赛详情';
       $scope.isAuthor = $stateParams.type === 'author';
       $scope.uploadAttachmentBtn = false;
       $scope.addGetInfoBtn = false;

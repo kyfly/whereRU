@@ -49,14 +49,14 @@
                  select-years="16">
         </div>
         <div input-field class="col m2 s4 offset-s3">
-          <input id="startHour" type="number" max="23" min="0" ng-model="startTime.hour">
+          <input ng-change="hourChange(0)" id="startHour" type="number" ng-model="startTime.hour">
           <label for="startHour">小时</label>
         </div>
         <div class="col m1 s1 text-center timeDivide">
           <p>:</p>
         </div>
         <div input-field class="col m2 s4">
-          <input id="startMinute" type="number" max="60" min="0" ng-model="startTime.minute">
+          <input ng-change="minuteChange(0)" id="startMinute" type="number" ng-model="startTime.minute">
           <label for="startMinute">分钟</label>
         </div>
         <div input-field class="col m7 s12">
@@ -81,14 +81,14 @@
                  select-years="16">
         </div>
         <div input-field class="col m2 s4 offset-s3">
-          <input id="endHour" type="number" max="23" min="0" ng-model="endTime.hour">
+          <input ng-change="hourChange(1)" id="endHour" type="number" ng-model="endTime.hour">
           <label for="endHour">小时</label>
         </div>
         <div class="col m1 s1 text-center timeDivide">
           <p>:</p>
         </div>
         <div input-field class="col m2 s4">
-          <input id="endMinute" type="number" max="60" min="0" ng-model="endTime.minute">
+          <input ng-change="minuteChange(1)" id="endMinute" type="number" ng-model="endTime.minute">
           <label for="endMinute">分钟</label>
         </div>
         <div input-field class="col s12">
