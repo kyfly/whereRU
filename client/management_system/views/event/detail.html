@@ -134,7 +134,7 @@
             <a class="btn margin-left" href ng-href="#{{'previewModal' + $index}}" modal ng-show="isAuthor">预览</a>
             <a class="btn margin-left" href ng-hide="isAuthor"
                ng-click="initFormResult()">填写</a>
-            <a class="btn margin-left" href ng-show="isAuthor">查看结果</a>
+            <a class="btn margin-left" ui-sref="formResult({id: notice.form.id})" ng-show="isAuthor">查看结果</a>
             <div id="{{'previewModal' + $index}}" class="modal modal-fixed-footer">
               <div class="modal-content">
                 <h4 ng-bind="notice.form.title || '表单预览'"></h4>

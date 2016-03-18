@@ -1,18 +1,16 @@
-<div>
-	<h6 class="row form-action-bar">
-		<span class="col s3 waves-effect">
-			结果：{{results.length}}
-		</span>
-		<span ng-class="pageViewActive" ng-click="pageView()" class="col s3 waves-effect">
-			分页显示
-		</span>
-		<span class="col s3 waves-effect" ng-class="allViewActive" ng-click="allView()">
-			列表显示
-		</span>
-		<span class="col s3 waves-effect">
-			<a href="" class="">excl下载</a>
-		</span>
-	</h6>
+<div class="row margin-top">
+  <div class="col s3 text-center">
+    <h5>结果：{{results.length}}</h5>
+  </div>
+  <div class="col s6">
+    <ul class="tabs" tabs>
+      <li class="tab col s3 waves-effect"><a href ng-click="pageView()">分页显示</a></li>
+      <li class="tab col s3 waves-effect"><a href ng-click="allView()">列表显示</a></li>
+    </ul>
+  </div>
+  <div class="col s3 text-center">
+    <a href="" class="btn orange darken-2 waves-effect waves-light">EXCEL下载</a>
+  </div>
 </div>
 <div>
 	<table ng-show="allViewActive" class="striped centered">
@@ -48,7 +46,7 @@
   		</li>
   		<li class="col s12">
   			<h5 class="col s3">所抢票</h5>
-  			<h6 class="col s9" ng-repeat="item in seckill._seckillItems" 
+  			<h6 class="col s9" ng-repeat="item in seckill._seckillItems"
   				ng-if="item.id == resultItem.itemId" ng-bind="item.name"></h6>
   		</li>
   		<li class="col s12">

@@ -49,14 +49,16 @@ hr {
   border-left: none;
   border-right: none;
 }
-.page-title{
+
+.page-title {
   width: 80%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 1.5rem;
+  font-size: 1.4rem !important;
   display: block;
 }
+
 .logo:hover {
   background-color: #ffffff;
 }
@@ -241,9 +243,11 @@ hr {
   right: 0;
   bottom: 0;
 }
+
 .btn-area a {
   display: block;
 }
+
 .btn-area > .text-center {
   line-height: 38px;
 }
@@ -490,10 +494,12 @@ hr {
   position: fixed;
   top: 10px;
 }
-.img-view{
-      padding: 5px 10px;
-    border: solid 1px #eee;
+
+.img-view {
+  padding: 5px 10px;
+  border: solid 1px #eee;
 }
+
 .bottomBtn {
   margin-bottom: 50px;
 }
@@ -527,70 +533,90 @@ hr {
 .switch > span {
   padding-right: 20px;
 }
-.form-action-bar{
+
+.form-action-bar {
   margin-top: 20px;
-    font-size: 1rem;
-    line-height: 3rem;
-    height: 3rem;
-    background-color: #FFF;
-    border: solid 1px #eee;
-    /* padding: 10px; */
-    text-align: center;
+  font-size: 1rem;
+  line-height: 3rem;
+  height: 3rem;
+  background-color: #FFF;
+  border: solid 1px #eee;
+  /* padding: 10px; */
+  text-align: center;
 }
-.form-action-bar span{
+
+.form-action-bar span {
   line-height: 3rem;
   height: 3rem;
   display: block;
   background-color: #eee;
   cursor: pointer;
 }
-.form-action-bar .active{
+
+.form-action-bar .active {
   background-color: #000;
-  color: #fff;  
+  color: #fff;
 }
-.page-view ul.col{
+
+.page-view ul.col {
   padding: 0;
 }
-.page-view li{
+
+.page-view li {
   padding: 10px 0 !important;
 }
-.page-view li:nth-child(2n){
+
+.page-view li:nth-child(2n) {
   background: #fff;
 }
-.page-view li:nth-child(2n + 1){
+
+.page-view li:nth-child(2n + 1) {
   background: #eee;
 }
-.page-view h5{
+
+.page-view h5 {
   margin: 0;
   font-size: 1.2rem;
   text-align: right;
 }
-.page-view h6{
+
+.page-view h6 {
   margin: 0;
   font-size: 1rem;
   border-left: solid 2px #ddd;
 }
-.seckill-result{
+
+.seckill-result {
 
 }
+
 .seckill-result b {
   font-size: 1.5rem;
   color: green;
 }
+
 .seckill-result i {
   font-size: 1.5rem;
   color: red;
 }
-.vote-result h5{
+
+.vote-result h5 {
   font-size: 1.3rem;
 }
-.vote-bg{
-  height: 50px;
-  background: #000;
+
+.vote-bg {
+  margin-top: 25px;
+  height: 20px;
+  background: #F8F8F8;
   padding: 0 !important;
 }
-.vote-point{
+
+.vote-point {
   display: block;
-  height: 50px;
-  background: #0ff;
+  height: 20px;
+  background: #F6B64A;
+}
+
+.vote-num {
+  font-size: 30px;
 }

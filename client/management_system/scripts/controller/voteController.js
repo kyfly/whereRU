@@ -122,8 +122,8 @@ app.controller('VoteEditCtrl',
             }, $scope.uploadData, function () {
               Materialize.toast('修改成功！请在投票模板里查看', 2000);
               $location.path('/MS/vote/list');
-            }, function () {
-              Materialize.toast('修改失败！', 2000);
+            }, function (res) {
+              Materialize.toast(res.data.error.message || '更新失败', 2000);
             });
           } else {
             Team.prototype_create_votes({
@@ -131,8 +131,8 @@ app.controller('VoteEditCtrl',
             }, $scope.uploadData, function () {
               Materialize.toast('创建成功！请在投票模板里查看', 2000);
               $location.path('/MS/vote/list');
-            }, function () {
-              Materialize.toast('创建失败！', 2000);
+            }, function (res) {
+              Materialize.toast(res.data.error.message || '创建失败', 2000);
             });
           }
         }

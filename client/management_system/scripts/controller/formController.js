@@ -262,8 +262,8 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
         }, $scope.uploadData, function () {
           Materialize.toast('修改成功！请在表单模板里查看', 2000);
           $location.path('/MS/form/list');
-        }, function () {
-          Materialize.toast('修改失败！', 2000);
+        }, function (res) {
+          Materialize.toast(res.data.error.message || '更新失败', 2000);
         });
       } else {
         Team.prototype_create_forms({
@@ -271,8 +271,8 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
         }, $scope.uploadData, function () {
           Materialize.toast('创建成功！请在表单模板里查看', 2000);
           $location.path('/MS/form/list');
-        }, function () {
-          Materialize.toast('创建失败！', 2000);
+        }, function (res) {
+          Materialize.toast(res.data.error.message || '创建失败', 2000);
         });
       }
     }
@@ -302,7 +302,7 @@ app.controller('FormResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Form'
     $scope.pageView = function () {
       $scope.pageViewActive = active;
       $scope.allViewActive = false;
-    }
+    };
     $scope.allViewActive = false;
     $scope.allView = function () {
       $scope.pageViewActive = false;
