@@ -3,7 +3,7 @@ module.exports = function(FormResult) {
 		ctx.instance.form({
 			include: 'activity'
 		}, function (err, form) {
-			if (err) {
+			if (err || !form.toJSON().activity) {
     		return next(err);
     	}
 			if (new Date() < new Date(form.toJSON().activity.started))

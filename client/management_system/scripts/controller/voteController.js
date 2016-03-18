@@ -159,11 +159,13 @@ app.controller('VoteResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Vote'
     $scope.ASC = function () {
       $scope.DESCActive = false;
       $scope.ASCActive = 'active';
+      $scope.desc = false;
     };
 
     $scope.DESC = function () {
       $scope.DESCActive = 'active';
       $scope.ASCActive = false;
+      $scope.desc = true;
     }
   }]);
 function sort(array) {

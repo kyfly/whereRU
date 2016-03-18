@@ -1,22 +1,61 @@
-<!-- 手机显示选择 -->
-<!-- <nav class="header row hide-on-large-only">
-  <div class="nav-wrapper">
-    <a href="/" class="brand-logo">whereRU</a>
-    <ul>
-      <li>
-        <a class="dropdown-button right" href="" dropdown data-hover="true"
-           data-activates="demoDropdown">{{choice || "全部"}}
-          <i class="mdi-navigation-arrow-drop-down"></i>
-        </a>
-      </li>
-      <ul id='demoDropdown' class='dropdown-content'>
-        <li ng-repeat="filter in activityFilter">
-          <a href="javascript:void(0);" ng-bind="filter" ng-click="changeFilter()"></a>
-        </li>
+<div ng-class="filterBar" class="row center filter-bar">
+  <ul>
+    <li class="col s3">
+      <a class="dropdown-button" href="" 
+        dropdown data-hover="true"
+        ng-click="search=false"
+        ng-mouseover="search=false"
+        data-activates="dropDown">活动
+        <i class="mdi-navigation-arrow-drop-down"></i>
+      </a>
+      <ul id='dropDown' class='dropdown-content'>
+        <li><a href="/w/teams">团队</a></li>
+        <li><a href="/w/races">竞赛</a></li>
       </ul>
-    </ul>
+    </li>
+    <li class="col s3">
+      <a class="dropdown-button" href="" 
+        ng-click="search=false;type=undefined;statusHide=false"
+        ng-mouseover="search=false;type=undefined;statusHide=false"
+        dropdown data-hover="true"
+        data-activates="statusDropDown">{{status || "状态"}}
+        <i class="mdi-navigation-arrow-drop-down"></i>
+      </a>
+      <ul ng-hide="statusHide" id='statusDropDown' class='dropdown-content'>
+        <li><a href="#!" ng-click="ingFilter()">进行中</a></li>
+        <li><a href="#!" ng-click="nosFilter()">未开始</a></li>
+        <li><a href="#!" ng-click="endFilter()">已结束</a></li>
+        <li><a href="#!" ng-click="allStatusFilter()">全部</a></li>
+      </ul>
+    </li>
+    <li class="col s3">
+      <a class="dropdown-button" href="" 
+        ng-click="search=false;status=undefined;typeHide=false"
+        ng-mouseover="search=false;status=undefined;typeHide=false"
+        dropdown data-hover="true"
+        data-activates="typeDropDown">{{type || "类型"}}
+        <i class="mdi-navigation-arrow-drop-down"></i>
+      </a>
+      <ul ng-hide="typeHide" id='typeDropDown' class='dropdown-content'>
+        <li><a href="#!" ng-click="formFilter()">表单</a></li>
+        <li><a href="#!" ng-click="voteFilter()">投票</a></li>
+        <li><a href="#!" ng-click="seckillFilter()">抢票</a></li>
+        <li><a href="#!" ng-click="allTypeFilter()">全部</a></li>
+      </ul>
+    </li>
+    <li class="col s3">
+      <a href="" ng-click="search = !search" ng-mouseover="search = !search">搜索
+        <i class="mdi-action-search"></i>
+      </a>
+    </li>
+  </ul>
+  <div input-field class="col s10 offset-s1" ng-show="search">
+    <input type="text" ng-model="filterTitle" ng-change="titleFilter()" placeholder="请在此输入关键字">
   </div>
-</nav> -->
+  
+</div>
+
+  
 <div class="row menu">
   <div class="col s4 m4 l2 item active waves-effect hide-on-med-and-down">
     <a class="active" href=""></a>
@@ -34,7 +73,7 @@
 <div class="row container card-list">
   <ul>
     <li class="col s12 m6 l3" 
-    ng-repeat="activityItem in activityItems track by $id(activityItem.id)">
+    ng-repeat="activityItem in activityItems | filter: query">
       <div class="card">
         <div class="card-content">
           <h4 class="card-title">

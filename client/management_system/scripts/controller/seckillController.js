@@ -187,4 +187,9 @@ app.controller('SeckillResultCtrl',
         $scope.pageViewActive = false;
         $scope.allViewActive = active;
       }
+      $scope.queryInput = function () {
+        if (!$scope.query.verifyId) {
+          $scope.query = undefined;
+        }
+      }
     }]);

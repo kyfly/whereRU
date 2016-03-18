@@ -3,6 +3,7 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
   $scope.choice = '全部';
   $window.pull = true;
   $scope.activityItems = [];
+  $scope.filterBar = 'ng-hide';
   var page = 0;
   $scope.changeFilter = function () {
     $scope.choice = this.filter;
@@ -15,29 +16,93 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
     } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 600) {
       $window.pull = true;
     }
+    if (body.scrollTop < 50) {
+      hideFilterBar();
+    } else {
+      showFilterBar();
+    }
   });
   $scope.$on('$destroy', function (event,data) {
     angular.element($window).unbind('scroll');
     $scope.activityItems = undefined;
   });
-  $scope.filterFun = function (activity) {
-    switch($scope.choice) {
-      case '全部':
-        return true;
-      case '进行中':
-        if (activity.status === 'ing')
-          return true;
-        break;
-      case '未开始':
-        if (activity.status === 'nos')
-          return true;
-        break;
-      case '已结束':
-        if (activity.status === 'end')
-          return true;
-        break;
+  function hideFilterBar () {
+    if ($scope.filterBar === 'ng-hide') {
+      return;
     }
+    $scope.$apply(function () {
+      $scope.filterBar = 'ng-hide';
+    });
   }
+  function showFilterBar () {
+    if ($scope.filterBar === 'ng-scope') {
+      return;
+    }
+    $scope.$apply(function () {
+      $scope.filterBar = 'ng-scope';
+    });
+  }
+  $scope.formFilter = function () {
+    $scope.query = {
+      actType: 'form'
+    };
+    $scope.typeHide = true;
+    $scope.type = '表单';
+  };
+  $scope.voteFilter = function () {
+    $scope.query = {
+      actType: 'vote'
+    };
+    $scope.typeHide = true;
+    $scope.type = '投票';
+  };
+  $scope.seckillFilter = function () {
+    $scope.query = {
+      actType: 'seckill'
+    };
+    $scope.typeHide = true;
+    $scope.type = '抢票';
+  };
+  $scope.allTypeFilter = function () {
+    $scope.query = undefined;
+    $scope.typeHide = true;
+    $scope.type = '类型';
+  };
+  $scope.allStatusFilter = function () {
+    $scope.query = undefined;
+    $scope.status = '状态';
+    $scope.statusHide = true;
+  };
+  $scope.ingFilter = function () {
+    $scope.query = {
+      status: 'ing'
+    };
+    $scope.statusHide = true;
+    $scope.status = '进行中';
+  };
+  $scope.nosFilter = function () {
+    $scope.query = {
+      status: 'nos'
+    };
+    $scope.statusHide = true;
+    $scope.status = '未开始';
+  };
+  $scope.endFilter = function () {
+    $scope.query = {
+      status: 'end'
+    };
+    $scope.statusHide = true;
+    $scope.status = '已结束';
+  };
+  $scope.titleFilter = function () {
+    if (!filterTitle) {
+      $scope.query = undefined;
+    } else {
+      $scope.query = {
+        title: filterTitle
+      };
+    }
+  };
   function getActivityStatus(activity) {
     var now = new Date();
     try{
@@ -75,7 +140,7 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
     }, function (err) {
       $scope.errorTip(err);
     });
-  }
+  };
   if (!$scope.$currentUser) {
     Activity.find(function (activities) {
       $scope.activityItems = activities;

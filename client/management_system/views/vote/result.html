@@ -9,16 +9,17 @@
     </ul>
   </div>
 </div>
+
 <div class="vote-result">
   <ul class="row">
-    <li ng-repeat="item in vote._voteItems" class="col s12">
+    <li ng-repeat="item in vote._voteItems | orderBy: 'count': desc" class="col s12">
       <p class="col s1">
         <span class="vote-num">{{$index + 1}}</span>.
       </p>
-      <p class="col s2">
+      <p class="col s2 center">
         <span ng-bind="item.name"></span>
         <br>
-        <span class="red-text" ng-bind="item.count"></span> 票
+        <span class="red-text" ng-bind="item.count"></span>
       </p>
       <div class="col s9 vote-bg z-depth-2">
         <div class="vote-point" ng-style="{'width': item.point + '%'}"></div>

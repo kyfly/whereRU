@@ -604,19 +604,38 @@ hr {
   font-size: 1.3rem;
 }
 
+.vote-result li {
+  margin: 10px;
+  position: relative;
+}
+
+.vote-result p {
+  margin: 0
+}
+
+.vote-result h5 {
+  font-size: 1.3rem;
+}
+
 .vote-bg {
-  margin-top: 25px;
   height: 20px;
-  background: #F8F8F8;
+  background: #ddd;
   padding: 0 !important;
+  border-radius: 15px;
+  margin-top: -15px;
+  position: absolute;
+  right: 5px;
+  top: 50%;
 }
 
 .vote-point {
   display: block;
   height: 20px;
-  background: #F6B64A;
+  background: #DE8920;
+  border-radius: 15px;
 }
 
 .vote-num {
   font-size: 30px;
 }
+

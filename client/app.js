@@ -22,8 +22,12 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
     'http://*.etuan.org/**'
   ]);
 })
-.run(['$rootScope', function ($rootScope) {
+.run(['$rootScope', '$window',function ($rootScope, $window) {
 	$rootScope.$on('$stateChangeStart', function(evt, next, current) {
+		if (!next.name.match(/^art/))
+		{
+			$window.document.body.scrollTop = 1;
+		}
 		$rootScope.cancelLogin();
 	});
 	function IsPC()

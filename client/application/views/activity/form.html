@@ -1,12 +1,14 @@
 <form name="activityForm">
 	<div ng-repeat="formItem in form._formItems">
 		<div input-field ng-if="formItem.type === 'text'" >
-	    <input id="name" type="text" ng-model="result[$index]['name']" length="formItem.len" required>
+	    <input ng-if="!formItem.len" id="name" type="text" ng-model="result[$index]['name']" required>
+	    <input ng-if="formItem.len" id="name" type="text" ng-model="result[$index]['name']" length="formItem.len" required>
 	    <label for="name">请输入{{formItem.name}}</label>
 		</div>
 
 		<div input-field ng-if="formItem.type === 'textarea'">
-	    <textarea ng-model="result[$index]['name']" class="materialize-textarea" length="formItem.len" required></textarea>
+	    <textarea ng-if="!formItem.len" ng-model="result[$index]['name']" class="materialize-textarea" required></textarea>
+	    <textarea ng-if="formItem.len" ng-model="result[$index]['name']" class="materialize-textarea" length="formItem.len" required></textarea>
 	    <label>请输入{{formItem.name}}</label>
 		</div>
 
