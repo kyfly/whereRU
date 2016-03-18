@@ -1,9 +1,28 @@
-<!-- 手机显示选择 -->
-<!-- <nav class="header row hide-on-large-only">
-  <div class="nav-wrapper">
-    <a href="/" class="brand-logo">whereRU</a>
+<div ng-class="filterBar" class="row center filter-bar">
+  <ul>
+    <li class="col s6">
+      <a class="dropdown-button" href="" 
+        dropdown data-hover="true"
+        ng-click="search=false"
+        ng-mouseover="search=false"
+        data-activates="dropDown">竞赛
+        <i class="mdi-navigation-arrow-drop-down"></i>
+      </a>
+      <ul id='dropDown' class='dropdown-content'>
+        <li><a href="/w/teams">团队</a></li>
+        <li><a href="/w/activities">活动</a></li>
+      </ul>
+    </li>
+    <li class="col s6">
+      <a href="" ng-click="search = !search" ng-mouseover="search = !search">搜索
+        <i class="mdi-action-search"></i>
+      </a>
+    </li>
+  </ul>
+  <div input-field class="col s10 m6 offset-m3 offset-s1" ng-show="search">
+    <input type="text" ng-model="filterTitle" ng-change="titleFilter()" placeholder="请在此输入关键字">
   </div>
-</nav> -->
+</div>
 <div class="row menu">
   <div class="col s4 m4 l2 item active waves-effect hide-on-med-and-down">
     <a class="active" href=""></a>
@@ -23,7 +42,7 @@
 <!--校园竞赛列表-->
 <div class="row container">
   <ul>
-    <li class="col s12 m6 l3 card-list"  ng-repeat="raceItem in raceItems track by $id(raceItem.id)">
+    <li class="col s12 m6 l3 card-list"  ng-repeat="raceItem in raceItems | filter: query">
       <div class="card">
         <div class="card-content">
           <h4 class="card-title">

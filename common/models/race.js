@@ -105,11 +105,12 @@ module.exports = function(Race) {
           teamId: instance.teamId
         }
       }, function (err, coterie) {
-        if (err || !coterie)
+        if (err || !coterie) {
           return next(err);
-        if (!instance.explainUrl)
+        }
+        if (!instance.explainUrl) {
           next();
-        else {
+        } else {
           coterie.articles.create({
             "title": instance.name,
             "contentUrl": instance.explainUrl,

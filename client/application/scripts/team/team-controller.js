@@ -1,6 +1,6 @@
 app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploadFile', '$window',
   function ($scope, Team, User, $location, uploadFile, $window) {
-  //$scope.filterBar = 'ng-hide';
+  $scope.filterBar = 'ng-hide';
   $scope.types = [{
     "name": "校园组织"
   }, {
@@ -8,7 +8,7 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
   }, {
     "name": "兴趣团队"
   }, {
-    "name": "技术团队"
+    "name": "竞赛团队"
   }];
   $window.pull = true;
   $scope.teams = [];
@@ -21,21 +21,83 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
     } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 600) {
       $window.pull = true;
     }
-    if (body.scrollTop > 50) {
-      $scope.filterBar = 'ng-hide';
-      console.log(1)
+    if (body.scrollTop < 50) {
+      hideFilterBar();
+    } else {
+      showFilterBar();
     }
   });
   $scope.$on('$destroy', function (event,data) {
     angular.element($window).unbind('scroll');
     $scope.teams = undefined;
   });
-  $scope.changeFilter = function () {
-    $scope.choice = this.type.name;
-  };
   $scope.team = {
     status: false,
     hidden: false
+  };
+  function hideFilterBar () {
+    if ($scope.filterBar === 'ng-hide') {
+      return;
+    }
+    $scope.$apply(function () {
+      $scope.filterBar = 'ng-hide';
+    });
+  }
+  function showFilterBar () {
+    if ($scope.filterBar === 'ng-scope') {
+      return;
+    }
+    $scope.$apply(function () {
+      $scope.filterBar = 'ng-scope';
+    });
+  }
+  $scope.statusFilter = function () {
+    $scope.query = {
+      status: 1
+    };
+    $scope.type = '可加入';
+  };
+  $scope.organizationFilter = function () {
+    $scope.query = {
+      type: '校园组织'
+    };
+    $scope.typeHide = true;
+    $scope.type = '校园组织';
+  };
+  $scope.associationFilter = function () {
+    $scope.query = {
+      type: '校园社团'
+    };
+    $scope.typeHide = true;
+    $scope.type = '校园社团';
+  };
+  $scope.avocationFilter = function () {
+    $scope.query = {
+      type: '兴趣团队'
+    };
+    $scope.typeHide = true;
+    $scope.type = '兴趣团队';
+  };
+  $scope.raceFilter = function () {
+    $scope.query = {
+      type: '竞赛团队'
+    };
+    $scope.typeHide = true;
+    $scope.type = '竞赛团队';
+  };
+  $scope.allTypeFilter = function () {
+    $scope.query = undefined;
+    $scope.typeHide = true;
+    $scope.type = '团队类型';
+  };
+  $scope.titleFilter = function () {
+    if (!this.filterTitle) {
+      $scope.query = undefined;
+    } else {
+      $scope.query = {
+        name: this.filterTitle
+      };
+    }
   };
   $scope.uploadLogo = function () {
     if (!$scope.$currentUser) {

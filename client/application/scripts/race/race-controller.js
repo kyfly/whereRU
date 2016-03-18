@@ -1,6 +1,7 @@
 app.controller('RacesController', ['$scope', 'Race', '$window', function ($scope, Race, $window) {
   $window.pull = true;
   $scope.raceItems = [];
+  $scope.filterBar = 'ng-hide';
   var page = 0;
   angular.element($window).bind('scroll', function (e) {
     var body = e.target.body;
@@ -10,12 +11,32 @@ app.controller('RacesController', ['$scope', 'Race', '$window', function ($scope
     } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 600) {
       $window.pull = true;
     }
+    if (body.scrollTop < 50) {
+      hideFilterBar();
+    } else {
+      showFilterBar();
+    }
   });
   $scope.$on('$destroy', function (event,data) {
     angular.element($window).unbind('scroll');
     $scope.raceItems = undefined;
   });
-
+  function hideFilterBar () {
+    if ($scope.filterBar === 'ng-hide') {
+      return;
+    }
+    $scope.$apply(function () {
+      $scope.filterBar = 'ng-hide';
+    });
+  }
+  function showFilterBar () {
+    if ($scope.filterBar === 'ng-scope') {
+      return;
+    }
+    $scope.$apply(function () {
+      $scope.filterBar = 'ng-scope';
+    });
+  }
   $scope.getRaces = function () {
     if (!$scope.$currentUser) {
       $scope.$emit('auth:loginRequired');
@@ -33,6 +54,15 @@ app.controller('RacesController', ['$scope', 'Race', '$window', function ($scope
         page ++;
       }
     });
+  };
+  $scope.titleFilter = function () {
+    if (!this.filterTitle) {
+      $scope.query = undefined;
+    } else {
+      $scope.query = {
+        name: this.filterTitle
+      };
+    }
   };
   if (!$scope.username) {
     Race.find(function (races) {

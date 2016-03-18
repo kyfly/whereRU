@@ -1,19 +1,19 @@
 <div>
 	<h6 class="row form-action-bar">
-		<span class="col s3 waves-effect">
-			参与量：{{sum}}
+		<span class="col s4 waves-effect">
+			参与量：<b class="red-text">{{sum}}</b>
 		</span>
-		<span ng-class="ASCActive" ng-click="ASC()" class="col s3 waves-effect">
+		<span ng-class="ASCActive" ng-click="ASC()" class="col s4 waves-effect">
 			升序
 		</span>
-		<span class="col s3 waves-effect" ng-class="DESCActive" ng-click="DESC()">
+		<span class="col s4 waves-effect" ng-class="DESCActive" ng-click="DESC()">
 			降序
 		</span>
 	</h6>
 </div>
 <div class="vote-result">
 	<ul class="row">
-		<li ng-repeat="item in vote._voteItems" class="col s12">
+		<li ng-repeat="item in vote._voteItems | orderBy: 'count': desc" class="col s12">
 			<p class="col s3 center">
 				<span ng-bind="item.name"></span>
 				<br>

@@ -16,7 +16,7 @@
   #toast-container {
     min-width: 100%;
     bottom: 48px;
-    position: absolute;
+    position: fixed;
     left: 0;
   }
   #toast-container .toast{
@@ -1304,14 +1304,84 @@ footer {
 .card-list {
 
 }
+.filter-bar {
+  background-color: #0CB9F7;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  margin-top: -2px;
+}
+.filter-bar ul{
+  margin: 0;
+  padding: 0;
+}
+.filter-bar>ul>li{
+  margin: 0;
+  height: 40px;
+  line-height: 40px;
+  padding: 0!important;
+}
+.filter-bar>ul>li>a{
+  font-size: 1.2rem;
+  color: #fff;
+  display: block;
+}
+.filter-bar>ul>li>.dropdown-content{
+  margin-top: 36px; 
+}
+.filter-bar>ul>li>.dropdown-content li{
+  text-align: center;
+}
+.filter-bar .input-field{
+  /*margin-top:0;*/
+  background-color: #fff;
+  border-radius: 3px;
+}
+.filter-bar .input-field{
+  margin-bottom: 1rem;
+}
+.filter-bar .input-field input{
+  margin:0;
+  height: 2rem;
+  border-radius: 3px;
+}
+@media screen and (min-width: 993px)  {
+  .filter-bar {
+    top: 4rem;
+    
+  }
+  .filter-bar ul{
+    position: relative;
+    width: 90%;
+    left: 5%;
+  }
+  .filter-bar .input-field input{
+    height: 3rem;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .filter-bar>ul>li{
+    height: 46px;
+    line-height: 46px;
+  }
+  .filter-bar>ul>li>a{
+    font-size: 1.4rem;
+  }
+  .filter-bar>ul>li>.dropdown-content{
+    margin-top: 46px; 
+  }
+}
+
 .list-more{
 
 }
 .list-more a {
-  padding: 20px 30px;
+ /* padding: 20px 30px;
     font-size: 1.5rem;
     background-color: rgba(7, 7, 7, 0.7);
-    color: #FFF;
+    color: #FFF;*/
 }
 .card-list .card .card-content {
   padding: 10px
