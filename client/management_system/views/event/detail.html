@@ -176,7 +176,7 @@
                     <h4 ng-bind="notice.form.title || '表单填写'"></h4>
                     <div ng-repeat="singleForm in notice.form._formItems">
                       <div input-field ng-show="singleForm.type === 'text'">
-                        <input type="text" ng-model="singleForm.result">
+                        <input type="text" ng-model="singleForm.result" length="{{singleForm.len}}">
                         <label ng-bind="singleForm.name"></label>
                       </div>
                       <select ng-model="singleForm.result" ng-if="singleForm.type === 'select'" material-select watch>
@@ -195,11 +195,12 @@
                         </div>
                       </div>
                       <div input-field ng-if="singleForm.type === 'textarea'">
-                        <textarea class="materialize-textarea" ng-model="singleForm.result"></textarea>
+                        <textarea length="{{singleForm.len}}" class="materialize-textarea" ng-model="singleForm.result"></textarea>
                         <label ng-bind="singleForm.name"></label>
                       </div>
                     </div>
-                    <a href class="btn waves-effect orange darken-2 right" ng-click="submitResult()">提交</a>
+                    <div class="clearfix"></div>
+                    <a href class="btn waves-effect orange darken-2 right margin-top" ng-click="submitResult()">提交</a>
                   </div>
                 </div>
               </div>

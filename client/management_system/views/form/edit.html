@@ -13,7 +13,7 @@
             <input class="textInput" id="{{'textInput' + $index}}" type="text" ng-model="form.name">
             <label for="{{'textInput' + $index}}">请输入题目</label>
           </div>
-          <div input-field ng-show="form.type !== 'select' && form.type !== 'file'">
+          <div input-field ng-show="form.type !== 'select' && form.type !== 'file' && form.type !== 'radio'">
             <span class="prefix textInputLabel">字数</span>
             <input class="textInput" id="textInput{{$index}}len" type="number" ng-model="form.len">
             <label for="textInput{{$index}}len">请输入可输入字数</label>

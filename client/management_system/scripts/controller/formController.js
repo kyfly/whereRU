@@ -100,9 +100,8 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
     },
     judge: function () {
       $scope.forms.push({
-        type: 'select',
-        name: '',
-        options: ['是', '否']
+        type: 'radio',
+        name: ''
       });
     },
     file: function () {
@@ -116,6 +115,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       $scope.forms.push({
         type: 'text',
         name: '姓名',
+        len: 5,
         options: []
       });
     },
@@ -130,6 +130,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       $scope.forms.push({
         type: 'text',
         name: '身份证号',
+        len: 18,
         options: []
       });
     },
@@ -137,6 +138,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       $scope.forms.push({
         type: 'text',
         name: '籍贯',
+        len: 10,
         options: []
       });
     },
@@ -144,6 +146,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       $scope.forms.push({
         type: 'text',
         name: '学号',
+        len: 8,
         options: []
       });
     },
@@ -163,6 +166,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       $scope.forms.push({
         type: 'text',
         name: '专业',
+        len: 20,
         options: []
       });
     },
@@ -170,6 +174,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       $scope.forms.push({
         type: 'text',
         name: '电子邮箱',
+        len: 30,
         options: []
       });
     },
@@ -177,6 +182,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       $scope.forms.push({
         type: 'text',
         name: 'QQ号',
+        len: 15,
         options: []
       });
     },
@@ -200,6 +206,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       $scope.forms.push({
         type: 'textarea',
         name: '个人简介',
+        len: 200,
         options: []
       });
     },
@@ -207,6 +214,7 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
       $scope.forms.push({
         type: 'textarea',
         name: '特长',
+        len: 100,
         options: []
       });
     }
