@@ -103,6 +103,7 @@ app.controller('EventEditCtrl',
           fk: $stateParams.id
         }, function (res) {
           $scope.eventData = res;
+          $scope.eventEditorContent = res.explain;
           var startInfo = new Date(res.started);
           var endInfo = new Date(res.ended);
           $scope.startTime.date = startInfo;
@@ -173,7 +174,7 @@ app.controller('EventEditCtrl',
           alert('请确认您上传的logo文件格式是jpg、png、gif或jpeg');
           return false;
         }
-        uploadFile.file(file, 'team', $scope.teamInfo.id)
+        uploadFile.img(file, 'team', $scope.teamInfo.id)
           .success(function (res) {
             $scope.eventData.imgUrl = res.url;
           });

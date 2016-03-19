@@ -89,9 +89,9 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
       alert('请确认您上传的logo文件格式是jpg、png、gif或jpeg');
       return false;
     }
-    uploadFile.file(file, 'teamlogo', $scope.$currentUser.id)
+    uploadFile.img(file, 'teamlogo', $scope.$currentUser.id)
     .success(function (res) {
-      $scope.team.logoUrl = 'http://cdn-img.etuan.org/' + res.url;
+      $scope.team.logoUrl = res.url;
     });
   };
   

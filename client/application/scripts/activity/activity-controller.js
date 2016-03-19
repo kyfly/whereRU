@@ -136,8 +136,8 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
 
 
 app.controller('ActivityController', 
-  ['$scope', 'Activity', 'User', '$stateParams', '$interval', 'uploadFile', 'appConfig',
-  function($scope, Activity, User, $stateParams, $interval, uploadFile, appConfig){
+  ['$scope', 'Activity', 'User', '$stateParams', '$interval', 'uploadFile',
+  function($scope, Activity, User, $stateParams, $interval, uploadFile){
   Activity.findById({
     id: $stateParams.id
   }, function (activity) {
@@ -279,7 +279,7 @@ app.controller('ActivityController',
     uploadFile.file(file, 'user', $scope.$currentUser.id)
     .success(function (res) {
       $scope.result[that['$index']].name = fileName;
-      $scope.result[that['$index']].url = appConfig.FILE_URL + res.url;
+      $scope.result[that['$index']].url = res.url;
     });
   };
   $scope.submitVoteResult = function () {

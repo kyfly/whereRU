@@ -4,7 +4,7 @@
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/loader.png" alt="" class="circle">
       <span class="title">团队负责人</span>
-      <p  class="blue-text text-darken-2">
+      <p>
         <br>
         <span ng-bind="team.username"></span>
       </p>
@@ -13,7 +13,7 @@
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/wechat-id.png" alt="" class="circle">
       <span class="title">微信公众号</span>
-      <p  class="blue-text text-darken-2">
+      <p>
         <br>
         <span ng-bind="team.chatId || '无'"></span>
       </p>
@@ -22,7 +22,7 @@
 		<li class="collection-item avatar">
       <img src="/lib/img/avatar/team-desc.png" alt="" class="circle">
       <span class="title">团队简介</span>
-      <p style="word-wrap: break-word;word-break: normal;" class="blue-text text-darken-2">
+      <p style="word-wrap: break-word;word-break: normal;">
         <br>
         <span ng-bind="team.desc"></span>
       </p>
@@ -32,18 +32,19 @@
       <img src="/lib/img/avatar/team-depart.png" alt="" class="circle">
       <span class="title">团队部门</span>
       <a href="" class="secondary-content"><i class="mdi-content-send"></i></a>
+      <p ng-repeat="dep in team.teamDepartments">
+        <span ng-bind="dep.name"></span>——<span ng-bind="dep.desc"></span>
+        <br>
+        
+      </p>
     </li>
-    
-   	<li class="collection-item avatar">
+   	<li ng-if="team.videoUrl"  class="collection-item avatar">
       <img src="/lib/img/avatar/av.png" alt="" class="circle">
       <span class="title">视频展示</span>
-      <a href="" class="secondary-content"><i class="mdi-content-send"></i></a>
-    </li>
-
-    <li class="collection-item avatar">
-      <img src="/lib/img/avatar/team-pic.png" alt="" class="circle">
-      <span class="title">图片展示</span>
-      <a href="" class="secondary-content"><i class="mdi-content-send"></i></a>
+      <video controls="controls">
+        <source ng-src="{{team.videoUrl}}">
+      Your browser does not support the video tag.
+      </video>
     </li>
   </ul>
 </div>

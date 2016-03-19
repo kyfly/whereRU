@@ -40,6 +40,37 @@ module.exports = function(Team) {
         cb(null,teams);
     });
 	};
+	Team.afterRemote('prototype.__findById__races', function (ctx, ins, next) {
+		if (ins.explainUrl) {
+			var file = ins.explainUrl.substring(Team.app.get('oss').rootUrl.length);
+			Team.app.AliYun.getObject(file, function (err, data) {
+				if (err) {
+					next();
+				} else {
+					ins.explain = data.Body.toString()
+					//console.log();
+					ctx.res.send(ins);
+				}
+			})
+		} else {
+			next();
+		}
+	});
+	Team.afterRemote('prototype.__findById__activities', function (ctx, ins, next) {
+		if (ins.explainUrl) {
+			var file = ins.explainUrl.substring(Team.app.get('oss').rootUrl.length);
+			Team.app.AliYun.getObject(file, function (err, data) {
+				if (err) {
+					next();
+				} else {
+					ins.explain = data.Body.toString()
+					ctx.res.send(ins);
+				}
+			})
+		} else {
+			next();
+		}
+	});
 	/**
 	 * [description]
 	 * @param  {[type]} ctx      [description]

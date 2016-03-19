@@ -20,6 +20,18 @@ app.factory('uploadFile', ['$http',function($http){
           'content': text
         }
       });
-		}
+		},
+		img: function uploadFile (file, type, id) {
+			var Fd = new FormData();
+			var path = '/ue/uploads?dir=' + type + '&id=' + id + '&action=uploadimage';
+			Fd.append('file', file);
+			return $http({
+				url: path,
+				data: Fd,
+				method: 'POST',
+				headers: {'Content-Type': undefined},
+				transformRequest: angular.identity
+			});
+		},
 	};
 }]);

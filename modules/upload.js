@@ -68,7 +68,7 @@ var uploadText = function (req, res) {
       throw err;
     } else {
       res.send({
-        'url': file,
+        'url': app.get('oss').rootUrl + file,
         'title': '',
         'original': file,
         'state': 'SUCCESS'
@@ -87,6 +87,7 @@ var uploadfile = function (req, res) {
       if (req.query.action === 'uploadimage')
       {
         url = app.get('oss').imgUrl + url;
+
       } else {
         url = app.get('oss').rootUrl + url;
       }

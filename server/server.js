@@ -1,6 +1,7 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 var path = require('path');
+var AliYun = require('../modules/AliYun');
 var app = module.exports = loopback();
 app.start = function() {
   // start the web server
@@ -18,3 +19,4 @@ boot(app, __dirname, function(err) {
   if (require.main === module)
     app.start();
 });
+app.AliYun = new AliYun(app);

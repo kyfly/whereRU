@@ -96,7 +96,7 @@ app.controller('VoteEditCtrl',
           alert('请确认您上传的logo文件格式是jpg、png、gif或jpeg');
           return false;
         }
-        uploadFile.file(file, 'team', $scope.teamInfo.id)
+        uploadFile.img(file, 'team', $scope.teamInfo.id)
           .success(function (res) {
             vote.imgUrl = res.url;
           });

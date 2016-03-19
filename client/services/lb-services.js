@@ -412,7 +412,10 @@
                 url: urlBase + '/Teams/:id/activities/:fk',
                 method: 'PUT'
               },
-
+              "prototype_findById_activities": {
+                url: urlBase + '/Teams/:id/activities/:fk',
+                method: 'GET'
+              },
               /**
                * 描述：申请加入团队，已登录用户
                */
@@ -1001,11 +1004,14 @@
             return config || $q.when(config);
           },
           'responseError': function (rejection) {
+            console.log(rejection.config.url);
             switch (rejection.status) {
               case 401:
                 if (rejection.config.url !== "/api/WUsers/login")
                   $rootScope.$broadcast('auth:loginRequired');
                 break;
+              case 400:
+
               // case 403:
               //   $rootScope.$broadcast('auth:forbidden');
               //   break;

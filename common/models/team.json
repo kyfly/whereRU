@@ -256,6 +256,12 @@
     },
     {
       "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__findById__activities"
+    },
+    {
+      "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "__create__members"

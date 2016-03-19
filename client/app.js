@@ -8,12 +8,6 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
   });
   $urlRouterProvider.otherwise('/');
 }])
-.factory('appConfig', function(){
-	return {
-		FILE_URL: 'http://oss.etuan.org/',
-		IMG_URL: 'http://cdn-img.etuan.org/'
-	};
-})
 .config(function($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist([
     // Allow same origin resource loads.
@@ -179,4 +173,15 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 		$scope.races = res;
 	});
 }]);
+app.directive('errSrc', function() {
+  return {
+    link: function(scope, element, attrs) {
+      element.bind('error', function() {
+        if (attrs.src != attrs.errSrc) {
+          attrs.$set('src', attrs.errSrc);
+        }
+      });
+    }
+  }
+});
 

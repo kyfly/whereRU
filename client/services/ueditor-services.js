@@ -1,16 +1,16 @@
 app.factory('Ueditor', ['$rootScope', function ($rootScope) {
-  if ($rootScope.teamInfo) {
-    var dir = 'team';
-    var id = $rootScope.teamInfo.id;
-  } else if ($rootScope.$currentUser) {
-    var dir = 'user';
-    var id = $rootScope.$currentUser.id;
-  } else {
-    return;
-  }
-  var url = "/ue/uploads?dir=" + dir + "&id=" + id;
-  return {
-    config: {
+  function UeConfig() {
+    if ($rootScope.teamInfo) {
+      var dir = 'team';
+      var id = $rootScope.teamInfo.id;
+    } else if ($rootScope.$currentUser) {
+      var dir = 'user';
+      var id = $rootScope.$currentUser.id;
+    } else {
+      return;
+    }
+    var url = "/ue/uploads?dir=" + dir + "&id=" + id;
+    return {
       serverUrl: url,
       toolbars: [[
         'fullscreen', 'source', '|', 'undo', 'redo', '|',
@@ -25,6 +25,9 @@ app.factory('Ueditor', ['$rootScope', function ($rootScope) {
       elementPathEnabled: false,
       //关闭右键菜单功能
       enableContextMenu: false
-    }
+    };
   }
+  return {
+    config: UeConfig()
+  };
 }]);

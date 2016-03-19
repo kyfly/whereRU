@@ -67,10 +67,12 @@ app.controller('ActivityEditCtrl',
       $scope.picNotice = $scope.isEdit ? "如果要更换图片请上传,建议900*500像素" : "请上传活动封面,建议900*500像素";
       $scope.preType = {};
       if ($stateParams.id) {
-        Activity.findById({
-          id: $stateParams.id
+        Team.prototype_findById_activities({
+          id: $scope.teamInfo.id,
+          fk: $stateParams.id
         }, function (activity) {
           $scope.activityData = activity;
+          $scope.activityEditorContent = activity.explain;;
           var startInfo = new Date(activity.started);
           var endInfo = new Date(activity.ended);
           $scope.startTime.date = startInfo;
@@ -79,12 +81,6 @@ app.controller('ActivityEditCtrl',
           $scope.endTime.date = endInfo;
           $scope.endTime.hour = endInfo.getHours();
           $scope.endTime.minute = endInfo.getMinutes();
-          if ($stateParams.id) {
-            $http.get($scope.activityData.explainUrl)
-              .success(function (contentHtml) {
-                $scope.activityEditorContent = contentHtml;
-              });
-          }
           if (activity.actType !== 'common') {
             $scope.preType.type = activity.actType;
 
@@ -148,7 +144,7 @@ app.controller('ActivityEditCtrl',
           alert('请确认您上传的logo文件格式是jpg、png、gif或jpeg');
           return false;
         }
-        uploadFile.file(file, 'team', $scope.teamInfo.id)
+        uploadFile.img(file, 'team', $scope.teamInfo.id)
           .success(function (res) {
             $scope.activityData.imgUrl = res.url;
           });
