@@ -29,6 +29,8 @@
     "bucket": "whereru-beta",
     "secret": "L46bpHJOvK4BRxgvWf7RnllvaOq1sq",
     "endpoint": "http://oss-cn-hangzhou.aliyuncs.com",
-    "allowOrigin": "http://localhost:3000"
+    "allowOrigin": "http://localhost:3000",
+    "rootUrl": "http://oss.etuan.org/",
+    "imgUrl": "http://cdn-img.etuan.org/"
   }
 }

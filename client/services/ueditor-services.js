@@ -1,7 +1,17 @@
-app.factory('Ueditor', function () {
-	return {
-		config: {
-      serverUrl: "/ue/uploads?dir=ue&id=ue",
+app.factory('Ueditor', ['$rootScope', function ($rootScope) {
+  if ($rootScope.teamInfo) {
+    var dir = 'team';
+    var id = $rootScope.teamInfo.id;
+  } else if ($rootScope.$currentUser) {
+    var dir = 'user';
+    var id = $rootScope.$currentUser.id;
+  } else {
+    return;
+  }
+  var url = "/ue/uploads?dir=" + dir + "&id=" + id;
+  return {
+    config: {
+      serverUrl: url,
       toolbars: [[
         'fullscreen', 'source', '|', 'undo', 'redo', '|',
         'bold', 'italic', 'underline', 'fontborder', 'strikethrough', '|',
@@ -16,5 +26,5 @@ app.factory('Ueditor', function () {
       //关闭右键菜单功能
       enableContextMenu: false
     }
-	}
-});
+  }
+}]);

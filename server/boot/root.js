@@ -8,13 +8,7 @@ module.exports = function(server) {
 	  extended: true
 	}));
 	server.use(bodyParser.json());
-  server.use('/ue/uploads', upload({
-  	bucket: server.get('oss').bucket,
-    endpoint: server.get('oss').endpoint,
-    accessKeyId: server.get('oss').key,
-    secretAccessKey: server.get('oss').secret,
-    allowOrigin: server.get('oss').allowOrigin
-  }));
+  server.use('/ue/uploads', upload(server));
 
   server.get(/^\/w\/*/, function(req, res) {
     res.sendFile(path.join(__dirname, '../../client/index.html'));

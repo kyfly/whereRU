@@ -5,26 +5,10 @@ var Busboy = require('busboy');
 var AliYun = require('./AliYun.js');
 var fse = require('fs-extra');
 var guid = 1000;
-var config = {
-    configFile: '../client/lib/ueditor/config.json',
-    mode: 'local',
-    dynamicPath: 'upload',
-    staticPath: path.join(__dirname, '../client/lib/temporary')
-};
-var setConfig = function(c) {
-  for (var i in c) {
-      config[i] = c[i];
-  }
-}
-function upload(c) {
-	setConfig(c);
-  AliYun = new AliYun({
-    accessKeyId: c.accessKeyId,
-    secretAccessKey: c.secretAccessKey,
-    endpoint: c.endpoint,
-    bucket: c.bucket,
-    allowOrigin: c.allowOrigin
-  });
+var app;
+function upload(server) {
+  app = server;
+  AliYun = new AliYun(server);
 	return function (req, res, next) {
     var query = req.query;
     if (query.dir !== 'ue' && (!query.dir || !query.id) && req.query.action !== 'config') {
@@ -37,7 +21,7 @@ function upload(c) {
 		switch (req.query.action) {
 	    case 'config':
         res.setHeader('Content-Type', 'application/json');
-        res.sendFile(path.join(__dirname, config.configFile));
+        res.sendFile(path.join(__dirname, '../client/lib/ueditor/config.json'));
         break;
 	    case 'uploadimage':
         uploadfile(req, res);
@@ -47,9 +31,6 @@ function upload(c) {
         break;
 	    case 'listimage':
         listfile(req, res, '.jpg,.jpeg,.png,.gif,.ico,.bmp');
-        break;
-	    case 'uploadscrawl':
-        uploadscrawl(req, res);
         break;
 	    case 'uploadfile':
         uploadfile(req, res);
@@ -77,7 +58,7 @@ var uploadText = function (req, res) {
     };
     return;
   }
-  var file = 'whereru/' + query.dir + '/' + query.id + '/html' + '/' +getFileName('.html');
+  var file = query.dir + '/' + query.id + '/html' + '/' +getFileName('.html');
   AliYun.putObject({
     fileName: file,
     data: req.body.content,
@@ -103,9 +84,11 @@ var uploadfile = function (req, res) {
       //防止多次res.end()
       if (isReturn) return;
       isReturn = true;
-      if (req.query.dir === 'ue')
+      if (req.query.action === 'uploadimage')
       {
-        url = "http://oss.etuan.org/" + url;
+        url = app.get('oss').imgUrl + url;
+      } else {
+        url = app.get('oss').rootUrl + url;
       }
       var r = {
         'url': url,
@@ -125,10 +108,22 @@ var save = function (file, filename, mimetype, req, callback) {
   var realName = getFileName(path.extname(filename));
   var saveTo = path.join(os.tmpDir(), realName);
   var query = req.query;
+  var fileType;
+  switch (req.query.action) {
+      case 'uploadimage':
+        fileType = 'image';
+        break;
+      case 'uploadfile':
+        fileType = 'file';
+        break;
+      case 'uploadvideo':
+        fileType = 'video';
+        break;
+    }
   file.pipe(fs.createWriteStream(saveTo));
   file.on('end', function() {
     fs.readFile(saveTo,function(err,data){
-      var file = 'whereru/' + query.dir + '/' + query.id + '/' + path.extname(filename).substr(1) + '/' + realName;
+      var file = query.dir + '/' + query.id + '/' + fileType + '/' + realName;
       AliYun.putObject({
         fileName: file,
         data: data,
@@ -146,60 +141,30 @@ var getFileName = function(extname) {
                 .join('_') + extname;
     return name;
 }
-var getRealDynamicPath = function (req) {
-    var dPath = config.dynamicPath;
-    if (typeof dPath == 'function')
-        dPath = dPath(req);
-    return dPath;
+var listfile = function (req, res, fileType) {
+  var query = req.query;
+  var urlRoot = app.get('oss').rootUrl;
+  var file = query.dir + '/' + query.id + '/';
+  AliYun.listObjects( file, function (err, list) {
+    var r = {};
+    if (err) {
+      r.state = 'ERROR';
+      res.status(500);
+    } else r.state = 'SUCCESS';
+    var data = [];
+    for (var i = 0; i < list.Contents.length; i++) {
+      var file = list.Contents[i].Key;
+      var extname = path.extname(file);
+      if (fileType.indexOf(extname.toLowerCase()) >= 0) {
+        data.push({
+            'url': urlRoot + file
+        });
+      }
+    }
+    r.list = data;
+    r.start = 1;
+    r.total = data ? data.length : 0;
+    res.json(r);
+  });
 }
-// var listfile = function (req, res, fileType) {
-//   var dPath = util.getRealDynamicPath(req);
-//   var urlRoot = dPath;
-//   var callback = function (err, files) {
-//     var r = {};
-//     if (err) {
-//       r.state = 'ERROR';
-//       res.status(500);
-//     } else r.state = 'SUCCESS';
-//     //var fileType = '.jpg,.jpeg,.png,.gif,.ico,.bmp';
-//     var data = [];
-//     for (var i = 0; i < files.length; i++) {
-//       var file = files[i];
-//       var extname = path.extname(file);
-//       //console.log(file);
-//       if (fileType.indexOf(extname.toLowerCase()) >= 0) {
-//         data.push({
-//             'url': urlRoot + '/' + file
-//         });
-//       }
-//     }
-//     r.list = data;
-//     r.start = 1;
-//     r.total = data ? data.length : 0;
-//     res.json(r);
-//   };
-//   if (config.mode == 'ali') {
-      
-//   } else {
-//     fs.readdir(path.join(config.staticPath, dPath), callback);
-//   }
-// }
-// var uploadscrawl = function (req, res) {
-//   var realName = getFileName('.png');
-//   var saveTo = path.join(os.tmpDir(), realName);
-//   console.log(saveTo);
-//   util.base64Decode(req.body.upfile, saveTo);
-//   var dPath = util.getRealDynamicPath(req);
-//   var readPath = path.join(config.staticPath, dPath, realName);
-//   fse.move(saveTo, readPath, function(err) {
-//     var r = {
-//         'url': dPath + '/' + realName,
-//         'original': realName,
-//     }
-//     if (err) {
-//         r.state = 'ERROR';
-//     } else r.state = 'SUCCESS';
-//     res.json(r);
-//   });
-// }
 exports.upload = upload;
