@@ -1,44 +1,42 @@
-<div>
-	<h6 class="row form-action-bar">
-		<span class="col s3 waves-effect">
-			结果：<b class="red-text">{{results.length}}</b>
-		</span>
-		<span ng-class="pageViewActive" ng-click="pageView()" class="col s3 waves-effect">
-			分页显示
-		</span>
-		<span class="col s3 waves-effect" ng-class="allViewActive" ng-click="allView()">
-			列表显示
-		</span>
-		<span class="col s3 waves-effect">
-			<a href="" class="">excl下载</a>
-		</span>
-	</h6>
+<div class="row margin-top">
+  <div class="col s3 text-center">
+    <h5>结果：{{results.length}}</h5>
+  </div>
+  <div class="col s6">
+    <ul class="tabs" tabs>
+      <li class="tab col s3 waves-effect"><a href ng-click="pageView()">分页显示</a></li>
+      <li class="tab col s3 waves-effect"><a href ng-click="allView()">列表显示</a></li>
+    </ul>
+  </div>
+  <div class="col s3 text-center">
+    <a href="" class="btn orange darken-2 waves-effect waves-light">EXCEL下载</a>
+  </div>
 </div>
 <div>
-	<table ng-show="allViewActive" class="striped centered">
+  <table ng-show="allViewActive" class="striped centered">
     <thead>
-      <tr>
-        <th ng-repeat="item in form._formItems" ng-bind="item.name"></th>
-        <th ng-show="results[0].verifyId">验证信息</th>
-      </tr>
+    <tr>
+      <th ng-repeat="item in form._formItems" ng-bind="item.name"></th>
+      <th ng-show="results[0].verifyId">验证信息</th>
+    </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="resultItem in results">
-        <td ng-repeat="result in resultItem.result" ng-bind="result.name"></td>
-        <td ng-show="resultItem.verifyId" ng-bind="resultItem.verifyId"></td>
-      </tr>
+    <tr ng-repeat="resultItem in results">
+      <td ng-repeat="result in resultItem.result" ng-bind="result.name"></td>
+      <td ng-show="resultItem.verifyId" ng-bind="resultItem.verifyId"></td>
+    </tr>
     </tbody>
   </table>
   <div ng-show="pageViewActive" class="row page-view">
-  	<ul ng-repeat="resultItem in results" class="col s12 z-depth-1">
-  		<li ng-show="results[0].verifyId" class="col s12">
-  			<h5 class="col s3"  ng-show="results[0].verifyId">验证信息</h5>
-  			<h6 class="col s9"  ng-show="resultItem.verifyId" ng-bind="resultItem.verifyId"></h6>
-  		</li>
-  		<li ng-repeat="item in form._formItems" class="col s12">
-  			<h5 class="col s3"  ng-bind="item.name"></h5>
-  			<h6 class="col s9"  ng-bind="resultItem.result[$index].name"></h6>
-  		</li>
-  	</ul>
+    <ul ng-repeat="resultItem in results" class="col s12 z-depth-1 hoverable">
+      <li ng-show="results[0].verifyId" class="col s12">
+        <h5 class="col s3" ng-show="results[0].verifyId">验证信息</h5>
+        <h6 class="col s9" ng-show="resultItem.verifyId" ng-bind="resultItem.verifyId"></h6>
+      </li>
+      <li ng-repeat="item in form._formItems" class="col s12">
+        <h5 class="col s3" ng-bind="item.name"></h5>
+        <h6 class="col s9" ng-bind="resultItem.result[$index].name"></h6>
+      </li>
+    </ul>
   </div>
 </div>

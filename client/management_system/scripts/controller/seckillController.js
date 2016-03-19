@@ -144,8 +144,8 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
           }, $scope.uploadData, function () {
             Materialize.toast('更新成功！请在抢票模板里查看', 2000);
             $location.path('/MS/seckill/list');
-          }, function () {
-            Materialize.toast('更新失败！', 2000);
+          }, function (res) {
+            Materialize.toast(res.data.error.message || '更新失败', 2000);
           });
         } else {
           Team.prototype_create_seckills({
@@ -153,8 +153,8 @@ app.controller('SeckillEditCtrl', ['$scope', '$location', 'Team', '$rootScope', 
           }, $scope.uploadData, function () {
             Materialize.toast('创建成功！请在抢票模板里查看', 2000);
             $location.path('/MS/seckill/list');
-          }, function () {
-            Materialize.toast('创建失败！', 2000);
+          }, function (res) {
+            Materialize.toast(res.data.error.message || '创建失败', 2000);
           });
         }
       }

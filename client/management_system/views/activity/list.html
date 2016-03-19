@@ -28,6 +28,9 @@
         <div class="card hoverable">
           <div class="card-content item-list activityInfo">
             <span class="card-title green-text text-darken-1 flow-text" ng-show="activityItem.hidden">[已隐藏]</span>
+            <span class="card-title green-text text-darken-1 flow-text" ng-show="activityItem.actType === 'form'">[表单]</span>
+            <span class="card-title green-text text-darken-1 flow-text" ng-show="activityItem.actType === 'vote'">[投票]</span>
+            <span class="card-title green-text text-darken-1 flow-text" ng-show="activityItem.actType === 'seckill'">[抢票]</span>
             <span class="card-title green-text text-darken-1 flow-text word-wrap" ng-bind="activityItem.title"></span>
             <br>
             <span class="addText" ng-bind="activityItem.authorName"></span>
