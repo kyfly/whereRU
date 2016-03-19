@@ -38,7 +38,9 @@
 .row {
   margin-bottom: 0;
 }
-
+nav {
+  box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0), 0 2px 10px 0 rgba(0, 0, 0, 0);
+}
 nav ul li {
   height: 4.2rem;
 }
@@ -87,6 +89,7 @@ nav ul li {
   position: absolute;
   background: #000;
   display: none;
+  z-index: 10000;
 }
 
 .header .pull-menu li {
@@ -1309,17 +1312,18 @@ footer {
   width: 100%;
   position: fixed;
   top: 0;
-  z-index: 9999;
+  z-index: 999;
   margin-top: -2px;
 }
+
 .filter-bar ul{
   margin: 0;
   padding: 0;
 }
 .filter-bar>ul>li{
   margin: 0;
-  height: 40px;
-  line-height: 40px;
+  height: 46px;
+  line-height: 46px;
   padding: 0!important;
 }
 .filter-bar>ul>li>a{
@@ -1328,7 +1332,7 @@ footer {
   display: block;
 }
 .filter-bar>ul>li>.dropdown-content{
-  margin-top: 36px; 
+  margin-top: 46px; 
 }
 .filter-bar>ul>li>.dropdown-content li{
   text-align: center;
@@ -1340,11 +1344,28 @@ footer {
 }
 .filter-bar .input-field{
   margin-bottom: 1rem;
+  padding-left: 20px;
 }
 .filter-bar .input-field input{
   margin:0;
   height: 2rem;
-  border-radius: 3px;
+  
+  border: 0 !important;
+}
+.filter-bar .race-search{
+  height: 100%;
+  line-height: 100%;
+}
+.filter-bar .race-search .input-field{
+  margin: 0;
+  height: 35px;
+  margin: 10px;
+}
+.filter-bar .race-search .input-field input{
+  margin:0;
+  height: 35px;
+  
+  border: 0 !important;
 }
 @media screen and (min-width: 993px)  {
   .filter-bar {
@@ -1354,23 +1375,25 @@ footer {
   .filter-bar ul{
     position: relative;
     width: 90%;
-    left: 5%;
+    max-width: 1280px;
+    margin: 0 auto;
   }
   .filter-bar .input-field input{
     height: 3rem;
+    margin: 0 auto;
   }
 }
 
 @media screen and (min-width: 601px) {
   .filter-bar>ul>li{
-    height: 46px;
-    line-height: 46px;
+    height: 50px;
+    line-height: 50px;
   }
   .filter-bar>ul>li>a{
     font-size: 1.4rem;
   }
   .filter-bar>ul>li>.dropdown-content{
-    margin-top: 46px; 
+    margin-top: 50px; 
   }
 }
 

@@ -16,32 +16,11 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
     } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 600) {
       $window.pull = true;
     }
-    if (body.scrollTop < 50) {
-      hideFilterBar();
-    } else {
-      showFilterBar();
-    }
   });
   $scope.$on('$destroy', function (event,data) {
     angular.element($window).unbind('scroll');
     $scope.activityItems = undefined;
   });
-  function hideFilterBar () {
-    if ($scope.filterBar === 'ng-hide') {
-      return;
-    }
-    $scope.$apply(function () {
-      $scope.filterBar = 'ng-hide';
-    });
-  }
-  function showFilterBar () {
-    if ($scope.filterBar === 'ng-scope') {
-      return;
-    }
-    $scope.$apply(function () {
-      $scope.filterBar = 'ng-scope';
-    });
-  }
   $scope.formFilter = function () {
     $scope.query = {
       actType: 'form'

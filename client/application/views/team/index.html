@@ -1,16 +1,16 @@
-<div ng-class="filterBar" class="row center filter-bar">
+<div class="row center filter-bar">
   <ul>
     <li class="col s3">
       <a class="dropdown-button" href="" 
         dropdown data-hover="true"
         ng-click="search=false"
         ng-mouseover="search=false"
-        data-activates="dropDown">团队
+        data-activates="dropDown">校园团队
         <i class="mdi-navigation-arrow-drop-down"></i>
       </a>
       <ul id='dropDown' class='dropdown-content'>
-        <li><a href="/w/activities">活动</a></li>
-        <li><a href="/w/races">竞赛</a></li>
+        <li><a href="/w/activities">校园活动</a></li>
+        <li><a href="/w/races">校园竞赛</a></li>
       </ul>
     </li>
     <li class="col s3">
@@ -43,7 +43,7 @@
       </ul>
     </li>
     <li class="col s3">
-      <a href="" ng-click="search = !search" ng-mouseover="search = !search">搜索
+      <a href="" ng-init="search = true" ng-click="search = !search">搜索
         <i class="mdi-action-search"></i>
       </a>
     </li>

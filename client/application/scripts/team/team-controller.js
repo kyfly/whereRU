@@ -21,11 +21,6 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
     } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 600) {
       $window.pull = true;
     }
-    if (body.scrollTop < 50) {
-      hideFilterBar();
-    } else {
-      showFilterBar();
-    }
   });
   $scope.$on('$destroy', function (event,data) {
     angular.element($window).unbind('scroll');
@@ -35,22 +30,6 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
     status: false,
     hidden: false
   };
-  function hideFilterBar () {
-    if ($scope.filterBar === 'ng-hide') {
-      return;
-    }
-    $scope.$apply(function () {
-      $scope.filterBar = 'ng-hide';
-    });
-  }
-  function showFilterBar () {
-    if ($scope.filterBar === 'ng-scope') {
-      return;
-    }
-    $scope.$apply(function () {
-      $scope.filterBar = 'ng-scope';
-    });
-  }
   $scope.statusFilter = function () {
     $scope.query = {
       status: 1

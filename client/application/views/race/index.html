@@ -1,28 +1,27 @@
-<div ng-class="filterBar" class="row center filter-bar">
+<div class="row center filter-bar">
   <ul>
-    <li class="col s6">
+    <li class="col s3">
       <a class="dropdown-button" href="" 
         dropdown data-hover="true"
         ng-click="search=false"
         ng-mouseover="search=false"
-        data-activates="dropDown">竞赛
+        data-activates="dropDown">校园竞赛
         <i class="mdi-navigation-arrow-drop-down"></i>
       </a>
       <ul id='dropDown' class='dropdown-content'>
-        <li><a href="/w/teams">团队</a></li>
-        <li><a href="/w/activities">活动</a></li>
+        <li><a href="/w/teams">校园团队</a></li>
+        <li><a href="/w/activities">校园活动</a></li>
       </ul>
     </li>
-    <li class="col s6">
-      <a href="" ng-click="search = !search" ng-mouseover="search = !search">搜索
-        <i class="mdi-action-search"></i>
-      </a>
+    <li class="col s9 race-search">
+      <div input-field>
+        <input type="text" ng-model="filterTitle" ng-change="titleFilter()" placeholder="请在此输入关键字">
+      </div>
     </li>
   </ul>
-  <div input-field class="col s10 m6 offset-m3 offset-s1" ng-show="search">
-    <input type="text" ng-model="filterTitle" ng-change="titleFilter()" placeholder="请在此输入关键字">
-  </div>
+  
 </div>
+
 <div class="row menu">
   <div class="col s4 m4 l2 item active waves-effect hide-on-med-and-down">
     <a class="active" href=""></a>
