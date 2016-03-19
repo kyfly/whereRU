@@ -35,10 +35,4 @@ app.config(['$locationProvider', function ($locationProvider) {
     }, 2000);
   }
 }])
-.factory('appConfig', function(){
-	return {
-		FILE_URL: 'http://oss.etuan.org/',
-		IMG_URL: 'http://cdn-img.etuan.org/'
-	};
-})
 

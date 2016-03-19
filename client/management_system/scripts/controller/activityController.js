@@ -39,8 +39,8 @@ app.controller('ActivityListCtrl', ['$scope', 'Team', '$rootScope', function ($s
 }]);
 
 app.controller('ActivityEditCtrl',
-  ['$scope', 'Team', 'Ueditor', '$location', '$http', 'Activity', '$stateParams', 'uploadFile', 'appConfig', '$timeout', '$rootScope',
-    function ($scope, Team, Ueditor, $location, $http, Activity, $stateParams, uploadFile, appConfig, $timeout, $rootScope) {
+  ['$scope', 'Team', 'Ueditor', '$location', '$http', 'Activity', '$stateParams', 'uploadFile', '$timeout', '$rootScope',
+    function ($scope, Team, Ueditor, $location, $http, Activity, $stateParams, uploadFile, $timeout, $rootScope) {
       //Input-date的配置
       var currentTime = new Date();
       $scope.minDate = (new Date(currentTime.getTime())).toISOString();
@@ -150,7 +150,7 @@ app.controller('ActivityEditCtrl',
         }
         uploadFile.file(file, 'team', $scope.teamInfo.id)
           .success(function (res) {
-            $scope.activityData.imgUrl = appConfig.IMG_URL + res.url;
+            $scope.activityData.imgUrl = res.url;
           });
       };
 
@@ -204,7 +204,7 @@ app.controller('ActivityEditCtrl',
         $scope.activityData.ended = endTimeSet;
         uploadFile.text($scope.activityEditorContent, 'team', $scope.teamInfo.id)
           .success(function (res) {
-            $scope.activityData.explainUrl = appConfig.FILE_URL + res.url;
+            $scope.activityData.explainUrl = res.url;
             $scope.activityData.team = undefined;
             if ($scope.formData) {
               $scope.activityData.actType = 'form'

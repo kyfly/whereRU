@@ -85,8 +85,8 @@ app.controller('EventListCtrl',
     }]);
 
 app.controller('EventEditCtrl',
-  ['$scope', 'Team', 'Ueditor', '$http', '$location', 'appConfig', 'uploadFile', '$stateParams', '$rootScope',
-    function ($scope, Team, Ueditor, $http, $location, appConfig, uploadFile, $stateParams, $rootScope) {
+  ['$scope', 'Team', 'Ueditor', '$http', '$location', 'uploadFile', '$stateParams', '$rootScope',
+    function ($scope, Team, Ueditor, $http, $location, uploadFile, $stateParams, $rootScope) {
       $scope.eventData = {
         authorName: $scope.teamInfo.name,     //$scope.teamInfo在homeController里面获取
         authorId: $scope.teamInfo.id,
@@ -175,7 +175,7 @@ app.controller('EventEditCtrl',
         }
         uploadFile.file(file, 'team', $scope.teamInfo.id)
           .success(function (res) {
-            $scope.eventData.imgUrl = appConfig.IMG_URL + res.url;
+            $scope.eventData.imgUrl = res.url;
           });
       };
 
@@ -194,7 +194,7 @@ app.controller('EventEditCtrl',
         $scope.eventData.ended = endTimeSet;
         uploadFile.text($scope.eventEditorContent, 'team', $scope.teamInfo.id)
           .success(function (res) {
-            $scope.eventData.explainUrl = appConfig.FILE_URL + res.url;
+            $scope.eventData.explainUrl = res.url;
             $scope.eventData.created = new Date();
             $scope.eventData.deleted = false;
             if ($stateParams.id) {
@@ -225,8 +225,8 @@ app.controller('EventEditCtrl',
     }]);
 
 app.controller('EventDetailCtrl',
-  ['$scope', 'Race', '$http', '$stateParams', 'appConfig', 'uploadFile', 'Team', 'Notice', 'User', '$rootScope',
-    function ($scope, Race, $http, $stateParams, appConfig, uploadFile, Team, Notice, User, $rootScope) {
+  ['$scope', 'Race', '$http', '$stateParams', 'uploadFile', 'Team', 'Notice', 'User', '$rootScope',
+    function ($scope, Race, $http, $stateParams, uploadFile, Team, Notice, User, $rootScope) {
       $rootScope.pageTitle = '竞赛详情';
       $scope.isAuthor = $stateParams.type === 'author';
       $scope.uploadAttachmentBtn = false;
@@ -248,7 +248,7 @@ app.controller('EventDetailCtrl',
         var file = document.getElementById('addMaterialDoc').files[0];
         uploadFile.file(file, 'team', $scope.teamInfo.id)
           .success(function (res) {
-            $scope.materialInfo.dataUrl = appConfig.FILE_URL + res.url;
+            $scope.materialInfo.dataUrl = res.url;
           })
           .error();
       };
@@ -324,7 +324,7 @@ app.controller('EventDetailCtrl',
         var file = document.getElementById('attachmentFile').files[0];
         uploadFile.file(file, 'team', $scope.teamInfo.id)
           .success(function (res) {
-            $scope.newNotice.attachmentUrl = appConfig.FILE_URL + res.url;
+            $scope.newNotice.attachmentUrl = res.url;
           })
           .error();
       };
@@ -362,7 +362,7 @@ app.controller('EventDetailCtrl',
         var notice = this.notice;
         uploadFile.file(file, 'team', $scope.teamInfo.id)
           .success(function (res) {
-            notice.dataUrl = appConfig.FILE_URL + res.url;
+            notice.dataUrl = res.url;
             $scope.putFileInfo(notice);
           })
           .error();

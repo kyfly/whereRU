@@ -1,5 +1,5 @@
-app.controller('SettingCtrl', ['$scope', '$rootScope', 'Team', 'uploadFile', 'appConfig',
-  function ($scope, $rootScope, Team, uploadFile, appConfig) {
+app.controller('SettingCtrl', ['$scope', '$rootScope', 'Team', 'uploadFile',
+  function ($scope, $rootScope, Team, uploadFile) {
   $rootScope.logoHide = false;
   $scope.team = {};
 
@@ -31,7 +31,7 @@ app.controller('SettingCtrl', ['$scope', '$rootScope', 'Team', 'uploadFile', 'ap
     }
     uploadFile.file(file, 'team', $scope.teamInfo.id)
     .success(function (res) {
-      $scope.team.logoUrl = appConfig.IMG_URL + res.url;
+      $scope.team.logoUrl = res.url;
     });
   };
 

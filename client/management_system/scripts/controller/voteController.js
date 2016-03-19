@@ -40,8 +40,8 @@ app.controller('VoteListCtrl', ['$scope', 'Team', '$rootScope', function ($scope
 }]);
 
 app.controller('VoteEditCtrl',
-  ['$scope', '$location', 'Team', '$rootScope', '$stateParams', 'uploadFile', 'appConfig',
-    function ($scope, $location, Team, $rootScope, $stateParams, uploadFile, appConfig) {
+  ['$scope', '$location', 'Team', '$rootScope', '$stateParams', 'uploadFile',
+    function ($scope, $location, Team, $rootScope, $stateParams, uploadFile) {
       $scope.isEdit = false;
       if ($stateParams.id !== '') {
         $scope.isEdit = true;
@@ -98,7 +98,7 @@ app.controller('VoteEditCtrl',
         }
         uploadFile.file(file, 'team', $scope.teamInfo.id)
           .success(function (res) {
-            vote.imgUrl = appConfig.IMG_URL + res.url;
+            vote.imgUrl = res.url;
           });
       };
 
