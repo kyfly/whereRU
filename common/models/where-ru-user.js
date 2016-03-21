@@ -813,12 +813,12 @@ module.exports = function(User) {
                     newUser.createAccessToken(7200, function (err, token) {
                       var token = token.toJSON();
                       token.user = {
-                        "name": user.name,
-                        "school": user.school,
-                        "phone": user.phone,
-                        "sign": user.sign,
-                        "headImgUrl": user.headImgUrl,
-                        "studentId": user.studentId
+                        "name": newUser.name,
+                        "school": newUser.school,
+                        "phone": newUser.phone,
+                        "sign": newUser.sign,
+                        "headImgUrl": newUser.headImgUrl,
+                        "studentId": newUser.studentId
                       };
                       ctx.res.send(token);
                     });
