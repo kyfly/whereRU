@@ -14,7 +14,7 @@
 		</li>
     <li ng-repeat="comment in article.comments">
       <div class="collapsible-header">
-      	<img ng-src="{{comment.user.headImgUrl}}@1e_1c_0o_0l_100h_100w_100q.src" alt="" class="circle">
+      	<img ng-src="{{comment.user.headImgUrl}}" alt="" class="circle">
       	<span class="title" ng-bind="comment.user.name"></span>
       	<p ng-click="loadReply()">
       		<time class="green-text" ng-bind="comment.created | date: 'yyyy-MM-dd HH:mm:ss'"></time>
