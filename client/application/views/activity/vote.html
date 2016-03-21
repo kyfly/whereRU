@@ -32,8 +32,8 @@
   	</form>
 	</div>
 	<div input-field ng-show="activity.verifyRule">
-    <input id="verifyRule" type="text" ng-model="activity.verifyId">
-    <label for="verifyRule">请输入验证信息({{activity.verifyRule}})</label>
+    <input id="verifyId" type="text" ng-model="activity.verifyId" ng-focus="focus()" ng-blur="blur()">
+    <label for="verifyId">请输入验证信息({{activity.verifyRule}})</label>
 	</div>
 	<div  class="row col s12 center">
 		<button type="sumbit" ng-disabled="activityEnded"

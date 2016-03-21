@@ -5,6 +5,19 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": {
+      "relation": "user",
+      "scope": {
+        "fields": [
+          "id",
+          "name",
+          "headImgUrl",
+          "sign"
+        ]
+      }
+    }
+  },
   "properties": {
     "content": {
       "type": "string",
@@ -42,13 +55,5 @@
       "property": "__get__replys"
     }
   ],
-  "methods": {},
-  "scope": {
-    "include": {
-      "relation": "user",
-      "scope": {
-        "fields": ["id", "name", "headImgUrl", "sign"]
-      }
-    }
-  }
+  "methods": {}
 }

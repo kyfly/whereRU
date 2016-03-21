@@ -172,6 +172,10 @@ app.controller('ActivityEditCtrl',
 
       $scope.addSeckillFunc = function () {
         $scope.seckillData = this.seckillItem;
+        if ($scope.seckillData.started < $scope.activityData.started) {
+          Materialize.toast('抢票开始时间怎么能在活动开始前呢，记得修改噢', 4000);
+          return;
+        }
         $('#addSeckill').closeModal();
       };
 
@@ -198,6 +202,15 @@ app.controller('ActivityEditCtrl',
         endTimeSet.setMinutes($scope.endTime.minute);
         endTimeSet.setSeconds(0);
         $scope.activityData.ended = endTimeSet;
+        
+        if ($scope.activityData.ended < $scope.activityData.started) {
+          Materialize.toast('结束时间怎么能比开始时间早呢', 4000);
+          return;
+        }
+        if ($scope.seckillData && $scope.seckillData.started < $scope.activityData.started) {
+          Materialize.toast('抢票开始时间在活动开始前，记得修改噢', 4000);
+        }
+        
         uploadFile.text($scope.activityEditorContent, 'team', $scope.teamInfo.id)
           .success(function (res) {
             $scope.activityData.explainUrl = res.url;
@@ -217,7 +230,6 @@ app.controller('ActivityEditCtrl',
                 fk: $stateParams.id
               }, $scope.activityData, function (res) {
                 Materialize.toast('更新成功！', 2000);
-
                 if ($scope.formData) {
                   $scope.formData.updated = new Date();
                   $scope.formData.id = undefined;

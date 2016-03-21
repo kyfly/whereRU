@@ -156,8 +156,8 @@ module.exports = function(Team) {
       	hidden: false,
       	deleted: false
       },
-      limit: 32,
-      skip: page * 32,
+      limit: 16,
+      skip: page * 16,
       order: "id DESC"
     },function(err,teams){
       if(err) return cb(err);

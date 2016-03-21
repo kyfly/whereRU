@@ -5,6 +5,19 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": {
+      "relation": "user",
+      "scope": {
+        "fields": [
+          "id",
+          "name",
+          "headImgUrl",
+          "sign"
+        ]
+      }
+    }
+  },
   "properties": {
     "content": {
       "type": "string",
@@ -23,17 +36,11 @@
     "user": {
       "type": "belongsTo",
       "model": "whereRUUser",
-      "fileds": ["id"]
+      "fileds": [
+        "id"
+      ]
     }
   },
   "acls": [],
-  "methods": {},
-  "scope": {
-    "include": {
-      "relation": "user",
-      "scope": {
-        "fields": ["id", "name", "headImgUrl", "sign"]
-      }
-    }
-  }
+  "methods": {}
 }

@@ -13,9 +13,13 @@
     "fileName": {
       "type": "string"
     },
-    "uploadFile": [{
-      "type": "object"
-    }],
+    "uploadFile": {
+      "type": [
+        {
+          "type": "object"
+        }
+      ]
+    },
     "created": {
       "type": "date"
     },

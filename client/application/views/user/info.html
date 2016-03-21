@@ -1,0 +1,101 @@
+<nav class="header row hide-on-large-only">
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">whereRU</a>
+  </div>
+</nav>
+
+<div class="register container">
+	<div class="row s12">
+	  <ul class="tabs" tabs>
+	    <li class="tab col s4 waves-effect">
+	      <a href="#requiredInfo" class="active">必须信息</a>
+	    </li>
+	    <li class="tab col s4 waves-effect">
+	      <a href="#detailIfo">其他信息</a>
+	    </li>
+	    <li class="tab col s4 waves-effect">
+	      <a href="#reset">密码修改</a>
+	    </li>
+	  </ul>
+	</div>
+	<div id="requiredInfo">
+		<form class="reg " id="reqForm" name="reqForm">
+			<div input-field class="col s12">
+			    <input id="phone" type="text" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
+
+			    <label ng-if="user.isVerify" for="phone">手机号</label>
+			    <label ng-if="!user.isVerify" for="phone"><b class="red-text">*</b>请输入手机号</label>
+			</div>
+
+			<div input-field class="col s12">
+			    <input id="name" type="text" ng-model="user.name" ng-focus="focus()" ng-blur="blur()" required>
+			    <label ng-if="!user.isVerify" for="name"><b class="red-text">*</b>请修改真实姓名</label>
+			    <label ng-if="user.isVerify" for="name">姓名</label>
+			</div>
+		
+			<div ng-if="!user.isVerify" input-field class="col s12">
+			    <input id="password" type="text" ng-model="user.password" length="16" ng-focus="focus()" ng-blur="blur()" required>
+			    <label for="password"><b class="red-text">*</b>请输入密码</label>
+			</div>
+			<select class="" ng-model="user.school" material-select watch>
+			  <option value="" disabled selected><b class="red-text">*</b>请选择学校</option>
+			  <option ng-repeat="school in schools">{{school.name}}</option>
+			</select>
+			
+			<select class="" ng-model="user.sex" material-select watch>
+			  <option value="" disabled selected>请选择性别</option>
+			  <option value="男">男</option>
+			  <option value="女">女</option>
+			</select>
+			<div  class="row center">
+				<button type="sumbit" 
+				  class="waves-effect waves-light btn offset-s1" 
+					ng-click="updateInfo()" 
+					style="margin-left: 20px"
+					ng-disabled="reqForm.$invalid">更新信息</button>
+			</div>
+		</form>
+	</div>
+	<div id="detailIfo">
+		<form class="reg " id="detForm" name="detForm">
+			<div input-field class="col s12">
+			    <input id="Email" type="email" ng-model="user.Email" length="11" ng-focus="focus()" ng-blur="blur()">
+			    <label for="Email">邮箱</label>
+			</div>
+
+			<div input-field class="col s12">
+			    <input id="studentId" type="number" ng-model="user.studentId" ng-focus="focus()" ng-blur="blur()">
+			    <label for="studentId">学号</label>
+			</div>
+			<div input-field class="col s12">
+			    <input id="academy" type="text" ng-model="user.academy" ng-focus="focus()" ng-blur="blur()">
+			    <label for="academy">学院</label>
+			</div>
+			<div  class="row center">
+				<button type="sumbit" 
+				  class="waves-effect waves-light btn offset-s1" 
+					ng-click="updateInfo()" 
+					style="margin-left: 20px"
+					ng-disabled="detForm.$invalid">更新信息</button>
+			</div>
+		</form>
+	</div>
+	<div id="reset">
+		<div input-field class="col s12">
+		    <input id="lastPwd" type="text" ng-model="lastPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
+		    <label for="password"><b class="red-text">*</b>请输入当前密码</label>
+		</div>
+		<div input-field class="col s12">
+		    <input id="lastPwd" type="text" ng-model="lastPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
+		    <label for="password"><b class="red-text">*</b>请输入新密码</label>
+		</div>
+		<div  class="row center">
+				<button type="sumbit" 
+				  class="waves-effect waves-light btn offset-s1" 
+					ng-click="reset()" 
+					style="margin-left: 20px">确定</button>
+			</div>
+	</div>
+</div>
+
+

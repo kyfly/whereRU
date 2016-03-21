@@ -59,6 +59,23 @@
         }]);
   module
     .factory(
+      'Aouth',
+      ['LoopBackResource', 'LoopBackAuth', '$injector',
+        function (Resource, LoopBackAuth, $injector) {
+          var R = Resource(
+            urlBase + '/Aouths/:id',
+            {'id': '@id'},
+            {
+              "findById": {
+                url: urlBase + '/Aouths/:id',
+                method: 'GET',
+              }
+            });
+          R.modelName = "Aouth";
+          return R;
+        }]);
+  module
+    .factory(
       'User',
       ['LoopBackResource', 'LoopBackAuth', '$injector',
       function (Resource, LoopBackAuth, $injector) {
@@ -81,6 +98,10 @@
             "prototype_create_likeUsers": {
               url: urlBase + '/WUsers/:id/likeUsers',
               method: 'POST'
+            },
+            "auth2wechat": {
+              url: urlBase + '/WUsers/auth2wechat',
+              method: 'GET'
             },
             /**
              * 关注圈子，圈子最后时间上传

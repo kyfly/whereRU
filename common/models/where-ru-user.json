@@ -6,6 +6,9 @@
   "options": {
     "validateUpsert": true
   },
+  "hidden": [
+    "email"
+  ],
   "properties": {
     "phone": {
       "type": "number"
@@ -36,6 +39,9 @@
       "type": "string"
     },
     "Email": {
+      "type": "string"
+    },
+    "openid": {
       "type": "string"
     }
   },
@@ -264,8 +270,13 @@
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "__get__coteries"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "auth2wechat"
     }
   ],
-  "methods": {},
-  "hidden": ["email"]
+  "methods": {}
 }

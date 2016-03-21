@@ -20,6 +20,16 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       controller: 'UserController',
       templateUrl: '/application/views/user/index.html'
     })
+    .state('info', {
+      url: '/u/info',
+      controller: 'UserInfoController',
+      templateUrl: '/application/views/user/info.html'
+    })
+    .state('auth', {
+      url: '/u/auth',
+      controller: 'AuthController',
+      templateUrl: '/application/views/user/auth.html'
+    })
     .state('activityResult', {
       url: '/u/results/:id/:type',
       controller: 'ActivityResultController',
@@ -35,4 +45,5 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       controller: 'ARTController',
       template: '<div ui-view></div>'
     })
+
 }]);

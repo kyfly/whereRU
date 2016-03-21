@@ -19,6 +19,12 @@ function modelPromise (model, method, option) {
     case 'count':
       model.count(option.query, callback);
       return defer.promise;
+    case 'create':
+      model.create(option.data, callback);
+      return defer.promise;
+    case 'save':
+      model.save(callback);
+      return defer.promise;
 	}
 	return defer.promise;
 

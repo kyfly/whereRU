@@ -63,7 +63,7 @@
         <div style="height:4.2rem" class="hide-on-med-and-down"></div>
       </header>
       
-      <div ng-show="loginShow" id="login" ng-include="'application/views/user/login.html'"></div>
+      <div class="row" ng-show="loginShow" id="login" ng-include="'application/views/user/login.html'"></div>
       <div id="doc">
         <div ui-view></div>
       </div>
@@ -91,13 +91,11 @@
           </ul>
         </div>
   </div>
-
-  
-    
 <!-- jquery -->
 <script src="/lib/jquery/jquery.min.js"></script>
 <!--angular-->
 <script src="/lib/angular/angular.min.js"></script>
+<script src="/lib/qrcode/qrcode.min.js"></script>
 <!-- material -->
 <script src="/lib/materialize/js/materialize.min.js"></script>
 

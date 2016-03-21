@@ -1,14 +1,14 @@
 <form name="activityForm">
 	<div ng-repeat="formItem in form._formItems">
 		<div input-field ng-if="formItem.type === 'text'" >
-	    <input ng-if="!formItem.len" id="name" type="text" ng-model="result[$index]['name']" required>
-	    <input ng-if="formItem.len" id="name" type="text" ng-model="result[$index]['name']" length="formItem.len" required>
-	    <label for="name">请输入{{formItem.name}}</label>
+	    <input ng-if="!formItem.len" ng-focus="focus()" id="{{$index}}" ng-blur="blur()" type="text" ng-model="result[$index]['name']" required>
+	    <input ng-if="formItem.len" ng-focus="focus()" id="{{$index}}" ng-blur="blur()" type="text" ng-model="result[$index]['name']" length="formItem.len" required>
+	    <label for="{{$index}}">请输入{{formItem.name}}</label>
 		</div>
 
 		<div input-field ng-if="formItem.type === 'textarea'">
-	    <textarea ng-if="!formItem.len" ng-model="result[$index]['name']" class="materialize-textarea" required></textarea>
-	    <textarea ng-if="formItem.len" ng-model="result[$index]['name']" class="materialize-textarea" length="formItem.len" required></textarea>
+	    <textarea ng-if="!formItem.len" ng-focus="focus()" ng-blur="blur()" ng-model="result[$index]['name']" class="materialize-textarea" required></textarea>
+	    <textarea ng-if="formItem.len" ng-focus="focus()" ng-blur="blur()" ng-model="result[$index]['name']" class="materialize-textarea" length="formItem.len" required></textarea>
 	    <label>请输入{{formItem.name}}</label>
 		</div>
 
@@ -31,8 +31,8 @@
 	</div>
 
 	<div input-field ng-if="activity.verifyRule">
-    <input id="name" type="text" ng-model="activity.verifyId">
-    <label for="name">请输入验证信息({{activity.verifyRule}})</label>
+    <input id="verifyId" type="text" ng-focus="focus()" ng-blur="blur()"  ng-model="activity.verifyId">
+    <label for="verifyId">请输入验证信息({{activity.verifyRule}})</label>
 	</div>
 
 	<div  class="row center">

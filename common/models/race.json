@@ -5,6 +5,18 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": {
+      "relation": "team",
+      "scope": {
+        "fields": [
+          "id",
+          "name",
+          "logoUrl"
+        ]
+      }
+    }
+  },
   "properties": {
     "name": {
       "type": "string",
@@ -147,13 +159,5 @@
       "property": "__create__materials"
     }
   ],
-  "methods": {},
-  "scope": {
-    "include": {
-      "relation": "team",
-      "scope": {
-        "fields": ["id", "name", "logoUrl"]
-      }
-    }
-  }
+  "methods": {}
 }

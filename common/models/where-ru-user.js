@@ -9,6 +9,9 @@
 var q = require('q');
 var promise = require(__dirname + '/../../modules/model-promise.js');
 var hdu = require(__dirname + '/../../modules/hdu.js');
+var wechat = require('wechat-oauth');
+var EventEmitter = require('events').EventEmitter;   
+var e = new EventEmitter();
 module.exports = function(User) {
   /**
    * 用户注册，给用户添加默认头像
@@ -736,5 +739,118 @@ module.exports = function(User) {
       });
     else
       next();
+  });
+  User.remoteMethod('auth2wechat', {
+    accepts: [{
+          "type": "string",
+          "arg": "code"
+        },{
+          "type": "string",
+          "arg": "state"
+        }],
+    results: {
+      "type": "string",
+      "arg": "url"
+    },
+    http: {
+      path: '/auth2wechat', verb: 'get'
+    }
+  });
+  User.auth2wechat= function (code, state, cb) {
+    
+  };
+  User.beforeRemote('auth2wechat', function (ctx, ins, next) {
+    var code = ctx.req.query.code;
+    var token = ctx.req.query.state;
+    var client = new wechat(User.app.get('wechat').appID, User.app.get('wechat').appsecret);
+   
+    User.app.models.Aouth.findById(token, function (err, aouth) {
+      if (err||!aouth) {
+        ctx.res.send({status: 500, message: '该连接不存在'});
+        return;
+      }
+      client.getAccessToken(code, function (err, result) {
+        if (err) {
+          ctx.res.send({status: 500, message: '获取token出错'});
+          return;
+        }
+        var accessToken = result.data.access_token;
+        var openid = result.data.openid;
+        User.findOne({
+          where: {
+            openid: openid
+          }
+        }, function (err, user) {
+          if (err) {
+            ctx.res.send({status: 500, message: err.message});
+          } else if (!user) {
+            client.getUser(openid, function (err, userDate) {
+              if (err) {
+                ctx.res.send({status: 500, message: err.message});
+                return;
+              }
+              User.create({
+                name: userDate.nickname,
+                sex: userDate.sex === 1? "男": "女",
+                headImgUrl: userDate.headimgurl,
+                openid: userDate.openid,
+                school: "未知",
+                email: userDate.openid + "@etuan.org",
+                password: userDate.openid,
+                isVerify: false
+              }, function (err, newUser) {
+                if (err) {
+                  ctx.res.send({status: 500, message: err.message});
+                  return;
+                }
+                aouth.openid = newUser.openid;
+                aouth.userId = newUser.toJSON().id;
+                aouth.save(function (err, ins) {
+                  if (err) {
+                    ctx.res.send({status: 500, message: err.message});
+                    return;
+                  } else {
+                    newUser.createAccessToken(7200, function (err, token) {
+                      var token = token.toJSON();
+                      token.user = {
+                        "name": user.name,
+                        "school": user.school,
+                        "phone": user.phone,
+                        "sign": user.sign,
+                        "headImgUrl": user.headImgUrl,
+                        "studentId": user.studentId
+                      };
+                      ctx.res.send(token);
+                    });
+                  }
+                });
+              });
+            });
+          } else {
+            aouth.openid = user.toJSON().openid;
+            aouth.userId = user.toJSON().id;
+            aouth.save(function (err, ins) {
+              if (err) {
+                ctx.res.send({status: 500, message: err.message});
+                return;
+              } else {
+                user.createAccessToken(7200, function (err, token) {
+                  var token = token.toJSON();
+                  token.user = {
+                    "name": user.name,
+                    "school": user.school,
+                    "phone": user.phone,
+                    "sign": user.sign,
+                    "headImgUrl": user.headImgUrl,
+                    "studentId": user.studentId
+                  };
+                  ctx.res.send(token);
+                });
+              }
+            });
+          }
+        });
+      });
+    });
   })
 };

@@ -5,6 +5,19 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": {
+      "relation": "user",
+      "scope": {
+        "fields": [
+          "id",
+          "name",
+          "headImgUrl",
+          "sign"
+        ]
+      }
+    }
+  },
   "properties": {
     "title": {
       "type": "string",
@@ -73,13 +86,5 @@
       "property": "__create__readers"
     }
   ],
-  "methods": {},
-  "scope": {
-    "include": {
-      "relation": "user",
-      "scope": {
-        "fields": ["id", "name", "headImgUrl", "sign"]
-      }
-    }
-  }
+  "methods": {}
 }

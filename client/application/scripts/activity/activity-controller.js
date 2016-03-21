@@ -136,8 +136,8 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
 
 
 app.controller('ActivityController', 
-  ['$scope', 'Activity', 'User', '$stateParams', '$interval', 'uploadFile',
-  function($scope, Activity, User, $stateParams, $interval, uploadFile){
+  ['$scope', 'Activity', 'User', '$stateParams', '$interval', 'uploadFile', '$location',
+  function($scope, Activity, User, $stateParams, $interval, uploadFile, $location){
   Activity.findById({
     id: $stateParams.id
   }, function (activity) {
@@ -258,8 +258,10 @@ app.controller('ActivityController',
     }, formResult, function (res) {
       if (res.status === 1000 || res.status === 1100)
         Materialize.toast(res.message, 2000);
-      else
-        Materialize.toast('参与成功', 2000);
+      else {
+        Materialize.toast('参与成功,可在个人主页查看结果', 4000);
+      }
+        
     }, function (err) {
       $scope.errorTip(err);
     });
@@ -318,7 +320,7 @@ app.controller('ActivityController',
         Materialize.toast(res.message, 2000);
       } 
       else
-        Materialize.toast('参与成功', 2000);
+        Materialize.toast('参与成功,可在个人主页查看结果', 4000);
     }, function (err) {
       $scope.errorTip(err);
     });
@@ -343,10 +345,10 @@ app.controller('ActivityController',
       if (res.status === 1000 || res.status === 1100)
         Materialize.toast(res.message, 2000);
       else 
-        Materialize.toast('恭喜你,抢到了', 2000);
+        Materialize.toast('参与成功,可在个人主页查看结果', 4000);
     }, function (err) {
       $scope.errorTip(err);
     });
-  }
+  };
 }]);
 

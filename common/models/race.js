@@ -54,8 +54,8 @@ module.exports = function(Race) {
         school: school
       },
       order:'id DESC',
-      skip: 32 * page,
-      limit: 32
+      skip: 16 * page,
+      limit: 16
     },function(err, races){
       if(err) {
         return cb(err);
@@ -105,10 +105,7 @@ module.exports = function(Race) {
           teamId: instance.teamId
         }
       }, function (err, coterie) {
-        if (err || !coterie) {
-          return next(err);
-        }
-        if (!instance.explainUrl) {
+        if (err || !coterie || !instance.explainUrl) {
           next();
         } else {
           coterie.articles.create({
@@ -118,11 +115,7 @@ module.exports = function(Race) {
             "coterieId": coterie.id,
             "userId": team.userId
           }, function (err, article) {
-            if (err) {
-              next(err);
-            } else {
-              next();
-            }
+            next();
           });
         }
       })

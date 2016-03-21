@@ -5,6 +5,18 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": {
+      "relation": "team",
+      "scope": {
+        "fields": [
+          "id",
+          "name",
+          "logoUrl"
+        ]
+      }
+    }
+  },
   "properties": {
     "title": {
       "type": "string",
@@ -74,121 +86,7 @@
       "default": 0
     }
   },
-  "validations": [
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "getHotActiveties"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "find"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "__get__forms"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "__get__votes"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "teamOwner",
-      "permission": "ALLOW",
-      "property": "__updateById__votes"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "teamOwner",
-      "permission": "ALLOW",
-      "property": "__updateById__seckills"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "teamOwner",
-      "permission": "ALLOW",
-      "property": "__get__seckills"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "teamOwner",
-      "permission": "ALLOW",
-      "property": "__create__forms"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "teamOwner",
-      "permission": "ALLOW",
-      "property": "__create__votes"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "teamOwner",
-      "permission": "ALLOW",
-      "property": "__create__seckills"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "teamOwner",
-      "permission": "ALLOW",
-      "property": "__updateById__forms"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "teamOwner",
-      "permission": "ALLOW",
-      "property": "__delete__forms"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "teamOwner",
-      "permission": "ALLOW",
-      "property": "__delete__forms"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "teamOwner",
-      "permission": "ALLOW",
-      "property": "__delete__forms"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "getMySchoolActiveties"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "search"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "__create__readers"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "findById"
-    }
-  ],
+  "validations": [],
   "relations": {
     "forms": {
       "type": "hasMany",
@@ -254,13 +152,5 @@
       "property": "findById"
     }
   ],
-  "methods": {},
-  "scope": {
-    "include": {
-      "relation": "team",
-      "scope": {
-        "fields": ["id", "name", "logoUrl"]
-      }
-    }
-  }
+  "methods": {}
 }

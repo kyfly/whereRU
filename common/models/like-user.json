@@ -6,8 +6,8 @@
     "validateUpsert": true
   },
   "properties": {
-    "created":{
-      "type":"date"
+    "created": {
+      "type": "date"
     }
   },
   "validations": [],

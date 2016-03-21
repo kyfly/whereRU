@@ -5,6 +5,18 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": {
+      "relation": "user",
+      "scope": {
+        "fields": [
+          "id",
+          "name",
+          "phone"
+        ]
+      }
+    }
+  },
   "properties": {
     "created": {
       "type": "date"
@@ -31,13 +43,5 @@
     }
   },
   "acls": [],
-  "methods": {},
-  "scope": {
-    "include": {
-      "relation": "user",
-      "scope": {
-        "fields": ["id", "name", "phone"]
-      }
-    }
-  }
+  "methods": {}
 }

@@ -27,40 +27,40 @@
             <option>手机</option>
           </select>
         </div>
-        <div input-field class="col m7 s12">
-          <i class="material-icons prefix">&#xE916;</i>
-          <label for="startTime">开始时间</label>
-          <input input-date
-                 type="text"
-                 name="created"
-                 id="startTime"
-                 ng-model="startTime.date"
-                 container="body"
-                 format="yyyy/mm/dd"
-                 months-full="{{ month }}"
-                 months-short="{{ monthShort }}"
-                 weekdays-full="{{ weekdaysFull }}"
-                 weekdays-short="{{ weekdaysShort }}"
-                 weekdays-letter="{{ weekdaysLetter }}"
-                 min="{{ minDate }}"
-                 today="today"
-                 clear="clear"
-                 close="close"
-                 select-years="16">
+        <div class="row">
+          <div input-field class="col s6">
+            <i class="material-icons prefix">&#xE916;</i>
+            <label for="startTime">开始时间</label>
+            <input input-date
+                   type="text"
+                   name="created"
+                   id="startTime"
+                   ng-model="startTime.date"
+                   container="body"
+                   format="yyyy/mm/dd"
+                   months-full="{{ month }}"
+                   months-short="{{ monthShort }}"
+                   weekdays-full="{{ weekdaysFull }}"
+                   weekdays-short="{{ weekdaysShort }}"
+                   weekdays-letter="{{ weekdaysLetter }}"
+                   min="{{ minDate }}"
+                   today="today"
+                   clear="clear"
+                   close="close"
+                   select-years="16">
+          </div>
+          <div input-field class="col s3">
+            <input ng-change="minuteChange(0)" min="0" max="23" id="startHour" type="number" ng-model="startTime.hour">
+            <label for="startHour">小时(0~23)</label>
+          </div>
+          <div input-field class="col s3">
+            <input ng-change="minuteChange(0)" id="startMinute" type="number" ng-model="startTime.minute">
+            <label for="startMinute">分钟(0~59)</label>
+          </div>
         </div>
-        <div input-field class="col m2 s4 offset-s3">
-          <input ng-change="hourChange(0)" id="startHour" type="number" ng-model="startTime.hour">
-          <label for="startHour">小时</label>
-        </div>
-        <div class="col m1 s1 text-center timeDivide">
-          <p>:</p>
-        </div>
-        <div input-field class="col m2 s4">
-          <input ng-change="minuteChange(0)" id="startMinute" type="number" ng-model="startTime.minute">
-          <label for="startMinute">分钟</label>
-        </div>
-        <div input-field class="col m7 s12">
-          <i class="prefix"></i>
+        <div class="row">
+          <div input-field class="col s6">
+          <i class="material-icons prefix"></i>
           <label for="endTime">结束时间</label>
           <input input-date
                  type="text"
@@ -80,16 +80,14 @@
                  close="close"
                  select-years="16">
         </div>
-        <div input-field class="col m2 s4 offset-s3">
+        <div input-field class="col s3">
           <input ng-change="hourChange(1)" id="endHour" type="number" ng-model="endTime.hour">
           <label for="endHour">小时</label>
         </div>
-        <div class="col m1 s1 text-center timeDivide">
-          <p>:</p>
-        </div>
-        <div input-field class="col m2 s4">
+        <div input-field class="col s3">
           <input ng-change="minuteChange(1)" id="endMinute" type="number" ng-model="endTime.minute">
           <label for="endMinute">分钟</label>
+        </div>
         </div>
         <div input-field class="col s12">
           <i class="mdi-communication-vpn-key prefix"></i>

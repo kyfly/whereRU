@@ -28,8 +28,8 @@ module.exports = function(Activity) {
       	deleted: false
 			},
 			order: "ended DESC",
-			skip: page* 32,
-			limit: 32
+			skip: page* 16,
+			limit: 16
 		}, function (err, activties) {
 			if (err)
 				cb("活动列表获取失败");
@@ -190,11 +190,9 @@ module.exports = function(Activity) {
 					teamId: instance.teamId
 				}
 			}, function (err, coterie) {
-				if (err || !coterie)
-					next(err);
-				if (!instance.explainUrl)
+				if (err || !coterie || !instance.explainUrl) {
 					next();
-				else {
+				} else {
 					coterie.articles.create({
 						"title": instance.title,
 				    "contentUrl": instance.explainUrl,
@@ -202,11 +200,7 @@ module.exports = function(Activity) {
 				    "coterieId": coterie.id,
 				    "userId": team.userId
 					}, function (err, article) {
-						if (err) {
-							next(err);
-						} else {
-              next();
-            }
+             next();
 					});
 				}
 			})

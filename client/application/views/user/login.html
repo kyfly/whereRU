@@ -1,26 +1,38 @@
-<form name="loginForm" ng-controller="LoginController">
+<div class="login-screen" ng-click="cancelLogin()"></div>
+<form class="z-depth-2 col s12 m8 offset-m2" name="loginForm" ng-controller="LoginController">
 	<div  class="row center">
 		<h3>登录后更精彩</h3>
 	</div>
 	<div class="row">
-		<div input-field class="col s12">
+		<div ng-show="!wechatLogin" class="col s4 center" ng-click="loadURL()">
+			<img src="/lib/img/weixin.jpg">
+			<h6>微信登录</h6>
+		</div>
+		<div ng-show="wechatLogin" class="col s4 center">
+			<div class="center" id="qrcode"></div>
+			<h6>微信“扫一扫”</h6>
+		</div>
+		<div>
+			<div input-field class="col s8">
 		    <input id="phone" type="text" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="phone">请输入手机号</label>
-		</div>
-		<div input-field class="col s12">
+			</div>
+			<div input-field class="col s8">
 		    <input id="password" type="text" ng-model="user.password" min="8" ng-focus="focus()" ng-blur="blur()" length="16" required>
 		    <label for="password">请输入密码</label>
 		    <a href="/" class="right">忘记密码</a>
+			</div>
+			<div class="col s8 right">
+				<a href="#" class="waves-effect btn-flat col s4 center" ng-click="cancelLogin()">取消</a>
+				<a href="/u/register" 
+					class="waves-effect btn-flat col s4 center" ng-click="cancelLogin()">注册</a>
+				<button type="sumbit" class="waves-effect btn-flat col s4 center"
+					ng-click="login()" 
+					ng-disabled="loginForm.$invalid">登录</button>
+			</div>
 		</div>
+		
 	</div>
-	<div  class="row center">
-		<a href="#"
-			class="waves-effect btn-flat" ng-click="cancelLogin()">取消</a>
-		<a href="/u/register" 
-			class="waves-effect btn-flat" ng-click="cancelLogin()">注册</a>
-		<button type="sumbit" class="waves-effect btn-flat"
-			ng-click="login()" 
-			ng-disabled="loginForm.$invalid">登录</button>
-	</div>
+	
 </form>
 

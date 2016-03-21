@@ -147,5 +147,9 @@
   "CoteriewhereRUUser": {
     "dataSource": "db",
     "public": false
+  },
+  "Aouth": {
+    "dataSource": "db",
+    "public": true
   }
 }
