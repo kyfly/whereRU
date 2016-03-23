@@ -3,7 +3,7 @@ app.controller('LoginController',
   function (User, Aouth, $scope, $location, LoopBackAuth, $window, $rootScope, $http, $interval, $timeout) {
   $scope.user = {};
   function createQrcode (url) {
-    document.getElementById("qrcode").innerHtml = null;
+    document.getElementById("qrcode").innerHTML = null;
     var qrcode = new QRCode(document.getElementById("qrcode"), {
         text: url,
         colorDark : "#000000",
@@ -25,7 +25,7 @@ app.controller('LoginController',
         $window.location.href = res.url;
       } else {
         createQrcode(res.url);
-        document.getElementById("qrcode").innerHtml = null;
+        document.getElementById("qrcode").innerHTML = null;
         var outh = $interval(function () {
           Aouth.findById({ id: res.token }, function (res) {
             var data = res.token;
@@ -46,7 +46,7 @@ app.controller('LoginController',
         }, 3000);
         $timeout(function () {
           if (outh) {
-            document.getElementById("qrcode").innerHtml = null;
+            document.getElementById("qrcode").innerHTML = null;
             $scope.wechatLogin = false;
             Aouth.deleteById({ id: res.token});
             $interval.cancel(outh);
