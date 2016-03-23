@@ -108,7 +108,7 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
       school: $scope.$currentUser.school,
       page: page
     }, function (res) {
-      if (res.teams.length < 32 || res.teams.length === 0) {
+      if (res.teams.length < 16 || res.teams.length === 0) {
         $scope.last = true;
       }
       page ++;

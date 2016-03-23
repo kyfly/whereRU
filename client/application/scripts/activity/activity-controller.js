@@ -109,7 +109,7 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
     }, function(res){
       for (x in res) if (x === 'activties') {
         page ++;
-        if (res[x].length < 32 || res[x].length === 0) {
+        if (res[x].length < 16 || res[x].length === 0) {
           $scope.last = true;
         }
         res[x].forEach(function (activity) {

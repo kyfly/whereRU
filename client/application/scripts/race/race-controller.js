@@ -26,7 +26,7 @@ app.controller('RacesController', ['$scope', 'Race', '$window', function ($scope
       page: page
     }, function (res) {
       for (x in res) if (x === 'races') {
-        if (res[x].length < 32 || res[x].length === 0) {
+        if (res[x].length < 16 || res[x].length === 0) {
           $scope.last = true;
         }
         $scope.raceItems.push.apply($scope.raceItems, res[x]);
