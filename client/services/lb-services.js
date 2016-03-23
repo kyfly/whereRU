@@ -69,6 +69,10 @@
               "findById": {
                 url: urlBase + '/Aouths/:id',
                 method: 'GET',
+              },
+              "deleteById": {
+                url: urlBase + '/Aouths/:id',
+                method: 'DELETE',
               }
             });
           R.modelName = "Aouth";

@@ -46,6 +46,9 @@ app.controller('LoginController',
         }, 3000);
         $timeout(function () {
           if (outh) {
+            document.getElementById("qrcode").innerHtml = null;
+            $scope.wechatLogin = false;
+            Aouth.deleteById({ id: res.token});
             $interval.cancel(outh);
           }
         }, 30000);
