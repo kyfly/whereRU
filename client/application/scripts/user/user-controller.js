@@ -221,6 +221,9 @@ app.controller('AuthController', ['$scope', 'User', '$location', '$rootScope', '
         }
         userAuthSave(data.token, $rootScope, LoopBackAuth);
         Materialize.toast('登录成功', 2000);
+        if ($scope.aouth.iswechat) {
+          $location.path($scope.aouth.url);
+        }
       }
     }, function (err) {
       $scope.status = 'fail';
