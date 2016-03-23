@@ -30,11 +30,15 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
     status: false,
     hidden: false
   };
+  $scope.allStatusFilter = function () {
+    $scope.query = undefined;
+    $scope.status = '状态';
+  };
   $scope.statusFilter = function () {
     $scope.query = {
       status: 1
     };
-    $scope.type = '可加入';
+    $scope.status = '可加入';
   };
   $scope.organizationFilter = function () {
     $scope.query = {

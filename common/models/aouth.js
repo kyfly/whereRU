@@ -18,7 +18,7 @@ module.exports = function(Aouth) {
 			        "headImgUrl": user.headImgUrl,
 			        "studentId": user.studentId
 			      };
-			      ctx.res.send(token);
+			      ctx.res.send({token: token, aouth: ins});
 			      ins.destroy();
 			    });
 				}

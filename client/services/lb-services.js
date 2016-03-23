@@ -103,6 +103,14 @@
               url: urlBase + '/WUsers/auth2wechat',
               method: 'GET'
             },
+            "checkPhone": {
+              url: urlBase + '/WUsers/checkPhone',
+              method: 'GET'
+            },
+            "updateAll": {
+              url: urlBase + '/WUsers/updateAll',
+              method: 'GET'
+            },
             /**
              * 关注圈子，圈子最后时间上传
              * 使用场景：pc端点击关注，点击修改最后使用时间

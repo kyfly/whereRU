@@ -820,7 +820,7 @@ module.exports = function(User) {
                         "headImgUrl": newUser.headImgUrl,
                         "studentId": newUser.studentId
                       };
-                      ctx.res.send(token);
+                      ctx.res.send({token: token, aouth: ins});
                     });
                   }
                 });
@@ -844,7 +844,7 @@ module.exports = function(User) {
                     "headImgUrl": user.headImgUrl,
                     "studentId": user.studentId
                   };
-                  ctx.res.send(token);
+                  ctx.res.send({token: token, aouth: ins});
                 });
               }
             });
@@ -852,5 +852,25 @@ module.exports = function(User) {
         });
       });
     });
-  })
+  });
+  User.remoteMethod('checkPhone', {
+    accepts: {
+          "type": "string",
+          "arg": "phone"
+        },
+    results: {
+      "type": "boolean",
+      "arg": "aouth"
+    },
+    http: {
+      path: '/checkPhone', verb: 'get'
+    }
+  });
+  User.checkPhone = function (phone, cb) {
+    User.count({
+      phone: phone
+    }, function (err, count) {
+      cb(err, count > 0);
+    });
+  }
 };

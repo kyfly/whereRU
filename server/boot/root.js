@@ -15,7 +15,9 @@ module.exports = function(server) {
     var scope = 'snsapi_userinfo';
     var isWechat = req.query.iswechat;
     server.models.Aouth.create({
-      created: new Date()
+      created: new Date(),
+      url: req.query.url,
+      iswechat: isWechat
     },function (err, ins) {
       if (err)
         res.error(err);

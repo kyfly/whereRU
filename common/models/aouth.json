@@ -12,6 +12,12 @@
     "userId": {
       "type": "string"
     },
+    "url": {
+      "type": "string"
+    },
+    "iswechat": {
+      "type": "boolean"
+    },
     "created": {
       "type": "date"
     }
