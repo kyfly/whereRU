@@ -71,7 +71,7 @@
     </li>
   </ul>
 </div>
-<div ng-show="raceItems.length >= 32" class="col s12 center list-more">
+<div ng-show="raceItems.length >= 16" class="col s12 center list-more">
   <a ng-show="$currentUser && !last" href="" ng-click="getRaces()">加载更多</a>
   <a ng-show="last" href="" >没有更多竞赛了</a>
   <a ng-show="!$currentUser" href="" ng-click="getRaces()">登录</a>

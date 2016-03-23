@@ -25,6 +25,9 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
     $scope.query = {
       actType: 'form'
     };
+    page = 0;
+    $scope.activityItems = [];
+    $scope.getActivities();
     $scope.typeHide = true;
     $scope.type = '表单';
   };
@@ -32,6 +35,9 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
     $scope.query = {
       actType: 'vote'
     };
+    page = 0;
+    $scope.activityItems = [];
+    $scope.getActivities();
     $scope.typeHide = true;
     $scope.type = '投票';
   };
@@ -39,6 +45,9 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
     $scope.query = {
       actType: 'seckill'
     };
+    page = 0;
+    $scope.activityItems = [];
+    $scope.getActivities();
     $scope.typeHide = true;
     $scope.type = '抢票';
   };
@@ -103,8 +112,11 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
       $scope.$emit('auth:loginRequired');
       return;
     }
+    if (!$scope.query)
+      $scope.query = {};
     Activity.getMySchoolActiveties({
       school: $scope.$currentUser.school,
+      actType: $scope.query.actType,
       page: page
     }, function(res){
       for (x in res) if (x === 'activties') {

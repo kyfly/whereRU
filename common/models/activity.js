@@ -7,6 +7,8 @@ module.exports = function(Activity) {
 			required: true
 		},{
 			arg: 'page', type: 'number',
+		},{
+			arg: 'actType', type: 'string',
 		}],
 		returns: {
 			arg: 'activties', type: 'array'
@@ -20,17 +22,19 @@ module.exports = function(Activity) {
 	 * @param  {Function} cb     回调函数
 	 * @return {object}          活动列表
 	 */
-	Activity.getMySchoolActiveties = function (school, page, cb) {
+	Activity.getMySchoolActiveties = function (school, page, actType, cb) {
 		Activity.find({
 			where: {
 				school: school,
 				hidden: false,
+				actType: actType,
       	deleted: false
 			},
 			order: "ended DESC",
 			skip: page* 16,
 			limit: 16
 		}, function (err, activties) {
+			
 			if (err)
 				cb("活动列表获取失败");
 			else
