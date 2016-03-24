@@ -18,21 +18,21 @@
 		    <label for="phone">请输入手机号</label>
 			</div>
 			<div input-field class="col s8">
-		    <input id="password" type="text" ng-model="user.password" min="8" ng-focus="focus()" ng-blur="blur()" length="16" required>
+		    <input id="password" type="password" ng-model="user.password" min="8" ng-focus="focus()" ng-blur="blur()" length="16" required>
 		    <label for="password">请输入密码</label>
 		    <a href="/" class="right">忘记密码</a>
 			</div>
 			<div class="col s8 right">
 				<a href="#" class="waves-effect btn-flat col s4 center" ng-click="cancelLogin()">取消</a>
-				<a href="/u/register" 
+				<a href="/u/register"
 					class="waves-effect btn-flat col s4 center" ng-click="cancelLogin()">注册</a>
 				<button type="sumbit" class="waves-effect btn-flat col s4 center"
-					ng-click="login()" 
+					ng-click="login()"
 					ng-disabled="loginForm.$invalid">登录</button>
 			</div>
 		</div>
-		
+
 	</div>
-	
+
 </form>
 
