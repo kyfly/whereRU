@@ -3,9 +3,9 @@
     <a href="/" class="brand-logo">whereRU</a>
   </div>
 </nav>
-<div class="register container">
+<div class="register container" ng-show="!$currentUser">
 	<h4>用户注册 <small class="grey-text"> 信息完善</small></h4>
-	<form class="reg " id="regForm" name="regForm">
+	<form ng-show="!regSuccess" class="reg " id="regForm" name="regForm">
 		<div input-field class="col offset-m2 offset-l2 s12 m4 l4">
 		    <input id="phone" type="text" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="phone">请输入手机号</label>
@@ -39,6 +39,12 @@
 				ng-disabled="regForm.$invalid">注册</button>
 		</div>
 	</form>
+	<div ng-show="regSuccess">
+		<div id="bindQrcode" class="center"></div>
+		<h6 class="center">微信扫一扫,绑定账号</h>
+	</div>
 </div>
-
+<div class="register container center" ng-show="$currentUser">
+	<a href="/w/activities">随便看看</a>
+</div>
 

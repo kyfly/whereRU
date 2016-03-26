@@ -275,6 +275,10 @@
               url: urlBase + '/WUsers/:id/teams',
               method: 'POST'
             },
+            "resetPassword": {
+              url: urlBase + '/WUsers/reset',
+              method: 'POST',
+            },
             /**
              * 描述：修改团队信息，已登录用户
              * 使用场景：修改团队信息

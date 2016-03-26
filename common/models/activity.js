@@ -6,9 +6,11 @@ module.exports = function(Activity) {
 			type: 'string',
 			required: true
 		},{
-			arg: 'page', type: 'number',
+			arg: 'page', type: 'number',required: true
 		},{
-			arg: 'actType', type: 'string',
+			arg: 'actType', type: 'string',required: true
+		},{
+			arg: 'status', type: 'number',required: true
 		}],
 		returns: {
 			arg: 'activties', type: 'array'
@@ -22,14 +24,30 @@ module.exports = function(Activity) {
 	 * @param  {Function} cb     回调函数
 	 * @return {object}          活动列表
 	 */
-	Activity.getMySchoolActiveties = function (school, page, actType, cb) {
+	Activity.getMySchoolActiveties = function (school, page, actType, status, cb) {
+		if (actType === 'all') {
+			actType = undefined;
+		}
+		var query = {
+			school: school,
+			hidden: false,
+			actType: actType,
+    	deleted: false
+		};
+		var now = new Date();
+		if (status === -1) {
+			query.ended = { lt: now };
+		} else if (status === 1){
+			query.and = [{
+				started: { lt: now }				
+			}, {
+				ended: { gt: now }
+			}];
+		} else if (status === 2){
+			query.started = {gt: now};
+		}
 		Activity.find({
-			where: {
-				school: school,
-				hidden: false,
-				actType: actType,
-      	deleted: false
-			},
+			where: query,
 			order: "ended DESC",
 			skip: page* 16,
 			limit: 16

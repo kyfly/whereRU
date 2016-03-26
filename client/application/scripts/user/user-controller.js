@@ -1,15 +1,16 @@
+function createQrcode (url, eId) {
+  var qrcode = new QRCode(document.getElementById(eId), {
+      text: url,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.M
+  });
+}
 app.controller('LoginController', 
   ['User', "Aouth",'$scope', '$location', 'LoopBackAuth', '$window', '$rootScope', '$http', '$interval', '$timeout',
   function (User, Aouth, $scope, $location, LoopBackAuth, $window, $rootScope, $http, $interval, $timeout) {
   $scope.user = {};
-  function createQrcode (url) {
-    var qrcode = new QRCode(document.getElementById("qrcode"), {
-        text: url,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.M
-    });
-  }
+  
   $scope.loadURL = function () {
     var url = $window.location.href;
     var isWechart = navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == "micromessenger";
@@ -23,7 +24,7 @@ app.controller('LoginController',
       if (isWechart) {
         $window.location.href = res.url;
       } else {
-        createQrcode(res.url);
+        createQrcode(res.url, 'qrcode');
         var outh = $interval(function () {
           Aouth.findById({ id: res.token }, function (res) {
             var data = res.token;
@@ -44,6 +45,7 @@ app.controller('LoginController',
         }, 3000);
         $timeout(function () {
           if (outh) {
+            Materialize.toast("验证超时，请在30秒内完成确认哦", 3000);
             document.getElementById("qrcode").innerHTML = null;
             $scope.wechatLogin = false;
             Aouth.deleteById({ id: res.token});
@@ -84,15 +86,21 @@ app.controller('RegisterController', ['User', 'School', '$scope', '$rootScope', 
     User.create($scope.user, function (data) {
       userAuthSave(data, $rootScope, LoopBackAuth);
       Materialize.toast('恭喜你，注册成功', 2000);
-      $location.path('/w/activities').replace();
+      var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + 'wx5d92b3c192f993e7'
+      + '&redirect_uri=http://'+ $location.host()
+      +'/u/bind&response_type=code&scope=snsapi_userinfo&state=' + data.userId
+      +'#wechat_redirect'
+      createQrcode(url, 'bindQrcode');
+      $scope.regSuccess = true;
     }, function (err) {
       if (err.status === 1000)
         Materialize.toast('该手机号已经被注册', 2000);
     });
-  }
+  };
 }]);
 
-app.controller('ConfirmSchoolController', ['User', '$scope', 'School', function (User, $scope, School) {
+app.controller('ConfirmSchoolController', ['User', '$scope', 'School', '$window',
+  function (User, $scope, School, $window) {
   $scope.user = $scope.$currentUser;
   School.findOne({
     filter: {
@@ -103,10 +111,15 @@ app.controller('ConfirmSchoolController', ['User', '$scope', 'School', function 
     $scope.academies = res[0].academy;
   })
   $scope.confirm = function () {
-
-    // User.confirmSchool({id: localStorage['$LoopBack$currentUserId']}, $scope.user, function () {
-    //   hex_md5($scope.studentPassword)
-    // });
+    User.confirmSchool({id: $scope.$currentUser.id}, {
+      studentId: $scope.studentId,
+      password: hex_md5($scope.studentPassword),
+      academy: $scope.academy
+    }, function (res) {
+      $scope.$currentUser.studentId = studentId;
+      Materialize.toast('验证成功', 2000);
+      $window.history.back();
+    });
   }
 }]);
 app.controller('UserController', ['$scope', 'User', '$rootScope', '$location',function($scope, User, $rootScope, $location){
@@ -192,43 +205,21 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location',fu
   }
   $scope.selectedMenu = 'team';
   if ($scope.$currentUser) {
-    User.getInfo(function (user) {
-      $scope.user = user;
-    });
+    $scope.user = $scope.$currentUser;
     pullTeams();
     pullArticles();
   } else {
     $scope.user = null;
   }
-
 }]);
 app.controller('AuthController', ['$scope', 'User', '$location', '$rootScope', 'LoopBackAuth',
   function($scope, User, $location, $rootScope, LoopBackAuth){
   var isWechart = navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == "micromessenger";
   var search = $location.search();
+  search.action = 'login';
   if (isWechart && search.code) {
-    User.auth2wechat({
-      code: search.code,
-      state: search.state
-    }, function (data) {
-      if (data.status === 500) {
-        $scope.status = 'fail';
-      } else {
-        $scope.user = data.token.user;
-        $scope.aouth = data.aouth;
-        if ($scope.user.school === '未知') {
-          $scope.user.school = '杭州电子科技大学';
-          $scope.user.isVerify = false;
-        }
-        userAuthSave(data.token, $rootScope, LoopBackAuth);
-        Materialize.toast('登录成功', 2000);
-        if ($scope.aouth.iswechat) {
-          $location.path($scope.aouth.url);
-        }
-      }
-    }, function (err) {
-      $scope.status = 'fail';
-    });
+    auth2wechat(User, $scope, search, $rootScope, $location, LoopBackAuth);
+    $location.search({});
   } else {
     $scope.status = 'fail';
   }
@@ -236,11 +227,45 @@ app.controller('AuthController', ['$scope', 'User', '$location', '$rootScope', '
     $scope.$emit('auth:loginRequired');
   };
 }]);
-app.controller('UserInfoController', ['$scope', 'User', 'School', '$location',
-  function($scope, User, School, $location){
-  
+function auth2wechat(User, scope, query, $rootScope, $location, LoopBackAuth) {
+  User.auth2wechat({
+    code: query.code,
+    state: query.state,
+    action: query.action
+  }, function (data) {
+    scope.user = data.token.user;
+    scope.aouth = data.aouth;
+    if (scope.user.school === '未知') {
+      scope.user.school = '杭州电子科技大学';
+    }
+    userAuthSave(data.token, $rootScope, LoopBackAuth);
+    Materialize.toast('登录成功', 2000);
+    if (scope.aouth.iswechat) {
+      $location.path(scope.aouth.url);
+    }
+  }, function (err) {
+    scope.err = err;
+    scope.status = 'fail';
+  });
+}
+app.controller('BindController', ['$scope', 'User', '$location', '$rootScope', 'LoopBackAuth',
+  function($scope, User, $location, $rootScope, LoopBackAuth){
+  var isWechart = navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == "micromessenger";
+  var search = $location.search();
+  search.action = 'bind';
+  if (isWechart && search.code) {
+    auth2wechat(User, $scope, search, $rootScope, $location, LoopBackAuth);
+    $location.search({});
+  } else {
+    $scope.status = 'fail';
+  }
+}]);
+app.controller('UserInfoController', ['$scope', 'User', 'School', '$location','uploadFile',
+  function($scope, User, School, $location, uploadFile){
   if ($scope.$currentUser) {
-    User.getInfo().$promise.then(function (user) {
+    User.getInfo(function (user) {
+      delete user.$promise;
+      delete user.$resolved;
       $scope.user = user;
     });
     School.find(function (schools) {
@@ -250,6 +275,32 @@ app.controller('UserInfoController', ['$scope', 'User', 'School', '$location',
     $scope.$emit('auth:loginRequired');
     $scope.user = null;
   }
+  $scope.uploadLogo = function () {
+    if (!$scope.$currentUser) {
+      return $scope.$emit('auth:loginRequired');
+    }
+    var file = document.getElementById('headImg').files[0];
+    uploadFile.img(file, 'headImgUrl', $scope.$currentUser.id)
+    .success(function (res) {
+      $scope.user.headImgUrl = res.url;
+    });
+  };
+  $scope.updateInfo = function () {
+    User.prototype_updateAttributes($scope.user, function (data) {
+      Materialize.toast('修改成功', 2000);
+    });
+  };
+  $scope.resetPassword = function () {
+    User.resetPassword({
+      lastPwd: $scope.lastPwd,
+      newPwd: $scope.newPwd
+    }, function (res) {
+      Materialize.toast('修改成功,请记住新密码', 2000);
+    });
+  };
+}]);
+app.controller('RetController', ['$scope', function($scope){
+  
 }]);
 app.controller('ActivityResultController', 
   ['$scope', '$stateParams', 'User', 

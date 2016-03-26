@@ -43,6 +43,10 @@
     },
     "openid": {
       "type": "string"
+    },
+    "isVerify": {
+      "type": "boolean",
+      "default": true
     }
   },
   "validations": [],
@@ -276,6 +280,12 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "auth2wechat"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "resetPassword"
     }
   ],
   "methods": {}

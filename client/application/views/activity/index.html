@@ -72,7 +72,7 @@
   <ul>
     <li class="col s12 m4 l3" 
     ng-repeat="activityItem in activityItems | filter: query">
-      <div class="card">
+      <div class="card" title="{{activityItem.title}}">
         <div class="card-content">
           <h4 class="card-title">
             <a ng-href="/w/activities/{{activityItem.id}}">

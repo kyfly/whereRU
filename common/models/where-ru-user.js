@@ -1,17 +1,8 @@
-/**
- * 错误代码注释区
- * 1000 该手机号已经被注册
- * 1001 获取圈子列表失败
- * 1002 用户搜索失败
- * 1004 用户信息获取失败
- * 1005 团队列表获取失败
- */
 var q = require('q');
 var promise = require(__dirname + '/../../modules/model-promise.js');
 var hdu = require(__dirname + '/../../modules/hdu.js');
+var http = require('http');
 var wechat = require('wechat-oauth');
-var EventEmitter = require('events').EventEmitter;   
-var e = new EventEmitter();
 module.exports = function(User) {
   /**
    * 用户注册，给用户添加默认头像
@@ -21,7 +12,7 @@ module.exports = function(User) {
    * @return {[type]}       [description]
    */
   User.beforeRemote('create', function (ctx, ins, next) {
-    ctx.req.body.headImgUrl = "http://cdn-img.etuan.org/whereru/headImgUrl/%E9%BB%98%E8%AE%A4%E5%A4%B4%E5%83%8F.jpg"
+    ctx.req.body.headImgUrl = User.app.get('default').headImg;
     ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
     ctx.req.body.created = new Date();
     User.count({ phone: ctx.req.body.phone }, function (err, count) {
@@ -53,6 +44,28 @@ module.exports = function(User) {
       ctx.res.send(token);
     });
   });
+  User.beforeRemote("resetPassword", function (ctx, ins, next) {
+    if (!ctx.req.accessToken) {
+      return next('不允许的操作');
+    }
+    User.findById(ctx.req.accessToken.userId, function (err, user) {
+      if (err)
+        return next(err);
+      if (user.hasPassword(ctx.req.body.lastPwd)) {
+        user.password = ctx.req.body.newPwd;
+        user.save(function (err, user) {
+          if (err)
+            return next(err);
+          else {
+            ctx.res.send(200)
+          }
+        });
+      } else {
+        next('密码错误')
+      }
+    });
+    //console.log(, ctx.req.body)
+  });
   //用户登录，并返回用户信息
   User.beforeRemote('login', function (ctx, ins, next) {
     ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
@@ -66,8 +79,8 @@ module.exports = function(User) {
         "school": user.school,
         "phone": user.phone,
         "sign": user.sign,
-        "headImgUrl": ins.headImgUrl,
-        "studentId": ins.studentId
+        "headImgUrl": user.headImgUrl,
+        "studentId": user.studentId
       };
       ctx.res.send(token);
     });
@@ -167,25 +180,41 @@ module.exports = function(User) {
    */
   User.remoteMethod('confirmSchool', {
     accepts: [{
-      arg: 'user', type: 'object',
+      arg: 'id', type: 'string',
+    },{
+      arg: 'studentId', type: 'string',
+    },{
+      arg: 'password', type: 'string',
+    },{
+      arg: 'academy', type: 'string',
     }],
     returns: {
-      arg: 'status', type: 'number'
+      arg: 'status', type: 'number',
     },
     http: {
       path: '/:id/confirmSchool', verb: 'post'
     }
   });
-  User.confirmSchool = function (user, cb) {
-
-  }
-  User.beforeRemote('confirmSchool', function (ctx, ins, next) {
-    if (ctx.req.query.ticket && ctx.req.query.ticket) {
-      ctx.instance.studentId = 1;
-    } else {
-
-    }
-  });
+  User.confirmSchool = function (id, studentId, password, academy, cb) {
+    hdu.ihdu(studentId, password, function (name) {
+      if (name) {
+        User.findById(id, function (err, user) {
+          if (err)
+              return cb(err);
+          user.name = name;
+          user.studentId = studentId;
+          user.academy = academy;
+          user.save(function (err, user) {
+            if (err)
+              return cb(err);
+            cb(null, 200);
+          });
+        });
+      } else {
+        cb("验证失败");
+      }
+    });
+  };
   /**
    * 用户搜索
    * @type {Object}
@@ -492,9 +521,14 @@ module.exports = function(User) {
    */
   User.beforeRemote('prototype.updateAttributes', function (ctx, ins, next) {
     var updateData = ctx.req.body;
-    console.log(updateData);
     if (ctx.req.body.phone) {
       ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
+    }
+    if (ctx.req.body.password && !updateData.isVerify) {
+      updateData.isVerify = true;
+    } else if (ctx.req.body.password) {
+      next('非允许操作');
+      return;
     }
     ctx.instance.histories.create({
       created: new Date(),
@@ -743,116 +777,134 @@ module.exports = function(User) {
   User.remoteMethod('auth2wechat', {
     accepts: [{
           "type": "string",
-          "arg": "code"
+          "arg": "code",
+          required: true
         },{
           "type": "string",
-          "arg": "state"
+          "arg": "state",
+          required: true
+        },{
+          "type": "string",
+          "arg": "action",
+          required: true
         }],
     results: {
-      "type": "string",
-      "arg": "url"
+      "type": "object",
+      "arg": "data"
     },
     http: {
       path: '/auth2wechat', verb: 'get'
     }
   });
-  User.auth2wechat= function (code, state, cb) {
-    
-  };
   User.beforeRemote('auth2wechat', function (ctx, ins, next) {
     var code = ctx.req.query.code;
-    var token = ctx.req.query.state;
+    var state = ctx.req.query.state;
+    var action = ctx.req.query.action;
+
     var client = new wechat(User.app.get('wechat').appID, User.app.get('wechat').appsecret);
-   
-    User.app.models.Aouth.findById(token, function (err, aouth) {
-      if (err||!aouth) {
-        ctx.res.send({status: 500, message: '该连接不存在'});
-        return;
-      }
+    function getUser (callback) {
       client.getAccessToken(code, function (err, result) {
         if (err) {
-          ctx.res.send({status: 500, message: '获取token出错'});
+          callback(err);
+        } else {
+          client.getUser(result.data.openid, function (err, userDate) {
+            callback(err, userDate);
+          });
+        }
+      });
+    }
+    function loginUser(userInstance, aouthInstance) {
+      userInstance.createAccessToken(7200, function (err, token) {
+        if (err) {
+          return next(err);
+        }
+        var token = token.toJSON();
+        token.user = {
+          "name": userInstance.name,
+          "school": userInstance.school,
+          "phone": userInstance.phone,
+          "sign": userInstance.sign,
+          "headImgUrl": userInstance.headImgUrl,
+          "studentId": userInstance.studentId
+        };
+        ctx.res.send({token: token, aouth: aouthInstance});
+      });
+    }
+    if (action === 'bind') {
+      User.findById(state, function (err, user) {
+        if (err || !user) {
+          next('该连接不存在');
           return;
         }
-        var accessToken = result.data.access_token;
-        var openid = result.data.openid;
-        User.findOne({
-          where: {
-            openid: openid
-          }
-        }, function (err, user) {
+        getUser(function (err, userDate) {
           if (err) {
-            ctx.res.send({status: 500, message: err.message});
-          } else if (!user) {
-            client.getUser(openid, function (err, userDate) {
-              if (err) {
-                ctx.res.send({status: 500, message: err.message});
-                return;
-              }
-              User.create({
-                name: userDate.nickname,
-                sex: userDate.sex === 1? "男": "女",
-                headImgUrl: userDate.headimgurl,
-                openid: userDate.openid,
-                school: "未知",
-                email: userDate.openid + "@etuan.org",
-                password: userDate.openid,
-                isVerify: false
-              }, function (err, newUser) {
-                if (err) {
-                  ctx.res.send({status: 500, message: err.message});
-                  return;
-                }
-                aouth.openid = newUser.openid;
-                aouth.userId = newUser.toJSON().id;
-                aouth.save(function (err, ins) {
-                  if (err) {
-                    ctx.res.send({status: 500, message: err.message});
-                    return;
-                  } else {
-                    newUser.createAccessToken(7200, function (err, token) {
-                      var token = token.toJSON();
-                      token.user = {
-                        "name": newUser.name,
-                        "school": newUser.school,
-                        "phone": newUser.phone,
-                        "sign": newUser.sign,
-                        "headImgUrl": newUser.headImgUrl,
-                        "studentId": newUser.studentId
-                      };
-                      ctx.res.send({token: token, aouth: ins});
-                    });
-                  }
-                });
-              });
-            });
+            next('获取用户信息失败');
           } else {
-            aouth.openid = user.toJSON().openid;
-            aouth.userId = user.toJSON().id;
-            aouth.save(function (err, ins) {
+            user.openid = userDate.openid;
+            user.headImgUrl = userDate.headimgurl;
+            user.save(function (err, user) {
+              loginUser(user, undefined);
+            });
+          }
+        });
+      });
+    } else if (action === 'login') {
+      User.app.models.Aouth.findById(state, function (err, aouth) {
+        if (err||!aouth) {
+          next('该连接不存在');
+          return;
+        }
+        getUser(function (err, userDate) {
+          if (err) {
+            next('获取用户信息失败');
+          } else {
+            User.findOne({where: {openid: userDate.openid}}, function (err, user) {
               if (err) {
-                ctx.res.send({status: 500, message: err.message});
-                return;
+                next(err);
+              } else if (user) {
+                  aouth.openid = user.toJSON().openid;
+                  aouth.userId = user.toJSON().id;
+                  aouth.save(function (err, ins) {
+                    if (err) {
+                      next(err);
+                    } else {
+                      loginUser(user, ins);
+                    }
+                  });
               } else {
-                user.createAccessToken(7200, function (err, token) {
-                  var token = token.toJSON();
-                  token.user = {
-                    "name": user.name,
-                    "school": user.school,
-                    "phone": user.phone,
-                    "sign": user.sign,
-                    "headImgUrl": user.headImgUrl,
-                    "studentId": user.studentId
-                  };
-                  ctx.res.send({token: token, aouth: ins});
+                User.create({
+                  name: userDate.nickname,
+                  sex: userDate.sex === 1? "男": "女",
+                  headImgUrl: userDate.headimgurl,
+                  openid: userDate.openid,
+                  school: "未知",
+                  email: userDate.openid + "@etuan.org",
+                  password: userDate.openid,
+                  isVerify: false
+                }, function (err, newUser) {
+                  if (err) {
+                    next(err);
+                    return;
+                  }
+                  aouth.openid = newUser.openid;
+                  aouth.userId = newUser.toJSON().id;
+                  aouth.save(function (err, ins) {
+                    if (err) {
+                      next(err);
+                    } else {
+                      loginUser(newUser, ins);
+                    }
+                  });
                 });
               }
             });
           }
         });
       });
-    });
+    }
   });
+  User.auth2wechat= function (code, state, action, cb) {
+  };
   User.remoteMethod('checkPhone', {
     accepts: {
           "type": "string",

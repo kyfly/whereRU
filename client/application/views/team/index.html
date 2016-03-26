@@ -72,7 +72,7 @@
 <div class="row container" >
   <ul>
     <li class="col s12 m6 l3 team-card" ng-repeat="team in teams | filter: query">
-      <div class="card">
+      <div class="card" title="{{team.name}}">
         <div class="card-image">
           <a href="/w/teams/{{team.id}}">
             <img ng-src="{{team.logoUrl}}@1e_1c_0o_0l_100h_100w_100q.src" err-src="http://img.etuan.org/default.jpg@1e_1c_0o_0l_100h_100w_100q.src">

@@ -1,7 +1,7 @@
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('confirmSchool', {
-      url: '/w/confirmSchool',
+      url: '/u/confirmSchool',
       controller: 'ConfirmSchoolController',
       templateUrl: 'application/views/confirm-school.html'
     })
@@ -25,10 +25,20 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       controller: 'UserInfoController',
       templateUrl: '/application/views/user/info.html'
     })
+    .state('retrieve', {
+      url: '/u/retrieve',
+      controller: 'RetController',
+      templateUrl: '/application/views/user/retrieve.html'
+    })
     .state('auth', {
       url: '/u/auth',
       controller: 'AuthController',
       templateUrl: '/application/views/user/auth.html'
+    })
+    .state('bind', {
+      url: '/u/bind',
+      controller: 'BindController',
+      templateUrl: '/application/views/user/bind.html'
     })
     .state('activityResult', {
       url: '/u/results/:id/:type',

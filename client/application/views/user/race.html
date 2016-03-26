@@ -1,7 +1,5 @@
 <ul class="collection with-header">
-  <li class="collection-header">
-    <h4><a href="/w/races">参与竞赛</a></h4>
-  </li>
+  
   <li class="collection-item avatar" ng-repeat="race in races">
     <img ng-src="{{race.imgUrl}}@1e_1c_0o_0l_100h_100w_100q.src" alt="" class="circle">
     <span class="title">
@@ -21,5 +19,8 @@
         <time ng-bind="race.ended| date:'yy/MM/dd'"></time>
       </span>
     </p>
+  </li>
+  <li class="collection-header">
+    <h4><a href="/w/races">参与竞赛</a></h4>
   </li>
 </ul>

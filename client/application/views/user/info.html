@@ -21,14 +21,14 @@
 	<div id="requiredInfo">
 		<form class="reg " id="reqForm" name="reqForm">
 			<div input-field class="col s12">
-			    <input id="phone" type="text" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
+			    <input id="phone" type="number" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
 
 			    <label ng-if="user.isVerify" for="phone">手机号</label>
 			    <label ng-if="!user.isVerify" for="phone"><b class="red-text">*</b>请输入手机号</label>
 			</div>
 
 			<div input-field class="col s12">
-			    <input id="name" type="text" ng-model="user.name" ng-focus="focus()" ng-blur="blur()" required>
+			    <input id="name" type="text" ng-model="user.name" ng-focus="focus()" ng-blur="blur()" required ng-disabled="user.studentId">
 			    <label ng-if="!user.isVerify" for="name"><b class="red-text">*</b>请修改真实姓名</label>
 			    <label ng-if="user.isVerify" for="name">姓名</label>
 			</div>
@@ -37,7 +37,7 @@
 			    <input id="password" type="text" ng-model="user.password" length="16" ng-focus="focus()" ng-blur="blur()" required>
 			    <label for="password"><b class="red-text">*</b>请输入密码</label>
 			</div>
-			<select class="" ng-model="user.school" material-select watch>
+			<select class="" ng-model="user.school" ng-disabled="user.studentId" material-select watch>
 			  <option value="" disabled selected><b class="red-text">*</b>请选择学校</option>
 			  <option ng-repeat="school in schools">{{school.name}}</option>
 			</select>
@@ -59,18 +59,27 @@
 	<div id="detailIfo">
 		<form class="reg " id="detForm" name="detForm">
 			<div input-field class="col s12">
-			    <input id="Email" type="email" ng-model="user.Email" length="11" ng-focus="focus()" ng-blur="blur()">
-			    <label for="Email">邮箱</label>
+		    <input id="Email" type="email" ng-model="user.Email" ng-focus="focus()" ng-blur="blur()">
+		    <label for="Email">邮箱</label>
 			</div>
 
 			<div input-field class="col s12">
-			    <input id="studentId" type="number" ng-model="user.studentId" ng-focus="focus()" ng-blur="blur()">
-			    <label for="studentId">学号</label>
+		    <input id="studentId" type="number" ng-model="user.studentId" ng-focus="focus()" ng-blur="blur()" disabled>
+		    <label for="studentId">学号</label>
 			</div>
 			<div input-field class="col s12">
-			    <input id="academy" type="text" ng-model="user.academy" ng-focus="focus()" ng-blur="blur()">
-			    <label for="academy">学院</label>
+		    <input id="academy" type="text" ng-model="user.academy" ng-focus="focus()" ng-blur="blur()">
+		    <label for="academy">学院</label>
 			</div>
+			<div class="file-field input-field headImgUrl" class="col s12">
+		    <div class="">
+		      <img ng-src="{{user.headImgUrl}}">
+		      <input type="file" id="headImg" multiple accept="image/*">
+		    </div>
+		    <div class="file-path-wrapper">
+		      <input class="file-path validate" ng-model="tem" ng-change="uploadLogo()" type="text" placeholder="请选择头像">
+		    </div>
+		  </div>
 			<div  class="row center">
 				<button type="sumbit" 
 				  class="waves-effect waves-light btn offset-s1" 
@@ -81,20 +90,24 @@
 		</form>
 	</div>
 	<div id="reset">
-		<div input-field class="col s12">
-		    <input id="lastPwd" type="text" ng-model="lastPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
-		    <label for="password"><b class="red-text">*</b>请输入当前密码</label>
-		</div>
-		<div input-field class="col s12">
-		    <input id="lastPwd" type="text" ng-model="lastPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
-		    <label for="password"><b class="red-text">*</b>请输入新密码</label>
-		</div>
-		<div  class="row center">
+		<form name="resetForm">
+			<div class="input-field col s12">
+			    <input id="lastPwd" type="text" ng-model="lastPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
+			    <label for="lastPwd"><b class="red-text">*</b>请输入当前密码</label>
+			</div>
+			<div class="input-field col s12">
+			    <input id="newPwd" type="text" ng-model="newPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
+			    <label for="newPwd"><b class="red-text">*</b>请输入新密码</label>
+			</div>
+			<div  class="row center">
 				<button type="sumbit" 
 				  class="waves-effect waves-light btn offset-s1" 
-					ng-click="reset()" 
+					ng-click="resetPassword()" 
+					ng-disabled="resetForm.$invalid"
 					style="margin-left: 20px">确定</button>
 			</div>
+		</form>
+			
 	</div>
 </div>
 

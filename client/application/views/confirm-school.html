@@ -1,22 +1,27 @@
-<form name="confirmForm">
+<nav class="header row hide-on-large-only">
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">whereRU</a>
+  </div>
+</nav>
+<form class="register container" name="confirmForm" id="confirmForm">
 	<div  class="row center">
 		<h3>学生学号验证</h3>
 	</div>
-	<div class="row container">
-		<select class="col s12" ng-model="user.academy" material-select watch>
+	<div class="row">
+		<select class="col s12" ng-model="academy" material-select watch required>
 		  <option value="" disabled selected>请选择学院</option>
 			  <option ng-repeat="academy in academies">{{academy}}</option>
 		</select>
-		<div input-field class="col s12">
+		<div  class="input-field col s12">
 		    <input id="phone" type="text" ng-model="user.name" ng-focus="focus()" ng-blur="blur()" disabled>
 		    <label for="phone">请输入姓名</label>
 		</div>
-		<div input-field class="col s12">
-		    <input id="studentId" type="text" ng-model="user.studentId" ng-focus="focus()" ng-blur="blur()" required>
+		<div class="input-field col s12">
+		    <input id="studentId" type="text" ng-model="studentId" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="studentId">请输入学号</label>
 		</div>
-		<div input-field class="col s12">
-		    <input id="password" type="text" ng-model="user.password" ng-focus="focus()" ng-blur="blur()" required>
+		<div class="input-field col s12">
+		    <input id="password" type="text" ng-model="studentPassword" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="password">请输入教务密码</label>
 		    <a href="/" class="right red-text">我们不记录你的教务密码，只用于验证学生</a>
 		</div>

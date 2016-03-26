@@ -13,7 +13,7 @@
 	<div class="col s12 center user-info">
 		<img ng-src="{{user.headImgUrl}}">
 		<h4 ng-show="user">
-			<a href="/u/info" class="black-text"><span ng-bind="user.name"></span></a>
+			<a href="/u/info"><span ng-bind="user.name"  class="black-text"></span><small>(修改信息)</small></a>
 			<a href="" ng-click="logout()">退出</a>
 		</h4>
 		<h4 ng-show="!user">

@@ -36,6 +36,10 @@
   "wechat": {
     "appID": "wx5d92b3c192f993e7",
     "appsecret": "ec1fde1a2cac7b6d6cced695df6e5e92",
-    "redrect": "http://whereru-dev.etuan.org/u/auth"
+    "redrect": "http://local.etuan.org/u/auth"
+  },
+  "default": {
+    "headImg": "http://img.etuan.org/default.jpg",
+    "img": "http://img.etuan.org/default.png"
   }
 }

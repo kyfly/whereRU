@@ -134,8 +134,14 @@ module.exports = function(Team) {
 			type: 'string',
 			required: true
 		},{
-			arg: 'page', type: 'number',
+			arg: 'page', type: 'number',required: true
+		},{
+			arg: 'type',
+			type: 'string'
+		},{
+			arg: 'status', type: 'number',
 		}],
+
 		returns: {
 			arg: 'teams', type: 'array'
 		},
@@ -148,13 +154,15 @@ module.exports = function(Team) {
 	 * @param  {Function} cb     [description]
 	 * @return {[type]}          [description]
 	 */
-	Team.getMySchoolTeams = function (school, page, cb){
+	Team.getMySchoolTeams = function (school, page, type, status, cb){
 		page = page || 0;
     Team.find({
       where: {
       	school:school,
       	hidden: false,
-      	deleted: false
+      	deleted: false,
+      	type: type,
+      	status: status
       },
       limit: 16,
       skip: page * 16,

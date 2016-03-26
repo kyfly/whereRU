@@ -1,7 +1,4 @@
 <ul class="collection with-header">
-  <li class="collection-header">
-    <h4><a href="/w/activities">参与活动</a></h4>
-  </li>
   <li class="collection-item avatar" ng-repeat="activity in activities">
     <img ng-src="{{activity.imgUrl}}@1e_1c_0o_0l_100h_100w_100q.src" alt="" class="circle">
     <span class="title">
@@ -17,5 +14,8 @@
         参与时间 | <span ng-bind="activity.created | date: 'yyyy-MM-dd HH:mm:ss'"></span>
       </span>
     </p>
+  </li>
+  <li class="collection-header">
+    <h4><a href="/w/activities">参与活动</a></h4>
   </li>
 </ul>

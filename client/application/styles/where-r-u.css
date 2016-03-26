@@ -34,7 +34,9 @@
   min-height: 300px;
   padding: 0 10px;
 }
-
+.side-nav{
+  z-index: 3;
+}
 .row {
   margin-bottom: 0;
 }
@@ -1248,6 +1250,28 @@ footer {
   padding: 20px 30px;
   margin-top: 4.5rem; 
 }
+#confirmForm{
+  background: #fff;
+    padding: 20px;
+}
+.headImgUrl img{
+  width: 50px;
+  height: 50px;
+}
+#teamlogo, #headImg{
+  z-index: 3;
+}
+.headImgUrl .file-path-wrapper{
+  position: absolute;
+  left: 60px;
+  top: 0;
+  right: 0;
+}
+#bindQrcode img{
+  border: 2px solid #eee;
+  padding: 10px;
+  display: initial !important;
+}
 .bottom-bar {
   position: fixed;
   bottom: 0;
@@ -1946,6 +1970,16 @@ footer {
 .user-activity>ul>li {
   display: inline;
   padding: 5px;
+}
+.user-activity .collection .collection-header{
+  padding: 0 10px;
+}
+.user-activity .collection .collection-header h4{
+  font-size: 1.5rem;
+  
+}
+.user-activity .collection .collection-header a{
+  color: #444;
 }
 .user-activity .collection .collection-item.avatar {
   min-height: 120px;

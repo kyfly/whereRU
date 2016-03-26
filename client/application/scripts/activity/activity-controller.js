@@ -5,12 +5,13 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
   $scope.activityItems = [];
   $scope.filterBar = 'ng-hide';
   var page = 0;
+  var status = 0;
   $scope.changeFilter = function () {
     $scope.choice = this.filter;
   }
   angular.element($window).bind('scroll', function (e) {
     var body = e.target.body;
-    if (body.scrollHeight - body.clientHeight - body.scrollTop < 600 && $window.pull) {
+    if (body.scrollHeight - body.clientHeight - body.scrollTop < 600 && $window.pull && !$scope.last) {
       $scope.getActivities();
       $window.pull = false;
     } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 600) {
@@ -26,6 +27,7 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
       actType: 'form'
     };
     page = 0;
+    $scope.last = false;
     $scope.activityItems = [];
     $scope.getActivities();
     $scope.typeHide = true;
@@ -36,6 +38,7 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
       actType: 'vote'
     };
     page = 0;
+    $scope.last = false;
     $scope.activityItems = [];
     $scope.getActivities();
     $scope.typeHide = true;
@@ -46,6 +49,7 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
       actType: 'seckill'
     };
     page = 0;
+    $scope.last = false;
     $scope.activityItems = [];
     $scope.getActivities();
     $scope.typeHide = true;
@@ -65,7 +69,13 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
     $scope.query = {
       status: 'ing'
     };
+
     $scope.statusHide = true;
+    status = 1;
+    page = 0;
+    $scope.last = false;
+    $scope.activityItems = [];
+    $scope.getActivities();
     $scope.status = '进行中';
   };
   $scope.nosFilter = function () {
@@ -73,6 +83,11 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
       status: 'nos'
     };
     $scope.statusHide = true;
+    status = 2;
+    page = 0;
+    $scope.last = false;
+    $scope.activityItems = [];
+    $scope.getActivities();
     $scope.status = '未开始';
   };
   $scope.endFilter = function () {
@@ -80,6 +95,11 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
       status: 'end'
     };
     $scope.statusHide = true;
+    status = -1;
+    page = 0;
+    $scope.last = false;
+    $scope.activityItems = [];
+    $scope.getActivities();
     $scope.status = '已结束';
   };
   $scope.titleFilter = function () {
@@ -112,11 +132,12 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
       $scope.$emit('auth:loginRequired');
       return;
     }
-    if (!$scope.query)
-      $scope.query = {};
+    var query = $scope.query || {};
+    var actType = query.actType || 'all';
     Activity.getMySchoolActiveties({
       school: $scope.$currentUser.school,
-      actType: $scope.query.actType,
+      actType: actType,
+      status: status,
       page: page
     }, function(res){
       for (x in res) if (x === 'activties') {

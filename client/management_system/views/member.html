@@ -1,5 +1,18 @@
 <h5 class="left">成员：<span ng-bind="memberLength"></span></h5>
-<a href="" class="addMember waves-effect waves-light btn right"><i class="mdi-social-person-add right"></i>邀请新成员</a>
+<a href="#invote" modal class="addMember waves-effect waves-light btn right">
+  <i class="mdi-social-person-add right"></i>
+  邀请新成员</a>
+<div id="invote" class="modal">
+  <div class="modal-content center">
+    <h4>复制该地址发送给成员</h4>
+    <p class="text-center warningText">
+      <span>http://whereru.etuan.org/w/team/{{teamInfo.id}}</span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+  </div>
+</div>
 <div class="clearfix"></div>
 <div class="row">
   <div class="col s12 m6" ng-repeat="member in members" ng-show="member.verified === false">
@@ -9,7 +22,7 @@
         <p><a ng-click="showMemberDetail()" href="" class="orange-text text-lighten-1 unverifiedName"
               ng-bind="member.name"></a> 通过团队查找申请加入该团队</p>
         <div class="white-text container" ng-class="{false: 'hide'}[isShowMemberDetail]">
-          <p>手机：<span ng-bind="member.phone"></span></p>
+          <p>手机：<a href="tel:{{member.phone}}" ng-bind="member.phone"></a></p>
           <p>学院：<span ng-bind="member.academy"></span></p>
           <p>部门：<span ng-bind="member.department"></span></p>
         </div>
@@ -26,12 +39,12 @@
   <div class="col s12 m6 l4" ng-repeat="member in members | filter: {verified: true}">
     <div class="card memberCard hoverable">
       <div class="card-content">
-        <i class="mdi-content-clear red-text deleteMember right" ng-href="{{'#deleteMemberConfirm' + $index}}" modal></i>
+        <i ng-show="member.department !== '负责人'" class="mdi-content-clear red-text deleteMember right" ng-href="{{'#deleteMemberConfirm' + $index}}" modal></i>
         <img class="left" width="55px" height="55px" src="/lib/img/logo.jpg">
         <div class="left memberInfo">
           <span ng-bind="member.name"></span>
           <br>
-          <p class="telSpan" ng-bind="member.phone"></p>
+          <a href="tel:{{member.phone}}" ng-bind="member.phone"></a>
         </div>
         <div class="clearfix"></div>
         <hr>

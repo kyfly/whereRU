@@ -15,7 +15,7 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
   var page = 0;
   angular.element($window).bind('scroll', function (e) {
     var body = e.target.body;
-    if (body.scrollHeight - body.clientHeight - body.scrollTop < 600 && $window.pull) {
+    if (body.scrollHeight - body.clientHeight - body.scrollTop < 600 && $window.pull && !$scope.last) {
       $scope.getTeams();
       $window.pull = false;
     } else if (body.scrollHeight - body.clientHeight - body.scrollTop > 600) {
@@ -38,12 +38,20 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
     $scope.query = {
       status: 1
     };
+    page = 0;
+    $scope.last = false;
+    $scope.teams = [];
+    $scope.getTeams();
     $scope.status = '可加入';
   };
   $scope.organizationFilter = function () {
     $scope.query = {
       type: '校园组织'
     };
+    page = 0;
+    $scope.last = false;
+    $scope.teams = [];
+    $scope.getTeams();
     $scope.typeHide = true;
     $scope.type = '校园组织';
   };
@@ -51,6 +59,10 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
     $scope.query = {
       type: '校园社团'
     };
+    page = 0;
+    $scope.last = false;
+    $scope.teams = [];
+    $scope.getTeams();
     $scope.typeHide = true;
     $scope.type = '校园社团';
   };
@@ -58,6 +70,10 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
     $scope.query = {
       type: '兴趣团队'
     };
+    page = 0;
+    $scope.last = false;
+    $scope.teams = [];
+    $scope.getTeams();
     $scope.typeHide = true;
     $scope.type = '兴趣团队';
   };
@@ -65,6 +81,10 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
     $scope.query = {
       type: '竞赛团队'
     };
+    page = 0;
+    $scope.last = false;
+    $scope.teams = [];
+    $scope.getTeams();
     $scope.typeHide = true;
     $scope.type = '竞赛团队';
   };
@@ -104,9 +124,12 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
       $scope.$emit('auth:loginRequired');
       return;
     }
+    var query = $scope.query || {};
     Team.getMySchoolTeams({
       school: $scope.$currentUser.school,
-      page: page
+      page: page,
+      type: query.type,
+      status: query.status
     }, function (res) {
       if (res.teams.length < 16 || res.teams.length === 0) {
         $scope.last = true;
@@ -149,8 +172,8 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
  */
 
 app.controller('TeamController', 
-  ['$scope', 'Team', '$stateParams', 'User', '$location',
-  function ($scope, Team, $stateParams, User, $location) {
+  ['$scope', 'Team', '$stateParams', 'User', '$location', '$timeout',
+  function ($scope, Team, $stateParams, User, $location, $timeout) {
   $scope.userInfomation = {};
 
   if (!$scope.teamId) {
@@ -197,18 +220,12 @@ app.controller('TeamController',
     }
     User.getInfo(function (user) {
       $scope.user = user;
-      // if (!user.studentId) {
-      //   console.log($location.url());
-      //   url = 'http://cas.hdu.edu.cn/cas/login?service='
-      //   + $location.protocol()
-      //   + "://" + $location.host()
-      //   + ":" + $location.port()
-      //   + "/api/WUsers/"+ $scope.$currentUser.id + "/confirmSchool"
-      //   + "?access_token=" + $scope.$currentUser.accessToken
-      //   + "&from=" + $location.url();
-      //   location.href = url;
-      // }
-        
+      if (!user.studentId) {
+        Materialize.toast('加入团队需要验证学号信息', 2000);
+        $timeout(function () {
+          $location.path('/u/confirmSchool');
+        }, 1000);
+      }
     });
   };
   $scope.join = function () {

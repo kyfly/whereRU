@@ -49,10 +49,10 @@
 			  <option ng-repeat="type in types">{{type.name}}</option>
 			</select>
 
-			<div class="file-field input-field">
-		    <div class="btn">
-		      <span>团队LOGO</span>
-		      <input type="file" id="teamlogo" multiple ng-model="team.logoUrl" required>
+			<div class="file-field input-field headImgUrl">
+		    <div>
+		      <img ng-src="{{team.logoUrl || 'http://img.etuan.org/default.jpg@1e_1c_0o_0l_100h_100w_100q.src'}}" alt="">
+		      <input type="file" id="teamlogo" multiple ng-model="team.logoUrl" accept="image/*" required>
 		    </div>
 		    <div class="file-path-wrapper">
 		      <input class="file-path validate" ng-model="tem" ng-change="uploadLogo()" type="text" placeholder="请选择团队LOGO">
