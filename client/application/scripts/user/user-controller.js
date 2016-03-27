@@ -1,4 +1,5 @@
 function createQrcode (url, eId) {
+  document.getElementById(eId).innerHTML = null;
   var qrcode = new QRCode(document.getElementById(eId), {
       text: url,
       colorDark : "#000000",
@@ -25,6 +26,7 @@ app.controller('LoginController',
         $window.location.href = res.url;
       } else {
         createQrcode(res.url, 'qrcode');
+        var flag = true;
         var outh = $interval(function () {
           Aouth.findById({ id: res.token }, function (res) {
             var data = res.token;
@@ -37,6 +39,7 @@ app.controller('LoginController',
               userAuthSave(data, $rootScope, LoopBackAuth);
               $scope.wechatLogin = false;
               Materialize.toast('登录成功', 3000);
+              flag = false;
               if (res.aouth.url) {
                 Materialize.toast('记得去完善资料', 3000);
               } else $location.path('/u/info');
@@ -44,7 +47,7 @@ app.controller('LoginController',
           });
         }, 3000);
         $timeout(function () {
-          if (outh) {
+          if (flag) {
             Materialize.toast("验证超时，请在30秒内完成确认哦", 3000);
             document.getElementById("qrcode").innerHTML = null;
             $scope.wechatLogin = false;
@@ -285,7 +288,18 @@ app.controller('UserInfoController', ['$scope', 'User', 'School', '$location','u
       $scope.user.headImgUrl = res.url;
     });
   };
+  $scope.bindWechat = function () {
+    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + 'wx5d92b3c192f993e7'
+      + '&redirect_uri=http://'+ $location.host()
+      +'/u/bind&response_type=code&scope=snsapi_userinfo&state=' + $scope.$currentUser.id
+      +'#wechat_redirect';
+    createQrcode(url, 'bindQrcode');
+  };
   $scope.updateInfo = function () {
+    User.checkPhone({
+      phone: $scope.user.phone,
+      id: $scope.user.id
+    });
     User.prototype_updateAttributes($scope.user, function (data) {
       Materialize.toast('修改成功', 2000);
     });

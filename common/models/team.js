@@ -303,6 +303,21 @@ module.exports = function(Team) {
   		}
   	});
   };
+  Team.afterCreate = function (next, instance) {
+  	instance.user(function (err, user) {
+  		var userInfo = {
+        "phone": user.phone,
+        "name": user.name,
+        "school": user.school,
+        "verified": true,
+        "userId": user.id,
+        "department": "负责人",
+        "created": new Date()
+      };
+      instance.members.create(userInfo);
+  	});
+  	next();
+  }
   /**
    * [description]
    * @param  {[type]} ctx   [description]

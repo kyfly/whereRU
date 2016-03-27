@@ -108,7 +108,7 @@
               method: 'GET'
             },
             "checkPhone": {
-              url: urlBase + '/WUsers/checkPhone',
+              url: urlBase + '/WUsers/:id/checkPhone',
               method: 'GET'
             },
             "updateAll": {

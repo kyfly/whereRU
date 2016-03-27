@@ -44,7 +44,7 @@ module.exports = function(User) {
       ctx.res.send(token);
     });
   });
-  User.beforeRemote("resetPassword", function (ctx, ins, next) {
+  User.beforeRemote("reset", function (ctx, ins, next) {
     if (!ctx.req.accessToken) {
       return next('不允许的操作');
     }
@@ -61,7 +61,7 @@ module.exports = function(User) {
           }
         });
       } else {
-        next('密码错误')
+        next('密码错误');
       }
     });
     //console.log(, ctx.req.body)
@@ -498,16 +498,6 @@ module.exports = function(User) {
       if (err) {
         return next(err);
       }
-      var userInfo = {
-        "phone": user.phone,
-        "name": user.name,
-        "school": user.school,
-        "verified": true,
-        "userId": user.id,
-        "department": "负责人",
-        "created": new Date()
-      };
-      data.members.create(userInfo);
       ctx.res.send(data)
     })
   });
@@ -521,22 +511,37 @@ module.exports = function(User) {
    */
   User.beforeRemote('prototype.updateAttributes', function (ctx, ins, next) {
     var updateData = ctx.req.body;
-    if (ctx.req.body.phone) {
-      ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
-    }
     if (ctx.req.body.password && !updateData.isVerify) {
       updateData.isVerify = true;
     } else if (ctx.req.body.password) {
       next('非允许操作');
       return;
     }
-    ctx.instance.histories.create({
-      created: new Date(),
-      updateData: updateData
-    }, function (err, histories) {
-      if (err)  throw err;
-    });
-    next();
+    if (ctx.req.body.phone) {
+      ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
+      User.findOne({
+        where: {
+          phone: ctx.req.body.phone
+        }
+      }, function (err, user) {
+        if (err) {
+          return next(err);
+        }
+        if (user.id != ctx.req.body.id) {
+          next('手机号被注册了，如果是你自己注册的请登录后,绑定微信号');
+        } else {
+          ctx.instance.histories.create({
+            created: new Date(),
+            updateData: updateData
+          }, function (err, histories) {
+            if (err)  throw err;
+          });
+          next();
+        }
+      })
+    }
+    
+    
   });
   /**
    * 用户信息更新处理
@@ -546,7 +551,21 @@ module.exports = function(User) {
    * @return {[type]}       [description]
    */
   User.afterRemote('prototype.__updateAttributes', function (ctx, ins, next) {
-    //TODO 暂时不需任何操作
+    ins.teams.updateAll({
+      where: {
+        userId: ins.id
+      }
+    }, {school: ins.school}, function() {});
+    User.app.models.Member.updateAll({
+      where: {
+        userId: ins.id
+      }
+    }, {
+      "phone": ins.phone,
+      "name": ins.name,
+      "school": ins.school,
+      "academy": ins.academy
+    }, function () {});
     next();
   });
    /**
@@ -842,9 +861,24 @@ module.exports = function(User) {
           } else {
             user.openid = userDate.openid;
             user.headImgUrl = userDate.headimgurl;
-            user.save(function (err, user) {
-              loginUser(user, undefined);
+            User.find({
+              where: {
+                openid: userDate.openid
+              }
+            }, function (err, weUser) {
+              if (err) {
+                next('服务器错误');
+              } else if (weUser) {
+                User.app.models.forEach(function (model) {
+                  model.updateAll({userId: weUser.id}, {userId: user.id}, function () {});
+                });
+                weUser.destroy();
+              }
+              user.save(function (err, user) {
+                loginUser(user, undefined);
+              });
             });
+           
           }
         });
       });
@@ -906,23 +940,36 @@ module.exports = function(User) {
   User.auth2wechat= function (code, state, action, cb) {
   };
   User.remoteMethod('checkPhone', {
-    accepts: {
-          "type": "string",
-          "arg": "phone"
-        },
+    accepts: [{
+      "type": "string",
+      "arg": "id"
+    },{
+      "type": "string",
+      "arg": "phone"
+    }],
     results: {
       "type": "boolean",
       "arg": "aouth"
     },
     http: {
-      path: '/checkPhone', verb: 'get'
+      path: '/:id/checkPhone', verb: 'get'
     }
   });
-  User.checkPhone = function (phone, cb) {
-    User.count({
-      phone: phone
-    }, function (err, count) {
-      cb(err, count > 0);
+  User.checkPhone = function (id, phone, cb) {
+    User.findOne({
+      where:
+      {
+        phone: phone
+      }
+    }, function (err, user) {
+      if (err) {
+        return cb(err);
+      }
+      if (user.id == id) {
+        cb(null, true);
+      } else {
+        cb('手机号被注册了,如果是你自己注册的,请登录后绑定微信号')
+      }
     });
   }
 };

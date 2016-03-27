@@ -7,14 +7,17 @@
 <div class="register container">
 	<div class="row s12">
 	  <ul class="tabs" tabs>
-	    <li class="tab col s4 waves-effect">
+	    <li class="tab col s3 waves-effect">
 	      <a href="#requiredInfo" class="active">必须信息</a>
 	    </li>
-	    <li class="tab col s4 waves-effect">
+	    <li class="tab col s3 waves-effect">
 	      <a href="#detailIfo">其他信息</a>
 	    </li>
-	    <li class="tab col s4 waves-effect">
+	    <li class="tab col s3 waves-effect">
 	      <a href="#reset">密码修改</a>
+	    </li>
+	    <li ng-show="mediaIsPC" class="tab col s3 waves-effect">
+	      <a href="#bind"  ng-click="bindWechat()">绑定微信</a>
 	    </li>
 	  </ul>
 	</div>
@@ -108,6 +111,10 @@
 			</div>
 		</form>
 			
+	</div>
+	<div id="bind">
+		<div id="bindQrcode" class="center"></div>
+		<h6 class="center">微信扫一扫,绑定账号</h>
 	</div>
 </div>
 
