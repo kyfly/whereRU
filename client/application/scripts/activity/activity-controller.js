@@ -149,8 +149,6 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
           $scope.activityItems.push(getActivityStatus(activity));
         });
       }
-    }, function (err) {
-      $scope.errorTip(err);
     });
   };
   if (!$scope.$currentUser) {
@@ -159,8 +157,6 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
       $scope.activityItems.forEach(function (activity) {
         getActivityStatus(activity);
       });
-    }, function (err) {
-      $scope.errorTip(err);
     });
   } else {
     $scope.getActivities();
@@ -211,11 +207,7 @@ app.controller('ActivityController',
           $interval.cancel(timer);
         });
       }
-    }, function (err) {
-      $scope.errorTip(err);
     });
-  }, function (err) {
-    $scope.errorTip(err);
   });
   $scope.onClickJoinActivity = function () {
     var actType = $scope.activity.actType;
@@ -295,8 +287,6 @@ app.controller('ActivityController',
         Materialize.toast('参与成功,可在个人主页查看结果', 4000);
       }
         
-    }, function (err) {
-      $scope.errorTip(err);
     });
   };
   $scope.uploadFile = function () {
@@ -330,7 +320,7 @@ app.controller('ActivityController',
       result.push($scope.vote._voteItems[x].id);
     }
     if ($scope.vote.limit && result.length < $scope.vote.limit) {
-      Materialize.toast('必须选择' + $scope.vote.max + '项哦', 2000);
+      Materialize.toast('必须选择' + $scope.vote.limit + '项哦', 2000);
       return;
     }
     if ($scope.vote.max && result.length > $scope.vote.max) {
@@ -354,8 +344,6 @@ app.controller('ActivityController',
       } 
       else
         Materialize.toast('参与成功,可在个人主页查看结果', 4000);
-    }, function (err) {
-      $scope.errorTip(err);
     });
   };
   $scope.submitSeckillResult = function () {
@@ -379,8 +367,6 @@ app.controller('ActivityController',
         Materialize.toast(res.message, 2000);
       else 
         Materialize.toast('参与成功,可在个人主页查看结果', 4000);
-    }, function (err) {
-      $scope.errorTip(err);
     });
   };
 }]);

@@ -96,6 +96,10 @@
     "seckills": {
       "type": "hasMany",
       "model": "Seckill"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "whereRUUser"
     }
   },
   "acls": [

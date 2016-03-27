@@ -296,10 +296,6 @@ app.controller('UserInfoController', ['$scope', 'User', 'School', '$location','u
     createQrcode(url, 'bindQrcode');
   };
   $scope.updateInfo = function () {
-    User.checkPhone({
-      phone: $scope.user.phone,
-      id: $scope.user.id
-    });
     User.prototype_updateAttributes($scope.user, function (data) {
       Materialize.toast('修改成功', 2000);
     });

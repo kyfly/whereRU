@@ -1,6 +1,6 @@
 module.exports = function(SeckillResult) {
-	SeckillResult.observe('before save', function (ctx, next) {
-    ctx.instance.seckill({
+	SeckillResult.beforeCreate = function (next, instance) {
+		instance.seckill({
     	include: ['activity', 'seckillResults']
     }, function (err, seckill) {
     	if (err) {
@@ -13,18 +13,18 @@ module.exports = function(SeckillResult) {
 				return next('活动已经结束了');
 			} else {
 				seckill.seckillResults.count({
-					itemId: ctx.instance.itemId
+					itemId: instance.itemId
 				}, function (err, count) {
 					if (err) {
 		    		return next(err);
 		    	}
 		    	for (var i = seckill.toJSON()._seckillItems.length - 1; i >= 0; i--) 
-		    		if (seckill.toJSON()._seckillItems[i].id == ctx.instance.itemId) {
+		    		if (seckill.toJSON()._seckillItems[i].id == instance.itemId) {
 		    			if ((seckill.toJSON()._seckillItems[i].count - count) > 0) {
-								ctx.instance.get = true;
+								instance.get = true;
 							}
 							else {
-								ctx.instance.get = false;
+								instance.get = false;
 							}
 							return next();
 		    		}
@@ -32,5 +32,5 @@ module.exports = function(SeckillResult) {
 				});
 			}
     });
-  });
+	}
 };

@@ -38,6 +38,9 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
 	$rootScope.$on('auth:loginRequired', function () {
 		$rootScope.loginShow = true;
 	});
+	$rootScope.$on('error:unknown', function (event, data) {
+		$rootScope.errorTip(data);
+	});
 	$rootScope.cancelLogin = function () {
 		$rootScope.loginShow = false;
 	};
@@ -48,7 +51,7 @@ var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'n
     $rootScope.$broadcast('showBottomBar');
   };
   $rootScope.errorTip = function (err) {
-    Materialize.toast(err.data.error.message + '<br>' +'好像遇到了一点小问题,请您联系我们哦', 4000);
+    Materialize.toast('<b class="red-text">' + err.data.error.message + '</b>' +'如果有问题,请您联系我们哦', 10000);
   }
 }])
 .controller('HeaderController',

@@ -1,6 +1,6 @@
 module.exports = function(VoteResult) {
-	VoteResult.observe('after save', function (ctx, next) {
-		ctx.instance.vote({
+	VoteResult.beforeCreate = function (next, instance) {
+		instance.vote({
 			include: 'activity'
 		}, function (err, vote) {
 			if (err) {
@@ -13,8 +13,8 @@ module.exports = function(VoteResult) {
 				return next('活动已经结束了');
 			} else {
 				vote._voteItems.forEach(function (voteItem) {
-					for (var i = 0; i < ctx.instance.result.length; i++) 
-						if (ctx.instance.result[i] === voteItem.id) {
+					for (var i = 0; i < instance.result.length; i++) 
+						if (instance.result[i] === voteItem.id) {
 						 	voteItem.count ++
 						};
 				});
@@ -22,5 +22,5 @@ module.exports = function(VoteResult) {
 				next();
 			}
 		});
-	});
+	}
 };

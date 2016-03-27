@@ -1,6 +1,6 @@
 module.exports = function(FormResult) {
-	FormResult.observe('after save', function (ctx, next) {
-		ctx.instance.form({
+	FormResult.beforeCreate = function (next, instance) {
+		instance.form({
 			include: 'activity'
 		}, function (err, form) {
 			if (err || !form.toJSON().activity) {
@@ -15,5 +15,5 @@ module.exports = function(FormResult) {
 				next();
 			}
 		});
-	});
+	}
 };

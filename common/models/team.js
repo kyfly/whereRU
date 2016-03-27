@@ -279,45 +279,7 @@ module.exports = function(Team) {
 
   // })
   // prototype_unlink_partakedRaces 团队退出竞赛时通知主办方
-  /**
-   * [beforeCreate description]
-   * @param  {Function} next     [description]
-   * @param  {[type]}   instance [description]
-   * @return {[type]}            [description]
-   */
-  Team.beforeCreate = function (next, instance) {
-  	Team.app.models.Coterie.create({
-  		name: instance.name,
-			logoUrl: instance.logoUrl,
-			created: new Date(),
-			teamId:  instance.id,
-			id: instance.id,
-			school: instance.school,
-			type: instance.type,
-			desc: instance.desc
-  	}, function (err, coterie) {
-  		if (err) {
-  			next(err);
-  		} else {
-  			next()
-  		}
-  	});
-  };
-  Team.afterCreate = function (next, instance) {
-  	instance.user(function (err, user) {
-  		var userInfo = {
-        "phone": user.phone,
-        "name": user.name,
-        "school": user.school,
-        "verified": true,
-        "userId": user.id,
-        "department": "负责人",
-        "created": new Date()
-      };
-      instance.members.create(userInfo);
-  	});
-  	next();
-  }
+  
   /**
    * [description]
    * @param  {[type]} ctx   [description]

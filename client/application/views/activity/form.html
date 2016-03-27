@@ -2,13 +2,13 @@
 	<div ng-repeat="formItem in form._formItems">
 		<div input-field ng-if="formItem.type === 'text'" >
 	    <input ng-if="!formItem.len" ng-focus="focus()" id="{{$index}}" ng-blur="blur()" type="text" ng-model="result[$index]['name']" required>
-	    <input ng-if="formItem.len" ng-focus="focus()" id="{{$index}}" ng-blur="blur()" type="text" ng-model="result[$index]['name']" length="formItem.len" required>
+	    <input ng-if="formItem.len" ng-focus="focus()" id="{{$index}}" ng-blur="blur()" type="text" ng-model="result[$index]['name']" length="{{formItem.len}}" required>
 	    <label for="{{$index}}">请输入{{formItem.name}}</label>
 		</div>
 
 		<div input-field ng-if="formItem.type === 'textarea'">
 	    <textarea ng-if="!formItem.len" ng-focus="focus()" ng-blur="blur()" ng-model="result[$index]['name']" class="materialize-textarea" required></textarea>
-	    <textarea ng-if="formItem.len" ng-focus="focus()" ng-blur="blur()" ng-model="result[$index]['name']" class="materialize-textarea" length="formItem.len" required></textarea>
+	    <textarea ng-if="formItem.len" ng-focus="focus()" ng-blur="blur()" ng-model="result[$index]['name']" class="materialize-textarea" length="{{formItem.len}}" required></textarea>
 	    <label>请输入{{formItem.name}}</label>
 		</div>
 

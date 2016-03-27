@@ -285,7 +285,7 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "reset"
+      "property": "resetPassword"
     }
   ],
   "methods": {}

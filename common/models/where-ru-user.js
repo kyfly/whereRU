@@ -44,27 +44,28 @@ module.exports = function(User) {
       ctx.res.send(token);
     });
   });
-  User.beforeRemote("reset", function (ctx, ins, next) {
+  User.beforeRemote("resetPassword", function (ctx, ins, next) {
     if (!ctx.req.accessToken) {
       return next('不允许的操作');
     }
     User.findById(ctx.req.accessToken.userId, function (err, user) {
       if (err)
         return next(err);
-      if (user.hasPassword(ctx.req.body.lastPwd)) {
-        user.password = ctx.req.body.newPwd;
-        user.save(function (err, user) {
-          if (err)
-            return next(err);
-          else {
-            ctx.res.send(200)
-          }
-        });
-      } else {
-        next('密码错误');
-      }
+      user.hasPassword(ctx.req.body.lastPwd).then(function (data) {
+        if (data) {
+          user.password = ctx.req.body.newPwd;
+          user.save(function (err, user) {
+            if (err)
+              return next(err);
+            else {
+              ctx.res.send(200)
+            }
+          });
+        } else {
+          next('密码错误');
+        }
+      })
     });
-    //console.log(, ctx.req.body)
   });
   //用户登录，并返回用户信息
   User.beforeRemote('login', function (ctx, ins, next) {
@@ -494,11 +495,38 @@ module.exports = function(User) {
     var user = ctx.instance.toJSON();
     ctx.req.body.school = user.school;
     ctx.req.body.created = new Date();
-    ctx.instance.teams.create(ctx.req.body, function (err, data) {
+    function createMember(team, user) {
+      var userInfo = {
+        "phone": user.phone,
+        "name": user.name,
+        "school": user.school,
+        "verified": true,
+        "userId": user.id,
+        "department": "负责人",
+        "created": new Date(),
+        "teamId": team.id
+      };
+      team.members.create(userInfo);
+    }
+    function createCoterie(team) {
+      User.app.models.Coterie.create({
+        name: team.name,
+        logoUrl: team.logoUrl,
+        created: new Date(),
+        teamId:  team.id,
+        id: team.id,
+        school: team.school,
+        type: team.type,
+        desc: team.desc
+      });
+    }
+    ctx.instance.teams.create(ctx.req.body, function (err, team) {
       if (err) {
         return next(err);
       }
-      ctx.res.send(data)
+      createCoterie(team);
+      createMember(team, ctx.instance);
+      ctx.res.send(team)
     })
   });
 
@@ -527,8 +555,8 @@ module.exports = function(User) {
         if (err) {
           return next(err);
         }
-        if (user.id != ctx.req.body.id) {
-          next('手机号被注册了，如果是你自己注册的请登录后,绑定微信号');
+        if (user && user.id != ctx.req.body.id) {
+          next('手机号被注册了,如果是你自己注册的请登录后,绑定微信号');
         } else {
           ctx.instance.histories.create({
             created: new Date(),
@@ -540,8 +568,6 @@ module.exports = function(User) {
         }
       })
     }
-    
-    
   });
   /**
    * 用户信息更新处理
@@ -552,14 +578,10 @@ module.exports = function(User) {
    */
   User.afterRemote('prototype.__updateAttributes', function (ctx, ins, next) {
     ins.teams.updateAll({
-      where: {
         userId: ins.id
-      }
     }, {school: ins.school}, function() {});
     User.app.models.Member.updateAll({
-      where: {
         userId: ins.id
-      }
     }, {
       "phone": ins.phone,
       "name": ins.name,
@@ -861,7 +883,7 @@ module.exports = function(User) {
           } else {
             user.openid = userDate.openid;
             user.headImgUrl = userDate.headimgurl;
-            User.find({
+            User.findOne({
               where: {
                 openid: userDate.openid
               }
@@ -869,9 +891,19 @@ module.exports = function(User) {
               if (err) {
                 next('服务器错误');
               } else if (weUser) {
-                User.app.models.forEach(function (model) {
-                  model.updateAll({userId: weUser.id}, {userId: user.id}, function () {});
-                });
+                if (weUser.phone) {
+                  next('该微信号已经和账户绑定');
+                  return;
+                }
+                var models = ['Article', 'Comment', 'CoteriewhereRUUser', 'FormResult', 'Member', 'Reply', 'SeckillResult', 'Team', 'VoteResult'];
+                if (weUser.id)
+                  models.forEach(function (model) {
+                    User.app.models[model].updateAll({
+                      userId: weUser.id
+                    }, {
+                      userId: user.id
+                    }, function () {});
+                  });
                 weUser.destroy();
               }
               user.save(function (err, user) {

@@ -158,6 +158,9 @@ app.controller('TeamsController', ['$scope', 'Team', 'User', '$location', 'uploa
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');
     }
+    if (!$scope.team.logoUrl) {
+      return Materialize.toast('团队logo未上传成功,请稍等', 2000);
+    }
     User.prototype_create_teams({
       id: $scope.$currentUser.id
     }, $scope.team, function (team) {

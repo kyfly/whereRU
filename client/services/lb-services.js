@@ -1041,23 +1041,13 @@
             return config || $q.when(config);
           },
           'responseError': function (rejection) {
-            console.log(rejection.config.url);
             switch (rejection.status) {
               case 401:
                 if (rejection.config.url !== "/api/WUsers/login")
                   $rootScope.$broadcast('auth:loginRequired');
                 break;
-              case 400:
-
-              // case 403:
-              //   $rootScope.$broadcast('auth:forbidden');
-              //   break;
-              // case 404:
-              //   $rootScope.$broadcast('page:notFound');
-              //   break;
-              // case 500:
-              //   $rootScope.$broadcast('server:error');
-              //   break;
+              default:
+                $rootScope.$broadcast('error:unknown', rejection);
             }
             return $q.reject(rejection);
           },

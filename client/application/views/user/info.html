@@ -16,106 +16,109 @@
 	    <li class="tab col s3 waves-effect">
 	      <a href="#reset">密码修改</a>
 	    </li>
-	    <li ng-show="mediaIsPC" class="tab col s3 waves-effect">
+	    <li ng-if="!user.openid" ng-show="mediaIsPC" class="tab col s3 waves-effect">
 	      <a href="#bind"  ng-click="bindWechat()">绑定微信</a>
 	    </li>
 	  </ul>
 	</div>
-	<div id="requiredInfo">
-		<form class="reg " id="reqForm" name="reqForm">
-			<div input-field class="col s12">
-			    <input id="phone" type="number" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
-
-			    <label ng-if="user.isVerify" for="phone">手机号</label>
-			    <label ng-if="!user.isVerify" for="phone"><b class="red-text">*</b>请输入手机号</label>
-			</div>
-
-			<div input-field class="col s12">
-			    <input id="name" type="text" ng-model="user.name" ng-focus="focus()" ng-blur="blur()" required ng-disabled="user.studentId">
-			    <label ng-if="!user.isVerify" for="name"><b class="red-text">*</b>请修改真实姓名</label>
-			    <label ng-if="user.isVerify" for="name">姓名</label>
-			</div>
 		
-			<div ng-if="!user.isVerify" input-field class="col s12">
-			    <input id="password" type="text" ng-model="user.password" length="16" ng-focus="focus()" ng-blur="blur()" required>
-			    <label for="password"><b class="red-text">*</b>请输入密码</label>
-			</div>
-			<select class="" ng-model="user.school" ng-disabled="user.studentId" material-select watch>
-			  <option value="" disabled selected><b class="red-text">*</b>请选择学校</option>
-			  <option ng-repeat="school in schools">{{school.name}}</option>
-			</select>
-			
-			<select class="" ng-model="user.sex" material-select watch>
-			  <option value="" disabled selected>请选择性别</option>
-			  <option value="男">男</option>
-			  <option value="女">女</option>
-			</select>
-			<div  class="row center">
-				<button type="sumbit" 
-				  class="waves-effect waves-light btn offset-s1" 
-					ng-click="updateInfo()" 
-					style="margin-left: 20px"
-					ng-disabled="reqForm.$invalid">更新信息</button>
-			</div>
-		</form>
-	</div>
-	<div id="detailIfo">
-		<form class="reg " id="detForm" name="detForm">
-			<div input-field class="col s12">
-		    <input id="Email" type="email" ng-model="user.Email" ng-focus="focus()" ng-blur="blur()">
-		    <label for="Email">邮箱</label>
-			</div>
+	<div>
+		<div id="requiredInfo">
+			<form class="reg " id="reqForm" name="reqForm">
+				<div input-field class="col s12">
+				    <input id="phone" type="number" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
 
-			<div input-field class="col s12">
-		    <input id="studentId" type="number" ng-model="user.studentId" ng-focus="focus()" ng-blur="blur()" disabled>
-		    <label for="studentId">学号</label>
-			</div>
-			<div input-field class="col s12">
-		    <input id="academy" type="text" ng-model="user.academy" ng-focus="focus()" ng-blur="blur()">
-		    <label for="academy">学院</label>
-			</div>
-			<div class="file-field input-field headImgUrl" class="col s12">
-		    <div class="">
-		      <img ng-src="{{user.headImgUrl}}">
-		      <input type="file" id="headImg" multiple accept="image/*">
-		    </div>
-		    <div class="file-path-wrapper">
-		      <input class="file-path validate" ng-model="tem" ng-change="uploadLogo()" type="text" placeholder="请选择头像">
-		    </div>
-		  </div>
-			<div  class="row center">
-				<button type="sumbit" 
-				  class="waves-effect waves-light btn offset-s1" 
-					ng-click="updateInfo()" 
-					style="margin-left: 20px"
-					ng-disabled="detForm.$invalid">更新信息</button>
-			</div>
-		</form>
-	</div>
-	<div id="reset">
-		<form name="resetForm">
-			<div class="input-field col s12">
-			    <input id="lastPwd" type="text" ng-model="lastPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
-			    <label for="lastPwd"><b class="red-text">*</b>请输入当前密码</label>
-			</div>
-			<div class="input-field col s12">
-			    <input id="newPwd" type="text" ng-model="newPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
-			    <label for="newPwd"><b class="red-text">*</b>请输入新密码</label>
-			</div>
-			<div  class="row center">
-				<button type="sumbit" 
-				  class="waves-effect waves-light btn offset-s1" 
-					ng-click="resetPassword()" 
-					ng-disabled="resetForm.$invalid"
-					style="margin-left: 20px">确定</button>
-			</div>
-		</form>
+				    <label ng-if="user.isVerify" for="phone">手机号</label>
+				    <label ng-if="!user.isVerify" for="phone"><b class="red-text">*</b>请输入手机号</label>
+				</div>
+
+				<div input-field class="col s12">
+				    <input id="name" type="text" ng-model="user.name" ng-focus="focus()" ng-blur="blur()" required ng-disabled="user.studentId">
+				    <label ng-if="!user.isVerify" for="name"><b class="red-text">*</b>请修改真实姓名</label>
+				    <label ng-if="user.isVerify" for="name">姓名</label>
+				</div>
 			
+				<div ng-if="!user.isVerify" input-field class="col s12">
+				    <input id="password" type="text" ng-model="user.password" length="16" ng-focus="focus()" ng-blur="blur()" required>
+				    <label for="password"><b class="red-text">*</b>请输入密码</label>
+				</div>
+				<select class="" ng-model="user.school" ng-disabled="user.studentId" material-select watch>
+				  <option value="" disabled selected><b class="red-text">*</b>请选择学校</option>
+				  <option ng-repeat="school in schools">{{school.name}}</option>
+				</select>
+				
+				<select class="" ng-model="user.sex" material-select watch>
+				  <option value="" disabled selected>请选择性别</option>
+				  <option value="男">男</option>
+				  <option value="女">女</option>
+				</select>
+				<div  class="row center">
+					<button type="sumbit" 
+					  class="waves-effect waves-light btn offset-s1" 
+						ng-click="updateInfo()" 
+						style="margin-left: 20px"
+						ng-disabled="reqForm.$invalid">更新信息</button>
+				</div>
+			</form>
+		</div>
+		<div id="detailIfo">
+			<form class="reg " id="detForm" name="detForm">
+				<div input-field class="col s12">
+			    <input id="Email" type="email" ng-model="user.Email" ng-focus="focus()" ng-blur="blur()">
+			    <label for="Email">邮箱</label>
+				</div>
+
+				<div input-field class="col s12">
+			    <input id="studentId" type="number" ng-model="user.studentId" ng-focus="focus()" ng-blur="blur()" disabled>
+			    <label for="studentId">学号</label>
+				</div>
+				<div input-field class="col s12">
+			    <input id="academy" type="text" ng-model="user.academy" ng-focus="focus()" ng-blur="blur()">
+			    <label for="academy">学院</label>
+				</div>
+				<div class="file-field input-field headImgUrl" class="col s12">
+			    <div class="">
+			      <img ng-src="{{user.headImgUrl}}">
+			      <input type="file" id="headImg" multiple accept="image/*">
+			    </div>
+			    <div class="file-path-wrapper">
+			      <input class="file-path validate" ng-model="tem" ng-change="uploadLogo()" type="text" placeholder="请选择头像">
+			    </div>
+			  </div>
+				<div  class="row center">
+					<button type="sumbit" 
+					  class="waves-effect waves-light btn offset-s1" 
+						ng-click="updateInfo()" 
+						style="margin-left: 20px"
+						ng-disabled="detForm.$invalid">更新信息</button>
+				</div>
+			</form>
+		</div>
+		<div id="reset">
+			<form name="resetForm">
+				<div class="input-field col s12">
+				    <input id="lastPwd" type="text" ng-model="lastPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
+				    <label for="lastPwd"><b class="red-text">*</b>请输入当前密码</label>
+				</div>
+				<div class="input-field col s12">
+				    <input id="newPwd" type="text" ng-model="newPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
+				    <label for="newPwd"><b class="red-text">*</b>请输入新密码</label>
+				</div>
+				<div  class="row center">
+					<button type="sumbit" 
+					  class="waves-effect waves-light btn offset-s1" 
+						ng-click="resetPassword()" 
+						ng-disabled="resetForm.$invalid"
+						style="margin-left: 20px">确定</button>
+				</div>
+			</form>
+		</div>
+		<div id="bind" ng-if="!user.openid">
+			<div id="bindQrcode" class="center"></div>
+			<h6 class="center">微信扫一扫,绑定账号</h6>
+		</div>
 	</div>
-	<div id="bind">
-		<div id="bindQrcode" class="center"></div>
-		<h6 class="center">微信扫一扫,绑定账号</h>
-	</div>
+	
 </div>
 
 

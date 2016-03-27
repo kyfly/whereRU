@@ -4,7 +4,10 @@
 		<h5 ng-show="vote.limit">你必须选择<span class="vote-tip" ng-bind="vote.limit"></span>项</h5>
 		<hr>
 	</div>
-
+	<div input-field ng-show="activity.verifyRule">
+    <input id="verifyId" type="text" ng-model="activity.verifyId" ng-focus="focus()" ng-blur="blur()">
+    <label for="verifyId">请输入验证信息({{activity.verifyRule}})</label>
+	</div>
 	<div class="row col s12" ng-if="vote._voteItems[0]['imgUrl']">
 		<div class="col s6 m4 l3"  ng-repeat="voteIteam in vote._voteItems">
 			<div class="card">
@@ -31,10 +34,7 @@
 	    </p>
   	</form>
 	</div>
-	<div input-field ng-show="activity.verifyRule">
-    <input id="verifyId" type="text" ng-model="activity.verifyId" ng-focus="focus()" ng-blur="blur()">
-    <label for="verifyId">请输入验证信息({{activity.verifyRule}})</label>
-	</div>
+	
 	<div  class="row col s12 center">
 		<button type="sumbit" ng-disabled="activityEnded"
 			class="btn waves-effect waves-light red"
