@@ -576,10 +576,11 @@ module.exports = function(User) {
    * @param  {[type]} next) {             } [description]
    * @return {[type]}       [description]
    */
-  User.afterRemote('prototype.__updateAttributes', function (ctx, ins, next) {
+  User.afterRemote('prototype.updateAttributes', function (ctx, ins, next) {
     ins.teams.updateAll({
-        userId: ins.id
-    }, {school: ins.school}, function() {});
+      userId: ins.id,
+      school: {neq: ins.school}
+    }, {school: ins.school}, function(err, team) {});
     User.app.models.Member.updateAll({
         userId: ins.id
     }, {
@@ -587,7 +588,7 @@ module.exports = function(User) {
       "name": ins.name,
       "school": ins.school,
       "academy": ins.academy
-    }, function () {});
+    }, function (err, member) {});
     next();
   });
    /**
