@@ -1,4 +1,12 @@
-var app = angular.module('app', ['ngResource', 'lbServices', 'ui.router', 'ui.materialize', 'ng.ueditor']);
+var app = angular.module('app', [
+	'ngResource',
+	'lbServices',
+	'ui.router',
+	'ui.materialize',
+	'ng.ueditor',
+	'ng.upload',
+	'ue.config'
+]);
 app.config(['$locationProvider', function ($locationProvider) {
   $locationProvider.html5Mode({
     enabled: true
