@@ -1,6 +1,11 @@
-var app = angular.module('WRU', ['ui.router', 'lbServices', 'ui.materialize', 'ng.ueditor'])
-
-  //配置路由方式
+var app = angular.module('WRU', [
+	'ui.router',
+	'lbServices',
+	'ui.materialize',
+	'ng.ueditor',
+	'ng.upload',
+	'ue.config'
+])
 .config(['$locationProvider', '$urlRouterProvider', function ($locationProvider, $urlRouterProvider) {
   $locationProvider.html5Mode({
   	enabled: true
