@@ -19,7 +19,7 @@ app.controller('LoginController',
       Materialize.toast('只能在微信中微信登录噢', 3000);
       return;
     }
-    
+
     $http.get('/wechatUrl?iswechat=' + isWechart + '&url=' + $location.path())
     .success(function (res) {
       $scope.wechatLogin = $rootScope.mediaIsPC;
@@ -69,6 +69,25 @@ app.controller('LoginController',
       Materialize.toast('登录成功', 2000);
     }, function (err) {
       Materialize.toast('登录失败,请检查输入是否正确', 2000);
+    });
+  };
+}]);
+app.controller('OrgLoginController', 
+  ['User','$scope', '$location', 'LoopBackAuth', '$rootScope', 
+  function(User, $scope, $location, LoopBackAuth, $rootScope){
+  $scope.login = function () {
+    User.login($scope.user, function (data) {
+      userAuthSave(data, $rootScope, LoopBackAuth);
+      Materialize.toast('登录成功', 2000);
+    });
+  };
+  $scope.resetPassword = function () {
+    User.resetPassword({
+      lastPwd: $scope.lastPwd,
+      newPwd: hex_md5($scope.newPwd)
+    }, function (res) {
+      Materialize.toast('密码修改成功,请记住新密码', 2000);
+      $location.path('/u/info');
     });
   };
 }]);

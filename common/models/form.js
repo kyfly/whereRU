@@ -1,4 +1,42 @@
+var xlsx = require('node-xlsx');
+var streamifier = require('streamifier');
 module.exports = function(Form) {
+  Form.remoteMethod(
+    'excel',
+    {
+      accepts: {arg:'id', type:'string'},
+      http: {path:'/excel/:id',verb:'get'}
+    }
+  );
+  Form.afterRemote('excel',function(ctx,instance,next){
+    Form.findById(ctx.req.params.id, {include: 'formResults'}, function (err, form) {
+      if (err) {
+        next(err);
+      } else {
+        try {
+          ctx.res.setHeader('Content-disposition', 'attachment; filename=' + form.title + '.xlsx');
+          var form = form.toJSON();
+          var formResult = form.formResults;
+          var excelTitle, result, formData;
+          form.formItems.forEach(function (item) {
+            excelTitle.push(item.name);
+          });
+          formData.push(excelTitle);
+          formResults.forEach(function(results){
+            results.forEach(function (re) {
+              result.push(re.name);
+            });
+            formData.push(result);
+            result = [];
+          });
+          var buffer = xlsx.build([{name: "表单结果", data: formData}]); // returns a buffer
+          streamifier.createReadStream(buffer).pipe(ctx.res);
+        } catch (e) {
+          next(e);
+        }
+      }
+    });
+  });
 	Form.beforeUpdate = function (next, form) {
     if (form.activityId) {
       Form.app.models.Activity.findById(form.activityId, {

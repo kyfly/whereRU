@@ -19,8 +19,10 @@
     "loopback-connector-mongodb": "^1.13.0",
     "loopback-datasource-juggler": "^2.19.0",
     "mammoth": "^0.3.27",
+    "node-xlsx": "^0.6.0",
     "q": "^1.4.1",
     "serve-favicon": "^2.0.1",
+    "streamifier": "^0.1.1",
     "wechat-oauth": "^1.1.1",
     "xmldom": "^0.1.19"
   },

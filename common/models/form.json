@@ -44,6 +44,12 @@
       "principalId": "teamOwner",
       "permission": "ALLOW",
       "property": "__get__formResults"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "teamOwner",
+      "permission": "ALLOW",
+      "property": "excel"
     }
   ],
   "methods": {}

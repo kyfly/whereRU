@@ -45,6 +45,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       controller: 'ActivityResultController',
       templateUrl: '/application/views/user/activity-result.html'
     })
+    .state('orgLogin', {
+      url: '/u/orgLogin',
+      controller: 'OrgLoginController',
+      templateUrl: '/application/views/user/org-user-login.html'
+    })
     .state('MS', {
       url: '/w/team/:id',
       controller: 'MSController',

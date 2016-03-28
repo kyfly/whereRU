@@ -1,0 +1,46 @@
+<nav class="header row hide-on-large-only">
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">whereRU</a>
+  </div>
+</nav>
+<div class="register container">
+	<form ng-show="!$currentUser" name="orgLoginForm">
+		<div input-field>
+	    <input id="phone" type="text" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
+	    <label for="phone">请输入手机号</label>
+		</div>
+		<div class="input-field password-input">
+	    <input id="password" type="{{pwdSwitch? 'text': 'password'}}" ng-model="user.password" min="8" ng-focus="focus()" ng-blur="blur()" length="16" required>
+	    <label for="password">请输入密码</label>
+	    <div class="switch">
+		    <label>
+		      <input type="checkbox" ng-init="true" ng-model="pwdSwitch">
+		      <span class="lever"></span>
+		    </label>
+		  </div>
+	    <a href="/u/retrieve" class="right">忘记密码</a>
+		</div>
+		<div class="center">
+			<button type="sumbit" class="waves-effect btn"
+				ng-click="login()"
+				ng-disabled="orgLoginForm.$invalid">登录</button>
+		</div>
+	</form>
+	<form ng-show="$currentUser" name="resetForm">
+		<div class="input-field col s12">
+		    <input id="lastPwd" type="text" ng-model="lastPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
+		    <label for="lastPwd"><b class="red-text">*</b>请输入当前密码</label>
+		</div>
+		<div class="input-field col s12">
+		    <input id="newPwd" type="text" ng-model="newPwd" length="16" ng-focus="focus()" ng-blur="blur()" required>
+		    <label for="newPwd"><b class="red-text">*</b>请输入新密码</label>
+		</div>
+		<div  class="row center">
+			<button type="sumbit" 
+			  class="waves-effect waves-light btn offset-s1" 
+				ng-click="resetPassword()" 
+				ng-disabled="resetForm.$invalid"
+				style="margin-left: 20px">确定</button>
+		</div>
+	</form>
+</div>
