@@ -1046,8 +1046,9 @@
                 if (rejection.config.url !== "/api/WUsers/login")
                   $rootScope.$broadcast('auth:loginRequired');
                 break;
-              default:
+              case 500:
                 $rootScope.$broadcast('error:unknown', rejection);
+                break;
             }
             return $q.reject(rejection);
           },

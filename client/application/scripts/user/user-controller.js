@@ -19,6 +19,7 @@ app.controller('LoginController',
       Materialize.toast('只能在微信中微信登录噢', 3000);
       return;
     }
+    
     $http.get('/wechatUrl?iswechat=' + isWechart + '&url=' + $location.path())
     .success(function (res) {
       $scope.wechatLogin = $rootScope.mediaIsPC;
@@ -62,6 +63,7 @@ app.controller('LoginController',
     });
   };
   $scope.login = function () {
+    $scope.user.password = hex_md5($scope.user.password);
     User.login($scope.user, function (data) {
       userAuthSave(data, $rootScope, LoopBackAuth);
       Materialize.toast('登录成功', 2000);
@@ -86,6 +88,7 @@ app.controller('RegisterController', ['User', 'School', '$scope', '$rootScope', 
     $scope.schools = schools;
   });
   $scope.register = function () {
+    $scope.user.password = hex_md5($scope.user.password);
     User.create($scope.user, function (data) {
       userAuthSave(data, $rootScope, LoopBackAuth);
       Materialize.toast('恭喜你，注册成功', 2000);
@@ -302,8 +305,8 @@ app.controller('UserInfoController', ['$scope', 'User', 'School', '$location','u
   };
   $scope.resetPassword = function () {
     User.resetPassword({
-      lastPwd: $scope.lastPwd,
-      newPwd: $scope.newPwd
+      lastPwd: hex_md5($scope.lastPwd),
+      newPwd: hex_md5($scope.newPwd)
     }, function (res) {
       Materialize.toast('修改成功,请记住新密码', 2000);
     });

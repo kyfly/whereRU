@@ -86,7 +86,7 @@ app.controller('CoterieController',
         'content': $scope.articleEditorContent
       }
     }).success(function (res) {
-      $scope.article.contentUrl = 'http://oss.etuan.org/' + res.url;
+      $scope.article.contentUrl = res.url;
       $scope.article.created = new Date();
       $scope.article.coterieId = $stateParams.id;
       User.prototype_create_articles({

@@ -4,7 +4,7 @@
 		<h3>登录后更精彩</h3>
 	</div>
 	<div class="row">
-		<div ng-show="!wechatLogin" class="col s4 center" ng-click="loadURL()">
+		<div ng-show="!wechatLogin" ng-hide="!$rootScope.mediaIsPC && !isWechart" class="col s4 center" ng-click="loadURL()">
 			<img src="/lib/img/weixin.jpg">
 			<h6>微信登录</h6>
 		</div>
@@ -12,17 +12,27 @@
 			<div class="center" id="qrcode"></div>
 			<h6>微信“扫一扫”</h6>
 		</div>
-		<div>
-			<div input-field class="col s8">
+		<div  ng-class="{true: 's12'}[!$rootScope.mediaIsPC && !isWechart]" class="col s8">
+			<div input-field>
 		    <input id="phone" type="text" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="phone">请输入手机号</label>
 			</div>
-			<div input-field class="col s8">
-		    <input id="password" type="password" ng-model="user.password" min="8" ng-focus="focus()" ng-blur="blur()" length="16" required>
-		    <label for="password">请输入密码</label>
+			<div class="input-field" style="overflow-x: hidden;">
+		    <input id="password" type="{{pwdSwitch? 'text': 'password'}}" ng-model="user.password" min="8" ng-focus="focus()" ng-blur="blur()" length="16" required style="padding-left: 80px;">
+		    <label style="padding-left: 80px;" for="password">请输入密码</label>
+		    <div class="switch">
+			    <label style="top: 0;
+				    left: 0;
+				    background: #fff;
+				    width: 75px;">
+			      <input type="checkbox" ng-init="true" ng-model="pwdSwitch">
+			      <span class="lever"></span>
+			    </label>
+			  </div>
+
 		    <a href="/u/retrieve" class="right">忘记密码</a>
 			</div>
-			<div class="col s8 right">
+			<div class="right">
 				<a href="#" class="waves-effect btn-flat col s4 center" ng-click="cancelLogin()">取消</a>
 				<a href="/u/register"
 					class="waves-effect btn-flat col s4 center" ng-click="cancelLogin()">注册</a>
