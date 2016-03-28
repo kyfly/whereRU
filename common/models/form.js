@@ -5,10 +5,12 @@ module.exports = function(Form) {
     'excel',
     {
       accepts: {arg:'id', type:'string'},
-      http: {path:'/excel/:id',verb:'get'}
+      http: {path:'/:id/excel',verb:'get'}
     }
   );
-  Form.afterRemote('excel',function(ctx,instance,next){
+  Form.excel = function() {};
+  Form.beforeRemote('excel',function(ctx,instance,next){
+
     Form.findById(ctx.req.params.id, {include: 'formResults'}, function (err, form) {
       if (err) {
         next(err);
@@ -17,19 +19,19 @@ module.exports = function(Form) {
           ctx.res.setHeader('Content-disposition', 'attachment; filename=' + form.title + '.xlsx');
           var form = form.toJSON();
           var formResult = form.formResults;
-          var excelTitle, result, formData;
-          form.formItems.forEach(function (item) {
+          var excelTitle = [], result = [], formData = [];
+          form._formItems.forEach(function (item) {
             excelTitle.push(item.name);
           });
           formData.push(excelTitle);
-          formResults.forEach(function(results){
-            results.forEach(function (re) {
+          formResult.forEach(function(results){
+            results.result.forEach(function (re) {
               result.push(re.name);
             });
             formData.push(result);
             result = [];
           });
-          var buffer = xlsx.build([{name: "表单结果", data: formData}]); // returns a buffer
+          var buffer = xlsx.build([{name: "表单结果", data: formData}]);
           streamifier.createReadStream(buffer).pipe(ctx.res);
         } catch (e) {
           next(e);

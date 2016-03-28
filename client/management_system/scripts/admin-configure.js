@@ -16,6 +16,7 @@ app.config(['$locationProvider', function ($locationProvider) {
 		  id: localStorage.$LoopBack$currentTeamId
 		}, function (res) {
 			$rootScope.teamInfo = res;
+			$rootScope.accesstoken = localStorage.$LoopBack$accessTokenId;
 			if (localStorage.$LoopBack$currentUserId == res.userId)
 			{
 			  $rootScope.teamInfo.owner = true;

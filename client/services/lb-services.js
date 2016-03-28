@@ -808,6 +808,10 @@
                 url: urlBase + '/Forms/:id/formResults',
                 method: 'GET',
                 isArray: true
+              },
+              "excel": {
+                url: urlBase + '/Forms/:id/excel',
+                method: 'GET'
               }
             }
           );

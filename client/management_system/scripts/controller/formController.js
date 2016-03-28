@@ -283,14 +283,16 @@ app.controller('FormEditCtrl', ['$scope', '$location', 'Team', '$rootScope', '$s
 }]);
 
 
-app.controller('FormResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Form', 'Team',
-  function ($scope, $rootScope, $stateParams, Form, Team) {
+app.controller('FormResultCtrl', 
+  ['$scope', '$rootScope', '$stateParams', 'Form', 'Team', '$location',
+  function ($scope, $rootScope, $stateParams, Form, Team, $location) {
     Team.prototype_findById_forms({
       id: localStorage.$LoopBack$currentTeamId,
       fk: $stateParams.id
     }, function (res) {
       $rootScope.pageTitle = '表单[' + res.title + ']结果';
       $scope.form = res;
+      $scope.url = 'http://' + $location.host() + ':' + $location.port() + '/api/Forms/' + $scope.form.id + '/excel?access_token=' + $scope.accesstoken;
     });
     Form.prototype_get_formResults({
       id: $stateParams.id
@@ -308,4 +310,8 @@ app.controller('FormResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Form'
       $scope.pageViewActive = false;
       $scope.allViewActive = active;
     }
+    //$scope.downExcel = function () {
+      
+      
+    //}
   }]);
