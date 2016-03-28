@@ -1,4 +1,11 @@
-app.factory('uploadFile', ['$http',function($http){
+(function (angular) {
+	/**
+	*  Module
+	*
+	* Description
+	*/
+	var module = angular.module('ng.upload', []);
+	module.factory('uploadFile', ['$http',function($http){
 	return {
 		file: function uploadFile (file, type, id) {
 			var Fd = new FormData();
@@ -35,3 +42,4 @@ app.factory('uploadFile', ['$http',function($http){
 		},
 	};
 }]);
+})(window.angular);

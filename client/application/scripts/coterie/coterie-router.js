@@ -1,4 +1,5 @@
-app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', 
+  function($stateProvider, $urlRouterProvider) {
   //$urlRouterProvider.when("", "/application/views/coterie/index.html");
   $stateProvider
 	.state('coteries', {

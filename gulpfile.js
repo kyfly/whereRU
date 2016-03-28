@@ -18,3 +18,27 @@ gulp.task('management', function () {
       .pipe(concat('management.min.js'))
       .pipe(gulp.dest('./client/build'));
 });
+gulp.task('appServices', function () {
+      gulp.src(['./client/services/*.js'])
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'))
+      .pipe(uglify())
+      .pipe(concat('app-services.min.js'))
+      .pipe(gulp.dest('./client/build'));
+});
+gulp.task('materialize', function () {
+      gulp.src(['./client/lib/materialize/js/angular-materialize.js'])
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'))
+      .pipe(uglify())
+      .pipe(concat('angular-materialize.min.js'))
+      .pipe(gulp.dest('./client/build'));
+});
+gulp.task('school', function () {
+      gulp.src(['./client/lib/school/hdu.js'])
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'))
+      .pipe(uglify())
+      .pipe(concat('school.min.js'))
+      .pipe(gulp.dest('./client/build'));
+});
