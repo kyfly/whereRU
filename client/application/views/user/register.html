@@ -16,9 +16,15 @@
 		    <label for="name">请输入姓名</label>
 		</div>
 	
-		<div input-field class="col s12 m4 l4">
-		    <input id="password" type="text" ng-model="user.password" length="16" ng-focus="focus()" ng-blur="blur()" required>
+		<div class="input-field password-input col s12 m4 l4">
+			<input id="password" type="{{pwdSwitch? 'text': 'password'}}" ng-model="user.password" ng-focus="focus()" ng-blur="blur()" length="16" required>
 		    <label for="password">请输入密码</label>
+		    <div class="switch">
+			    <label>
+			      <input type="checkbox" ng-init="true" ng-model="pwdSwitch">
+			      <span class="lever"></span>
+			    </label>
+			  </div>
 		</div>
 
 		<select class="" ng-model="user.school" material-select watch>

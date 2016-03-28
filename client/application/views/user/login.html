@@ -17,14 +17,11 @@
 		    <input id="phone" type="text" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="phone">请输入手机号</label>
 			</div>
-			<div class="input-field" style="overflow-x: hidden;">
-		    <input id="password" type="{{pwdSwitch? 'text': 'password'}}" ng-model="user.password" min="8" ng-focus="focus()" ng-blur="blur()" length="16" required style="padding-left: 80px;">
-		    <label style="padding-left: 80px;" for="password">请输入密码</label>
+			<div class="input-field password-input">
+		    <input id="password" type="{{pwdSwitch? 'text': 'password'}}" ng-model="user.password" min="8" ng-focus="focus()" ng-blur="blur()" length="16" required>
+		    <label for="password">请输入密码</label>
 		    <div class="switch">
-			    <label style="top: 0;
-				    left: 0;
-				    background: #fff;
-				    width: 75px;">
+			    <label>
 			      <input type="checkbox" ng-init="true" ng-model="pwdSwitch">
 			      <span class="lever"></span>
 			    </label>
