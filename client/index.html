@@ -13,7 +13,6 @@
 	<link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
 	<link href="/lib/materialize/css/materialize.css" rel="stylesheet">
   <link href="/application/styles/where-r-u.css" rel="stylesheet">
-
 </head>
 <body>
   <div class="wrap">
@@ -38,18 +37,15 @@
                   </ul>
                 </div>
               </li>
-              <li ng-show="!username" class="waves-effect">
+              <li ng-if="!username" class="waves-effect">
                 <a href="" ng-click="goLogin()">登录</a>
               </li>
-              <li ng-show="username">
+              <li ng-if="username">
                 <a href="">个人中心</a>
                 <div>
                   <ul class="pull-menu">
                     <li class="waves-effect">
                       <a href="/u/home">我的主页</a>
-                    </li>
-                    <li class="waves-effect">
-                      <a href="/u/home">我的消息</a>
                     </li>
                     <li class="waves-effect">
                       <a href="" ng-click="logOut()">退出登录</a>
