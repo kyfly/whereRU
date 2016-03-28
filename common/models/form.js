@@ -16,7 +16,11 @@ module.exports = function(Form) {
         next(err);
       } else {
         try {
-          ctx.res.setHeader('Content-disposition', 'attachment; filename=' + form.title + '.xlsx');
+          ctx.res.setHeader('Accept-Language', 'zh-CN,zh;q=0.8,en;q=0.6');
+          ctx.res.setHeader("Pragma", "No-cache");  
+          ctx.res.setHeader("Cache-Control", "No-cache");  
+          ctx.res.setHeader("Expires", 0);
+          ctx.res.setHeader('Content-disposition', 'attachment; filename=' + encodeURI(form.title) + '.xlsx;filename*=utf-8');
           var form = form.toJSON();
           var formResult = form.formResults;
           var excelTitle = [], result = [], formData = [];
