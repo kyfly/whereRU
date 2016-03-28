@@ -11,15 +11,15 @@ app.controller('LoginController',
   ['User', "Aouth",'$scope', '$location', 'LoopBackAuth', '$window', '$rootScope', '$http', '$interval', '$timeout',
   function (User, Aouth, $scope, $location, LoopBackAuth, $window, $rootScope, $http, $interval, $timeout) {
   $scope.user = {};
-  
+  var isWechart = navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == "micromessenger";
+  $scope.isWechart = isWechart;
+  console.log(!$rootScope.mediaIsPC && !$scope.isWechart);
   $scope.loadURL = function () {
     var url = $window.location.href;
-    var isWechart = navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == "micromessenger";
     if (!$rootScope.mediaIsPC && !isWechart) {
       Materialize.toast('只能在微信中微信登录噢', 3000);
       return;
     }
-
     $http.get('/wechatUrl?iswechat=' + isWechart + '&url=' + $location.path())
     .success(function (res) {
       $scope.wechatLogin = $rootScope.mediaIsPC;

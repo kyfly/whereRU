@@ -4,7 +4,7 @@
 		<h3>登录后更精彩</h3>
 	</div>
 	<div class="row">
-		<div ng-show="!wechatLogin" ng-hide="!$rootScope.mediaIsPC && !isWechart" class="col s4 center" ng-click="loadURL()">
+		<div ng-show="!wechatLogin" ng-hide="!mediaIsPC && !isWechart" class="col s4 center" ng-click="loadURL()">
 			<img src="/lib/img/weixin.jpg">
 			<h6>微信登录</h6>
 		</div>
@@ -12,7 +12,7 @@
 			<div class="center" id="qrcode"></div>
 			<h6>微信“扫一扫”</h6>
 		</div>
-		<div  ng-class="{true: 's12'}[!$rootScope.mediaIsPC && !isWechart]" class="col s8">
+		<div  ng-class="{true: 's12'}[!mediaIsPC && !isWechart]" class="col s8">
 			<div class="input-field">
 		    <input id="phone" type="number" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="phone">请输入手机号</label>
