@@ -13,8 +13,8 @@
 			<h6>微信“扫一扫”</h6>
 		</div>
 		<div  ng-class="{true: 's12'}[!$rootScope.mediaIsPC && !isWechart]" class="col s8">
-			<div input-field>
-		    <input id="phone" type="text" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
+			<div class="input-field">
+		    <input id="phone" type="number" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="phone">请输入手机号</label>
 			</div>
 			<div class="input-field password-input">
