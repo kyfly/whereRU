@@ -29,7 +29,7 @@
                 <div>
                   <ul class="pull-menu">
                     <li ng-repeat="team in teams" class="waves-effect">
-                      <a href="/w/team/{{team.id}}" ng-bind="team.name"></a>
+                      <a target="_blank" href="/w/team/{{team.id}}" ng-bind="team.name"></a>
                     </li>
                     <li class="waves-effect">
                       <a href="/w/teams/create">新建团队</a>
@@ -58,12 +58,12 @@
         </nav>
         <div style="height:4.2rem" class="hide-on-med-and-down"></div>
       </header>
-      
+
       <div class="row" ng-show="loginShow" id="login" ng-include="'application/views/user/login.html'"></div>
       <div id="doc">
         <div ui-view></div>
       </div>
-      
+
     </div>
   </div>
   <footer class="center">
@@ -73,7 +73,7 @@
         <div style="height:48px" ></div>
 
         <div class="row s12 bottom-bar z-depth-1">
-          
+
           <ul class="tabs">
             <li class="tab col s3 waves-effect">
               <span ng-click="goback()">
@@ -83,7 +83,7 @@
             <li class="tab col s3 waves-effect" ng-repeat="menu in menus">
               <a href="{{menu.path}}" ng-click="changePage()" ng-class="{true: 'active'}[menu.active]" ng-bind="menu.name"></a>
             </li>
-            
+
           </ul>
         </div>
   </div>
