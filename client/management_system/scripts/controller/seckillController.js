@@ -186,10 +186,21 @@ app.controller('SeckillResultCtrl',
       $scope.allView = function () {
         $scope.pageViewActive = false;
         $scope.allViewActive = active;
-      }
+      };
       $scope.queryInput = function () {
         if (!$scope.query.verifyId) {
           $scope.query = undefined;
         }
-      }
+      };
+      $scope.invoice = function () {
+        var that = this;
+        Seckill.prototype_updateById_seckillResults({
+          id: $stateParams.id,
+          fk: this.resultItem.id
+        }, {
+          invoiced: true
+        }, function (res) {
+          that.resultItem.invoiced = true;
+        });
+      };
     }]);

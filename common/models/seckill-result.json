@@ -29,6 +29,10 @@
     },
     "itemId": {
       "type": "number"
+    },
+    "invoiced": {
+      "type": "boolean",
+      "default": false
     }
   },
   "validations": [],

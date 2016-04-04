@@ -49,7 +49,12 @@
         <h5>
           是否抢票成功：<span class="red-text" ng-bind="results.get?'是':'否'"></span>
         </h5>
-        
+        <h5>
+          验证信息({{activity.verifyRule}})：<span class="red-text" ng-bind="results.verifyId"></span>
+        </h5>
+        <h5>
+          是否索票：<span class="red-text" ng-bind="results.invoiced ?'已索票':'未索票'"></span>
+        </h5>
         <h5>
           参与活动时间：<span ng-bind="results.created | date: 'yyyy-MM-dd HH:mm:ss'"></span>
         </h5>

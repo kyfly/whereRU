@@ -52,6 +52,12 @@
       "principalId": "teamOwner",
       "permission": "ALLOW",
       "property": "__get__seckillResults"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "teamOwner",
+      "permission": "ALLOW",
+      "property": "__updateById__seckillResults"
     }
   ],
   "methods": {}

@@ -723,7 +723,7 @@ module.exports = function(User) {
       include: {
         relation: 'activity',
         scope: {
-          fields: ['title', 'authorName', 'authorId', 'id', 'imgUrl', 'ended']
+          fields: ['title', 'authorName', 'authorId', 'id', 'imgUrl', 'ended', 'verifyRule']
         }
       }
     }, function (err, seckill) {

@@ -233,6 +233,7 @@ app.controller('ActivityEditCtrl',
                 if ($scope.formData) {
                   $scope.formData.updated = new Date();
                   $scope.formData.id = undefined;
+                  $scope.formData.title = $scope.activityData.title;
                   $scope.formData.activityId = $stateParams.id;
                   $scope.formData.teamId = localStorage.$LoopBack$currentTeamId;
 
@@ -259,7 +260,7 @@ app.controller('ActivityEditCtrl',
                   $scope.voteData.id = undefined;
                   $scope.voteData.activityId = $stateParams.id;
                   $scope.voteData.teamId = localStorage.$LoopBack$currentTeamId;
-
+                  $scope.voteData.title = $scope.activityData.title;
                   if ($scope.preType.type === 'vote') {
                     Activity.prototype_updateById_votes({
                       id: res.id,
@@ -283,6 +284,7 @@ app.controller('ActivityEditCtrl',
                   $scope.seckillData.id = undefined;
                   $scope.seckillData.activityId = $stateParams.id;
                   $scope.seckillData.teamId = localStorage.$LoopBack$currentTeamId;
+                  $scope.seckillData.title = $scope.activityData.title;
 
 
                   if ($scope.preType.type === 'seckill') {
@@ -317,6 +319,7 @@ app.controller('ActivityEditCtrl',
                   $scope.formData.activityId = res.id;
                   $scope.formData.id = undefined;
                   $scope.formData.teamId = localStorage.$LoopBack$currentTeamId;
+                  $scope.formData.title = $scope.activityData.title;
                   Activity.prototype_create_forms({
                     id: res.id
                   }, $scope.formData)
@@ -325,6 +328,7 @@ app.controller('ActivityEditCtrl',
                   $scope.voteData.activityId = res.id;
                   $scope.voteData.id = undefined;
                   $scope.voteData.teamId = localStorage.$LoopBack$currentTeamId;
+                  $scope.voteData.title = $scope.activityData.title;
                   Activity.prototype_create_votes({
                     id: res.id
                   }, $scope.voteData)
@@ -332,6 +336,7 @@ app.controller('ActivityEditCtrl',
                   $scope.seckillData.updated = new Date();
                   $scope.seckillData.activityId = res.id;
                   $scope.seckillData.id = undefined;
+                  $scope.seckillData.title = $scope.activityData.title;
                   $scope.seckillData.teamId = localStorage.$LoopBack$currentTeamId;
                   Activity.prototype_create_seckills({
                     id: res.id

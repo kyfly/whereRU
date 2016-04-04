@@ -787,6 +787,10 @@
                 url: urlBase + '/Seckills/:id/seckillResults',
                 method: 'GET',
                 isArray: true
+              },
+              "prototype_updateById_seckillResults": {
+                url: urlBase + '/Seckills/:id/seckillResults/:fk',
+                method: 'PUT',
               }
             }
           );
