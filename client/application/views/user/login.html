@@ -1,43 +1,52 @@
 <div class="login-screen" ng-click="cancelLogin()"></div>
 <form class="z-depth-2 col s12 m8 offset-m2" name="loginForm" ng-controller="LoginController">
-	<div  class="row center">
-		<h3>登录后更精彩</h3>
-	</div>
-	<div class="row">
-		<div ng-show="!wechatLogin" ng-hide="!mediaIsPC && !isWechart" class="col s4 center" ng-click="loadURL()">
-			<img src="/lib/img/weixin.jpg">
-			<h6>微信登录</h6>
-		</div>
-		<div ng-show="wechatLogin" class="col s4 center">
-			<div class="center" id="qrcode"></div>
-			<h6>微信“扫一扫”</h6>
-		</div>
-		<div  ng-class="{true: 's12'}[!mediaIsPC && !isWechart]" class="col s8">
-			<div class="input-field">
-		    <input id="phone" type="number" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
-		    <label for="phone">请输入手机号</label>
-			</div>
-			<div class="input-field password-input">
-		    <input id="password" type="{{pwdSwitch? 'text': 'password'}}" ng-model="user.password" min="8" ng-focus="focus()" ng-blur="blur()" length="16" required>
-		    <label for="password">请输入密码</label>
-		    <div class="switch">
-			    <label>
-			      <input type="checkbox" ng-init="true" ng-model="pwdSwitch">
-			      <span class="lever"></span>
-			    </label>
-			  </div>
+  <div class="row center">
+    <h3>登录后更精彩</h3>
+  </div>
+  <div class="row">
+    <div style="cursor: pointer" ng-show="!wechatLogin" ng-hide="!mediaIsPC && !isWechart" class="col s4 center"
+         ng-click="loadURL()">
+      <img src="/lib/img/weixin.jpg">
+      <h6>微信登录</h6>
+    </div>
+    <div ng-show="wechatLogin" class="col s4 center">
+      <div class="center" id="qrcode"></div>
+      <h6>微信“扫一扫”</h6>
+    </div>
+    <div ng-class="{true: 's12'}[!mediaIsPC && !isWechart]" class="col s8">
+      <div class="input-field">
+        <input id="phone" type="number" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
+        <label for="phone">请输入手机号</label>
+      </div>
+      <div class="input-field password-input">
+        <input id="password" type="{{pwdSwitch? 'text': 'password'}}" ng-model="user.password" min="8"
+               ng-focus="focus()" ng-blur="blur()" length="16" required>
+        <label for="password">请输入密码</label>
+        <div class="switch">
+          <label id="tooltip" data-position="bottom" data-delay="0" data-tooltip="显示/隐藏密码">
+            <input type="checkbox" ng-init="true" ng-model="pwdSwitch">
+            <span class="lever"></span>
+          </label>
+        </div>
 
-		    <a href="/u/retrieve" class="right">忘记密码</a>
-			</div>
-			<div class="right">
-				<a href="#" class="waves-effect btn-flat col s4 center" ng-click="cancelLogin()">取消</a>
-				<a href="/u/register"
-					class="waves-effect btn-flat col s4 center" ng-click="cancelLogin()">注册</a>
-				<button type="sumbit" class="waves-effect btn-flat col s4 center"
-					ng-click="login()"
-					ng-disabled="loginForm.$invalid">登录</button>
-			</div>
-		</div>
+        <a href="/u/retrieve" class="right">忘记密码</a>
+      </div>
+      <div class="right">
+        <a href="#" class="waves-effect btn-flat col s4 center" ng-click="cancelLogin()">取消</a>
+        <a href="/u/register"
+           class="waves-effect btn-flat col s4 center" ng-click="cancelLogin()">注册</a>
+        <button type="sumbit" class="waves-effect btn-flat col s4 center"
+                ng-click="login()"
+                ng-disabled="loginForm.$invalid">登录
+        </button>
+      </div>
+    </div>
 
-	</div>
+  </div>
 </form>
+
+<script>
+  $(document).ready(function () {
+    $('#tooltip').tooltip();
+  });
+</script>
