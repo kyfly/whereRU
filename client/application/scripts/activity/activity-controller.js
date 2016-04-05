@@ -179,7 +179,7 @@ app.controller('ActivityController',
       s: s
     };
   }
-  var seckillTimer;
+  var seckillTimer, timer;
   function autoLoadSeckill() {
     seckillTimer = $interval(function () {
       Activity.prototype_get_seckills({
@@ -211,7 +211,7 @@ app.controller('ActivityController',
         var time = formatTime(countDown);
         $scope.countDown = countDown;
         $scope.seckillTime = time;
-        var timer = $interval(function () {
+        timer = $interval(function () {
           countDown --;
           var s = countDown % 60;
           var d = Math.floor(countDown / (3600*24));
@@ -229,6 +229,10 @@ app.controller('ActivityController',
         }, 1000);
       }
     });
+  });
+  $scope.$on('$destroy',function(){
+    $interval.cancel(timer);
+    $interval.cancel(seckillTimer);
   });
   $scope.onClickJoinActivity = function () {
     var actType = $scope.activity.actType;
@@ -250,10 +254,7 @@ app.controller('ActivityController',
   };
 
   
-  $scope.$on('$destroy',function(){
-    $interval.cancel(timer);
-    $interval.cancel(seckillTimer);
-  });
+  
   $scope.checkedForVote = function () {
     var results = $scope.result.filter(function (item) {
       return item;
