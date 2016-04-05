@@ -1,11 +1,11 @@
 <div class="row">
-	<h5 ng-if="countDown > 0" class="center">开始倒计时：
+	<h5 ng-show="countDown > 0" class="center">开始倒计时：
 		<span class="red-text" ng-bind="seckillTime.d"></span>天
 		<span class="red-text" ng-bind="seckillTime.h"></span>时
 		<span class="red-text" ng-bind="seckillTime.m"></span>分
 		<span class="red-text" ng-bind="seckillTime.s"></span>秒
 	</h5>
-	<h5 ng-if="countDown <= 0 " class="center">
+	<h5 ng-show="countDown <= 0 " class="center">
 		<span class="seckill-time red-text">{{activityEnded ? '已结束': '正在进行中...'}}</span>
 	</h5>
 	<hr>
