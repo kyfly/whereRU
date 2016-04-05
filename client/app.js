@@ -166,7 +166,8 @@ var app = angular.module('WRU', [
 				ended: {
 					gt: new Date()
 				}
-			}]
+			}],
+			deleted: false
 		},
 		limit: 8,
 		order: 'readers DESC'

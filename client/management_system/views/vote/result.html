@@ -1,29 +1,32 @@
-<div class="row margin-top">
-  <div class="col s3 text-center">
-    <h5>参与量：{{sum}}</h5>
+<div id="voteResult">
+  <div class="row margin-top">
+    <div class="col s3 text-center">
+      <h5>参与量：{{sum}}</h5>
+    </div>
+    <div class="col s9">
+      <ul class="tabs" tabs>
+        <li class="tab col s3 waves-effect"><a href ng-click="ASC()">升序显示</a></li>
+        <li class="tab col s3 waves-effect"><a href ng-click="DESC()">降序显示</a></li>
+        <li class="tab col s3 waves-effect"><a href ng-click="fullSreen()">全屏显示</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="col s6">
-    <ul class="tabs" tabs>
-      <li class="tab col s3 waves-effect"><a href ng-click="ASC()">升序显示</a></li>
-      <li class="tab col s3 waves-effect"><a href ng-click="DESC()">降序显示</a></li>
+
+  <div  class="vote-result">
+    <ul class="row">
+      <li ng-repeat="item in vote._voteItems | orderBy: 'count': desc" class="col s12">
+        
+        <div class="col s2 center">
+          <span ng-bind="item.name"></span>
+        </div>
+        <div class="col s9 vote-bg z-depth-2">
+          <div class="vote-point" ng-style="{'width': item.point + '%'}"></div>
+        </div>
+        <div class="col s1">
+          <span class="red-text" ng-bind="item.count + ' (' + item.point + '%)'"></span>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
-
-<div class="vote-result">
-  <ul class="row">
-    <li ng-repeat="item in vote._voteItems | orderBy: 'count': desc" class="col s12">
-      <p class="col s1">
-        <span class="vote-num">{{$index + 1}}</span>.
-      </p>
-      <p class="col s2 center">
-        <span ng-bind="item.name"></span>
-        <br>
-        <span class="red-text" ng-bind="item.count"></span>
-      </p>
-      <div class="col s9 vote-bg z-depth-2">
-        <div class="vote-point" ng-style="{'width': item.point + '%'}"></div>
-      </div>
-    </li>
-  </ul>
-</div>
+  

@@ -1,5 +1,5 @@
 app.config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/MS/home');
+  $urlRouterProvider.otherwise('/MS/member');
   $stateProvider
     .state('home', {
       url: '/MS/home',

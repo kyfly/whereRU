@@ -18,7 +18,8 @@ module.exports = function(VoteResult) {
 						 	voteItem.count ++
 						};
 				});
-				vote.save();
+				vote.save(function(err, vote){
+				});
 				next();
 			}
 		});

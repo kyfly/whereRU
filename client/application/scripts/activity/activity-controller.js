@@ -165,16 +165,18 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
 
 
 app.controller('ActivityController', 
-  ['$scope', 'Activity', 'User', '$stateParams', '$interval', 'uploadFile', '$location',
-  function($scope, Activity, User, $stateParams, $interval, uploadFile, $location){
+  ['$scope', 'Activity', 'User', '$stateParams', '$interval', 'uploadFile', '$location', 'Article',
+  function($scope, Activity, User, $stateParams, $interval, uploadFile, $location, Article){
   Activity.findById({
     id: $stateParams.id
   }, function (activity) {
     $scope.activity = activity;
-    $scope.$emit('shareContentArrive', {
-      bdText: activity.title,
-      bdDesc: activity.keyword,
-      bdPic: activity.imgUrl
+    $scope.article =  activity;
+    Article.prototype_get_comments({
+      id: activity.id
+    }, function (comments) {
+      $scope.article.comments = comments;
+      $scope.article.showCommentBox = true;
     });
     if (activity.actType === 'common')
       return;
@@ -215,9 +217,9 @@ app.controller('ActivityController',
     if (!$scope.$currentUser) {
       $scope.$emit('auth:loginRequired');
     }
-    if ($scope.activity.verifyRule === '学号') {
+    if ($scope.$currentUser && $scope.activity.verifyRule === '学号') {
       $scope.activity.verifyId = $scope.$currentUser.studentId;
-    } else if ($scope.activity.verifyRule === '手机') {
+    } else if ($scope.$currentUser && $scope.activity.verifyRule === '手机') {
       $scope.activity.verifyId = $scope.$currentUser.phone;
     }
     if (actType !== 'common') {

@@ -148,10 +148,11 @@ app.controller('VoteResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Vote'
       $rootScope.pageTitle = '[' + res.title + ']结果';
       $scope.vote = res;
       $scope.sum = 0;
-      $scope.vote._voteItems = sort($scope.vote._voteItems);
       $scope.vote._voteItems.forEach(function (item) {
         $scope.sum += item.count;
-        item.point = (item.count / $scope.vote._voteItems[$scope.vote._voteItems.length - 1].count) * 100;
+      });
+      $scope.vote._voteItems.forEach(function (item) {
+        item.point = (item.count / $scope.sum) * 100;
       });
     });
     $scope.ASCActive = 'active';
@@ -166,44 +167,60 @@ app.controller('VoteResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Vote'
       $scope.DESCActive = 'active';
       $scope.ASCActive = false;
       $scope.desc = true;
-    }
+    };
+    $scope.fullSreen = function () {
+      var e = document.getElementById('voteResult');
+      requestFullScreen(e);
+    };
   }]);
-function sort(array) {
-  var i = 0;
-  var j = array.length - 1;
-  var Sort = function (i, j) {
+  function sort(array) {
+    var i = 0;
+    var j = array.length - 1;
+    var Sort = function (i, j) {
 
-    // 结束条件
-    if (i == j) {
-      return
-    }
+      // 结束条件
+      if (i == j) {
+        return
+      }
 
-    var key = array[i].count;
-    var stepi = i;
-    var stepj = j;
-    while (j > i) {
-      if (array[j].count >= key) {
-        j--;
-      } else {
-        array[i].count = array[j].count;
-        while (j > ++i) {
-          if (array[i].count > key) {
-            array[j].count = array[i].count;
-            break;
+      var key = array[i].count;
+      var stepi = i;
+      var stepj = j;
+      while (j > i) {
+        if (array[j].count >= key) {
+          j--;
+        } else {
+          array[i].count = array[j].count;
+          while (j > ++i) {
+            if (array[i].count > key) {
+              array[j].count = array[i].count;
+              break;
+            }
           }
         }
       }
-    }
-    if (stepi == i) {
-      Sort(++i, stepj);
-      return;
-    }
-    array[i].count = key;
-    Sort(stepi, i);
-    Sort(j, stepj);
-  };
+      if (stepi == i) {
+        Sort(++i, stepj);
+        return;
+      }
+      array[i].count = key;
+      Sort(stepi, i);
+      Sort(j, stepj);
+    };
 
-  Sort(i, j);
+    Sort(i, j);
 
-  return array;
-}
+    return array;
+  }
+  function requestFullScreen(element) {
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+    if (requestMethod) {  
+        requestMethod.call(element);
+    } else if (typeof window.ActiveXObject !== "undefined") {  
+        var wscript = new ActiveXObject("WScript.Shell");
+        if (wscript !== null) {
+            wscript.SendKeys("{F11}");
+        }
+    }
+  } 

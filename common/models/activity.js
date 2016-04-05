@@ -198,6 +198,10 @@ module.exports = function(Activity) {
     	var filter = {
         limit: 32
       };
+    if (filter.where)
+    	filter.where.deleted = false;
+    else
+    	filter.where = {deleted: false};
 		filter.limit = filter.limit > 32? 32 : filter.limit;
 		filter.skip = 0;
 		filter.order = filter.order || 'readers DESC';
@@ -205,27 +209,4 @@ module.exports = function(Activity) {
 			ctx.res.send(activities);
 		});
   });
-  Activity.beforeCreate = function(next, instance){
-  	instance.team(function (err, team) {
-  		Activity.app.models.Coterie.findOne({
-				where: {
-					teamId: instance.teamId
-				}
-			}, function (err, coterie) {
-				if (err || !coterie || !instance.explainUrl) {
-					next();
-				} else {
-					coterie.articles.create({
-						"title": instance.title,
-				    "contentUrl": instance.explainUrl,
-				    "created": new Date(),
-				    "coterieId": coterie.id,
-				    "userId": team.userId
-					}, function (err, article) {
-             next();
-					});
-				}
-			})
-  	});
-  };
 };

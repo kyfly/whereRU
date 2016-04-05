@@ -110,6 +110,28 @@ module.exports = function(Team) {
 		ctx.req.body.created = new Date();
 		next();
 	});
+	Team.afterRemote('prototype.__create__activities', function (ctx, instance, next) {
+		Team.app.models.Coterie.findOne({
+			where: {
+				teamId: instance.teamId
+			}
+		}, function (err, coterie) {
+			if (err || !coterie || !instance.explainUrl) {
+				next();
+			} else {
+				coterie.articles.create({
+					"title": instance.title,
+			    "contentUrl": instance.explainUrl,
+			    "created": new Date(),
+			    "coterieId": coterie.id,
+			    "userId": ctx.instance.userId,
+			    "id": instance.id
+				}, function (err, article) {
+           next();
+				});
+			}
+		});
+	});
 	/**
 	 * 竞赛创建前保存团队信息到竞赛信息
 	 * @param  {[type]} ctx   [description]
@@ -275,9 +297,28 @@ module.exports = function(Team) {
       }
     });
   });
-  // Team.afterRemote("prototype.__get__partakedRaces", function (ctx, ins, next) {
-
-  // })
+  Team.beforeRemote("prototype.__updateById__votes", function (ctx, ins, next) {
+  	ctx.instance.votes.findById(ctx.req.params.fk, function (err, vote) {
+  		if (vote.activityId) {
+				Team.app.models.Activity.findById(vote.activityId, {
+					fields: ['started', 'ended']
+				}, function (err, activity) {
+					if (err) {
+						return next(err);
+					}
+					if (activity.started < new Date()) {
+						next('活动期间不可修改');
+					} else if (activity.ended < new Date()) {
+						next('活动已结束');
+					} else {
+						next();
+					}
+				});
+	    } else {
+	    	next();
+	    }
+  	})
+  });
   // prototype_unlink_partakedRaces 团队退出竞赛时通知主办方
   
   /**

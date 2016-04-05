@@ -10,7 +10,6 @@ module.exports = function(Form) {
   );
   Form.excel = function() {};
   Form.beforeRemote('excel',function(ctx,instance,next){
-
     Form.findById(ctx.req.params.id, {include: 'formResults'}, function (err, form) {
       if (err) {
         next(err);

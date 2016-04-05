@@ -125,6 +125,13 @@ hr {
   padding: 0 !important;
 }
 
+@media screen and (min-width: 601px) {
+  #voteResult{
+    padding: 20px 50px;
+    width: 100%;
+    height: 100%;
+  }
+}
 @media screen and (min-width: 993px) {
   main, nav {
     padding-left: 240px;
@@ -609,10 +616,6 @@ hr {
   position: relative;
 }
 
-.vote-result p {
-  margin: 0
-}
-
 .vote-result h5 {
   font-size: 1.3rem;
 }
@@ -622,8 +625,7 @@ hr {
   background: #ddd;
   padding: 0 !important;
   border-radius: 15px;
-  margin-top: -15px;
-  position: absolute;
+  
   right: 5px;
   top: 50%;
 }

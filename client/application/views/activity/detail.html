@@ -1,4 +1,10 @@
 <div class="container row">
+  <div class="row s12 hide-on-med-and-up card">
+    <div class="card-image">
+      <img ng-src="{{activity.imgUrl}}@4e_0o_0l_200h_360w_90q.src" style="width:100%" alt="{{activityItem.title}}" err-src="http://img.etuan.org/default.png@4e_0o_0l_200h_360w_90q.src">
+      <span class="card-title" ng-bind="activity.title"></span>
+    </div>
+  </div>
   <div class="row s12 detail-menu">
     <ul class="tabs" tabs>
       <li class="tab col s4 waves-effect">
@@ -30,6 +36,13 @@
       <div ng-if="activity.actType === 'seckill'">
         <div ng-include="'/application/views/activity/seckill.html'"></div>
       </div>
+      <div ng-if="activity.actType === 'common'">
+        <div class="center">不需要参与</div>
+      </div>
     </div>
+
+  </div>
+  <div style="clear: both;">
+    <ng-include src="'/application/views/coterie/comments.html'"></ng-include>
   </div>
 </div>

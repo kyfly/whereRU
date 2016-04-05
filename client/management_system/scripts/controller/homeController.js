@@ -13,7 +13,7 @@ function AdminCtrl($scope, $timeout, $window, $rootScope, Team) {
     {
       'id': 'sidebarHome',
       'display_name': '首页',
-      'url': '/MS/home'
+      'url': '/'
     },
     {
       'id': 'sidebarMember',
