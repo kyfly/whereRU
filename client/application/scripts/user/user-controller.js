@@ -318,6 +318,7 @@ app.controller('UserInfoController', ['$scope', 'User', 'School', '$location','u
     createQrcode(url, 'bindQrcode');
   };
   $scope.updateInfo = function () {
+    hex_md5($scope.user.password);
     User.prototype_updateAttributes($scope.user, function (data) {
       Materialize.toast('修改成功', 2000);
     });
