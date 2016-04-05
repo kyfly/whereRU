@@ -167,6 +167,28 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
 app.controller('ActivityController', 
   ['$scope', 'Activity', 'User', '$stateParams', '$interval', 'uploadFile', '$location', 'Article',
   function($scope, Activity, User, $stateParams, $interval, uploadFile, $location, Article){
+  function formatTime (time) {
+    var s = time % 60;
+    var d = Math.floor(time / (3600*24));
+    var h = Math.floor((time - d * 3600 * 24) / 3600);
+    var m = Math.floor((time - d * 3600 * 24 - h * 3600) / 60);
+    return {
+      d: d,
+      h: h,
+      m: m,
+      s: s
+    };
+  }
+  var seckillTimer;
+  function autoLoadSeckill() {
+    seckillTimer = $interval(function () {
+      Activity.prototype_get_seckills({
+        id: $stateParams.id
+      }, function (res) {
+        $scope.seckill = res[0];
+      });
+    }, 1000);
+  }
   Activity.findById({
     id: $stateParams.id
   }, function (activity) {
@@ -205,9 +227,6 @@ app.controller('ActivityController',
             $interval.cancel(timer);
           }
         }, 1000);
-        $scope.$on('$destroy',function(){
-          $interval.cancel(timer);
-        });
       }
     });
   });
@@ -228,21 +247,17 @@ app.controller('ActivityController',
     if (new Date() - new Date($scope.activity.ended) > 0) {
       $scope.activityEnded = true;
     }
+    if (actType === 'seckill')
+    {
+      autoLoadSeckill();
+    }
   };
 
-  function formatTime (time) {
-    var s = time % 60;
-    var d = Math.floor(time / (3600*24));
-    var h = Math.floor((time - d * 3600 * 24) / 3600);
-    var m = Math.floor((time - d * 3600 * 24 - h * 3600) / 60);
-    return {
-      d: d,
-      h: h,
-      m: m,
-      s: s
-    };
-  }
-
+  
+  $scope.$on('$destroy',function(){
+    $interval.cancel(timer);
+    $interval.cancel(seckillTimer);
+  });
   $scope.checkedForVote = function () {
     var results = $scope.result.filter(function (item) {
       return item;
