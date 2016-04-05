@@ -247,10 +247,6 @@ app.controller('ActivityController',
     if (new Date() - new Date($scope.activity.ended) > 0) {
       $scope.activityEnded = true;
     }
-    if (actType === 'seckill')
-    {
-      autoLoadSeckill();
-    }
   };
 
   
@@ -364,6 +360,7 @@ app.controller('ActivityController',
     });
   };
   $scope.submitSeckillResult = function () {
+    autoLoadSeckill();
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');
     }
