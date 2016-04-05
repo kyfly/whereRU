@@ -11,19 +11,30 @@
       </ul>
     </div>
   </div>
-
+  <a ng-show="!timer" style="
+    /* padding: 10px; */
+    position: fixed;
+    right: 20px;
+    top: 100px;
+" class="btn-floating btn-large waves-effect waves-light red" ng-click="realyTime()"><b>实时</b></a>
+  <a ng-show="timer" style="
+      /* padding: 10px; */
+      position: fixed;
+      right: 20px;
+      top: 100px;
+  " class="btn-floating btn-large waves-effect waves-light red" ng-click="cancelTimer()"><b>关闭</b></a>
   <div  class="vote-result">
     <ul class="row">
       <li ng-repeat="item in vote._voteItems | orderBy: 'count': desc" class="col s12">
         
-        <div class="col s2 center">
+        <div class="col s2">
           <span ng-bind="item.name"></span>
         </div>
-        <div class="col s9 vote-bg z-depth-2">
+        <div class="col s8 vote-bg z-depth-2">
           <div class="vote-point" ng-style="{'width': item.point + '%'}"></div>
         </div>
-        <div class="col s1">
-          <span class="red-text" ng-bind="item.count + ' (' + item.point + '%)'"></span>
+        <div class="col s2" style="text-align:right">
+          <span class="red-text" ng-bind="item.count + ' (' + item.point.toFixed(2) + '%)'"></span>
         </div>
       </li>
     </ul>

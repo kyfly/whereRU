@@ -139,21 +139,38 @@ app.controller('VoteEditCtrl',
       };
     }]);
 
-app.controller('VoteResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Vote', 'Team',
-  function ($scope, $rootScope, $stateParams, Vote, Team) {
-    Team.prototype_findById_votes({
-      id: localStorage.$LoopBack$currentTeamId,
-      fk: $stateParams.id
-    }, function (res) {
-      $rootScope.pageTitle = '[' + res.title + ']结果';
-      $scope.vote = res;
-      $scope.sum = 0;
-      $scope.vote._voteItems.forEach(function (item) {
-        $scope.sum += item.count;
+app.controller('VoteResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Vote', 'Team', '$interval',
+  function ($scope, $rootScope, $stateParams, Vote, Team, $interval) {
+    function getVoteResults () {
+      Team.prototype_findById_votes({
+        id: localStorage.$LoopBack$currentTeamId,
+        fk: $stateParams.id
+      }, function (res) {
+        $rootScope.pageTitle = '[' + res.title + ']结果';
+        $scope.vote = res;
+        $scope.sum = 0;
+        $scope.vote._voteItems.forEach(function (item) {
+          $scope.sum += item.count;
+        });
+        $scope.vote._voteItems.forEach(function (item) {
+          item.point = (item.count / $scope.sum) * 100;
+        });
       });
-      $scope.vote._voteItems.forEach(function (item) {
-        item.point = (item.count / $scope.sum) * 100;
-      });
+    }
+    getVoteResults ();
+    $scope.timer = undefined;
+    $scope.realyTime = function () {
+      $scope.timer = $interval(function () {
+        getVoteResults ();
+      }, 500);
+    };
+    $scope.cancelTimer = function () {
+      $interval.cancel($scope.timer);
+      $scope.timer = undefined;
+    };
+    $scope.$on('$destroy',function(){
+      $interval.cancel($scope.timer);
+      $scope.timer = undefined;
     });
     $scope.ASCActive = 'active';
     $scope.DESCActive = false;
@@ -172,6 +189,7 @@ app.controller('VoteResultCtrl', ['$scope', '$rootScope', '$stateParams', 'Vote'
       var e = document.getElementById('voteResult');
       requestFullScreen(e);
     };
+
   }]);
   function sort(array) {
     var i = 0;

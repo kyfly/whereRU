@@ -156,7 +156,7 @@ app.controller('ArticlesController',
   };
 }]);
 app.controller('CommentsController',
-  ['$scope', 'Comment', 'User', function($scope, Comment, User){
+  ['$scope', 'Comment', 'User', 'Article', '$interval', function($scope, Comment, User, Article, $interval){
   $scope.createComment = function () {
     var article = this.article;
     if (!$scope.$currentUser) {
@@ -183,6 +183,13 @@ app.controller('CommentsController',
       article.comments.push(comment);
       article.writingCommentContent = null;
       Materialize.toast('评论成功', 2000);
+    });
+  };
+  $scope.reload = function () {
+    Article.prototype_get_comments({
+      id: this.article.id
+    }, function (comments) {
+      $scope.article.comments = comments;
     });
   };
   $scope.loadReply = function () {
