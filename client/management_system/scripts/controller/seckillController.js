@@ -170,11 +170,17 @@ app.controller('SeckillResultCtrl',
       }, function (res) {
         $rootScope.pageTitle = '[' + res.title + ']结果';
         $scope.seckill = res;
+        $scope.getNum = 0;
       });
       Seckill.prototype_get_seckillResults({
         id: $stateParams.id
       }, function (results) {
         $scope.results = results;
+        $scope.getNum = 0;
+        for (var i = 0; i < results.length; i++) {
+          if (results[i].get === true)
+            $scope.getNum++;
+        }
       });
       var active = 'active';
       $scope.pageViewActive = active;
