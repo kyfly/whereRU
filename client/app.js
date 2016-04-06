@@ -58,7 +58,8 @@ var app = angular.module('WRU', [
       $rootScope.$broadcast('showBottomBar');
     };
     $rootScope.errorTip = function (err) {
-      Materialize.toast('<b class="red-text">' + err.data.error.message + '</b>' + '&nbsp;如果有问题,请您联系我们哦', 2000);
+      Materialize.toast('<b class="red-text">' + err.data.error.message + 
+        '</b>' + '&nbsp;如果有问题,请您联系我们哦', 2000);
     }
   }])
   .controller('HeaderController',

@@ -186,13 +186,13 @@ app.controller('ActivityController',
       var seckillTimer, timer;
 
       function autoLoadSeckill() {
-        seckillTimer = function () {
+        seckillTimer = $interval(function () {
           Activity.prototype_get_seckills({
             id: $stateParams.id
           }, function (res) {
             $scope.seckill = res[0];
           });
-        };
+        }, 1000);
       }
 
       Activity.findById({
@@ -369,12 +369,8 @@ app.controller('ActivityController',
         });
       };
 
-      $rootScope.errorTip = function (err) {
-        Materialize.toast('<b class="red-text">' + err.data.error.message + '</b>' + '&nbsp;如果有问题,请您联系我们哦', 400);
-      };
-
       $scope.submitSeckillResult = function () {
-        autoLoadSeckill();
+        
         if (!$scope.$currentUser) {
           return $scope.$emit('auth:loginRequired');
         }
@@ -392,9 +388,10 @@ app.controller('ActivityController',
           id: $scope.$currentUser.id
         }, seckillResult, function (res) {
           if (res.status === 1000 || res.status === 1100)
-            Materialize.toast(res.message, 1000);
+            Materialize.toast(res.message, 500);
           else {
             Materialize.toast('参与成功,可在个人主页查看结果', 4000);
+            autoLoadSeckill();
           }
         });
       };
