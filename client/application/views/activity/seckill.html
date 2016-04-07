@@ -40,27 +40,27 @@
              style="background-image: url({{activity.imgUrl}}@1e_1c_0o_0l_200h_360w_90q.src);">
           <div class="frosted-glass"></div>
           <div class="seckill-info center">
-            <h4 style="margin-top: 50px" class="deep-orange-text text-shadow" ng-bind="seckillItem.name"></h4>
+            <h4 style="margin-top: 50px" class="pink-text text-lighten-2 text-shadow" ng-bind="seckillItem.name"></h4>
             <h5 ng-show="countDown > 0" class="center">开始倒计时：</h5>
             <h5 ng-show="countDown > 0" class="center">
-              <span class="deep-orange-text" ng-bind="seckillTime.d"></span>天
-              <span class="deep-orange-text" ng-bind="seckillTime.h"></span>时
-              <span class="deep-orange-text" ng-bind="seckillTime.m"></span>分
-              <span class="deep-orange-text" ng-bind="seckillTime.s"></span>秒
+              <span class="pink-text text-lighten-2" ng-bind="seckillTime.d"></span>天
+              <span class="pink-text text-lighten-2" ng-bind="seckillTime.h"></span>时
+              <span class="pink-text text-lighten-2" ng-bind="seckillTime.m"></span>分
+              <span class="pink-text text-lighten-2" ng-bind="seckillTime.s"></span>秒
             </h5>
             <h5 ng-show="countDown <= 0 " class="center">
-              <span class="seckill-time deep-orange-text">{{activityEnded ? '已结束': '正在进行中...'}}</span>
+              <span class="seckill-time pink-text text-lighten-2">{{activityEnded ? '已结束': '正在进行中...'}}</span>
             </h5>
             <div class="col s12 m6 offset-m3" input-field ng-show="activity.verifyRule">
               <input id="verifyId2" type="text" ng-model="activity.verifyId" ng-focus="focus()" ng-blur="blur()"
-                     style="text-align:center">
-              <label for="verifyId2">请输入验证信息({{activity.verifyRule}})</label>
+                     style="text-align:center;text-shadow: 0 0 10px #000000">
+              <label style="color: #ffffff" for="verifyId2">请输入{{activity.verifyRule}}</label>
               <div style="margin-top: 50px">
                 <h6>票数：<span ng-bind="seckillItem.count"></span></h6>
                 <h6>余量：<span ng-bind="seckillItem.margin"></span></h6>
                 <h4>
                   <button ng-disabled="activityEnded"
-                          class="btn-floating btn-large white deep-orange-text seckill-btn waves-effect"
+                          class="btn-floating btn-large white pink-text text-lighten-2 seckill-btn waves-effect"
                           ng-click="submitSeckillResult()" href="">抢
                   </button>
                 </h4>

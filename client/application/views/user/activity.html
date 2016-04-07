@@ -1,7 +1,7 @@
 <ul class="collection with-header">
 
   <li class="collection-item" ng-if="activities.length === 0">
-    <p>
+    <p class="word-wrap">
       你还没有参与活动哦，点击下面的按钮参与 （＾∀＾）
     </p>
   </li>
@@ -9,7 +9,8 @@
     <img ng-src="{{activity.imgUrl}}@1e_1c_0o_0l_100h_100w_100q.src" alt="" class="circle">
     <span class="title">
       <a class="black-text" href="/w/activities/{{activity.id}}" ng-bind="activity.title"></a>
-        <a href="/u/results/{{activity.resultId}}/{{activity.actType}}">查看结果</a>
+      <br>
+      <a href="/u/results/{{activity.resultId}}/{{activity.actType}}">查看结果</a>
     </span>
     <p>
       <span>发布方 |

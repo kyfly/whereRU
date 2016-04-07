@@ -1,7 +1,7 @@
 <ul class="collection with-header">
 
   <li class="collection-item" ng-if="races.length === 0">
-    <p>
+    <p class="word-wrap">
       你还没有参加竞赛哦，点击下面的按钮参加 (´・ω・`)
     </p>
   </li>
@@ -11,13 +11,13 @@
       <a href="/w/races/{{race.id}}" ng-bind="race.name"></a>
     </span>
     <p>
-      <span>发布方 |
+      <span class="nowrap">发布方 |
         <a ng-href="/w/teams/{{race.teamId}}">
           <b ng-bind="race.authorName"></b>
         </a>
       </span>
       <br>
-      <span>
+      <span class="nowrap">
         <span>报名时间:</span>
         <time ng-bind="race.created| date:'yy/MM/dd'"></time>
         <span>-</span>
