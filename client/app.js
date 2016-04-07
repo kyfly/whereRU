@@ -1,101 +1,4 @@
 var app = angular.module('WRU', [
-<<<<<<< HEAD
-	'ui.router',
-	'lbServices',
-	'ui.materialize',
-	'ng.ueditor',
-	'ng.upload',
-	'ue.config'
-])
-.config(['$locationProvider', '$urlRouterProvider', function ($locationProvider, $urlRouterProvider) {
-  $locationProvider.html5Mode({
-  	enabled: true
-  	//requireBase: false
-  });
-  $urlRouterProvider.otherwise('/');
-}])
-.config(function($sceDelegateProvider) {
-  $sceDelegateProvider.resourceUrlWhitelist([
-    // Allow same origin resource loads.
-    'self',
-    // Allow loading from our assets domain.  Notice the difference between * and **.
-    'http://*.etuan.org/**'
-  ]);
-})
-.run(['$rootScope', '$window',function ($rootScope, $window) {
-	$rootScope.$on('$stateChangeStart', function(evt, next, current) {
-		if (!next.name.match(/^art/))
-		{
-			$window.document.body.scrollTop = 1;
-		}
-		$rootScope.cancelLogin();
-	});
-	function IsPC()
-	{
-		var userAgentInfo = navigator.userAgent;
-		var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
-		var flag = true;
-		for (var v = 0; v < Agents.length; v++) {
-			if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
-		}
-		return flag;
-	}
-	$rootScope.mediaIsPC = IsPC();
-	$rootScope.$on('auth:loginRequired', function () {
-		$rootScope.loginShow = true;
-	});
-	$rootScope.$on('error:unknown', function (event, data) {
-		$rootScope.errorTip(data);
-	});
-	$rootScope.cancelLogin = function () {
-		$rootScope.loginShow = false;
-	};
-	$rootScope.focus = function () {
-    $rootScope.$broadcast('hiddenBottomBar');
-  };
-  $rootScope.blur = function () {
-    $rootScope.$broadcast('showBottomBar');
-  };
-  $rootScope.errorTip = function (err) {
-    Materialize.toast('<b class="red-text">' + err.data.error.message + '</b>' +'如果有问题,请您联系我们哦', 10000);
-  }
-}])
-.controller('HeaderController',
-	['$scope', '$rootScope', "User", "$location", "$window",
-	function ($scope, $rootScope, User, $location, $window){
-	try {
-		var token = JSON.parse(localStorage.$LoopBack$currentUserToken);
-		if (new Date().getTime() - new Date(token.created).getTime() > token.ttl * 1000) {
-			localStorage.clear();
-			Materialize.toast('你的TOKEN已失效,你需要重新登录', 2000);
-		} else {
-			token.user.id = token.userId;
-    	token.user.accessToken = token.id;
-			$rootScope.$currentUser = token.user;
-			$rootScope.username = token.user.name;
-		}
-	} catch (err) {
-		console.log(err);
-	}
-	$scope.pullTeams = function () {
-		User.prototype_get_teams({
-			id: $scope.$currentUser.id
-		}, function(teams){
-			$scope.teams = teams;
-		})
-	};
-	$scope.logOut = function () {
-		$rootScope.$currentUser = null;
-		localStorage.$LoopBack$currentUserToken = '';
-		localStorage.$LoopBack$accessTokenId = '';
-		$rootScope.username = false;
-		Materialize.toast('退出成功', 2000);
-		$location.path("/w/activities");
-	};
-	$scope.goLogin = function (){
-    if (!$scope.$currentUser) {
-      return $scope.$emit('auth:loginRequired');
-=======
     'ui.router',
     'lbServices',
     'ui.materialize',
@@ -136,7 +39,6 @@ var app = angular.module('WRU', [
         }
       }
       return flag;
->>>>>>> 76800aa0fd60bb497befc29ab13f3da7405bea79
     }
 
     $rootScope.mediaIsPC = IsPC();
