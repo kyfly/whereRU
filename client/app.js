@@ -82,7 +82,7 @@ var app = angular.module('WRU', [
 		}, function(teams){
 			$scope.teams = teams;
 		})
-	}
+	};
 	$scope.logOut = function () {
 		$rootScope.$currentUser = null;
 		localStorage.$LoopBack$currentUserToken = '';
@@ -90,7 +90,7 @@ var app = angular.module('WRU', [
 		$rootScope.username = false;
 		Materialize.toast('退出成功', 2000);
 		$location.path("/w/activities");
-	}
+	};
 	$scope.goLogin = function (){
     if (!$scope.$currentUser) {
       return $scope.$emit('auth:loginRequired');
