@@ -13,6 +13,7 @@
 	<link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
 	<link href="/lib/materialize/css/materialize.css" rel="stylesheet">
   <link href="/application/styles/where-r-u.css" rel="stylesheet">
+
 </head>
 <body>
   <div class="wrap">
@@ -29,7 +30,7 @@
                 <div>
                   <ul class="pull-menu">
                     <li ng-repeat="team in teams" class="waves-effect">
-                      <a target="_blank" href="/w/team/{{team.id}}" ng-bind="team.name"></a>
+                      <a href="/w/team/{{team.id}}" ng-bind="team.name"></a>
                     </li>
                     <li class="waves-effect">
                       <a href="/w/teams/create">新建团队</a>
@@ -37,15 +38,18 @@
                   </ul>
                 </div>
               </li>
-              <li ng-if="!username" class="waves-effect">
+              <li ng-show="!username" class="waves-effect">
                 <a href="" ng-click="goLogin()">登录</a>
               </li>
-              <li ng-if="username">
+              <li ng-show="username">
                 <a href="">个人中心</a>
                 <div>
                   <ul class="pull-menu">
                     <li class="waves-effect">
                       <a href="/u/home">我的主页</a>
+                    </li>
+                    <li class="waves-effect">
+                      <a href="/u/home">我的消息</a>
                     </li>
                     <li class="waves-effect">
                       <a href="" ng-click="logOut()">退出登录</a>
@@ -67,7 +71,7 @@
     </div>
   </div>
   <footer class="center">
-    <span>&copy; 团团一家工作室 | 浙ICP备14023518号-1 </span>
+    <span>&copy; 团团一家工作室 | <a target="_blank" href="http://www.miitbeian.gov.cn/">浙ICP备14023518号-1</a> </span>
   </footer>
   <div ng-show="bottomBar" class="hide-on-large-only" ng-controller="BottomBarController">
         <div style="height:48px" ></div>
@@ -98,15 +102,36 @@
 <script src="/lib/ueditor/ueditor.config.js"></script>
 <script src="/lib/ueditor/ueditor.all.min.js"></script>
 <script src="/lib/angular-ueditor/angular-ueditor.min.js"></script>
+
+<!-- ng-material -->
+<script src="/lib/materialize/js/angular-materialize.js"></script>
 <!--ui-router-->
 <script src="/lib/angular-components/angular-ui-router.min.js"></script>
 <!--resource-->
 <script src="/lib/angular-components/angular-resource.min.js"></script>
-
+<!--model service-->
+<script src="/services/lb-services.js"></script>
+<script src="/lib/school/hdu.js"></script>
 
 <!--angular module-->
 <script src="/app.js"></script>
-<script src="/build/application.min.js"></script>
-
+<script src="/services/upload-services.js"></script>
+<!--ueditor service-->
+<script src="/services/ueditor-services.js"></script>
+<!-- User -->
+<script src="/application/scripts/user/user-controller.js"></script>
+<!--&lt;!&ndash; Activity &ndash;&gt;-->
+<script src="/application/scripts/activity/activity-controller.js"></script>
+<!-- Coterie -->
+<script src="/application/scripts/coterie/coterie-controller.js"></script>
+<!-- Team -->
+<script src="/application/scripts/team/team-controller.js"></script>
+<!-- Race -->
+<script src="/application/scripts/race/race-controller.js"></script>
+<script src="/application/scripts/user/user-router.js"></script>
+<script src="/application/scripts/activity/activity-router.js"></script>
+<script src="/application/scripts/coterie/coterie-router.js"></script>
+<script src="/application/scripts/team/team-router.js"></script>
+<script src="/application/scripts/race/race-router.js"></script>
 </body>
 </html>

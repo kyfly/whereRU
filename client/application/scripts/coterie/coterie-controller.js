@@ -1,4 +1,4 @@
-app.controller('CoteriesController', 
+app.controller('CoteriesController',
   ['$scope', 'User','Coterie', '$location', function ($scope, User, Coterie, $location) {
   $scope.more = false;
   $scope.moreOrBack = $scope.more ? '返回' : '发现';
@@ -35,7 +35,7 @@ app.controller('CoteriesController',
     getCoteries();
   }
 }]);
-app.controller('CoterieController', 
+app.controller('CoterieController',
   ['$scope', '$stateParams', 'Coterie', 'User', 'Ueditor', '$http', '$location',
   function ($scope, $stateParams, Coterie, User, Ueditor, $http, $location) {
   Coterie.findById({
@@ -53,7 +53,7 @@ app.controller('CoterieController',
       }, {
         lastView: new Date()
       }, function (res) {
-        
+
       }, function (err) {
         console.log(err);
       });
@@ -138,7 +138,7 @@ app.controller('CoterieController',
     });
   };
 }]);
-app.controller('ArticlesController', 
+app.controller('ArticlesController',
   ['$scope', 'Article', function($scope, Article){
   $scope.loadComment = function () {
     var article = this.article;
@@ -148,7 +148,10 @@ app.controller('ArticlesController',
       return;
     }
     Article.prototype_get_comments({
-      id: article.id
+      id: article.id,
+      filter: {
+        order: 'created DESC'
+      }
     }, function (comments) {
       article.comments = comments;
     });
@@ -180,7 +183,7 @@ app.controller('CommentsController',
       };
       article.commentCount ++;
       comment.replyCount = 0;
-      article.comments.push(comment);
+      article.comments.splice(0,0,comment);
       article.writingCommentContent = null;
       Materialize.toast('评论成功', 2000);
     });
@@ -227,7 +230,7 @@ app.controller('CommentsController',
     });
   }
 }]);
-app.controller('ArticleController', 
+app.controller('ArticleController',
   ['$scope', '$stateParams', 'User','Coterie', 'Article', 'Comment',
   function ($scope, $stateParams, User, Coterie, Article, Comment) {
   if (!$scope.$currentUser) {
@@ -248,7 +251,7 @@ app.controller('ArticleController',
     });
     $scope.article.showCommentBox = true;
   });
-  
+
   Article.prototype_create_readers({
     id: $stateParams.id
   }, {

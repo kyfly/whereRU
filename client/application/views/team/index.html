@@ -1,7 +1,7 @@
 <div class="row center filter-bar">
   <ul>
     <li class="col s3">
-      <a class="dropdown-button" href="" 
+      <a class="dropdown-button" href=""
         dropdown data-hover="true"
         ng-click="search=false"
         ng-mouseover="search=false"
@@ -14,7 +14,7 @@
       </ul>
     </li>
     <li class="col s3">
-      <a class="dropdown-button" href="" 
+      <a class="dropdown-button" href=""
         ng-click="search=false;type=undefined;statusHide=false"
         ng-mouseover="search=false;type=undefined;statusHide=false"
         dropdown data-hover="true"
@@ -27,7 +27,7 @@
       </ul>
     </li>
     <li class="col s3">
-      <a class="dropdown-button" href="" 
+      <a class="dropdown-button" href=""
         ng-click="search=false;status=undefined;typeHide=false"
         ng-mouseover="search=false;status=undefined;typeHide=false"
         dropdown data-hover="true"
@@ -52,7 +52,7 @@
     <input type="text" ng-model="filterTitle" ng-change="titleFilter()" placeholder="请在此输入关键字">
   </div>
 </div>
-      
+
 <div class="row menu">
   <div class="col s4 m4 l2 item active waves-effect hide-on-med-and-down">
     <a class="active" href=""></a>
@@ -72,7 +72,7 @@
 <div class="row container" >
   <ul>
     <li class="col s12 m6 l3 team-card" ng-repeat="team in teams | filter: query">
-      <div class="card" title="{{team.name}}">
+      <div class="card hoverable" title="{{team.name}}">
         <div class="card-image">
           <a href="/w/teams/{{team.id}}">
             <img ng-src="{{team.logoUrl}}@1e_1c_0o_0l_100h_100w_100q.src" err-src="http://img.etuan.org/default.jpg@1e_1c_0o_0l_100h_100w_100q.src">

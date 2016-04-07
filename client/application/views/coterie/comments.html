@@ -11,7 +11,7 @@
 				" ng-click="reload()" class="title">刷新</a>
 	      <div>
 	      	<div input-field>
-				    <textarea ng-model="article.writingCommentContent" class="materialize-textarea" ></textarea>
+				    <textarea ng-model="article.writingCommentContent" class="materialize-textarea no-pad-top" ></textarea>
 					</div>
 					<a href="" class="btn waves-effect waves-light red" ng-click="createComment()">发布</a>
 				</div>
@@ -43,7 +43,7 @@
 	      	<li class="collection-item">
 			      <span class="title">写回复</span>
 			      <div input-field>
-					    <textarea ng-model="comment.writingReplyContent" class="materialize-textarea" ></textarea>
+					    <textarea ng-model="comment.writingReplyContent" class="materialize-textarea no-pad-top" ></textarea>
 						</div>
 						<a href="" class="btn waves-effect waves-light red" ng-click="createReply()">提交</a>
 	    		</li>

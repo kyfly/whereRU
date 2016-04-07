@@ -4,42 +4,44 @@
     <a href="/" class="col brand-logo">whereRU</a>
     <ul>
       <li>
-        
+
       </li>
     </ul>
   </div>
 </nav> -->
 <div class="container row z-depth-1 user-header">
-	<div class="col s12 center user-info">
-		<img ng-src="{{user.headImgUrl}}">
-		<h4 ng-show="user">
-			<a href="/u/info"><span ng-bind="user.name"  class="black-text"></span><small>(修改信息)</small></a>
-			<a href="" ng-click="logout()">退出</a>
-		</h4>
-		<h4 ng-show="!user">
-			<a  href='' ng-click="goLogin()">登录</a>
-			<span> | </span>
-			<a href="/u/register">注册</a>
-		</h4>
-	</div>
+  <div class="col s12 center user-info">
+    <img ng-src="{{user.headImgUrl}}">
+    <h4 ng-show="user">
+      <a href="/u/info"><span ng-bind="user.name" class="black-text"></span>
+        <small>(修改信息)</small>
+      </a>
+      <a href="" ng-click="logout()">退出</a>
+    </h4>
+    <h4 ng-show="!user">
+      <a href='' ng-click="goLogin()">登录</a>
+      <span> | </span>
+      <a href="/u/register">注册</a>
+    </h4>
+  </div>
 </div>
 <div class="container row z-depth-1 user-activity">
-	<ul class="row menus">
-		<li ng-repeat="menu in activeMenus">
-			<a href="" ng-class="{true: 'active'}[menu.active]" 
-					ng-click="pullData()" ng-bind="menu.name"></a>
-		</li>
-	</ul>
-	<hr>
-	<div class="content">
-		<div ng-if="!user">
-			<h4>你还没有<span><a  href='' ng-click="goLogin()">登录</a><span>噢</h4>
-		</div>
-		<div ng-if="user">
-			<ng-include src="'/application/views/user/' + selectedMenu + '.html'"></ng-include>
-		</div>
-	</div>
+  <ul class="row menus">
+    <li ng-repeat="menu in activeMenus">
+      <a href="" ng-class="{true: 'active'}[menu.active]"
+         ng-click="pullData()" ng-bind="menu.name"></a>
+    </li>
+  </ul>
+  <hr>
+  <div class="content">
+    <div ng-if="!user">
+      <h4>你还没有<span><a href='' ng-click="goLogin()">登录</a></span>噢</h4>
+    </div>
+    <div ng-if="user">
+      <ng-include src="'/application/views/user/' + selectedMenu + '.html'"></ng-include>
+    </div>
+  </div>
 </div>
 <div class="container row">
-	<ng-include src="'/application/views/coterie/articles.html'"></ng-include>
+  <ng-include src="'/application/views/coterie/articles.html'"></ng-include>
 </div>
