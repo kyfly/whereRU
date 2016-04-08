@@ -1,5 +1,5 @@
-app.controller('SettingCtrl', ['$scope', '$rootScope', 'Team', 'uploadFile',
-  function ($scope, $rootScope, Team, uploadFile) {
+app.controller('SettingCtrl', ['$scope', '$rootScope', 'Team', 'uploadFile', 'User',
+  function ($scope, $rootScope, Team, uploadFile, User) {
   $rootScope.logoHide = false;
   $scope.team = {};
 
@@ -64,9 +64,9 @@ app.controller('SettingCtrl', ['$scope', '$rootScope', 'Team', 'uploadFile',
         dsTmp[i].id = i;
       }
     }
-    console.log($scope.team);
-    Team.prototype_updateAttributes({
-      id: localStorage.$LoopBack$currentTeamId
+    User.prototype_updateById_teams({
+      id: localStorage.$LoopBack$currentUserId,
+      fk: localStorage.$LoopBack$currentTeamId
     }, $scope.team, function () {
       Materialize.toast('更新成功！', 2000);
     }, function () {

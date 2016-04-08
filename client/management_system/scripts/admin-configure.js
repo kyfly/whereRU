@@ -20,6 +20,9 @@ app.config(['$locationProvider', function ($locationProvider) {
 })
 .run(['$rootScope', 'Team', '$timeout', function($rootScope, Team, $timeout){
 	if (localStorage.$LoopBack$currentTeamId) {
+    $rootScope.teamInfo = {
+      id: localStorage.$LoopBack$currentTeamId
+    };
 		Team.findById({
 		  id: localStorage.$LoopBack$currentTeamId
 		}, function (res) {
