@@ -290,6 +290,7 @@ app.controller('BindController', ['$scope', 'User', '$location', '$rootScope', '
   }]);
 app.controller('UserInfoController', ['$scope', 'User', 'School', '$location', 'uploadFile',
   function ($scope, User, School, $location, uploadFile) {
+    $scope.isBindWeChat = false;
     if ($scope.$currentUser) {
       User.getInfo(function (user) {
         delete user.$promise;
@@ -313,7 +314,12 @@ app.controller('UserInfoController', ['$scope', 'User', 'School', '$location', '
           $scope.user.headImgUrl = res.url;
         });
     };
+
+    $scope.closeBind = function () {
+      $scope.isBindWeChat = false;
+    }
     $scope.bindWechat = function () {
+      $scope.isBindWeChat = true;
       var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + 'wx5d92b3c192f993e7'
         + '&redirect_uri=http://' + $location.host()
         + '/u/bind&response_type=code&scope=snsapi_userinfo&state=' + $scope.$currentUser.id

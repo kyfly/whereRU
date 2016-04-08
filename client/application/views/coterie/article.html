@@ -13,15 +13,15 @@
 		<div class="card-action">
       <div class="waves-effect text-center action" ng-click="loadComment()">
        	<a href="" class="black-text">
-       		<i class="mdi-action-visibility"></i>阅读量(<span ng-bind="article.readerCount"></span>)
+       		<i class="mdi-action-visibility"></i> 阅读量 ( <span ng-bind="article.readerCount"></span> )
        	</a>
       </div>
       <div class="waves-effect text-center action">
         <a href="" class="red-text" ng-show="article.islike">
-          <i class="mdi-toggle-star"></i>收藏(<span ng-bind="article.likeCount"></span>)
+          <i class="mdi-toggle-star"></i> 收藏 ( <span ng-bind="article.likeCount"></span> )
         </a>
         <a href="" class="red-text" ng-show="!article.islike" ng-click="addLike()">
-          <i class="mdi-toggle-star-border"></i>收藏(<span ng-bind="article.likeCount"></span>)
+          <i class="mdi-toggle-star-border"></i> 收藏 ( <span ng-bind="article.likeCount"></span> )
         </a>
       </div>
 		</div>

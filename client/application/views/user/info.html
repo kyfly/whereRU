@@ -1,6 +1,6 @@
 <nav class="header row hide-on-large-only">
   <div class="nav-wrapper">
-    <a href="/" class="brand-logo">whereRU</a>
+    <a href="/" class="brand-logo">WhereRU</a>
   </div>
 </nav>
 
@@ -8,20 +8,20 @@
 	<div class="row s12">
 	  <ul class="tabs" tabs>
 	    <li class="tab col s3 waves-effect">
-	      <a href="#requiredInfo" class="active">必须信息</a>
+	      <a href="#requiredInfo" class="active" ng-click="closeBind()">必须信息</a>
 	    </li>
 	    <li class="tab col s3 waves-effect">
-	      <a href="#detailIfo">其他信息</a>
+	      <a href="#detailIfo" ng-click="closeBind()">其他信息、头像</a>
 	    </li>
 	    <li class="tab col s3 waves-effect">
-	      <a href="#reset">密码修改</a>
+	      <a href="#reset" ng-click="closeBind()">密码修改</a>
 	    </li>
 	    <li ng-if="!user.openid" ng-show="mediaIsPC" class="tab col s3 waves-effect">
-	      <a href="#bind"  ng-click="bindWechat()">绑定微信</a>
+	      <a href="#bind" ng-click="bindWechat()">绑定微信</a>
 	    </li>
 	  </ul>
 	</div>
-		
+
 	<div>
 		<div id="requiredInfo">
 			<form class="reg" id="reqForm" name="reqForm">
@@ -36,7 +36,7 @@
 			    <label ng-if="!user.isVerify" for="name"><b class="red-text">*</b>请修改真实姓名</label>
 			    <label ng-if="user.isVerify" for="name">姓名</label>
 				</div>
-			
+
 				<div ng-if="!user.isVerify" class="input-field col s12">
 			    <input id="password" type="text" ng-model="user.password" length="16" ng-focus="focus()" ng-blur="blur()" required>
 			    <label for="password"><b class="red-text">*</b>请输入密码</label>
@@ -45,16 +45,16 @@
 				  <option value="" disabled selected><b class="red-text">*</b>请选择学校</option>
 				  <option ng-repeat="school in schools">{{school.name}}</option>
 				</select>
-				
+
 				<select class="" ng-model="user.sex" material-select watch>
 				  <option value="" disabled selected>请选择性别</option>
 				  <option value="男">男</option>
 				  <option value="女">女</option>
 				</select>
 				<div  class="row center">
-					<button type="sumbit" 
-					  class="waves-effect waves-light btn offset-s1" 
-						ng-click="updateInfo()" 
+					<button type="sumbit"
+					  class="waves-effect waves-light btn offset-s1"
+						ng-click="updateInfo()"
 						style="margin-left: 20px"
 						ng-disabled="reqForm.$invalid">更新信息</button>
 				</div>
@@ -85,9 +85,9 @@
 			    </div>
 			  </div>
 				<div  class="row center">
-					<button type="sumbit" 
-					  class="waves-effect waves-light btn offset-s1" 
-						ng-click="updateInfo()" 
+					<button type="sumbit"
+					  class="waves-effect waves-light btn offset-s1"
+						ng-click="updateInfo()"
 						style="margin-left: 20px"
 						ng-disabled="detForm.$invalid">更新信息</button>
 				</div>
@@ -104,9 +104,9 @@
 				    <label for="newPwd"><b class="red-text">*</b>请输入新密码</label>
 				</div>
 				<div  class="row center">
-					<button type="sumbit" 
-					  class="waves-effect waves-light btn offset-s1" 
-						ng-click="resetPassword()" 
+					<button type="sumbit"
+					  class="waves-effect waves-light btn offset-s1"
+						ng-click="resetPassword()"
 						ng-disabled="resetForm.$invalid"
 						style="margin-left: 20px">确定</button>
 				</div>
@@ -114,10 +114,10 @@
 		</div>
 		<div id="bind" ng-if="!user.openid">
 			<div id="bindQrcode" class="center"></div>
-			<h6 class="center">微信扫一扫,绑定账号</h6>
+			<p class="center" ng-show="isBindWeChat">微信扫一扫,绑定账号</p>
 		</div>
 	</div>
-	
+
 </div>
 
 

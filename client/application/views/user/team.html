@@ -6,17 +6,20 @@
     </p>
   </li>
   <li class="collection-item avatar" ng-repeat="team in teams">
-    <img ng-src="{{team.team.logoUrl}}@1e_1c_0o_0l_100h_100w_100q.src" alt="" class="circle">
+    <a href="/w/teams/{{team.team.id}}">
+      <img ng-src="{{team.team.logoUrl}}@1e_1c_0o_0l_100h_100w_100q.src" alt="" class="circle">
+    </a>
     <span class="title">
-      <a href="/w/team/{{team.team.id}}" ng-bind="team.team.name"></a>
+      <a href="/w/teams/{{team.team.id}}" ng-bind="team.team.name"></a>
     </span>
     <p>
-      <span ng-if="team.owner" >
-        <i class="mdi-action-grade"></i><span>拥有者</span>
-      </span>
-      <br>
-      <span>角色 | <span ng-bind="team.role || '未选择'"></span></span>
+      <span>角色 |
+        <span ng-if="team.owner">
+          <i class="mdi-action-grade"></i><span>拥有者 |</span>
+        </span>
+        <span ng-bind="team.role || '未选择'"></span></span>
     </p>
+    <a href="/w/team/{{team.team.id}}" class="btn waves-effect orange darken-2" ng-if="team.owner">管理团队</a>
   </li>
   <li class="collection-item add-btn">
     <a href="/w/teams/create" class="btn waves-effect">新建团队</a>

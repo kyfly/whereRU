@@ -12,20 +12,20 @@
 	<div class="card-action">
 		<div class="waves-effect text-center action">
       <a href="/w/articles/{{article.id}}" class="orange-text">
-        <i class="mdi-action-visibility"></i>阅读原文
+        <i class="mdi-action-visibility"></i> 阅读原文
       </a>
     </div>
     <div class="waves-effect text-center action" ng-click="loadComment()">
       <a href="" class="black-text">
-        <i class="mdi-communication-comment"></i>评论(<span ng-bind="article.commentCount"></span>)
+        <i class="mdi-communication-comment"></i> 评论 ( <span ng-bind="article.commentCount"></span> )
       </a>
     </div>
     <div class="waves-effect text-center action">
       <a href="" class="red-text" ng-show="article.islike">
-        <i class="mdi-toggle-star"></i>收藏(<span ng-bind="article.likeCount"></span>)
+        <i class="mdi-toggle-star"></i> 收藏( <span ng-bind="article.likeCount"></span> )
       </a>
       <a href="" class="red-text" ng-show="!article.islike" ng-click="addLike()">
-        <i class="mdi-toggle-star-border"></i>收藏(<span ng-bind="article.likeCount"></span>)
+        <i class="mdi-toggle-star"></i> 收藏 ( <span ng-bind="article.likeCount"></span> )
       </a>
     </div>
 	</div>
