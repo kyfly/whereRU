@@ -1,7 +1,7 @@
 ﻿body {
   background-color: #eee;
   overflow-y: scroll;
-  font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体",sans-serif;
 }
 
 @media only screen and (max-width: 601px) {
@@ -126,7 +126,7 @@ nav ul li {
   padding: 0;
   white-space: nowrap;
   font-weight: 900;
-  font-family: cursive;
+  font-family: Verdana;
 }
 
 nav .nav-wrapper i {
@@ -1197,8 +1197,8 @@ footer {
   background-color: #008000;
   display: inline-block;
   color: #fff;
-  margin: 10px;
-  margin-left: 0;
+  margin: 10px 10px 10px 0;
+  /*margin-left: 0;*/
   line-height: 20px;
   width: 50px;
   height: 50px;
@@ -1500,6 +1500,7 @@ footer {
   .filter-bar > ul > li > a {
     font-size: 1.4rem;
   }
+
 
   .filter-bar > ul > li > .dropdown-content {
     margin-top: 50px;
@@ -1944,7 +1945,7 @@ footer {
 }
 
 .comments-section .comment-area {
-  padding: 10px 0;
+  padding: 10px 20px 20px 0;
 }
 
 .comments-section .collapsible-header {
@@ -2038,6 +2039,10 @@ footer {
   background-color: rgb(255, 255, 255);
 }
 
+.word-wrap {
+  white-space: normal !important;
+}
+
 .user-activity hr {
   border: solid 1px #eee;
   /*clear: both;*/
@@ -2105,7 +2110,7 @@ footer {
 .user-activity .item {
   position: relative;
   margin: 10px 0;
-  margin-top: 10px;
+  /*margin-top: 10px;*/
 }
 
 .user-activity .item .result {
@@ -2153,8 +2158,8 @@ footer {
   position: absolute;
 }
 
-.auth-status > div {
 
+.auth-status > div {
   padding-top: 100px;
 }
 
@@ -2163,26 +2168,74 @@ footer {
   height: 150px;
 }
 
-.seckillBtn {
+.seckill-btn {
   width: 100px !important;
   height: 100px !important;
+  border-style: solid !important;
+  border-width: 3px !important;
+  border-color: #f06292 !important;
 }
-.seckill-bg{
+
+.seckill-btn:disabled {
+  border-color: #9F9F9F !important;
+}
+
+.seckill-bg {
   width: 100%;
   height: 500px;
-  background-size:cover;
-  background-repeat: no-repeat;
+  background-size: cover;
   overflow: hidden;
+  background-position: 47%;
 }
- .frosted-glass{
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -ms-filter: blur(5px);
-    -o-filter: blur(5px);
-    filter: blur(5px);
-    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=4, MakeShadow=false);
+
+.frosted-glass {
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  -webkit-filter: blur(6px);
+  -moz-filter: blur(6px);
+  -ms-filter: blur(6px);
+  -o-filter: blur(6px);
+  filter: blur(6px);
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=4, MakeShadow=false);
 }
+
+.add-btn {
+  padding-left: 15px !important;
 }
+
+.seckill-info {
+  margin-top: -500px;
+  margin-left: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: block;
+}
+
+.text-shadow {
+  /*text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 40px #ff5722, 0 0 70px #ff5722;*/
+  text-shadow: 0 0 20px #ccc;
+}
+
+.gray-shadow {
+  text-shadow: 0 0 10px #000000;
+}
+
+.toast {
+  position: fixed;
+  right: 10%;
+}
+
+@media only screen and (max-width: 992px) {
+  .toast {
+    position: fixed;
+    height: 28px;
+    right: 0;
+  }
+}
+
+.no-pad-top {
+  padding-top: 0 !important;
+}
+

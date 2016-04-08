@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="WRU">
 <head>
-  <title>where R U</title>
+  <title>WhereRU校园服务平台</title>
   <base href="/">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="renderer" content="webkit">
@@ -21,7 +21,7 @@
       <header ng-controller="HeaderController">
         <nav class="header row  hide-on-med-and-down">
           <div class="nav-wrapper">
-            <a href="/" class="left brand-logo col l3 offset-l1">whereRU</a>
+            <a href="/" class="left brand-logo col l3 offset-l1">WhereRU</a>
             <ul class="col l6 offset-l6 right">
               <li  class="waves-effect"><a href="/w/activities">校园服务</a></li>
               <li class="waves-effect"><a href="/w/coteries">校园圈子</a></li>
@@ -30,7 +30,7 @@
                 <div>
                   <ul class="pull-menu">
                     <li ng-repeat="team in teams" class="waves-effect">
-                      <a href="/w/team/{{team.id}}" ng-bind="team.name"></a>
+                      <a target="_blank" href="/w/team/{{team.id}}" ng-bind="team.name"></a>
                     </li>
                     <li class="waves-effect">
                       <a href="/w/teams/create">新建团队</a>
@@ -62,22 +62,22 @@
         </nav>
         <div style="height:4.2rem" class="hide-on-med-and-down"></div>
       </header>
-      
+
       <div class="row" ng-show="loginShow" id="login" ng-include="'application/views/user/login.html'"></div>
       <div id="doc">
         <div ui-view></div>
       </div>
-      
+
     </div>
   </div>
   <footer class="center">
-    <span>&copy; 团团一家工作室 | 浙ICP备14023518号-1 </span>
+    <span>&copy; 团团一家工作室 | <a target="_blank" href="http://www.miitbeian.gov.cn/">浙ICP备14023518号-1</a> </span>
   </footer>
   <div ng-show="bottomBar" class="hide-on-large-only" ng-controller="BottomBarController">
         <div style="height:48px" ></div>
 
         <div class="row s12 bottom-bar z-depth-1">
-          
+
           <ul class="tabs">
             <li class="tab col s3 waves-effect">
               <span ng-click="goback()">
@@ -87,7 +87,7 @@
             <li class="tab col s3 waves-effect" ng-repeat="menu in menus">
               <a href="{{menu.path}}" ng-click="changePage()" ng-class="{true: 'active'}[menu.active]" ng-bind="menu.name"></a>
             </li>
-            
+
           </ul>
         </div>
   </div>

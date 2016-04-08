@@ -1,13 +1,20 @@
 <ul class="collection with-header">
+
+  <li class="collection-item" ng-if="activities.length === 0">
+    <p class="word-wrap">
+      你还没有参与活动哦，点击下面的按钮参与 （＾∀＾）
+    </p>
+  </li>
   <li class="collection-item avatar" ng-repeat="activity in activities">
     <img ng-src="{{activity.imgUrl}}@1e_1c_0o_0l_100h_100w_100q.src" alt="" class="circle">
     <span class="title">
       <a class="black-text" href="/w/activities/{{activity.id}}" ng-bind="activity.title"></a>
-        <a href="/u/results/{{activity.resultId}}/{{activity.actType}}">查看结果</a>
+      <br>
+      <a href="/u/results/{{activity.resultId}}/{{activity.actType}}">查看结果</a>
     </span>
     <p>
-      <span>发布方 | 
-        <a href="/w/teams/{{activity.authorId}}"  ng-bind="activity.authorName"></a>
+      <span>发布方 |
+        <a href="/w/teams/{{activity.authorId}}" ng-bind="activity.authorName"></a>
       </span>
       <br>
       <span>
@@ -15,7 +22,7 @@
       </span>
     </p>
   </li>
-  <li class="collection-header">
-    <h4><a href="/w/activities">参与活动</a></h4>
+  <li class="collection-item add-btn">
+    <a href="/w/activities" class="btn waves-effect">参与活动</a>
   </li>
 </ul>
