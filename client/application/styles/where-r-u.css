@@ -1,7 +1,7 @@
 ﻿body {
   background-color: #eee;
   overflow-y: scroll;
-  font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体",sans-serif;
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体", sans-serif;
 }
 
 @media only screen and (max-width: 601px) {
@@ -1501,7 +1501,6 @@ footer {
     font-size: 1.4rem;
   }
 
-
   .filter-bar > ul > li > .dropdown-content {
     margin-top: 50px;
   }
@@ -2158,7 +2157,6 @@ footer {
   position: absolute;
 }
 
-
 .auth-status > div {
   padding-top: 100px;
 }
@@ -2239,6 +2237,10 @@ footer {
   padding-top: 0 !important;
 }
 
-.myCursorPointer{
-  cursor: pointer;
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.margin-top {
+  margin-top: 20px !important;
 }

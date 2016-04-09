@@ -99,9 +99,18 @@
               url: urlBase + '/WUsers/:id/articles',
               method: 'POST'
             },
+            "prototype_get_likeUsers": {
+              url: urlBase + '/WUsers/:id/likeUsers',
+              method: 'GET',
+              isArray: true
+            },
             "prototype_create_likeUsers": {
               url: urlBase + '/WUsers/:id/likeUsers',
               method: 'POST'
+            },
+            "prototype_destroyById_likeUsers": {
+              url: urlBase + '/WUsers/:id/likeUsers/:fk',
+              method: 'DELETE'
             },
             "auth2wechat": {
               url: urlBase + '/WUsers/auth2wechat',

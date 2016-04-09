@@ -17,7 +17,7 @@
        	</a>
       </div>
       <div class="waves-effect text-center action">
-        <a href="" class="red-text" ng-show="article.islike">
+        <a href="" class="red-text" ng-show="article.islike" ng-click="deleteLike()">
           <i class="mdi-toggle-star"></i> 收藏 ( <span ng-bind="article.likeCount"></span> )
         </a>
         <a href="" class="red-text" ng-show="!article.islike" ng-click="addLike()">

@@ -273,6 +273,24 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
+      "property": "__get__likeUsers"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__delete__likeUsers"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__destroyById__likeUsers"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
       "property": "__get__coteries"
     },
     {

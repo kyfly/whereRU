@@ -4,7 +4,7 @@
       你还没有喜欢文章哦 (￣▽￣")
     </p>
   </li>
-  <li class="item col s12" ng-repeat="likeArticle in likeArticles">
+  <li class="item col s12 margin-top" ng-repeat="likeArticle in likeArticles">
     <img ng-src="{{likeArticle.article.user.headImgUrl}}">
     <div>
     	<h6 class="title">
@@ -16,6 +16,8 @@
 		  <h6>收藏时间 |
 	    	<span ng-bind="likeArticle.created | date: 'yyyy-MM-dd HH:mm:ss'"></span>
 		  </h6>
+      <a class="waves-effect btn white black-text" ng-click="deleteLike()">取消收藏</a>
     </div>
+    <hr>
   </li>
 </ul>

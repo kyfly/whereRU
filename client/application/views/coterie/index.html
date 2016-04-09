@@ -18,7 +18,7 @@
 </nav> -->
 <div class="row s12 coterie hide-on-large-only">
   <ul class="coterie-list">
-    
+
     <li>
       <a ng-show="!more" class="find-more-btn" href="#" ng-click="moreCoteries()">
         <i class="mdi-device-wifi-tethering"></i>
@@ -59,7 +59,7 @@
       你还没关注任何圈子呢
     </div>
     <div class="tip" ng-show="!$currentUser">
-      你还没<span href="" style="color:#039be5" ng-click="goLogin()">登录</span>呢
+      你还没<span href="" style="color:#039be5" ng-click="goLogin()"  class="cursor-pointer">登录</span>呢
     </div>
     <li ng-repeat="coterie in coteries" ng-click="hideSideBar()">
       <a href="/w/coteries/{{coterie.id}}" ng-click="coterie.msgCount=0">

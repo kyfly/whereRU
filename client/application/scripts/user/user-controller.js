@@ -40,12 +40,12 @@ app.controller('LoginController',
                     userAuthSave(data, $rootScope, LoopBackAuth);
                     $scope.wechatLogin = false;
                     Materialize.toast('登录成功', 3000);
-                    
+
                     flag = false;
                     if (res.aouth.url) {
                       Materialize.toast('记得去完善资料', 3000);
                       window.location.reload();
-                    } else 
+                    } else
                       $location.path('/u/info');
                   }
                 });
@@ -196,6 +196,28 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location', f
       return $scope.$emit('auth:loginRequired');
     }
   };
+  $scope.deleteLike = function () {
+    var article = this.likeArticle;
+    var thisElement = this;
+    console.log(this);
+    User.prototype_get_likeUsers({
+      id: $scope.$currentUser.id,
+      filter: {
+        where: {
+          articleId: article.articleId
+        }
+      }
+    }, function (res) {
+      User.prototype_destroyById_likeUsers({
+        id: $scope.$currentUser.id,
+        fk: res[0].id
+      }, function () {
+        Materialize.toast('文章取消收藏成功', 2000);
+        $scope.likeArticles.splice(this.$index,1)
+      });
+    });
+
+  };
   $scope.activeMenus = [{
     "name": "我的团队",
     "clickFn": pullTeams,
@@ -213,7 +235,7 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location', f
     "eName": 'activity'
   }, {
     'clickFn': pullLikeArticles,
-    'name': '喜欢文章',
+    'name': '文章收藏',
     "active": false,
     "eName": 'article'
   }];
