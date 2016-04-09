@@ -7,90 +7,89 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/lib/img/etuan_logo.ico" type="image/x-icon">
-	<link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
-	<link href="/lib/materialize/css/materialize.css" rel="stylesheet">
+  <link href="/lib/materialize/css/material-icons.css" rel="stylesheet">
+  <link href="/lib/materialize/css/materialize.css" rel="stylesheet">
   <link href="/application/styles/where-r-u.css" rel="stylesheet">
 
 </head>
 <body>
-  <div class="wrap">
-    <div class="main">
-      <header ng-controller="HeaderController">
-        <nav class="header row  hide-on-med-and-down">
-          <div class="nav-wrapper">
-            <a href="/" class="left brand-logo col l3 offset-l1">WhereRU</a>
-            <ul class="col l6 offset-l6 right">
-              <li  class="waves-effect"><a href="/w/activities">校园服务</a></li>
-              <li class="waves-effect"><a href="/w/coteries">校园圈子</a></li>
-              <li ng-show="username">
-                <a ng-mouseover="pullTeams()">我的团队</a>
-                <div>
-                  <ul class="pull-menu">
-                    <li ng-repeat="team in teams" class="waves-effect">
-                      <a target="_blank" href="/w/team/{{team.id}}" ng-bind="team.name"></a>
-                    </li>
-                    <li class="waves-effect">
-                      <a href="/w/teams/create">新建团队</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li ng-show="!username" class="waves-effect">
-                <a href="" ng-click="goLogin()">登录</a>
-              </li>
-              <li ng-show="username">
-                <a href="">个人中心</a>
-                <div>
-                  <ul class="pull-menu">
-                    <li class="waves-effect">
-                      <a href="/u/home">我的主页</a>
-                    </li>
-                    <li class="waves-effect">
-                      <a href="/u/home">我的消息</a>
-                    </li>
-                    <li class="waves-effect">
-                      <a href="" ng-click="logOut()">退出登录</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <div style="height:4.2rem" class="hide-on-med-and-down"></div>
-      </header>
+<div class="wrap">
+  <div class="main">
+    <header ng-controller="HeaderController">
+      <nav class="header row  hide-on-med-and-down">
+        <div class="nav-wrapper">
+          <a href="/" class="left brand-logo col l3 offset-l1">WhereRU</a>
+          <ul class="col l6 offset-l6 right">
+            <li class="waves-effect"><a href="/w/activities">校园服务</a></li>
+            <li class="waves-effect"><a href="/w/coteries">校园圈子</a></li>
+            <li ng-show="username">
+              <a ng-mouseover="pullTeams()">我的团队</a>
+              <div>
+                <ul class="pull-menu">
+                  <li ng-repeat="team in teams" class="waves-effect">
+                    <a target="_blank" href="/w/team/{{team.id}}" ng-bind="team.name"></a>
+                  </li>
+                  <li class="waves-effect">
+                    <a href="/w/teams/create">新建团队</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li ng-show="!username" class="waves-effect">
+              <a href="" ng-click="goLogin()">登录</a>
+            </li>
+            <li ng-show="username">
+              <a href="">个人中心</a>
+              <div>
+                <ul class="pull-menu">
+                  <li class="waves-effect">
+                    <a href="/u/home">我的主页</a>
+                  </li>
+                  <li class="waves-effect">
+                    <a href="/u/home">我的消息</a>
+                  </li>
+                  <li class="waves-effect">
+                    <a href="" ng-click="logOut()">退出登录</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div style="height:4.2rem" class="hide-on-med-and-down"></div>
+    </header>
 
-      <div class="row" ng-show="loginShow" id="login" ng-include="'application/views/user/login.html'"></div>
-      <div id="doc">
-        <div ui-view></div>
-      </div>
-
+    <div class="row" ng-show="loginShow" id="login" ng-include="'application/views/user/login.html'"></div>
+    <div id="doc">
+      <div ui-view></div>
     </div>
+
   </div>
-  <footer class="center">
-    <span>&copy; 团团一家工作室 | <a target="_blank" href="http://www.miitbeian.gov.cn/">浙ICP备14023518号-1</a> </span>
-  </footer>
-  <div ng-show="bottomBar" class="hide-on-large-only" ng-controller="BottomBarController">
-        <div style="height:48px" ></div>
+</div>
+<footer class="center">
+  <span>&copy; 团团一家工作室 | <a target="_blank" href="http://www.miitbeian.gov.cn/">浙ICP备14023518号-1</a> </span>
+</footer>
+<div ng-show="bottomBar" class="hide-on-large-only" ng-controller="BottomBarController">
+  <div style="height:48px"></div>
 
-        <div class="row s12 bottom-bar z-depth-1">
+  <div class="row s12 bottom-bar z-depth-1">
 
-          <ul class="tabs">
-            <li class="tab col s3 waves-effect">
+    <ul class="tabs">
+      <li class="tab col s3 waves-effect">
               <span ng-click="goback()">
                 <i class="mdi-image-navigate-before"></i>返回
               </span>
-            </li>
-            <li class="tab col s3 waves-effect" ng-repeat="menu in menus">
-              <a href="{{menu.path}}" ng-click="changePage()" ng-class="{true: 'active'}[menu.active]" ng-bind="menu.name"></a>
-            </li>
+      </li>
+      <li class="tab col s3 waves-effect" ng-repeat="menu in menus">
+        <a href="{{menu.path}}" ng-click="changePage()" ng-class="{true: 'active'}[menu.active]"
+           ng-bind="menu.name"></a>
+      </li>
 
-          </ul>
-        </div>
+    </ul>
   </div>
+</div>
 <!-- jquery -->
 <script src="/lib/jquery/jquery.min.js"></script>
 <!--angular-->

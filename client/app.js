@@ -30,7 +30,7 @@ var app = angular.module('WRU', [
     });
     function IsPC() {
       var userAgentInfo = navigator.userAgent;
-      var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+      var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
       var flag = true;
       for (var v = 0; v < Agents.length; v++) {
         if (userAgentInfo.indexOf(Agents[v]) > 0) {
@@ -85,14 +85,14 @@ var app = angular.module('WRU', [
           }, function (teams) {
             $scope.teams = teams;
           })
-        }
+        };
         $scope.logOut = function () {
           $rootScope.$currentUser = null;
           localStorage.clear();
           $rootScope.username = false;
           Materialize.toast('退出成功', 2000);
           $location.path("/w/activities");
-        }
+        };
         $scope.goLogin = function () {
           if (!$scope.$currentUser) {
             return $scope.$emit('auth:loginRequired');
@@ -151,7 +151,7 @@ var app = angular.module('WRU', [
         });
         this.menu.active = true;
         $location.path(this.menu.path)
-      }
+      };
       $scope.goback = function () {
         $window.history.back();
       }
