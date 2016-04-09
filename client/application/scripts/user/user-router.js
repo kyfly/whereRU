@@ -20,6 +20,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       controller: 'UserController',
       templateUrl: '/application/views/user/index.html'
     })
+    .state('detail', {
+      url: '/u/:id',
+      controller: 'UserDetailController',
+      templateUrl: '/application/views/user/detail.html'
+    })
     .state('info', {
       url: '/u/info',
       controller: 'UserInfoController',
