@@ -40,10 +40,13 @@ app.controller('LoginController',
                     userAuthSave(data, $rootScope, LoopBackAuth);
                     $scope.wechatLogin = false;
                     Materialize.toast('登录成功', 3000);
+                    
                     flag = false;
                     if (res.aouth.url) {
                       Materialize.toast('记得去完善资料', 3000);
-                    } else $location.path('/u/info');
+                      window.location.reload();
+                    } else 
+                      $location.path('/u/info');
                   }
                 });
               }, 3000);
@@ -68,7 +71,7 @@ app.controller('LoginController',
           $scope.user = {};
           userAuthSave(data, $rootScope, LoopBackAuth);
           Materialize.toast('登录成功', 2000);
-          $location.path('/w/activities');
+          window.location.reload();
         }, function (err) {
           $scope.user.password = undefined;
           Materialize.toast('登录失败,请检查输入是否正确', 2000);
@@ -100,6 +103,8 @@ function userAuthSave(data, $rootScope, LoopBackAuth) {
   data.user.accessToken = data.id;
   $rootScope.$currentUser = data.user;
   $rootScope.username = data.user.name;
+  localStorage.$LoopBack$accessTokenId = data.id;
+  localStorage.$LoopBack$currentUserId = data.userId;
   LoopBackAuth.setUser(data.id, data.userId, data.user);
   LoopBackAuth.save();
   localStorage.$LoopBack$currentUserToken = JSON.stringify(data);
@@ -232,11 +237,9 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location', f
   };
   $scope.selectedMenu = 'team';
   if ($scope.$currentUser) {
-    //User.getInfo(function (user) {
       $scope.user = $scope.$currentUser;
       pullTeams();
       pullArticles();
-    //});
   } else {
     $scope.user = null;
   }
