@@ -65,10 +65,12 @@ app.controller('LoginController',
       $scope.login = function () {
         $scope.user.password = hex_md5($scope.user.password);
         User.login($scope.user, function (data) {
+          $scope.user = {};
           userAuthSave(data, $rootScope, LoopBackAuth);
           Materialize.toast('登录成功', 2000);
           $location.path('/w/activities');
         }, function (err) {
+          $scope.user.password = undefined;
           Materialize.toast('登录失败,请检查输入是否正确', 2000);
         });
       };
@@ -210,10 +212,9 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location', f
     "active": false,
     "eName": 'article'
   }];
-  $scope.logout = function () {
+  $scope.logOut = function () {
     $rootScope.$currentUser = null;
-    localStorage.$LoopBack$currentUserToken = '';
-    localStorage.$LoopBack$accessTokenId = '';
+    localStorage.clear();
     $rootScope.username = false;
     Materialize.toast('退出成功', 2000);
     $location.path("/w/activities");
