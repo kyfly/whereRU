@@ -109,7 +109,7 @@ nav ul li {
   float: none;
   line-height: 48px;
   text-align: left;
-  padding: 0 20px;
+  padding: 0 0px;
   height: 100%;
   display: block;
 }
@@ -1406,8 +1406,8 @@ footer {
   position: fixed;
   top: 0;
   z-index: 999;
-  margin-top: -2px;
-  padding-top: 10px;
+  margin-top: 4px;
+  padding-top: 0px;
 }
 
 .filter-bar ul {
@@ -2231,3 +2231,6 @@ footer {
   padding-top: 0 !important;
 }
 
+.myCursorPointer{
+  cursor: pointer;
+}
