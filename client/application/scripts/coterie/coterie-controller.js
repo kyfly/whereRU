@@ -176,7 +176,6 @@ app.controller('ArticlesController',
 
         })
       });
-
     };
     $scope.loadComment = function () {
       var article = this.article;
@@ -296,6 +295,45 @@ app.controller('ArticleController',
         userId: $scope.$currentUser.id,
         form: 'pc'//带修改
       });
+      $scope.addLike = function () {
+        if (!$scope.$currentUser) {
+          return $scope.$emit('auth:loginRequired');
+        }
+        var article = this.article;
+        User.prototype_create_likeUsers({
+          id: $scope.$currentUser.id
+        }, {
+          articleId: article.id,
+          created: new Date()
+        }, function (res) {
+          if (res.status === 1) {
+            article.likeCount++;
+            article.islike = true;
+            Materialize.toast('文章收藏成功', 2000);
+          }
+        });
+      };
+      $scope.deleteLike = function () {
+        var article = this.article;
+        User.prototype_get_likeUsers({
+          id: $scope.$currentUser.id,
+          filter: {
+            where: {
+              articleId: this.article.id
+            }
+          }
+        }, function (res) {
+          User.prototype_destroyById_likeUsers({
+            id: $scope.$currentUser.id,
+            fk: res[0].id
+          }, function () {
+            article.likeCount--;
+            article.islike = false;
+            Materialize.toast('文章取消收藏成功', 2000);
+
+          })
+        });
+      };
 
     }]);
 
