@@ -2039,6 +2039,10 @@ footer {
   background-color: rgb(255, 255, 255);
 }
 
+.word-wrap {
+  white-space: normal !important;
+}
+
 .user-activity hr {
   border: solid 1px #eee;
   /*clear: both;*/
@@ -2169,7 +2173,11 @@ footer {
   height: 100px !important;
   border-style: solid !important;
   border-width: 3px !important;
-  border-color: #ff5722 !important;
+  border-color: #f06292 !important;
+}
+
+.seckill-btn:disabled {
+  border-color: #9F9F9F !important;
 }
 
 .seckill-bg {

@@ -103,11 +103,11 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
     $scope.status = '已结束';
   };
   $scope.titleFilter = function () {
-    if (!filterTitle) {
+    if (!this.filterTitle) {
       $scope.query = undefined;
     } else {
       $scope.query = {
-        title: filterTitle
+        title: this.filterTitle
       };
     }
   };
@@ -370,7 +370,7 @@ app.controller('ActivityController',
       };
 
       $scope.submitSeckillResult = function () {
-        
+
         if (!$scope.$currentUser) {
           return $scope.$emit('auth:loginRequired');
         }

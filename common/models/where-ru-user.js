@@ -596,9 +596,9 @@ module.exports = function(User) {
    * @param  {[type]} ) {             } [description]
    * @return {[type]}   [description]
    */
-  User.afterRemote('prototype.__updateById__teams', function () {
-    //TODO 需要把更新的内容存到团队历史
-  });
+  // User.afterRemote('prototype.__updateById__teams', function () {
+  //   //TODO 需要把更新的内容存到团队历史
+  // });
   /**
    * 用户标识喜欢的文章
    * @param  {[type]} ctx      [description]

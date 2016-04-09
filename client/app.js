@@ -88,8 +88,7 @@ var app = angular.module('WRU', [
         }
         $scope.logOut = function () {
           $rootScope.$currentUser = null;
-          localStorage.$LoopBack$currentUserToken = '';
-          localStorage.$LoopBack$accessTokenId = '';
+          localStorage.clear();
           $rootScope.username = false;
           Materialize.toast('退出成功', 2000);
           $location.path("/w/activities");
