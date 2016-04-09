@@ -160,28 +160,28 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location', f
     User.getMyTeams({
       id: $scope.$currentUser.id
     }, function (teams) {
-      $scope.teams = teams.teams;
+      $scope.teams = teams.teams.reverse();
     });
   };
   var pullRaces = function () {
     User.getRaceHistories({
       id: $scope.$currentUser.id
     }, function (res) {
-      $scope.races = res.races;
+      $scope.races = res.races.reverse();
     });
   };
   var pullActivities = function () {
     User.getActivitiesHistories({
       id: $scope.$currentUser.id
     }, function (res) {
-      $scope.activities = res.activities;
+      $scope.activities = res.activities.reverse();
     });
   };
   var pullLikeArticles = function () {
     User.getLikeArticles({
       id: $scope.$currentUser.id
     }, function (res) {
-      $scope.likeArticles = res.articles;
+      $scope.likeArticles = res.articles.reverse();
     });
   };
   var pullArticles = function () {
@@ -321,7 +321,7 @@ app.controller('UserInfoController', ['$scope', 'User', 'School', '$location', '
 
     $scope.closeBind = function () {
       $scope.isBindWeChat = false;
-    }
+    };
     $scope.bindWechat = function () {
       $scope.isBindWeChat = true;
       var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + 'wx5d92b3c192f993e7'

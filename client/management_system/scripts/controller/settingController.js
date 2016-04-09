@@ -56,6 +56,12 @@ app.controller('SettingCtrl', ['$scope', '$rootScope', 'Team', 'uploadFile', 'Us
   };
 
   $scope.updateInfo = function () {
+    if($scope.team.status === undefined){
+      $scope.team.status = false;
+    }
+    if($scope.team.hidden === undefined){
+      $scope.team.hidden = false;
+    }
     $scope.team.updated = new Date();
     var dsTmp = [];
     if($scope.team.teamDepartments.length){
