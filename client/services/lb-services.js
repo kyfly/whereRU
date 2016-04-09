@@ -977,7 +977,7 @@
 
       LoopBackAuth.prototype.save = function () {
         var self = this;
-        var storage = this.rememberMe ? localStorage : sessionStorage;
+        var storage = this.rememberMe ? window.localStorage : window.sessionStorage;
         props.forEach(function (name) {
           save(storage, name, self[name]);
         });

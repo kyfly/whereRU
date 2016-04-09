@@ -232,11 +232,11 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location', f
   };
   $scope.selectedMenu = 'team';
   if ($scope.$currentUser) {
-    User.getInfo(function (user) {
-      $scope.user = user;
+    //User.getInfo(function (user) {
+      $scope.user = $scope.$currentUser;
       pullTeams();
       pullArticles();
-    });
+    //});
   } else {
     $scope.user = null;
   }
