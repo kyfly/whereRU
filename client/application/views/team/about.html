@@ -3,7 +3,7 @@
 
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/loader.png" alt="" class="circle">
-      <span class="title">团队负责人</span>
+      <span class="title pink-text text-lighten-3">团队负责人</span>
       <p>
         <br>
         <span ng-bind="team.username"></span>
@@ -12,7 +12,7 @@
 
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/wechat-id.png" alt="" class="circle">
-      <span class="title">微信公众号</span>
+      <span class="title pink-text text-lighten-3">微信公众号</span>
       <p>
         <br>
         <span ng-bind="team.chatId || '无'"></span>
@@ -21,7 +21,7 @@
 
 		<li class="collection-item avatar">
       <img src="/lib/img/avatar/team-desc.png" alt="" class="circle">
-      <span class="title">团队简介</span>
+      <span class="title pink-text text-lighten-3">团队简介</span>
       <p style="word-wrap: break-word;word-break: normal;">
         <br>
         <span ng-bind="team.desc"></span>
@@ -30,17 +30,17 @@
 
     <li class="collection-item avatar">
       <img src="/lib/img/avatar/team-depart.png" alt="" class="circle">
-      <span class="title">团队部门</span>
+      <span class="title pink-text text-lighten-3">团队部门</span>
       <a href="" class="secondary-content"><i class="mdi-content-send"></i></a>
       <p ng-repeat="dep in team.teamDepartments">
         <span ng-bind="dep.name"></span>——<span ng-bind="dep.desc"></span>
         <br>
-        
+
       </p>
     </li>
    	<li ng-if="team.videoUrl"  class="collection-item avatar">
       <img src="/lib/img/avatar/av.png" alt="" class="circle">
-      <span class="title">视频展示</span>
+      <span class="title pink-text text-lighten-3">视频展示</span>
       <video controls="controls">
         <source ng-src="{{team.videoUrl}}">
       Your browser does not support the video tag.

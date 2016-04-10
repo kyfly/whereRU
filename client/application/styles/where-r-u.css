@@ -1,7 +1,7 @@
 ﻿body {
   background-color: #eee;
   overflow-y: scroll;
-  font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体",sans-serif;
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体", sans-serif;
 }
 
 @media only screen and (max-width: 601px) {
@@ -109,7 +109,7 @@ nav ul li {
   float: none;
   line-height: 48px;
   text-align: left;
-  padding: 0 20px;
+  padding: 0 0px;
   height: 100%;
   display: block;
 }
@@ -1406,8 +1406,8 @@ footer {
   position: fixed;
   top: 0;
   z-index: 999;
-  margin-top: -2px;
-  padding-top: 10px;
+  margin-top: 0px;
+  padding-top: 0px;
 }
 
 .filter-bar ul {
@@ -1500,7 +1500,6 @@ footer {
   .filter-bar > ul > li > a {
     font-size: 1.4rem;
   }
-
 
   .filter-bar > ul > li > .dropdown-content {
     margin-top: 50px;
@@ -1997,7 +1996,7 @@ footer {
 }
 
 .user-header .user-info {
-  height: 170px;
+  min-height: 170px;
 }
 
 .user-header img {
@@ -2158,7 +2157,6 @@ footer {
   position: absolute;
 }
 
-
 .auth-status > div {
   padding-top: 100px;
 }
@@ -2239,3 +2237,10 @@ footer {
   padding-top: 0 !important;
 }
 
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.margin-top {
+  margin-top: 20px !important;
+}

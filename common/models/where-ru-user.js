@@ -3,7 +3,7 @@ var promise = require(__dirname + '/../../modules/model-promise.js');
 var hdu = require(__dirname + '/../../modules/hdu.js');
 var http = require('http');
 var wechat = require('wechat-oauth');
-module.exports = function(User) {
+module.exports = function (User) {
   /**
    * 用户注册，给用户添加默认头像
    * @param  {[type]} ctx   [description]
@@ -15,7 +15,7 @@ module.exports = function(User) {
     ctx.req.body.headImgUrl = User.app.get('default').headImg;
     ctx.req.body.email = ctx.req.body.phone + '@etuan.org';
     ctx.req.body.created = new Date();
-    User.count({ phone: ctx.req.body.phone }, function (err, count) {
+    User.count({phone: ctx.req.body.phone}, function (err, count) {
       if (count > 0) {
         next({"status": 1000, "message": "该手机号已经被注册"})
       } else {
@@ -141,6 +141,7 @@ module.exports = function(User) {
   });
   User.afterRemote('prototype.__get__coteries', function (ctx, ins, next) {
     var coteriesFn = [];
+
     function coterieFn(userCoterie) {
       var defer = q.defer();
       var lastView = userCoterie.lastView;
@@ -182,11 +183,11 @@ module.exports = function(User) {
   User.remoteMethod('confirmSchool', {
     accepts: [{
       arg: 'id', type: 'string',
-    },{
+    }, {
       arg: 'studentId', type: 'string',
-    },{
+    }, {
       arg: 'password', type: 'string',
-    },{
+    }, {
       arg: 'academy', type: 'string',
     }],
     returns: {
@@ -201,7 +202,7 @@ module.exports = function(User) {
       if (name) {
         User.findById(id, function (err, user) {
           if (err)
-              return cb(err);
+            return cb(err);
           user.name = name;
           user.studentId = studentId;
           user.academy = academy;
@@ -276,7 +277,7 @@ module.exports = function(User) {
    */
   User.getMyTeams = function (id, cb) {
     User.app.models.Member.find({
-      where: {userId: id,verified: true},
+      where: {userId: id, verified: true},
       include: {
         relation: 'team',
         scope: {
@@ -305,18 +306,19 @@ module.exports = function(User) {
    * 获取当前登录用户信息接口
    * @type {Object}
    */
-	User.remoteMethod('getInfo', {
-		accepts: {
-			arg: 'from', type: 'string',
-		},
-		returns: {
-			arg: 'user', type: "array"
-		},
-		http: {
-			path: '/info', verb: 'get'
-		}
-	});
-	User.getInfo = function () {}
+  User.remoteMethod('getInfo', {
+    accepts: {
+      arg: 'from', type: 'string',
+    },
+    returns: {
+      arg: 'user', type: "array"
+    },
+    http: {
+      path: '/info', verb: 'get'
+    }
+  });
+  User.getInfo = function () {
+  }
   /**
    * 获取当前登录用户信息，该接口待修改
    * @param  {[type]} ctx      [description]
@@ -325,43 +327,43 @@ module.exports = function(User) {
    * @param  {[type]}
    * @return {[type]}          [description]
    */
-	User.beforeRemote('getInfo', function (ctx, ins, next) {
-		var userId = ctx.req.accessToken.userId;
-		User.findById(userId, {
-			include : 'data'
-		}, function (err, data) {
-			if (err) {
-				next({"status": 1004, "message": "用户信息获取失败"});
-			} else {
-				ctx.res.send(data);
-			}
+  User.beforeRemote('getInfo', function (ctx, ins, next) {
+    var userId = ctx.req.accessToken.userId;
+    User.findById(userId, {
+      include: 'data'
+    }, function (err, data) {
+      if (err) {
+        next({"status": 1004, "message": "用户信息获取失败"});
+      } else {
+        ctx.res.send(data);
+      }
 
-		});
-	})
+    });
+  })
   /**
    * 获取用户参赛历史接口
    * @type {Object}
    */
-	User.remoteMethod('getRaceHistories', {
-		accepts: {
-			arg: 'id', type: 'string',
-		},
-		returns: {
-			arg: 'races', type: "array"
-		},
-		http: {
-			path: '/:id/raceHistories', verb: 'get'
-		}
-	});
+  User.remoteMethod('getRaceHistories', {
+    accepts: {
+      arg: 'id', type: 'string',
+    },
+    returns: {
+      arg: 'races', type: "array"
+    },
+    http: {
+      path: '/:id/raceHistories', verb: 'get'
+    }
+  });
   /**
    * 获取用户参赛历史
    * @return {[type]} [description]
    */
-	User.getRaceHistories = function (id, cb) {
+  User.getRaceHistories = function (id, cb) {
     //TODO 通过用户所在团队参与的竞赛，查询竞赛信息
     //数据太乱，待真实数据测试
     User.app.models.Member.find({
-      where: { userId: id },
+      where: {userId: id},
       include: {
         relation: 'team',
         scope: {
@@ -385,17 +387,17 @@ module.exports = function(User) {
    * 获取用户活动历史接口
    * @type {Object}
    */
-	User.remoteMethod('getActivitiesHistories', {
-		accepts: {
-			arg: 'id', type: 'string',
-		},
-		returns: {
-			arg: 'activities', type: "array"
-		},
-		http: {
-			path: '/:id/activitiesHistories', verb: 'get'
-		}
-	});
+  User.remoteMethod('getActivitiesHistories', {
+    accepts: {
+      arg: 'id', type: 'string',
+    },
+    returns: {
+      arg: 'activities', type: "array"
+    },
+    http: {
+      path: '/:id/activitiesHistories', verb: 'get'
+    }
+  });
   /**
    * 获取用户参与活动历史
    * @return {[type]}         [description]
@@ -403,10 +405,10 @@ module.exports = function(User) {
   User.getActivitiesHistories = function (id, cb) {
     User.findById(id, {
       include: [{
-        formResults:{form: 'activity'}
-      },{
-        voteResults:{vote: 'activity'}
-      },{
+        formResults: {form: 'activity'}
+      }, {
+        voteResults: {vote: 'activity'}
+      }, {
         seckillResults: {seckill: 'activity'}
       }]
     }, function (err, user) {
@@ -418,7 +420,7 @@ module.exports = function(User) {
         }
         var activity = results.form.activity;
         if (activity) {
-          pushActivity (activity, results);
+          pushActivity(activity, results);
         }
       });
       user.voteResults.forEach(function (results) {
@@ -426,16 +428,16 @@ module.exports = function(User) {
           return;
         }
         var activity = results.vote.activity;
-        pushActivity (activity, results);
+        pushActivity(activity, results);
       });
       user.seckillResults.forEach(function (results) {
-        if (!results.seckill) {
+        if (!results.seckill || !results.get) {
           return;
         }
         var activity = results.seckill.activity;
-        pushActivity (activity, results);
+        pushActivity(activity, results);
       });
-      function pushActivity (activity, results) {
+      function pushActivity(activity, results) {
         activities.push({
           authorId: activity.authorId,
           authorName: activity.authorName,
@@ -447,6 +449,7 @@ module.exports = function(User) {
           resultId: results.id
         });
       }
+
       cb(err, activities);
     });
   };
@@ -480,7 +483,7 @@ module.exports = function(User) {
    * @param  {Array}  next){                 var result [description]
    * @return {object}         成功返回团队列表，失败返回错误信息
    */
-  User.beforeRemote('prototype.__get__teams', function (ctx, ins, next){
+  User.beforeRemote('prototype.__get__teams', function (ctx, ins, next) {
     ctx.instance.teams({
       fields: ["id", "name", "logoUrl", 'desc']
     }, function (err, teams) {
@@ -491,7 +494,7 @@ module.exports = function(User) {
       }
     })
   });
-  User.beforeRemote('prototype.__create__teams', function (ctx, ins, next){
+  User.beforeRemote('prototype.__create__teams', function (ctx, ins, next) {
     var user = ctx.instance.toJSON();
     ctx.req.body.school = user.school;
     ctx.req.body.created = new Date();
@@ -508,18 +511,20 @@ module.exports = function(User) {
       };
       team.members.create(userInfo);
     }
+
     function createCoterie(team) {
       User.app.models.Coterie.create({
         name: team.name,
         logoUrl: team.logoUrl,
         created: new Date(),
-        teamId:  team.id,
+        teamId: team.id,
         id: team.id,
         school: team.school,
         type: team.type,
         desc: team.desc
       });
     }
+
     ctx.instance.teams.create(ctx.req.body, function (err, team) {
       if (err) {
         return next(err);
@@ -580,18 +585,20 @@ module.exports = function(User) {
     ins.teams.updateAll({
       userId: ins.id,
       school: {neq: ins.school}
-    }, {school: ins.school}, function(err, team) {});
+    }, {school: ins.school}, function (err, team) {
+    });
     User.app.models.Member.updateAll({
-        userId: ins.id
+      userId: ins.id
     }, {
       "phone": ins.phone,
       "name": ins.name,
       "school": ins.school,
       "academy": ins.academy
-    }, function (err, member) {});
+    }, function (err, member) {
+    });
     next();
   });
-   /**
+  /**
    * 更新团队信息
    * @param  {[type]} ) {             } [description]
    * @return {[type]}   [description]
@@ -649,7 +656,7 @@ module.exports = function(User) {
    * @param  {[type]} ) {             } [description]
    * @return {[type]}   [description]
    */
-  User.afterRemote('prototype.__findById__formResults', function (ctx,ins,next) {
+  User.afterRemote('prototype.__findById__formResults', function (ctx, ins, next) {
     var result = ins.toJSON();
     ins.form({
       include: {
@@ -664,11 +671,11 @@ module.exports = function(User) {
       var form = form.toJSON();
       var activityResult = [];
 
-      for(var i =0; i<form._formItems.length; i++) {
+      for (var i = 0; i < form._formItems.length; i++) {
         activityResult.push({
           q: form._formItems[i].name,
           w: result.result[i].name,
-          url:result.result[i].url
+          url: result.result[i].url
         });
       }
       result.result = activityResult;
@@ -683,7 +690,7 @@ module.exports = function(User) {
    * @param  {[type]} ) {             } [description]
    * @return {[type]}   [description]
    */
-  User.afterRemote('prototype.__findById__voteResults', function (ctx,ins,next) {
+  User.afterRemote('prototype.__findById__voteResults', function (ctx, ins, next) {
     var results = ins.toJSON();
     ins.vote({
       include: {
@@ -693,13 +700,12 @@ module.exports = function(User) {
         }
       }
     }, function (err, vote) {
-      if (err)
-      {
+      if (err) {
         return next(err);
       }
       voteItems = vote.toJSON()._voteItems;
       voteItems.forEach(function (item) {
-        for (id in results.result) if (item.id === results.result[id]){
+        for (id in results.result) if (item.id === results.result[id]) {
           item.chioce = true;
         } else {
           item.chioce = false;
@@ -733,7 +739,7 @@ module.exports = function(User) {
           return;
         }
       });
-      
+
       ctx.res.send({
         activity: seckill.toJSON().activity,
         results: results
@@ -793,9 +799,9 @@ module.exports = function(User) {
   User.beforeRemote('prototype.__create__seckillResults', function (ctx, ins, next) {
     var Seckill = User.app.models.Seckill;
     User.app.models.SeckillResult.count({
-        userId: ctx.req.params.id,
-        seckillId: ctx.req.body.seckillId,
-        get: true
+      userId: ctx.req.params.id,
+      seckillId: ctx.req.body.seckillId,
+      get: true
     }, function (err, count) {
       if (count > 0) {
         ctx.res.send({
@@ -818,18 +824,18 @@ module.exports = function(User) {
   });
   User.remoteMethod('auth2wechat', {
     accepts: [{
-          "type": "string",
-          "arg": "code",
-          required: true
-        },{
-          "type": "string",
-          "arg": "state",
-          required: true
-        },{
-          "type": "string",
-          "arg": "action",
-          required: true
-        }],
+      "type": "string",
+      "arg": "code",
+      required: true
+    }, {
+      "type": "string",
+      "arg": "state",
+      required: true
+    }, {
+      "type": "string",
+      "arg": "action",
+      required: true
+    }],
     results: {
       "type": "object",
       "arg": "data"
@@ -844,7 +850,8 @@ module.exports = function(User) {
     var action = ctx.req.query.action;
 
     var client = new wechat(User.app.get('wechat').appID, User.app.get('wechat').appsecret);
-    function getUser (callback) {
+
+    function getUser(callback) {
       client.getAccessToken(code, function (err, result) {
         if (err) {
           callback(err);
@@ -855,6 +862,7 @@ module.exports = function(User) {
         }
       });
     }
+
     function loginUser(userInstance, aouthInstance) {
       userInstance.createAccessToken(7200, function (err, token) {
         if (err) {
@@ -872,6 +880,7 @@ module.exports = function(User) {
         ctx.res.send({token: token, aouth: aouthInstance});
       });
     }
+
     if (action === 'bind') {
       User.findById(state, function (err, user) {
         if (err || !user) {
@@ -903,7 +912,8 @@ module.exports = function(User) {
                       userId: weUser.id
                     }, {
                       userId: user.id
-                    }, function () {});
+                    }, function () {
+                    });
                   });
                 weUser.destroy();
               }
@@ -911,13 +921,13 @@ module.exports = function(User) {
                 loginUser(user, undefined);
               });
             });
-           
+
           }
         });
       });
     } else if (action === 'login') {
       User.app.models.Aouth.findById(state, function (err, aouth) {
-        if (err||!aouth) {
+        if (err || !aouth) {
           next('该连接不存在');
           return;
         }
@@ -929,19 +939,19 @@ module.exports = function(User) {
               if (err) {
                 next(err);
               } else if (user) {
-                  aouth.openid = user.toJSON().openid;
-                  aouth.userId = user.toJSON().id;
-                  aouth.save(function (err, ins) {
-                    if (err) {
-                      next(err);
-                    } else {
-                      loginUser(user, ins);
-                    }
-                  });
+                aouth.openid = user.toJSON().openid;
+                aouth.userId = user.toJSON().id;
+                aouth.save(function (err, ins) {
+                  if (err) {
+                    next(err);
+                  } else {
+                    loginUser(user, ins);
+                  }
+                });
               } else {
                 User.create({
                   name: userDate.nickname,
-                  sex: userDate.sex === 1? "男": "女",
+                  sex: userDate.sex === 1 ? "男" : "女",
                   headImgUrl: userDate.headimgurl,
                   openid: userDate.openid,
                   school: "未知",
@@ -970,13 +980,13 @@ module.exports = function(User) {
       });
     }
   });
-  User.auth2wechat= function (code, state, action, cb) {
+  User.auth2wechat = function (code, state, action, cb) {
   };
   User.remoteMethod('checkPhone', {
     accepts: [{
       "type": "string",
       "arg": "id"
-    },{
+    }, {
       "type": "string",
       "arg": "phone"
     }],
@@ -990,8 +1000,7 @@ module.exports = function(User) {
   });
   User.checkPhone = function (id, phone, cb) {
     User.findOne({
-      where:
-      {
+      where: {
         phone: phone
       }
     }, function (err, user) {

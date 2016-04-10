@@ -11,19 +11,19 @@
 </nav> -->
 <div class="container row z-depth-1 user-header">
   <div class="col s12 center user-info">
-    <img ng-src="{{user.headImgUrl}}">
-    <h4 ng-show="user">
-      <a href="/u/info"><span ng-bind="user.name" class="black-text"></span>
-        <small>(修改信息)</small>
-      </a>
-      <a href="" ng-click="logOut()">&nbsp;&nbsp;退出</a>
-    </h4>
+    <a href="/u/info"><img ng-src="{{user.headImgUrl}}"></a>
+    <h4 class="black-text" ng-show="user" ng-bind="user.name"></h4>
+    <div ng-show="user">
+      <a class="grey-text" href="/u/info">修改信息</a>
+      <a class="grey-text" href="#logoutBtn" modal>&nbsp;&nbsp;退出</a>
+    </div>
     <h4 ng-show="!user">
       <a href='' ng-click="goLogin()">登录</a>
       <span> | </span>
       <a href="/u/register">注册</a>
     </h4>
   </div>
+  <div class="clearfix"></div>
 </div>
 <div class="container row z-depth-1 user-activity">
   <ul class="row menus">
@@ -35,13 +35,25 @@
   <hr>
   <div class="content">
     <div ng-if="!user">
-      <h4>你还没有<span><a href='' ng-click="goLogin()">登录</a></span>噢</h4>
+      <h4>你还没有<span><a href='' ng-click="goLogin()">登录</a></span>(ﾉ･ω･)ﾉﾞ</h4>
     </div>
     <div ng-if="user">
       <ng-include src="'/application/views/user/' + selectedMenu + '.html'"></ng-include>
     </div>
   </div>
 </div>
-<div class="container row">
+<div class="container row" style="margin-top: 40px">
+  <h5 ng-if="user" style="margin-left: 10px">我的文章</h5>
   <ng-include src="'/application/views/coterie/articles.html'"></ng-include>
+</div>
+<div id="logoutBtn" class="modal">
+  <div class="modal-content">
+    <h4>确认</h4>
+    <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>确认退出？</span></p>
+  </div>
+  <div class="modal-footer">
+    <a ng-click="logOut()" href=""
+       class="white-text modal-action modal-close waves-effect waves-green btn-flat red darken-1">退出</a>
+    <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+  </div>
 </div>

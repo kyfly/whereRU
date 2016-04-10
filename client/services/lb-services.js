@@ -82,235 +82,244 @@
     .factory(
       'User',
       ['LoopBackResource', 'LoopBackAuth', '$injector',
-      function (Resource, LoopBackAuth, $injector) {
-        var R = Resource(
-          urlBase + '/WUsers/:id',
-          {'id': '@id'},
-          {
-            "prototype_create_replys": {
-              url: urlBase + '/WUsers/:id/replys',
-              method: 'POST'
-            },
-            "prototype_create_comments": {
-              url: urlBase + '/WUsers/:id/comments',
-              method: 'POST'
-            },
-            "prototype_create_articles": {
-              url: urlBase + '/WUsers/:id/articles',
-              method: 'POST'
-            },
-            "prototype_create_likeUsers": {
-              url: urlBase + '/WUsers/:id/likeUsers',
-              method: 'POST'
-            },
-            "auth2wechat": {
-              url: urlBase + '/WUsers/auth2wechat',
-              method: 'GET'
-            },
-            "checkPhone": {
-              url: urlBase + '/WUsers/:id/checkPhone',
-              method: 'GET'
-            },
-            "updateAll": {
-              url: urlBase + '/WUsers/updateAll',
-              method: 'GET'
-            },
-            /**
-             * 关注圈子，圈子最后时间上传
-             * 使用场景：pc端点击关注，点击修改最后使用时间
-             */
-            "prototype_create_coteries": {
-              url: urlBase + '/WUsers/:id/coteries',
-              method: 'POST'
-            },
-            "prototype_updateById_coteries": {
-              url: urlBase + '/WUsers/:id/coteries/:fk',
-              params: {
-                fk: '@fk'
+        function (Resource, LoopBackAuth, $injector) {
+          var R = Resource(
+            urlBase + '/WUsers/:id',
+            {'id': '@id'},
+            {
+              "prototype_create_replys": {
+                url: urlBase + '/WUsers/:id/replys',
+                method: 'POST'
               },
-              method: 'PUT'
-            },
-            /**
-             * 用户拥有的获取团队
-             */
-            'prototype_get_teams': {
-              url: urlBase + '/WUsers/:id/teams',
-              method: 'GET',
-              isArray: true
-            },
-            /**
-             *  圈子部分详情
-             *  pc圈子
-             */
-            "prototype_get_articles": {
-              url: urlBase + '/WUsers/:id/articles',
-              method: 'GET',
-              isArray: true
-            },
-            /**
-             *描述已加入圈子列表
-             *使用场景：pc侧边栏已存在圈子
-             * */
-            "prototype_get_coteries": {
-              url: urlBase + '/WUsers/:id/coteries',
-              method: 'GET',
-              isArray: true
-            },
-            /**
-             * 描述：新用户注册接口，未登录
-             * 使用场景：APP，PC注册
-             */
-            "create": {
-              url: urlBase + '/WUsers',
-              method: 'POST'
-            },
-            /**
-             * 描述：学生学校验证，已登录用户
-             * 使用场景：用户在APP,PC验证学号
-             */
-            "confirmSchool": {
-              url: urlBase + '/WUsers/:id/confirmSchool',
-              method: 'POST'
-            },
-            /**
-             * 描述：用户参与校园表单活动，已登录用户
-             * 使用场景：用户参与表单活动
-             */
-            "prototype_create_formResults": {
-              url: urlBase + '/WUsers/:id/formResults',
-              method: 'POST'
-            },
-            /**
-             * 描述：用户参与表单活动所填入的数据，已登录用户
-             * 使用场景：用户查看参与活动历史，点击单个表单活动
-             */
-            "prototype_findById_formResults": {
-              url: urlBase + '/WUsers/:id/formResults/:fk',
-              params: {'fk': '@fk'},
-              method: 'GET'
-            },
-            /**
-             * 描述：用户参与校园投票活动，已登录用户
-             * 使用场景：用户参与投票活动
-             */
-            "prototype_create_voteResults": {
-              url: urlBase + '/WUsers/:id/voteResults',
-              method: 'POST'
-            },
-            /**
-             * 描述：用户参与投票活动所填入的数据，已登录用户
-             * 使用场景：用户查看参与活动历史，点击单个投票活动
-             */
-            "prototype_findById_voteResults": {
-              url: urlBase + '/WUsers/:id/voteResults/:fk',
-              params: {'fk': '@fk'},
-              method: 'GET'
-            },
-            /**
-             * 描述：用户参与校园抢票活动，已登录用户
-             * 使用场景：用户参与抢票活动
-             */
-            "prototype_create_seckillResults": {
-              url: urlBase + '/WUsers/:id/seckillResults',
-              method: 'POST'
-            },
-            /**
-             * 描述：用户参与投票活动所填入的数据，已登录用户
-             * 使用场景：用户查看参与活动历史，点击单个抢票活动
-             */
-            "prototype_findById_seckillResults": {
-              url: urlBase + '/WUsers/:id/seckillResults/:fk',
-              params: {'fk': '@fk'},
-              method: 'GET'
-            },
-            /**
-             * 描述：获取用户所在团队和所拥有的团队，已登录用户
-             * 使用场景：1、选择参与竞赛的团队。2、用户团队列表
-             */
-            "getMyTeams": {
-              url: urlBase + '/WUsers/:id/myTeams',
-              method: 'GET'
-            },
-            /**
-             * 描述：获取用户信息，已登录用户
-             * 使用场景：1、用户申请加入团队，2、用户个人信息
-             */
-            "getInfo": {
-              url: urlBase + '/WUsers/info',
-              method: 'GET'
-            },
-            /**
-             * 描述：获取参与活动历史，已登录用户
-             * 使用场景：个人中心，活动历史列表
-             */
-            "getActivitiesHistories": {
-              url: urlBase + '/WUsers/:id/activitiesHistories',
-              method: 'GET'
-            },
-            /**
-             * 描述：获取参与竞赛历史，已登录用户
-             * 使用场景：个人中心，竞赛历史列表
-             */
-            "getRaceHistories": {
-              url: urlBase + '/WUsers/:id/raceHistories',
-              method: 'GET'
-            },
-            "getLikeArticles": {
-              url: urlBase + '/WUsers/:id/likeArticles',
-              method: 'GET'
-            },
-            /**
-             * 描述：更新用户信息，已登录用户
-             * 使用场景：个人中心修改用户信息
-             */
-            "prototype_updateAttributes": {
-              url: urlBase + '/WUsers/:id',
-              method: 'PUT'
-            },
-            /**
-             * 描述：创建团队，已登录用户
-             * 使用场景：创建团队
-             */
-            "prototype_create_teams": {
-              url: urlBase + '/WUsers/:id/teams',
-              method: 'POST'
-            },
-            "resetPassword": {
-              url: urlBase + '/WUsers/reset',
-              method: 'POST',
-            },
-            /**
-             * 描述：修改团队信息，已登录用户
-             * 使用场景：修改团队信息
-             */
-            "prototype_updateById_teams": {
-              url: urlBase + '/WUsers/:id/teams/:fk',
-              params: {'fk': '@fk'},
-              method: 'PUT'
-            },
-            /**
-             * 描述：用户登录
-             * 使用场景：用户登录
-             */
-            "login": {
-              url: urlBase + '/WUsers/login',
-              method: 'POST',
-              params: {
-                include: "user"
+              "prototype_create_comments": {
+                url: urlBase + '/WUsers/:id/comments',
+                method: 'POST'
               },
-              interceptor: {
-                response: function (response) {
-                  var accessToken = response.data;
-                  LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
-                  LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
-                  LoopBackAuth.save();
-                  return response.resource;
+              "prototype_create_articles": {
+                url: urlBase + '/WUsers/:id/articles',
+                method: 'POST'
+              },
+              "prototype_get_likeUsers": {
+                url: urlBase + '/WUsers/:id/likeUsers',
+                method: 'GET',
+                isArray: true
+              },
+              "prototype_create_likeUsers": {
+                url: urlBase + '/WUsers/:id/likeUsers',
+                method: 'POST'
+              },
+              "prototype_destroyById_likeUsers": {
+                url: urlBase + '/WUsers/:id/likeUsers/:fk',
+                method: 'DELETE'
+              },
+              "auth2wechat": {
+                url: urlBase + '/WUsers/auth2wechat',
+                method: 'GET'
+              },
+              "checkPhone": {
+                url: urlBase + '/WUsers/:id/checkPhone',
+                method: 'GET'
+              },
+              "updateAll": {
+                url: urlBase + '/WUsers/updateAll',
+                method: 'GET'
+              },
+              /**
+               * 关注圈子，圈子最后时间上传
+               * 使用场景：pc端点击关注，点击修改最后使用时间
+               */
+              "prototype_create_coteries": {
+                url: urlBase + '/WUsers/:id/coteries',
+                method: 'POST'
+              },
+              "prototype_updateById_coteries": {
+                url: urlBase + '/WUsers/:id/coteries/:fk',
+                params: {
+                  fk: '@fk'
+                },
+                method: 'PUT'
+              },
+              /**
+               * 用户拥有的获取团队
+               */
+              'prototype_get_teams': {
+                url: urlBase + '/WUsers/:id/teams',
+                method: 'GET',
+                isArray: true
+              },
+              /**
+               *  圈子部分详情
+               *  pc圈子
+               */
+              "prototype_get_articles": {
+                url: urlBase + '/WUsers/:id/articles',
+                method: 'GET',
+                isArray: true
+              },
+              /**
+               *描述已加入圈子列表
+               *使用场景：pc侧边栏已存在圈子
+               * */
+              "prototype_get_coteries": {
+                url: urlBase + '/WUsers/:id/coteries',
+                method: 'GET',
+                isArray: true
+              },
+              /**
+               * 描述：新用户注册接口，未登录
+               * 使用场景：APP，PC注册
+               */
+              "create": {
+                url: urlBase + '/WUsers',
+                method: 'POST'
+              },
+              /**
+               * 描述：学生学校验证，已登录用户
+               * 使用场景：用户在APP,PC验证学号
+               */
+              "confirmSchool": {
+                url: urlBase + '/WUsers/:id/confirmSchool',
+                method: 'POST'
+              },
+              /**
+               * 描述：用户参与校园表单活动，已登录用户
+               * 使用场景：用户参与表单活动
+               */
+              "prototype_create_formResults": {
+                url: urlBase + '/WUsers/:id/formResults',
+                method: 'POST'
+              },
+              /**
+               * 描述：用户参与表单活动所填入的数据，已登录用户
+               * 使用场景：用户查看参与活动历史，点击单个表单活动
+               */
+              "prototype_findById_formResults": {
+                url: urlBase + '/WUsers/:id/formResults/:fk',
+                params: {'fk': '@fk'},
+                method: 'GET'
+              },
+              /**
+               * 描述：用户参与校园投票活动，已登录用户
+               * 使用场景：用户参与投票活动
+               */
+              "prototype_create_voteResults": {
+                url: urlBase + '/WUsers/:id/voteResults',
+                method: 'POST'
+              },
+              /**
+               * 描述：用户参与投票活动所填入的数据，已登录用户
+               * 使用场景：用户查看参与活动历史，点击单个投票活动
+               */
+              "prototype_findById_voteResults": {
+                url: urlBase + '/WUsers/:id/voteResults/:fk',
+                params: {'fk': '@fk'},
+                method: 'GET'
+              },
+              /**
+               * 描述：用户参与校园抢票活动，已登录用户
+               * 使用场景：用户参与抢票活动
+               */
+              "prototype_create_seckillResults": {
+                url: urlBase + '/WUsers/:id/seckillResults',
+                method: 'POST'
+              },
+              /**
+               * 描述：用户参与投票活动所填入的数据，已登录用户
+               * 使用场景：用户查看参与活动历史，点击单个抢票活动
+               */
+              "prototype_findById_seckillResults": {
+                url: urlBase + '/WUsers/:id/seckillResults/:fk',
+                params: {'fk': '@fk'},
+                method: 'GET'
+              },
+              /**
+               * 描述：获取用户所在团队和所拥有的团队，已登录用户
+               * 使用场景：1、选择参与竞赛的团队。2、用户团队列表
+               */
+              "getMyTeams": {
+                url: urlBase + '/WUsers/:id/myTeams',
+                method: 'GET'
+              },
+              /**
+               * 描述：获取用户信息，已登录用户
+               * 使用场景：1、用户申请加入团队，2、用户个人信息
+               */
+              "getInfo": {
+                url: urlBase + '/WUsers/info',
+                method: 'GET'
+              },
+              /**
+               * 描述：获取参与活动历史，已登录用户
+               * 使用场景：个人中心，活动历史列表
+               */
+              "getActivitiesHistories": {
+                url: urlBase + '/WUsers/:id/activitiesHistories',
+                method: 'GET'
+              },
+              /**
+               * 描述：获取参与竞赛历史，已登录用户
+               * 使用场景：个人中心，竞赛历史列表
+               */
+              "getRaceHistories": {
+                url: urlBase + '/WUsers/:id/raceHistories',
+                method: 'GET'
+              },
+              "getLikeArticles": {
+                url: urlBase + '/WUsers/:id/likeArticles',
+                method: 'GET'
+              },
+              /**
+               * 描述：更新用户信息，已登录用户
+               * 使用场景：个人中心修改用户信息
+               */
+              "prototype_updateAttributes": {
+                url: urlBase + '/WUsers/:id',
+                method: 'PUT'
+              },
+              /**
+               * 描述：创建团队，已登录用户
+               * 使用场景：创建团队
+               */
+              "prototype_create_teams": {
+                url: urlBase + '/WUsers/:id/teams',
+                method: 'POST'
+              },
+              "resetPassword": {
+                url: urlBase + '/WUsers/reset',
+                method: 'POST',
+              },
+              /**
+               * 描述：修改团队信息，已登录用户
+               * 使用场景：修改团队信息
+               */
+              "prototype_updateById_teams": {
+                url: urlBase + '/WUsers/:id/teams/:fk',
+                params: {'fk': '@fk'},
+                method: 'PUT'
+              },
+              /**
+               * 描述：用户登录
+               * 使用场景：用户登录
+               */
+              "login": {
+                url: urlBase + '/WUsers/login',
+                method: 'POST',
+                params: {
+                  include: "user"
+                },
+                interceptor: {
+                  response: function (response) {
+                    var accessToken = response.data;
+                    LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
+                    LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
+                    LoopBackAuth.save();
+                    return response.resource;
+                  }
                 }
               }
-            }
-          });
-        return R;
-      }])
+            });
+          return R;
+        }])
     .factory(
       'Team',
       ['LoopBackResource', 'LoopBackAuth', '$injector',

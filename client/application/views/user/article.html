@@ -1,10 +1,10 @@
 <ul ng-if="articles.length">
-  <li class="collection-item" ng-if="likeArticles.length === 0">
+  <li class="collection-item" ng-if="likeArticles.length === 0 || !likeArticles">
     <p class="word-wrap">
       你还没有喜欢文章哦 (￣▽￣")
     </p>
   </li>
-  <li class="item col s12" ng-repeat="likeArticle in likeArticles">
+  <li class="item col s12 margin-top" ng-repeat="likeArticle in likeArticles">
     <img ng-src="{{likeArticle.article.user.headImgUrl}}">
     <div>
     	<h6 class="title">
@@ -16,6 +16,20 @@
 		  <h6>收藏时间 |
 	    	<span ng-bind="likeArticle.created | date: 'yyyy-MM-dd HH:mm:ss'"></span>
 		  </h6>
+      <a class="waves-effect btn white black-text" ng-href="{{'#deleteLikeConfirm' + $index}}" modal>取消收藏</a>
+      <div id="{{'deleteLikeConfirm' + $index}}" class="modal">
+        <div class="modal-content">
+          <h4>确认</h4>
+          <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>确认取消收藏？</span></p>
+        </div>
+        <div class="modal-footer">
+          <a ng-click="deleteLike()" href=""
+             class="white-text modal-action modal-close waves-effect waves-green btn-flat red darken-1">取消收藏</a>
+          <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+        </div>
+      </div>
     </div>
+    <hr>
   </li>
 </ul>
+

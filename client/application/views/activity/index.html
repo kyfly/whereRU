@@ -23,10 +23,10 @@
         <i class="mdi-navigation-arrow-drop-down"></i>
       </a>
       <ul ng-hide="statusHide" id='statusDropDown' class='dropdown-content'>
-        <li><a href="#!" ng-click="ingFilter()">进行中</a></li>
-        <li><a href="#!" ng-click="nosFilter()">未开始</a></li>
-        <li><a href="#!" ng-click="endFilter()">已结束</a></li>
-        <li><a href="#!" ng-click="allStatusFilter()">全部</a></li>
+        <li><a href="" ng-click="allStatusFilter()">全部</a></li>
+        <li><a href="" ng-click="ingFilter()">进行中</a></li>
+        <li><a href="" ng-click="nosFilter()">未开始</a></li>
+        <li><a href="" ng-click="endFilter()">已结束</a></li>
       </ul>
     </li>
     <li class="col s3">
@@ -38,10 +38,10 @@
         <i class="mdi-navigation-arrow-drop-down"></i>
       </a>
       <ul ng-hide="typeHide" id='typeDropDown' class='dropdown-content'>
-        <li><a href="#!" ng-click="formFilter()">表单</a></li>
-        <li><a href="#!" ng-click="voteFilter()">投票</a></li>
-        <li><a href="#!" ng-click="seckillFilter()">抢票</a></li>
-        <li><a href="#!" ng-click="allTypeFilter()">全部</a></li>
+        <li><a href="" ng-click="allTypeFilter()">全部</a></li>
+        <li><a href="" ng-click="formFilter()">表单</a></li>
+        <li><a href="" ng-click="voteFilter()">投票</a></li>
+        <li><a href="" ng-click="seckillFilter()">抢票</a></li>
       </ul>
     </li>
     <li class="col s3">
@@ -79,14 +79,11 @@
           <h4 class="card-title">
             <a ng-href="/w/activities/{{activityItem.id}}">
               <span ng-if="activityItem.status === 'ing'"
-                  class="red white-text act-status"
-                  ng-bind="activityItem.status"></span>
+                  class="red white-text act-status">进行中</span>
               <span ng-if="activityItem.status === 'end'"
-                  class="grey white-text act-status"
-                  ng-bind="activityItem.status"></span>
+                  class="grey white-text act-status">已结束</span>
               <span ng-if="activityItem.status === 'nos'"
-                  class="orange white-text act-status"
-                  ng-bind="activityItem.status"></span>
+                  class="orange white-text act-status">未开始</span>
               <span ng-bind="activityItem.title"></span>
             </a>
           </h4>

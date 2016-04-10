@@ -1,5 +1,5 @@
 <div class="card article" ng-controller="ArticlesController" ng-repeat="article in articles">
-	<a href="/u/{{article.user.id}}">
+	<a href="/u/detail/{{article.user.id}}">
 		<h4 class="author">
 			<img ng-src="{{article.user.headImgUrl}}">
 			<span ng-bind="article.user.name"></span>
@@ -17,15 +17,15 @@
     </div>
     <div class="waves-effect text-center action" ng-click="loadComment()">
       <a href="" class="black-text">
-        <i class="mdi-communication-comment"></i> 评论 ( <span ng-bind="article.commentCount"></span> )
+        <i class="mdi-communication-comment"></i> 评论 (<span ng-bind="article.commentCount"></span>)
       </a>
     </div>
     <div class="waves-effect text-center action">
-      <a href="" class="red-text" ng-show="article.islike">
-        <i class="mdi-toggle-star"></i> 收藏( <span ng-bind="article.likeCount"></span> )
+      <a href="" class="red-text" ng-show="article.islike" ng-click="deleteLike()">
+        <i class="mdi-toggle-star"></i> 收藏 (<span ng-bind="article.likeCount"></span>)
       </a>
       <a href="" class="red-text" ng-show="!article.islike" ng-click="addLike()">
-        <i class="mdi-toggle-star"></i> 收藏 ( <span ng-bind="article.likeCount"></span> )
+        <i class="mdi-toggle-star"></i> 收藏 (<span ng-bind="article.likeCount"></span>)
       </a>
     </div>
 	</div>
