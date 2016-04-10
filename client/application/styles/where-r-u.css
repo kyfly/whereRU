@@ -25,6 +25,10 @@
   }
 }
 
+.slider {
+  height: 450px !important;
+}
+
 @media only screen and (max-width: 601px) {
   .detail-container {
     padding: 0 10px;
@@ -153,15 +157,27 @@ nav .nav-wrapper i {
   width: 100%;
 }
 
+.slider-pic {
+  height: 400px !important;
+}
+
 @media screen and (min-width: 1200px) {
   .section-first {
-    height: 400px;
+    height: 580px;
+  }
+
+  .slider-pic {
+    height: 530px !important;
+  }
+
+  .slider {
+    height: 570px !important;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .section-first {
-    height: 300px;
+    height: 450px;
   }
 }
 
