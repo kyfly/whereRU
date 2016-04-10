@@ -15,7 +15,7 @@
 		    <input id="name" type="text" ng-model="user.name" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="name">请输入姓名</label>
 		</div>
-	
+
 		<div class="input-field password-input col s12 m4 l4">
 			<input id="password" type="{{pwdSwitch? 'text': 'password'}}" ng-model="user.password" ng-focus="focus()" ng-blur="blur()" length="16" required>
 		    <label for="password">请输入密码</label>
@@ -31,16 +31,16 @@
 		  <option value="" disabled selected>请选择学校</option>
 		  <option ng-repeat="school in schools">{{school.name}}</option>
 		</select>
-		
+
 		<select class="" ng-model="user.sex" material-select watch>
 		  <option value="" disabled selected>请选择性别</option>
 		  <option value="男">男</option>
 		  <option value="女">女</option>
 		</select>
 		<div  class="row center">
-			<button type="sumbit" 
-			  class="waves-effect waves-light btn offset-s1" 
-				ng-click="register()" 
+			<button type="sumbit"
+			  class="waves-effect waves-light btn offset-s1"
+				ng-click="register()"
 				style="margin-left: 20px"
 				ng-disabled="regForm.$invalid">注册</button>
 		</div>

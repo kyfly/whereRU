@@ -229,6 +229,12 @@
     },
     {
       "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "confirmSchool"

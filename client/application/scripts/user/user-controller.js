@@ -395,6 +395,12 @@ app.controller('MSController', ['User', '$stateParams', function (User, $statePa
 app.controller('ARTController', ['$scope', function () {
 
 }]);
-app.controller('UserDetailController', ['$scope', function ($scope) {
-
-}]);
+app.controller('UserDetailController', ['$scope', '$stateParams', 'User',
+  function ($scope, $stateParams, User) {
+    //console.log($stateParams);
+    User.findById({
+      id:$stateParams.id
+    }, function (res) {
+      console.log(res)
+    })
+  }]);

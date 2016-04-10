@@ -91,6 +91,10 @@
                 url: urlBase + '/WUsers/:id/replys',
                 method: 'POST'
               },
+              "findById": {
+                url: urlBase + '/WUsers/:id',
+                method: 'GET'
+              },
               "prototype_create_comments": {
                 url: urlBase + '/WUsers/:id/comments',
                 method: 'POST'
