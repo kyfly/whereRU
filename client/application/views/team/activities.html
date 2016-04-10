@@ -1,18 +1,18 @@
 <div>
 	<ul class="row card-list">
     <li class="col s12 m6 l3" ng-repeat="activity in activities">
-      <div class="card">
+      <div class="card hoverable">
         <div class="card-content">
           <h4 class="card-title">
             <a ng-href="/w/activities/{{activity.id}}">
-              <span ng-if="activity.status === 'ing'" 
-                  class="red white-text act-status" 
+              <span ng-if="activity.status === 'ing'"
+                  class="red white-text act-status"
                   ng-bind="activity.status"></span>
-              <span ng-if="activity.status === 'end'" 
-                  class="grey white-text act-status" 
+              <span ng-if="activity.status === 'end'"
+                  class="grey white-text act-status"
                   ng-bind="activity.status"></span>
-              <span ng-if="activity.status === 'nos'" 
-                  class="orange white-text act-status" 
+              <span ng-if="activity.status === 'nos'"
+                  class="orange white-text act-status"
                   ng-bind="activity.status"></span>
               <span ng-bind="activity.title"></span>
             </a>
