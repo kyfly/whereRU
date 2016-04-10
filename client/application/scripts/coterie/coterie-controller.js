@@ -227,7 +227,10 @@ app.controller('CommentsController',
     };
     $scope.reload = function () {
       Article.prototype_get_comments({
-        id: this.article.id
+        id: this.article.id,
+        filter: {
+          order: 'created DESC'
+        }
       }, function (comments) {
         $scope.article.comments = comments;
       });
