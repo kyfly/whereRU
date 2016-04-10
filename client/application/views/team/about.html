@@ -19,7 +19,7 @@
       </p>
     </li>
 
-		<li class="collection-item avatar">
+    <li class="collection-item avatar">
       <img src="/lib/img/avatar/team-desc.png" alt="" class="circle">
       <span class="title pink-text text-lighten-3">团队简介</span>
       <p style="word-wrap: break-word;word-break: normal;">
@@ -38,12 +38,12 @@
 
       </p>
     </li>
-   	<li ng-if="team.videoUrl"  class="collection-item avatar">
+    <li ng-if="team.videoUrl" class="collection-item avatar">
       <img src="/lib/img/avatar/av.png" alt="" class="circle">
       <span class="title pink-text text-lighten-3">视频展示</span>
       <video controls="controls">
         <source ng-src="{{team.videoUrl}}">
-      Your browser does not support the video tag.
+        请换个浏览器观看视频
       </video>
     </li>
   </ul>

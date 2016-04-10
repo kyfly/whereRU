@@ -21,14 +21,14 @@
     </li>
     <li ng-repeat="comment in article.comments">
       <div class="collapsible-header">
-        <img ng-src="{{comment.user.headImgUrl}}" alt="" class="circle">
-        <span class="title" ng-bind="comment.user.name"></span>
+        <a href="/u/detail/{{comment.user.id}}"><img ng-src="{{comment.user.headImgUrl}}" alt="" class="circle"></a>
+        <a href="/u/detail/{{comment.user.id}}" class="black-text"><span class="title" ng-bind="comment.user.name"></span></a>
         <p ng-click="loadReply()">
-          <time class="green-text" ng-bind="comment.created | date: 'yyyy-MM-dd HH:mm:ss'"></time>
+          <time class="green-text" ng-bind="comment.created | date: 'yyyy-MM-dd HH:mm'"></time>
           <br>
           {{comment.content}}
           <a href="" class="reply">
-            <i class="mdi-content-reply"></i> ( <span ng-bind="comment.replyCount"></span> )
+            <i class="mdi-content-reply"></i> (<span ng-bind="comment.replyCount"></span>)
           </a>
         </p>
       </div>
@@ -37,7 +37,7 @@
           <li class="collection-item" ng-repeat="reply in comment.replys">
             <span class="title" ng-bind="reply.user.name"></span>
             <p>
-              <time class="green-text" ng-bind="reply.created | date: 'yyyy-MM-dd HH:mm:ss'"></time>
+              <time class="green-text" ng-bind="reply.created | date: 'yyyy-MM-dd HH:mm'"></time>
               <br>
               {{reply.content}}
             </p>
