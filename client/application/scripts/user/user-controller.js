@@ -155,117 +155,119 @@ app.controller('ConfirmSchoolController', ['User', '$scope', 'School', '$window'
       });
     }
   }]);
-app.controller('UserController', ['$scope', 'User', '$rootScope', '$location', function ($scope, User, $rootScope, $location) {
-  var pullTeams = function () {
-    User.getMyTeams({
-      id: $scope.$currentUser.id
-    }, function (teams) {
-      $scope.teams = teams.teams.reverse();
-    });
-  };
-  var pullRaces = function () {
-    User.getRaceHistories({
-      id: $scope.$currentUser.id
-    }, function (res) {
-      $scope.races = res.races.reverse();
-    });
-  };
-  var pullActivities = function () {
-    User.getActivitiesHistories({
-      id: $scope.$currentUser.id
-    }, function (res) {
-      $scope.activities = res.activities.reverse();
-    });
-  };
-  var pullLikeArticles = function () {
-    User.getLikeArticles({
-      id: $scope.$currentUser.id
-    }, function (res) {
-      $scope.likeArticles = res.articles.reverse();
-    });
-  };
-  var pullArticles = function () {
-    User.prototype_get_articles({
-      id: $scope.$currentUser.id
-    }, function (articles) {
-      $scope.articles = articles;
-    });
-  };
-  $scope.goLogin = function () {
-    if (!$scope.$currentUser) {
-      return $scope.$emit('auth:loginRequired');
-    }
-  };
-  $scope.deleteLike = function () {
-    var article = this.likeArticle;
-    var thisElement = this;
-    console.log(this);
-    User.prototype_get_likeUsers({
-      id: $scope.$currentUser.id,
-      filter: {
-        where: {
-          articleId: article.articleId
-        }
-      }
-    }, function (res) {
-      User.prototype_destroyById_likeUsers({
-        id: $scope.$currentUser.id,
-        fk: res[0].id
-      }, function () {
-        Materialize.toast('文章取消收藏成功', 2000);
-        $scope.likeArticles.splice(this.$index, 1)
+app.controller('UserController', ['$scope', 'User', '$rootScope', '$location', '$stateParams',
+  function ($scope, User, $rootScope, $location, $stateParams) {
+    $scope.isAuthor = $stateParams.id ? false : true;
+    var pullTeams = function () {
+      User.getMyTeams({
+        id: $scope.$currentUser.id
+      }, function (teams) {
+        $scope.teams = teams.teams.reverse();
       });
-    });
+    };
+    var pullRaces = function () {
+      User.getRaceHistories({
+        id: $scope.$currentUser.id
+      }, function (res) {
+        $scope.races = res.races.reverse();
+      });
+    };
+    var pullActivities = function () {
+      User.getActivitiesHistories({
+        id: $scope.$currentUser.id
+      }, function (res) {
+        $scope.activities = res.activities.reverse();
+      });
+    };
+    var pullLikeArticles = function () {
+      User.getLikeArticles({
+        id: $scope.$currentUser.id
+      }, function (res) {
+        $scope.likeArticles = res.articles.reverse();
+      });
+    };
+    var pullArticles = function () {
+      User.prototype_get_articles({
+        id: $scope.$currentUser.id
+      }, function (articles) {
+        $scope.articles = articles;
+      });
+    };
+    $scope.goLogin = function () {
+      if (!$scope.$currentUser) {
+        return $scope.$emit('auth:loginRequired');
+      }
+    };
+    $scope.deleteLike = function () {
+      var article = this.likeArticle;
+      var thisElement = this;
+      console.log(this);
+      User.prototype_get_likeUsers({
+        id: $scope.$currentUser.id,
+        filter: {
+          where: {
+            articleId: article.articleId
+          }
+        }
+      }, function (res) {
+        User.prototype_destroyById_likeUsers({
+          id: $scope.$currentUser.id,
+          fk: res[0].id
+        }, function () {
+          Materialize.toast('文章取消收藏成功', 2000);
+          $scope.likeArticles.splice(this.$index, 1)
+        });
+      });
 
-  };
-  $scope.activeMenus = [{
-    "name": "我的团队",
-    "clickFn": pullTeams,
-    "active": true,
-    "eName": 'team'
-  }, {
-    'clickFn': pullRaces,
-    'name': '参赛竞赛',
-    "active": false,
-    "eName": 'race'
-  }, {
-    'clickFn': pullActivities,
-    'name': '活动历史',
-    "active": false,
-    "eName": 'activity'
-  }, {
-    'clickFn': pullLikeArticles,
-    'name': '文章收藏',
-    "active": false,
-    "eName": 'article'
-  }];
-  $scope.logOut = function () {
-    $rootScope.$currentUser = null;
-    localStorage.clear();
-    $rootScope.username = false;
-    Materialize.toast('退出成功', 2000);
-    $location.path("/w/activities");
-  };
-  $scope.pullData = function () {
-    if (!$scope.$currentUser) {
-      return $scope.$emit('auth:loginRequired');
+    };
+    $scope.activeMenus = [{
+      "name": "我的团队",
+      "clickFn": pullTeams,
+      "active": true,
+      "eName": 'team'
+    }, {
+      'clickFn': pullRaces,
+      'name': '参赛竞赛',
+      "active": false,
+      "eName": 'race'
+    }, {
+      'clickFn': pullActivities,
+      'name': '活动历史',
+      "active": false,
+      "eName": 'activity'
+    }, {
+      'clickFn': pullLikeArticles,
+      'name': '文章收藏',
+      "active": false,
+      "eName": 'article'
+    }];
+    $scope.logOut = function () {
+      $rootScope.$currentUser = null;
+      localStorage.clear();
+      $rootScope.username = false;
+      Materialize.toast('退出成功', 2000);
+      $location.path("/w/activities");
+    };
+    $scope.pullData = function () {
+      if (!$scope.$currentUser) {
+        return $scope.$emit('auth:loginRequired');
+      }
+      $scope.activeMenus.forEach(function (menu) {
+        menu.active = false;
+      });
+      this.menu.active = true;
+      this.menu.clickFn();
+      $scope.selectedMenu = this.menu.eName;
+    };
+    $scope.selectedMenu = 'team';
+    if ($scope.$currentUser) {
+      $scope.user = $scope.$currentUser;
+      pullTeams();
+      pullArticles();
+    } else {
+      $scope.user = null;
     }
-    $scope.activeMenus.forEach(function (menu) {
-      menu.active = false;
-    });
-    this.menu.active = true;
-    this.menu.clickFn();
-    $scope.selectedMenu = this.menu.eName;
-  };
-  $scope.selectedMenu = 'team';
-  if ($scope.$currentUser) {
-    $scope.user = $scope.$currentUser;
-    pullTeams();
-    pullArticles();
-  } else {
-    $scope.user = null;
-  }
-}]);
+  }]);
 app.controller('AuthController', ['$scope', 'User', '$location', '$rootScope', 'LoopBackAuth',
   function ($scope, User, $location, $rootScope, LoopBackAuth) {
     var isWechart = navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == "micromessenger";
@@ -397,10 +399,80 @@ app.controller('ARTController', ['$scope', function () {
 }]);
 app.controller('UserDetailController', ['$scope', '$stateParams', 'User',
   function ($scope, $stateParams, User) {
-    //console.log($stateParams);
     User.findById({
-      id:$stateParams.id
+      id: $stateParams.id
     }, function (res) {
-      console.log(res)
-    })
+      $scope.user = res;
+    });
+    var pullTeams = function () {
+      User.getMyTeams({
+        id: $scope.$currentUser.id
+      }, function (teams) {
+        $scope.teams = teams.teams.reverse();
+      });
+    };
+    var pullRaces = function () {
+      User.getRaceHistories({
+        id: $stateParams.id
+      }, function (res) {
+        $scope.races = res.races.reverse();
+      });
+    };
+    var pullActivities = function () {
+      User.getActivitiesHistories({
+        id: $stateParams.id
+      }, function (res) {
+        $scope.activities = res.activities.reverse();
+      });
+    };
+    var pullLikeArticles = function () {
+      User.getLikeArticles({
+        id: $stateParams.id
+      }, function (res) {
+        $scope.likeArticles = res.articles.reverse();
+      });
+    };
+    var pullArticles = function () {
+      User.prototype_get_articles({
+        id: $stateParams.id
+      }, function (articles) {
+        $scope.articles = articles;
+      });
+    };
+    $scope.activeMenus = [{
+      "name": "我的团队",
+      "clickFn": pullTeams,
+      "active": true,
+      "eName": 'team'
+    }, {
+      'clickFn': pullRaces,
+      'name': '参赛竞赛',
+      "active": false,
+      "eName": 'race'
+    }, {
+      'clickFn': pullActivities,
+      'name': '活动历史',
+      "active": false,
+      "eName": 'activity'
+    }, {
+      'clickFn': pullLikeArticles,
+      'name': '文章收藏',
+      "active": false,
+      "eName": 'article'
+    }];
+    $scope.pullData = function () {
+      $scope.activeMenus.forEach(function (menu) {
+        menu.active = false;
+      });
+      this.menu.active = true;
+      this.menu.clickFn();
+      $scope.selectedMenu = this.menu.eName;
+    };
+    $scope.selectedMenu = 'team';
+    if ($stateParams.id) {
+      pullTeams();
+      pullArticles();
+    } else {
+      $scope.user = null;
+    }
   }]);

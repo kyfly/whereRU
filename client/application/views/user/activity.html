@@ -1,8 +1,11 @@
 <ul class="collection with-header">
 
   <li class="collection-item" ng-if="activities.length === 0">
-    <p class="word-wrap">
+    <p class="word-wrap" ng-if="isAuthor">
       你还没有参与活动哦，点击下面的按钮参与 （＾∀＾）
+    </p>
+    <p class="word-wrap" ng-if="!isAuthor">
+      TA还没有参与活动哦 （＾∀＾）
     </p>
   </li>
   <li class="collection-item avatar" ng-repeat="activity in activities">
@@ -10,7 +13,7 @@
     <span class="title">
       <a class="black-text" href="/w/activities/{{activity.id}}" ng-bind="activity.title"></a>
       <br>
-      <a href="/u/results/{{activity.resultId}}/{{activity.actType}}">查看结果</a>
+      <a href="/u/results/{{activity.resultId}}/{{activity.actType}}" ng-if="isAuthor">查看结果</a>
     </span>
     <p>
       <span>发布方 |
@@ -22,7 +25,7 @@
       </span>
     </p>
   </li>
-  <li class="collection-item add-btn">
+  <li class="collection-item add-btn" ng-if="isAuthor">
     <a href="/w/activities" class="btn waves-effect">参与活动</a>
   </li>
 </ul>

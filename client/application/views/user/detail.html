@@ -1,1 +1,28 @@
-detail
+<div class="container row z-depth-1 user-header">
+  <div class="col s12 center user-info">
+    <a href="/u/info"><img ng-src="{{user.headImgUrl}}"></a>
+    <h4 class="black-text" ng-show="user" ng-bind="user.name"></h4>
+    <small>性别: <span ng-bind="user.sex"></span></small>
+    <br>
+    <small>学校: <span ng-bind="user.school"></span></small>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="container row z-depth-1 user-activity">
+  <ul class="row menus">
+    <li ng-repeat="menu in activeMenus">
+      <a href="" ng-class="{true: 'active'}[menu.active]"
+         ng-click="pullData()" ng-bind="menu.name"></a>
+    </li>
+  </ul>
+  <hr>
+  <div class="content">
+    <div>
+      <ng-include src="'/application/views/user/' + selectedMenu + '.html'"></ng-include>
+    </div>
+  </div>
+</div>
+<div class="container row" style="margin-top: 40px">
+  <h5 style="margin-left: 10px">TA的文章</h5>
+  <ng-include src="'/application/views/coterie/articles.html'"></ng-include>
+</div>

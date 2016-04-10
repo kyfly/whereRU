@@ -1,8 +1,11 @@
 <ul class="collection with-header">
 
   <li class="collection-item" ng-if="teams.length === 0">
-    <p class="word-wrap">
+    <p class="word-wrap" ng-if="isAuthor">
       你还没有创建团队哦，点击下面的按钮创建 ｡◕‿◕｡
+    </p>
+    <p class="word-wrap" ng-if="!isAuthor">
+      TA还没有创建团队哦｡◕‿◕｡
     </p>
   </li>
   <li class="collection-item avatar" ng-repeat="team in teams">
@@ -19,9 +22,9 @@
         </span>
         <span ng-bind="team.role || '未选择'"></span></span>
     </p>
-    <a href="/w/team/{{team.team.id}}" class="btn waves-effect orange darken-2" ng-if="team.owner">管理团队</a>
+    <a href="/w/team/{{team.team.id}}" class="btn waves-effect orange darken-2" ng-if="team.owner && isAuthor">管理团队</a>
   </li>
-  <li class="collection-item add-btn">
+  <li class="collection-item add-btn" ng-if="isAuthor">
     <a href="/w/teams/create" class="btn waves-effect">新建团队</a>
   </li>
 </ul>

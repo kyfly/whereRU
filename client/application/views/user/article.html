@@ -1,7 +1,10 @@
 <ul ng-if="articles.length">
   <li class="collection-item" ng-if="likeArticles.length === 0 || !likeArticles">
-    <p class="word-wrap">
-      你还没有喜欢文章哦 (￣▽￣")
+    <p class="word-wrap" ng-if="isAuthor">
+      你还没有收藏文章哦 (￣▽￣")
+    </p>
+    <p class="word-wrap" ng-if="!isAuthor">
+      TA还没有收藏文章哦 (￣▽￣")
     </p>
   </li>
   <li class="item col s12 margin-top" ng-repeat="likeArticle in likeArticles">
@@ -16,7 +19,7 @@
 		  <h6>收藏时间 |
 	    	<span ng-bind="likeArticle.created | date: 'yyyy-MM-dd HH:mm'"></span>
 		  </h6>
-      <a class="waves-effect btn white black-text" ng-href="{{'#deleteLikeConfirm' + $index}}" modal>取消收藏</a>
+      <a class="waves-effect btn white black-text" ng-href="{{'#deleteLikeConfirm' + $index}}" modal ng-if="isAuthor">取消收藏</a>
       <div id="{{'deleteLikeConfirm' + $index}}" class="modal">
         <div class="modal-content">
           <h4>确认</h4>

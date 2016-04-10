@@ -1,8 +1,11 @@
 <ul class="collection with-header">
 
   <li class="collection-item" ng-if="races.length === 0">
-    <p class="word-wrap">
+    <p class="word-wrap" ng-if="isAuthor">
       你还没有参加竞赛哦，点击下面的按钮参加 (´・ω・`)
+    </p>
+    <p class="word-wrap" ng-if="!isAuthor">
+      TA还没有参加竞赛哦 (´・ω・`)
     </p>
   </li>
   <li class="collection-item avatar" ng-repeat="race in races">
@@ -25,7 +28,7 @@
       </span>
     </p>
   </li>
-  <li class="collection-item add-btn">
+  <li class="collection-item add-btn" ng-if="isAuthor">
     <a href="/w/races" class="btn waves-effect">参与竞赛</a>
   </li>
 </ul>
