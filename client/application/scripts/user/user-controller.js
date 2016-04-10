@@ -213,7 +213,7 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location', f
         fk: res[0].id
       }, function () {
         Materialize.toast('文章取消收藏成功', 2000);
-        $scope.likeArticles.splice(this.$index,1)
+        $scope.likeArticles.splice(this.$index, 1)
       });
     });
 
@@ -259,9 +259,9 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location', f
   };
   $scope.selectedMenu = 'team';
   if ($scope.$currentUser) {
-      $scope.user = $scope.$currentUser;
-      pullTeams();
-      pullArticles();
+    $scope.user = $scope.$currentUser;
+    pullTeams();
+    pullArticles();
   } else {
     $scope.user = null;
   }
@@ -356,6 +356,7 @@ app.controller('UserInfoController', ['$scope', 'User', 'School', '$location', '
       if ($scope.user.password)
         $scope.user.password = hex_md5($scope.user.password);
       User.prototype_updateAttributes($scope.user, function (data) {
+        $scope.$currentUser.headImgUrl = data.headImgUrl;
         Materialize.toast('修改成功', 2000);
       });
     };
@@ -391,5 +392,8 @@ app.controller('MSController', ['User', '$stateParams', function (User, $statePa
   window.location.href = '/MS';
 }]);
 app.controller('ARTController', ['$scope', function () {
+
+}]);
+app.controller('UserDetailController', ['$scope', function ($scope) {
 
 }]);

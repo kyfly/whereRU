@@ -57,11 +57,13 @@ app.controller('ActivitiesController', ['$scope', 'Activity', '$window', functio
   };
   $scope.allTypeFilter = function () {
     $scope.query = undefined;
+    $scope.getActivities();
     $scope.typeHide = true;
     $scope.type = '类型';
   };
   $scope.allStatusFilter = function () {
     $scope.query = undefined;
+    $scope.getActivities();
     $scope.status = '状态';
     $scope.statusHide = true;
   };

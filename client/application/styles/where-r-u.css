@@ -1996,7 +1996,7 @@ footer {
 }
 
 .user-header .user-info {
-  height: 170px;
+  min-height: 170px;
 }
 
 .user-header img {

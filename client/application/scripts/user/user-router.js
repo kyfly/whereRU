@@ -21,7 +21,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       templateUrl: '/application/views/user/index.html'
     })
     .state('detail', {
-      url: '/u/:id',
+      url: '/u/detail/:id',
       controller: 'UserDetailController',
       templateUrl: '/application/views/user/detail.html'
     })
