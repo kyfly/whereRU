@@ -31,7 +31,7 @@
           <div class="card-action btn-area">
             <div class="viewEvent-btn waves-effect text-center">
               <a ui-sref="eventDetail({id: eventItem.id, type: 'author'})"
-                      class="blue-text text-darken-1" href>
+                 class="blue-text text-darken-1" href>
                 <i class="mdi-image-remove-red-eye"></i> 详情
               </a>
             </div>
@@ -85,7 +85,8 @@
           </div>
           <div class="card-action btn-area">
             <div class="edit-btn waves-effect text-center">
-              <a ui-sref="eventDetail({id: partakedEventItem.id, type: 'guest'})" class="blue-text text-darken-1" href><i
+              <a ui-sref="eventDetail({id: partakedEventItem.id, type: 'guest'})" class="blue-text text-darken-1"
+                 href><i
                 class="mdi-image-remove-red-eye"></i>
                 详情</a>
             </div>
@@ -100,7 +101,8 @@
           <div id="{{'quitEventConfirm' + $index}}" class="modal">
             <div class="modal-content">
               <h4>确认退出？</h4>
-              <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>退出就是放弃参赛机会,所有相关信息都将清除！</span></p>
+              <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>退出就是放弃参赛机会,所有相关信息都将清除！</span>
+              </p>
             </div>
             <div class="modal-footer">
               <a ng-click="quitEvent()" href=""
@@ -119,8 +121,8 @@
         <li ng-repeat="race in recommendRaces" class="z-depth-1">
           <img ng-src="{{race.imgUrl}}">
           <div class="race-info margin-left">
-            <h4 ng-bind="race.name"></h4>
-            发布方：<a href="" ng-bind="race.authorName"></a>
+            <a target="_blank" href="/w/races/{{race.id}}"><h4 ng-bind="race.name"></h4></a>
+            发布方：<a target="_blank" href="/w/teams/{{race.teamId}}" ng-bind="race.authorName"></a>
             <span>报名时间：
               <em ng-bind="race.started | date: format"></em> 到
               <em ng-bind="race.ended | date: format"></em>

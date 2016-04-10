@@ -383,6 +383,7 @@ app.controller('ActivityResultController',
         id: $scope.$currentUser.id,
         fk: $stateParams.id
       }, function (res) {
+        res.results.created = new Date(res.results.created).getTime() + 50;
         $scope.results = res.results;
         $scope.activity = res.activity;
       });

@@ -14,7 +14,7 @@
 	    	<a href="/u/{{likeArticle.article.user.id}}" ng-bind="likeArticle.article.user.name"></a>
 		  </h6>
 		  <h6>收藏时间 |
-	    	<span ng-bind="likeArticle.created | date: 'yyyy-MM-dd HH:mm:ss'"></span>
+	    	<span ng-bind="likeArticle.created | date: 'yyyy-MM-dd HH:mm'"></span>
 		  </h6>
       <a class="waves-effect btn white black-text" ng-href="{{'#deleteLikeConfirm' + $index}}" modal>取消收藏</a>
       <div id="{{'deleteLikeConfirm' + $index}}" class="modal">
