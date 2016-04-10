@@ -157,19 +157,19 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "$owner",
+      "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "getActivitiesHistories"
     },
     {
       "principalType": "ROLE",
-      "principalId": "$owner",
+      "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "getRaceHistories"
     },
     {
       "principalType": "ROLE",
-      "principalId": "$owner",
+      "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "getLikeArticles"
     },
@@ -193,7 +193,7 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "$owner",
+      "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "__get__articles"
     },
