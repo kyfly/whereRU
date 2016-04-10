@@ -6,8 +6,8 @@
 <div class="register container">
 	<h4>用户注册 <small class="grey-text"> 信息完善</small></h4>
 	<form ng-show="!regSuccess && !$currentUser" class="reg " id="regForm" name="regForm">
-		<div class="input-field col offset-m2 offset-l2 s12 m4 l4">
-		    <input id="phone" type="number" ng-model="user.phone" length="11" ng-focus="focus()" ng-blur="blur()" required>
+		<div class="input-field col offset-m2 offset-l2 s12 m4 l4" input-field>
+		    <input id="phone" type="number" ng-model="user.phone" ng-maxlength="11" ng-minlength="11" length="11" ng-focus="focus()" ng-blur="blur()" required>
 		    <label for="phone">请输入手机号</label>
 		</div>
 
