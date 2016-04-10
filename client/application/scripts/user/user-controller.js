@@ -200,8 +200,6 @@ app.controller('UserController', ['$scope', 'User', '$rootScope', '$location', '
     };
     $scope.deleteLike = function () {
       var article = this.likeArticle;
-      var thisElement = this;
-      console.log(this);
       User.prototype_get_likeUsers({
         id: $scope.$currentUser.id,
         filter: {
@@ -319,6 +317,7 @@ app.controller('BindController', ['$scope', 'User', '$location', '$rootScope', '
 app.controller('UserInfoController', ['$scope', 'User', 'School', '$location', 'uploadFile',
   function ($scope, User, School, $location, uploadFile) {
     $scope.isBindWeChat = false;
+    console.log($scope.$currentUser)
     if ($scope.$currentUser) {
       User.getInfo(function (user) {
         delete user.$promise;
@@ -359,6 +358,7 @@ app.controller('UserInfoController', ['$scope', 'User', 'School', '$location', '
         $scope.user.password = hex_md5($scope.user.password);
       User.prototype_updateAttributes($scope.user, function (data) {
         $scope.$currentUser.headImgUrl = data.headImgUrl;
+        $scope.$currentUser.school = data.school;
         Materialize.toast('修改成功', 2000);
       });
     };
@@ -406,7 +406,7 @@ app.controller('UserDetailController', ['$scope', '$stateParams', 'User',
     });
     var pullTeams = function () {
       User.getMyTeams({
-        id: $scope.$currentUser.id
+        id: $stateParams.id
       }, function (teams) {
         $scope.teams = teams.teams.reverse();
       });
