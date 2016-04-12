@@ -119,7 +119,7 @@ app.controller('RegisterController', ['User', 'School', '$scope', '$rootScope', 
     User.create($scope.user, function (data) {
       userAuthSave(data, $rootScope, LoopBackAuth);
       Materialize.toast('恭喜你，注册成功', 2000);
-      var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + 'wx5d92b3c192f993e7'
+      var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + 'wx809e719f43b30edf'
         + '&redirect_uri=http://' + $location.host()
         + '/u/bind&response_type=code&scope=snsapi_userinfo&state=' + data.userId
         + '#wechat_redirect';
@@ -347,7 +347,7 @@ app.controller('UserInfoController', ['$scope', 'User', 'School', '$location', '
     };
     $scope.bindWechat = function () {
       $scope.isBindWeChat = true;
-      var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + 'wx5d92b3c192f993e7'
+      var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + 'wx809e719f43b30edf'
         + '&redirect_uri=http://' + $location.host()
         + '/u/bind&response_type=code&scope=snsapi_userinfo&state=' + $scope.$currentUser.id
         + '#wechat_redirect';
