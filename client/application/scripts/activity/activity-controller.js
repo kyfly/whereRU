@@ -199,8 +199,8 @@ app.directive("ngTap", function () {
 });
 
 app.controller('ActivityController',
-  ['$scope', 'Activity', 'User', '$stateParams', '$interval', 'uploadFile', '$location', 'Article', '$rootScope',
-    function ($scope, Activity, User, $stateParams, $interval, uploadFile, $location, Article, $rootScope) {
+  ['$scope', 'Activity', 'User', '$stateParams', '$interval', 'uploadFile', '$location', 'Article', '$rootScope', '$timeout',
+    function ($scope, Activity, User, $stateParams, $interval, uploadFile, $location, Article, $rootScope, $timeout) {
       function formatTime(time) {
         var s = time % 60;
         var d = Math.floor(time / (3600 * 24));
@@ -399,33 +399,40 @@ app.controller('ActivityController',
             Materialize.toast('参与成功,可在个人主页查看结果', 4000);
         });
       };
-
+      $scope.alreadyGet = false;
+      $scope.exp = new RegExp("^((0[8-9])|(1[0-4]))(\\d{6}|\\d{7})$");
       $scope.submitSeckillResult = function () {
-
-        if (!$scope.$currentUser) {
-          return $scope.$emit('auth:loginRequired');
-        }
-        if ($scope.activity.verifyRule && !$scope.activity.verifyId) {
-          Materialize.toast('请填写验证规则', 800);
-          return;
-        }
-        var seckillResult = {
-          "created": new Date(),
-          "verifyId": $scope.activity.verifyId,
-          "itemId": this.seckillItem.id,
-          "seckillId": $scope.seckill.id
-        };
-        User.prototype_create_seckillResults({
-          id: $scope.$currentUser.id
-        }, seckillResult, function (res) {
-          if (res.status === 1000 || res.status === 1100) {
-            Materialize.toast(res.message, 500);
-            $scope.activityEnded = true;
-          } else {
-            Materialize.toast('参与成功,可在个人主页查看结果', 4000);
-            autoLoadSeckill();
+        if ($scope.alreadyGet === false) {
+          $scope.alreadyGet = true;
+          if (!$scope.$currentUser) {
+            return $scope.$emit('auth:loginRequired');
           }
-        });
+          if ($scope.activity.verifyRule && !$scope.activity.verifyId) {
+            Materialize.toast('请检查你的' + $scope.activity.verifyRule, 800);
+            $scope.alreadyGet = false;
+            return;
+          }
+          var seckillResult = {
+            "created": new Date(),
+            "verifyId": $scope.activity.verifyId,
+            "itemId": this.seckillItem.id,
+            "seckillId": $scope.seckill.id
+          };
+          User.prototype_create_seckillResults({
+            id: $scope.$currentUser.id
+          }, seckillResult, function (res) {
+            if (res.status === 1000 || res.status === 1100) {
+              Materialize.toast(res.message, 500);
+            } else {
+              Materialize.toast('恭喜你抢到票,可在个人主页查看结果', 4000);
+              autoLoadSeckill();
+            }
+          }, function () {
+            $timeout(function () {
+              $scope.alreadyGet = false;
+            }, 200);
+          });
+        }
       };
     }]);
 

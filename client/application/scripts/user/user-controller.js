@@ -317,7 +317,6 @@ app.controller('BindController', ['$scope', 'User', '$location', '$rootScope', '
 app.controller('UserInfoController', ['$scope', 'User', 'School', '$location', 'uploadFile',
   function ($scope, User, School, $location, uploadFile) {
     $scope.isBindWeChat = false;
-    console.log($scope.$currentUser)
     if ($scope.$currentUser) {
       User.getInfo(function (user) {
         delete user.$promise;
@@ -385,7 +384,7 @@ app.controller('ActivityResultController',
         id: $scope.$currentUser.id,
         fk: $stateParams.id
       }, function (res) {
-        res.results.created = new Date(res.results.created).getTime() + 50;
+        res.results.created = new Date(res.results.created).getTime() + 20000;
         $scope.results = res.results;
         $scope.activity = res.activity;
       });
