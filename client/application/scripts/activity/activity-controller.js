@@ -400,7 +400,6 @@ app.controller('ActivityController',
         });
       };
       $scope.alreadyGet = false;
-      $scope.exp = new RegExp("^((0[8-9])|(1[0-4]))(\\d{6}|\\d{7})$");
       $scope.submitSeckillResult = function () {
         if ($scope.alreadyGet === false) {
           $scope.alreadyGet = true;

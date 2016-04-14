@@ -23,7 +23,7 @@
           <div class="card-content">
             <h5 class="card-title orange-text darken-1" ng-bind="seckillItem.name"></h5>
             <h6>票数：<span ng-bind="seckillItem.count"></span></h6>
-            <h6>余量：<span ng-bind="seckillItem.margin"></span></h6>
+            <h6>余量：<span ng-bind="seckillItem.margin < 0? 0: seckillItem.margin"></span></h6>
           </div>
           <div class="card-action center">
             <h4>
@@ -53,11 +53,11 @@
             </h5>
             <div class="col s12 m6 offset-m3" input-field ng-show="activity.verifyRule">
               <input id="verifyId2" type="text" ng-model="activity.verifyId" ng-focus="focus()" ng-blur="blur()"
-                     style="text-align:center;text-shadow: 0 0 10px #000000" ng-pattern="exp">
+                     style="text-align:center;text-shadow: 0 0 10px #000000">
               <label style="color: #ffffff" for="verifyId2">请输入{{activity.verifyRule}}</label>
               <div style="margin-top: 50px">
                 <h6>票数：<span ng-bind="seckillItem.count"></span></h6>
-                <h6>余量：<span ng-bind="seckillItem.margin"></span></h6>
+                <h6>余量：<span ng-bind="seckillItem.margin < 0? 0: seckillItem.margin"></span></h6>
                 <h4>
                   <button ng-disabled="activityEnded || alreadyGet"
                           class="btn-floating btn-large white pink-text text-lighten-2 seckill-btn waves-effect"
