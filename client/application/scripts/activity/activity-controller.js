@@ -414,13 +414,16 @@ app.controller('ActivityController',
           "itemId": this.seckillItem.id,
           "seckillId": $scope.seckill.id
         };
+        if ($scope.activityEnded) {
+          return;
+        }
         $scope.activityEnded = true;
         User.prototype_create_seckillResults({
           id: $scope.$currentUser.id
         }, seckillResult, function (res) {
           if (res.status === 1000 || res.status === 1100) {
             Materialize.toast(res.message, 500);
-            $scope.activityEnded = true;
+            $scope.activityEnded = false;
           } else {
             Materialize.toast('参与成功,可在个人主页查看结果', 4000);
             autoLoadSeckill();
