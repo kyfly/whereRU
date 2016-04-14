@@ -149,7 +149,7 @@ app.controller('ConfirmSchoolController', ['User', '$scope', 'School', '$window'
         password: hex_md5($scope.studentPassword),
         academy: $scope.academy
       }, function (res) {
-        $scope.$currentUser.studentId = studentId;
+        $scope.$currentUser.studentId = $scope.studentId;
         Materialize.toast('验证成功', 2000);
         $window.history.back();
       });

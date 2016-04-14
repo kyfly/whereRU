@@ -28,6 +28,10 @@
       <div ng-include="activity.explainUrl"></div>
     </div>
     <div id="join" class="col s12">
+      <div class="center" ng-show="$currentUser && !activity.verifyId">
+        如果你希望绑定学号，请点击 <a href="/u/confirmSchool">绑定</a>
+      </div>
+
       <div ng-if="activity.actType === 'form'" ng-controller="ActivityController">
         <div ng-include="'/application/views/activity/form.html'"></div>
       </div>
