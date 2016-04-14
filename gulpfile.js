@@ -20,3 +20,21 @@ gulp.task('management', function () {
       .pipe(concat('management.min.js'))
       .pipe(gulp.dest('./client/build'));
 });
+gulp.task('static', function () {
+      gulp.src([
+            './client/lib/jquery/jquery.min.js',
+            './client/lib/angular/angular.min.js',
+            './client/lib/qrcode/qrcode.min.js',
+            './client/lib/materialize/js/materialize.min.js',
+            './client/lib/ueditor/ueditor.config.js',
+            './client/lib/ueditor/ueditor.all.min.js',
+            './client/lib/angular-ueditor/angular-ueditor.min.js',
+            './client/lib/angular-components/angular-ui-router.min.js',
+            './client/lib/angular-components/angular-resource.min.js'
+      ])
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'))
+      .pipe(uglify())
+      .pipe(concat('components.min.js'))
+      .pipe(gulp.dest('./client/build'));
+});
