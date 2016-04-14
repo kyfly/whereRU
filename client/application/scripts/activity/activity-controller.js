@@ -401,7 +401,6 @@ app.controller('ActivityController',
       };
 
       $scope.submitSeckillResult = function () {
-        $scope.activityEnded = true;
         if (!$scope.$currentUser) {
           return $scope.$emit('auth:loginRequired');
         }
@@ -415,6 +414,7 @@ app.controller('ActivityController',
           "itemId": this.seckillItem.id,
           "seckillId": $scope.seckill.id
         };
+        $scope.activityEnded = true;
         User.prototype_create_seckillResults({
           id: $scope.$currentUser.id
         }, seckillResult, function (res) {
