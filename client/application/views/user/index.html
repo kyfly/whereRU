@@ -15,7 +15,7 @@
     <h4 class="black-text" ng-show="user" ng-bind="user.name"></h4>
     <div ng-show="user">
       <a class="grey-text" href="/u/info">修改信息</a>
-      <a class="grey-text" href="#logoutBtn" modal>&nbsp;&nbsp;退出</a>
+      <a class="grey-text" href="" ng-click="logOut()">&nbsp;&nbsp;退出</a>
     </div>
     <h4 ng-show="!user">
       <a href='' ng-click="goLogin()">登录</a>
@@ -45,15 +45,4 @@
 <div class="container row" style="margin-top: 40px">
   <h5 ng-if="user" style="margin-left: 10px">我的文章</h5>
   <ng-include src="'/application/views/coterie/articles.html'"></ng-include>
-</div>
-<div id="logoutBtn" class="modal">
-  <div class="modal-content">
-    <h4>确认</h4>
-    <p class="text-center warningText"><i class="mdi-alert-warning"></i> <span>确认退出？</span></p>
-  </div>
-  <div class="modal-footer">
-    <a ng-click="logOut()" href=""
-       class="white-text modal-action modal-close waves-effect waves-green btn-flat red darken-1">退出</a>
-    <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
-  </div>
 </div>
