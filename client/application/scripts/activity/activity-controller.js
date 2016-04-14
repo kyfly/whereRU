@@ -401,7 +401,7 @@ app.controller('ActivityController',
       };
 
       $scope.submitSeckillResult = function () {
-
+        $scope.activityEnded = true;
         if (!$scope.$currentUser) {
           return $scope.$emit('auth:loginRequired');
         }
