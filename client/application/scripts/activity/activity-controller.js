@@ -430,7 +430,7 @@ app.controller('ActivityController',
           }, function () {
             $timeout(function () {
               $scope.alreadyGet = false;
-            }, 200);
+            }, 400);
           });
         }
       };
