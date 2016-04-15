@@ -70,6 +70,9 @@
 			    <input id="studentId" type="number" ng-model="user.studentId" ng-focus="focus()" ng-blur="blur()" disabled>
 			    <label for="studentId">学号</label>
 				</div>
+        <div ng-show="$currentUser && !user.studentId">
+          如果你希望绑定学号，请点击 <a href="/u/confirmSchool">绑定</a>
+        </div>
 				<div class="input-field col s12">
 			    <input id="academy" type="text" ng-model="user.academy" ng-focus="focus()" ng-blur="blur()">
 			    <label for="academy">学院</label>

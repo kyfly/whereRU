@@ -281,7 +281,14 @@ app.controller('ActivityController',
           $scope.$emit('auth:loginRequired');
         }
         if ($scope.$currentUser && $scope.activity.verifyRule === '学号') {
-          $scope.activity.verifyId = $scope.$currentUser.studentId;
+          if($scope.$currentUser.studentId){
+            $scope.activity.verifyId = $scope.$currentUser.studentId;
+          } else {
+            User.getInfo(function (res) {
+              $scope.activity.verifyId = res.studentId;
+            });
+          }
+
         } else if ($scope.$currentUser && $scope.activity.verifyRule === '手机') {
           $scope.activity.verifyId = $scope.$currentUser.phone;
         }
@@ -360,6 +367,7 @@ app.controller('ActivityController',
             $scope.result[that['$index']].url = res.url;
           });
       };
+
       $scope.submitVoteResult = function () {
         var result = [];
         if (!$scope.$currentUser) {
@@ -399,6 +407,7 @@ app.controller('ActivityController',
             Materialize.toast('参与成功,可在个人主页查看结果', 4000);
         });
       };
+
       $scope.alreadyGet = false;
       $scope.submitSeckillResult = function () {
         if ($scope.alreadyGet === false) {
