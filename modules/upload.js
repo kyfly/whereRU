@@ -98,7 +98,7 @@ var uploadfile = function (req, res) {
       }
       if (err) {
         r.state = 'ERROR';
-      } else 
+      } else
         r.state = 'SUCCESS';
       res.json(r);
     });

@@ -1,6 +1,6 @@
 var app = angular.module('app', [
 	'ngResource',
-	'lbServices',
+  'lbServices',
 	'ui.router',
 	'ui.materialize',
 	'ng.ueditor',
