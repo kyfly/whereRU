@@ -51,7 +51,8 @@ module.exports = function(Race) {
     page = page || 0;
     Race.find({
       where: {
-        school: school
+        school: school,
+        delete: false
       },
       order:'id DESC',
       skip: 16 * page,
