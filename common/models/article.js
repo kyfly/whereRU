@@ -16,7 +16,12 @@ module.exports = function(Article) {
 	Article.afterRemote('prototype.__get__comments', function (ctx, ins, next) {
 		var comments = [];
 		var commentFns = [];
+        var index = 0;
 		ins.forEach(function(comment) {
+            if (index > 20){
+                return;
+            }
+            index ++;
 			commentFns.push(commentFn(comment));
 		});
 		q.all(commentFns)
