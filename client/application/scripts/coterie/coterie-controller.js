@@ -27,7 +27,6 @@ app.controller('CoteriesController',
       else {
         if (!$scope.$currentUser) {
           return $scope.$emit('auth:loginRequired');
-          return $scope.$emit('auth:loginRequired');
         }
         getCoteries();
       }

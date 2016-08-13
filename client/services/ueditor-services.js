@@ -16,7 +16,7 @@
       } else {
         return;
       }
-     var url = "/ue/uploads?dir=" + dir + "&id=" + id;
+      var url = "/ue/uploads?dir=" + dir + "&id=" + id;
       return {
         serverUrl: url,
         toolbars: [[
