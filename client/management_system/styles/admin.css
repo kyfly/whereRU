@@ -66,6 +66,9 @@ hr {
 #front-page-logo {
   height: 80px;
 }
+#front-page-logo-set {
+  height: 370px;
+}
 
 #sidebarHr {
   width: 70%;

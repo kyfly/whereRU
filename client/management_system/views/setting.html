@@ -45,18 +45,24 @@
        ng-click="updateInfo()">更新资料</a>
   </div>
 
-  <div id="editLogo" class="col s12">
-    <div class="file-field input-field">
-      <div class="btn">
-        <span>团队LOGO</span>
-        <input type="file" id="teamlogo" multiple ng-model="team.logoUrl" required>
+  <div id="editLogo" class="col 5s">
+      <img id="front-page-logo-set" ng-src="{{team.logoUrl}}">
+      <div class="file-field input-field" style="margin-top: -59px;padding-top:7px ;background: rgba(0, 0, 0, 0.5)">
+        <div style="margin: 0 5px">
+          <div class="btn" style="margin-left: 5px">
+            <span>团队LOGO</span>
+            <input type="file" id="teamlogo" multiple ng-model="team.logoUrl" required>
+          </div>
+          <div class="file-path-wrapper" style="height: 52px">
+            <input class="file-path validate" ng-model="tem" ng-change="uploadLogo()" type="text" placeholder="请选择团队LOGO" style="color: white" >
+          </div>
+          <div style="margin-top: -60px;padding-right: 5px">
+            <a href="#" class="waves-effect waves-light btn orange darken-4 right"
+               ng-click="updateInfo()">更新LOGO</a>
+          </div>
+        </div>
+
       </div>
-      <div class="file-path-wrapper">
-        <input class="file-path validate" ng-model="tem" ng-change="uploadLogo()" type="text" placeholder="请选择团队LOGO">
-      </div>
-    </div>
-    <a href="#" class="waves-effect waves-light btn orange darken-4 right"
-       ng-click="updateInfo()">更新LOGO</a>
   </div>
 
   <div id="editDepartment" class="col s12">
