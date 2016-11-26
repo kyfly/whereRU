@@ -26,11 +26,13 @@ module.exports = function(Form) {
           form._formItems.forEach(function (item) {
             excelTitle.push(item.name);
           });
+          excelTitle.push('verifyId');
           formData.push(excelTitle);
           formResult.forEach(function(results){
             results.result.forEach(function (re) {
               result.push(re.name);
             });
+            result.push(results.verifyId);
             formData.push(result);
             result = [];
           });

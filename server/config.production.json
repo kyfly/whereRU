@@ -1,0 +1,47 @@
+{
+  "restApiRoot": "/api",
+  "host": "127.0.0.1",
+  "port": 8888,
+  "remoting": {
+    "context": {
+      "enableHttpContext": false
+    },
+    "rest": {
+      "normalizeHttpPath": false,
+      "xml": false
+    },
+    "json": {
+      "strict": false,
+      "limit": "100kb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "100kb"
+    },
+    "cors": false,
+    "errorHandler": {
+      "disableStackTrace": false
+    }
+  },
+  "legacyExplorer": false,
+  "oss": {
+    "key": "ILhh2EX7UnN2UI1t",
+    "bucket": "whereru",
+    "secret": "L46bpHJOvK4BRxgvWf7RnllvaOq1sq",
+    "endpoint": "http://oss-cn-hangzhou.aliyuncs.com",
+    "allowOrigin": "http://localhost:3000",
+    "rootUrl": "http://cdn.etuan.org/",
+    "imgUrl": "http://img.etuan.org/"
+  },
+  "wechat": {
+    "appID": "wx809e719f43b30edf",
+    "appsecret": "cceb290d7b8fea3dbc7289963b189d05",
+    "redrect": "http://whereru.etuan.org/u/auth"
+  },
+  "default": {
+    "headImg": "http://img.etuan.org/default.jpg",
+    "img": "http://img.etuan.org/default.png"
+  }
+
+}
+

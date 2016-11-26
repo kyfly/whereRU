@@ -52,7 +52,7 @@ module.exports = function(Race) {
     Race.find({
       where: {
         school: school,
-        delete: false
+        deleted: false
       },
       order:'id DESC',
       skip: 16 * page,

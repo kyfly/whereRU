@@ -1,0 +1,13 @@
+{
+  "db":{
+    "host": "127.0.0.1",
+    "port": 27017,
+    "database": "whereRU",
+    "name": "db",
+    "username": "whereRU",
+    "password": "whereru.kyfly.net",
+    "connector": "mongodb",
+    "allowExtendedOperators": true
+  }
+}
+

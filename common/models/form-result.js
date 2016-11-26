@@ -3,9 +3,12 @@ module.exports = function(FormResult) {
 		instance.form({
 			include: 'activity'
 		}, function (err, form) {
-			if (err || !form.toJSON().activity) {
-    		return next(err);
-    	}
+            if (form.toJSON().noticeId) {
+                return next();
+            }	
+	    	if (err || !form.toJSON().activity) {
+    	    	return next(err);
+    	    }
 			if (new Date() < new Date(form.toJSON().activity.started))
 			{
 				return next('还没开始呢');
