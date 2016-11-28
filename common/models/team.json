@@ -49,6 +49,9 @@
     "status": {
       "type": "boolean",
       "required": true
+    },
+    "media_id": {
+      "type": "string"
     }
   },
   "validations": [],

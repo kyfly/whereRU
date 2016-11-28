@@ -151,5 +151,9 @@
   "Aouth": {
     "dataSource": "db",
     "public": true
+  },
+  "weixiaoToken": {
+    "dataSource": "db",
+    "public": false
   }
 }

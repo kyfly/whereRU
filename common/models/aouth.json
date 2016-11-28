@@ -24,20 +24,24 @@
   },
   "validations": [],
   "relations": {},
-  "acls": [{
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "DENY"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "ALLOW",
-    "property": "findById"
-  },{
-    "principalType": "ROLE",
-    "principalId": "$everyone",
-    "permission": "ALLOW",
-    "property": "deleteById"
-  }],
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    }
+  ],
   "methods": {}
 }
