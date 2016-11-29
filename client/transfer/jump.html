@@ -1,0 +1,32 @@
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>jump</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="lib/materialize/css/materialize.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+</head>
+<body ng-controller="JumpController">
+
+<div class="container jump">
+    <form name="jump_pg" >
+        <h4 class="center ">ID</h4>
+        <input type="text" placeholder="请输入ID" ng-model="jumplist.teamId" name="id" required/>
+        <div class="error" ng-show="jump_pg.id.$dirty&&jump_pg.id.$invalid">
+            <small class="error" ng-show="jump_pg.id.$error.required">
+                别忘记填写id
+            </small>
+        </div>
+        <button type="submit" ng-disabled="jump_pg.$invalid" class="btn waves-effect waves-light right" ng-click="confirm()">确定</button>
+       </form>
+</div>
+<div class="container">
+    <p>1.如何获取团队id?</p>
+</div>
+<script src="lib/angular/angular.min.js"></script>
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/materialize/js/materialize.min.js"></script>
+<script src="js/jump.js"></script>
+</body>
+</html>

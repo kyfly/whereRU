@@ -145,7 +145,7 @@ function config(app, req, res) {
   const token = gen_token(media_id);
   app.models.weixiaoToken.upsert({ token: token, media_id: media_id }, (err, result) => {
     if (err) return res.send({ errcode: 5003, errmsg: '请求接口失败' });
-    res.redirect('/weixiao/config?token=' + token);
+    res.redirect('/weixiao/' + media_id + '/' + token);
   });
 }
 
@@ -160,14 +160,14 @@ function configSave(app, res, req) {
       if (err || !team) return res.send({ errcode: 5003, errmsg: '找不到该团队' });
       team.media_id = media_id;
       team.save();
+      console.log(team);
     });
   });
 }
 
 module.exports = function (app) {
-  app.get('/weixiao/config', function (req, res, cb) {
-    const token = req.query.token;
-    res.send(res.sendFile(path.join(__dirname, '../../client/config.html')));
+  app.get('/weixiao/:meida_id/:token', function (req, res, cb) {
+    res.send(res.sendFile(path.join(__dirname, '../../client/transfer/jump.html')));
   });
 
   app.post('/weixiao', function (req, res, cb) {
@@ -175,7 +175,6 @@ module.exports = function (app) {
       if (err) return cb(err);
       req.body = JSON.parse(str.toString());
       const type = req.query.type;
-      console.log(req.body);
       switch (type) {
         case 'open': return open(app, req, res);
         case 'close': return close(app, req, res);
