@@ -18,11 +18,3 @@ coverage
 node_modules
 npm-debug.log
 client/lib/temporary
-server/config.local.json
-server/datasources.local.json
-server/config.product.json
-server/datasources.peoduct.json
-server/config.dev.json
-server/datasources.dev.json
-server/boot/DBback.js
-client/build
