@@ -183,7 +183,7 @@ module.exports = function (app) {
         case 'open': return open(app, req, res);
         case 'close': return close(app, req, res);
         case 'trigger': break;// return trigger();
-        case 'configSave': return configSave(app, req, res);
+        //case 'configSave': return configSave(app, req, res);
       }
     });
   });
@@ -198,6 +198,23 @@ module.exports = function (app) {
     }
   });
 
-  app.use('/weixiao' ,loopback.static(path.resolve(__dirname, '../../client/transfer')));
+  app.post('/weixiao/config', function (req, res) {
+    const body = req.body;
+    console.log(body)
+    const media_id = body.media_id;
+    const teamId = body.teamId;
+    const token = body.token;
+    app.models.weixiaoToken.findOne({ token: token, media_id: media_id }, (err, tokenRecord) => {
+      if (err || !tokenRecord) return res.send({ errcode: 5003, errmsg: '令牌错误' });
+      app.models.Team.findById(teamId, (err, team) => {
+        if (err || !team) return res.send({ errcode: 5003, errmsg: '找不到该团队' });
+        team.media_id = media_id;
+        team.save();
+        res.send({ errcode: 0, errmsg: '成功' });
+      });
+    });
+  });
+
+  app.use('/weixiao', loopback.static(path.resolve(__dirname, '../../client/transfer')));
 
 };
