@@ -41,4 +41,5 @@ module.exports = function (server) {
   server.get(/^\/MS\/*/, function (req, res) {
     res.sendFile(path.join(__dirname, '../../client/management_system/index.html'));
   });
+  
 };

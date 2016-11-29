@@ -3,14 +3,16 @@
 const crypto = require('crypto');
 const _ = require('lodash');
 const getRawBody = require('raw-body');
+const path = require('path');
+const loopback = require('loopback');
 
 function gen_token(media_id) {
   let secret = 'ETUANSTUDIO'; //自己定义SECRET值
   let string = media_id.length + media_id;
   const b = 64;
-  secret = _.padRight(secret, b, '\0');
-  const ipad = _.padRight('', b, '6');
-  const opad = _.padRight('', b, '\\');
+  secret = _.padEnd(secret, b, '\0');
+  const ipad = _.padEnd('', b, '6');
+  const opad = _.padEnd('', b, '\\');
   const k_ipad = secret ^ ipad;
   const k_opad = secret ^ opad;
   return md5(k_opad + md5(k_ipad + string));
@@ -143,14 +145,19 @@ function config(app, req, res) {
     return res.send(err);
   }
   const token = gen_token(media_id);
-  app.models.weixiaoToken.upsert({ token: token, media_id: media_id }, (err, result) => {
+  app.models.weixiaoToken.findOrCreate({ token: token, media_id: media_id }, (err, result) => {
     if (err) return res.send({ errcode: 5003, errmsg: '请求接口失败' });
-    res.redirect('/weixiao/' + media_id + '/' + token);
+    res.redirect('/weixiao?type=configGet&token=' + token + '&media_id=' + media_id);
   });
 }
+function configGet(app, req, res) {
+  const configPage = path.join(__dirname, '../../client/transfer/jump.html');
+  res.sendFile(configPage);
+}
 
-function configSave(app, res, req) {
+function configSave(app, req, res) {
   const body = req.body;
+  console.log(body)
   const media_id = body.media_id;
   const teamId = body.teamId;
   const token = body.token;
@@ -160,17 +167,14 @@ function configSave(app, res, req) {
       if (err || !team) return res.send({ errcode: 5003, errmsg: '找不到该团队' });
       team.media_id = media_id;
       team.save();
-      console.log(team);
+      res.send({ errcode: 0, msg: '成功' });
     });
   });
 }
 
 module.exports = function (app) {
-  app.get('/weixiao/:meida_id/:token', function (req, res, cb) {
-    res.send(res.sendFile(path.join(__dirname, '../../client/transfer/jump.html')));
-  });
-
   app.post('/weixiao', function (req, res, cb) {
+    console.log(req.url)
     getRawBody(req, (err, str) => {
       if (err) return cb(err);
       req.body = JSON.parse(str.toString());
@@ -185,10 +189,15 @@ module.exports = function (app) {
   });
 
   app.get('/weixiao', function (req, res) {
+    console.log(req.url)
     const type = req.query.type;
     switch (type) {
       case 'config': return config(app, req, res);
       case 'monitor': return monitor(app, req, res);
+      case 'configGet': return configGet(app, req, res);
     }
   });
+
+  app.use('/weixiao' ,loopback.static(path.resolve(__dirname, '../../client/transfer')));
+
 };
