@@ -120,7 +120,7 @@ function monitor(app, req, res) {
 function config(app, req, res) {
   const media_id = req.query.media_id;
   const sign = req.query.sign;
-
+  const timestamp = req.query.timestamp;
   let body = req.query;
   delete (body['sign']);
   delete (body['type']);
