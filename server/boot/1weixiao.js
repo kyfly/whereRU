@@ -151,30 +151,29 @@ function config(app, req, res) {
   });
 }
 function configGet(app, req, res) {
-  const configPage = path.join(__dirname, '../../client/transfer/jump.html');
+  const configPage = path.join(__dirname, '../../client/weixiao-config.html');
   res.sendFile(configPage);
 }
 
 function configSave(app, req, res) {
-  const body = req.body;
-  console.log(body)
-  const media_id = body.media_id;
-  const teamId = body.teamId;
-  const token = body.token;
-  app.models.weixiaoToken.findOne({ token: token, media_id: media_id }, (err, tokenRecord) => {
+  const teamId = req.query.teamId;
+  const media_id = req.query.media_id;
+  const token = req.query.token;
+  app.models.weixiaoToken.findOne({where:{ token: token, media_id: media_id }}, (err, tokenRecord) => {
     if (err || !tokenRecord) return res.send({ errcode: 5003, errmsg: '令牌错误' });
     app.models.Team.findById(teamId, (err, team) => {
       if (err || !team) return res.send({ errcode: 5003, errmsg: '找不到该团队' });
-      team.media_id = media_id;
-      team.save();
-      res.send({ errcode: 0, msg: '成功' });
+      team.updateAttribute('media_id', media_id, (err,team)=>{
+        console.log(team);
+        res.send({ errcode: 0, msg: '成功' });
+        tokenRecord.destroy();
+      });
     });
   });
 }
 
 module.exports = function (app) {
   app.post('/weixiao', function (req, res, cb) {
-    console.log(req.url)
     getRawBody(req, (err, str) => {
       if (err) return cb(err);
       req.body = JSON.parse(str.toString());
@@ -185,36 +184,32 @@ module.exports = function (app) {
         case 'trigger': break;// return trigger();
         //case 'configSave': return configSave(app, req, res);
       }
+      cb();
     });
   });
 
-  app.get('/weixiao', function (req, res) {
-    console.log(req.url)
+  app.get('/weixiao', function (req, res, cb) {
     const type = req.query.type;
     switch (type) {
       case 'config': return config(app, req, res);
       case 'monitor': return monitor(app, req, res);
       case 'configGet': return configGet(app, req, res);
+      case 'configSave': return configSave(app, req, res);
     }
+    cb();
   });
 
-  app.post('/weixiao/config', function (req, res) {
-    const body = req.body;
-    console.log(body)
-    const media_id = body.media_id;
-    const teamId = body.teamId;
-    const token = body.token;
-    app.models.weixiaoToken.findOne({ token: token, media_id: media_id }, (err, tokenRecord) => {
-      if (err || !tokenRecord) return res.send({ errcode: 5003, errmsg: '令牌错误' });
-      app.models.Team.findById(teamId, (err, team) => {
-        if (err || !team) return res.send({ errcode: 5003, errmsg: '找不到该团队' });
-        team.media_id = media_id;
-        team.save();
-        res.send({ errcode: 0, errmsg: '成功' });
+  app.get('/weixiao/mp/:media_id', function (req, res, cb) {
+    const media_id = req.params.media_id;
+    app.models.Team.findOne({where:{ media_id: media_id }}, function (err, team) {
+      if (err || !team) return cb({ status: 404, message: '找不到该公众号所绑定的团队' });
+      res.send({
+        name: team.name,
+        logoUrl: team.logoUrl,
+        type: team.type,
+        desc: team.desc,
+        teamUrl: 'http://whereru.etuan.org/w/teams/' + team.teamId
       });
     });
   });
-
-  app.use('/weixiao', loopback.static(path.resolve(__dirname, '../../client/transfer')));
-
 };

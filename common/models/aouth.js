@@ -8,7 +8,7 @@ module.exports = function(Aouth) {
 				if (err) {
 					next(err);
 				} else {
-					user.createAccessToken(7200, function (err, token) {
+					user.createAccessToken(43200, function (err, token) {
 			      var token = token.toJSON();
 			      token.user = {
 			        "name": user.name,
