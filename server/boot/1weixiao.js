@@ -159,7 +159,7 @@ function configSave(app, req, res, cb) {
   const teamId = req.query.teamId;
   const media_id = req.query.media_id;
   const token = req.query.token;
-  if(!token||!media_id||!teamId) {
+  if (!token || !media_id || !teamId) {
     var err = new Error('非法请求');
     err.status = 401;
     cb(err);
@@ -178,14 +178,14 @@ function configSave(app, req, res, cb) {
           err.status = 404;
           return cb(err);
         }
+        if (!teams) return;
+        teams.forEach((team) => {
+          team.updateAttribute('media_id', '', (err, team) => {
+          });
+        });
         team.updateAttribute('media_id', media_id, (err, team) => {
           res.send({ errcode: 0, errmsg: '成功' });
           tokenRecord.destroy();
-        });
-      });
-      if (!teams) return;
-      teams.forEach((team) => {
-        team.updateAttribute('media_id', '', (err, team) => {
         });
       });
     });
