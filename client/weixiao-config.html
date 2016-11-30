@@ -434,13 +434,12 @@
             console.log(url);
             $.get(url)
             .done(function(data){
-              console.log(data)
                 alert('设置成功！');
                 fetch_team();
                 $('#button1').attr("disabled", true);
             })
             .fail(function(res){
-                alert(res);
+                alert(res.message);
             });
         }
     });

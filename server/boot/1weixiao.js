@@ -156,6 +156,7 @@ function configGet(app, req, res, cb) {
 }
 
 function configSave(app, req, res, cb) {
+  console.log(req.url)
   const teamId = req.query.teamId;
   const media_id = req.query.media_id;
   const token = req.query.token;
