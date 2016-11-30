@@ -72,13 +72,25 @@
 
 <body>
   <div class="container" style="font-size:16px;">
+    <p>请在下方填写WhereRU团队ID，以绑定本公众号:</p>
     <div class="wx-form-group">
-      <label class="wx-control-label">请在下方填写WhereRU团队ID，以绑定本公众号</label>
+      <label for="10" class="wx-control-label"><i>*</i>
+          WhereRU团队ID
+      </label>
       <div class="wx-form-content">
         <div>
-          <input type="text" class="wx-form-input" id="teamId" name="test_media">
+            <input type="text" class="wx-form-input" id="teamId" name="test_media">
         </div>
       </div>
+    </div>
+    <div class="wx-form-group">
+        <button type="submit" class="wx-btn wx-btn-small" id="button1">提交</button>
+    </div>
+    <div class="wx-form-content">
+      <div>
+        <input type="text" class="wx-form-input" id="teamId" name="test_media">
+      </div>
+    </div>
       <div>
         <button type="submit" class="wx-btn" id="button1">提交</button>
       </div>
