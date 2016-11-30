@@ -33,7 +33,7 @@ function _cal_sign(param_array) {
   return md5(str).toUpperCase();
 }
 
-function open(app, req, res) {
+function open(app, req, res, cb) {
   let body = req.body;
   const sign = body.sign;
   const timestamp = body.timestamp;
@@ -65,7 +65,7 @@ function open(app, req, res) {
   return res.send(result);
 }
 
-function close(app, req, res) {
+function close(app, req, res, cb) {
   let body = req.body;
   const sign = body.sign;
   const timestamp = body.timestamp;
@@ -115,11 +115,11 @@ function close(app, req, res) {
   });
 }
 
-function monitor(app, req, res) {
+function monitor(app, req, res, cb) {
   res.send(req.query.echostr);
 }
 
-function config(app, req, res) {
+function config(app, req, res, cb) {
   const media_id = req.query.media_id;
   const sign = req.query.sign;
   const timestamp = req.query.timestamp;
@@ -150,12 +150,12 @@ function config(app, req, res) {
     res.redirect('/weixiao?type=configGet&token=' + token + '&media_id=' + media_id);
   });
 }
-function configGet(app, req, res) {
+function configGet(app, req, res, cb) {
   const configPage = path.join(__dirname, '../../client/weixiao-config.html');
   res.sendFile(configPage);
 }
 
-function configSave(app, req, res) {
+function configSave(app, req, res, cb) {
   const teamId = req.query.teamId;
   const media_id = req.query.media_id;
   const token = req.query.token;
@@ -187,8 +187,8 @@ module.exports = function (app) {
       req.body = JSON.parse(str.toString());
       const type = req.query.type;
       switch (type) {
-        case 'open': return open(app, req, res);
-        case 'close': return close(app, req, res);
+        case 'open': return open(app, req, res, cb);
+        case 'close': return close(app, req, res, cb);
         case 'trigger': break;// return trigger();
         //case 'configSave': return configSave(app, req, res);
       }
@@ -199,10 +199,10 @@ module.exports = function (app) {
   app.get('/weixiao', function (req, res, cb) {
     const type = req.query.type;
     switch (type) {
-      case 'config': return config(app, req, res);
-      case 'monitor': return monitor(app, req, res);
-      case 'configGet': return configGet(app, req, res);
-      case 'configSave': return configSave(app, req, res);
+      case 'config': return config(app, req, res, cb);
+      case 'monitor': return monitor(app, req, res, cb);
+      case 'configGet': return configGet(app, req, res, cb);
+      case 'configSave': return configSave(app, req, res, cb);
     }
     cb();
   });
