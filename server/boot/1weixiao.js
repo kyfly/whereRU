@@ -208,7 +208,7 @@ module.exports = function (app) {
         logoUrl: team.logoUrl,
         type: team.type,
         desc: team.desc,
-        teamUrl: 'http://whereru.etuan.org/w/teams/' + team.teamId
+        teamUrl: 'http://whereru.etuan.org/w/teams/' + team.id
       });
     });
   });

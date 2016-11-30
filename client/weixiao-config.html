@@ -71,28 +71,23 @@
 </head>
 
 <body>
-  <div class="container" style="font-size:36px;color:#4078c0">
-    <!--<div style=" margin-top:10% ">-->
-    <!--<a >teamId</a>-->
-    <!--<input type="text" id="teamId" style="width:300px;height: 30px">-->
-    <!--<button id="button1" style="font-size:24px">提交</button>-->
-    <!--</div>-->
+  <div class="container" style="font-size:16px;">
     <div class="wx-form-group">
-      <label class="wx-control-label">WhereRU团队ID</label>
+      <label class="wx-control-label">请在下方填写WhereRU团队ID，以绑定本公众号</label>
       <div class="wx-form-content">
         <div>
           <input type="text" class="wx-form-input" id="teamId" name="test_media">
         </div>
       </div>
       <div>
-        <button type="submit" class="wx-btn" id="button1">确认提交</button>
+        <button type="submit" class="wx-btn" id="button1">提交</button>
       </div>
     </div>
     <div id="showTeam">
-      <p style="">当前公众号尚未绑定whereru团队</p>
+      <p style="font-size:20px;">当前公众号尚未绑定whereru团队</p>
     </div>
     <div id="showTip">
-      <p>如何获取团队id?</p>
+      <p style="font-size:20px;">如何获取团队id?</p>
       <p>请登录WhereRU平台，如果你已经成为whereRU的用户，请登录创建团队的账号，打开团队主页，复制主页上的teamId到本文本框即可。
       如果你还不是whereRU的用户，请登录whereRU主页，点击右上角登录。在登录后，创建团队，复制团队主页上的teamId到本文本框即可。</p>
     </div>
@@ -106,10 +101,10 @@
         $.get(url).done(function(data){
             usrStr+='<div>当前公众号已被绑定到团队'+data.name+'</div></br>';
             usrStr+='<div>'
-            usrStr+='<img src="'+data.logoUrl+'" style="width: 50px;height: 50px">';
-            usrStr+='<p>团队名称：'+data.name+'</p>';
+            usrStr+='<p><img src="'+data.logoUrl+'" style="width: 25px;height: 25px">';
+            usrStr+='团队名称：'+data.name+'</p>';
             usrStr+='<p>简介:'+data.desc+'</p>' ;
-            usrStr+='<p>团队主页:'+ data.teamUrl+'</p>';
+            usrStr+='<p>团队主页:<a href="'+ data.teamUrl+'">'+ data.teamUrl+'</p>';
             usrStr+='</div>';
             $('#showTeam').html(usrStr);
         }).fail(function(res){
