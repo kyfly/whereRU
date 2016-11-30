@@ -159,14 +159,22 @@ function configSave(app, req, res) {
   const teamId = req.query.teamId;
   const media_id = req.query.media_id;
   const token = req.query.token;
-  app.models.weixiaoToken.findOne({where:{ token: token, media_id: media_id }}, (err, tokenRecord) => {
-    if (err || !tokenRecord) return res.send({ errcode: 5003, errmsg: '令牌错误' });
-    app.models.Team.findById(teamId, (err, team) => {
-      if (err || !team) return res.send({ errcode: 5003, errmsg: '找不到该团队' });
-      team.updateAttribute('media_id', media_id, (err,team)=>{
-        console.log(team);
-        res.send({ errcode: 0, msg: '成功' });
-        tokenRecord.destroy();
+  app.models.weixiaoToken.findOne({ where: { token: token, media_id: media_id } }, (err, tokenRecord) => {
+    if (err || !tokenRecord) return cb({errcode:403,errmsg:'令牌错误'});
+    app.models.Team.find({ media_id: media_id }, (err, teams) => {
+      if (err) return res.send(err);
+      app.models.Team.findById(teamId, (err, team) => {
+        if (err || !team) return cb({errcode:404,errmsg:'找不到该团队'});
+        team.updateAttribute('media_id', media_id, (err, team) => {
+          console.log(team);
+          res.send({ errcode: 0, errmsg: '成功' });
+          tokenRecord.destroy();
+        });
+      });
+      teams.foreach((team) => {
+        team.updateAttribute('media_id', '', (err, team) => {
+          if (err) return res.send(err);
+        });
       });
     });
   });
@@ -201,7 +209,7 @@ module.exports = function (app) {
 
   app.get('/weixiao/mp/:media_id', function (req, res, cb) {
     const media_id = req.params.media_id;
-    app.models.Team.findOne({where:{ media_id: media_id }}, function (err, team) {
+    app.models.Team.findOne({ where: { media_id: media_id } }, function (err, team) {
       if (err || !team) return cb({ status: 404, message: '找不到该公众号所绑定的团队' });
       res.send({
         name: team.name,
