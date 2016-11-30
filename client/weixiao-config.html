@@ -436,10 +436,10 @@
             .done(function(data){
                 alert('设置成功！');
                 fetch_team();
-                $('#button1').attr("disabled", true);
+                $('#button1').val('已设置').attr("disabled", true);
             })
             .fail(function(res){
-                alert(res.message);
+                alert('非法团队ID');
             });
         }
     });

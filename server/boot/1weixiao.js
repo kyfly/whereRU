@@ -156,17 +156,21 @@ function configGet(app, req, res, cb) {
 }
 
 function configSave(app, req, res, cb) {
-  console.log(req.url)
   const teamId = req.query.teamId;
   const media_id = req.query.media_id;
   const token = req.query.token;
+  if(!token||!media_id||!teamId) {
+    var err = new Error('非法请求');
+    err.status = 401;
+    cb(err);
+  }
   app.models.weixiaoToken.findOne({ where: { token: token, media_id: media_id } }, (err, tokenRecord) => {
     if (err || !tokenRecord) {
       var err = new Error('令牌错误');
       err.status = 404;
       return cb(err);
     }
-    app.models.Team.find({ media_id: media_id }, (err, teams) => {
+    app.models.Team.find({ where: { media_id: media_id } }, (err, teams) => {
       if (err) return res.send(err);
       app.models.Team.findById(teamId, (err, team) => {
         if (err || !team) {
@@ -175,12 +179,12 @@ function configSave(app, req, res, cb) {
           return cb(err);
         }
         team.updateAttribute('media_id', media_id, (err, team) => {
-          console.log(team);
           res.send({ errcode: 0, errmsg: '成功' });
           tokenRecord.destroy();
         });
       });
-      teams.foreach((team) => {
+      if (!teams) return;
+      teams.forEach((team) => {
         team.updateAttribute('media_id', '', (err, team) => {
         });
       });
