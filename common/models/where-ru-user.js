@@ -27,11 +27,11 @@ module.exports = function (User) {
    * 用户注册，完成后登录用户
    * @param  {[type]} ctx   [description]
    * @param  {[type]} ins   [description]
-   * @param  {[type]} next) {               ins.createAccessToken(7200, function (err, token) {      var token [description]
+   * @param  {[type]} next) {               ins.createAccessToken(43200, function (err, token) {      var token [description]
    * @return {[type]}       [description]
    */
   User.afterRemote('create', function (ctx, ins, next) {
-    ins.createAccessToken(7200, function (err, token) {
+    ins.createAccessToken(43200, function (err, token) {
       var token = token.toJSON();
       token.user = {
         "name": ins.name,
@@ -864,7 +864,7 @@ module.exports = function (User) {
     }
 
     function loginUser(userInstance, aouthInstance) {
-      userInstance.createAccessToken(7200, function (err, token) {
+      userInstance.createAccessToken(43200, function (err, token) {
         if (err) {
           return next(err);
         }
