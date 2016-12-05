@@ -132,9 +132,9 @@ app.controller('RegisterController', ['User', 'School', '$scope', '$rootScope', 
   };
 }]);
 
-app.controller('ConfirmSchoolController', ['User', '$scope', 'School', '$window',
-  function (User, $scope, School, $window) {
-    $scope.user = $scope.$currentUser;
+app.controller('ConfirmSchoolController', ['User', '$scope', 'School', '$window', '$rootScope',
+  function (User, $scope, School, $window, $rootScope) {
+    $scope.user = $rootScope.$currentUser;
     School.findOne({
       filter: {
         where: {name: $scope.$currentUser.school},
@@ -144,12 +144,12 @@ app.controller('ConfirmSchoolController', ['User', '$scope', 'School', '$window'
       $scope.academies = res[0].academy;
     });
     $scope.confirm = function () {
-      User.confirmSchool({id: $scope.$currentUser.id}, {
+      User.confirmSchool({id: $rootScope.$currentUser.id}, {
         studentId: $scope.studentId,
         password: hex_md5($scope.studentPassword),
         academy: $scope.academy
       }, function (res) {
-        $scope.$currentUser.studentId = $scope.studentId;
+        $rootScope.$currentUser.studentId = $scope.studentId;
         Materialize.toast('验证成功', 2000);
         $window.history.back();
       });
